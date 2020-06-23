@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 40" width="96" height="40">
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="M-122 -368L838 -368L838 172L-122 172Z" />
+		</clipPath>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { opacity: 0.698;fill: #FFFFFF } 
+	</style>
+	<g id="Login" clip-path="url(#cp1)">
+		<g id="Component 18 – 1">
+			<path id="Path 61" class="shp0" d="M0.18 3.31C0.18 3.31 5.69 -2.82 10.81 3.31C15.93 9.44 21.27 3.31 21.27 3.31C21.27 3.31 27.53 -3.44 32.47 3.31C37.4 10.06 44.42 3.31 44.42 3.31C44.42 3.31 51.02 -3.1 57.35 3.31C63.67 9.72 70.39 3.31 70.39 3.31C70.39 3.31 75.06 -2.97 82.84 3.31C90.62 9.59 95.98 3.31 95.98 3.31L95.98 23.21L95.98 39.87L0.18 39.87L0.18 3.31Z" />
+		</g>
+	</g>
+</svg>

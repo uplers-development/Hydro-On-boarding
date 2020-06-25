@@ -1,0 +1,306 @@
+.login-main {
+	min-height: 100vh;
+	/*IE Support CSS */
+	@media all and (-ms-high-contrast:none){
+		height: 100vh;
+	}
+	/*Edge Support CSS */
+	@supports (-ms-ime-align: auto) {
+	  height: 100vh;
+	}
+
+	.login-form {
+		width: 44.53%;
+		position: relative;
+		@media screen and (max-width:$ipad-portrait) {
+				align-items: center;
+		}
+		@media screen and (max-width:$mobile-small) {
+			width: 100%;
+			position: static;
+		}
+
+		> img {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			@media screen and (max-width:$mobile-small) {
+				max-width: 223px;
+			}
+
+			@media screen and (max-width:$small-x) {
+				max-width: 180px;
+				height: inherit;
+			}
+		}
+
+		.top-details {
+			position: relative;
+			margin-top: 42.5%;
+			margin-left: auto;
+			padding-right: 46px;
+
+			.logo {
+				display: block;
+				margin-bottom: 33px;
+				outline: none;
+
+				img {
+					width: 238px;
+
+					@media screen and (max-width:$large-m) {
+						width: 200px;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						width: 180px;
+					}
+				}
+
+				@media screen and (max-width:$large-m) {
+					margin-bottom: 20px;
+				}
+
+				@media screen and (max-width:$mobile-small) {
+					max-width: 337px;
+					width: 100%;
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				@media screen and (max-width:$small-x) {
+					margin-bottom: 10px;
+				}
+			}
+
+			@media screen and (max-width:$large-m) {
+				padding: 20px;
+				margin-top: 25%;
+			}
+			@media screen and (max-width:$ipad-landscape) {
+				margin-top: 45%;
+			}
+		
+			@media screen and (max-width:$mobile-small) {
+				margin: 0 auto;
+				padding: 15px;
+				width: 100%;
+				margin-top: 45%;
+				top: 0;
+				padding-bottom: 0;
+			}
+		
+			@media screen and (max-width:$small-x) {
+				margin-top: 40%;
+
+			}
+
+		}
+
+		.form-group {
+			max-width: 360px;
+			width: 100%;
+			margin-bottom: 15px;
+
+			@media screen and (max-width:$mobile-small) {
+				max-width: 337px;
+				margin: 0 auto 6px;
+			}
+
+			label {
+				display: block;
+				width: 100%;
+				margin-bottom: 3px;
+				font-size: 16px;
+				line-height: 20px;
+				font-family: $gibson;
+				font-weight: $font-normal;
+				color: $black;
+			}
+
+			input[type="email"],
+			input[type="password"] {
+				font-size: 16px;
+				padding: 9px 12px;
+				width: 100%;
+				line-height: 20px;
+				border: 1px solid $panton-gray;
+				font-family: $arial;
+				font-weight: 400;
+				color: $light-black;
+
+				&:focus,
+				&:focus {
+					border-color: $sky-blue;
+					outline: none;
+				}
+
+			}
+
+			input {
+				@include placeholder {
+					color: $light-black;
+					font-size: 16px;
+					font-family: $arial;
+					font-weight: 400;
+					opacity: 1;
+					position: relative;
+				}
+			}
+
+			> a {
+				width: 100%;
+				display: block;
+				font-size: 12px;
+				margin-top: 5px;
+				text-align: right;
+				color: $light-black;
+				line-height: 24px;
+				font-family: $arial;
+				font-weight: $font-normal;
+				text-decoration: none;
+				outline: none;
+
+				&:hover {
+					color: $cobalt-blue;
+				}
+			}
+		}
+
+		.button-group {
+			margin-top: 24px;
+
+			@media screen and (max-width:$mobile-small) {
+				max-width: 337px;
+				margin: 0 auto;
+			}
+
+			button {
+				&:not(:last-child) {
+					margin-right: 15px;
+
+					@media screen and (max-width:$large) {
+						margin-right: 5px;
+					}
+				}
+
+				&:not(:first-child) {
+					@media screen and (max-width:$mobile-small) {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.login-footer {
+			@media screen and (max-width:$mobile-small) {
+				z-index: 1;
+			}
+
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			padding: 13px 64px 13px 8px;
+			background-color: $off-white;
+
+			@media screen and (max-width:$ipad-landscape) {
+				padding: 13px 40px 13px 35px;
+			}
+
+			@media screen and (max-width:$small-x) {
+				padding: 13px 20px;
+			}
+
+			ul {
+				margin: 0;
+
+				@media screen and (max-width:$ipad-portrait) {
+					padding-left: 0;
+				}
+
+				li {
+					position: relative;
+
+					a {
+						text-decoration: none;
+						color: $panton-gray;
+						font-family: $arial;
+						font-weight: $font-normal;
+						font-size: 12px;
+						line-height: 24px;
+						padding: 0 6px;
+
+						&:hover {
+							color: $sky-blue;
+						}
+					}
+
+					&:first-child {
+						a:after {
+							content: "";
+							display: inline-block;
+							width: 1px;
+							height: 10px;
+							right: 0;
+							top: 50%;
+							transform: translateY(-50%);
+							-webkit-transform: translateY(-50%);
+							position: absolute;
+							background-color: $panton-gray;
+						}
+					}
+				}
+			}
+
+			.copyright {
+				margin-left: auto;
+				color: $panton-gray;
+				font-family: $arial;
+				font-weight: $font-normal;
+				font-size: 12px;
+				line-height: 24px;
+			}
+		}
+
+	}
+
+	.login-right-img {
+		width: 55.47%;
+		position: relative;
+		overflow: hidden;
+
+		@media screen and (max-width:$mobile-small) {
+			width: 100%;
+			position: relative;
+			background-image: none !important;
+			z-index: 0;
+			    height: 210px;
+    bottom: 0;
+    right: 0;
+		}
+
+		> svg {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			max-width: 526px;
+
+			@media screen and (max-width:$mobile-small) {
+				max-width: 217px;
+				bottom: -66px;
+
+				.a {
+					fill: #75787b;
+				}
+			}
+
+			@media screen and (max-width:$small-x) {
+				max-width: 180px;
+				bottom: -72px;
+			}
+		}
+	}
+}

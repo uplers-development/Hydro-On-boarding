@@ -1,0 +1,81 @@
+$imgpath: '../images';
+$fontpath: '../fonts';
+
+@font-face {
+    font-family: 'Gibson';
+    src: url('#{$fontpath}/Gibson-SemiBold.eot');
+    src: url('#{$fontpath}/Gibson-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('#{$fontpath}/Gibson-SemiBold.woff2') format('woff2'),
+        url('#{$fontpath}/Gibson-SemiBold.woff') format('woff'),
+        url('#{$fontpath}/Gibson-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gibson';
+    src: url('#{$fontpath}/Gibson-Regular.eot');
+    src: url('#{$fontpath}/Gibson-Regular.eot?#iefix') format('embedded-opentype'),
+        url('#{$fontpath}/Gibson-Regular.woff2') format('woff2'),
+        url('#{$fontpath}/Gibson-Regular.woff') format('woff'),
+        url('#{$fontpath}/Gibson-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gibson';
+    src: url('#{$fontpath}/Gibson-Bold.eot');
+    src: url('#{$fontpath}/Gibson-Bold.eot?#iefix') format('embedded-opentype'),
+        url('#{$fontpath}/Gibson-Bold.woff2') format('woff2'),
+        url('#{$fontpath}/Gibson-Bold.woff') format('woff'),
+        url('#{$fontpath}/Gibson-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    
+}
+
+//== Colors
+$body-color: #fff;
+$white: #ffffff;
+$black: #000000;
+$red: #FF3D00;
+$light-black: #55595C;
+/*Site use color*/
+$cadet-blue: #007381;
+$cobalt-blue: #00447A;
+$panton-gray: #75787B;
+$teal: #004F59;
+$sky-blue: #00AEEF;
+$off-white: #F5F5F5;
+$mint-color:#00AEEF0D;
+$cyprus-color: #003A41;
+$gray-light: #455B6314;
+$white-transparent: rgba(255, 255, 255, 0.1);
+$black-transparent: rgba(0, 0, 0, 0.65);
+$sky-blue-transparent: rgba(0, 176, 240, 0.04);
+
+//== Fonts
+$arial: 'Arial';
+$gibson: 'Gibson';
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semi-bold: 600;
+$font-bold: 700;
+$font-extra-bold: 900;
+
+
+//Breakpoint
+$small: 320px;
+$small-x: 380px;
+$small-medium:640px;
+$mobile-small-up:768px;
+$mobile-small:767px;
+$ipad-landscape: 1024px;
+$ipad-portrait: 991px;
+$large: 1200px;
+$large-x: 1300px;
+$large-m: 1400px;
+$large-mx: 1700px;
+$container-x : 1320px;

@@ -75,7 +75,7 @@ ul {
 	font-family: $gibson;
 	text-transform: uppercase;
 	margin-bottom: 10px;
-	transition: 0.4s all ease-in-out;
+	@include transition(all 0.4s ease-in-out);
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
@@ -104,11 +104,9 @@ ul {
 		height: 70px;
 		position: absolute;
 		top: 60px;
-		/*transform: translateY(-70px);	
-			-webkit-transform: translateY(-70px);*/
 		left: 0;
 		right: 0;
-		transition: 0.4s all ease-in-out;
+		@include transition(all 0.4s ease-in-out);
 		background-image: url(#{$imgpath}/button-hover-effect.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -142,7 +140,7 @@ ul {
 	min-width: 145px;
 	text-transform: uppercase;
 	outline: none;
-	transition: 0.4s all ease-in-out;
+	@include transition(all 0.4s ease-in-out);
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
@@ -169,11 +167,9 @@ ul {
 		height: 70px;
 		position: absolute;
 		top: 60px;
-		/*transform: translateY(-70px);	
-			-webkit-transform: translateY(-70px);*/
 		left: 0;
 		right: 0;
-		transition: 0.4s all ease-in-out;
+		@include transition(all 0.4s ease-in-out);
 		background-image: url(#{$imgpath}/button-hover-sky-blue.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -215,7 +211,7 @@ ul {
 	min-width: 106px;
 	text-transform: uppercase;
 	outline: none;
-	transition: 0.4s all ease-in-out;
+	@include transition(all 0.4s ease-in-out);
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
@@ -249,7 +245,7 @@ ul {
 			-webkit-transform: translateY(-70px);*/
 		left: 0;
 		right: 0;
-		transition: 0.4s all ease-in-out;
+		@include transition(all 0.4s ease-in-out);
 		background-image: url(#{$imgpath}/button-hover-sky-white.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -498,7 +494,7 @@ nav {
 					position: relative;
 					outline: none;
 					position: relative;
-					transition: 0.5s all;
+					@include transition(all 0.5s ease-in-out);
 					text-decoration: none;
 
 					@media screen and (max-width:$large-m) {
@@ -512,11 +508,14 @@ nav {
 
 					svg {
 						.shp0 {
-							transition: 0.5s all;
+							@include transition(all 0.5s ease-in-out);
 						}
 					}
 
 					&:hover {
+						span {
+							color: $white;
+						}
 						svg {
 							.shp0 {
 								fill: $sky-blue;
@@ -636,7 +635,7 @@ nav {
 						background: -webkit-linear-gradient(left, rgba(128, 128, 128, 0.02) 0%, rgba(198, 198, 198, 0.09) 55%, rgba(255, 255, 255, 0.2) 100%);
 
 						background: linear-gradient(to right, rgba(128, 128, 128, 0.02) 0%, rgba(198, 198, 198, 0.09) 55%, rgba(255, 255, 255, 0.2) 100%);
-						transition: 0.5s all;
+						@include transition(all 0.5s ease-in-out);
 					}
 
 					&:hover {
@@ -716,14 +715,16 @@ nav {
 	padding-left: 90px;
 	margin-left: auto;
 	align-items: flex-start;
+	position: relative;
 	@media screen and (max-width:$large-mx) {
 		padding-left: 40px;
 	}
-
-	@media screen and (max-width:$ipad-landscape) {
-		padding: 0 12px;
+	@media screen and (max-width:$large-m) {
+		padding-left: 20px;
 	}
-
+	@media screen and (max-width:$ipad-landscape) {
+		padding: 0 15px;
+	}
 	@media screen and (max-width:$mobile-small) {
 		width: 100%;
 		padding: 0 0 72px 0;
@@ -872,7 +873,6 @@ nav {
 			}
 		}
 	}
-
 }
 
 /*BG color calss teansparent*/
@@ -915,6 +915,43 @@ nav {
 	opacity: 0.76;
 	z-index: 0;
 }
+
+/*Right bottom pattern gray*/
+.right-btm-pattern-gray {
+	padding-bottom: 15%;
+	@media screen and (max-width:$mobile-small) {
+			padding-bottom: 0;
+	}
+	&:after {
+		content: "";
+		display: inline-block;
+		background-image: url(#{$imgpath}/screen-pattern-grey.svg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		position: absolute;
+		bottom: 10%;
+		right: -3%;
+		width: 42.35%;
+		height: 40%;
+		@media screen and (max-width:$large-mx) {
+			bottom: -7%;
+			right: 0;
+		}
+		@media screen and (max-width:$ipad-landscape) {
+			bottom: -9%;
+		}
+		@media screen and (max-width:$ipad-portrait) {
+			width: 32%;
+			height: 33%;
+			bottom: -10%;
+		}
+		@media screen and (max-width:$mobile-small) {
+			display: none;
+		}
+	}
+}
+
 
 /*Custom selct box*/
 .sbHolder {
@@ -1053,7 +1090,7 @@ nav {
 			&:visited {
 				color: #75787B;
 				text-decoration: none;
-				transition: all 0.2s ease-in-out;
+				@include transition(all 0.2s ease-in-out);
 			}
 
 			&:hover,
@@ -1096,7 +1133,7 @@ nav {
 	padding: 10px 15px;
 	max-width: 192px;
     width: 100%;
-	transition: 0.5s all ease-in-out;
+	@include transition(all 0.5s ease-in-out);
 	position: absolute;
 	right: 245px;
 	top:38px;
@@ -1124,7 +1161,7 @@ nav {
 	{
 		visibility: hidden;
 		opacity: 0;
-		transition: 0.2s all ease-in-out;
+		@include transition(all 0.2s ease-in-out);
 		ul
 		{
 			margin: 0;
@@ -1260,8 +1297,7 @@ nav {
 	position: relative;
 	z-index: 1;
 	width: 357px;
-	-webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+	@include transition(all 0.5s ease-in-out);
 	@media screen and (max-width:$large-x) {
 		margin: 5px 0 0;
 		width: 280px;
@@ -1292,7 +1328,7 @@ nav {
 			border-left: 4px solid transparent;
 			border-right: 4px solid transparent;
 			border-top: 8px solid $panton-gray;
-			transition: 0.2s all ease-in-out;
+			@include transition(all 0.2s ease-in-out);
 		}
 	}
 	ul 
@@ -1306,7 +1342,7 @@ nav {
 		opacity: 0;
 		background-color: $white;
 		width: 100%;
-		transition: 0.5s all ease-in-out;
+		@include transition(all 0.5s ease-in-out);
 		a {
 			font-size: 14px;
 			line-height: 22px;
@@ -1353,8 +1389,7 @@ nav {
 	justify-content: flex-end;
     padding-right: 20px;
 	margin-left: auto;
-	-webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+	@include transition(all 0.5s ease-in-out);
 	z-index: 1;
 	background-color: $white;
 	.sort-selected {
@@ -1549,7 +1584,7 @@ nav {
 		z-index: 9;
 		transform: translateY(100%);
 		-webkit-transform: translateY(100%);
-    	transition: 0.3s all ease-in-out;
+    	@include transition(all 0.3s ease-in-out);
    		overflow-y: scroll;
 		.top-head {
 			border-bottom: 1px solid $off-white;
@@ -1641,4 +1676,17 @@ nav {
 	}
 }
 
+/*Class for hide show in mobile and desktop*/
+.mobile-hide {
+	@media screen and (max-width:$mobile-small) {
+			display: none;
+	}
+} 
+.desktop-hide {
+	@media screen and (min-width: $mobile-small-up) {
+			display: none;
+	}
+}
 
+/*All common transition*/
+a { @include transition(all 0.5s ease-in-out); }

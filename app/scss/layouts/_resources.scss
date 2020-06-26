@@ -73,7 +73,7 @@
 					position: absolute;
 					right: 0;
 					top: 0;
-					transition: 0.5s all ease-in-out;
+					@include transition(all 0.5s ease-in-out);
 					@media screen and (max-width:$large-m) {
 						padding: 3px 8px;
 						font-size: 12px;
@@ -86,7 +86,7 @@
 					left: 0;
 					height: 100%;
 					width: 100%;
-					transition: all .2s linear;
+					@include transition(all 0.2s ease-in-out);
 				}
 			}
 			.res-content {
@@ -102,7 +102,7 @@
 				font-weight: $font-semi-bold;
 				margin: 0 0 8px 0;	
 				text-decoration: none;
-				transition: 0.3s all ease-in-out;
+				@include transition(all 0.3s ease-in-out);
 				@media screen and (max-width:$large-m) {
 					font-size: 18px;
 					line-height: 28px;

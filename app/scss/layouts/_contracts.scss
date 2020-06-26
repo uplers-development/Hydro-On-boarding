@@ -99,7 +99,7 @@
 							font-weight: $font-semi-bold;
 							margin: 10px 0 2px;	
 							text-decoration: none;
-							transition: 0.3s all ease-in-out;
+							@include transition(all 0.3s ease-in-out);
 							@media screen and (max-width:$large-m) {
 								font-size: 18px;
 							}		
@@ -182,7 +182,7 @@
 					bottom: 0;
 					left: 0;
 					right: 0;
-					transition: 0.2s all ease-in-out;
+					@include transition(all 0.2s ease-in-out);
 					z-index: 1;
 				} 
 				

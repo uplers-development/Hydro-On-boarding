@@ -51,7 +51,7 @@
 				font-weight: $font-semi-bold;
 				margin-bottom: 8px;
 				text-decoration: none;
-				transition: 0.3s all ease-in-out;
+				@include transition(all 0.3s ease-in-out);
 				@media screen and (max-width:$mobile-small) {
 					font-size: 16px;
 				}
@@ -136,7 +136,7 @@
 				}
 				img, svg 
 				{
-					transition: 0.5s all ease-in-out;	
+					@include transition(all 0.5s ease-in-out);
 					width: 54px;
 					height: 54px;
 					@media screen and (max-width:$large-mx) {

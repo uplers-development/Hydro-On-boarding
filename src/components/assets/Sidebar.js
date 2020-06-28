@@ -1,32 +1,47 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Apiurl from '../Apiurl'; 
+import Apiurl,{site_url} from '../Apiurl'; 
 class Sidebar extends Component {
 	constructor(props) {
 		super(props);
+		this.state={
+			sidebarItem:[],
+			changeClassnav:false
+		}
 	}
+
+	componentDidMount(){
+		this.SidebarItems();
+		window.location.pathname==='/newsfeed' || window.location.pathname==='/Dashboard' ? this.setState({changeClassnav:false}) :this.setState({changeClassnav:true});
+	}
+
+	SidebarItems=()=>{
+		fetch(Apiurl.Leftsidebar_client.url,{
+    			/*headers: {
+                	"Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },*/
+                method:Apiurl.Leftsidebar_client.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		this.setState({sidebarItem:data});
+    	})
+	}
+
 
 	render() {
 		return (
 			<div>
-				<nav className="navbar white-bg-trnsparent navbar-expand-md navbar-dark bg-primary fixed-left">
+				<nav className={this.state.changeClassnav ? "navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left" : "navbar white-bg-trnsparent navbar-expand-md navbar-dark bg-primary fixed-left"}>
 				<Link to='' className="navbar-logo" href="#" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
-					<li><Link to='' className="active" href="#" title="News Feed">
-							<img className="svg" src={require("../../images/home-logo.svg")} alt="profile-logo"/>
-							<span>News <span>feed</span></span></Link></li>
-					<li><Link to="" title="Products">
-							<img className="svg" src={require("../../images/product-logo.svg")} alt="product-logo"/>
-							<span>Products</span></Link></li>
-					<li><Link to="" title="Resources">
-							<img className="svg" src={require("../../images/resources-logo.svg")} alt="Resource-logo"/>
-							<span>Resources</span></Link></li>
-					<li><Link to="" title="Contracts">
-							<img className="svg" src={require("../../images/contracts-logo.svg")} alt="Contracts-logo"/>
-							<span>Contracts</span></Link></li>
-					<li><Link to="" title="Products">
-							<img className="svg" src={require("../../images/rep-contracts.svg")} alt="rep-contracts"/>
-							<span>Rep cntracts</span></Link></li>
+					{this.state.sidebarItem.map((item,index)=>
+						<li key={index}><Link to={item.field_react_route} className=""  title={item.title}>
+								<img className="svg" src={site_url+item.field_icon} alt={item.title}/>
+						<span>{item.title}</span></Link></li>
+					)}
 				</ul>
 				
 				<div className="nav-bottom-master teal-color-bg">

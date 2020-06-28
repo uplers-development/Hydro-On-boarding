@@ -1,11 +1,58 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-
+import Apiurl from './Apiurl'; 
 
 class Profile extends Component {
 	constructor(props) {
 		super(props);
 	}
+
+	componentDidMount(){
+
+
+	/*	fetch(Apiurl.Profile.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),"X-CSRF-Token" : localStorage.getItem("access-token") 
+                },
+                method:Apiurl.Profile.method
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		if(data.message){
+    			alert(data.message);
+    		}else{
+    			alert(data);
+    		}
+    	})*/
+
+    	this.updateProfile();
+	}
+
+
+	updateProfile = () =>{
+		let updatedata={
+			"name":[{value:'client'}]
+		};
+
+		fetch(Apiurl.Updateprofile.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                },
+                method:Apiurl.Updateprofile.method,
+                body:JSON.stringify(updatedata)
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		if(data.message){
+    		}else{
+    		}
+    	})
+	}
+
 
 	render() {
 		return (
@@ -97,32 +144,32 @@ class Profile extends Component {
 								<form className="row">
 									<div className="form-group one-by-two">
 										<label>First Name</label>
-										<input type="text" placeholder="" tabindex="1"/>
+										<input type="text" placeholder="" tabIndex="1"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Last Name</label>
-										<input type="text" placeholder="Name" tabindex="2"/>
+										<input type="text" placeholder="Name" tabIndex="2"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Email*</label>
-										<input type="email" placeholder="" tabindex="3"/>
+										<input type="email" placeholder="" tabIndex="3"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Contact Number*</label>
-										<input type="text" placeholder="" tabindex="4"/>
+										<input type="text" placeholder="" tabIndex="4"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Organisation*</label>
-										<input type="text" placeholder="" tabindex="5"/>
+										<input type="text" placeholder="" tabIndex="5"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Timezone*</label>
-										<select name="1" className="" tabindex="6">
+										<select name="1" className="" tabIndex="6">
 											<option value="">GMT</option>
 											<option data-img-src="images/16/flag(1).png" value="et">EET</option>
 											<option data-img-src="images/16/flag(2).png" value="ak">EST</option>
@@ -131,11 +178,11 @@ class Profile extends Component {
 
 									<div className="form-group one-by-two">
 										<label>Location*</label>
-										<input type="text" placeholder="" tabindex="7"/>
+										<input type="text" placeholder="" tabIndex="7"/>
 									</div>
 
 									<div className="button-group full">
-										<button className="btn common-btn-blue" type="submit" tabindex="4">
+										<button className="btn common-btn-blue" type="submit" tabIndex="4">
 											<span>Save settings</span></button>
 									</div>
 								</form>

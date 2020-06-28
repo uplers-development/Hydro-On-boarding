@@ -8,11 +8,19 @@ class Login extends Component{
 	constructor() {
     	super();
     	this.state={
-
+    		login_data_loaded:false,
+    		login_admin_button:null,
+    		login_background:null,
+    		login_email_title:null,
+    		login_logo:null,
+    		login_password_title:null,
+    		login_rep_button:null,
+    		login_sign_button:null,
     	}
     	this.Login=this.Login.bind(this);
     }
     componentDidMount(){
+    	this.getLoginPageContent();
     	//this.createSvg()
     	$('img.svg').each(function () {
 		var $img = $(this);
@@ -35,6 +43,21 @@ class Login extends Component{
 
     }
 
+    getLoginPageContent =() =>{
+    	fetch(Apiurl.Loginpagecontent.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                },
+                method:Apiurl.Loginpagecontent.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({login_data_loaded:true,login_admin_button:data.login_admin_button,login_background:data.login_background,login_email_title:data.login_email_title,login_logo:data.login_logo,login_password_title:data.login_password_title,login_rep_button:data.login_rep_button,login_sign_button:data.login_sign_button})
+    	})
+    }
+
+
     Login = () =>{
     	var logindata={
     		name:document.querySelector('#email').value,
@@ -51,65 +74,78 @@ class Login extends Component{
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		this.props.history.push({pathname:"/components/Dashboard"});
+    		if(data.message){
+    			alert(data.message);
+    		}else{
+    			localStorage.setItem("access-token",data.csrf_token);
+    			localStorage.setItem("basic-auth",btoa(logindata.name+':'+logindata.pass));
+    			localStorage.setItem("user-type",JSON.stringify(data.current_user));
+    			this.props.history.push({pathname:"/Dashboard"});
+    		}
     	})
 
 }
 
    render(){
-   		return(<section className="main-wrapper">
-		<div className="d-flex flex-wrap login-main">
+   		return(
+   		<section className="main-wrapper">
+   			{this.state.login_data_loaded ? 
+				<div className="d-flex flex-wrap login-main">
 			
-			{/*<!--Login form block start-->*/}
-			<div className="login-form d-flex flex-wraps">
-				<img src={require("./../images/login-screen-pattern-grey.svg")} alt="login screen pattern"/>
-				
-				{/*<!--Login top details start-->*/}
-				<div className="top-details">
-					<a className="logo" href="#"><img src={require("./../images/logo-main-blue.svg")}/></a>
-					
-					{/*<!--Login form start-->*/}
-					<form>
-						<div className="form-group">
-							<label>Email</label>
-							<input type="email" placeholder="Email" id='email' tabIndex="1"/>
-						</div>
+					{/*<!--Login form block start-->*/}
+					<div className="login-form d-flex flex-wraps">
+						<img src={require("./../images/login-screen-pattern-grey.svg")} alt="login screen pattern"/>
+						
+						{/*<!--Login top details start-->*/}
+						<div className="top-details">
+							<a className="logo" href="#"><img src={this.state.login_logo}/></a>
+							
+							{/*<!--Login form start-->*/}
+							<form>
+								<div className="form-group">
+									<label>{this.state.login_email_title}</label>
+									<input type="email" placeholder="Email" id='email' tabIndex="1"/>
+								</div>
 
-						<div className="form-group">
-							<label>Password</label>
-							<input type="password" placeholder="Password" id='password' tabIndex="2"/>
-							<a href="#" title="Reset your password" tabIndex="3">Reset your password</a>
-						</div>
+								<div className="form-group">
+									<label>{this.state.login_password_title}</label>
+									<input type="password" placeholder="Password" id='password' tabIndex="2"/>
+									<a href="#" title="Reset your password" tabIndex="3">Reset your password</a>
+								</div>
 
-						<div className="button-group">
-							<button className="btn common-btn-blue" type="button"  onClick={this.Login}  tabIndex="4">
-								<span>SIGN IN</span></button>
-							<button className="btn common-btn-blue" type="submit"><span>REP USER</span></button>
-							<button className="btn common-btn-blue" type="submit"><span>ADMIN</span></button>
-						</div>
-					</form>{/*<!--Login form end-->*/}
-					
-				</div>{/*<!--Login top details end-->*/}
-				
-				{/*<!--Login footer start-->*/}
-				<div className="login-footer d-flex flex-wrap">
-					<ul className="links d-flex flex-wrap">
-						<li><a href="#" title="Contact">Contact</a></li>
-						<li><a href="#" title="Privacy">Privacy</a></li>
-					</ul>
-					<div className="copyright"> &copy; 2020 Hydro International</div>
-				</div>{/*<!--Login footer end-->*/}
-			</div>
-			{/*<!--Login form block end-->*/}
+								<div className="button-group">
+									<button className="btn common-btn-blue" type="button"  onClick={this.Login}  tabIndex="4">
+										<span>{this.state.login_sign_button}</span></button>
+									<button className="btn common-btn-blue" type="submit"><span>{this.state.login_rep_button}</span></button>
+									<button className="btn common-btn-blue" type="submit"><span>{this.state.login_admin_button}</span></button>
+								</div>
+							</form>{/*<!--Login form end-->*/}
+							
+						</div>{/*<!--Login top details end-->*/}
+						
+						{/*<!--Login footer start-->*/}
+						<div className="login-footer d-flex flex-wrap">
+							<ul className="links d-flex flex-wrap">
+								<li><a href="#" title="Contact">Contact</a></li>
+								<li><a href="#" title="Privacy">Privacy</a></li>
+							</ul>
+							<div className="copyright"> &copy; 2020 Hydro International</div>
+						</div>{/*<!--Login footer end-->*/}
+					</div>
+					{/*<!--Login form block end-->*/}
 
-			{/*<!--Login right block start-->*/}
-			<div className="login-right-img bg-cover" style={{backgroundImage: `url(${loginScreeImg})`}}>
-				<img className="svg" src={require("./../images/login-screen-pattern-white-r.svg")} alt="login screen pattern"/>
-			</div>
-			{/*<!--Login right block end-->*/}
-		</div>
-	</section>);
-   }
+					{/*<!--Login right block start-->*/}
+					<div className="login-right-img bg-cover" style={{backgroundImage: `url(${this.state.login_background})`}}>
+						<img className="svg" src={require("./../images/login-screen-pattern-white-r.svg")} alt="login screen pattern"/>
+					</div>
+					{/*<!--Login right block end-->*/}
+				</div>
+				:
+				<div className='Loading'>Loading</div>}
+			</section>
+		);
+	}
+
 }
 
 export default Login;

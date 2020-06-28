@@ -1,0 +1,329 @@
+import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import Sidebar from './assets/Sidebar';
+import UserProfile from './assets/UserProfile';
+import Apiurl,{site_url} from './Apiurl'; 
+import ReactHtmlParser from 'react-html-parser';
+
+class Resources extends Component {
+	constructor(props) {
+		super(props);
+		this.state={
+			ResourceList:[],
+			productList:[],
+			ResourceTypelist:[],
+			SearchList:[]
+		}
+		this.GetProductBaseFilter=this.GetProductBaseFilter.bind(this);
+		this.FilterByResourceId=this.FilterByResourceId.bind(this);
+		this.SortResources=this.SortResources.bind(this);
+		this.ListResourcesforSearch=this.ListResourcesforSearch.bind(this);
+		this.SearchResourcesByTitle=this.SearchResourcesByTitle.bind(this);
+	}
+
+
+	componentDidMount(){
+		localStorage.removeItem("resource-id");
+		localStorage.removeItem("resource-filter-type");
+		this.GetResourcesList()
+		this.getAllProductList()
+		this.GetResourceTypeTitleId()
+	}
+	
+	GetResourcesList=()=>{
+		fetch(Apiurl.GetResourcesList.url,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.GetResourcesList.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data});
+    	})
+	}
+
+
+	getAllProductList =()=>{
+		fetch(Apiurl.GetProductTitle.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.GetProductTitle.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({productList:data})
+    	})
+	}
+
+	GetResourceTypeTitleId=()=>{
+
+		fetch(Apiurl.GetResourceTypeTitleId.url,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.GetResourceTypeTitleId.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceTypelist:data});
+    	})
+	}
+
+	GetProductBaseFilter=(e)=>{
+		let product_id=e.target.getAttribute("data-pid");
+		localStorage.setItem("product_id",product_id);
+		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.GetResourceProductbaseFilter.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data});
+    	})
+	}
+
+	FilterByResourceId=(e)=>{
+		let resourceApi=localStorage.getItem("product_id") && localStorage.getItem("product_id")!=='' ? Apiurl.FilterByResourceId.url+localStorage.getItem("product_id")+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		let resource_id=e.target.getAttribute("data-resource-id");
+		localStorage.setItem("resource-id",resource_id);
+		fetch(resourceApi+"&field_resource_type_target_id="+resource_id,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.FilterByResourceId.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data});
+    	})
+	}
+
+	SortResources=(e)=>{
+		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
+		let filterType=e.target.getAttribute("data-get-filterindex");
+		localStorage.setItem("resource-filter-type",filterType);
+		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resource_id+filterType,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.SortResources.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data});
+    	})
+	}
+
+	ListResourcesforSearch=(e)=>{
+		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
+		let resourcenameString=e.target.value;
+		console.log(resourcenameString)
+		fetch(Apiurl.ListResourcesforSearch.url+"&field_resource_type_target_id="+resource_id+"&title="+resourcenameString,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.ListResourcesforSearch.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({SearchList:data});
+    	})
+	}
+
+	SearchResourcesByTitle=(e)=>{
+		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
+		let filterType=localStorage.getItem("resource-filter-type") && localStorage.getItem("resource-filter-type")!=='' ? localStorage.getItem("resource-filter-type") : '';
+		let searchValue=e.target.getAttribute("data-title-name");
+		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resource_id+filterType+"&title="+searchValue,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.SortResources.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data});
+    	})
+	}
+
+
+	render() {
+		return (
+			<div>
+				<section className="main-wrapper">
+		<div className="d-flex flex-wrap main-block">
+
+			<Sidebar/>
+
+			
+			<div className="d-flex flex-wrap right-content-part">
+				
+				<div className="top-heading">
+
+					
+					<div className="top-heading-continer d-flex flex-wrap align-center">
+						<div className="name-of-heading d-flex flex-wrap">
+							<img src={require("./../images/resources-logo-blue.svg")} alt="profile-logo"/>
+							<h1>Resources</h1>
+						</div>
+						<UserProfile/>
+					</div>
+					
+				</div>
+				
+
+				
+				<div className="bottom-content-block with-filter">
+
+					
+					<div className="d-flex flex-wrap resources-main">
+
+						
+						<div className="fileter-block d-flex flex-wrap border-bottom">
+
+							
+							<div className="select-box">
+								<a href="#" data-value="">Products</a>
+								<ul className="list">
+								{this.state.productList.map((productItem,index)=>
+									<li key={index}><Link title={productItem.title} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{productItem.title}</Link></li>
+								)}
+								</ul>
+							</div>
+							
+
+							
+							<div className="select-box">
+								<a href="#" data-value="">Types</a>
+								<ul className="list">
+									{this.state.ResourceTypelist.map((resourcetitle,index)=>
+										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={resourcetitle.name} onClick={this.FilterByResourceId}>{resourcetitle.name}</Link></li>
+									)}
+								</ul>
+							</div>
+							
+
+							
+							<div className="search-sort-block d-flex flex-wrap align-center">
+								
+								<div className="auto-search-box">
+									<form>
+										<div className="autocomplete">
+											<input id="myInput" type="text" name="hydro" onChange={this.ListResourcesforSearch}/>
+										</div>
+										<ul className="list">
+											{this.state.SearchList.length && this.state.SearchList.map((resourcename,index)=>
+												<li key={resourcename.nid} ><Link data-title-name={resourcename.title} onClick={this.SearchResourcesByTitle}>{resourcename.title}</Link></li>
+											)}
+										</ul>
+									</form>
+								</div>
+								
+
+
+								
+								<div className="d-flex flex-wrap sort-by">
+									<div className="sort-selected d-flex flex-wrap align-center">
+										<h2>Sort by</h2>
+									</div>
+									<div className="drop-down-menu">
+										<ul>
+											<li><Link title="Recently added" data-get-filterindex="&sort_by=created&sort_order=DESC" onClick={this.SortResources}>Recently added</Link></li>
+											<li><Link title="Oldest-Newest"  data-get-filterindex="&sort_by=created&sort_order=ASC" onClick={this.SortResources}>Oldest-Newest</Link></li>
+											<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.SortResources}>Recently viewed</Link></li>
+											<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.SortResources}>Most viewed</Link></li>
+										</ul>
+									</div>
+								</div>
+								
+
+								
+								<div className="mobile-filter">
+									<a href="#" title="filter-btn" className="filter-open-btn">
+										<img src={require("./../images/ic_filter.svg")} alt="ic_filter"/>
+									</a>
+
+									<div className="open-close-filter-block">
+										<div className="top-head d-flex flex-wrap align-center">
+											<div className="top-title d-flex flex-wrap">
+												<img src={require("./../images/ic_filter-blue.svg")} alt="ic_filter"/>
+												<h4>Filters</h4>
+											</div>
+											<a href="#" title="close-btn" className="filter-open-btn">
+												<img src={require("./../images/ic_close.svg")} alt="ic_close"/>
+											</a>
+										</div>
+
+										<div className="list-filter-mobile">
+											<h5>Applications</h5>
+											<ul>
+												<li><a href="#">Stormwater treatment</a></li>
+												<li><a href="#">Hydrometry and monitoring</a></li>
+												<li><a href="#">Industrial water treatment</a></li>
+												<li><a href="#">CSO screening, treatment & flow control</a></li>
+												<li className="active"><a href="#">Flow control and flood protection</a></li>
+												<li><a href="#">Water and wastewater treatment</a></li>
+											</ul>
+
+											<h5>Sort by</h5>
+											<ul>
+												<li className="active"><a href="#" title="Purchase date newest">Purchase date newest</a></li>
+												<li><a href="#" title="Purchase date oldest">Purchase date oldest</a></li>
+												<li><a href="#" title="A-Z">A-Z</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="container">
+							<div className="resources-list d-flex flex-wrap">
+							{this.state.ResourceList.map((resourceItem,index)=>
+								<div className="resources-box" key={index}>
+									<div>
+										<Link to={site_url+resourceItem.field_resources_document} title={resourceItem.field_resource_type}>{resourceItem.field_resource_type}</Link>
+										<div className="image-block">
+											<div className="bg-cover" style={{backgroundImage: `url(${site_url+resourceItem.field_resources_image})`}}></div>
+											{/*<label>{resourceItem.field_resource_type}</label>	*/}	
+										</div>
+										<div className="res-content">
+											<h3>{resourceItem.title}</h3>
+											<p>{resourceItem.field__resources_description}</p>
+											<div className="date">{resourceItem.created}</div>
+										</div>
+									</div>
+								</div>
+							)}
+							</div>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+			</div>
+		);
+	}
+}
+
+export default Resources;

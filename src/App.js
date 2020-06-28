@@ -5,20 +5,53 @@ import Profile from "./components/Profile";
 import Welcome from "./components/Welcome";
 import Dashboard from "./components/Dashboard";
 import Newsfeeds from "./components/Newsfeeds";
+import Product from "./components/Product";
+import Resources from "./components/Resources";
+import Contract from "./components/Contract";
+import Repcontact from "./components/Resources";
+import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      sidebarItem:[]
+    }
+  }
+
+  componentDidMount(){
+    fetch(Apiurl.Leftsidebar_client.url,{
+                method:Apiurl.Leftsidebar_client.method,
+      }).then(res=>{
+        return res.json()
+      }).then(data=>{
+        console.log(data);
+        this.setState({sidebarItem:data});
+      })
+  }
+
    render() {
       return (
            <div className="App">
               <BrowserRouter>
                 <div className="Routes">
+                {this.state.sidebarItem.length > 0 ?
+                  <>
                     <Route path="/" exact component={Login} />
                     <Route path="/Login"  component={Login} />
                     <Route path="/Profile"  component={Profile} />
                     <Route path="/Welcome"  component={Welcome} />
                     <Route path="/Dashboard"  component={Dashboard} />
-                    <Route path="/Newsfeeds"  component={Newsfeeds} />
+                    <Route path={this.state.sidebarItem[0].field_react_route}  component={Newsfeeds} />
+                    <Route path={this.state.sidebarItem[1].field_react_route}  component={Product} />
+                    <Route path={this.state.sidebarItem[2].field_react_route}  component={Resources} />
+                    <Route path={this.state.sidebarItem[3].field_react_route}  component={Contract} />
+                    {/*<Route path={this.state.sidebarItem[4].field_react_route}  component={Repcontact} />*/}
+                  </>
+                  :
+                  ""}
+                    
                 </div>
              </BrowserRouter>
           </div>

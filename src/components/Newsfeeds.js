@@ -2,12 +2,53 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sidebar from './assets/Sidebar';
 import UserProfile from './assets/UserProfile';
+import Apiurl,{site_url} from './Apiurl'; 
+import ReactHtmlParser from 'react-html-parser';
 
 class Newsfeeds extends Component {
 	constructor(props) {
 		super(props);
-		this.state={}
+		this.state={
+			newsFeedItems:[],
+			recentViews:[]
+		}
 	}
+
+	componentDidMount(){
+		this.newsFeedItems()
+		this.newsFeedRecentlyViewed();
+	}	
+
+	newsFeedItems=()=>{
+		fetch(Apiurl.Newsfeeds.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		this.setState({newsFeedItems:data});
+    	})
+	}
+
+
+	newsFeedRecentlyViewed=()=>{
+		fetch(Apiurl.Newsfeeds_recentviews.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+               method:Apiurl.Newsfeeds_recentviews.method
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		this.setState({recentViews:data});
+    	})
+	}
+
 
 	render() {
 		return (
@@ -25,106 +66,138 @@ class Newsfeeds extends Component {
 						{/*<!--News feed left blok start-->*/}
 						<div className="news-feed-left">
 
-							<div className="news-title sky-blue-bg">
-								<img src={require("./../images/bell-icon-logo.svg")} alt="Bell logo"/>
-								<h3>Notification title</h3>
-								<div className="time-date">Today at 8:30am</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-								<img className="svg" src={require("./../images/login-screen-pattern-white-r.svg")} alt="login screen pattern"/>
-							</div>
+							
 
 							{/*<!--Date wise block start-->*/}
-							<div className="news-date">
-								<h4>Friday, 1st May</h4>
-							</div>
-							<div className="datewise-common-block white-bg-boxshadow">
+							
+							 {(() => {
+								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
 
-								<div className="top-title">
-									<img src={require("./../images/warning-logo.svg")} alt="warning-logo"/>
-									<h4><span>WARNING</span> Flooding in the West Midlands</h4>
-								</div>
-								<div className="time-date">Today at 8:30am</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-								<div className="btn-block">
-									<button className="btn common-btn-white" type="submit"><span>Find Out More</span></button>
-								</div>
-							</div>
-							<div className="white-text datewise-common-block d-flex flex-wrap padding-0">
-								<div className="left-content cobalt-blue-bg">
-									<div className="top-title">
-										<img src={require("./../images/new-product-launch.svg")}/>
-										<h4>New product launch</h4>
-									</div>
-									<div className="time-date">Today at 9.03am</div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
-									<div className="btn-block">
+										if(this.state.newsFeedItems[i].field_news_feed_type=="13"){
+											return(<div className="news-title sky-blue-bg">
+													<img src={site_url+this.state.newsFeedItems[i].field_icon} alt="Bell logo"/>
+													<h3>{this.state.newsFeedItems[i].title}</h3>
+													<div className="time-date">Today at 8:30am</div>
+													{ReactHtmlParser(this.state.newsFeedItems[i].body)}
+													<img className="svg" src={this.state.newsFeedItems[i].field_image} alt="login screen pattern"/>
+											</div>);
+										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
+										} 
+									}
+								 })()}
 
-										<button className="btn btn-cobalt-blue" type="submit"><span>SEE MORE</span></button>
+							{(() => {
+								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
 
-									</div>
-								</div>
-								<div className="image-block bg-cover" style={{backgroundImage: "url(./../images/hydro-dryscreen.jpg)"}}></div>
-							</div>
-							{/*<!--Date wise details box end-->*/}
+										if(this.state.newsFeedItems[i].field_news_feed_type=="4"){
+											return(<div className="white-text datewise-common-block d-flex flex-wrap padding-0">
+														<div className="left-content cobalt-blue-bg">
+															<div className="top-title">
+																<img src={site_url+this.state.newsFeedItems[i].field_icon}/>
+																<h4>New product launch</h4>
+															</div>
+															<div className="time-date">Today at {this.state.newsFeedItems[i].created}</div>
+															{ReactHtmlParser(this.state.newsFeedItems[i].body)}
+															<div className="btn-block">
 
-							{/*<!--Date wise block start-->*/}
-							<div className="news-date">
-								<h4>Monday, 4th May</h4>
-							</div>
+																<Link className="btn btn-cobalt-blue" to={""}><span>{this.state.newsFeedItems[i].field_news_feed_button}</span></Link>
 
-							<div className="datewise-common-block white-bg-boxshadow">
+															</div>
+														</div>
+														<div className="image-block bg-cover"></div>
+													</div>);
+										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
+										} 
+									}
+								 })()}
 
-								<div className="top-title">
-									<img src={""} alt="issue-logo"/>
-									<h4>Issues</h4>
-								</div>
-								<div className="time-date">Today at 8:30am</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-								<div className="btn-block">
-									<button className="btn common-btn-white" type="submit"><span>Find Out More</span></button>
-								</div>
-							</div>
-							<div className="datewise-common-block white-bg-boxshadow">
+							{(() => {
+								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
 
-								<div className="top-title">
-									<img src={require("./../images/warning-logo.svg")} alt="warning-logo"/>
-									<h4><span>WARNING</span> Flooding in the West Midlands</h4>
-								</div>
-								<div className="time-date">Today at 8:30am</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-								<div className="btn-block">
-									<button className="btn common-btn-white" type="submit"><span>Find Out More</span></button>
-								</div>
-							</div>
+										if(this.state.newsFeedItems[i].field_news_feed_type=="2"){
+												return(<div className="datewise-common-block white-bg-boxshadow">
+																<div className="top-title">
+																	<img src={site_url+this.state.newsFeedItems[i].field_icon} alt="warning-logo"/>
+																	<h4><span>{this.state.newsFeedItems[i].title}</span></h4>
+																</div>
+																<div className="time-date">Today at {this.state.newsFeedItems[i].created}</div>
+																{ReactHtmlParser(this.state.newsFeedItems[i].body)}
+																<div className="btn-block">
+																	<button className="btn common-btn-white" type="submit"><span>{this.state.newsFeedItems[i].field_news_feed_button}</span></button>
+																</div>
+															</div>
+														);
+										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
+										} 
+									}
+								 })()}
+
+							{(() => {
+								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
+
+										if(this.state.newsFeedItems[i].field_news_feed_type=="3"){
+												return(<div className="datewise-common-block white-bg-boxshadow">
+																	<div className="top-title">
+																		<img src={this.state.newsFeedItems[i].field_icon} alt="issue-logo"/>
+																		<h4>{this.state.newsFeedItems[i].title}</h4>
+																	</div>
+																	<div className="time-date">Today at {this.state.newsFeedItems[i].created}</div>
+																	{ReactHtmlParser(this.state.newsFeedItems[i].body)}
+																	<div className="btn-block">
+																		<button className="btn common-btn-white" type="submit"><span>{this.state.newsFeedItems[i].field_news_feed_button}</span></button>
+																	</div>
+																</div>
+														);
+										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
+										} 
+									}
+								 })()}
+							{(() => {
+								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
+
+										if(this.state.newsFeedItems[i].field_news_feed_type=="5"){
+												return(<div className="datewise-common-block white-text teal-color-bg">
+																<div className="top-title">
+																	<img src={this.state.newsFeedItems[i].field_icon} alt="setting-logo"/>
+																	<h4>{this.state.newsFeedItems[i].title}</h4>
+																</div>
+																<div className="time-date">{this.state.newsFeedItems[i].created}</div>
+																{ReactHtmlParser(this.state.newsFeedItems[i].body)}
+															</div>
+														);
+										} 
+									}
+								 })()}
+							{(() => {
+								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
+
+											if(i > 0 && this.state.newsFeedItems[i-1].created_1!==this.state.newsFeedItems[i].created_1){
+												return(<div className="news-date">
+															<h4>{this.state.newsFeedItems[i].created_1}</h4>
+														</div>);
+
+											}
+									}
+								 })()}
+							{(() => {
+								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
+
+											 if(i == 0){
+												return(<div className="news-date">
+															<h4>{this.state.newsFeedItems[i].created_1}</h4>
+												 	</div>);
+											}
+									}
+								 })()}
+
+
+
+
+
 							{/*<!--Date wise block end-->*/}
 
 							{/*<!--Date wise block start-->*/}
-							<div className="news-date">
-								<h4>Tuesday, 5th May</h4>
-							</div>
-
-							<div className="datewise-common-block white-bg-boxshadow">
-
-								<div className="top-title">
-									<img src={""} alt="issue-logo"/>
-									<h4>Issues</h4>
-								</div>
-								<div className="time-date">Today at 8:30am</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-								<div className="btn-block">
-									<button className="btn common-btn-white" type="submit"><span>Find Out More</span></button>
-								</div>
-							</div>
-
-							<div className="datewise-common-block white-text teal-color-bg">
-
-								<div className="top-title">
-									<img src={require("./../images/setting-logo.svg")} alt="setting-logo"/>
-									<h4>Update to T&Cs</h4>
-								</div>
-								<div className="time-date">10:00 am</div>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-							</div>
+							
 							{/*<!--Date wise block end-->*/}
 
 
@@ -138,10 +211,9 @@ class Newsfeeds extends Component {
 							<div className="recently-viewed">
 								<h4>Recently viewed</h4>
 								<ul>
-									<li><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></li>
-									<li><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor sit amet…</a></li>
-									<li><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></li>
-									<li><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></li>
+									{this.state.recentViews.map((recentItem,index)=>
+										<li><Link href="#" title={recentItem.title}>{recentItem.title}</Link></li>
+									)}
 								</ul>
 							</div>
 						</div>

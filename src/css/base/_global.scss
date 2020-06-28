@@ -10,7 +10,9 @@ body {
 	font-family: $arial;
 	height: 100%;
 }
-
+a:focus {
+	outline: none;
+}
 ul {
 	list-style: none;
 }
@@ -104,7 +106,7 @@ ul {
 		left: 0;
 		right: 0;
 		transition: 0.4s all ease-in-out;
-		/*background-image: url(#{$imgpath}/button-hover-effect.svg);*/
+		background-image: url(#{$imgpath}/button-hover-effect.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
@@ -169,7 +171,7 @@ ul {
 		left: 0;
 		right: 0;
 		transition: 0.4s all ease-in-out;
-		/*background-image: url(#{$imgpath}/button-hover-sky-blue.svg);*/
+		background-image: url(#{$imgpath}/button-hover-sky-blue.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
@@ -245,7 +247,7 @@ ul {
 		left: 0;
 		right: 0;
 		transition: 0.4s all ease-in-out;
-		/*background-image: url(#{$imgpath}/button-hover-sky-white.svg);*/
+		background-image: url(#{$imgpath}/button-hover-sky-white.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center center;
@@ -311,11 +313,11 @@ a.btn, button.btn{-webkit-appearance: none; -moz-appearance: none; appearance: n
 	input[type=file] {
 		font-size: 100px;
 		position: absolute;
-		left: 0;
+		right: 0;
 		top: 0;
 		opacity: 0;
 		cursor: pointer;
-		z-index: 1;
+		z-index: 2;
 
 		&:hover {
 			+ button {
@@ -578,13 +580,16 @@ nav {
 						@media screen and (max-width:$mobile-small) {
 							max-width: 26px;
 						}
+						@media screen and (max-width:$small-x) {
+							max-width: 20px;
+						}
 						/*IE Support CSS */
 						@media all and (-ms-high-contrast:none) {
 							height: 23px;
 						}
 
 						@media screen and (max-width:$mobile-small) {
-							max-height: 23px;
+							max-height: 22px;
 						}
 					}
 					label {
@@ -705,7 +710,7 @@ nav {
 	padding-left: 90px;
 	margin-left: auto;
 	align-items: flex-start;
-	@media screen and (max-width:$large-m) {
+	@media screen and (max-width:$large-mx) {
 		padding-left: 40px;
 	}
 
@@ -730,7 +735,7 @@ nav {
 		border-bottom: 1px solid $off-white;
 		padding: 36px 274px 36px 0;
 
-		@media screen and (max-width:$large-m) {
+		@media screen and (max-width:$large-mx) {
 			padding: 12px 80px 12px 0;
 		}
 		
@@ -765,8 +770,7 @@ nav {
 
 			img {
 				margin-right: 15px;
-				width: 37px;
-
+				max-width: 37px;
 				@media screen and (max-width:$mobile-small) {
 					max-width: 23px;
 				}
@@ -837,9 +841,15 @@ nav {
 	.bottom-content-block {
 		padding: 40px 0;
 		width: 100%;
-
+		
 		@media screen and (max-width:$ipad-landscape) {
 			padding: 24px 0;
+		}
+		@media screen and (max-width:$large-x) {
+			padding: 20px 0;
+		}
+		&.with-filter {
+			padding: 20px 0;
 		}
 	}
 
@@ -954,8 +964,8 @@ nav {
 	}
 
 	.sbToggleOpen {
-		transform: translateY(-50%) rotate(180deg);
-		-webkit-transform: translateY(-50%) rotate(180deg);
+		transform: translateY(-50%) rotate(-180deg);
+		-webkit-transform: translateY(-50%) rotate(-180deg);
 
 		/*&:hover {
     background: url(#{$imgpath}/select-icons.png) 0 -66px no-repeat;
@@ -1067,10 +1077,16 @@ nav {
 	position: absolute;
 	right: 245px;
 	top:38px;
-	z-index: 1;
+	z-index: 11;
+	@media screen and (max-width:$large-mx) {
+		top: 5px;
+	}
 	@media screen and (max-width:$large-m) {
 		right: 100px;
 		top:0;	
+	}
+	@media screen and (max-width:$large-x) {
+		right: 30px;
 	}
 	@media screen and (max-width:$ipad-portrait) {
 		right: 30px;
@@ -1079,6 +1095,7 @@ nav {
 		max-width: 150px;
 		padding: 10px;
 		right: 0;
+		pointer-events: none;
 	}
 	.drop-down-menu
 	{
@@ -1217,9 +1234,17 @@ nav {
 {
 	border: 1px solid $off-white;
 	position: relative;
+	z-index: 1;
 	width: 357px;
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
+	@media screen and (max-width:$large-x) {
+		margin: 5px 0 0;
+		width: 280px;
+	}
+	@media screen and (max-width:$mobile-small) {
+		display: none;
+	}
 	> a {
 		font-size: 16px;
 		line-height: 22px;
@@ -1237,12 +1262,13 @@ nav {
 			top: 50%;
 			transform: translateY(-50%);
 			-webkit-transform: translateY(-50%);
-			right: 15px;
+			right: 12px;
 			width: 0;
 			height: 0;
 			border-left: 4px solid transparent;
 			border-right: 4px solid transparent;
 			border-top: 8px solid $panton-gray;
+			transition: 0.2s all ease-in-out;
 		}
 	}
 	ul 
@@ -1250,13 +1276,16 @@ nav {
 		padding-left: 0;
 		margin: 0;
 		position: absolute;
-		top: 45px;
+		top: 44px;
 		height: 0;
 		visibility: hidden;
 		opacity: 0;
+		background-color: $white;
+		width: 100%;
+		transition: 0.5s all ease-in-out;
 		a {
 			padding: 11px 25px;
-			font-size: 16px;
+			font-size: 14px;
 			line-height: 22px;
 			padding: 11px 25px;
 			width: 100%;
@@ -1272,11 +1301,19 @@ nav {
 	}
 	&:hover {
 		box-shadow: 0 4px 16px rgba(69,91,99,.08);
+		border-color: transparent;
 		.list
 		{
 			height: auto;
 			visibility: visible;
 			opacity: 1;
+			box-shadow: 0 13px 16px rgba(69,91,99,.08);
+		}
+		a{
+			&:after {
+				transform: translateY(-50%) rotate(-180deg);
+    			-webkit-transform: translateY(-50%) rotate(-180deg);
+			}
 		}
 	}
 }
@@ -1287,14 +1324,24 @@ nav {
 .sort-by
 {
 	position: relative;
-	width: 257px;
+	width: 219px;
 	justify-content: flex-end;
     padding-right: 20px;
 	margin-left: auto;
 	-webkit-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
-	@media screen and (max-width:$large-m) {
+	z-index: 1;
+	background-color: $white;
+
+	@media screen and (max-width:$large-mx) {
 		margin-right: 120px;
+	}
+	@media screen and (max-width:$large-x) {
+		margin-right: 50px;
+		width: 190px;
+	}
+	@media screen and (max-width:$mobile-small) {
+		display: none;
 	}
 	 h2 {
 		font-size: 16px;
@@ -1326,49 +1373,226 @@ nav {
 	.drop-down-menu
 	{
 		position: absolute;
-		top: 45px;
+		top: 43px;
 		height: 0;
 		visibility: hidden;
 		opacity: 0;
+		background-color: $white;
+		right: 0;
+		left: 0;
+		text-align: right;
 		ul 
 	{
 		padding-left: 0;
 		margin: 0;
 		a {
 			padding: 11px 25px;
-			font-size: 16px;
+			font-size: 14px;
 			line-height: 22px;
-			padding: 11px 25px;
+			padding: 5px 25px;
 			width: 100%;
 			display: block;
 			font-family: $gibson;
 			font-weight: $font-normal;
 			color: $panton-gray;
 			text-decoration: none;
+			&:hover {
+				color: $sky-blue;
+			}
 		}
 	}
 	}
-	
-	
-	
 	&:hover {
-			-webkit-box-shadow: 0px 0px 4px -2px rgba(0,0,0,.75);
-			-moz-box-shadow: 0px 0px 4px -2px rgba(0,0,0,.75);
-			box-shadow: 0px 0px 4px -2px rgba(0,0,0,.75);
+		box-shadow: 0px 4px 16px $gray-light;
 		.drop-down-menu
 		{
 			height: auto;
 			visibility: visible;
 			opacity: 1;
+			box-shadow: 0 13px 16px rgba(69,91,99,.08);
 		}
 	}
 }
 
 /*Filter Block*/
-.fileter-block { max-width: 1320px; width: 100%; }
+.fileter-block { 
+	max-width: 1320px;
+	width: 100%;
+	@media screen and (max-width:$mobile-small) {
+		padding: 0 23px;
+	}
+	.search-sort-block
+	{
+		margin-left: auto;
+		@media screen and (max-width:$large-x) {
+				margin-top: 5px;
+		}
+		@media screen and (max-width:$ipad-portrait) {
+			margin-left: 0;
+    		margin-right: auto;
+		}
+		@media screen and (max-width:$mobile-small) {
+			width: 100%;
+		}
+	}
+	&.border-bottom {
+		padding-bottom: 20px;
+		border-bottom: 1px solid $off-white;
+		&:after {
+			content: "";
+			display: block;
+			width: 100%;
+			height: 1px;
+			background-color: $off-white;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	}
+}
 
+/*Auto search box*/
+.auto-search-box 
+{
+	position: relative;
+	width: 238px;
+    padding-right: 20px;
+	margin-left: auto;
+	@media screen and (max-width:$large-x) {
+		width: 200px;
+	}
+	@media screen and (max-width:$mobile-small) {
+		width: 268px;
+		padding: 0;
+		margin-right: auto;
+		margin-left: 0;
+	}
+	input[type="text"]
+	{
+		border: 1px solid #f5f5f5;
+    	position: relative;	
+		font-size: 16px;
+			line-height: 22px;
+			padding: 11px 25px 11px 33px;
+			width: 100%;
+			display: block;
+			font-family: $gibson;
+			font-weight: $font-normal;
+			color: $panton-gray;
+			text-decoration: none;
+			background-image: url(#{$imgpath}/ic_search.svg);
+			background-size: 17px;
+			background-repeat: no-repeat;
+			background-position: 5% center;
+		@media screen and (max-width:$mobile-small) {
+			padding: 5px 9px 5px 35px;
+		}
+	}
+}
 
-
-
+/*Mobile filter block open close*/
+.mobile-filter {
+	@media screen and (min-width:$mobile-small-up) {
+			display: none;
+	}
+	.filter-open-btn {
+		margin-left: auto;
+		width: 16px;
+		img, svg {
+			width: 100%;
+		}
+	}
+	.open-close-filter-block
+	{
+		position: fixed;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		background-color: $white;
+		z-index: 9;
+		transform: translateY(100%);
+		-webkit-transform: translateY(100%);
+    	transition: 0.3s all ease-in-out;
+   		overflow-y: scroll;
+		.top-head {
+			border-bottom: 1px solid $off-white;
+			padding: 5px 30px;
+			.top-title
+			{
+				min-width: 120px;
+				img {
+					width: 25px;
+				}
+				h4 {
+					font-size: 20px;
+					line-height: 46px;
+					font-family: $gibson;
+					font-weight: $font-semi-bold;
+					color: $cobalt-blue;
+					margin: 0;
+					padding-left: 10px;
+				}
+			}
+		}
+	}
+	.list-filter-mobile {
+		padding: 0 40px 40px 40px;
+		h5 {
+					font-size: 18px;
+					line-height: 28px;
+					font-family: $gibson;
+					font-weight: $font-semi-bold;
+					color: $cobalt-blue;
+					margin: 33px 0 0 0;
+		}
+		ul {
+			padding-left: 0;
+			li {
+				border-bottom: 1px solid $off-white;
+				a {
+					font-size: 15px;
+					line-height: 22px;
+					font-family: $gibson;
+					font-weight: $font-normal;
+					color: $panton-gray;
+					text-decoration: none;
+					padding: 10px 25px 10px 0;
+					display: block;
+					width: 100%;
+					position: relative;
+				}
+				&.active
+				{
+					a {
+						color: $black;
+						&:after {
+							content: "";
+							display: inline-block;
+							background-image: url(#{$imgpath}/ic_right.svg);
+							background-size: contain;
+							background-repeat: no-repeat;
+							background-position: right center;
+							height: 10px;
+							width: 12px;
+							position: absolute;
+							right: 15px;
+							top: 50%;
+							transform: translateY(-50%);
+							-webkit-transform: translateY(-50%);
+						}
+					}
+				}
+			}
+		}
+	}
+	&.filter-active {
+		.open-close-filter-block {
+			transform: translateY(0%);
+			-webkit-transform: translateY(0%);
+		}
+	}
+}
 
 

@@ -1,11 +1,55 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
+import ReactHtmlParser from 'react-html-parser';
 import CommonBackground from './../images/common-bg.jpg';
+import Apiurl,{site_url} from './Apiurl'; 
 
 
 class Welcome extends Component {
 	constructor(props) {
 		super(props);
+		this.state={
+			title:null,
+			bodyparagraph:null,
+			field_button_text:null,
+			field_button_uri:null,
+			middleItem:[]
+		}
+	}
+
+
+	componentDidMount(){
+		this.welcomeMainBlock();
+		this.welcomeThreeBlock();
+	}
+
+	welcomeMainBlock=()=>{
+		fetch(Apiurl.Welcomeblockmain.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                },
+                method:Apiurl.Welcomeblockmain.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({title:data.title[0].value,bodyparagraph:data.body[0].value,field_button_text:data.field_button_text[0].value});
+    	})	
+	}
+
+
+	welcomeThreeBlock=()=>{
+		fetch(Apiurl.WelcomeThreeblock.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                },
+                method:Apiurl.WelcomeThreeblock.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({middleItem:data});
+    	})	
 	}
 
 	render() {
@@ -17,48 +61,27 @@ class Welcome extends Component {
 						*/}			
 			<div className="intro-new-user-popup">
 				<a href="#" className="close" title="Close icon"><img className="svg" src={require("./../images/close-icon-gray.svg")} alt="close icon"/></a>
-				<h1>Welcome to <br/> Hydro International <br/> On-boarding</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<h1>{this.state.title}</h1>
+				{ReactHtmlParser(this.state.bodyparagraph)}
 				<div className="list welcome-slider d-flex flex-wrap">
-					
-					<div className="items">
-						<div>
-						<h2>Products</h2>
-						<div className="image-block">
-							<div className="back-transp-img">
-								<img className="svg" src={require("./../images/wlcome-item-bg.svg")} alt="welcome ovelay"/>
-							</div>
-							<img src={require("./../images/welcome-product-screen1.png")} alt="welcome-product-screen"/>
-						</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p></div>
-					</div>
-					
-					<div className="items"><div>
-						<h2>Resources</h2>
-						<div className="image-block">
-							<div className="back-transp-img">
-								<img className="svg" src={require("./../images/wlcome-item-bg.svg")} alt="welcome ovelay"/>
-							</div>
-							<img src={require("./../images/welcome-resources-screen2.png")} alt="welcome-product-screen"/>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-					</div></div>
-					
-					<div className="items"><div>
-						<h2>Contracts</h2>
-						<div className="image-block">
-							<div className="back-transp-img">
-								<img className="svg" src={require("./../images/wlcome-item-bg.svg")} alt="welcome ovelay"/>
-							</div>
-							<img src={require("./../images/welcome-contracts-screen3.png")} alt="welcome-product-screen"/>
-						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-					</div></div>
+					{this.state.middleItem.length && this.state.middleItem.map((item,index)=>
+							<div className="items"  key={index}><div>
+								<h2>{item.field_block_title}</h2>
+								<div className="image-block">
+									<div className="back-transp-img">
+										<img className="svg" src={require("./../images/wlcome-item-bg.svg")} alt="welcome ovelay"/>
+									</div>
+									<img src={site_url+item.field_block_image} alt={item.field_block_title} />
+								</div>
+								<p>{item.field_block_description}</p>
+							</div></div>		
+					)}
+
 					
 				</div>
 				<div className="btn-block">
-					<button className="btn common-btn-blue" type="submit">
-						<span>START NOW</span></button>
+					<Link to={"/Dashboard"} className="btn common-btn-blue">
+						<span>{this.state.field_button_text}</span></Link>
 				</div>
 			</div>{/*<!--Intro new user popup End-->*/}
 

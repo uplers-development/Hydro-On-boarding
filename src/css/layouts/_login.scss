@@ -252,11 +252,12 @@
 	.login-right-img {
 		width: 55.47%;
 		position: relative;
-
+		overflow: hidden;
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 			position: relative;
 			background-image: none !important;
+			z-index: -1;
 		}
 
 		> svg {

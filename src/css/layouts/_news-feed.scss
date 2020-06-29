@@ -131,7 +131,7 @@
     			margin-bottom: 30px;
 			}
 			@media screen and (max-width:$mobile-small) {
-				padding: 22px 29px 24px 25px;
+				padding: 22px 29px 20px 22px;
 			}
 			margin-bottom: 45px;
 			.top-title
@@ -151,6 +151,7 @@
 					@media screen and (max-width:$mobile-small) {
 						right: -10px;
     					left: auto;
+						width: 21px;
 					}
 				}
 				h4 {
@@ -210,8 +211,14 @@
 				@media screen and (max-width:$mobile-small) {
 					font-size: 15px;
 					padding-right: 0;
+					margin-bottom: 0;
 				}
 			}
+			.btn-block {
+				@media screen and (max-width:$mobile-small) { 
+					margin-top: 10px;
+				}
+			}	
 			.left-content 
 			{
 				width: 50.31%;

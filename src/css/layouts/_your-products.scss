@@ -1,8 +1,10 @@
 .your-product-list {
 	max-width: 1320px;
 	width: 100%;
+	margin-top: 18px;
 	@media screen and (max-width:$large-mx) {
 		padding-right: 15px;
+		margin-top: 0;
 	}
 	@media screen and (max-width:$mobile-small) {
 		padding: 0 23px;
@@ -25,7 +27,7 @@
 				padding-bottom: 73.94%;
 			}
 			@media screen and (max-width:$mobile-small) {
-				padding-bottom: 44.65%;
+				padding-bottom: 52.70%;
 			}
 		}
 		.product-content
@@ -49,7 +51,7 @@
 				font-weight: $font-semi-bold;
 				margin-bottom: 8px;
 				text-decoration: none;
-				transition: 0.3s all ease-in-out;
+				@include transition(all 0.3s ease-in-out);
 				@media screen and (max-width:$mobile-small) {
 					font-size: 16px;
 				}
@@ -134,7 +136,7 @@
 				}
 				img, svg 
 				{
-					transition: 0.5s all ease-in-out;	
+					@include transition(all 0.5s ease-in-out);
 					width: 54px;
 					height: 54px;
 					@media screen and (max-width:$large-mx) {

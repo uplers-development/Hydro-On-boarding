@@ -51,9 +51,14 @@ $off-white: #F5F5F5;
 $mint-color:#00AEEF0D;
 $cyprus-color: #003A41;
 $gray-light: #455B6314;
+$gray-dark-border: #75787B4D;
+$gray-dark-shadow: #00000029;
 $white-transparent: rgba(255, 255, 255, 0.1);
+$white-transparent-menu-text: rgba(255, 255, 255, 0.8);
 $black-transparent: rgba(0, 0, 0, 0.65);
 $sky-blue-transparent: rgba(0, 176, 240, 0.04);
+$sky-blue-transparent-2: rgba(0, 176, 240, 0.04);
+$popup-back-bg :rgba(0,0,0,0.77);
 
 //== Fonts
 $arial: 'Arial';
@@ -77,4 +82,5 @@ $ipad-portrait: 991px;
 $large: 1200px;
 $large-x: 1300px;
 $large-m: 1400px;
-$large-mx: 1600px;
+$large-mx: 1700px;
+$container-x : 1320px;

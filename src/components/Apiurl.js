@@ -143,7 +143,7 @@ export default {
          url: base_url+'user/2?_format=json',
          method: 'PATCH'
     },Leftsidebar_client: {
-    	 url: base_url+'/jsonapi/menu_list/main?_format=json',
+    	 url: base_url+'jsonapi/menu_list/main?_format=json',
          method: 'GET'
     },Leftsidebar_enduser: {
     	 url: base_url+'entity/menu/main/tree',

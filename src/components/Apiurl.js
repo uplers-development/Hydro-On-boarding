@@ -122,6 +122,10 @@ export default {
         url:base_url+'/jsonapi/contract_list?_format=json',
         method:'GET'
     }, 
+    ContractTypeProductBaseFilter:{
+        url:base_url+'/jsonapi/contract_list?_format=json',
+        method:'GET'
+    }, 
     ContractSortByFilter:{
         url:base_url+'/jsonapi/contract_list?_format=json',
         method:'GET'

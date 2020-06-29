@@ -113,7 +113,7 @@ class Profile extends Component {
 
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
-				<a className="navbar-logo" href="#" title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></a>
+				<Link className="navbar-logo" to={"/Dashboard"} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
 					<li><a className="active" href="#" title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>

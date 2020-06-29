@@ -12,6 +12,7 @@ class Product extends Component {
 			productList:[],
 			categoryfilter:[],
 			getTileListforSearch:[],
+			mobileView:false,
 		}
 
 		this.filterProductCategoryById=this.filterProductCategoryById.bind(this);
@@ -20,6 +21,7 @@ class Product extends Component {
 		this.SortProductCategoryById=this.SortProductCategoryById.bind(this);
 		this.ProductListTitleSearch=this.ProductListTitleSearch.bind(this);
 		this.GetProductTitleForSearch=this.GetProductTitleForSearch.bind(this);
+
 	}
 
 
@@ -61,7 +63,6 @@ class Product extends Component {
 	filterProductCategoryById =(e) =>{
 		console.log(e.target);
 		let pid=e.target.getAttribute("data-cat-id");
-		alert(pid);
 		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid,{
 				headers: {
                 	"Content-Type" : "application/json",
@@ -124,6 +125,7 @@ class Product extends Component {
 	GetProductTitleForSearch=(e)=>{
 		let productnamestring=e.target.value;
 		console.log(productnamestring)
+		if(productnamestring!==''){
 		fetch(Apiurl.GetProductTitle.url+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
@@ -136,6 +138,9 @@ class Product extends Component {
     		console.log(data);
     		this.setState({getTileListforSearch:data});
     	})
+     }else{
+    		this.setState({getTileListforSearch:''});
+     }
 	}
 
 	ProductListTitleSearch =(e) =>{
@@ -189,7 +194,7 @@ class Product extends Component {
 								<a href="#" data-value="">Applications</a>
 								<ul className="list">
 								{this.state.categoryfilter.map((catname,index)=>
-									<li key={catname.tid} onClick={this.filterProductCategoryById}><a href="#" data-cat-id={catname.tid}>{catname.name}</a></li>
+									<li key={catname.tid} onClick={this.filterProductCategoryById}><a href="#" data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</a></li>
 								)}
 								</ul>
 							</div>
@@ -205,8 +210,8 @@ class Product extends Component {
 											<input id="myInput" type="text" name="hydro" onChange={this.GetProductTitleForSearch}/>
 										</div>
 										<ul className="list">
-											{this.state.getTileListforSearch.length && this.state.getTileListforSearch.map((titlename,index)=>
-												<li key={titlename.nid} ><a href="#" data-title-name={titlename.title} onClick={this.ProductListTitleSearch}>{titlename.title}</a></li>
+											{this.state.getTileListforSearch.length > 0 && this.state.getTileListforSearch.map((titlename,index)=>
+												<li key={titlename.nid} ><a href="#" data-title-name={ReactHtmlParser(titlename.title)} onClick={this.ProductListTitleSearch}>{titlename.title}</a></li>
 											)}
 										</ul>
 									</form>
@@ -230,49 +235,43 @@ class Product extends Component {
 								
 
 								
-								{/*<div className="mobile-filter">
-																	<a href="#" title="filter-btn" className="filter-open-btn">
-																		<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
-																	</a>
-								
-																	<div className="open-close-filter-block">
-																		<div className="top-head d-flex flex-wrap align-center">
-																			<div className="top-title d-flex flex-wrap">
-																				<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
-																				<h4>Filters</h4>
-																			</div>
-																			<a href="#" title="close-btn" className="filter-open-btn">
-																				<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
-																			</a>
-																		</div>
-								
-																		<div className="list-filter-mobile">
-																			<h5>Applications</h5>
-																			<ul>
-																				<li><a href="#">Stormwater treatment</a></li>
-																				<li><a href="#">Hydrometry and monitoring</a></li>
-																				<li><a href="#">Industrial water treatment</a></li>
-																				<li><a href="#">CSO screening, treatment & flow control</a></li>
-																				<li className="active"><a href="#">Flow control and flood protection</a></li>
-																				<li><a href="#">Water and wastewater treatment</a></li>
-																			</ul>
-																			
-																			<h5>Sort by</h5>
-																			<ul>
-																				<li className="active"><a href="#" title="Purchase date newest">Purchase date newest</a></li>
-																				<li><a href="#" title="Purchase date oldest">Purchase date oldest</a></li>
-																				<li><a href="#" title="A-Z">A-Z</a></li>
-																				
-																			</ul>
-																		</div>
-								
-																	</div>
-																</div>*/}
-								
+								<div className="mobile-filter">
+										<a title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
+											<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
+										</a>
+	
+										<div className="open-close-filter-block">
+											<div className="top-head d-flex flex-wrap align-center">
+												<div className="top-title d-flex flex-wrap">
+													<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
+													<h4>Filters</h4>
+												</div>
+												<a href="#" title="close-btn" className="filter-open-btn">
+													<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
+												</a>
+											</div>
+	
+											<div className="list-filter-mobile">
+												<h5>Applications</h5>
+												<ul>
 
+													{this.state.categoryfilter.map((catname,index)=>
+															<li key={catname.tid} onClick={this.filterProductCategoryById}><a href="#" data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</a></li>
+													)}
+												</ul>
+												
+												<h5>Sort by</h5>
+												<ul>
+													<li><a href="#" title="Purchase date newest" onClick={this.SortProductCategoryByPurchaseDateNew}>Purchase date newest</a></li>
+													<li><a href="#" title="Purchase date oldest" onClick={this.SortProductCategoryByPurchaseDateOld}>Purchase date oldest</a></li>
+													<li><a href="#" title="A-Z" onClick={this.SortProductCategoryById}>A-Z</a></li>
+													
+												</ul>
+											</div>
+	
+										</div>
+									</div>
 							</div>
-							
-
 						</div>
 						
 
@@ -283,13 +282,13 @@ class Product extends Component {
 
 									</div>
 									<div className="product-content">
-										<Link to="#" title={item.title}>{item.title}</Link>
+										<Link to="#" title={ReactHtmlParser(item.title)}>{ReactHtmlParser(item.title)}</Link>
 										<h4>
 										{item.field_product_category.split(',').map((cat,cat_index)=>
-											<span key={cat_index}>{cat}</span>
+											<span key={cat_index}>{ReactHtmlParser(cat)}</span>
 										)}
 										</h4>
-										<p>{item.field_product_description}</p>
+										<p>{ReactHtmlParser(item.field_product_description)}</p>
 										<div className="purchase-date">Purchase Date: {item.field_purchase_date}</div>
 									</div>
 									<div className="btn-block">

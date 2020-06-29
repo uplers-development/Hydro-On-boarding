@@ -18,6 +18,7 @@ class Contract extends Component {
 		this.ContractSortByDateOld=this.ContractSortByDateOld.bind(this);
 		this.ContractSortByDateNew=this.ContractSortByDateNew.bind(this);
 		this.ContractSortA_Z=this.ContractSortA_Z.bind(this);
+		this.ContractTypeProductBaseFilter=this.ContractTypeProductBaseFilter.bind(this);
 	}
 
 	componentDidMount(){
@@ -61,6 +62,19 @@ class Contract extends Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({contractType:data})
+    	})
+	}
+
+	ContractTypeProductBaseFilter=(e)=>{
+		e.preventDefault()
+		let typeId=e.target.getAttribute("data-product-id");
+		fetch(Apiurl.ContractTypeBaseFilter.url+"&field_contract_document_type_target_id="+typeId,{
+                method:Apiurl.ContractTypeBaseFilter.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({contractDetails:data})
     	})
 	}
 
@@ -146,19 +160,7 @@ class Contract extends Component {
 										<img src={require("../../images/resources-logo-blue.svg")} alt="profile-logo"/>
 										<h1>Contracts</h1>
 									</div>
-
-									<div className="d-flex flex-wrap user-log">
-										<div className="user-image-name d-flex flex-wrap align-center">
-											<img src={require("../../images/girls-profile-img.png")} alt="Prfile image"/>
-											<h2>Username</h2>
-										</div>
-										<div className="drop-down-menu">
-											<ul>
-												<li><a href="#" title="Profile">Profile</a></li>
-												<li><a href="#" title="Sign out">Sign out</a></li>
-											</ul>
-										</div>
-									</div>
+									<UserProfile/>
 								</div>
 								
 							</div>
@@ -175,10 +177,10 @@ class Contract extends Component {
 
 										
 										<div className="select-box">
-											<a href="#" data-value="">Products</a>
+											<a href="javascript:void(0)" data-value="">Products</a>
 											<ul className="list">
 											{this.state.categoryfilter.map((productItem,index)=>
-												<li key={index}><Link to={""} title={productItem.name} data-product-id={productItem.tid}>{productItem.name}</Link></li>
+												<li key={index}><a href="javascript:void(0)" title={productItem.name} data-product-id={productItem.tid} onClick={this.ContractTypeProductBaseFilter}>{productItem.name}</a></li>
 											)}
 
 											</ul>
@@ -226,7 +228,7 @@ class Contract extends Component {
 
 											
 											<div className="mobile-filter">
-												<a href="#" title="filter-btn" className="filter-open-btn">
+												<a href="#" title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
 													<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
 												</a>
 
@@ -244,19 +246,16 @@ class Contract extends Component {
 													<div className="list-filter-mobile">
 														<h5>Applications</h5>
 														<ul>
-															<li><a href="#">Stormwater treatment</a></li>
-															<li><a href="#">Hydrometry and monitoring</a></li>
-															<li><a href="#">Industrial water treatment</a></li>
-															<li><a href="#">CSO screening, treatment & flow control</a></li>
-															<li className="active"><a href="#">Flow control and flood protection</a></li>
-															<li><a href="#">Water and wastewater treatment</a></li>
+															{this.state.categoryfilter.map((productItem,index)=>
+																<li key={index}><a href="javascript:void(0)" title={productItem.name} data-product-id={productItem.tid} onClick={this.ContractTypeProductBaseFilter}>{productItem.name}</a></li>
+															)}
 														</ul>
 
 														<h5>Sort by</h5>
 														<ul>
-															<li className="active"><a href="#" title="Purchase date newest">Purchase date newest</a></li>
-															<li><a href="#" title="Purchase date oldest">Purchase date oldest</a></li>
-															<li><a href="#" title="A-Z">A-Z</a></li>
+															<li><Link to={""} title="Purchase date newest" onClick={this.ContractSortByDateNew}>Purchase date newest</Link></li>
+															<li><Link to={""} title="Purchase date oldest" onClick={this.ContractSortByDateOld}>Purchase date oldest</Link></li>
+															<li><Link to={""} title="A-Z" onClick={this.ContractSortA_Z}>A-Z</Link></li>
 
 														</ul>
 

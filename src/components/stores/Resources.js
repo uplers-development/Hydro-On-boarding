@@ -12,7 +12,8 @@ class Resources extends Component {
 			ResourceList:[],
 			productList:[],
 			ResourceTypelist:[],
-			SearchList:[]
+			SearchList:[],
+			mobileview:false
 		}
 		this.GetProductBaseFilter=this.GetProductBaseFilter.bind(this);
 		this.FilterByResourceId=this.FilterByResourceId.bind(this);
@@ -133,6 +134,7 @@ class Resources extends Component {
 	ListResourcesforSearch=(e)=>{
 		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
 		let resourcenameString=e.target.value;
+		if(resourcenameString!==''){
 		console.log(resourcenameString)
 		fetch(Apiurl.ListResourcesforSearch.url+"&field_resource_type_target_id="+resource_id+"&title="+resourcenameString,{
 			headers: {
@@ -146,6 +148,9 @@ class Resources extends Component {
     		console.log(data);
     		this.setState({SearchList:data});
     	})
+    }else{
+    		this.setState({SearchList:''});
+    }
 	}
 
 	SearchResourcesByTitle=(e)=>{
@@ -206,7 +211,7 @@ class Resources extends Component {
 								<a href="#" data-value="">Products</a>
 								<ul className="list">
 								{this.state.productList.map((productItem,index)=>
-									<li key={index}><Link title={productItem.title} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{productItem.title}</Link></li>
+									<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
 								)}
 								</ul>
 							</div>
@@ -217,7 +222,7 @@ class Resources extends Component {
 								<a href="#" data-value="">Types</a>
 								<ul className="list">
 									{this.state.ResourceTypelist.map((resourcetitle,index)=>
-										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={resourcetitle.name} onClick={this.FilterByResourceId}>{resourcetitle.name}</Link></li>
+										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FilterByResourceId}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
 									)}
 								</ul>
 							</div>
@@ -232,16 +237,13 @@ class Resources extends Component {
 											<input id="myInput" type="text" name="hydro" onChange={this.ListResourcesforSearch}/>
 										</div>
 										<ul className="list">
-											{this.state.SearchList.length && this.state.SearchList.map((resourcename,index)=>
-												<li key={resourcename.nid} ><Link data-title-name={resourcename.title} onClick={this.SearchResourcesByTitle}>{resourcename.title}</Link></li>
+											{this.state.SearchList.length > 0 && this.state.SearchList.map((resourcename,index)=>
+												<li key={resourcename.nid} ><Link data-title-name={ReactHtmlParser(resourcename.title)} onClick={this.SearchResourcesByTitle}>{ReactHtmlParser(resourcename.title)}</Link></li>
 											)}
 										</ul>
 									</form>
 								</div>
-								
 
-
-								
 								<div className="d-flex flex-wrap sort-by">
 									<div className="sort-selected d-flex flex-wrap align-center">
 										<h2>Sort by</h2>
@@ -259,7 +261,7 @@ class Resources extends Component {
 
 								
 								<div className="mobile-filter">
-									<a href="#" title="filter-btn" className="filter-open-btn">
+									<a href="#" title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
 										<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
 									</a>
 
@@ -277,19 +279,18 @@ class Resources extends Component {
 										<div className="list-filter-mobile">
 											<h5>Applications</h5>
 											<ul>
-												<li><a href="#">Stormwater treatment</a></li>
-												<li><a href="#">Hydrometry and monitoring</a></li>
-												<li><a href="#">Industrial water treatment</a></li>
-												<li><a href="#">CSO screening, treatment & flow control</a></li>
-												<li className="active"><a href="#">Flow control and flood protection</a></li>
-												<li><a href="#">Water and wastewater treatment</a></li>
+												{this.state.productList.map((productItem,index)=>
+													<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
+												 )}
+												
 											</ul>
 
 											<h5>Sort by</h5>
 											<ul>
-												<li className="active"><a href="#" title="Purchase date newest">Purchase date newest</a></li>
-												<li><a href="#" title="Purchase date oldest">Purchase date oldest</a></li>
-												<li><a href="#" title="A-Z">A-Z</a></li>
+												<li><Link title="Recently added" data-get-filterindex="&sort_by=created&sort_order=DESC" onClick={this.SortResources}>Recently added</Link></li>
+												<li><Link title="Oldest-Newest"  data-get-filterindex="&sort_by=created&sort_order=ASC" onClick={this.SortResources}>Oldest-Newest</Link></li>
+												<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.SortResources}>Recently viewed</Link></li>
+												<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.SortResources}>Most viewed</Link></li>
 											</ul>
 										</div>
 									</div>
@@ -303,11 +304,11 @@ class Resources extends Component {
 									<div>
 										<div className="image-block">
 											<div className="bg-cover" style={{backgroundImage: `url(${site_url+resourceItem.field_resources_image})`}}></div>
-											<label>{resourceItem.field_resource_type}</label>
+											<label>{ReactHtmlParser(resourceItem.field_resource_type)}</label>		
 										</div>
 										<div className="res-content">
-											<h3>{resourceItem.title}</h3>
-											<p>{resourceItem.field__resources_description}</p>
+											<h3>{ReactHtmlParser(resourceItem.title)}</h3>
+											<p>{ReactHtmlParser(resourceItem.field__resources_description)}</p>
 											<div className="date">{resourceItem.created}</div>
 										</div>
 									</div>

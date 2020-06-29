@@ -21,14 +21,14 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch(Apiurl.Leftsidebar_client.url,{
-                method:Apiurl.Leftsidebar_client.method,
-      }).then(res=>{
-        return res.json()
-      }).then(data=>{
-        console.log(data);
-        this.setState({sidebarItem:data});
-      })
+      fetch(Apiurl.Leftsidebar_client.url,{
+                  method:Apiurl.Leftsidebar_client.method,
+        }).then(res=>{
+          return res.json()
+        }).then(data=>{
+          console.log(data);
+          this.setState({sidebarItem:data});
+        })
   }
 
    render() {
@@ -36,10 +36,10 @@ class App extends Component {
            <div className="App">
               <BrowserRouter>
                 <div className="Routes">
-                {this.state.sidebarItem.length > 0 ?
-                  <>
                     <Route path="/" exact component={Login} />
                     <Route path="/Login"  component={Login} />
+                    {this.state.sidebarItem.length > 0 ?
+                      <>
                     <Route path="/Profile"  component={Profile} />
                     <Route path="/Welcome"  component={Welcome} />
                     <Route path="/Dashboard"  component={Dashboard} />
@@ -50,7 +50,9 @@ class App extends Component {
                     {/*<Route path={this.state.sidebarItem[4].field_react_route}  component={Repcontact} />*/}
                   </>
                   :
-                  ""}
+                  <>
+                    <Route path="/Login"  component={Login} />
+                  </>}
                     
                 </div>
              </BrowserRouter>

@@ -50,7 +50,7 @@ class Sidebar extends Component {
 		return (
 			<div>
 				<nav className={this.state.changeClassnav ? "navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left" : "navbar white-bg-trnsparent navbar-expand-md navbar-dark bg-primary fixed-left"}>
-				<Link to={""} className="navbar-logo" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
+				<Link to={"/Dashboard"} className="navbar-logo" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
 					{this.state.sidebarItem.map((item,index)=>
 						<li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>

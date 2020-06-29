@@ -4,11 +4,11 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Welcome from "./components/Welcome";
 import Dashboard from "./components/Dashboard";
-import Newsfeeds from "./components/Newsfeeds";
-import Product from "./components/Product";
-import Resources from "./components/Resources";
-import Contract from "./components/Contract";
-import Repcontact from "./components/Resources";
+import Newsfeeds from "./components/stores/Newsfeeds";
+import Product from "./components/stores/Product";
+import Resources from "./components/stores/Resources";
+import Contract from "./components/stores/Contract";
+import Repcontact from "./components/stores/Resources";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 

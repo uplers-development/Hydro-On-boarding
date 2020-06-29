@@ -5,35 +5,61 @@ import Apiurl from './Apiurl';
 class Profile extends Component {
 	constructor(props) {
 		super(props);
+		this.state={
+			first_name:null,
+			last_name:null,
+			email:null,
+			contact_number:null,
+			organization:null,
+			time_zone:null,
+			location:null,
+			userPicture:[],
+		}
+		this.updateProfile=this.updateProfile.bind(this);
+		this.updateProfilePic=this.updateProfilePic.bind(this);
 	}
 
 	componentDidMount(){
+    	this.GetProfile();
+	}
 
 
-	/*	fetch(Apiurl.Profile.url,{
-    			headers: {
+	GetProfile=()=>{
+		fetch(Apiurl.GetProfile.url,{
+				headers: {
                 	"Content-Type" : "application/json",
-                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),"X-CSRF-Token" : localStorage.getItem("access-token") 
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.Profile.method
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{
-    		console.log(data);
-    		if(data.message){
-    			alert(data.message);
-    		}else{
-    			alert(data);
-    		}
-    	})*/
+                method:Apiurl.GetProfile.method,
+		}).then(res=>{
+			return res.json();
+		}).then(data=>{
+			console.log(data);
+			console.log(data.field_first_name);
 
-    	this.updateProfile();
+			this.setState({first_name:data.field_first_name.length>0 ?data.field_first_name[0].value : ''
+						 ,last_name:data.field_last_name.length > 0 ? data.field_last_name[0].value :'',
+						 email:data.mail.length>0 ? data.mail[0].value :''
+						,contact_number:data.field_contact_number.length>0 ? data.field_contact_number[0].value :''
+						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
+						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
+						,location:data.field_location.length>0 ?data.field_location[0].value : '',
+						userPicture:data.user_picture.length>0 ? data.user_picture[0] :''
+					})
+			console.log(this.state.userPicture);
+		})
 	}
 
 
 	updateProfile = () =>{
 		let updatedata={
-			"name":[{value:'client'}]
+			mail : [{ "value": document.querySelector("#email").value}],
+			field_contact_number : [{ "value": document.querySelector("#contact_number").value }],
+			field_first_name : [{ "value": document.querySelector("#first_name").value }],
+			field_location : [{ "value":  document.querySelector("#location").value }],
+			field_organisation : [{ "value": document.querySelector("#organization").value }],
+			timezone : [{ "value": document.querySelector("#time_zone").value }],
+			user_picture : [{ "target_id": document.querySelector("#user-pic").getAttribute("data-id")}]
 		};
 
 		fetch(Apiurl.Updateprofile.url,{
@@ -47,10 +73,34 @@ class Profile extends Component {
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		if(data.message){
-    		}else{
-    		}
     	})
+	}
+
+	updateProfilePic=(e)=>{
+		var fullPath = document.getElementById('user-pic').value;
+		var filename=''
+			if (fullPath) {
+			    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+			    filename = fullPath.substring(startIndex);
+			    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+			        filename = filename.substring(1);
+			    }
+		}
+		const data = new FormData() 
+		data.append('file', fullPath)
+		fetch(Apiurl.Updateprofile.url,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                	"Content-Disposition" : filename,
+                },
+                method:Apiurl.Updateprofile.method,
+                body:data         
+            }).then(res=>{
+           	return res.json()
+           }).then(data=>{
+    			console.log(data);
+           })
 	}
 
 
@@ -124,12 +174,12 @@ class Profile extends Component {
 							<div className="upload-profile-photo">
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
-									<img src={require("./../images/girls-profile-img.png")} alt="profile-img"/>
+									<img src={this.state.userPicture.url} alt="profile-img"/>
 									<div className="upload-img">
 
 										<span>JPG, GIF or PNG. Max size of 1mb</span>
 										<div className="upload-btn-wrapper">
-											<input type="file" name="Coose File" />
+											<input type="file" name="Coose File" id="user-pic" onChange={this.updateProfilePic} data-id={this.state.userPicture.target_id} />
 											<button className="btn common-btn-blue">
 												<span>Coose File</span></button>
 										</div>
@@ -144,45 +194,45 @@ class Profile extends Component {
 								<form className="row">
 									<div className="form-group one-by-two">
 										<label>First Name</label>
-										<input type="text" placeholder="" tabIndex="1"/>
+										<input type="text" id='first_name' defaultValue={this.state.first_name} placeholder="" tabIndex="1"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Last Name</label>
-										<input type="text" placeholder="Name" tabIndex="2"/>
+										<input type="text" id='last_name' defaultValue={this.state.last_name} placeholder="Name" tabIndex="2"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Email*</label>
-										<input type="email" placeholder="" tabIndex="3"/>
+										<input type="email" id='email' defaultValue={this.state.email} placeholder="" tabIndex="3"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Contact Number*</label>
-										<input type="text" placeholder="" tabIndex="4"/>
+										<input type="text" id='contact_number' defaultValue={this.state.contact_number} placeholder="" tabIndex="4"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Organisation*</label>
-										<input type="text" placeholder="" tabIndex="5"/>
+										<input type="text" id='organization' defaultValue={this.state.organization} placeholder="" tabIndex="5"/>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Timezone*</label>
-										<select name="1" className="" tabIndex="6">
-											<option value="">GMT</option>
-											<option data-img-src="images/16/flag(1).png" value="et">EET</option>
-											<option data-img-src="images/16/flag(2).png" value="ak">EST</option>
+										<select name="1" className="" tabIndex="6" id="time_zone">
+											<option value="GMT">GMT</option>
+											<option data-img-src="images/16/flag(1).png" value="EET">EET</option>
+											<option data-img-src="images/16/flag(2).png" value="EST">EST</option>
 										</select>
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Location*</label>
-										<input type="text" placeholder="" tabIndex="7"/>
+										<input type="text" id='location' defaultValue={this.state.location} placeholder="" tabIndex="7"/>
 									</div>
 
 									<div className="button-group full">
-										<button className="btn common-btn-blue" type="submit" tabIndex="4">
+										<button className="btn common-btn-blue" type="submit" tabIndex="4" onClick={this.updateProfile}>
 											<span>Save settings</span></button>
 									</div>
 								</form>

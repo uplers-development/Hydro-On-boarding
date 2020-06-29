@@ -60,7 +60,7 @@ class Welcome extends Component {
 			{/*<!--Intro new user popup-->
 						*/}			
 			<div className="intro-new-user-popup">
-				<a href="#" className="close" title="Close icon"><img className="svg" src={require("./../images/close-icon-gray.svg")} alt="close icon"/></a>
+				<Link to={"/Dashboard"} className="close" title="Close icon"><img className="svg" src={require("./../images/close-icon-gray.svg")} alt="close icon"/></Link>
 				<h1>{this.state.title}</h1>
 				{ReactHtmlParser(this.state.bodyparagraph)}
 				<div className="list welcome-slider d-flex flex-wrap">

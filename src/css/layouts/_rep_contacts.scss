@@ -1,0 +1,374 @@
+.rep-contacts-main {
+	@media screen and (max-width:$mobile-small) {
+		padding: 0 16px;
+	}
+	align-items: flex-start;
+	.rep-contracts-left {
+		max-width: 840px;
+		width: 100%;
+
+		@media screen and (max-width:$large-mx) {
+			max-width: none;
+			width: calc(100% - 350px);
+		}
+		@media screen and (max-width: $ipad-landscape) {
+			width: 100%;
+		}
+		.get-in-touch {
+			margin-top: 42px;
+
+			@media screen and (max-width: $ipad-landscape) {
+				margin-top: 15px;
+			}
+
+			h5 {
+				margin: 0 0 10px;
+				font-size: 22px;
+				line-height: 26px;
+				color: $black;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+
+				@media screen and (max-width: $ipad-landscape) {
+					font-size: 16px;
+					line-height: 28px;
+					margin: 0 0 5px;
+				}
+			}
+
+			form {
+				textarea {
+					border: 1px solid $gray-dark-border;
+					box-shadow: 0px 3px 6px $gray-dark-shadow;
+					min-height: 316px;
+					resize: none;
+					padding: 22px 30px;
+					font-size: 16px;
+					line-height: 24px;
+					color: $light-black;
+					font-family: $arial;
+					font-weight: $font-normal;
+					font-style: italic;
+
+					@media screen and (max-width: $ipad-landscape) {
+						min-height: 190px;
+						font-size: 14px;
+						padding: 13px 15px;
+						border-radius: 5px;
+					}
+				}
+
+				.btn-block {
+					padding-top: 30px;
+
+					@media screen and (max-width: $ipad-landscape) {
+						padding-top: 13px;
+					}
+
+					button {
+						min-width: 244px;
+						margin-bottom: 0;
+
+						@media screen and (max-width:$mobile-small) {
+							min-width: 156px;
+							padding: 5px 10px 3px;
+						}
+
+						&:after {
+							background-repeat: repeat-x;
+							background-size: contain;
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.rep-contracts-right {
+		max-width: 330px;
+		width: 100%;
+		border: 1px solid $off-white;
+		padding: 27px 30px;
+		margin-left: 30px;
+
+		@media screen and (max-width:$large-mx) {
+			margin-left: 20px;
+			padding: 15px;
+		}
+
+		@media screen and (max-width: $ipad-landscape) {
+			width: 100%;
+			margin: 15px 0 0 0;
+		}
+
+		h6 {
+			margin: 0;
+			font-size: 18px;
+			line-height: 22px;
+			padding-bottom: 5px;
+			color: $black;
+			font-family: $arial;
+			font-weight: $font-normal;
+			border-bottom: 2px solid $off-white;
+		}
+
+		ul {
+			padding-left: 0;
+			padding-top: 10px;
+
+			li {
+				a {
+					text-decoration: none;
+					display: inherit;
+					align-content: center;
+
+					img {
+						display: inline-block;
+						vertical-align: middle;
+						max-width: 19px;
+					}
+
+					span {
+						font-size: 16px;
+						line-height: 20px;
+						padding-left: 8px;
+						display: inline-block;
+						vertical-align: middle;
+						color: $light-black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						@include transition(0.3s all ease-in-out);
+					}
+				}
+
+				&:hover {
+					span {
+						color: $sky-blue;
+					}
+				}
+
+				&:not(:last-child) {
+					margin-bottom: 12px;
+				}
+			}
+		}
+	}
+}
+
+
+/*Personal detail box */
+.person-detils-box {
+	padding: 40px 44px;
+	position: relative;
+
+	@media screen and (max-width:$large-mx) {
+		padding: 30px;
+	}
+
+	@media screen and (max-width:$mobile-small) {
+		padding: 17px;
+	}
+
+	.person-img {
+		max-width: 195px;
+		width: 100%;
+
+		@media screen and (max-width:$large-mx) {
+			max-width: 140px;
+		}
+
+		@media screen and (max-width:$large-m) {
+			max-width: 98px;
+		}
+
+		img {
+			width: 100%;
+			max-width: 160px;
+
+			@media screen and (max-width: $ipad-landscape) {
+				max-width: 156px;
+			}
+		}
+	}
+
+	.person-right {
+		@media screen and (max-width:$large-mx) {
+			width: calc(100% - 145px);
+			padding-left: 10px;
+		}
+
+		@media screen and (max-width:$mobile-small) {
+			width: 100%;
+			padding-left: 0;
+			padding-top: 17px;
+			margin-top: 17px;
+			border-top: 2px solid #FFFFFF;
+		}
+
+		.person-title {
+			h3 {
+				margin: 0;
+				font-size: 40px;
+				line-height: 46px;
+				color: $cobalt-blue;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+
+				@media screen and (max-width:$large-m) {
+					font-size: 30px;
+					line-height: 36px;
+				}
+
+				@media screen and (max-width:$mobile-small) {
+					font-size: 16px;
+					line-height: normal;
+				}
+			}
+
+			h4 {
+				margin: 8px 0 26px 0;
+				font-size: 18px;
+				line-height: 22px;
+				color: $black;
+				font-family: $arial;
+				font-weight: $font-normal;
+
+				@media screen and (max-width:$mobile-small) {
+					font-size: 14px;
+					margin: 0;
+				}
+			}
+
+			ul {
+				align-items: center;
+				padding-left: 0;
+				margin: 0 0 10px 0;
+
+				@media screen and (max-width:$mobile-small) {
+					margin: 0 0 5px;
+				}
+
+				li {
+					&:not(:last-child) {
+						margin-right: 18px;
+					}
+
+					img {
+						max-width: 20px;
+					}
+				}
+			}
+
+			@media screen and (max-width:$mobile-small) {
+				display: inline-block;
+				position: absolute;
+				top: 30px;
+				left: 130px;
+			}
+		}
+
+		.person-details {
+			.bottom-details {
+				.left {
+					align-items: flex-start;
+
+					img {
+						max-width: 20px;
+
+						@media screen and (max-width:$mobile-small) {
+							max-width: 16px;
+						}
+					}
+
+					span {
+						font-size: 16px;
+						line-height: 20px;
+						padding-left: 11px;
+						color: $light-black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						width: calc(100% - 20px);
+
+						@media screen and (max-width:$large-m) {
+							font-size: 14px;
+						}
+
+						> br {
+							@media screen and (max-width:$mobile-small) {
+								display: none;
+							}
+						}
+					}
+				}
+
+				.right {
+					padding-left: 35px;
+
+					@media screen and (max-width:$large-mx) {
+						padding-left: 15px;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						padding-left: 0;
+					}
+
+					ul {
+						margin: 5px 0 0 0;
+
+						@media screen and (max-width:$large-m) {
+							padding-left: 5px;
+							margin-top: 0;
+						}
+
+						@media screen and (max-width:$mobile-small) {
+							padding-left: 0;
+							margin-top: 7px;
+						}
+
+						li {
+							&:not(:last-child) {
+								margin-bottom: 16px;
+
+								@media screen and (max-width:$large-m) {
+									margin-bottom: 0;
+								}
+							}
+
+							a {
+								text-decoration: none;
+								display: flex;
+								flex-wrap: wrap;
+								align-content: center;
+
+								img {
+									max-width: 20px;
+								}
+
+								span {
+									font-size: 16px;
+									line-height: 20px;
+									margin-left: 12px;
+									color: $light-black;
+									font-family: $arial;
+									font-weight: $font-normal;
+									@include transition(0.3s all ease-in-out);
+									@media screen and (max-width:$large-m) {
+										font-size: 14px;
+										line-height: 34px;
+									}
+								}
+
+								&:hover {
+									span {
+										color: $sky-blue;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

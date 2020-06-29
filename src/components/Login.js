@@ -21,26 +21,6 @@ class Login extends Component{
     }
     componentDidMount(){
     	this.getLoginPageContent();
-    	//this.createSvg()
-    	$('img.svg').each(function () {
-		var $img = $(this);
-		var imgID = $img.attr('id');
-		var imgClass = $img.attr('class');
-		var imgURL = $img.attr('src');
-		$.get(imgURL, function (data) {
-			var $svg = $(data).find('svg');
-			if (typeof imgID !== 'undefined') {
-				$svg = $svg.attr('id', imgID);
-			}
-			if (typeof imgClass !== 'undefined') {
-				$svg = $svg.attr('class', imgClass + ' replaced-svg');
-			}
-			$svg = $svg.removeAttr('xmlns:a');
-			$img.replaceWith($svg);
-		}, 'xml');
-	});
-
-
     }
 
     getLoginPageContent =() =>{
@@ -54,6 +34,23 @@ class Login extends Component{
     	}).then(data=>{	
     		console.log(data);
     		this.setState({login_data_loaded:true,login_admin_button:data.login_admin_button,login_background:data.login_background,login_email_title:data.login_email_title,login_logo:data.login_logo,login_password_title:data.login_password_title,login_rep_button:data.login_rep_button,login_sign_button:data.login_sign_button})
+    		$('img.svg').each(function () {
+			var $img = $(this);
+			var imgID = $img.attr('id');
+			var imgClass = $img.attr('class');
+			var imgURL = $img.attr('src');
+			$.get(imgURL, function (data) {
+				var $svg = $(data).find('svg');
+				if (typeof imgID !== 'undefined') {
+					$svg = $svg.attr('id', imgID);
+				}
+				if (typeof imgClass !== 'undefined') {
+					$svg = $svg.attr('class', imgClass + ' replaced-svg');
+				}
+				$svg = $svg.removeAttr('xmlns:a');
+				$img.replaceWith($svg);
+			}, 'xml');
+		});
     	})
     }
 

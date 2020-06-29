@@ -29,7 +29,28 @@ class Newsfeeds extends Component {
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		this.setState({newsFeedItems:data});
+    			let newsfeed = []
+				for (var i = 0; i < data.length; i++) {
+					 if(data[i].field_news_feed_type=="5"){
+					 	 newsfeed.push(<div className="datewise-common-block white-text teal-color-bg"><div className="top-title"><img src={site_url+data[i].field_icon} alt="setting-logo"/><h4>{ReactHtmlParser(data[i].title)}</h4></div><div className="time-date">{data[i].created}</div>{ReactHtmlParser(data[i].body)}</div>);
+					 }else if(data[i].field_news_feed_type=="4"){
+					 	 newsfeed.push(<div className="white-text datewise-common-block d-flex flex-wrap padding-0"><div className="left-content cobalt-blue-bg"><div className="top-title"><img src={site_url+data[i].field_icon}/><h4>New product launch</h4></div><div className="time-date">Today at {data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block"><Link className="btn btn-cobalt-blue" to={""}><span>{data[i].field_news_feed_button}</span></Link></div></div><div className="image-block bg-cover" style={{backgroundImage: `url(${site_url+data[i].field_image})`}}></div></div>);
+					 }else if(data[i].field_news_feed_type=="2"){
+					 	 newsfeed.push(<div className="datewise-common-block white-bg-boxshadow"><div className="top-title"><img src={site_url+data[i].field_icon} alt="warning-logo"/><h4><span>{data[i].title}</span></h4></div><div className="time-date">Today at {data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block"><button className="btn common-btn-white" type="submit"><span>{data[i].field_news_feed_button}</span></button></div></div>);
+					 }else if(data[i].field_news_feed_type=="3"){
+					 	 newsfeed.push(<div className="datewise-common-block white-bg-boxshadow"><div className="top-title"><img src={site_url+data[i].field_icon} alt="issue-logo"/><h4>{data[i].title}</h4></div><div className="time-date">Today at {data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block"><button className="btn common-btn-white" type="submit"><span>{data[i].field_news_feed_button}</span></button></div></div>);
+					 }
+					 else if(data[i].field_news_feed_type=="13"){
+					 	 newsfeed.push(<div className="news-title sky-blue-bg"><img src={site_url+data[i].field_icon} alt="Bell logo"/><h3>{data[i].title}</h3><div className="time-date">Today at 8:30am</div>{ReactHtmlParser(data[i].body)}<img className="svg" src={require("./../images/login-screen-pattern-white-r.svg")} alt="login screen pattern"/></div>);
+					 }
+		        	 if(i > 0  && data[i-1].created_1!==data[i].created_1){     
+		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}</h4></div>);  	 
+		        	 }else if(i == 0){
+		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}</h4></div>);  	 
+		        	 }	   	
+		        }
+    		this.setState({newsFeedItems:newsfeed});
+    		console.log(this.state.newsFeedItems);
     	})
 	}
 
@@ -70,125 +91,7 @@ class Newsfeeds extends Component {
 
 							{/*<!--Date wise block start-->*/}
 							
-							 {(() => {
-								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
-
-										if(this.state.newsFeedItems[i].field_news_feed_type=="13"){
-											return(<div className="news-title sky-blue-bg">
-													<img src={site_url+this.state.newsFeedItems[i].field_icon} alt="Bell logo"/>
-													<h3>{this.state.newsFeedItems[i].title}</h3>
-													<div className="time-date">Today at 8:30am</div>
-													{ReactHtmlParser(this.state.newsFeedItems[i].body)}
-													<img className="svg" src={this.state.newsFeedItems[i].field_image} alt="login screen pattern"/>
-											</div>);
-										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
-										} 
-									}
-								 })()}
-
-							{(() => {
-								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
-
-										if(this.state.newsFeedItems[i].field_news_feed_type=="4"){
-											return(<div className="white-text datewise-common-block d-flex flex-wrap padding-0">
-														<div className="left-content cobalt-blue-bg">
-															<div className="top-title">
-																<img src={site_url+this.state.newsFeedItems[i].field_icon}/>
-																<h4>New product launch</h4>
-															</div>
-															<div className="time-date">Today at {this.state.newsFeedItems[i].created}</div>
-															{ReactHtmlParser(this.state.newsFeedItems[i].body)}
-															<div className="btn-block">
-
-																<Link className="btn btn-cobalt-blue" to={""}><span>{this.state.newsFeedItems[i].field_news_feed_button}</span></Link>
-
-															</div>
-														</div>
-														<div className="image-block bg-cover"></div>
-													</div>);
-										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
-										} 
-									}
-								 })()}
-
-							{(() => {
-								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
-
-										if(this.state.newsFeedItems[i].field_news_feed_type=="2"){
-												return(<div className="datewise-common-block white-bg-boxshadow">
-																<div className="top-title">
-																	<img src={site_url+this.state.newsFeedItems[i].field_icon} alt="warning-logo"/>
-																	<h4><span>{this.state.newsFeedItems[i].title}</span></h4>
-																</div>
-																<div className="time-date">Today at {this.state.newsFeedItems[i].created}</div>
-																{ReactHtmlParser(this.state.newsFeedItems[i].body)}
-																<div className="btn-block">
-																	<button className="btn common-btn-white" type="submit"><span>{this.state.newsFeedItems[i].field_news_feed_button}</span></button>
-																</div>
-															</div>
-														);
-										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
-										} 
-									}
-								 })()}
-
-							{(() => {
-								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
-
-										if(this.state.newsFeedItems[i].field_news_feed_type=="3"){
-												return(<div className="datewise-common-block white-bg-boxshadow">
-																	<div className="top-title">
-																		<img src={this.state.newsFeedItems[i].field_icon} alt="issue-logo"/>
-																		<h4>{this.state.newsFeedItems[i].title}</h4>
-																	</div>
-																	<div className="time-date">Today at {this.state.newsFeedItems[i].created}</div>
-																	{ReactHtmlParser(this.state.newsFeedItems[i].body)}
-																	<div className="btn-block">
-																		<button className="btn common-btn-white" type="submit"><span>{this.state.newsFeedItems[i].field_news_feed_button}</span></button>
-																	</div>
-																</div>
-														);
-										console.log('Design for '+this.state.newsFeedItems[i].field_news_feed_type_1);
-										} 
-									}
-								 })()}
-							{(() => {
-								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
-
-										if(this.state.newsFeedItems[i].field_news_feed_type=="5"){
-												return(<div className="datewise-common-block white-text teal-color-bg">
-																<div className="top-title">
-																	<img src={this.state.newsFeedItems[i].field_icon} alt="setting-logo"/>
-																	<h4>{this.state.newsFeedItems[i].title}</h4>
-																</div>
-																<div className="time-date">{this.state.newsFeedItems[i].created}</div>
-																{ReactHtmlParser(this.state.newsFeedItems[i].body)}
-															</div>
-														);
-										} 
-									}
-								 })()}
-							{(() => {
-								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
-
-											if(i > 0 && this.state.newsFeedItems[i-1].created_1!==this.state.newsFeedItems[i].created_1){
-												return(<div className="news-date">
-															<h4>{this.state.newsFeedItems[i].created_1}</h4>
-														</div>);
-
-											}
-									}
-								 })()}
-							{(() => {
-								for (var i = this.state.newsFeedItems.length - 1; i >= 0; i--) {
-
-											 if(i == 0){
-												return(<div className="news-date">
-															<h4>{this.state.newsFeedItems[i].created_1}</h4>
-												 	</div>);
-											}
-									}
-								 })()}
+							 {this.state.newsFeedItems}
 
 
 
@@ -212,7 +115,7 @@ class Newsfeeds extends Component {
 								<h4>Recently viewed</h4>
 								<ul>
 									{this.state.recentViews.map((recentItem,index)=>
-										<li><Link href="#" title={recentItem.title}>{recentItem.title}</Link></li>
+										<li key={index}><Link to={""} title={recentItem.title}>{recentItem.title}</Link></li>
 									)}
 								</ul>
 							</div>

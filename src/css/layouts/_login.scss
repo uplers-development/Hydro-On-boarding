@@ -18,8 +18,10 @@
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 			position: static;
+			align-items: normal;
+    		margin-top: 10px;
 		}
-
+	
 		> img {
 			position: absolute;
 			top: 0;
@@ -95,7 +97,18 @@
 				margin-top: 40%;
 
 			}
-
+			
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					padding-bottom: 180px;
+					margin-top: 15%;
+			}
+			
+			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
+					padding-bottom: 180px;
+					margin-top: 50%;
+					width: 100%;
+					margin-left: 0;
+			}
 		}
 
 		.form-group {
@@ -189,6 +202,9 @@
 					@media screen and (max-width:$mobile-small) {
 						display: none;
 					}
+					@media (max-height: $mob-landscape-375) and (orientation: landscape) {
+						display: none;
+					}
 				}
 			}
 		}
@@ -277,9 +293,10 @@
 			position: relative;
 			background-image: none !important;
 			z-index: 0;
-			    height: 210px;
-    bottom: 0;
-    right: 0;
+			height: auto;
+			bottom: 0;
+			right: 0;
+			overflow: visible;
 		}
 
 		> svg {
@@ -290,7 +307,8 @@
 
 			@media screen and (max-width:$mobile-small) {
 				max-width: 217px;
-				bottom: -66px;
+				bottom: 0;
+				height: 210px;
 
 				.a {
 					fill: $panton-gray;
@@ -299,7 +317,7 @@
 
 			@media screen and (max-width:$small-x) {
 				max-width: 180px;
-				bottom: -72px;
+		
 			}
 		}
 	}

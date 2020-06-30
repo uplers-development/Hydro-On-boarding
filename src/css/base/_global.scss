@@ -139,6 +139,7 @@ ul {
 	position: relative;
 	overflow: hidden;
 	outline: none;
+	display: inline-block;
 	span {
 		color: $sky-blue;
 		font-size: 14px;
@@ -205,11 +206,13 @@ ul {
 	min-width: 106px;
 	text-transform: uppercase;
 	outline: none;
+	text-decoration: none;
 	@include transition(all 0.4s ease-in-out);
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
 	outline: none;
+	display: inline-block;
 	@media screen and (max-width: $mobile-small) {
 		padding: 4px 15px;
 	}
@@ -281,7 +284,7 @@ a.btn, button.btn{-webkit-appearance: none; -moz-appearance: none; appearance: n
 		color: $white;
 		cursor: pointer;
 		min-width: 138px;
-		padding: 8px 10px 6px;
+		padding: 6px 10px 4px;
 		margin-bottom: 0;
 		span {
 			font-size: 16px;

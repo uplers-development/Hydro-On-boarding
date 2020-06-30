@@ -13,12 +13,16 @@ class Contract extends Component {
 			contractDetails:[],
 			categoryfilter:[],
 			contractType:[],
+			ContractdropDownSearch:[],
+			mobileView:false,
 		}
 		this.ContractTypeBaseFilter=this.ContractTypeBaseFilter.bind(this);
 		this.ContractSortByDateOld=this.ContractSortByDateOld.bind(this);
 		this.ContractSortByDateNew=this.ContractSortByDateNew.bind(this);
 		this.ContractSortA_Z=this.ContractSortA_Z.bind(this);
 		this.ContractTypeProductBaseFilter=this.ContractTypeProductBaseFilter.bind(this);
+		this.GetAllContractForSearch=this.GetAllContractForSearch.bind(this);
+		this.ContractSearchListData=this.ContractSearchListData.bind(this);
 	}
 
 	componentDidMount(){
@@ -45,6 +49,10 @@ class Contract extends Component {
 
 	ProductCategory=()=>{
 		fetch(Apiurl.ProductCategoryId.url,{
+				headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
                 method:Apiurl.ProductCategoryId.method,
     	}).then(res=>{
     		return res.json()
@@ -67,9 +75,16 @@ class Contract extends Component {
 
 	ContractTypeProductBaseFilter=(e)=>{
 		e.preventDefault()
-		let typeId=e.target.getAttribute("data-product-id");
-		fetch(Apiurl.ContractTypeBaseFilter.url+"&field_contract_document_type_target_id="+typeId,{
-                method:Apiurl.ContractTypeBaseFilter.method,
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
+		let uid=JSON.parse(localStorage.getItem("user-type")).uid
+		let nid=e.target.getAttribute("data-product-id");
+		fetch(Apiurl.ContractTypeProductBaseFilter.url+uid+'/'+nid+"?_format=json",{
+                method:Apiurl.ContractTypeProductBaseFilter.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -82,6 +97,10 @@ class Contract extends Component {
 		e.preventDefault()
 		let typeId=e.target.getAttribute("data-contracttype-id");
 		fetch(Apiurl.ContractTypeBaseFilter.url+"&field_contract_document_type_target_id="+typeId,{
+				headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
                 method:Apiurl.ContractTypeBaseFilter.method,
     	}).then(res=>{
     		return res.json()
@@ -91,10 +110,37 @@ class Contract extends Component {
     	})
 	}
 
-	ContractSortByFilter=(e)=>{
+
+	GetAllContractForSearch=(e)=>{
+		if(e.target.value!==''){
+		var contractText=e.target.value;
+		fetch(Apiurl.GetAllContractForSearch.url+"&title="+contractText,{
+				headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+                method:Apiurl.GetAllContractForSearch.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ContractdropDownSearch:data})
+    	})
+     }else{
+    	this.setState({ContractdropDownSearch:''})
+     }
+	}
+
+	ContractSearchListData=(e)=>{
 		e.preventDefault()
-		fetch(Apiurl.ContractSortByFilter.url+"&sort_by=title&sort_order=ASC",{
-                method:Apiurl.ContractSortByFilter.method,
+			
+		let textValue=e.target.textContent
+		fetch(Apiurl.GetAllContractForSearch.url+"&title="+textValue,{
+				headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+                method:Apiurl.GetAllContractForSearch.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -106,6 +152,12 @@ class Contract extends Component {
 
 	ContractSortByDateOld=(e)=>{
 		e.preventDefault()
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
 		fetch(Apiurl.ContractSortByDate.url+"&sort_by=field_purchase_date_value&sort_order=DESC",{
                 method:Apiurl.ContractSortByDate.method,
     	}).then(res=>{
@@ -118,6 +170,12 @@ class Contract extends Component {
 
 	ContractSortByDateNew=(e)=>{
 		e.preventDefault()
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
 		fetch(Apiurl.ContractSortByDate.url+"&sort_by=field_purchase_date_value&sort_order=ASC",{
                 method:Apiurl.ContractSortByDate.method,
     	}).then(res=>{
@@ -130,7 +188,12 @@ class Contract extends Component {
 
 	ContractSortA_Z=(e)=>{
 		e.preventDefault()
-		//let sortBy=e.target.
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
 		fetch(Apiurl.ContractSortA_Z.url+"&sort_by=field_purchase_date_value&sort_order=DESC",{
                 method:Apiurl.ContractSortA_Z.method,
     	}).then(res=>{
@@ -180,7 +243,7 @@ class Contract extends Component {
 											<a href="javascript:void(0)" data-value="">Products</a>
 											<ul className="list">
 											{this.state.categoryfilter.map((productItem,index)=>
-												<li key={index}><a href="javascript:void(0)" title={productItem.name} data-product-id={productItem.tid} onClick={this.ContractTypeProductBaseFilter}>{productItem.name}</a></li>
+												<li key={index}><a href="javascript:void(0)" title={productItem.title} data-product-id={productItem.nid} onClick={this.ContractTypeProductBaseFilter}>{productItem.title}</a></li>
 											)}
 
 											</ul>
@@ -192,7 +255,7 @@ class Contract extends Component {
 											<a href="#" data-value="">Types</a>
 											<ul className="list">
 											{this.state.contractType.map((contractType,index)=>
-												<li key={index}><Link title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.ContractTypeBaseFilter}>{contractType.name}</Link></li>	
+												<li key={index}><a title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.ContractTypeBaseFilter}>{contractType.name}</a></li>	
 											)}
 											</ul>
 										</div>
@@ -204,8 +267,13 @@ class Contract extends Component {
 											<div className="auto-search-box">
 												<form>
 													<div className="autocomplete">
-														<input id="myInput" type="text" name="hydro"/>
+														<input id="myInput" type="text" name="hydro" onChange={this.GetAllContractForSearch}/>
 													</div>
+													<ul className="list">
+														{this.state.ContractdropDownSearch.length > 0 && this.state.ContractdropDownSearch.map((contractSearchlist,index)=>
+															<li key={contractSearchlist.nid} ><Link data-title-name={ReactHtmlParser(contractSearchlist.title)} onClick={this.ContractSearchListData}>{ReactHtmlParser(contractSearchlist.title)}</Link></li>
+														)}
+													</ul>
 												</form>
 											</div>
 											
@@ -227,7 +295,7 @@ class Contract extends Component {
 											
 
 											
-											<div className="mobile-filter">
+											<div className={this.state.mobileView ? "mobile-filter filter-active" : "mobile-filter"}>
 												<a href="#" title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
 													<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
 												</a>
@@ -238,7 +306,7 @@ class Contract extends Component {
 															<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
 															<h4>Filters</h4>
 														</div>
-														<a href="#" title="close-btn" className="filter-open-btn">
+														<a href="#" title="close-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:false})}>
 															<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
 														</a>
 													</div>
@@ -247,7 +315,7 @@ class Contract extends Component {
 														<h5>Applications</h5>
 														<ul>
 															{this.state.categoryfilter.map((productItem,index)=>
-																<li key={index}><a href="javascript:void(0)" title={productItem.name} data-product-id={productItem.tid} onClick={this.ContractTypeProductBaseFilter}>{productItem.name}</a></li>
+																<li key={index}><a href="javascript:void(0)" title={productItem.title} data-product-id={productItem.nid} onClick={this.ContractTypeProductBaseFilter}>{productItem.title}</a></li>
 															)}
 														</ul>
 

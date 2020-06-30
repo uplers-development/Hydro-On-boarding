@@ -53,7 +53,7 @@ export default {
         method:"GET"
     }, 
     ProductCategoryId:{
-        url:base_url+"/jsonapi/taxonomy_list/applications?_format=json",
+        url:base_url+"/jsonapi/product_list_title/?_format=json",
         method:"GET"
     },
     FilterProductCategoryById:{
@@ -123,7 +123,12 @@ export default {
         method:'GET'
     }, 
     ContractTypeProductBaseFilter:{
-        url:base_url+'/jsonapi/contract_list?_format=json',
+        url:base_url+'/jsonapi/contract_list/',
+        method:'GET'
+    }, 
+
+    GetAllContractForSearch:{
+        url:base_url+'/json/contract_listing?_format=json',
         method:'GET'
     }, 
     ContractSortByFilter:{

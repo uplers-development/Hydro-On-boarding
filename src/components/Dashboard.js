@@ -57,7 +57,7 @@ import ReactHtmlParser from 'react-html-parser';
 									<img src={site_url+item.field_s_block_icon} alt="Book logo"/>
 									<h3>{item.field_s_block_title}</h3>
 									<p>{ReactHtmlParser(item.field_s_block_description)}</p>
-										<Link to="#" title={item.field_s_block_link}>{item.field_s_block_link}</Link>
+										{ReactHtmlParser(item.field_s_block_link)}
 								</div>
 								<div className="right-image">
 									<img src={site_url+item.field_s_block_image} alt="hydro-in-tab"/>

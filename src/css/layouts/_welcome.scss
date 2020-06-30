@@ -253,11 +253,7 @@
 	
 	.slick-dots
 	{
-	    display: -webkit-flex;
-		display: -moz-flex;
-		display: -ms-flex;
-		display: -o-flex;
-		display: flex;
+		display: flex !important;
 		align-items: center;
 		justify-content: center;
 		padding-left: 0;
@@ -324,13 +320,16 @@
 			background-color: transparent;
 			border: 0;
 			position: absolute;
-			top: 50%;
+			top: 42%;
 			transform: translateY(-50%);
 			-webkit-transform: translateY(-50%);
 		}
 		&.slick-prev
 		{
-		left: 0;
+		left: -60px;
+		@media screen and (max-width:$small-x) {
+				left: -50px;
+			}	
 		font-size: 0;
 			&:after {
 				content: "";
@@ -348,7 +347,10 @@
 		}
 		&.slick-next
 		{
-		right: 0;
+		right: -60px;
+			@media screen and (max-width:$small-x) {
+				right: -50px;
+			}	
 		font-size: 0;
 			&:after {
 				content: "";

@@ -72,6 +72,7 @@ ul {
 	position: relative;
 	overflow: hidden;
 	outline: none;
+	display: inline-block;
 
 	span {
 		font-size: 20px;
@@ -339,7 +340,7 @@ form {
 
 	input[type="email"],
 	input[type="password"],
-	input[type="text"],
+	input[type="text"], 
 	textarea {
 		font-size: 16px;
 		padding: 8px 12px;
@@ -357,7 +358,19 @@ form {
 		}
 
 	}
-
+	select {
+		font-size: 16px;
+		padding: 8px 12px;
+		width: 100%;
+		line-height: 20px;
+		border: 1px solid $panton-gray;
+		font-family: $arial;
+		font-weight: 400;
+		color: $light-black;
+		&:focus, &:focus {
+			outline: none;
+		}
+	}
 }
 
 /*Common form css*/
@@ -1184,6 +1197,8 @@ nav {
 		> img 
 		{
 			width: 40px;
+			height: 40px;
+			border-radius: 50%;
 			@media screen and (max-width:$mobile-small) {
 				width: 30px;
 				margin-left: auto;
@@ -1896,8 +1911,14 @@ a { @include transition(all 0.5s ease-in-out); }
 		}
 	}
 }
-
-
+/*Form error css*/
+.empty-field {
+	font-size: 14px;
+	line-height: 18px;
+	color: $red;
+	font-family: $arial;
+	font-weight: $font-normal;
+}
 
 
 

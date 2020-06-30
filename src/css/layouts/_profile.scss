@@ -106,6 +106,8 @@
 
 			img {
 				width: 123px;
+				height: 123px;
+				border-radius: 50%;
 				@media screen and (max-width:$mobile-small) {
 					width: 96px;
 				}

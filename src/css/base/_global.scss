@@ -73,6 +73,7 @@ ul {
 	overflow: hidden;
 	outline: none;
 	display: inline-block;
+	text-decoration: none;
 
 	span {
 		font-size: 20px;
@@ -367,8 +368,18 @@ form {
 		font-family: $arial;
 		font-weight: 400;
 		color: $light-black;
+		
 		&:focus, &:focus {
 			outline: none;
+		}
+		option {
+			border: 0;
+			background-color: $white;
+			font-family: $arial;
+			font-weight: 400;
+			color: $light-black;
+			font-size: 16px;
+			padding: 8px 12px;
 		}
 	}
 }

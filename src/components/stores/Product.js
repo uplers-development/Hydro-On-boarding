@@ -16,6 +16,7 @@ class Product extends Component {
 		}
 
 		this.filterProductCategoryById=this.filterProductCategoryById.bind(this);
+		this.MobfilterProductCategoryById=this.MobfilterProductCategoryById.bind(this);
 		this.SortProductCategoryByPurchaseDateNew=this.SortProductCategoryByPurchaseDateNew.bind(this);
 		this.SortProductCategoryByPurchaseDateOld=this.SortProductCategoryByPurchaseDateOld.bind(this);
 		this.SortProductCategoryById=this.SortProductCategoryById.bind(this);
@@ -47,10 +48,10 @@ class Product extends Component {
 
 	ProductCategory=()=>{
 		fetch(Apiurl.ProductCategoryId.url,{
-    			/*headers: {
+    			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },*/
+                },
                 method:Apiurl.ProductCategoryId.method,
     	}).then(res=>{
     		return res.json()
@@ -61,8 +62,30 @@ class Product extends Component {
 	}
 
 	filterProductCategoryById =(e) =>{
-		console.log(e.target);
 		let pid=e.target.getAttribute("data-cat-id");
+		localStorage.setItem("product_id",pid);
+		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid,{
+				headers: {
+                	"Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.FilterProductCategoryById.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({productList:data})
+    	})
+	}
+
+	MobfilterProductCategoryById =(e) =>{
+		console.log(e.target);
+		document.querySelectorAll(".list-filter-mobile > ul > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+		})
+		e.target.parentNode.classList.add("active");
+		let pid=e.target.getAttribute("data-cat-id");
+		localStorage.setItem("product_id",pid);
 		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid,{
 				headers: {
                 	"Content-Type" : "application/json",
@@ -78,6 +101,12 @@ class Product extends Component {
 	}
 
 	SortProductCategoryByPurchaseDateNew =(e) =>{
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
 		fetch(Apiurl.SortProductByNewDate.url,{
 			headers: {
                 	"Content-Type" : "application/json",
@@ -194,7 +223,7 @@ class Product extends Component {
 								<a href="#" data-value="">Applications</a>
 								<ul className="list">
 								{this.state.categoryfilter.map((catname,index)=>
-									<li key={catname.tid} onClick={this.filterProductCategoryById}><a href="#" data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</a></li>
+									<li key={catname.tid} onClick={this.filterProductCategoryById}><a data-cat-id={catname.nid}>{ReactHtmlParser(catname.title)}</a></li>
 								)}
 								</ul>
 							</div>
@@ -235,7 +264,7 @@ class Product extends Component {
 								
 
 								
-								<div className="mobile-filter">
+								<div className={this.state.mobileView ? "mobile-filter filter-active" : "mobile-filter"} >
 										<a title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
 											<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
 										</a>
@@ -246,7 +275,7 @@ class Product extends Component {
 													<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
 													<h4>Filters</h4>
 												</div>
-												<a href="#" title="close-btn" className="filter-open-btn">
+												<a href="javascript:void(0)" title="close-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:false})}>
 													<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
 												</a>
 											</div>
@@ -256,7 +285,7 @@ class Product extends Component {
 												<ul>
 
 													{this.state.categoryfilter.map((catname,index)=>
-															<li key={catname.tid} onClick={this.filterProductCategoryById}><a href="#" data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</a></li>
+															<li key={catname.nid}><a href="#" onClick={this.MobfilterProductCategoryById} data-cat-id={catname.nid}>{ReactHtmlParser(catname.title)}</a></li>
 													)}
 												</ul>
 												

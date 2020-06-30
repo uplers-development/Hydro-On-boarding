@@ -65,6 +65,7 @@ class Login extends Component{
     		pass:document.querySelector('#password').value,
     	}
     	console.log(logindata);
+    	if(!hasNull(logindata.name) && !hasNull(logindata.password)){
     	fetch(Apiurl.Loginaction.url,{
     			headers: {
                 	"Content-Type" : "application/json",
@@ -84,6 +85,10 @@ class Login extends Component{
     			this.props.history.push({pathname:"/Welcome"});
     		}
     	})
+      }else{
+      	hasNull(logindata.name) ? this.setState({usernameState:true}): this.setState({usernameState:false})
+		hasNull(logindata.pass) ? this.setState({passwordState:true}): this.setState({passwordState:false})
+      }
 	}
 
    render(){
@@ -104,7 +109,7 @@ class Login extends Component{
 							<form>
 								<div className="form-group">
 									<label>{this.state.login_email_title}</label>
-									<input type="email" placeholder="Email" id='email' name='email' tabIndex="1" onBlur={(e)=>
+									<input type="email" placeholder={this.state.login_email_title} id='email' name='email' tabIndex="1" onBlur={(e)=>
 										hasNull(e.target.value) ? this.setState({usernameState:true}): this.setState({usernameState:false})
 									}/>
 									{this.state.usernameState ? ValidationMsg.common.default.userfield : ''}

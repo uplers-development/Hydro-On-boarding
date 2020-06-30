@@ -79,6 +79,12 @@ class Resources extends Component {
 	}
 
 	GetProductBaseFilter=(e)=>{
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
 		let product_id=e.target.getAttribute("data-pid");
 		localStorage.setItem("product_id",product_id);
 		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
@@ -114,6 +120,12 @@ class Resources extends Component {
 	}
 
 	SortResources=(e)=>{
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
 		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
 		let filterType=e.target.getAttribute("data-get-filterindex");
 		localStorage.setItem("resource-filter-type",filterType);
@@ -260,7 +272,7 @@ class Resources extends Component {
 								
 
 								
-								<div className="mobile-filter">
+								<div className={this.state.mobileView ? "mobile-filter filter-active" : "mobile-filter"}>
 									<a href="#" title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
 										<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
 									</a>
@@ -271,14 +283,14 @@ class Resources extends Component {
 												<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
 												<h4>Filters</h4>
 											</div>
-											<a href="#" title="close-btn" className="filter-open-btn">
+											<a href="javascript:void(0)" title="close-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:false})}>
 												<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
 											</a>
 										</div>
 
 										<div className="list-filter-mobile">
 											<h5>Applications</h5>
-											<ul>
+											<ul className='product-filter'>
 												{this.state.productList.map((productItem,index)=>
 													<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
 												 )}
@@ -286,7 +298,7 @@ class Resources extends Component {
 											</ul>
 
 											<h5>Sort by</h5>
-											<ul>
+											<ul className='sorting-filter'>
 												<li><Link title="Recently added" data-get-filterindex="&sort_by=created&sort_order=DESC" onClick={this.SortResources}>Recently added</Link></li>
 												<li><Link title="Oldest-Newest"  data-get-filterindex="&sort_by=created&sort_order=ASC" onClick={this.SortResources}>Oldest-Newest</Link></li>
 												<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.SortResources}>Recently viewed</Link></li>

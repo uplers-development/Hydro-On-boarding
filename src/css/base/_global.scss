@@ -1210,7 +1210,11 @@ nav {
 						color: $sky-blue;
 					}
 				}
+				&.active {
+					color: $sky-blue;
+				}
 			}
+			
 		}
 		
 	}

@@ -2,7 +2,7 @@
 export const base_url='http://staging.project-progress.net/projects/hydro/';
 export const site_url='http://staging.project-progress.net';
 let target_id=localStorage.getItem("user-type")!==null? JSON.parse(localStorage.getItem("user-type")).uid:'';
-console.log(target_id);
+
 export default {
     Loginpagecontent:{
         url:base_url+'json-api/login.json',
@@ -122,6 +122,10 @@ export default {
         url:base_url+'/jsonapi/contract_list?_format=json',
         method:'GET'
     }, 
+    ContractTypeProductBaseFilter:{
+        url:base_url+'/jsonapi/contract_list?_format=json',
+        method:'GET'
+    }, 
     ContractSortByFilter:{
         url:base_url+'/jsonapi/contract_list?_format=json',
         method:'GET'
@@ -137,10 +141,14 @@ export default {
 
 
     GetProfile: {
-    	 url: base_url+'user/user_id?_format=json',
+    	 url: base_url+`user/${target_id}?_format=json`,
          method: 'GET'
     },Updateprofile: {
-         url: base_url+'user/2?_format=json',
+         url: base_url+`user/${target_id}?_format=json`,
+         method: 'PATCH'
+    },
+    UpdateprofilePic: {
+         url: base_url+"file/upload/user/user/user_picture?_format=json",
          method: 'PATCH'
     },Leftsidebar_client: {
     	 url: base_url+'jsonapi/menu_list/main?_format=json',

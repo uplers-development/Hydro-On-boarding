@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
 import CommonBackground from './../images/common-bg.jpg';
 import Apiurl,{site_url} from './Apiurl'; 
+import Slider from "react-slick";
 
 
 class Welcome extends Component {
@@ -13,7 +14,8 @@ class Welcome extends Component {
 			bodyparagraph:null,
 			field_button_text:null,
 			field_button_uri:null,
-			middleItem:[]
+			middleItem:[],
+			mobileView:false
 		}
 	}
 
@@ -21,6 +23,9 @@ class Welcome extends Component {
 	componentDidMount(){
 		this.welcomeMainBlock();
 		this.welcomeThreeBlock();
+		window.addEventListener('load',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
+		window.addEventListener('resize',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
+		console.log(this.state.mobileView);
 	}
 
 	welcomeMainBlock=()=>{
@@ -53,6 +58,7 @@ class Welcome extends Component {
 	}
 
 	render() {
+		var settings = {dots: true,infinite: true,speed: 500,slidesToShow: 1,slidesToScroll: 1};
 		return (
 			<div><section className="main-wrapper">
 		<div className="d-flex flex-wrap main-block black-overlay-transparent bg-cover" style={{backgroundImage:`url(${CommonBackground})`}}>
@@ -60,10 +66,12 @@ class Welcome extends Component {
 			{/*<!--Intro new user popup-->
 						*/}			
 			<div className="intro-new-user-popup">
-				<a href="#" className="close" title="Close icon"><img className="svg" src={require("./../images/close-icon-gray.svg")} alt="close icon"/></a>
+				<Link to={"/Dashboard"} className="close" title="Close icon"><img className="svg" src={require("./../images/close-icon-gray.svg")} alt="close icon"/></Link>
 				<h1>{this.state.title}</h1>
 				{ReactHtmlParser(this.state.bodyparagraph)}
 				<div className="list welcome-slider d-flex flex-wrap">
+				{this.state.mobileView ? 
+				 <Slider {...settings}>
 					{this.state.middleItem.length && this.state.middleItem.map((item,index)=>
 							<div className="items"  key={index}><div>
 								<h2>{item.field_block_title}</h2>
@@ -76,7 +84,23 @@ class Welcome extends Component {
 								<p>{item.field_block_description}</p>
 							</div></div>		
 					)}
-
+				</Slider>
+				:
+				<>
+				{this.state.middleItem.length && this.state.middleItem.map((item,index)=>
+							<div className="items"  key={index}><div>
+								<h2>{item.field_block_title}</h2>
+								<div className="image-block">
+									<div className="back-transp-img">
+										<img className="svg" src={require("./../images/wlcome-item-bg.svg")} alt="welcome ovelay"/>
+									</div>
+									<img src={site_url+item.field_block_image} alt={item.field_block_title} />
+								</div>
+								<p>{item.field_block_description}</p>
+							</div></div>		
+					)}
+				</>
+			}
 					
 				</div>
 				<div className="btn-block">

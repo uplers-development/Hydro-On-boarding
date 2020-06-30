@@ -4,11 +4,12 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Welcome from "./components/Welcome";
 import Dashboard from "./components/Dashboard";
-import Newsfeeds from "./components/Newsfeeds";
-import Product from "./components/Product";
-import Resources from "./components/Resources";
-import Contract from "./components/Contract";
-import Repcontact from "./components/Resources";
+import Newsfeeds from "./components/stores/Newsfeeds";
+import Product from "./components/stores/Product";
+import Resources from "./components/stores/Resources";
+import Contract from "./components/stores/Contract";
+import Repcontact from "./components/stores/Resources";
+import RepDashboard from "./components/Repuser/RepDashboard";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
@@ -21,14 +22,14 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch(Apiurl.Leftsidebar_client.url,{
-                method:Apiurl.Leftsidebar_client.method,
-      }).then(res=>{
-        return res.json()
-      }).then(data=>{
-        console.log(data);
-        this.setState({sidebarItem:data});
-      })
+      fetch(Apiurl.Leftsidebar_client.url,{
+                  method:Apiurl.Leftsidebar_client.method,
+        }).then(res=>{
+          return res.json()
+        }).then(data=>{
+          console.log(data);
+          this.setState({sidebarItem:data});
+        })
   }
 
    render() {
@@ -36,10 +37,11 @@ class App extends Component {
            <div className="App">
               <BrowserRouter>
                 <div className="Routes">
-                {this.state.sidebarItem.length > 0 ?
-                  <>
                     <Route path="/" exact component={Login} />
                     <Route path="/Login"  component={Login} />
+                    <Route path="/components/Repuser/RepDashboard"  component={RepDashboard} />
+                    {this.state.sidebarItem.length > 0 ?
+                      <>
                     <Route path="/Profile"  component={Profile} />
                     <Route path="/Welcome"  component={Welcome} />
                     <Route path="/Dashboard"  component={Dashboard} />
@@ -50,7 +52,9 @@ class App extends Component {
                     {/*<Route path={this.state.sidebarItem[4].field_react_route}  component={Repcontact} />*/}
                   </>
                   :
-                  ""}
+                  <>
+                    <Route path="/Login"  component={Login} />
+                  </>}
                     
                 </div>
              </BrowserRouter>

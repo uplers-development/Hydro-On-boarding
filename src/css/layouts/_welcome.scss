@@ -1,6 +1,5 @@
-
 .intro-new-user-popup {
-    background-color: #FFFFFF;
+    background-color: $white;
     max-width: 1230px;
     width: 100%;
     padding: 40px 90px 62px;
@@ -42,13 +41,14 @@
 	@media screen and (max-width:$ipad-portrait) {
 		padding: 40px 20px;
 		overflow-y: scroll;
-    	max-height: 100%;
+    	max-height: 95%;
 		max-width: calc(100% - 50px);
 	}
 	@media screen and (max-width:$mobile-small) {
 		max-width: 360px;
-    	padding: 50px 16px;
+    	padding: 49px 16px;
 		overflow-y: scroll;
+		top: 48%;
 	}
 	@media screen and (max-width:$small) {
 		padding: 20px 16px;
@@ -194,7 +194,7 @@
 					background-repeat: no-repeat;
 					background-position: center;
 					position: absolute;
-					top: 0;
+					top: -10px;
 					left: 0;
 					display: inline-block;
 				}
@@ -209,7 +209,7 @@
 					background-repeat: no-repeat;
 					background-position: center;
 					position: absolute;
-					bottom:0;
+					bottom:-10px;
 					right: 0;
 					left: auto;
 					display: inline-block;
@@ -240,6 +240,7 @@
 				font-family: $arial;
 				font-weight: $font-bold;
 				margin-bottom: 0;
+				margin-top: 35px;
 				@media screen and (max-width:$mobile-small) {
 					color: $black;
 					font-size: 15px;
@@ -253,11 +254,7 @@
 	
 	.slick-dots
 	{
-	    display: -webkit-flex;
-		display: -moz-flex;
-		display: -ms-flex;
-		display: -o-flex;
-		display: flex;
+		display: flex !important;
 		align-items: center;
 		justify-content: center;
 		padding-left: 0;
@@ -324,13 +321,16 @@
 			background-color: transparent;
 			border: 0;
 			position: absolute;
-			top: 50%;
+			top: 42%;
 			transform: translateY(-50%);
 			-webkit-transform: translateY(-50%);
 		}
 		&.slick-prev
 		{
-		left: 0;
+		left: -60px;
+		@media screen and (max-width:$small-x) {
+				left: -50px;
+			}	
 		font-size: 0;
 			&:after {
 				content: "";
@@ -348,7 +348,10 @@
 		}
 		&.slick-next
 		{
-		right: 0;
+		right: -60px;
+			@media screen and (max-width:$small-x) {
+				right: -50px;
+			}	
 		font-size: 0;
 			&:after {
 				content: "";

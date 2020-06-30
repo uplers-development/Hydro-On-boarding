@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Apiurl from './Apiurl'; 
 import loginScreeImg from "./../images/login-screen.jpg";
+import {ValidationMsg} from'./constants/validationmsg';
+import{hasNull,isRequired} from './validation';
 import $ from "jquery";
 
 class Login extends Component{
@@ -16,6 +18,8 @@ class Login extends Component{
     		login_password_title:null,
     		login_rep_button:null,
     		login_sign_button:null,
+    		usernameState:false,
+    		passwordState:false,
     	}
     	this.Login=this.Login.bind(this);
     }
@@ -77,11 +81,10 @@ class Login extends Component{
     			localStorage.setItem("access-token",data.csrf_token);
     			localStorage.setItem("basic-auth",btoa(logindata.name+':'+logindata.pass));
     			localStorage.setItem("user-type",JSON.stringify(data.current_user));
-    			this.props.history.push({pathname:"/Dashboard"});
+    			this.props.history.push({pathname:"/Welcome"});
     		}
     	})
-
-}
+	}
 
    render(){
    		return(
@@ -101,12 +104,18 @@ class Login extends Component{
 							<form>
 								<div className="form-group">
 									<label>{this.state.login_email_title}</label>
-									<input type="email" placeholder="Email" id='email' tabIndex="1"/>
+									<input type="email" placeholder="Email" id='email' name='email' tabIndex="1" onBlur={(e)=>
+										hasNull(e.target.value) ? this.setState({usernameState:true}): this.setState({usernameState:false})
+									}/>
+									{this.state.usernameState ? ValidationMsg.common.default.userfield : ''}
 								</div>
 
 								<div className="form-group">
 									<label>{this.state.login_password_title}</label>
-									<input type="password" placeholder="Password" id='password' tabIndex="2"/>
+									<input type="password" placeholder="******" id='password' name='password' tabIndex="2" onBlur={(e)=>
+										hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
+									}/>
+									{this.state.passwordState ? ValidationMsg.common.default.passwordfield : ''}
 									<a href="#" title="Reset your password" tabIndex="3">Reset your password</a>
 								</div>
 

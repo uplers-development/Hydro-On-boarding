@@ -30,18 +30,10 @@ ul {
 }
 
 .flex-wrap {
-	-webkit-flex-wrap: wrap;
-	-moz-flex-wrap: wrap;
-	-ms-flex-wrap: wrap;
-	-o-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
 
 .d-flex {
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
 	display: flex;
 }
 
@@ -52,7 +44,10 @@ ul {
 .justify-center {
 	justify-content: center;
 }
-
+.container {
+	max-width: 1320px;
+	width: 100%;
+}
 .common-btn-blue:focus {
 	outline: none;
 }
@@ -72,11 +67,13 @@ ul {
 	font-family: $gibson;
 	text-transform: uppercase;
 	margin-bottom: 10px;
-	transition: 0.4s all ease-in-out;
+	@include transition(all 0.4s ease-in-out);
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
 	outline: none;
+	display: inline-block;
+	text-decoration: none;
 
 	span {
 		font-size: 20px;
@@ -101,11 +98,9 @@ ul {
 		height: 70px;
 		position: absolute;
 		top: 60px;
-		/*transform: translateY(-70px);	
-			-webkit-transform: translateY(-70px);*/
 		left: 0;
 		right: 0;
-		transition: 0.4s all ease-in-out;
+		@include transition(all 0.4s ease-in-out);
 		background-image: url(#{$imgpath}/button-hover-effect.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -114,7 +109,7 @@ ul {
 
 	@media screen and (max-width:$large-m) {
 		min-width: 150px;
-		padding: 4px 10px 1px;
+		padding: 4px 10px 2px;
 	}
 
 	@media screen and (max-width:$ipad-landscape) {
@@ -139,7 +134,7 @@ ul {
 	min-width: 145px;
 	text-transform: uppercase;
 	outline: none;
-	transition: 0.4s all ease-in-out;
+	@include transition(all 0.4s ease-in-out);
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
@@ -166,11 +161,9 @@ ul {
 		height: 70px;
 		position: absolute;
 		top: 60px;
-		/*transform: translateY(-70px);	
-			-webkit-transform: translateY(-70px);*/
 		left: 0;
 		right: 0;
-		transition: 0.4s all ease-in-out;
+		@include transition(all 0.4s ease-in-out);
 		background-image: url(#{$imgpath}/button-hover-sky-blue.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -212,7 +205,7 @@ ul {
 	min-width: 106px;
 	text-transform: uppercase;
 	outline: none;
-	transition: 0.4s all ease-in-out;
+	@include transition(all 0.4s ease-in-out);
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
@@ -246,7 +239,7 @@ ul {
 			-webkit-transform: translateY(-70px);*/
 		left: 0;
 		right: 0;
-		transition: 0.4s all ease-in-out;
+		@include transition(all 0.4s ease-in-out);
 		background-image: url(#{$imgpath}/button-hover-sky-white.svg);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -288,7 +281,7 @@ a.btn, button.btn{-webkit-appearance: none; -moz-appearance: none; appearance: n
 		color: $white;
 		cursor: pointer;
 		min-width: 138px;
-		padding: 7px 10px;
+		padding: 8px 10px 6px;
 		margin-bottom: 0;
 		span {
 			font-size: 16px;
@@ -348,7 +341,7 @@ form {
 
 	input[type="email"],
 	input[type="password"],
-	input[type="text"],
+	input[type="text"], 
 	textarea {
 		font-size: 16px;
 		padding: 8px 12px;
@@ -364,9 +357,42 @@ form {
 			border-color: $sky-blue;
 			outline: none;
 		}
-
+		@include placeholder {
+			line-height: 20px;
+			font-size: 16px;
+			font-family: $arial;
+			font-weight: 400;
+			color: $light-black;
+			opacity: 1;
+			position: relative;
+		}
 	}
-
+	select {
+		font-size: 16px;
+		padding: 8px 12px;
+		width: 100%;
+		line-height: 20px;
+		border: 1px solid $panton-gray;
+		font-family: $arial;
+		font-weight: 400;
+		color: $light-black;
+		-webkit-appearance: none;
+		&:focus, &:focus {
+			outline: none;
+		}
+		option {
+			border: 0;
+			background-color: $white;
+			font-family: $arial;
+			font-weight: 400;
+			color: $light-black;
+			font-size: 16px;
+			padding: 8px 12px;
+		}
+		&::-ms-expand {
+			display: none;
+		}
+	}
 }
 
 /*Common form css*/
@@ -495,7 +521,7 @@ nav {
 					position: relative;
 					outline: none;
 					position: relative;
-					transition: 0.5s all;
+					@include transition(all 0.5s ease-in-out);
 					text-decoration: none;
 
 					@media screen and (max-width:$large-m) {
@@ -509,11 +535,14 @@ nav {
 
 					svg {
 						.shp0 {
-							transition: 0.5s all;
+							@include transition(all 0.5s ease-in-out);
 						}
 					}
 
 					&:hover {
+						span {
+							color: $white;
+						}
 						svg {
 							.shp0 {
 								fill: $sky-blue;
@@ -522,6 +551,9 @@ nav {
 					}
 
 					&.active {
+						span {
+							color: $white;
+						}
 						svg {
 							.shp0 {
 								fill: $sky-blue;
@@ -530,7 +562,7 @@ nav {
 					}
 
 					span {
-						color: $white;
+						color: $white-transparent-menu-text;
 						text-decoration: none;
 						font-family: $gibson;
 						font-weight: $font-normal;
@@ -630,7 +662,7 @@ nav {
 						background: -webkit-linear-gradient(left, rgba(128, 128, 128, 0.02) 0%, rgba(198, 198, 198, 0.09) 55%, rgba(255, 255, 255, 0.2) 100%);
 
 						background: linear-gradient(to right, rgba(128, 128, 128, 0.02) 0%, rgba(198, 198, 198, 0.09) 55%, rgba(255, 255, 255, 0.2) 100%);
-						transition: 0.5s all;
+						@include transition(all 0.5s ease-in-out);
 					}
 
 					&:hover {
@@ -710,14 +742,16 @@ nav {
 	padding-left: 90px;
 	margin-left: auto;
 	align-items: flex-start;
+	position: relative;
 	@media screen and (max-width:$large-mx) {
 		padding-left: 40px;
 	}
-
-	@media screen and (max-width:$ipad-landscape) {
-		padding: 0 12px;
+	@media screen and (max-width:$large-m) {
+		padding-left: 20px;
 	}
-
+	@media screen and (max-width:$ipad-landscape) {
+		padding: 0 15px;
+	}
 	@media screen and (max-width:$mobile-small) {
 		width: 100%;
 		padding: 0 0 72px 0;
@@ -737,10 +771,13 @@ nav {
 
 		@media screen and (max-width:$large-mx) {
 			padding: 12px 80px 12px 0;
+			width: calc(100% - 15px);
+    		margin-left: auto;
 		}
 		
 		@media screen and (max-width:$ipad-portrait) {
 			padding: 12px 15px 12px 0;
+			width: 100%;
 		}
 
 		@media screen and (max-width:$mobile-small) {
@@ -771,6 +808,9 @@ nav {
 			img {
 				margin-right: 15px;
 				max-width: 37px;
+				@media screen and (max-width:$large-m) {
+					max-width: 30px;
+				}
 				@media screen and (max-width:$mobile-small) {
 					max-width: 23px;
 				}
@@ -841,7 +881,9 @@ nav {
 	.bottom-content-block {
 		padding: 40px 0;
 		width: 100%;
-		
+		@media screen and (max-width:$large-mx) {
+			padding: 15px;
+		}
 		@media screen and (max-width:$ipad-landscape) {
 			padding: 24px 0;
 		}
@@ -849,10 +891,15 @@ nav {
 			padding: 20px 0;
 		}
 		&.with-filter {
-			padding: 20px 0;
+			padding: 15px 0;
+			@media screen and (max-width:$large-mx) {
+				padding: 15px;
+			}
+			@media screen and (max-width:$mobile-small) {
+				padding: 15px 0;
+			}
 		}
 	}
-
 }
 
 /*BG color calss teansparent*/
@@ -875,6 +922,14 @@ nav {
 {
 	background-color: $sky-blue;
 }
+.sky-blue-light
+{
+	background-color: $sky-blue-transparent;
+}
+.sky-blue-light-2
+{
+	background-color: $sky-blue-transparent-2;
+}
 .black-overlay-transparent:after {
 	content: "";
 	display: block;
@@ -888,11 +943,47 @@ nav {
 	z-index: 0;
 }
 
+/*Right bottom pattern gray*/
+.right-btm-pattern-gray {
+	padding-bottom: 15%;
+	@media screen and (max-width:$mobile-small) {
+			padding-bottom: 0;
+	}
+	&:after {
+		content: "";
+		display: inline-block;
+		background-image: url(#{$imgpath}/screen-pattern-grey.svg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		position: absolute;
+		bottom: 10%;
+		right: -3%;
+		width: 42.35%;
+		height: 40%;
+		@media screen and (max-width:$large-mx) {
+			bottom: -7%;
+			right: 0;
+		}
+		@media screen and (max-width:$ipad-landscape) {
+			bottom: -9%;
+		}
+		@media screen and (max-width:$ipad-portrait) {
+			width: 32%;
+			height: 33%;
+			bottom: -10%;
+		}
+		@media screen and (max-width:$mobile-small) {
+			display: none;
+		}
+	}
+}
+
+
 /*Custom selct box*/
 .sbHolder {
 	background-color: $white;
 	border: solid 1px $panton-gray;
-	;
 	font-family: $arial;
 	font-weight: 400;
 	font-size: 16px;
@@ -905,10 +996,6 @@ nav {
 	&:focus {
 		border-color: $sky-blue;
 	}
-
-	.sbSelector {}
-
-
 	.sbSelector {
 		> a {
 			font-family: $arial;
@@ -1030,7 +1117,7 @@ nav {
 			&:visited {
 				color: #75787B;
 				text-decoration: none;
-				transition: all 0.2s ease-in-out;
+				@include transition(all 0.2s ease-in-out);
 			}
 
 			&:hover,
@@ -1073,11 +1160,11 @@ nav {
 	padding: 10px 15px;
 	max-width: 192px;
     width: 100%;
-	transition: 0.5s all ease-in-out;
+	@include transition(all 0.5s ease-in-out);
 	position: absolute;
 	right: 245px;
 	top:38px;
-	z-index: 11;
+	
 	@media screen and (max-width:$large-mx) {
 		top: 5px;
 	}
@@ -1101,7 +1188,7 @@ nav {
 	{
 		visibility: hidden;
 		opacity: 0;
-		transition: 0.2s all ease-in-out;
+		@include transition(all 0.2s ease-in-out);
 		ul
 		{
 			margin: 0;
@@ -1132,6 +1219,8 @@ nav {
 		> img 
 		{
 			width: 40px;
+			height: 40px;
+			border-radius: 50%;
 			@media screen and (max-width:$mobile-small) {
 				width: 30px;
 				margin-left: auto;
@@ -1193,6 +1282,7 @@ nav {
 	
 	&:hover
 		{
+			z-index: 11;
 			.user-image-name
 			{
 				h2 {
@@ -1236,8 +1326,7 @@ nav {
 	position: relative;
 	z-index: 1;
 	width: 357px;
-	-webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+	@include transition(all 0.5s ease-in-out);
 	@media screen and (max-width:$large-x) {
 		margin: 5px 0 0;
 		width: 280px;
@@ -1268,7 +1357,7 @@ nav {
 			border-left: 4px solid transparent;
 			border-right: 4px solid transparent;
 			border-top: 8px solid $panton-gray;
-			transition: 0.2s all ease-in-out;
+			@include transition(all 0.2s ease-in-out);
 		}
 	}
 	ul 
@@ -1282,12 +1371,11 @@ nav {
 		opacity: 0;
 		background-color: $white;
 		width: 100%;
-		transition: 0.5s all ease-in-out;
+		@include transition(all 0.5s ease-in-out);
 		a {
-			padding: 11px 25px;
 			font-size: 14px;
 			line-height: 22px;
-			padding: 11px 25px;
+			padding: 6px 25px;
 			width: 100%;
 			display: block;
 			font-family: $gibson;
@@ -1300,6 +1388,7 @@ nav {
 		}
 	}
 	&:hover {
+		z-index: 2;
 		box-shadow: 0 4px 16px rgba(69,91,99,.08);
 		border-color: transparent;
 		.list
@@ -1308,6 +1397,7 @@ nav {
 			visibility: visible;
 			opacity: 1;
 			box-shadow: 0 13px 16px rgba(69,91,99,.08);
+			padding-bottom: 10px;
 		}
 		a{
 			&:after {
@@ -1328,11 +1418,12 @@ nav {
 	justify-content: flex-end;
     padding-right: 20px;
 	margin-left: auto;
-	-webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+	@include transition(all 0.5s ease-in-out);
 	z-index: 1;
 	background-color: $white;
-
+	.sort-selected {
+		padding-right: 18px;
+	}
 	@media screen and (max-width:$large-mx) {
 		margin-right: 120px;
 	}
@@ -1361,7 +1452,7 @@ nav {
 			top: 50%;
 			transform: translateY(-50%);
 			-webkit-transform: translateY(-50%);
-			right: 15px;
+			right: 24px;
 			width: 0;
 			height: 0;
 			border-left: 4px solid transparent;
@@ -1404,12 +1495,14 @@ nav {
 	}
 	&:hover {
 		box-shadow: 0px 4px 16px $gray-light;
+		z-index: 11;
 		.drop-down-menu
 		{
 			height: auto;
 			visibility: visible;
 			opacity: 1;
 			box-shadow: 0 13px 16px rgba(69,91,99,.08);
+			padding-bottom: 10px;
 		}
 	}
 }
@@ -1418,6 +1511,7 @@ nav {
 .fileter-block { 
 	max-width: 1320px;
 	width: 100%;
+	align-items: center;
 	@media screen and (max-width:$mobile-small) {
 		padding: 0 23px;
 	}
@@ -1433,11 +1527,13 @@ nav {
 		}
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
+			margin-top: 0;
 		}
 	}
 	&.border-bottom {
 		padding-bottom: 20px;
 		border-bottom: 1px solid $off-white;
+		position: relative;
 		&:after {
 			content: "";
 			display: block;
@@ -1448,6 +1544,7 @@ nav {
 			bottom: 0;
 			left: 0;
 			right: 0;
+			box-shadow: 0px 1px 15px rgba(0,0,0,0.16);
 		}
 	}
 }
@@ -1457,9 +1554,11 @@ nav {
 {
 	position: relative;
 	width: 238px;
-    padding-right: 20px;
+    padding-right: 0;
 	margin-left: auto;
-	@media screen and (max-width:$large-x) {
+	border: 1px solid $off-white;
+	z-index: 1;
+	@media screen and (max-width:$large-m) {
 		width: 200px;
 	}
 	@media screen and (max-width:$mobile-small) {
@@ -1468,11 +1567,13 @@ nav {
 		margin-right: auto;
 		margin-left: 0;
 	}
+	@media screen and (max-width:$small-x) {
+		width: 200px;
+	}
 	input[type="text"]
 	{
-		border: 1px solid #f5f5f5;
-    	position: relative;	
-		font-size: 16px;
+			position: relative;	
+			font-size: 16px;
 			line-height: 22px;
 			padding: 11px 25px 11px 33px;
 			width: 100%;
@@ -1483,10 +1584,63 @@ nav {
 			text-decoration: none;
 			background-image: url(#{$imgpath}/ic_search.svg);
 			background-size: 17px;
+		    border-color: transparent;
 			background-repeat: no-repeat;
 			background-position: 5% center;
+			outline: none;
 		@media screen and (max-width:$mobile-small) {
 			padding: 5px 9px 5px 35px;
+		}
+		&:focus {
+			border-color: transparent;
+		}
+	}
+	ul 
+	{
+		padding-left: 0;
+		margin: 0;
+		position: absolute;
+		top: 46px;
+		border: 1px solid $off-white;
+		border-top: 0;
+		background-color: $white;
+		width: calc(100% + 2px);
+		left: -1px;
+		
+		@include transition(all 0.5s ease-in-out);
+		a {
+			font-size: 14px;
+			line-height: 22px;
+			padding: 6px 35px;
+			width: 100%;
+			display: block;
+			font-family: $gibson;
+			font-weight: $font-normal;
+			color: $panton-gray;
+			text-decoration: none;
+			background-image: url(#{$imgpath}/ic_search.svg);
+			background-size: 17px;
+			background-repeat: no-repeat;
+			background-position: 5% center;
+			&:hover {
+				color: $sky-blue;
+			}
+		}
+	}
+	&:hover {
+		z-index: 2;
+		box-shadow: 0 4px 16px rgba(69,91,99,.08);
+	
+		.list
+		{
+			height: auto;
+			box-shadow: 0 13px 16px rgba(69,91,99,.08);
+		}
+		a{
+			&:after {
+				transform: translateY(-50%) rotate(-180deg);
+    			-webkit-transform: translateY(-50%) rotate(-180deg);
+			}
 		}
 	}
 }
@@ -1514,7 +1668,7 @@ nav {
 		z-index: 9;
 		transform: translateY(100%);
 		-webkit-transform: translateY(100%);
-    	transition: 0.3s all ease-in-out;
+    	@include transition(all 0.3s ease-in-out);
    		overflow-y: scroll;
 		.top-head {
 			border-bottom: 1px solid $off-white;
@@ -1549,8 +1703,8 @@ nav {
 		}
 		ul {
 			padding-left: 0;
+			margin-top: 0;
 			li {
-				border-bottom: 1px solid $off-white;
 				a {
 					font-size: 15px;
 					line-height: 22px;
@@ -1584,6 +1738,10 @@ nav {
 						}
 					}
 				}
+				&:not(last-child)
+				{
+					border-bottom: 1px solid $off-white;
+				}
 			}
 		}
 	}
@@ -1593,6 +1751,247 @@ nav {
 			-webkit-transform: translateY(0%);
 		}
 	}
+	.btn-block {
+		button {
+			min-width: 195px;
+			margin-bottom: 0;
+			padding: 5px 10px 3px;
+		}
+	}
 }
+
+/*Class for hide show in mobile and desktop*/
+.mobile-hide {
+	@media screen and (max-width:$mobile-small) {
+			display: none;
+	}
+} 
+.desktop-hide {
+	@media screen and (min-width: $mobile-small-up) {
+			display: none;
+	}
+}
+
+/*All common transition*/
+a { @include transition(all 0.5s ease-in-out); }
+
+/*Common popup css*/
+.modal-container
+{
+		&.modal-container {
+		&:before {
+			content: "";
+			background-color: $popup-back-bg;
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
+	}
+	.modal {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		-webkit-transform: translate(-50%,-50%);
+		margin: 0 auto;
+		display: block;
+		background: $white;
+		padding: 40px;
+		width: 618px;
+		min-height: 380px;
+		max-width: 100%;
+		z-index: 1;
+		border-radius: 4px;
+    	overflow: hidden;
+		
+			> div {
+				height: auto;
+				text-align: center;
+				width: 100%;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				-webkit-transform: translate(-50%,-50%);
+				z-index: 1;
+				img {
+					margin-top: 15px;
+					@media screen and (max-width: $mobile-small) {
+						width: 42px;
+						margin-top: 42px;
+					}
+				}
+				h2 {
+					margin: 22px 0 0;
+					font-size: 40px;
+					line-height: 46px;
+					color: $cobalt-blue;
+					font-family: $gibson;
+					font-weight: $font-semi-bold;
+					@media screen and (max-width: $mobile-small) {
+						font-size: 22px;
+						line-height: 26px;
+					}
+				}
+				p {
+					font-size: 18px;
+					line-height: 22px;
+					color: $black;
+					font-family: $arial;
+					font-weight: $font-normal;
+					margin-top: 12px;
+					@media screen and (max-width: $mobile-small) {
+						font-size: 14px;
+						max-width: 250px;
+						margin-left: auto;
+						margin-right: auto;
+					}
+				}
+			}
+		
+		&:after {
+			content: "";
+			display: inline-block;
+			background-image: url(#{$imgpath}/screen-pattern-grey.svg);
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			position: absolute;
+			bottom: -120px;
+			right: 0;
+			width: 100%;
+			height: 580px;
+			@media screen and (max-width: $mobile-small) {
+				width: 325px !important;
+    			height: 200px !important;
+				bottom: -10px !important;
+			}
+		}
+		.close {
+			width: 16px;
+			height: 16px;
+			position: absolute;
+			right: 28px;
+			top: 28px;
+			z-index: 1;
+			img {
+				width: 100%;
+			}
+
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+		@media screen and (max-width: $mobile-small) {
+				width: 350px !important;
+				min-height: 300px !important;
+		}
+		@media screen and (max-width: $mobile-small) {
+				width: calc(100% - 20px) !important;
+				min-height: 300px !important;
+		}
+	}
+
+}
+
+/*Class for hide show in mobile and desktop*/
+.mobile-hide {
+	@media screen and (max-width:$mobile-small) {
+			display: none;
+	}
+} 
+.desktop-hide {
+	@media screen and (min-width: $mobile-small-up) {
+			display: none;
+	}
+}
+
+/*All common transition*/
+a { @include transition(all 0.5s ease-in-out); }
+
+/*Common popup css*/
+.modal-container
+{
+	.modal {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		-webkit-transform: translate(-50%,-50%);
+		margin: 0 auto;
+		display: block;
+		background: $white;
+		padding: 40px;
+		width: 618px;
+		min-height: 419px;
+		max-width: 100%;
+		z-index: 1;
+		border-radius: 4px;
+    	overflow: hidden;
+		> div {
+			text-align: center;
+			width: 100%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			-webkit-transform: translate(-50%,-50%);
+			z-index: 1;
+		}
+		h2 {
+				margin: 0;
+				font-size: 40px;
+				line-height: 46px;
+				color: $cobalt-blue;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+		}
+			p {
+				font-size: 18px;
+				line-height: 22px;
+				color: $black;
+				font-family: $arial;
+				font-weight: $font-normal;
+		}
+		&:after {
+			content: "";
+			display: inline-block;
+			background-image: url(#{$imgpath}/screen-pattern-grey.svg);
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			position: absolute;
+			bottom: -120px;
+			right: 0;
+			width: 100%;
+			height: 580px;
+		}
+	}
+	&.modal-container {
+		&:before {
+			content: "";
+			background-color: $popup-back-bg;
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
+	}
+}
+/*Form error css*/
+.empty-field {
+	font-size: 14px;
+	line-height: 18px;
+	color: $red;
+	font-family: $arial;
+	font-weight: $font-normal;
+}
+
+
 
 

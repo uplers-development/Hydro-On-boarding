@@ -304,7 +304,7 @@ class Resources extends Component {
 										<Link to={site_url+resourceItem.field_resources_document} title={resourceItem.field_resource_type}>{resourceItem.field_resource_type}</Link>
 										<div className="image-block">
 											<div className="bg-cover" style={{backgroundImage: `url(${site_url+resourceItem.field_resources_image})`}}></div>
-											{/*<label>{resourceItem.field_resource_type}</label>	*/}	
+											<label>{resourceItem.field_resource_type}</label>		
 										</div>
 										<div className="res-content">
 											<h3>{resourceItem.title}</h3>

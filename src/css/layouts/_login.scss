@@ -104,8 +104,6 @@
 			}
 			
 			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
-					padding-bottom: 180px;
-					margin-top: 50%;
 					width: 100%;
 					margin-left: 0;
 			}
@@ -118,6 +116,9 @@
 
 			@media screen and (max-width:$mobile-small) {
 				max-width: 337px;
+				margin: 0 auto 6px;
+			}
+			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
 				margin: 0 auto 6px;
 			}
 
@@ -183,7 +184,9 @@
 
 		.button-group {
 			margin-top: 24px;
-
+			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
+				margin-top: 0;
+			}
 			@media screen and (max-width:$mobile-small) {
 				max-width: 337px;
 				margin: 0 auto;
@@ -225,7 +228,15 @@
 			@media screen and (max-width:$ipad-landscape) {
 				padding: 13px 40px 13px 35px;
 			}
-
+			
+			@media screen and (max-width:$mobile-small) {
+				padding: 13px 40px 13px 31px;
+			}
+			
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					padding: 13px 20px 13px 14px;
+			}
+			
 			@media screen and (max-width:$small-x) {
 				padding: 13px 20px;
 			}

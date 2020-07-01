@@ -220,7 +220,7 @@ class Contract extends Component {
 								
 								<div className="top-heading-continer d-flex flex-wrap align-center">
 									<div className="name-of-heading d-flex flex-wrap">
-										<img src={require("../../images/resources-logo-blue.svg")} alt="profile-logo"/>
+										<img src={require("../../images/contracts-logo-blue.svg")} alt="contracts-logo"/>
 										<h1>Contracts</h1>
 									</div>
 									<UserProfile/>

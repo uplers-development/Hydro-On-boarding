@@ -63,8 +63,13 @@ class Product extends Component {
 
 	filterProductCategoryById =(e) =>{
 		e.preventDefault();
+		document.querySelectorAll(".product-filter-desktop li a").forEach((item,index)=>{
+			if(item.classList.contains("active")){item.classList.remove("active")}
+		})
+		e.target.classList.add("active");
 		let pid=e.target.getAttribute("data-cat-id");
 		localStorage.setItem("product_id",pid);
+
 		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid,{
 				headers: {
                 	"Content-Type" : "application/json",
@@ -222,7 +227,7 @@ class Product extends Component {
 							
 							<div className="select-box">
 								<span>Applications</span>
-								<ul className="list">
+								<ul className="list product-filter-desktop">
 								{this.state.categoryfilter.map((catname,index)=>
 									<li key={catname.tid}><Link to={""} data-cat-id={catname.tid} onClick={this.filterProductCategoryById}>{ReactHtmlParser(catname.name)}</Link></li>
 								)}

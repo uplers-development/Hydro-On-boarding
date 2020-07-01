@@ -84,6 +84,9 @@
 						@media screen and (max-width:$ipad-portrait) {
 							right: 35px;
 						}
+						@media screen and (max-width:$mobile-small) {
+							display: none;
+						}
 					}
 				}
 				.contracts-content {

@@ -151,6 +151,13 @@
 				&:not(:last-child) {
 					margin-bottom: 12px;
 				}
+				&:nth-child(2) {
+					a {
+						span {
+							padding-left: 15px;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -272,7 +279,10 @@
 			.bottom-details {
 				.left {
 					align-items: flex-start;
-
+					max-width: 176px;
+					@media screen and (max-width:$mobile-small) {
+						max-width: none;
+					}
 					img {
 						max-width: 20px;
 

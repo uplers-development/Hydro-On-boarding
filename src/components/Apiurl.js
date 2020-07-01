@@ -53,7 +53,7 @@ export default {
         method:"GET"
     }, 
     ProductCategoryId:{
-        url:base_url+"/jsonapi/product_list_title/?_format=json",
+        url:base_url+"/jsonapi/taxonomy_list/applications?_format=json",
         method:"GET"
     },
     FilterProductCategoryById:{

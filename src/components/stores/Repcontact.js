@@ -4,7 +4,9 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
-import {cosmaticAsset} from'../constants/common';
+//import {cosmaticAsset} from'../constants/common';
+import{hasNull,isRequired} from '../validation';
+import {ValidationMsg} from'../constants/validationmsg';
 
 class Repcontact extends React.Component {
 
@@ -14,6 +16,7 @@ class Repcontact extends React.Component {
 			repContactDetails:null,
 			repcontactRendered:false,
 			showPop:false,
+			textareaState:false,
 		}
 		this.textArea = React.createRef();
 		this.SendRepContactQuery=this.SendRepContactQuery.bind(this);
@@ -45,6 +48,7 @@ class Repcontact extends React.Component {
 		let QueryObj={
 				message:this.textArea.current.value
 		}
+		if(!hasNull(QueryObj.message)){
 		fetch(Apiurl.SendRepContactQuery.url,{
 			headers: {
                 	"Content-Type" : "application/json",
@@ -56,9 +60,17 @@ class Repcontact extends React.Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({showPop:true})
+    		if(data.response!==''){
+    			this.setState({showPop:true,textareaState:false})
+    		}else{
+    			this.setState({showPop:false,textareaState:false})
+    		}
     	})
+    }else{
+    	hasNull(QueryObj.message) ? this.setState({textareaState:true}): this.setState({textareaState:false})
+    }
 	}
+
 
  
 	render() {
@@ -126,6 +138,7 @@ class Repcontact extends React.Component {
 											<h5>Get in touch with your rep</h5>
 											<form action="#">
 												<textarea placeholder="Type your message here…" ref={this.textArea}/>
+												{this.state.textareaState ? ValidationMsg.common.default.mailTextarea : ''}
 												<div className="btn-block">
 													<button className="btn common-btn-blue" type="button" tabIndex="4" onClick={this.SendRepContactQuery}>
 														<span>SUBMIT QUERY</span></button>
@@ -146,9 +159,17 @@ class Repcontact extends React.Component {
 							:""}
 						</div>
 					</div>:
-					<>
-						{cosmaticAsset.cosmatic.default.popup}
-					</>
+					
+						<div id="modal" className="modal-container">
+							<div className="modal d-flex flex-wrap align-center justify-center">
+								<Link to={"./rep-contact"} className="close" title="Close" onClick={(e)=>this.setState({showPop:false})}>
+									<img src={require("../../images/close-icon-gray.svg")} alt="Close icon" />
+								</Link>
+								<div>
+								<img src={require("../../images/round-correct.svg")} alt="Right icon"/><h2>Thank you</h2><p>Your message was submitted successfully</p>
+								</div>
+							</div>
+						</div>
 				}
 				</section>
 		);

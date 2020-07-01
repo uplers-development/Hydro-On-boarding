@@ -62,8 +62,14 @@ class Product extends Component {
 	}
 
 	filterProductCategoryById =(e) =>{
+		e.preventDefault();
+		document.querySelectorAll(".product-filter-desktop li a").forEach((item,index)=>{
+			if(item.classList.contains("active")){item.classList.remove("active")}
+		})
+		e.target.classList.add("active");
 		let pid=e.target.getAttribute("data-cat-id");
 		localStorage.setItem("product_id",pid);
+
 		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid,{
 				headers: {
                 	"Content-Type" : "application/json",
@@ -220,10 +226,10 @@ class Product extends Component {
 
 							
 							<div className="select-box">
-								<a href="#" data-value="">Applications</a>
-								<ul className="list">
+								<span>Applications</span>
+								<ul className="list product-filter-desktop">
 								{this.state.categoryfilter.map((catname,index)=>
-									<li key={catname.tid} onClick={this.filterProductCategoryById}><a data-cat-id={catname.nid}>{ReactHtmlParser(catname.title)}</a></li>
+									<li key={catname.tid}><Link to={""} data-cat-id={catname.tid} onClick={this.filterProductCategoryById}>{ReactHtmlParser(catname.name)}</Link></li>
 								)}
 								</ul>
 							</div>
@@ -240,7 +246,7 @@ class Product extends Component {
 										</div>
 										<ul className="list">
 											{this.state.getTileListforSearch.length > 0 && this.state.getTileListforSearch.map((titlename,index)=>
-												<li key={titlename.nid} ><a href="#" data-title-name={ReactHtmlParser(titlename.title)} onClick={this.ProductListTitleSearch}>{titlename.title}</a></li>
+												<li key={titlename.nid} ><Link to={""} data-title-name={ReactHtmlParser(titlename.title)} onClick={this.ProductListTitleSearch}>{titlename.title}</Link></li>
 											)}
 										</ul>
 									</form>
@@ -255,9 +261,10 @@ class Product extends Component {
 									</div>
 									<div className="drop-down-menu">
 										<ul>
-											<li><a href="#" title="Purchase date newest" onClick={this.SortProductCategoryByPurchaseDateNew}>Purchase date newest</a></li>
-											<li><a href="#" title="Purchase date oldest" onClick={this.SortProductCategoryByPurchaseDateOld}>Purchase date oldest</a></li>
-											<li><a href="#" title="A-Z" onClick={this.SortProductCategoryById}>A-Z</a></li>
+											<li><Link to={""} title="Purchase date newest" onClick={this.SortProductCategoryByPurchaseDateNew}>Purchase date newest</Link></li>
+											<li><Link to={""} title="Purchase date oldest" onClick={this.SortProductCategoryByPurchaseDateOld}>Purchase date oldest</Link></li>
+											<li><Link to={""} title="A-Z" onClick={this.SortProductCategoryById}>A-Z</Link></li>
+											<li><Link to={""} title="Z-A" onClick={this.SortProductCategoryById}>Z-A</Link></li>
 										</ul>
 									</div>
 								</div>
@@ -285,7 +292,7 @@ class Product extends Component {
 												<ul>
 
 													{this.state.categoryfilter.map((catname,index)=>
-															<li key={catname.nid}><a href="#" onClick={this.MobfilterProductCategoryById} data-cat-id={catname.nid}>{ReactHtmlParser(catname.title)}</a></li>
+															<li key={catname.tid}><a href="#" onClick={this.MobfilterProductCategoryById} data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</a></li>
 													)}
 												</ul>
 												
@@ -294,7 +301,7 @@ class Product extends Component {
 													<li><a href="#" title="Purchase date newest" onClick={this.SortProductCategoryByPurchaseDateNew}>Purchase date newest</a></li>
 													<li><a href="#" title="Purchase date oldest" onClick={this.SortProductCategoryByPurchaseDateOld}>Purchase date oldest</a></li>
 													<li><a href="#" title="A-Z" onClick={this.SortProductCategoryById}>A-Z</a></li>
-													
+													<li><a href="#" title="Z-A" onClick={this.SortProductCategoryById}>Z-A</a></li>
 												</ul>
 											</div>
 	

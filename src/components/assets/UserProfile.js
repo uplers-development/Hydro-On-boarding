@@ -59,7 +59,7 @@ class UserProfile extends Component {
 			<div>
 				<div className="d-flex flex-wrap user-log">
 						<div className="user-image-name d-flex flex-wrap align-center">
-							<img src={this.state.userPicture.url} alt="Prfile image"/>
+							<img src={this.state.userPicture!=='' ? this.state.userPicture.url : ''} alt="Prfile image"/>
 							<h2>{this.state.first_name+ " "+this.state.last_name }</h2>
 						</div>
 						<div className="drop-down-menu">

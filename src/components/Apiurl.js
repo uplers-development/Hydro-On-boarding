@@ -61,7 +61,11 @@ export default {
         method:"GET"
     },
     //for Sorting A-z after the filter pass field_product_category_target_id=6
-    SortProductByNewDate:{
+    SortProduct:{
+        url:base_url+"/jsonapi/product_list?_format=json",
+        method:"GET"
+    },
+    /*SortProductByNewDate:{
         url:base_url+"/jsonapi/product_list?_format=json&sort_by=field_purchase_date_value&sort_order=ASC",
         method:"GET"
     },
@@ -72,7 +76,7 @@ export default {
     SortProductByA_Z:{
         url:base_url+"/jsonapi/product_list?_format=json&sort_by=title&sort_order=ASC",
         method:"GET"
-    },
+    },*/
     GetProductTitle:{
         url:base_url+"/jsonapi/product_list_title/?_format=json",
         method:"GET"

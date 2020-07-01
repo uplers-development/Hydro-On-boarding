@@ -220,7 +220,7 @@ class Resources extends Component {
 
 							
 							<div className="select-box">
-								<a href="#" data-value="">Products</a>
+								<span>Products</span>
 								<ul className="list">
 								{this.state.productList.map((productItem,index)=>
 									<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
@@ -231,7 +231,7 @@ class Resources extends Component {
 
 							
 							<div className="select-box">
-								<a href="#" data-value="">Types</a>
+								<span>Types</span>
 								<ul className="list">
 									{this.state.ResourceTypelist.map((resourcetitle,index)=>
 										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FilterByResourceId}>{ReactHtmlParser(resourcetitle.name)}</Link></li>

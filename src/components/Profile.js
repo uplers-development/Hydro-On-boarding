@@ -142,7 +142,7 @@ class Profile extends Component {
 						
 						{/*<!--Progressbar start-->*/}
 						<div className="progressbar-block">
-							<span className="percent-text">40% Complete</span>
+							<span className="percent-text"><strong>40%</strong> Complete</span>
 							<div className="progress-bar-wrap">
 								<progress className="p" value="0.3"></progress>
 								<div className="progress-bar"  style={{"transform": "translateX(-55%)"}}></div>

@@ -74,11 +74,17 @@ class Sidebar extends Component {
 				</ul>
 				
 				<div className="nav-bottom-master teal-color-bg">
-					<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")  } alt="hydro-in-tab"/>
+					<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")} alt="hydro-in-tab"/>
 					<p>{this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].body : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")  }
 					</p>
 					<Link to={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_link : ''}className="common-btn-blue"><span>Master CTA</span></Link>
 				</div>
+
+				<div class="pattern-block">
+				
+					<img src={require("../../images/pattern-nav-bottom.svg")} alt="Pattern img"/>	
+						
+						</div>
 
 				<div className="nav-copyright">© 2020 Hydro International</div>
 			</nav>

@@ -1404,6 +1404,9 @@ nav {
 			&:hover {
 				color: $sky-blue;
 			}
+			&.active {
+					color: $sky-blue;
+			}
 		}
 	}
 	&:hover {
@@ -1443,6 +1446,7 @@ nav {
     			-webkit-transform: translateY(-50%) rotate(-180deg);
 			}
 		}
+		
 	}
 }
 

@@ -26,7 +26,9 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-
+			@media screen and (max-width:$ipad-landscape) {
+				left: -2px;
+			}
 			@media screen and (max-width:$mobile-small) {
 				max-width: 223px;
 			}
@@ -97,14 +99,13 @@
 				margin-top: 40%;
 
 			}
-			
 			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 					padding-bottom: 180px;
-					margin-top: 15%;
+					margin-top: 45%;
 			}
-			
 			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
 					width: 100%;
+					margin-left: 0;
 			}
 		}
 

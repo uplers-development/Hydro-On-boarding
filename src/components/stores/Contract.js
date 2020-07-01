@@ -240,10 +240,10 @@ class Contract extends Component {
 
 										
 										<div className="select-box">
-											<a href="javascript:void(0)" data-value="">Products</a>
+											<span>Products</span>
 											<ul className="list">
 											{this.state.categoryfilter.map((productItem,index)=>
-												<li key={index}><a href="javascript:void(0)" title={productItem.title} data-product-id={productItem.nid} onClick={this.ContractTypeProductBaseFilter}>{productItem.title}</a></li>
+												<li key={index}><a href="javascript:void(0)" title={ReactHtmlParser(productItem.name)} data-product-id={productItem.tid} onClick={this.ContractTypeProductBaseFilter}>{ReactHtmlParser(productItem.name)}</a></li>
 											)}
 
 											</ul>
@@ -252,7 +252,7 @@ class Contract extends Component {
 
 										
 										<div className="select-box">
-											<a href="#" data-value="">Types</a>
+											<span>Types</span>
 											<ul className="list">
 											{this.state.contractType.map((contractType,index)=>
 												<li key={index}><a title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.ContractTypeBaseFilter}>{contractType.name}</a></li>	
@@ -271,7 +271,7 @@ class Contract extends Component {
 													</div>
 													<ul className="list">
 														{this.state.ContractdropDownSearch.length > 0 && this.state.ContractdropDownSearch.map((contractSearchlist,index)=>
-															<li key={contractSearchlist.nid} ><Link data-title-name={ReactHtmlParser(contractSearchlist.title)} onClick={this.ContractSearchListData}>{ReactHtmlParser(contractSearchlist.title)}</Link></li>
+															<li key={contractSearchlist.tid} ><Link data-title-name={ReactHtmlParser(contractSearchlist.title)} onClick={this.ContractSearchListData}>{ReactHtmlParser(contractSearchlist.title)}</Link></li>
 														)}
 													</ul>
 												</form>

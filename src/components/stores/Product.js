@@ -17,9 +17,10 @@ class Product extends Component {
 
 		this.filterProductCategoryById=this.filterProductCategoryById.bind(this);
 		this.MobfilterProductCategoryById=this.MobfilterProductCategoryById.bind(this);
-		this.SortProductCategoryByPurchaseDateNew=this.SortProductCategoryByPurchaseDateNew.bind(this);
+		this.SortProductByType=this.SortProductByType.bind(this);
+		/*this.SortProductCategoryByPurchaseDateNew=this.SortProductCategoryByPurchaseDateNew.bind(this);
 		this.SortProductCategoryByPurchaseDateOld=this.SortProductCategoryByPurchaseDateOld.bind(this);
-		this.SortProductCategoryById=this.SortProductCategoryById.bind(this);
+		this.SortProductCategoryById=this.SortProductCategoryById.bind(this);*/
 		this.ProductListTitleSearch=this.ProductListTitleSearch.bind(this);
 		this.GetProductTitleForSearch=this.GetProductTitleForSearch.bind(this);
 
@@ -106,7 +107,29 @@ class Product extends Component {
     	})
 	}
 
-	SortProductCategoryByPurchaseDateNew =(e) =>{
+	SortProductByType=(e)=>{
+		e.preventDefault();
+		document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		let sortByType=e.target.getAttribute("sortby")
+		fetch(Apiurl.SortProduct.url+sortByType,{
+			headers: {
+                	"Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.SortProduct.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		this.setState({productList:data})
+    	})
+	}
+
+
+	/*SortProductCategoryByPurchaseDateNew =(e) =>{
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -125,37 +148,7 @@ class Product extends Component {
     		console.log(data);
     		this.setState({productList:data})
     	})
-	}
-
-	SortProductCategoryByPurchaseDateOld =(e) =>{
-		fetch(Apiurl.SortProductByOldDate.url,{
-			headers: {
-                	"Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
-                method:Apiurl.SortProductByOldDate.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({productList:data})
-    	})
-	}
-
-	SortProductCategoryById =(e) =>{
-		fetch(Apiurl.SortProductByA_Z.url,{
-			headers: {
-                	"Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
-                method:Apiurl.SortProductByA_Z.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({productList:data})
-    	})
-	}
+	}*/
 
 	GetProductTitleForSearch=(e)=>{
 		let productnamestring=e.target.value;
@@ -175,10 +168,12 @@ class Product extends Component {
     	})
      }else{
     		this.setState({getTileListforSearch:''});
+    		this.productList();
      }
 	}
 
 	ProductListTitleSearch =(e) =>{
+		e.preventDefault();
 		let productnamestring=e.target.getAttribute("data-title-name");
 		console.log(productnamestring)
 		fetch(Apiurl.ProductListTitleSearch.url+"&title="+productnamestring,{
@@ -261,10 +256,10 @@ class Product extends Component {
 									</div>
 									<div className="drop-down-menu">
 										<ul>
-											<li><Link to={""} title="Purchase date newest" onClick={this.SortProductCategoryByPurchaseDateNew}>Purchase date newest</Link></li>
-											<li><Link to={""} title="Purchase date oldest" onClick={this.SortProductCategoryByPurchaseDateOld}>Purchase date oldest</Link></li>
-											<li><Link to={""} title="A-Z" onClick={this.SortProductCategoryById}>A-Z</Link></li>
-											<li><Link to={""} title="Z-A" onClick={this.SortProductCategoryById}>Z-A</Link></li>
+											<li><Link to={""} title="Purchase date newest" sortby="&sort_by=field_purchase_date_value&sort_order=ASC" onClick={this.SortProductByType}>Purchase date newest</Link></li>
+											<li><Link to={""} title="Purchase date oldest" sortby="&sort_by=field_purchase_date_value&sort_order=DESC" onClick={this.SortProductByType}>Purchase date oldest</Link></li>
+											<li><Link to={""} sortby="&sort_by=title&sort_order=ASC" title="A-Z" onClick={this.SortProductByType}>A-Z</Link></li>
+											<li><Link to={""} sortby="&sort_by=title&sort_order=DESC" title="Z-A" onClick={this.SortProductByType}>Z-A</Link></li>
 										</ul>
 									</div>
 								</div>
@@ -297,11 +292,11 @@ class Product extends Component {
 												</ul>
 												
 												<h5>Sort by</h5>
-												<ul>
-													<li><a href="#" title="Purchase date newest" onClick={this.SortProductCategoryByPurchaseDateNew}>Purchase date newest</a></li>
-													<li><a href="#" title="Purchase date oldest" onClick={this.SortProductCategoryByPurchaseDateOld}>Purchase date oldest</a></li>
-													<li><a href="#" title="A-Z" onClick={this.SortProductCategoryById}>A-Z</a></li>
-													<li><a href="#" title="Z-A" onClick={this.SortProductCategoryById}>Z-A</a></li>
+												<ul clasName='product-sort-by'>
+													<li><Link to={""} title="Purchase date newest" sortby="&sort_by=field_purchase_date_value&sort_order=ASC" onClick={this.SortProductByType}>Purchase date newest</Link></li>
+													<li><Link to={""} title="Purchase date oldest" sortby="&sort_by=field_purchase_date_value&sort_order=DESC" onClick={this.SortProductByType}>Purchase date oldest</Link></li>
+													<li><Link to={""} sortby="&sort_by=title&sort_order=ASC" title="A-Z" onClick={this.SortProductByType}>A-Z</Link></li>
+													<li><Link to={""} sortby="&sort_by=title&sort_order=DESC" title="Z-A" onClick={this.SortProductByType}>Z-A</Link></li>
 												</ul>
 											</div>
 	
@@ -329,7 +324,7 @@ class Product extends Component {
 									</div>
 									<div className="btn-block">
 										<Link to="#" title="Resources logo blue"><img src={require("../../images/resources-logo-blue-round.svg")} alt="icon" className="svg"/> </Link>
-										<Link to="#" className="svg" title="Pdf download"><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg"/> </Link>
+										<Link to={site_url+item.field_product_document} className="svg" title="Pdf download"><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg"/> </Link>
 									</div>
 								</div>
 							)}

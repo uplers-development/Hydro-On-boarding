@@ -38,7 +38,8 @@ class Repcontact extends React.Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({repContactDetails:data,repcontactRendered:true})
-    		console.log(this.state.repContactDetails.email);
+    		console.log(this.state.repContactDetails.user_picture.url);
+
     	})
 	}
 
@@ -98,7 +99,7 @@ class Repcontact extends React.Component {
 									<div className="rep-contracts-left">
 										<div className="person-detils-box sky-blue-light-2 d-flex flex-wrap">
 											<div className="person-img">
-												<img src={this.state.repContactDetails.user_picture} alt="User image"/>
+												<img src={this.state.repContactDetails.user_picture!=='' ? this.state.repContactDetails.user_picture :require("../../images/hydro-in-tab.png")} alt="User image"/>
 											</div>
 											<div className="person-right">
 												<div className="person-title">

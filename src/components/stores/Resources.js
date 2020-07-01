@@ -85,6 +85,12 @@ class Resources extends Component {
 			})
 			e.target.parentNode.classList.add("active");
 		}
+		else{
+			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.classList.add("active");
+		}
 		let product_id=e.target.getAttribute("data-pid");
 		localStorage.setItem("product_id",product_id);
 		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
@@ -102,9 +108,27 @@ class Resources extends Component {
 	}
 
 	FilterByResourceId=(e)=>{
-		let resourceApi=localStorage.getItem("product_id") && localStorage.getItem("product_id")!=='' ? Apiurl.FilterByResourceId.url+localStorage.getItem("product_id")+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		let resourceActive;
+		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
+			 console.log(item.classList[0]);
+			 if(item.classList[0]==="active"){
+			 	resourceActive=item.getAttribute("data-pid");
+			 }
+		})
+		if(window.innerWidth<=767){
+			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}
+		else{
+			document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.classList.add("active");
+		}
+		let resourceApi=resourceActive!=='undefined' ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
 		let resource_id=e.target.getAttribute("data-resource-id");
-		localStorage.setItem("resource-id",resource_id);
 		fetch(resourceApi+"&field_resource_type_target_id="+resource_id,{
 			headers: {
                 	 "Content-Type" : "application/json",
@@ -120,16 +144,25 @@ class Resources extends Component {
 	}
 
 	SortResources=(e)=>{
+		let resourceActive;
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.parentNode.classList.add("active");
 		}
-		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
+		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
+			 console.log(item.classList[0]);
+			 if(item.classList[0]==="active"){
+			 	resourceActive=item.getAttribute("data-pid");
+			 }else{
+			 	resourceActive='All';
+			 }
+		})
+
 		let filterType=e.target.getAttribute("data-get-filterindex");
-		localStorage.setItem("resource-filter-type",filterType);
-		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resource_id+filterType,{
+		//localStorage.setItem("resource-filter-type",filterType);
+		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resourceActive+filterType,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -144,25 +177,33 @@ class Resources extends Component {
 	}
 
 	ListResourcesforSearch=(e)=>{
-		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
+		let resource_id;
 		let resourcenameString=e.target.value;
+				document.querySelectorAll(".resource-filter-type li a").forEach((item,index)=>{
+					 console.log(item.classList[0]);
+					 if(item.classList[0]==="active"){
+					 	resource_id=item.getAttribute("data-resource-id");
+					 }else{
+					 	resource_id='All';
+					 }
+				})
 		if(resourcenameString!==''){
-		console.log(resourcenameString)
-		fetch(Apiurl.ListResourcesforSearch.url+"&field_resource_type_target_id="+resource_id+"&title="+resourcenameString,{
-			headers: {
-                	 "Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
-                method:Apiurl.ListResourcesforSearch.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({SearchList:data});
-    	})
-    }else{
+			console.log(resourcenameString)
+			fetch(Apiurl.ListResourcesforSearch.url+"&field_resource_type_target_id="+resource_id+"&title="+resourcenameString,{
+				headers: {
+	                	 "Content-Type" : "application/json",
+	                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+	                },
+	                method:Apiurl.ListResourcesforSearch.method,
+	    	}).then(res=>{
+	    		return res.json()
+	    	}).then(data=>{	
+	    		console.log(data);
+	    		this.setState({SearchList:data});
+	    	})
+    	}else{
     		this.setState({SearchList:''});
-    }
+   		}
 	}
 
 	SearchResourcesByTitle=(e)=>{
@@ -221,7 +262,7 @@ class Resources extends Component {
 							
 							<div className="select-box">
 								<span>Products</span>
-								<ul className="list">
+								<ul className="list product-list-item">
 								{this.state.productList.map((productItem,index)=>
 									<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
 								)}
@@ -232,7 +273,7 @@ class Resources extends Component {
 							
 							<div className="select-box">
 								<span>Types</span>
-								<ul className="list">
+								<ul className="list resource-filter-type">
 									{this.state.ResourceTypelist.map((resourcetitle,index)=>
 										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FilterByResourceId}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
 									)}

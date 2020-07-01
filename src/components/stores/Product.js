@@ -87,7 +87,8 @@ class Product extends Component {
 
 	MobfilterProductCategoryById =(e) =>{
 		console.log(e.target);
-		document.querySelectorAll(".list-filter-mobile > ul > li").forEach((item,index)=>{
+		document.querySelectorAll(".product-filter li").forEach((item,index)=>{
+				console.log(item)
 				if(item.classList.contains("active")){item.classList.remove("active")}
 		})
 		e.target.parentNode.classList.add("active");
@@ -109,10 +110,17 @@ class Product extends Component {
 
 	SortProductByType=(e)=>{
 		e.preventDefault();
+		if(window.innerWidth > 767){
 		document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.parentNode.classList.add("active");
+		}else{
+			document.querySelectorAll(".product-sort-by > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}	
 		let sortByType=e.target.getAttribute("sortby")
 		fetch(Apiurl.SortProduct.url+sortByType,{
 			headers: {
@@ -127,28 +135,6 @@ class Product extends Component {
     		this.setState({productList:data})
     	})
 	}
-
-
-	/*SortProductCategoryByPurchaseDateNew =(e) =>{
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		fetch(Apiurl.SortProductByNewDate.url,{
-			headers: {
-                	"Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
-                method:Apiurl.SortProductByNewDate.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({productList:data})
-    	})
-	}*/
 
 	GetProductTitleForSearch=(e)=>{
 		let productnamestring=e.target.value;
@@ -284,7 +270,7 @@ class Product extends Component {
 	
 											<div className="list-filter-mobile">
 												<h5>Applications</h5>
-												<ul>
+												<ul className='product-filter'>
 
 													{this.state.categoryfilter.map((catname,index)=>
 															<li key={catname.tid}><a href="#" onClick={this.MobfilterProductCategoryById} data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</a></li>
@@ -292,7 +278,7 @@ class Product extends Component {
 												</ul>
 												
 												<h5>Sort by</h5>
-												<ul clasName='product-sort-by'>
+												<ul className='product-sort-by'>
 													<li><Link to={""} title="Purchase date newest" sortby="&sort_by=field_purchase_date_value&sort_order=ASC" onClick={this.SortProductByType}>Purchase date newest</Link></li>
 													<li><Link to={""} title="Purchase date oldest" sortby="&sort_by=field_purchase_date_value&sort_order=DESC" onClick={this.SortProductByType}>Purchase date oldest</Link></li>
 													<li><Link to={""} sortby="&sort_by=title&sort_order=ASC" title="A-Z" onClick={this.SortProductByType}>A-Z</Link></li>

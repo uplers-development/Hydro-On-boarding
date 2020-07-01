@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Apiurl from './Apiurl'; 
+import{hasNull,isRequired} from './validation';
+import {ValidationMsg} from'./constants/validationmsg';
 
 class Profile extends Component {
 	constructor(props) {
@@ -14,6 +16,13 @@ class Profile extends Component {
 			time_zone:null,
 			location:null,
 			userPicture:[],
+			firstnameState:false,
+			lastnameState:false,
+			emailState:false,
+			contactNumberState:false,
+			OrganisationState:false,
+			locationState:false,
+			imageFormateState:false,
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
@@ -51,17 +60,19 @@ class Profile extends Component {
 	}
 
 
-	updateProfile = () =>{
+	updateProfile = (e) =>{
+		e.preventDefault();
 		let updatedata={
 			mail : [{ "value": document.querySelector("#email").value}],
 			field_contact_number : [{ "value": document.querySelector("#contact_number").value }],
 			field_first_name : [{ "value": document.querySelector("#first_name").value }],
+			field_last_name : [{ "value": document.querySelector("#last_name").value }],
 			field_location : [{ "value":  document.querySelector("#location").value }],
 			field_organisation : [{ "value": document.querySelector("#organization").value }],
 			timezone : [{ "value": document.querySelector("#time_zone").value }],
 			user_picture : [{ "target_id": document.querySelector("#user-pic").getAttribute("data-id")}]
 		};
-
+		if(!hasNull(updatedata.mail[0].value) && !hasNull(updatedata.field_last_name[0].value) && !hasNull(updatedata.field_contact_number[0].value) && !hasNull(updatedata.field_first_name[0].value) && !hasNull(updatedata.field_location[0].value) && !hasNull(updatedata.field_organisation[0].value) && !hasNull(updatedata.user_picture[0].target_id)){
 		fetch(Apiurl.Updateprofile.url,{
     			headers: {
                 	"Content-Type" : "application/json",
@@ -74,6 +85,15 @@ class Profile extends Component {
     	}).then(data=>{
     		console.log(data);
     	})
+    }else{
+		hasNull(updatedata.field_first_name[0].value) ? this.setState({firstnameState:true}): this.setState({firstnameState:false})
+		hasNull(updatedata.field_last_name[0].value) ? this.setState({lastnameState:true}): this.setState({lastnameState:false})
+		hasNull(updatedata.mail[0].value) ? this.setState({emailState:true}): this.setState({emailState:false})
+		hasNull(updatedata.field_contact_number[0].value) ? this.setState({contactNumberState:true}): this.setState({contactNumberState:false})
+		hasNull(updatedata.field_organisation[0].value) ? this.setState({OrganisationState:true}): this.setState({OrganisationState:false})
+		hasNull(updatedata.field_location[0].value) ? this.setState({locationState:true}): this.setState({locationState:false})
+
+     }
 	}
 
 	updateProfilePic=(e)=>{
@@ -86,21 +106,28 @@ class Profile extends Component {
 			        filename = filename.substring(1);
 			    }
 		}
-		const data = new FormData() 
-		data.append('file', fullPath)
-		fetch(Apiurl.Updateprofile.url,{
-    			headers: {
-                	"Content-Type" : "application/json",
-                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
-                	"Content-Disposition" : filename,
-                },
-                method:Apiurl.Updateprofile.method,
-                body:data         
-            }).then(res=>{
-           	return res.json()
-           }).then(data=>{
-    			console.log(data);
-           })
+
+		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
+				this.setState({imageFormateState:false})	
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/octet-stream");
+				myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
+				myHeaders.append("Content-Disposition", "file;filename=\""+filename+"\"");
+				myHeaders.append("Authorization", "Basic "+localStorage.getItem("basic-auth"));
+				var file = file;
+
+				var requestOptions = {
+				  method: 'POST',
+				  headers: myHeaders,
+				  body: file,
+				  redirect: 'follow'
+				};
+				fetch("http://staging.project-progress.net/projects/hydro/file/upload/user/user/user_picture?_format=json",requestOptions)
+				.then(res=>{return res.text()})
+				.then(data=>{console.log(data);})
+	  }else{
+	  	this.setState({imageFormateState:true})	
+	  }
 	}
 
 
@@ -183,7 +210,7 @@ class Profile extends Component {
 											<button className="btn common-btn-blue">
 												<span>CHOOSE FILE</span></button>
 										</div>
-
+										{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
 									</div>
 								</div>
 							</div>
@@ -194,27 +221,42 @@ class Profile extends Component {
 								<form className="row">
 									<div className="form-group one-by-two">
 										<label>First Name*</label>
-										<input type="text" id='first_name' defaultValue={this.state.first_name} placeholder="First Name" tabIndex="1"/>
+										<input type="text" id='first_name' defaultValue={this.state.first_name} placeholder="First Name" tabIndex="1" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({firstnameState:true}): this.setState({firstnameState:false})
+									}/>
+									{this.state.firstnameState ? ValidationMsg.common.default.firstname : ''}
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Last Name*</label>
-										<input type="text" id='last_name' defaultValue={this.state.last_name} placeholder="Name" tabIndex="2"/>
+										<input type="text" id='last_name' defaultValue={this.state.last_name} placeholder="Name" tabIndex="2" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({lastnameState:true}): this.setState({lastnameState:false})
+									}/>
+									{this.state.lastnameState ? ValidationMsg.common.default.lastname : ''}
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Email*</label>
-										<input type="email" id='email' defaultValue={this.state.email} placeholder="Email" tabIndex="3"/>
+										<input type="email" id='email' defaultValue={this.state.email} placeholder="Email" tabIndex="3" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({emailState:true}): this.setState({emailState:false})
+									}/>
+									{this.state.emailState ? ValidationMsg.common.default.email : ''}
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Contact Number*</label>
-										<input type="text" id='contact_number' defaultValue={this.state.contact_number} placeholder="Contact Number" tabIndex="4"/>
+										<input type="text" id='contact_number' defaultValue={this.state.contact_number} placeholder="Contact Number" tabIndex="4" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({contactNumberState:true}): this.setState({contactNumberState:false})
+									}/>
+									{this.state.contactNumberState ? ValidationMsg.common.default.contactNumber : ''}
 									</div>
 
 									<div className="form-group one-by-two">
 										<label>Organisation*</label>
-										<input type="text" id='organization' defaultValue={this.state.organization} placeholder="Organisation" tabIndex="5"/>
+										<input type="text" id='organization' defaultValue={this.state.organization} placeholder="Organisation" tabIndex="5" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({OrganisationState:true}): this.setState({OrganisationState:false})
+									}/>
+									{this.state.OrganisationState ? ValidationMsg.common.default.Organisation : ''}
 									</div>
 
 									<div className="form-group one-by-two">
@@ -228,7 +270,10 @@ class Profile extends Component {
 
 									<div className="form-group one-by-two">
 										<label>Location*</label>
-										<input type="text" id='location' defaultValue={this.state.location} placeholder="Location" tabIndex="7"/>
+										<input type="text" id='location' defaultValue={this.state.location} placeholder="Location" tabIndex="7" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({locationState:true}): this.setState({locationState:false})
+									}/>
+									{this.state.locationState ? ValidationMsg.common.default.location : ''}
 									</div>
 
 									<div className="button-group full">

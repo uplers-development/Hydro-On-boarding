@@ -109,7 +109,7 @@ class Profile extends Component {
 			<div><section className="main-wrapper">
 
 		{/*<!--Main block start-->*/}
-		<div className="d-flex flex-wrap main-block">
+		<div className="d-flex flex-wrap main-block right-btm-pattern-gray">
 
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">

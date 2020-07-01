@@ -792,7 +792,7 @@ nav {
 		}
 
 		@media screen and (max-width:$mobile-small) {
-			padding: 2px 30px;
+			padding: 2px 25px;
 		}
 		
 		.name-of-heading {
@@ -1194,7 +1194,7 @@ nav {
 	@media screen and (max-width:$mobile-small) {
 		max-width: 150px;
 		padding: 10px;
-		right: 0;
+		right: 15px;
 		pointer-events: none;
 	}
 	.drop-down-menu
@@ -1404,6 +1404,9 @@ nav {
 			&:hover {
 				color: $sky-blue;
 			}
+			&.active {
+					color: $sky-blue;
+			}
 		}
 	}
 	&:hover {
@@ -1443,6 +1446,7 @@ nav {
     			-webkit-transform: translateY(-50%) rotate(-180deg);
 			}
 		}
+		
 	}
 }
 

@@ -8,7 +8,7 @@ import Newsfeeds from "./components/stores/Newsfeeds";
 import Product from "./components/stores/Product";
 import Resources from "./components/stores/Resources";
 import Contract from "./components/stores/Contract";
-import Repcontact from "./components/stores/Resources";
+import Repcontact from "./components/stores/Repcontact";
 import RepDashboard from "./components/Repuser/RepDashboard";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
@@ -49,7 +49,7 @@ class App extends Component {
                     <Route path={this.state.sidebarItem[1].field_react_route}  component={Product} />
                     <Route path={this.state.sidebarItem[2].field_react_route}  component={Resources} />
                     <Route path={this.state.sidebarItem[3].field_react_route}  component={Contract} />
-                    {/*<Route path={this.state.sidebarItem[4].field_react_route}  component={Repcontact} />*/}
+                    <Route path={this.state.sidebarItem[4].field_react_route}  component={Repcontact} />
                   </>
                   :
                   <>

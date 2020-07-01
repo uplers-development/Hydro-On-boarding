@@ -329,7 +329,7 @@ class Product extends Component {
 									</div>
 									<div className="btn-block">
 										<Link to="#" title="Resources logo blue"><img src={require("../../images/resources-logo-blue-round.svg")} alt="icon" className="svg"/> </Link>
-										<Link to="#" className="svg" title="Pdf download"><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg"/> </Link>
+										<Link to={site_url+item.field_product_document} className="svg" title="Pdf download"><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg"/> </Link>
 									</div>
 								</div>
 							)}

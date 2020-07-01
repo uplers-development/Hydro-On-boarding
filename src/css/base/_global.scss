@@ -994,6 +994,9 @@ nav {
 		@media screen and (max-width:$mobile-small) {
 			display: none;
 		}
+		@media (max-height: $mob-landscape-375) and (orientation: landscape) {
+				display: none;
+		}
 	}
 }
 
@@ -1869,6 +1872,11 @@ a { @include transition(all 0.5s ease-in-out); }
 				width: 350px;
 				min-height: 300px;
 		}
+		@media (max-height: $mob-landscape-375) and (orientation: landscape) {
+				height: 95%;
+				min-height: auto;
+		}
+		
 			> div {
 				height: auto;
 				text-align: center;
@@ -1881,6 +1889,8 @@ a { @include transition(all 0.5s ease-in-out); }
 				z-index: 1;
 				img {
 					margin-top: 15px;
+					background-color: $white;
+    				border-radius: 50%;
 					@media screen and (max-width: $mobile-small) {
 						width: 42px;
 						margin-top: 42px;
@@ -1893,9 +1903,10 @@ a { @include transition(all 0.5s ease-in-out); }
 					color: $cobalt-blue;
 					font-family: $gibson;
 					font-weight: $font-semi-bold;
+					    text-transform: capitalize;
 					@media screen and (max-width: $mobile-small) {
-						font-size: 22px;
-						line-height: 26px;
+						font-size: 24px;
+						line-height: 28px;
 					}
 				}
 				p {

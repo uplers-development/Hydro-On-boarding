@@ -21,7 +21,7 @@ class RepDashboard extends React.Component {
 					</a>
 					<div>
 						<img src={require("../../images/round-correct.svg")} alt="Right icon"/>
-						<h2>Thank you</h2>
+						<h2>Thank You</h2>
 						<p>Your message was submitted successfully</p>
 					</div>
 				</div>

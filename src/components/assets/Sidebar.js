@@ -2,18 +2,21 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{site_url} from '../Apiurl'; 
 import $ from "jquery";
+import ReactHtmlParser from 'react-html-parser';
 
 class Sidebar extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
 			sidebarItem:[],
+			sidebarItemFooter:[],
 			changeClassnav:false
 		}
 	}
 
 	componentDidMount(){
 		this.SidebarItems();
+		this.FooterItems();
 		window.location.pathname==='/newsfeed' || window.location.pathname==='/Dashboard' ? this.setState({changeClassnav:false}) :this.setState({changeClassnav:true});
 	}
 
@@ -45,6 +48,17 @@ class Sidebar extends Component {
     	})
 	}
 
+	FooterItems=()=>{
+		fetch(Apiurl.LeftsidebarFooter.url,{
+                method:Apiurl.LeftsidebarFooter.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		this.setState({sidebarItemFooter:data});
+    	})
+	}
+
 
 	render() {
 		return (
@@ -60,10 +74,10 @@ class Sidebar extends Component {
 				</ul>
 				
 				<div className="nav-bottom-master teal-color-bg">
-					<img src={require("../../images/hydro-in-tab.png")} alt="hydro-in-tab"/>
-					<p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.
+					<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")  } alt="hydro-in-tab"/>
+					<p>{this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].body : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")  }
 					</p>
-					<button className="common-btn-blue"><span>Master CTA</span></button>
+					<Link to={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_link : ''}className="common-btn-blue"><span>Master CTA</span></Link>
 				</div>
 
 				<div className="nav-copyright">© 2020 Hydro International</div>

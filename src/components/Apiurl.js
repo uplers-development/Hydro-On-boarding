@@ -144,6 +144,16 @@ export default {
         method:'GET'
     }, 
 
+    /*************************Contract API END*******************************/
+    /***********************REP Contact API Start***************************/
+    GetRepContactDetails:{
+        url:base_url+"/json-api/repdetails.json",
+        method:"GET"
+    },
+    SendRepContactQuery:{
+        url:`http://staging.project-progress.net/projects/hydro/json-api/repmail.json`,
+        method:"POST"
+    },
 
     GetProfile: {
     	 url: base_url+`user/${target_id}?_format=json`,
@@ -167,8 +177,9 @@ export default {
     },Leftsidebar_adminuser: {
     	 url: base_url+'entity/menu/main-navigation-admin/tree',
          method: 'GET'
-    },Newsfeeds: {
-    	 url: base_url+'jsonapi/news_feed/?_format=json',
-         method: 'POGETST'
-    }
+    }, 
+    LeftsidebarFooter:{
+         url:base_url+`/jsonapi/user_sidebar/?_format=json`,
+         method:'GET'
+    },
 }

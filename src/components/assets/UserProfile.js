@@ -6,8 +6,8 @@ class UserProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			first_name:null,
-			last_name:null,
+			first_name:'',
+			last_name:'',
 			email:null,
 			contact_number:null,
 			organization:null,
@@ -48,14 +48,7 @@ class UserProfile extends Component {
 			console.log(data);
 			console.log(data.field_first_name);
 
-			this.setState({first_name:data.field_first_name.length>0 ?data.field_first_name[0].value : ''
-						 ,last_name:data.field_last_name.length > 0 ? data.field_last_name[0].value :'',
-						 email:data.mail.length>0 ? data.mail[0].value :''
-						,contact_number:data.field_contact_number.length>0 ? data.field_contact_number[0].value :''
-						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
-						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
-						,location:data.field_location.length>0 ?data.field_location[0].value : '',
-						userPicture:data.user_picture.length>0 ? data.user_picture[0] :''
+			this.setState({first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:data.user_picture[0]
 					})
 			console.log(this.state.userPicture);
 		})

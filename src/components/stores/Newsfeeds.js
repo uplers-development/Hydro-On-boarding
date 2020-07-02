@@ -4,6 +4,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import {cosmaticAsset} from'../constants/common';
 import $ from "jquery";
 
 class Newsfeeds extends Component {
@@ -11,7 +12,8 @@ class Newsfeeds extends Component {
 		super(props);
 		this.state={
 			newsFeedItems:[],
-			recentViews:[]
+			recentViews:[],
+			loader:true
 		}
 	}
 
@@ -71,7 +73,7 @@ class Newsfeeds extends Component {
 		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}<span></span></h4></div>);  	 
 		        	 }	   	
 		        }
-    		this.setState({newsFeedItems:newsfeed});
+    		this.setState({newsFeedItems:newsfeed,loader:false});
 	    		console.log(this.state.newsFeedItems);
 	    		$('img.svg').each(function () {
 				var $img = $(this);
@@ -114,6 +116,7 @@ class Newsfeeds extends Component {
 		return (
 			<div>
 				<section className="main-wrapper">
+				{!this.state.loader ? 
 					<div className="d-flex flex-wrap main-block">
 					<Sidebar/>
 					<div className="d-flex flex-wrap right-content-part">
@@ -146,8 +149,11 @@ class Newsfeeds extends Component {
 					</div>
 				</div>
 			</div>
-					</div>
-				</section>
+		</div>:
+		<>
+			{cosmaticAsset.cosmatic.default.loader}
+		</>}
+	</section>
 			</div>
 		);
 	}

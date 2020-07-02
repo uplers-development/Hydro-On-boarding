@@ -5,12 +5,14 @@ import Sidebar from './assets/Sidebar';
 import UserProfile from './assets/UserProfile';
 import Apiurl,{site_url} from './Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import {cosmaticAsset} from'./constants/common';
 
  class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
 			rightSide_data:[],
+			loader:true
 		}
 	}
 
@@ -32,7 +34,7 @@ import ReactHtmlParser from 'react-html-parser';
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		this.setState({rightSide_data:data});
+    		this.setState({rightSide_data:data,loader:false});
     	})
 	}
 
@@ -42,7 +44,8 @@ import ReactHtmlParser from 'react-html-parser';
 	render() {
 		return (
 			<div><section className="main-wrapper">
-		<div className="d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover" style={{backgroundImage:`url(${CommonBackground})`}} >
+			{!this.state.loader ? 
+			<div className="d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover" style={{backgroundImage:`url(${CommonBackground})`}} >
 			<Sidebar/>
 			
 			{/*<!--Dashboard switch user block start-->*/}
@@ -73,7 +76,11 @@ import ReactHtmlParser from 'react-html-parser';
 				
 			</div>{/*<!--Dashboard switch user block end-->*/}
 			
-		</div>
+		</div>:
+		<>
+			{cosmaticAsset.cosmatic.default.loader}
+		</>}
+
 	</section></div>
 		);
 	}

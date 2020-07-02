@@ -6,15 +6,16 @@ class UserProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			first_name:'',
-			last_name:'',
+			first_name:null,
+			last_name:null,
 			email:null,
 			contact_number:null,
 			organization:null,
 			time_zone:null,
 			location:null,
 			userPicture:[],
-			logout:false
+			logout:false,
+			dataLoaded:false
 		}
 		this.Logout=this.Logout.bind(this);
 	}
@@ -50,7 +51,7 @@ class UserProfile extends Component {
 			console.log(data);
 			console.log(data.field_first_name);
 			if(data!==''){
-			this.setState({first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:data.user_picture[0]
+			this.setState({dataLoaded:true,first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:data.user_picture[0]
 					})
 			console.log(this.state.userPicture);
 			}
@@ -61,6 +62,8 @@ class UserProfile extends Component {
 		return (
 			<div>
 				<div className="d-flex flex-wrap user-log">
+					{this.state.dataLoaded ?
+						<>
 						<div className="user-image-name d-flex flex-wrap align-center">
 							<img src={this.state.userPicture!=='' ? this.state.userPicture.url : ''} alt="Prfile image"/>
 							<h2>{this.state.first_name+ " "+this.state.last_name }</h2>
@@ -71,6 +74,8 @@ class UserProfile extends Component {
 								<li><Link to={""} title="Sign out" onClick={this.Logout}>Sign out</Link></li>
 							</ul>
 						</div>
+					</>
+			 		:''}
 				</div>
 				{this.state.logout ? this.logoutDone() :''}
 			</div>

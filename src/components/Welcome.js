@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
 import CommonBackground from './../images/common-bg.jpg';
+import {cosmaticAsset} from'./constants/common';
 import Apiurl,{site_url} from './Apiurl'; 
 import Slider from "react-slick";
 
@@ -15,7 +16,8 @@ class Welcome extends Component {
 			field_button_text:null,
 			field_button_uri:null,
 			middleItem:[],
-			mobileView:false
+			mobileView:false,
+			loader:true
 		}
 	}
 
@@ -57,7 +59,7 @@ class Welcome extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({middleItem:data});
+    		this.setState({middleItem:data,loader:false});
     	})	
 	}
 
@@ -65,7 +67,9 @@ class Welcome extends Component {
 		var settings = {dots: true,infinite: true,speed: 500,slidesToShow: 1,slidesToScroll: 1};
 		return (
 			<div><section className="main-wrapper">
-		<div className="d-flex flex-wrap main-block black-overlay-transparent bg-cover" style={{backgroundImage:`url(${CommonBackground})`}}>
+				{!this.state.loader ?
+				<div className="d-flex flex-wrap main-block black-overlay-transparent bg-cover" style={{backgroundImage:`url(${CommonBackground})`}}>
+				
 			
 			{/*<!--Intro new user popup-->
 						*/}			
@@ -114,6 +118,12 @@ class Welcome extends Component {
 			</div>{/*<!--Intro new user popup End-->*/}
 
 		</div>
+		:
+		<>
+			{cosmaticAsset.cosmatic.default.loader}
+		</>
+
+	}
 	</section></div>
 		);
 	}

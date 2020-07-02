@@ -23,7 +23,11 @@ class Repcontact extends React.Component {
 	}
 
 	componentDidMount(){
-		this.GetRepContactDetails();
+		if(localStorage.getItem("access-token")!==null){
+			this.GetRepContactDetails();
+		}else{
+			this.props.history.push("/Login")
+		}
 	}
 
 	GetRepContactDetails=()=>{

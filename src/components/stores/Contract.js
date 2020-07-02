@@ -26,9 +26,14 @@ class Contract extends Component {
 	}
 
 	componentDidMount(){
+	 if(localStorage.getItem("access-token")!==null){
+
 		this.GetContractForEndusers();
 		this.ProductCategory();
 		this.GetContractType();
+	}else{
+		this.props.history.push("/Login")
+	}
 	}
 
 

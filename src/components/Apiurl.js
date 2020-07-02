@@ -1,6 +1,6 @@
 /*********************************Staging Server*********************************************/
-export const base_url='http://staging.project-progress.net/projects/hydro/';
-export const site_url='http://staging.project-progress.net';
+export const base_url='//staging.project-progress.net/projects/hydro/';
+export const site_url='//staging.project-progress.net';
 let target_id=localStorage.getItem("user-type")!==null? JSON.parse(localStorage.getItem("user-type")).uid:'';
 
 export default {
@@ -165,6 +165,10 @@ export default {
     },Updateprofile: {
          url: base_url+`user/${target_id}?_format=json`,
          method: 'PATCH'
+    }
+    ,ProfiletimeZone: {
+         url: base_url+"json-api/timezones.json",
+         method: 'GET'
     },
     UpdateprofilePic: {
          url: base_url+"file/upload/user/user/user_picture?_format=json",

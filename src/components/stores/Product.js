@@ -28,8 +28,12 @@ class Product extends Component {
 
 
 	componentDidMount(){
-		this.productList();
-		this.ProductCategory();
+		if(localStorage.getItem("access-token")!==null){
+			this.productList();
+			this.ProductCategory();
+		}else{
+			this.props.history.push("/Login")
+		}
 	}
 
 	productList=()=>{

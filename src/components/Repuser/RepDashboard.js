@@ -15,7 +15,7 @@ class RepDashboard extends React.Component {
 	}
 	render(){
 		return(<div id="modal" className="modal-container">
-				<div class="modal d-flex flex-wrap align-center justify-center">
+				<div className="modal d-flex flex-wrap align-center justify-center">
 					<a href="#" className="close" title="Close">
 					<img src={require("../../images/close-icon-gray.svg")} alt="Close icon"/>
 					</a>

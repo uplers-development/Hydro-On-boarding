@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Apiurl from './Apiurl'; 
 import{hasNull,isRequired} from './validation';
 import {ValidationMsg} from'./constants/validationmsg';
+import ReactHtmlParser from 'react-html-parser';
 
 class Profile extends Component {
 	constructor(props) {
@@ -23,15 +24,37 @@ class Profile extends Component {
 			OrganisationState:false,
 			locationState:false,
 			imageFormateState:false,
+			timeZone:null,
+			newuserPic_id:null,
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
+		this.timeZoneref=React.createRef();
 	}
 
 	componentDidMount(){
-    	this.GetProfile();
+		if(localStorage.getItem("acess-token")!==null){
+			this.GetTimeZone();
+    		this.GetProfile();
+     	}else{
+     		this.props.history.push("/Login")
+     	}
 	}
 
+	GetTimeZone=()=>{
+		fetch(Apiurl.ProfiletimeZone.url,{
+				headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                },
+                method:Apiurl.ProfiletimeZone.method,
+		}).then(res=>{
+			return res.json();
+		}).then(data=>{
+			console.log(data);
+			this.setState({timeZone:data.timezonehtml})
+		})
+	}
 
 	GetProfile=()=>{
 		fetch(Apiurl.GetProfile.url,{
@@ -62,6 +85,7 @@ class Profile extends Component {
 
 	updateProfile = (e) =>{
 		e.preventDefault();
+		console.log(this.timeZoneref.current.value);
 		let updatedata={
 			mail : [{ "value": document.querySelector("#email").value}],
 			field_contact_number : [{ "value": document.querySelector("#contact_number").value }],
@@ -69,7 +93,7 @@ class Profile extends Component {
 			field_last_name : [{ "value": document.querySelector("#last_name").value }],
 			field_location : [{ "value":  document.querySelector("#location").value }],
 			field_organisation : [{ "value": document.querySelector("#organization").value }],
-			timezone : [{ "value": document.querySelector("#time_zone").value }],
+			timezone : [{ "value": this.timeZoneref.current.value}],
 			user_picture : [{ "target_id": document.querySelector("#user-pic").getAttribute("data-id")}]
 		};
 		if(!hasNull(updatedata.mail[0].value) && !hasNull(updatedata.field_last_name[0].value) && !hasNull(updatedata.field_contact_number[0].value) && !hasNull(updatedata.field_first_name[0].value) && !hasNull(updatedata.field_location[0].value) && !hasNull(updatedata.field_organisation[0].value) && !hasNull(updatedata.user_picture[0].target_id)){
@@ -97,7 +121,9 @@ class Profile extends Component {
 	}
 
 	updateProfilePic=(e)=>{
-		var fullPath = document.getElementById('user-pic').value;
+		console.log(e.target.value)
+		var fullPath = e.target.value;
+
 		var filename=''
 			if (fullPath) {
 			    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
@@ -106,7 +132,12 @@ class Profile extends Component {
 			        filename = filename.substring(1);
 			    }
 		}
-
+		const reader = new FileReader();
+		 if (filename) {
+    		reader.readAsDataURL(filename);
+    		console.log(reader.readAsDataURL(filename))
+ 		 }	
+ 		 return false;
 		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
 				this.setState({imageFormateState:false})	
 				var myHeaders = new Headers();
@@ -114,8 +145,8 @@ class Profile extends Component {
 				myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
 				myHeaders.append("Content-Disposition", "file;filename=\""+filename+"\"");
 				myHeaders.append("Authorization", "Basic "+localStorage.getItem("basic-auth"));
-				var file = file;
-
+				var file = filename;
+				console.log(file);
 				var requestOptions = {
 				  method: 'POST',
 				  headers: myHeaders,
@@ -123,8 +154,11 @@ class Profile extends Component {
 				  redirect: 'follow'
 				};
 				fetch("http://staging.project-progress.net/projects/hydro/file/upload/user/user/user_picture?_format=json",requestOptions)
-				.then(res=>{return res.text()})
-				.then(data=>{console.log(data);})
+				.then(res=>{return res.json()})
+				.then(data=>{console.log(data);
+					this.setState({newuserPic_id:data.fid[0]['value']})
+					console.log(this.state.newuserPic_id);
+				})
 	  }else{
 	  	this.setState({imageFormateState:true})	
 	  }
@@ -206,7 +240,7 @@ class Profile extends Component {
 
 										<span>JPG, GIF or PNG. Max size of 1mb</span>
 										<div className="upload-btn-wrapper">
-											<input type="file" name="CHOOSE FILE" id="user-pic" onChange={this.updateProfilePic} data-id={this.state.userPicture.target_id} />
+											<input type="file" name="CHOOSE FILE" id="user-pic" onChange={this.updateProfilePic} data-id={this.state.newuserPic_id} />
 											<button className="btn common-btn-blue">
 												<span>CHOOSE FILE</span></button>
 										</div>
@@ -261,10 +295,8 @@ class Profile extends Component {
 
 									<div className="form-group one-by-two">
 										<label>Timezone*</label>
-										<select name="1" className="" tabIndex="6" id="time_zone">
-											<option value="GMT">GMT</option>
-											<option data-img-src="images/16/flag(1).png" value="EET">EET</option>
-											<option data-img-src="images/16/flag(2).png" value="EST">EST</option>
+										<select name="1" className="" tabIndex="6" id="time_zone" ref={this.timeZoneref} >
+											{this.state.timeZone!==null ? ReactHtmlParser(this.state.timeZone) : '' }
 										</select>
 									</div>
 

@@ -16,6 +16,7 @@ class Newsfeeds extends Component {
 	}
 
 	componentDidMount(){
+		if(localStorage.getItem("access-token")!==null){
 		$('img.svg').each(function () {
 				var $img = $(this);
 				var imgID = $img.attr('id');
@@ -35,6 +36,9 @@ class Newsfeeds extends Component {
 			});
 		this.newsFeedItems()
 		this.newsFeedRecentlyViewed();
+	 }else{
+	 	this.props.history.push('/Login')
+	 }
 	}	
 
 	newsFeedItems=()=>{

@@ -44,6 +44,8 @@
 			margin-top: 42.5%;
 			margin-left: auto;
 			padding-right: 55px;
+			max-width: 600px;
+    		width: 100%;
 
 			.logo {
 				display: block;
@@ -106,6 +108,9 @@
 			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
 					width: 100%;
 					margin-left: 0;
+			}
+			@media (max-height: $mob-landscape-320) and (orientation: landscape) {
+					margin-top: 25%;
 			}
 		}
 

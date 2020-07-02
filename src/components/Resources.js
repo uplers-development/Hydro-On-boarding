@@ -279,22 +279,34 @@ class Resources extends Component {
 										</div>
 
 										<div className="list-filter-mobile">
-											<h5>Applications</h5>
+											<h5>Product</h5>
 											<ul>
-												<li><a href="#">Stormwater treatment</a></li>
-												<li><a href="#">Hydrometry and monitoring</a></li>
-												<li><a href="#">Industrial water treatment</a></li>
-												<li><a href="#">CSO screening, treatment & flow control</a></li>
-												<li className="active"><a href="#">Flow control and flood protection</a></li>
-												<li><a href="#">Water and wastewater treatment</a></li>
+												<li><a href="#" title="Product01">Product01</a></li>
+												<li><a href="#" title="Product02">Product02</a></li>
+												<li><a href="#" title="Product03">Product03</a></li>
+												<li><a href="#" title="Product04">Product04</a></li>
+												<li className="active"><a href="#" title="Product05">Product05</a></li>
+												<li><a href="#" title="Product06">Product06</a></li>
+												
 											</ul>
-
+														  
+											<h5>Types</h5>
+											<ul>
+												<li className="active"><a href="#" title="Brochure">Brochure</a></li>
+												<li><a href="#" title="Technical">Technical</a></li>
+												<li><a href="#" title="Guide">Guide</a></li>
+												<li><a href="#" title="Sale Tool">Sale Tool</a></li>
+											</ul>			  
+														  
 											<h5>Sort by</h5>
 											<ul>
 												<li className="active"><a href="#" title="Purchase date newest">Purchase date newest</a></li>
 												<li><a href="#" title="Purchase date oldest">Purchase date oldest</a></li>
 												<li><a href="#" title="A-Z">A-Z</a></li>
 											</ul>
+														  <div class="btn-block">
+												<button class="common-btn-blue"><span>Apply filters</span></button>
+											</div>
 										</div>
 									</div>
 								</div>

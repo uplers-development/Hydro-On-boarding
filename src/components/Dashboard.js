@@ -15,7 +15,11 @@ import ReactHtmlParser from 'react-html-parser';
 	}
 
 	componentDidMount(){
+	 if(localStorage.getItem("access-token")!==null){
 		this.rightSideMenu();
+	 }else{
+			this.props.history.push("/Login")
+	 }
 	}
 
 	rightSideMenu=()=>{	

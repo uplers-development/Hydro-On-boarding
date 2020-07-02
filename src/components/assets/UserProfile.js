@@ -20,7 +20,14 @@ class UserProfile extends Component {
 	}
 
 	componentDidMount(){
-		this.GetProfile();
+		if(localStorage.getItem("access-token")!==null){
+			this.GetProfile();
+		}else{
+			this.setState({logout:true})
+			if(this.state.logout){
+					return <Redirect to="/Login"/>
+				}	
+		}
 	}
 
 	Logout=(e)=>{
@@ -47,10 +54,11 @@ class UserProfile extends Component {
 		}).then(data=>{
 			console.log(data);
 			console.log(data.field_first_name);
-
+			if(data!==''){
 			this.setState({first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:data.user_picture[0]
 					})
 			console.log(this.state.userPicture);
+			}
 		})
 	}
 

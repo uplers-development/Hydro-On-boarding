@@ -80,7 +80,7 @@ class Sidebar extends Component {
 					<Link to={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_link : ''}className="common-btn-blue"><span>Master CTA</span></Link>
 				</div>
 
-				<div class="pattern-block">
+				<div className="pattern-block">
 				
 					<img src={require("../../images/pattern-nav-bottom.svg")} alt="Pattern img"/>	
 						

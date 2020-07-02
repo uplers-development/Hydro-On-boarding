@@ -23,11 +23,15 @@ class Resources extends Component {
 
 
 	componentDidMount(){
-		localStorage.removeItem("resource-id");
-		localStorage.removeItem("resource-filter-type");
-		this.GetResourcesList()
-		this.getAllProductList()
-		this.GetResourceTypeTitleId()
+		if(localStorage.getItem("access-token")!==null){
+			localStorage.removeItem("resource-id");
+			localStorage.removeItem("resource-filter-type");
+			this.GetResourcesList()
+			this.getAllProductList()
+			this.GetResourceTypeTitleId()
+		}else{
+			this.props.history.push("/Login")
+		}
 	}
 	
 	GetResourcesList=()=>{

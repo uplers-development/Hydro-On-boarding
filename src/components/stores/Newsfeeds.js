@@ -16,6 +16,7 @@ class Newsfeeds extends Component {
 	}
 
 	componentDidMount(){
+		if(localStorage.getItem("access-token")!==null){
 		$('img.svg').each(function () {
 				var $img = $(this);
 				var imgID = $img.attr('id');
@@ -35,6 +36,9 @@ class Newsfeeds extends Component {
 			});
 		this.newsFeedItems()
 		this.newsFeedRecentlyViewed();
+	 }else{
+	 	this.props.history.push('/Login')
+	 }
 	}	
 
 	newsFeedItems=()=>{
@@ -64,7 +68,7 @@ class Newsfeeds extends Component {
 		        	 if(i > 0  && data[i-1].created_1!==data[i].created_1){     
 		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}</h4></div>);  	 
 		        	 }else if(i == 0){
-		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}</h4></div>);  	 
+		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}<span></span></h4></div>);  	 
 		        	 }	   	
 		        }
     		this.setState({newsFeedItems:newsfeed});

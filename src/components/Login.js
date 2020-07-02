@@ -80,7 +80,7 @@ class Login extends Component{
     			alert(data.message);
     		}else{
     			localStorage.setItem("access-token",data.csrf_token);
-    			localStorage.setItem("basic-auth",btoa(logindata.name+':'+logindata.pass));
+    			localStorage.setItem("basic-auth",btoa(data.current_user.name+':'+logindata.pass));
     			localStorage.setItem("user-type",JSON.stringify(data.current_user));
     			this.props.history.push({pathname:"/Welcome"});
     		}
@@ -127,8 +127,8 @@ class Login extends Component{
 								<div className="button-group">
 									<button className="btn common-btn-blue" type="button"  onClick={this.Login}  tabIndex="4">
 										<span>{this.state.login_sign_button}</span></button>
-									<button className="btn common-btn-blue" type="submit"><span>{this.state.login_rep_button}</span></button>
-									<button className="btn common-btn-blue" type="submit"><span>{this.state.login_admin_button}</span></button>
+									{this.state.login_rep_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_rep_button}</span></button>:''}
+									{this.state.login_admin_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_admin_button}</span></button>:''}
 								</div>
 							</form>{/*<!--Login form end-->*/}
 							

@@ -21,11 +21,15 @@ class Welcome extends Component {
 
 
 	componentDidMount(){
-		this.welcomeMainBlock();
-		this.welcomeThreeBlock();
-		window.addEventListener('load',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
-		window.addEventListener('resize',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
-		console.log(this.state.mobileView);
+		if(localStorage.getItem("access-token")!==null){
+			this.welcomeMainBlock();
+			this.welcomeThreeBlock();
+			window.addEventListener('load',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
+			window.addEventListener('resize',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
+			console.log(this.state.mobileView);
+		}else{
+			this.props.history.push('/Login')
+		}
 	}
 
 	welcomeMainBlock=()=>{

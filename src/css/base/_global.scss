@@ -711,6 +711,26 @@ nav {
 
 
 				}
+				ul {
+					margin-top: 0;
+					li {
+						padding-left: 63px;
+						a {
+							color: $white-transparent-menu-text;
+							text-decoration: none;
+							font-family: $gibson;
+							font-weight: $font-normal;
+							font-size: 16px;
+							line-height: 20px;
+							padding-left: 20px;
+						}
+						&:hover {
+							a {
+								color: $white;
+							}
+						}
+					}
+				}
 			}
 		}
 
@@ -1233,6 +1253,8 @@ nav {
 					font-family: $gibson;
 					font-weight: $font-normal;
 					text-decoration: none;
+					display: block;
+					padding: 3px 0;
 					&:hover {
 						color: $sky-blue;
 					}

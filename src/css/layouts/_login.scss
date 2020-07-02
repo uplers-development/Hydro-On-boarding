@@ -82,7 +82,8 @@
 
 			@media screen and (max-width:$large-m) {
 				padding: 20px;
-				margin-top: 25%;
+				margin-top: 28%;
+				max-width: 520px;
 			}
 			@media screen and (max-width:$ipad-landscape) {
 				margin-top: 45%;
@@ -92,9 +93,13 @@
 				margin: 0 auto;
 				padding: 15px;
 				width: 100%;
-				margin-top: 45%;
+				margin-top: 25%;
 				top: 0;
 				padding-bottom: 0;
+			}
+			
+			@media screen and (max-width:$small-medium) {
+				margin-top: 45%;
 			}
 		
 			@media screen and (max-width:$small-x) {

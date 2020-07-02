@@ -263,7 +263,7 @@
 			.news-and-events {
 				max-width: 810px;
 				width: 100%;
-				padding: 68px 85px 20px 85px;
+				padding: 8px 85px 20px 82px;
 				box-shadow: 0px 4px 16px $product-box-shadow;
 				margin-left: 30px;
 				@media screen and (max-width:$large-mx) {
@@ -350,8 +350,4 @@
 			}
 		}
 	}
-}
-
-.bottom-content-block {
-	padding-top: 22px !important;
 }

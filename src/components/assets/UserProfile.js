@@ -22,11 +22,6 @@ class UserProfile extends Component {
 	componentDidMount(){
 		if(localStorage.getItem("access-token")!==null){
 			this.GetProfile();
-		}else{
-			this.setState({logout:true})
-			if(this.state.logout){
-					return <Redirect to="/Login"/>
-				}	
 		}
 	}
 

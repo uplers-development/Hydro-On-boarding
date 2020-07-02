@@ -33,7 +33,7 @@ class Profile extends Component {
 	}
 
 	componentDidMount(){
-		if(localStorage.getItem("acess-token")!==null){
+		if(localStorage.getItem("access-token")!==null){
 			this.GetTimeZone();
     		this.GetProfile();
      	}else{

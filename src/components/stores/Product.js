@@ -187,7 +187,6 @@ class Product extends Component {
 				<Sidebar/>
 			<div className="d-flex flex-wrap right-content-part">
 				<div className="top-heading">
-					<div className="top-heading">
 						<div className="top-heading-continer d-flex flex-wrap align-center">
 							<div className="name-of-heading d-flex flex-wrap align-center">
 								<img src={require("../../images/your-product-blue-logo.svg")} alt="product-logo"/>
@@ -196,8 +195,6 @@ class Product extends Component {
 
 							<UserProfile/>
 						</div>
-						
-					</div>
 				</div>
 
 				
@@ -212,10 +209,10 @@ class Product extends Component {
 							
 							<div className="select-box">
 								<span>Applications</span>
-								<ul className="list product-filter-desktop">
-								{this.state.categoryfilter.map((catname,index)=>
-									<li key={catname.tid}><Link to={""} data-cat-id={catname.tid} onClick={this.filterProductCategoryById}>{ReactHtmlParser(catname.name)}</Link></li>
-								)}
+									<ul className="list product-filter-desktop">
+										{this.state.categoryfilter.map((catname,index)=>
+										<li key={catname.tid}><Link to={""} data-cat-id={catname.tid} onClick={this.filterProductCategoryById}>{ReactHtmlParser(catname.name)}</Link></li>
+									)}
 								</ul>
 							</div>
 							

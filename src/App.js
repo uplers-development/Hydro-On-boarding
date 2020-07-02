@@ -10,6 +10,7 @@ import Resources from "./components/stores/Resources";
 import Contract from "./components/stores/Contract";
 import Repcontact from "./components/stores/Repcontact";
 import RepDashboard from "./components/Repuser/RepDashboard";
+import RepClients from "./components/Repuser/RepClients";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
@@ -40,6 +41,7 @@ class App extends Component {
                     <Route path="/" exact component={Login} />
                     <Route path="/Login"  component={Login} />
                     <Route path="/components/Repuser/RepDashboard"  component={RepDashboard} />
+                    <Route path="/components/Repuser/RepClients"  component={RepClients} />
                     {this.state.sidebarItem.length > 0 ?
                       <>
                     <Route path="/Profile"  component={Profile} />

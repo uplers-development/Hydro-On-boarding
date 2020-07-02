@@ -101,6 +101,13 @@
 						font-size: 13px;
 					}
 				}
+				.empty-field {
+						font-size: 14px;
+						line-height: 18px;
+						color: $red;
+						font-family: $arial;
+						font-weight: $font-normal;
+				}
 			}
 
 			img {

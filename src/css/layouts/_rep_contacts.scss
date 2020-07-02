@@ -329,13 +329,9 @@
 						max-width: none;
 					}
 					img {
-						max-width: 20px;
-
-						@media screen and (max-width:$mobile-small) {
-							max-width: 16px;
-						}
+						width: 16px;
+						height: auto;
 					}
-
 					span {
 						font-size: 16px;
 						line-height: 20px;
@@ -396,10 +392,6 @@
 								flex-wrap: wrap;
 								align-content: center;
 
-								img {
-									max-width: 20px;
-								}
-
 								span {
 									font-size: 16px;
 									line-height: 20px;
@@ -417,6 +409,20 @@
 								&:hover {
 									span {
 										color: $sky-blue;
+									}
+								}
+							}
+							&:nth-child(1) {
+								a {
+									img {
+										width: 18px;
+									}
+								}
+							}
+							&:nth-child(2) {
+								a {
+									img {
+										width: 20px;
 									}
 								}
 							}

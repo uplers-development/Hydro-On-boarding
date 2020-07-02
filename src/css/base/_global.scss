@@ -47,6 +47,12 @@ ul {
 .container {
 	max-width: 1320px;
 	width: 100%;
+	@media screen and (max-width:$large-m) {
+		padding: 0 15px 0 0;
+	}
+	@media screen and (max-width:$mobile-small) {
+		padding:0;
+	}
 }
 .common-btn-blue:focus {
 	outline: none;
@@ -1990,6 +1996,7 @@ a { @include transition(all 0.5s ease-in-out); }
 	font-family: $arial;
 	font-weight: $font-normal;
 }
+
 
 
 

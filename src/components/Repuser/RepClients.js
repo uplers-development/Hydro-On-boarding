@@ -83,9 +83,7 @@ class RepClients extends React.Component {
 					{/*<!--Clients main blok start-->*/}
 					<div className="d-flex flex-wrap clients-main">
 					
-					<div className="">
 						
-					</div>	
 						
 					</div>
 					{/*<!--Clients main blok end-->*/}

@@ -2,10 +2,15 @@
 {
 	.fileter-block
 	{
+		@media screen and (max-width:$ipad-portrait) {
+			justify-content: space-between; }
 		.select-box {
 			width: 282px;
 			@media screen and (max-width:$large-mx) {
 				width: 220px;
+			}
+			@media screen and (max-width:$ipad-portrait) {
+				width: calc(50% - 10px);
 			}
 			&:first-of-type {
 				margin-right: 19px;

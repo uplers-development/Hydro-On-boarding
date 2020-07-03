@@ -143,10 +143,12 @@ class RepClients extends React.Component {
 								<table className="table table-striped">
    <thead>
       <tr>
-         <th><div className="checkbox-cust">
+         <th>
+		 <div className="checkbox-cust">
 				 	<input type="checkbox" id="html" />
-      				<label for="html">HTML</label>	 
-			 </div>Name</th>
+      				<label for="html"></label>	 
+			 </div><span>Name</span>
+		</th>
          <th>Email</th>
          <th>Role</th>
          <th>Last updatetd</th>
@@ -157,21 +159,51 @@ class RepClients extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="html" />
-      				<label for="html">HTML</label>	 
+      				<label for="html"></label>	 
 			 </div>
 			 <div className="name-edit">
-				 <h3></h3>
+				 <div className="img-c">
+					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
 			     <div className="action d-flex flex-wrap">
 					<a href="#" title="Edit">Edit</a>	 
 					<a href="#" title="Delete">Delete</a>	 
 					<a href="#" title="View">View</a>	 
-				 </div>		
+				 </div>	
+				</div>	
 			 </div>	 
 		 </td>
-		 <td>John.smith@gmail.com</td>				
+		 <td>John.smith@example.co.uk</td>				
 		 <td>Project manager</td>				
 		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
       </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="html" />
+      				<label for="html"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>						  
       
          </tbody>
 </table>

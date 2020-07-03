@@ -309,15 +309,26 @@
 			@media screen and (max-width:$mobile-small) {
 				display: inline-block;
 				position: absolute;
-				top: 30px;
-				left: 130px;
+				top: 35px;
+				left: 140px;
 			}
 			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
 				display: inline-block;
 				position: absolute;
-				top: 50px;
-				left: 150px;
+				top: 35px;
+				left: 140px;
 			}
+			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
+				display: inline-block;
+				position: absolute;
+				top: 35px;
+				left: 140px;
+			}
+			@media (max-height: $mob-landscape-375) and (width: $iphone-x) and (orientation: landscape) {
+				top: 42px;
+			}
+			
+			
 		}
 
 		.person-details {
@@ -385,7 +396,7 @@
 									margin-bottom: 0;
 								}
 							}
-
+							
 							a {
 								text-decoration: none;
 								display: flex;

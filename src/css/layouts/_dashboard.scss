@@ -134,7 +134,7 @@
 						border-top-color: $white;	
 					}
 				}
-				&:hover{
+				&.active{
 					h2 {
 						color: $black;
 						&:after {

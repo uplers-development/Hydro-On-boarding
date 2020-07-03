@@ -68,6 +68,7 @@
 			font-size: 30px;
 			line-height: 36px;
 			margin-bottom: 10px;
+			margin-top: 5px;
 		}
 		@media screen and (max-width:$mobile-small) {
 			font-size: 22px;
@@ -100,7 +101,7 @@
 		width: 100%;
 		padding-bottom: 25px;
 		@media screen and (max-width:$large-m) {
-			padding-bottom: 10px;
+			padding-bottom: 0;
 		}
 		@media screen and (max-width:$mobile-small) {
 			display: none;
@@ -140,8 +141,11 @@
 			.image-block {
 				position: relative;
 				height: 220px;
+				@media screen and (max-width:$large-mx) {
+					height: 150px;
+				}
 				@media screen and (max-width:$mobile-small) {
-					height: 210px;
+					height: 180px;
 				}
 				@media screen and (max-width:$ipad-portrait) {
 					display: flex;
@@ -367,6 +371,9 @@
 				background-image: url(#{$imgpath}/right-gray-arrow.svg);
 			}
 		}
+	}
+	@media screen and (max-width:$large-mx) {
+		padding: 20px 40px 20px;
 	}
 }
 

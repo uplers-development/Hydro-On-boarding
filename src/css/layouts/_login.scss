@@ -110,10 +110,16 @@
 					padding-bottom: 180px;
 					margin-top: 45%;
 			}
-			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
-					width: 100%;
-					margin-left: 0;
+			@media (height: $mob-landscape-414) and (width: $mob-6-7-8) and (orientation: landscape) {
+					margin-top: 15%;
 			}
+			@media (max-height: $mob-landscape-414) and (max-width: $mob-6-7-8) and (orientation: landscape) {
+					margin-top: 15%;
+			}
+			@media (max-height: $small-xx) and (orientation: landscape) {
+					margin-top: 25%;
+			}
+			
 			@media (max-height: $mob-landscape-320) and (orientation: landscape) {
 					margin-top: 25%;
 			}

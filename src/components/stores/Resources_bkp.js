@@ -83,6 +83,7 @@ class Resources extends Component {
 	}
 
 	GetProductBaseFilter=(e)=>{
+		let resourceTypeSelectedValue,resouceSorttarget;
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -94,10 +95,29 @@ class Resources extends Component {
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.classList.add("active");
+			document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+				 if(item.classList[0]==="active"){
+				 	resourceTypeSelectedValue=item.getAttribute("data-resource-id");
+				 }
+			})
+			document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
+				 if(item.parentNode.classList[0]==="active"){
+				 	resouceSorttarget=item.getAttribute("data-get-filterindex");
+				 }
+			})
 		}
+
+		if(resourceTypeSelectedValue===undefined){
+			resourceTypeSelectedValue='';
+		} 
+		if(resouceSorttarget===undefined){
+			resouceSorttarget='';
+		}
+
 		let product_id=e.target.getAttribute("data-pid");
 		localStorage.setItem("product_id",product_id);
-		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
+
+		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json"+"&field_resource_type_target_id="+resourceTypeSelectedValue+resouceSorttarget,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -112,13 +132,18 @@ class Resources extends Component {
 	}
 
 	FilterByResourceId=(e)=>{
-		let resourceActive;
+		let resourceProductItem,resouceSorttarget,resourceApi;
 		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
-			 	resourceActive=item.getAttribute("data-pid");
+			 	resourceProductItem=item.getAttribute("data-pid");
 			 }
 		})
+		document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
+				 if(item.parentNode.classList[0]==="active"){
+				 	resouceSorttarget=item.getAttribute("data-get-filterindex");
+				 }
+			})
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -130,8 +155,27 @@ class Resources extends Component {
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.classList.add("active");
+		} 
+
+		alert(resourceProductItem);
+		alert(resouceSorttarget);
+		if(resouceSorttarget===undefined){
+			resouceSorttarget='';
 		}
-		let resourceApi=resourceActive!=='undefined' ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		if(resourceProductItem!==undefined && resourceProductItem!==undefined){
+			resourceApi=Apiurl.FilterByResourceId.url+"/"+resourceProductItem+resouceSorttarget+"?_format=json"			
+		}
+		else if(resourceProductItem===undefined && resourceProductItem===undefined){
+			resourceApi=Apiurl.FilterByResourceId.url+"?_format=json"			
+		}
+		else if(resourceProductItem===undefined && resourceProductItem!==undefined){
+			resourceApi=Apiurl.FilterByResourceId.url+"/"+resourceProductItem+"?_format=json"			
+		}
+		else if(resourceProductItem!==undefined && resourceProductItem===undefined){
+			resourceApi=Apiurl.FilterByResourceId.url+resouceSorttarget+"?_format=json"			
+		}
+
+
 		let resource_id=e.target.getAttribute("data-resource-id");
 		fetch(resourceApi+"&field_resource_type_target_id="+resource_id,{
 			headers: {
@@ -148,25 +192,44 @@ class Resources extends Component {
 	}
 
 	SortResources=(e)=>{
-		let resourceActive;
+		let resourceProductItem,resouceSorttarget;
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+		}else{
+			document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
+				 console.log(item.classList[0]);
+				 if(item.classList[0]==="active"){
+				 	resourceProductItem=item.getAttribute("data-pid");
+				 }
+			})
+		document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
+				 if(item.parentNode.classList[0]==="active"){
+				 	resouceSorttarget=item.getAttribute("data-get-filterindex");
+				 }
 			})
 			e.target.parentNode.classList.add("active");
 		}
 		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
-			 	resourceActive=item.getAttribute("data-pid");
+			 	resourceProductItem=item.getAttribute("data-pid");
 			 }else{
-			 	resourceActive='All';
+			 	resourceProductItem='All';
 			 }
 		})
+		if(resourceProductItem===undefined){
+			resourceProductItem='';
+		}
+		if(resouceSorttarget===undefined){
+					resouceSorttarget='';
+				}
 
 		let filterType=e.target.getAttribute("data-get-filterindex");
 		//localStorage.setItem("resource-filter-type",filterType);
-		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resourceActive+filterType,{
+		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resourceProductItem+filterType+resouceSorttarget,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -357,7 +420,7 @@ class Resources extends Component {
 						<div className="container">
 							<div className="resources-list d-flex flex-wrap">
 							{this.state.ResourceList.map((resourceItem,index)=>
-								<div className="resources-box" key={index} onClick={(e)=>window.open(site_url+resourceItem.field_resources_document,"_blank")}>
+								<div className="resources-box" key={index}>
 									<div>
 										<div className="image-block">
 											<div className="bg-cover" style={{backgroundImage: `url(${site_url+resourceItem.field_resources_image})`}}></div>

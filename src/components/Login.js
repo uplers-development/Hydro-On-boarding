@@ -4,6 +4,7 @@ import Apiurl from './Apiurl';
 import loginScreeImg from "./../images/login-screen.jpg";
 import {ValidationMsg} from'./constants/validationmsg';
 import{hasNull,isRequired} from './validation';
+import {cosmaticAsset} from'./constants/common';
 import $ from "jquery";
 
 class Login extends Component{
@@ -20,6 +21,7 @@ class Login extends Component{
     		login_sign_button:null,
     		usernameState:false,
     		passwordState:false,
+    		loader:false
     	}
     	this.Login=this.Login.bind(this);
     }
@@ -28,6 +30,7 @@ class Login extends Component{
     }
 
     getLoginPageContent =() =>{
+    	this.setState({loader:true})
     	fetch(Apiurl.Loginpagecontent.url,{
     			headers: {
                 	"Content-Type" : "application/json",
@@ -37,7 +40,7 @@ class Login extends Component{
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({login_data_loaded:true,login_admin_button:data.login_admin_button,login_background:data.login_background,login_email_title:data.login_email_title,login_logo:data.login_logo,login_password_title:data.login_password_title,login_rep_button:data.login_rep_button,login_sign_button:data.login_sign_button})
+    		this.setState({loader:false,login_data_loaded:true,login_admin_button:data.login_admin_button,login_background:data.login_background,login_email_title:data.login_email_title,login_logo:data.login_logo,login_password_title:data.login_password_title,login_rep_button:data.login_rep_button,login_sign_button:data.login_sign_button})
     		$('img.svg').each(function () {
 			var $img = $(this);
 			var imgID = $img.attr('id');
@@ -152,7 +155,9 @@ class Login extends Component{
 					{/*<!--Login right block end-->*/}
 				</div>
 				:
-				<div className='Loading'>Loading</div>}
+				<div className='Loading'>
+				{cosmaticAsset.cosmatic.default.loader}
+				</div>}
 			</section>
 		);
 	}

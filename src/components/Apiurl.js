@@ -100,7 +100,7 @@ export default {
         method:'GET'
     },
     FilterByResourceId:{
-        url:base_url+"/jsonapi/resources_listing/",
+        url:base_url+"/jsonapi/resources_listing",
         method:'GET'
     },
     SortResources:{

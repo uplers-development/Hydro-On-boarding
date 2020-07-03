@@ -4,7 +4,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
-
+import {cosmaticAsset} from'../constants/common';
 class Product extends Component {
 	constructor(props) {
 		super(props);
@@ -13,6 +13,7 @@ class Product extends Component {
 			categoryfilter:[],
 			getTileListforSearch:[],
 			mobileView:false,
+			loader:true
 		}
 
 		this.filterProductCategoryById=this.filterProductCategoryById.bind(this);
@@ -47,7 +48,7 @@ class Product extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({productList:data})
+    		this.setState({productList:data,loader:false})
     	})
 	}
 
@@ -68,14 +69,24 @@ class Product extends Component {
 
 	filterProductCategoryById =(e) =>{
 		e.preventDefault();
+		let sortByType;
 		document.querySelectorAll(".product-filter-desktop li a").forEach((item,index)=>{
 			if(item.classList.contains("active")){item.classList.remove("active")}
 		})
+		document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
+				 if(item.parentNode.classList[0]==="active"){
+					console.log(item);
+				 	sortByType=item.getAttribute("sortby");
+                    console.log(sortByType)
+				 }
+			})
 		e.target.classList.add("active");
 		let pid=e.target.getAttribute("data-cat-id");
 		localStorage.setItem("product_id",pid);
-
-		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid,{
+		if(sortByType===undefined){
+			sortByType='';
+		}
+		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -85,20 +96,33 @@ class Product extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({productList:data})
+    		this.setState({productList:data,loader:false})
     	})
 	}
 
 	MobfilterProductCategoryById =(e) =>{
-		console.log(e.target);
-		document.querySelectorAll(".product-filter li").forEach((item,index)=>{
+		e.preventDefault();
+		let sortByType;
+		document.querySelectorAll(".product-sort-by > li > a").forEach((item,index)=>{
+				 if(item.parentNode.classList[0]==="active"){
+					console.log(item);
+				 	sortByType=item.getAttribute("sortby");
+                    console.log(sortByType)
+				 }
+			})
+		document.querySelectorAll(".product-filter-mob li").forEach((item,index)=>{
 				console.log(item)
 				if(item.classList.contains("active")){item.classList.remove("active")}
 		})
+
+		if(sortByType===undefined){
+			sortByType='';
+		}
+		//alert(sortByType);
 		e.target.parentNode.classList.add("active");
 		let pid=e.target.getAttribute("data-cat-id");
 		localStorage.setItem("product_id",pid);
-		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid,{
+		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -108,25 +132,41 @@ class Product extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({productList:data})
+    		this.setState({productList:data,loader:false})
     	})
 	}
 
 	SortProductByType=(e)=>{
 		e.preventDefault();
+		let productSelectedvalue;
 		if(window.innerWidth > 767){
 		document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
+		document.querySelectorAll(".product-filter-desktop li a").forEach((item,index)=>{
+				 console.log(item.classList[0]);
+				 if(item.classList[0]==="active"){
+				 	productSelectedvalue=item.getAttribute("data-cat-id");
+				 }
+		})
 			e.target.parentNode.classList.add("active");
 		}else{
 			document.querySelectorAll(".product-sort-by > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
+			document.querySelectorAll(".product-filter-mob li a").forEach((item,index)=>{
+				console.log(item)
+				 if(item.parentNode.classList[0]==="active"){
+				 	productSelectedvalue=item.getAttribute("data-cat-id");
+				 }
+			})
 			e.target.parentNode.classList.add("active");
 		}	
+		if(productSelectedvalue===''){
+			productSelectedvalue="All";
+		}	
 		let sortByType=e.target.getAttribute("sortby")
-		fetch(Apiurl.SortProduct.url+sortByType,{
+		fetch(Apiurl.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -136,15 +176,38 @@ class Product extends Component {
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		this.setState({productList:data})
+    		this.setState({productList:data,loader:false})
     	})
 	}
 
 	GetProductTitleForSearch=(e)=>{
+		console.log("eys");
 		let productnamestring=e.target.value;
+		let productSelectedvalue;
 		console.log(productnamestring)
 		if(productnamestring!==''){
-		fetch(Apiurl.GetProductTitle.url+"&title="+productnamestring,{
+		if(window.innerWidth>767){
+			document.querySelectorAll(".product-filter-desktop li a").forEach((item,index)=>{
+				 console.log(item.classList[0]);
+				 if(item.classList[0]==="active"){
+				 	productSelectedvalue=item.getAttribute("data-cat-id");
+				 }
+			})
+		}else{
+			document.querySelectorAll(".product-filter-mob li a").forEach((item,index)=>{
+				console.log(item)
+				 if(item.parentNode.classList[0]==="active"){
+				 	productSelectedvalue=item.getAttribute("data-cat-id");
+				 }
+			})
+		}
+		if(productSelectedvalue===undefined){
+			productSelectedvalue="All";
+		}		
+
+		console.log(productSelectedvalue);
+		//return false;	
+		fetch(Apiurl.GetProductTitle.url+"&field_product_category_target_id="+productSelectedvalue+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -156,16 +219,16 @@ class Product extends Component {
     		console.log(data);
     		this.setState({getTileListforSearch:data});
     	})
-     }else{
+     }else if(productSelectedvalue!==''){
     		this.setState({getTileListforSearch:''});
-    		this.productList();
-     }
+
+        }
 	}
 
 	ProductListTitleSearch =(e) =>{
 		e.preventDefault();
 		let productnamestring=e.target.getAttribute("data-title-name");
-		console.log(productnamestring)
+		document.querySelector("#myInput").value=productnamestring;
 		fetch(Apiurl.ProductListTitleSearch.url+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
@@ -176,18 +239,18 @@ class Product extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({productList:data})
+    		this.setState({productList:data,getTileListforSearch:'',loader:false})
     	})
 	}
 
 	render() {
 		return (
 			<section className="main-wrapper">
+			{!this.state.loader ?
 			<div className="d-flex flex-wrap main-block">
 				<Sidebar/>
 			<div className="d-flex flex-wrap right-content-part">
 				<div className="top-heading">
-					<div className="top-heading">
 						<div className="top-heading-continer d-flex flex-wrap align-center">
 							<div className="name-of-heading d-flex flex-wrap align-center">
 								<img src={require("../../images/your-product-blue-logo.svg")} alt="product-logo"/>
@@ -196,8 +259,6 @@ class Product extends Component {
 
 							<UserProfile/>
 						</div>
-						
-					</div>
 				</div>
 
 				
@@ -212,10 +273,10 @@ class Product extends Component {
 							
 							<div className="select-box">
 								<span>Applications</span>
-								<ul className="list product-filter-desktop">
-								{this.state.categoryfilter.map((catname,index)=>
-									<li key={catname.tid}><Link to={""} data-cat-id={catname.tid} onClick={this.filterProductCategoryById}>{ReactHtmlParser(catname.name)}</Link></li>
-								)}
+									<ul className="list product-filter-desktop">
+										{this.state.categoryfilter.map((catname,index)=>
+										<li key={catname.tid}><Link to={""} data-cat-id={catname.tid} onClick={this.filterProductCategoryById}>{ReactHtmlParser(catname.name)}</Link></li>
+									)}
 								</ul>
 							</div>
 							
@@ -274,10 +335,10 @@ class Product extends Component {
 	
 											<div className="list-filter-mobile">
 												<h5>Applications</h5>
-												<ul className='product-filter'>
+												<ul className='product-filter-mob'>
 
 													{this.state.categoryfilter.map((catname,index)=>
-															<li key={catname.tid}><a href="#" onClick={this.MobfilterProductCategoryById} data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</a></li>
+															<li key={catname.tid}><Link to={""} onClick={this.MobfilterProductCategoryById} data-cat-id={catname.tid}>{ReactHtmlParser(catname.name)}</Link></li>
 													)}
 												</ul>
 												
@@ -303,7 +364,7 @@ class Product extends Component {
 
 									</div>
 									<div className="product-content">
-										<Link to="#" title={ReactHtmlParser(item.title)}>{ReactHtmlParser(item.title)}</Link>
+										<Link to={""} title={ReactHtmlParser(item.title)}>{ReactHtmlParser(item.title)}</Link>
 										<h4>
 										{item.field_product_category.split(',').map((cat,cat_index)=>
 											<span key={cat_index}>{ReactHtmlParser(cat)}</span>
@@ -313,7 +374,7 @@ class Product extends Component {
 										<div className="purchase-date">Purchase Date: {item.field_purchase_date}</div>
 									</div>
 									<div className="btn-block">
-										<Link to="#" title="Resources logo blue"><img src={require("../../images/resources-logo-blue-round.svg")} alt="icon" className="svg"/> </Link>
+										<Link to={"/Resources"} title="Resources logo blue"><img src={require("../../images/resources-logo-blue-round.svg")} alt="icon" className="svg"/> </Link>
 										<Link to={site_url+item.field_product_document} className="svg" title="Pdf download"><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg"/> </Link>
 									</div>
 								</div>
@@ -330,7 +391,10 @@ class Product extends Component {
 
 			</div>
 
-		</div>
+		</div>:
+		<>
+				{cosmaticAsset.cosmatic.default.loader}
+		</>}
 	</section>
 		);
 	}

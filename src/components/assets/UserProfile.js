@@ -61,7 +61,6 @@ class UserProfile extends Component {
 	}
 
 	openToogle=(e)=>{
-		alert();
 		if(window.innerWidth<=767){
 			if(e.target.classList.contains("active")){
 				this.setState({openTooglecontent:false})
@@ -74,7 +73,7 @@ class UserProfile extends Component {
 	render() {
 		return (
 			<div>
-				<div className={this.state.openTooglecontent ? "d-flex flex-wrap user-log active": "d-flex flex-wrap user-log "} onClick={this.openToogle}>
+				<div className={this.state.openTooglecontent ? "d-flex flex-wrap user-log active": "d-flex flex-wrap user-log"} onClick={this.openToogle}>
 					{this.state.dataLoaded ?
 						<>
 						<div className="user-image-name d-flex flex-wrap align-center">

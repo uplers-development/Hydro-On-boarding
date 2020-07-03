@@ -68,9 +68,9 @@ class Newsfeeds extends Component {
 					 	 newsfeed.push(<div className="news-title sky-blue-bg"><img src={site_url+data[i].field_icon} alt="Bell logo"/><h3>{data[i].title}</h3><div className="time-date">Today at 8:30am</div>{ReactHtmlParser(data[i].body)}<img className="svg" src={require("../../images/login-screen-pattern-white-r.svg")} alt="login screen pattern"/></div>);
 					 }
 		        	 if(i > 0  && data[i-1].created_1!==data[i].created_1){     
-		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}</h4></div>);  	 
+		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}</h4></div>);  	 
 		        	 }else if(i == 0){
-		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_1}<span></span></h4></div>);  	 
+		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}<span></span></h4></div>);  	 
 		        	 }	   	
 		        }
     		this.setState({newsFeedItems:newsfeed,loader:false});
@@ -108,6 +108,7 @@ class Newsfeeds extends Component {
     	}).then(data=>{
     		console.log(data);
     		this.setState({recentViews:data});
+    		console.log(this.state.recentViews);
     	})
 	}
 

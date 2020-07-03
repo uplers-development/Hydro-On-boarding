@@ -4,6 +4,7 @@ import Apiurl from './Apiurl';
 import{hasNull,isRequired} from './validation';
 import {ValidationMsg} from'./constants/validationmsg';
 import ReactHtmlParser from 'react-html-parser';
+import {cosmaticAsset} from'./constants/common';
 
 class Profile extends Component {
 	constructor(props) {
@@ -26,6 +27,7 @@ class Profile extends Component {
 			imageFormateState:false,
 			timeZone:null,
 			newuserPic_id:null,
+			loader:true
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
@@ -76,7 +78,7 @@ class Profile extends Component {
 						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
 						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
 						,location:data.field_location.length>0 ?data.field_location[0].value : '',
-						userPicture:data.user_picture.length>0 ? data.user_picture[0] :''
+						userPicture:data.user_picture.length>0 ? data.user_picture[0] :'',loader:false
 					})
 			console.log(this.state.userPicture);
 		})
@@ -108,6 +110,7 @@ class Profile extends Component {
     		return res.json()
     	}).then(data=>{
     		console.log(data);
+    		this.GetProfile();
     	})
     }else{
 		hasNull(updatedata.field_first_name[0].value) ? this.setState({firstnameState:true}): this.setState({firstnameState:false})
@@ -122,22 +125,17 @@ class Profile extends Component {
 
 	updateProfilePic=(e)=>{
 		console.log(e.target.value)
-		var fullPath = e.target.value;
-
-		var filename=''
-			if (fullPath) {
-			    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-			    filename = fullPath.substring(startIndex);
+		var fullPath = e.target.files[0];
+		var exactfile=e.target.value;
+		var filename='';
+			if (exactfile) {
+			    var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
+			    filename = exactfile.substring(startIndex);
 			    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
 			        filename = filename.substring(1);
 			    }
 		}
-		const reader = new FileReader();
-		 if (filename) {
-    		reader.readAsDataURL(filename);
-    		console.log(reader.readAsDataURL(filename))
- 		 }	
- 		 return false;
+
 		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
 				this.setState({imageFormateState:false})	
 				var myHeaders = new Headers();
@@ -150,7 +148,7 @@ class Profile extends Component {
 				var requestOptions = {
 				  method: 'POST',
 				  headers: myHeaders,
-				  body: file,
+				  body: fullPath,
 				  redirect: 'follow'
 				};
 				fetch("http://staging.project-progress.net/projects/hydro/file/upload/user/user/user_picture?_format=json",requestOptions)
@@ -215,6 +213,7 @@ class Profile extends Component {
 				{/*<!--Main content top heading end-->*/}
 
 				{/*<!--Main content bottom block start-->*/}
+				{!this.state.loader ?
 				<div className="bottom-content-block">
 
 					{/*<!--Profile left block start-->*/}
@@ -323,7 +322,10 @@ class Profile extends Component {
 					</div>
 					{/*<!--Profile left block end-->*/}
 
-				</div>
+				</div>:
+				<>
+					{cosmaticAsset.cosmatic.default.loader}
+				</>}
 				{/*<!--Main content bottom block end-->*/}
 
 			</div>

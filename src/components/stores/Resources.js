@@ -4,6 +4,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import {cosmaticAsset} from'../constants/common';
 
 class Resources extends Component {
 	constructor(props) {
@@ -13,13 +14,12 @@ class Resources extends Component {
 			productList:[],
 			ResourceTypelist:[],
 			SearchList:[],
-			mobileview:false
+			mobileview:false,
+			loader:true,
 		}
-		this.GetProductBaseFilter=this.GetProductBaseFilter.bind(this);
-		this.FilterByResourceId=this.FilterByResourceId.bind(this);
-		this.SortResources=this.SortResources.bind(this);
 		this.ListResourcesforSearch=this.ListResourcesforSearch.bind(this);
 		this.SearchResourcesByTitle=this.SearchResourcesByTitle.bind(this);
+		this.FiltersApplied=this.FiltersApplied.bind(this);
 	}
 
 
@@ -27,15 +27,13 @@ class Resources extends Component {
 		 if(localStorage.getItem("access-token")!==null){
 			localStorage.removeItem("resource-id");
 			localStorage.removeItem("resource-filter-type");
-			this.GetResourcesList()
-			this.getAllProductList()
-			this.GetResourceTypeTitleId()
+			this.GetFilterValues();
 		}else{
 			this.props.history.push("/Login")
 		}
 	}
-	
-	GetResourcesList=()=>{
+
+	GetFilterValues=()=>{
 		fetch(Apiurl.GetResourcesList.url,{
 			headers: {
                 	 "Content-Type" : "application/json",
@@ -48,11 +46,21 @@ class Resources extends Component {
     		console.log(data);
     		this.setState({ResourceList:data});
     	})
-	}
 
+    	fetch(Apiurl.GetResourcesList.url,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.GetResourcesList.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data});
+    	})
 
-	getAllProductList =()=>{
-		fetch(Apiurl.GetProductTitle.url,{
+    	fetch(Apiurl.GetProductTitle.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -64,11 +72,8 @@ class Resources extends Component {
     		console.log(data);
     		this.setState({productList:data})
     	})
-	}
 
-	GetResourceTypeTitleId=()=>{
-
-		fetch(Apiurl.GetResourceTypeTitleId.url,{
+    	fetch(Apiurl.GetResourceTypeTitleId.url,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -78,11 +83,68 @@ class Resources extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({ResourceTypelist:data});
+    		this.setState({ResourceTypelist:data,loader:false});
     	})
 	}
+	
 
-	GetProductBaseFilter=(e)=>{
+	FiltersApplied=(e)=>{
+		this.setState({loader:true})
+		console.log(e.target);
+		if(e.target.parentNode.parentNode.classList.contains("product-list-item")){
+			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
+				item.classList.remove("active")	
+			})
+		}else if(e.target.parentNode.parentNode.classList.contains("resource-filter-type")){
+			document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+				item.classList.remove("active")	
+			})
+		}else if(e.target.parentNode.parentNode.classList.contains("resource-filter-sort")){
+			document.querySelectorAll(".resource-filter-sort > li > a").forEach((item,index)=>{
+				item.classList.remove("active")	
+			})
+		}
+		e.target.classList.add("active");
+		let ProductId,resourceTypefilterId,resourceSortFilter;	
+		document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
+				if(item.classList[0]==="active"){
+		 			ProductId=item.getAttribute("data-pid")
+			 	}	
+			})
+		document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+				if(item.classList[0]==="active"){
+		 			resourceTypefilterId=item.getAttribute("data-resource-id")
+			 	}	
+			})
+		document.querySelectorAll(".resource-filter-sort > li > a").forEach((item,index)=>{
+				if(item.classList[0]==="active"){
+		 			resourceSortFilter=item.getAttribute("data-get-filterindex")
+			 	}	
+			})		
+		ProductId=ProductId!==undefined ?ProductId :'All';
+		resourceTypefilterId=resourceTypefilterId!==undefined ? "&field_resource_type_target_id="+resourceTypefilterId :'';
+		resourceSortFilter=resourceSortFilter!==undefined ?resourceSortFilter :'';
+		console.log(ProductId);
+		console.log(resourceTypefilterId);
+		console.log(resourceSortFilter);
+
+		fetch(Apiurl.FilterByResourceId.url+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Apiurl.FilterByResourceId.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data,loader:false});
+    	})
+
+	}
+
+	/*GetProductBaseFilter=(e)=>{
+		alert("product");
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -95,6 +157,8 @@ class Resources extends Component {
 			})
 			e.target.classList.add("active");
 		}
+
+
 		let product_id=e.target.getAttribute("data-pid");
 		localStorage.setItem("product_id",product_id);
 		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
@@ -109,16 +173,24 @@ class Resources extends Component {
     		console.log(data);
     		this.setState({ResourceList:data});
     	})
+
 	}
 
 	FilterByResourceId=(e)=>{
-		let resourceActive;
+		alert("type");
+		let resourceActive,resourceSortActive;
 		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
 			 	resourceActive=item.getAttribute("data-pid");
 			 }
 		})
+
+		document.querySelectorAll(".drop-down-menu ul li a").forEach((item,index)=>{
+			if(item.parentNode.classList[0]==="active"){
+			 	resourceSortActive=item.getAttribute("data-get-filterindex");
+			 }
+		})	
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -131,9 +203,13 @@ class Resources extends Component {
 			})
 			e.target.classList.add("active");
 		}
-		let resourceApi=resourceActive!=='undefined' ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		if(resourceSortActive===undefined){
+			resourceSortActive=''
+		}
+		alert(resourceSortActive);
+		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
 		let resource_id=e.target.getAttribute("data-resource-id");
-		fetch(resourceApi+"&field_resource_type_target_id="+resource_id,{
+		fetch(resourceApi+"&field_resource_type_target_id="+resource_id+resourceSortActive,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -148,9 +224,15 @@ class Resources extends Component {
 	}
 
 	SortResources=(e)=>{
-		let resourceActive;
+		let resourceActive,resourceTypefilterId;
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+
+		}else{
+			document.querySelectorAll(".drop-down-menu > ul > li a").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.parentNode.classList.add("active");
@@ -159,14 +241,23 @@ class Resources extends Component {
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
 			 	resourceActive=item.getAttribute("data-pid");
-			 }else{
-			 	resourceActive='All';
 			 }
 		})
+		document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+				 if(item.classList[0]==="active"){
+			 			resourceTypefilterId=item.getAttribute("data-resource-id");
+			 		}
+			})
+		if(resourceActive===undefined){
+			resourceActive='All'
+		}
 
+		if(resourceTypefilterId===undefined){
+			resourceTypefilterId=''
+		}
 		let filterType=e.target.getAttribute("data-get-filterindex");
-		//localStorage.setItem("resource-filter-type",filterType);
-		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resourceActive+filterType,{
+		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		fetch(resourceApi+"&field_resource_type_target_id="+resourceTypefilterId+filterType,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -178,7 +269,7 @@ class Resources extends Component {
     		console.log(data);
     		this.setState({ResourceList:data});
     	})
-	}
+	}*/
 
 	ListResourcesforSearch=(e)=>{
 		let resource_id;
@@ -257,7 +348,7 @@ class Resources extends Component {
 				
 				<div className="bottom-content-block with-filter">
 
-					
+					{!this.state.loader ?
 					<div className="d-flex flex-wrap resources-main">
 
 						
@@ -268,7 +359,7 @@ class Resources extends Component {
 								<span>Products</span>
 								<ul className="list product-list-item">
 								{this.state.productList.map((productItem,index)=>
-									<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
+									<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.FiltersApplied}>{ReactHtmlParser(productItem.title)}</Link></li>
 								)}
 								</ul>
 							</div>
@@ -279,7 +370,7 @@ class Resources extends Component {
 								<span>Types</span>
 								<ul className="list resource-filter-type">
 									{this.state.ResourceTypelist.map((resourcetitle,index)=>
-										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FilterByResourceId}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
+										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FiltersApplied}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
 									)}
 								</ul>
 							</div>
@@ -306,11 +397,11 @@ class Resources extends Component {
 										<h2>Sort by</h2>
 									</div>
 									<div className="drop-down-menu">
-										<ul>
-											<li><Link title="Recently added" data-get-filterindex="&sort_by=created&sort_order=DESC" onClick={this.SortResources}>Recently added</Link></li>
-											<li><Link title="Oldest-Newest"  data-get-filterindex="&sort_by=created&sort_order=ASC" onClick={this.SortResources}>Oldest-Newest</Link></li>
-											<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.SortResources}>Recently viewed</Link></li>
-											<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.SortResources}>Most viewed</Link></li>
+										<ul className='resource-filter-sort'>
+											<li><Link title="Recently added" data-get-filterindex="&sort_by=created&sort_order=DESC" onClick={this.FiltersApplied}>Recently added</Link></li>
+											<li><Link title="Oldest-Newest"  data-get-filterindex="&sort_by=created&sort_order=ASC" onClick={this.FiltersApplied}>Oldest-Newest</Link></li>
+											<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.FiltersApplied}>Recently viewed</Link></li>
+											<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.FiltersApplied}>Most viewed</Link></li>
 										</ul>
 									</div>
 								</div>
@@ -335,31 +426,31 @@ class Resources extends Component {
 
 										<div className="list-filter-mobile">
 											<h5>Product</h5>
-											<ul className='product-filter'>
+											<ul className='product-list-item'>
 												{this.state.productList.map((productItem,index)=>
-													<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
+													<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.FiltersApplied}>{ReactHtmlParser(productItem.title)}</Link></li>
 												 )}
 												
 											</ul>
 
 											<h5>Types</h5>
 											<ul className="list resource-filter-type list-type-mobile-filter">
-									{this.state.ResourceTypelist.map((resourcetitle,index)=>
-										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FilterByResourceId}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
-									)}
-								</ul>
+												{this.state.ResourceTypelist.map((resourcetitle,index)=>
+													<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FiltersApplied}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
+												)}
+											</ul>
 
 											<h5>Sort by</h5>
-											<ul className='sorting-filter'>
-												<li><Link title="Recently added" data-get-filterindex="&sort_by=created&sort_order=DESC" onClick={this.SortResources}>Recently added</Link></li>
-												<li><Link title="Oldest-Newest"  data-get-filterindex="&sort_by=created&sort_order=ASC" onClick={this.SortResources}>Oldest-Newest</Link></li>
-												<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.SortResources}>Recently viewed</Link></li>
-												<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.SortResources}>Most viewed</Link></li>
+											<ul className='resource-filter-sort'>
+												<li><Link title="Recently added" data-get-filterindex="&sort_by=created&sort_order=DESC" onClick={this.FiltersApplied}>Recently added</Link></li>
+												<li><Link title="Oldest-Newest"  data-get-filterindex="&sort_by=created&sort_order=ASC" onClick={this.FiltersApplied}>Oldest-Newest</Link></li>
+												<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.FiltersApplied}>Recently viewed</Link></li>
+												<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.FiltersApplied}>Most viewed</Link></li>
 											</ul>
 
 											
-											<div class="btn-block">
-												<button class="common-btn-blue"><span>Apply filters</span></button>
+											<div className="btn-block">
+												<button className="common-btn-blue" onClick={(e)=>this.setState({mobileView:false})}><span>Apply filters</span></button>
 											</div>
 
 										</div>
@@ -386,7 +477,10 @@ class Resources extends Component {
 							)}
 							</div>							
 						</div>
-					</div>
+					</div>:
+					<>
+						{cosmaticAsset.cosmatic.default.loader}
+					</>}
 				</div>
 			</div>
 		</div>

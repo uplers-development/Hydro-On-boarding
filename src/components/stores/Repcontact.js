@@ -7,6 +7,7 @@ import ReactHtmlParser from 'react-html-parser';
 //import {cosmaticAsset} from'../constants/common';
 import{hasNull,isRequired} from '../validation';
 import {ValidationMsg} from'../constants/validationmsg';
+import {cosmaticAsset} from'../constants/common';
 
 class Repcontact extends React.Component {
 
@@ -14,7 +15,7 @@ class Repcontact extends React.Component {
 		super(props);
 		this.state={
 			repContactDetails:null,
-			repcontactRendered:false,
+			repcontactRendered:true,
 			showPop:false,
 			textareaState:false,
 		}
@@ -41,7 +42,7 @@ class Repcontact extends React.Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({repContactDetails:data,repcontactRendered:true})
+    		this.setState({repContactDetails:data,repcontactRendered:false})
     		console.log(this.state.repContactDetails.user_picture.url);
 
     	})
@@ -97,71 +98,75 @@ class Repcontact extends React.Component {
 								</div>
 								
 							</div>
-							{this.state.repcontactRendered ? 
-							<div className="bottom-content-block">	
-								<div className="d-flex flex-wrap rep-contacts-main">
-									<div className="rep-contracts-left">
-										<div className="person-detils-box sky-blue-light-2 d-flex flex-wrap">
-											<div className="person-img">
-												<img src={this.state.repContactDetails.user_picture!=='' ? this.state.repContactDetails.user_picture :require("../../images/hydro-in-tab.png")} alt="User image"/>
-											</div>
-											<div className="person-right">
-												<div className="person-title">
-													<ul className="desktop-hide d-flex">
-														<li><a href="https://twitter.com" title="Follow us"><img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" /></a></li>
-														<li><a href="https://www.linkedin.com/" title="Connect"><img src={require("../../images/ic_linkedin.svg")} alt="Linkedin" /></a></li>
-													</ul>
-													<h3>{this.state.repContactDetails.field_first_name[0].value} {this.state.repContactDetails.field_last_name[0].value}</h3>
-													<h4>Job title</h4>
-												</div>
-												<div className="person-details">
-													<div className="bottom-details d-flex flex-wrap">
-														<div className="left d-flex flex-wrap">
-															<img src={require("../../images/ic_location_marker.svg")} alt="Map marker"/>
-															<span>{this.state.repContactDetails.field_organisation[0].value}, {this.state.repContactDetails.field_location[0].value}</span>
-														</div>
-
-														<div className="right">
-															<ul>
-																<li><a href={`tel:${this.state.repContactDetails.field_contact_number[0].value}`} title={this.state.repContactDetails.field_contact_number[0].value}><img src={require("../../images/ic_telephone_blue.svg")} alt="Telephone marker" />
-																		<span><strong>Tel:</strong> {this.state.repContactDetails.field_contact_number[0].value}</span></a>
-																</li>
-
-																<li><a href={`mailto:${this.state.repContactDetails.email}`} title= {this.state.repContactDetails.email}><img src={require("../../images/ic_mail_box_blue.svg")} alt="Mailbox marker" />
-																		<span><strong>Email:</strong> {this.state.repContactDetails.email}</span></a>
-																</li>
+							{!this.state.repcontactRendered ? 
+									<div className="bottom-content-block">	
+										<div className="d-flex flex-wrap rep-contacts-main">
+											<div className="rep-contracts-left">
+												<div className="person-detils-box sky-blue-light-2 d-flex flex-wrap">
+													<div className="person-img">
+														<img src={this.state.repContactDetails.user_picture!=='' ? this.state.repContactDetails.user_picture :require("../../images/hydro-in-tab.png")} alt="User image"/>
+													</div>
+													<div className="person-right">
+														<div className="person-title">
+															<ul className="desktop-hide d-flex">
+																<li><a href="https://twitter.com" title="Follow us"><img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" /></a></li>
+																<li><a href="https://www.linkedin.com/" title="Connect"><img src={require("../../images/ic_linkedin.svg")} alt="Linkedin" /></a></li>
 															</ul>
+															<h3>{this.state.repContactDetails.field_first_name[0].value} {this.state.repContactDetails.field_last_name[0].value}</h3>
+															<h4>{this.state.repContactDetails.field_job_title[0].value}</h4>
 														</div>
+														<div className="person-details">
+															<div className="bottom-details d-flex flex-wrap">
+																<div className="left d-flex flex-wrap">
+																	<img src={require("../../images/ic_location_marker.svg")} alt="Map marker"/>
+																	<span>{this.state.repContactDetails.field_organisation[0].value}, {this.state.repContactDetails.field_location[0].value}</span>
+																</div>
 
+																<div className="right">
+																	<ul>
+																		<li><a href={`tel:${this.state.repContactDetails.field_contact_number[0].value}`} title={this.state.repContactDetails.field_contact_number[0].value}><img src={require("../../images/ic_telephone_blue.svg")} alt="Telephone marker" />
+																				<span><strong>Tel:</strong> {this.state.repContactDetails.field_contact_number[0].value}</span></a>
+																		</li>
+
+																		<li><a href={`mailto:${this.state.repContactDetails.email}`} title= {this.state.repContactDetails.email}><img src={require("../../images/ic_mail_box_blue.svg")} alt="Mailbox marker" />
+																				<span><strong>Email:</strong> {this.state.repContactDetails.email}</span></a>
+																		</li>
+																	</ul>
+																</div>
+
+															</div>
+														</div>
 													</div>
 												</div>
+												
+
+												<div className="get-in-touch">
+													<h5>Get in touch with your rep</h5>
+													<form action="#">
+														<textarea placeholder="Type your message here…" ref={this.textArea}/>
+														{this.state.textareaState ? ValidationMsg.common.default.mailTextarea : ''}
+														<div className="btn-block">
+															<button className="btn common-btn-blue" type="button" tabIndex="4" onClick={this.SendRepContactQuery}>
+																<span>SUBMIT QUERY</span></button>
+														</div>
+													</form>
+												</div>
+											</div>
+											
+											<div className="rep-contracts-right mobile-hide">
+												<h6>Hydro on Social</h6>
+												<ul>
+													<li><a href="https://twitter.com" title="Follow us"><img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" /> <span>Follow us</span></a></li>
+													<li><a href="https://www.linkedin.com/" title="Connect"><img src={require("../../images/ic_linkedin.svg")} alt="Linkedin" /><span>Connect</span></a></li>
+												</ul>
 											</div>
 										</div>
-										
-
-										<div className="get-in-touch">
-											<h5>Get in touch with your rep</h5>
-											<form action="#">
-												<textarea placeholder="Type your message here…" ref={this.textArea}/>
-												{this.state.textareaState ? ValidationMsg.common.default.mailTextarea : ''}
-												<div className="btn-block">
-													<button className="btn common-btn-blue" type="button" tabIndex="4" onClick={this.SendRepContactQuery}>
-														<span>SUBMIT QUERY</span></button>
-												</div>
-											</form>
-										</div>
 									</div>
-									
-									<div className="rep-contracts-right mobile-hide">
-										<h6>Hydro on Social</h6>
-										<ul>
-											<li><a href="https://twitter.com" title="Follow us"><img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" /> <span>Follow us</span></a></li>
-											<li><a href="https://www.linkedin.com/" title="Connect"><img src={require("../../images/ic_linkedin.svg")} alt="Linkedin" /><span>Connect</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							:""}
+									:
+									<>
+										{cosmaticAsset.cosmatic.default.loader}
+									</>
+							}
 						</div>
 					</div>:
 					

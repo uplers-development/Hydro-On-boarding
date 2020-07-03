@@ -4,6 +4,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import {cosmaticAsset} from'../constants/common';
 
 
 class Contract extends Component {
@@ -15,22 +16,16 @@ class Contract extends Component {
 			contractType:[],
 			ContractdropDownSearch:[],
 			mobileView:false,
+			loader:true,
 		}
-		this.ContractTypeBaseFilter=this.ContractTypeBaseFilter.bind(this);
-		this.ContractSortByDateOld=this.ContractSortByDateOld.bind(this);
-		this.ContractSortByDateNew=this.ContractSortByDateNew.bind(this);
-		this.ContractSortA_Z=this.ContractSortA_Z.bind(this);
-		this.ContractTypeProductBaseFilter=this.ContractTypeProductBaseFilter.bind(this);
+		this.FilterContract=this.FilterContract.bind(this);
 		this.GetAllContractForSearch=this.GetAllContractForSearch.bind(this);
 		this.ContractSearchListData=this.ContractSearchListData.bind(this);
 	}
 
 	componentDidMount(){
 	 if(localStorage.getItem("access-token")!==null){
-
 		this.GetContractForEndusers();
-		this.ProductCategory();
-		this.GetContractType();
 	}else{
 		this.props.history.push("/Login")
 	}
@@ -50,71 +45,81 @@ class Contract extends Component {
     		console.log(data);
     		this.setState({contractDetails:data})
     	})
-	}
 
-	ProductCategory=()=>{
-		fetch(Apiurl.ProductCategoryId.url,{
+    	fetch(Apiurl.GetContractProduct.url,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.ProductCategoryId.method,
+                method:Apiurl.GetContractProduct.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
     		this.setState({categoryfilter:data})
     	})
-	}
-
-	GetContractType =()=>{
 		fetch(Apiurl.GetContractType.url,{
-                method:Apiurl.GetContractType.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractType:data})
-    	})
+		                method:Apiurl.GetContractType.method,
+		    	}).then(res=>{
+		    		return res.json()
+		    	}).then(data=>{	
+		    		console.log(data);
+		    		this.setState({contractType:data,loader:false})
+		    	})
 	}
 
-	ContractTypeProductBaseFilter=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
+	FilterContract =(e)=>{
+		e.preventDefault();
+		if(e.target.parentNode.parentNode.classList.contains("product-list-item")){
+			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
+				item.classList.remove("active")	
 			})
-			e.target.parentNode.classList.add("active");
+		}else if(e.target.parentNode.parentNode.classList.contains("contract-filter-type")){
+			document.querySelectorAll(".contract-filter-type > li > a").forEach((item,index)=>{
+				item.classList.remove("active")	
+			})
+		}else if(e.target.parentNode.parentNode.classList.contains("contract-filter-sort")){
+			document.querySelectorAll(".contract-filter-sort > li > a").forEach((item,index)=>{
+				item.classList.remove("active")	
+			})
 		}
+		e.target.classList.add("active");
+		let ProductId,resourceTypefilterId,resourceSortFilter;	
+		document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
+				if(item.classList[0]==="active"){
+		 			ProductId=item.getAttribute("data-product-id")
+			 	}	
+			})
+		document.querySelectorAll(".contract-filter-type > li > a").forEach((item,index)=>{
+				if(item.classList[0]==="active"){
+		 			resourceTypefilterId=item.getAttribute("data-contracttype-id")
+			 	}	
+			})
+		document.querySelectorAll(".contract-filter-sort > li > a").forEach((item,index)=>{
+				if(item.classList[0]==="active"){
+		 			resourceSortFilter=item.getAttribute("data-contactractsort-index")
+			 	}	
+			})		
+		ProductId=ProductId!==undefined ?"/"+ProductId :'';
+		resourceTypefilterId=resourceTypefilterId!==undefined ? "&field_resource_type_target_id="+resourceTypefilterId :'';
+		resourceSortFilter=resourceSortFilter!==undefined ?resourceSortFilter :'';
+		console.log(ProductId);
+		console.log(resourceTypefilterId);
+		console.log(resourceSortFilter);
 		let uid=JSON.parse(localStorage.getItem("user-type")).uid
-		let nid=e.target.getAttribute("data-product-id");
-		fetch(Apiurl.ContractTypeProductBaseFilter.url+uid+'/'+nid+"?_format=json",{
+		fetch(Apiurl.ContractTypeProductBaseFilter.url+uid+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
                 method:Apiurl.ContractTypeProductBaseFilter.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({contractDetails:data})
+    		this.setState({contractDetails:data,loader:false});
     	})
 	}
-
-	ContractTypeBaseFilter=(e)=>{
-		e.preventDefault()
-		let typeId=e.target.getAttribute("data-contracttype-id");
-		fetch(Apiurl.ContractTypeBaseFilter.url+"&field_contract_document_type_target_id="+typeId,{
-				headers: {
-                	"Content-Type" : "application/json",
-                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
-                },
-                method:Apiurl.ContractTypeBaseFilter.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}
-
 
 	GetAllContractForSearch=(e)=>{
 		if(e.target.value!==''){
@@ -155,60 +160,6 @@ class Contract extends Component {
 	}
 	
 
-	ContractSortByDateOld=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		fetch(Apiurl.ContractSortByDate.url+"&sort_by=field_purchase_date_value&sort_order=DESC",{
-                method:Apiurl.ContractSortByDate.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}
-
-	ContractSortByDateNew=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		fetch(Apiurl.ContractSortByDate.url+"&sort_by=field_purchase_date_value&sort_order=ASC",{
-                method:Apiurl.ContractSortByDate.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}
-
-	ContractSortA_Z=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		fetch(Apiurl.ContractSortA_Z.url+"&sort_by=field_purchase_date_value&sort_order=DESC",{
-                method:Apiurl.ContractSortA_Z.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}
-
 	render() {
 		return (
 			<div>
@@ -236,7 +187,7 @@ class Contract extends Component {
 
 							
 							<div className="bottom-content-block with-filter">
-
+								{!this.state.loader ?
 								
 								<div className="d-flex flex-wrap contracts-main">
 
@@ -246,9 +197,9 @@ class Contract extends Component {
 										
 										<div className="select-box">
 											<span>Products</span>
-											<ul className="list">
+											<ul className="list product-list-item">
 											{this.state.categoryfilter.map((productItem,index)=>
-												<li key={index}><a href="javascript:void(0)" title={ReactHtmlParser(productItem.name)} data-product-id={productItem.tid} onClick={this.ContractTypeProductBaseFilter}>{ReactHtmlParser(productItem.name)}</a></li>
+												<li key={index}><a href="javascript:void(0)" title={ReactHtmlParser(productItem.title)} data-product-id={productItem.nid} onClick={this.FilterContract}>{ReactHtmlParser(productItem.title)}</a></li>
 											)}
 
 											</ul>
@@ -258,9 +209,9 @@ class Contract extends Component {
 										
 										<div className="select-box">
 											<span>Types</span>
-											<ul className="list">
+											<ul className="list contract-filter-type">
 											{this.state.contractType.map((contractType,index)=>
-												<li key={index}><a title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.ContractTypeBaseFilter}>{contractType.name}</a></li>	
+												<li key={index}><a title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.FilterContract}>{contractType.name}</a></li>	
 											)}
 											</ul>
 										</div>
@@ -290,10 +241,11 @@ class Contract extends Component {
 													<h2>Sort by</h2>
 												</div>
 												<div className="drop-down-menu">
-													<ul>
-														<li><Link to={""} title="Purchase date newest" onClick={this.ContractSortByDateNew}>Purchase date newest</Link></li>
-														<li><Link to={""} title="Purchase date oldest" onClick={this.ContractSortByDateOld}>Purchase date oldest</Link></li>
-														<li><Link to={""} title="A-Z" onClick={this.ContractSortA_Z}>A-Z</Link></li>
+													<ul className="contract-filter-sort">
+														<li><Link to={""} title="Purchase date newest" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=DESC" onClick={this.FilterContract}>Purchase date newest</Link></li>
+														<li><Link to={""} title="Purchase date oldest" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=ASC" onClick={this.FilterContract}>Purchase date oldest</Link></li>
+														<li><Link to={""} title="A-Z" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=ASC" onClick={this.FilterContract}>A-Z</Link></li>
+														<li><Link to={""} title="Z-A" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=DESC" onClick={this.FilterContract}>Z-A</Link></li>
 													</ul>
 												</div>
 											</div>
@@ -317,30 +269,32 @@ class Contract extends Component {
 													</div>
 
 													<div className="list-filter-mobile">
-														<h5>Applications</h5>
-														<ul>
+														<h5>Products</h5>
+														<ul className="product-list-item">
 															{this.state.categoryfilter.map((productItem,index)=>
-																<li key={index}><a href="javascript:void(0)" title={productItem.title} data-product-id={productItem.nid} onClick={this.ContractTypeProductBaseFilter}>{productItem.title}</a></li>
+																<li key={index}><a href="javascript:void(0)" title={productItem.title} data-product-id={productItem.nid} onClick={this.FilterContract}>{productItem.title}</a></li>
 															)}
 														</ul>
 
-											<h5>Types</h5>
-											<ul>
-												<li className="active"><a href="#" title="Brochure">Brochure</a></li>
-												
-											</ul>
+														<h5>Types</h5>
+														<ul className="list contract-filter-type">
+														{this.state.contractType.map((contractType,index)=>
+															<li key={index}><a title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.FilterContract}>{contractType.name}</a></li>	
+														)}
+														</ul>
 
 														<h5>Sort by</h5>
-														<ul>
-															<li><Link to={""} title="Purchase date newest" onClick={this.ContractSortByDateNew}>Purchase date newest</Link></li>
-															<li><Link to={""} title="Purchase date oldest" onClick={this.ContractSortByDateOld}>Purchase date oldest</Link></li>
-															<li><Link to={""} title="A-Z" onClick={this.ContractSortA_Z}>A-Z</Link></li>
+														<ul className="contract-filter-sort">
+															<li><Link to={""} title="Purchase date newest" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=DESC" onClick={this.FilterContract}>Purchase date newest</Link></li>
+														<li><Link to={""} title="Purchase date oldest" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=ASC" onClick={this.FilterContract}>Purchase date oldest</Link></li>
+														<li><Link to={""} title="A-Z" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=ASC" onClick={this.FilterContract}>A-Z</Link></li>
+														<li><Link to={""} title="Z-A" data-contactractsort-index="&sort_by=field_purchase_date_value&sort_order=DESC" onClick={this.FilterContract}>Z-A</Link></li>
 
 														</ul>
 														
-											<div class="btn-block">
-												<button class="common-btn-blue"><span>Apply filters</span></button>
-											</div>
+														<div className="btn-block">
+															<button className="common-btn-blue" onClick={(e)=>this.setState({mobileView:false})}><span>Apply filters</span></button>
+														</div>
 													</div>
 
 												</div>
@@ -377,7 +331,10 @@ class Contract extends Component {
 									</div>
 									
 
-								</div>
+								</div>:
+								<>
+									{cosmaticAsset.cosmatic.default.loader}
+								</>}
 
 							</div>
 							

@@ -53,12 +53,12 @@ class Contract extends Component {
 	}
 
 	ProductCategory=()=>{
-		fetch(Apiurl.ProductCategoryId.url,{
+		fetch(Apiurl.GetContractProduct.url,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.ProductCategoryId.method,
+                method:Apiurl.GetContractProduct.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -248,7 +248,7 @@ class Contract extends Component {
 											<span>Products</span>
 											<ul className="list">
 											{this.state.categoryfilter.map((productItem,index)=>
-												<li key={index}><a href="javascript:void(0)" title={ReactHtmlParser(productItem.name)} data-product-id={productItem.tid} onClick={this.ContractTypeProductBaseFilter}>{ReactHtmlParser(productItem.name)}</a></li>
+												<li key={index}><a href="javascript:void(0)" title={ReactHtmlParser(productItem.title)} data-product-id={productItem.nid} onClick={this.ContractTypeProductBaseFilter}>{ReactHtmlParser(productItem.title)}</a></li>
 											)}
 
 											</ul>
@@ -317,7 +317,7 @@ class Contract extends Component {
 													</div>
 
 													<div className="list-filter-mobile">
-														<h5>Applications</h5>
+														<h5>Products</h5>
 														<ul>
 															{this.state.categoryfilter.map((productItem,index)=>
 																<li key={index}><a href="javascript:void(0)" title={productItem.title} data-product-id={productItem.nid} onClick={this.ContractTypeProductBaseFilter}>{productItem.title}</a></li>

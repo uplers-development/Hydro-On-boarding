@@ -100,11 +100,11 @@ export default {
         method:'GET'
     },
     FilterByResourceId:{
-        url:base_url+"/jsonapi/resources_listing",
+        url:base_url+"/jsonapi/resources_listing/",
         method:'GET'
     },
     SortResources:{
-        url:base_url+"/jsonapi/resources_listing/?_format=json",
+        url:base_url+"/jsonapi/resources_listing/",
         method:'GET'
     },
     ListResourcesforSearch:{
@@ -122,6 +122,10 @@ export default {
         url:base_url+'/jsonapi/taxonomy_list/contract_type?_format=json',
         method:'GET'
     }, 
+    GetContractProduct:{
+        url:base_url+"/jsonapi/product_list?_format=json",
+        method:"GET"
+    },
     ContractTypeBaseFilter:{
         url:base_url+'/jsonapi/contract_list?_format=json',
         method:'GET'

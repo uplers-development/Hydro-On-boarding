@@ -83,6 +83,7 @@ class Resources extends Component {
 	}
 
 	GetProductBaseFilter=(e)=>{
+		alert("product");
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -95,6 +96,8 @@ class Resources extends Component {
 			})
 			e.target.classList.add("active");
 		}
+		
+		
 		let product_id=e.target.getAttribute("data-pid");
 		localStorage.setItem("product_id",product_id);
 		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
@@ -112,13 +115,20 @@ class Resources extends Component {
 	}
 
 	FilterByResourceId=(e)=>{
-		let resourceActive;
+		alert("type");
+		let resourceActive,resourceSortActive;
 		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
 			 	resourceActive=item.getAttribute("data-pid");
 			 }
 		})
+
+		document.querySelectorAll(".drop-down-menu ul li a").forEach((item,index)=>{
+			if(item.parentNode.classList[0]==="active"){
+			 	resourceSortActive=item.getAttribute("data-get-filterindex");
+			 }
+		})	
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -131,9 +141,13 @@ class Resources extends Component {
 			})
 			e.target.classList.add("active");
 		}
-		let resourceApi=resourceActive!=='undefined' ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		if(resourceSortActive===undefined){
+			resourceSortActive=''
+		}
+		alert(resourceSortActive);
+		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
 		let resource_id=e.target.getAttribute("data-resource-id");
-		fetch(resourceApi+"&field_resource_type_target_id="+resource_id,{
+		fetch(resourceApi+"&field_resource_type_target_id="+resource_id+resourceSortActive,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -148,9 +162,15 @@ class Resources extends Component {
 	}
 
 	SortResources=(e)=>{
-		let resourceActive;
+		let resourceActive,resourceTypefilterId;
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
+			})
+			e.target.parentNode.classList.add("active");
+
+		}else{
+			document.querySelectorAll(".drop-down-menu > ul > li a").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.parentNode.classList.add("active");
@@ -159,14 +179,23 @@ class Resources extends Component {
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
 			 	resourceActive=item.getAttribute("data-pid");
-			 }else{
-			 	resourceActive='All';
 			 }
 		})
+		document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+				 if(item.classList[0]==="active"){
+			 			resourceTypefilterId=item.getAttribute("data-resource-id");
+			 		}
+			})
+		if(resourceActive===undefined){
+			resourceActive='All'
+		}
 
+		if(resourceTypefilterId===undefined){
+			resourceTypefilterId=''
+		}
 		let filterType=e.target.getAttribute("data-get-filterindex");
-		//localStorage.setItem("resource-filter-type",filterType);
-		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resourceActive+filterType,{
+		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		fetch(resourceApi+"&field_resource_type_target_id="+resourceTypefilterId+filterType,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")

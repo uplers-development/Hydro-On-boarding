@@ -138,7 +138,7 @@ class Product extends Component {
 
 	SortProductByType=(e)=>{
 		e.preventDefault();
-		let productSelectedvalue;
+		let productSelectedvalue,productSearchValue;
 		if(window.innerWidth > 767){
 		document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -148,6 +148,8 @@ class Product extends Component {
 				 if(item.classList[0]==="active"){
 				 	productSelectedvalue=item.getAttribute("data-cat-id");
 				 }
+
+		productSearchValue=document.querySelector("#myInput").value!=='' ? document.querySelector("#myInput").value : ''
 		})
 			e.target.parentNode.classList.add("active");
 		}else{
@@ -162,11 +164,11 @@ class Product extends Component {
 			})
 			e.target.parentNode.classList.add("active");
 		}	
-		if(productSelectedvalue===''){
+		if(productSelectedvalue===undefined){
 			productSelectedvalue="All";
 		}	
 		let sortByType=e.target.getAttribute("sortby")
-		fetch(Apiurl.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType,{
+		fetch(Apiurl.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -241,6 +243,11 @@ class Product extends Component {
     		console.log(data);
     		this.setState({productList:data,getTileListforSearch:'',loader:false})
     	})
+	}
+
+	callPDF=(e,value)=>{
+		e.preventDefault();
+		window.open(site_url+value,"_target")
 	}
 
 	render() {
@@ -380,7 +387,7 @@ class Product extends Component {
 									</div>
 									<div className="btn-block">
 										<Link to={"/Resources"} title="Resources logo blue"><img src={require("../../images/resources-logo-blue-round.svg")} alt="icon" className="svg"/> </Link>
-										<Link to={site_url+item.field_product_document} className="svg" title="Pdf download"><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg"/> </Link>
+										<Link to={""} className="svg" title="Pdf download" onClick={((e)=>this.callPDF(e,item.field_product_document))}><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg" /> </Link>
 									</div>
 								</div>
 							)}

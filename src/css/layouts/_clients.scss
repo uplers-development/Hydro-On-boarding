@@ -1,0 +1,19 @@
+.clients-main-block {
+	.fileter-block {
+		.select-box {
+			width: 146px;
+		}
+		.btn-block {
+			margin-left: 14px;
+			.common-btn-blue {
+				min-width: 87px;
+				margin-bottom: 0;
+				padding: 9px 10px 7px;
+				span {
+					font-size: 18px;
+				    line-height: 28px;
+				}
+			}
+		}
+	}
+}

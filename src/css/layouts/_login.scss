@@ -129,6 +129,8 @@
 			max-width: 360px;
 			width: 100%;
 			margin-bottom: 17px;
+			background-color: #FFFFFF;
+    		position: relative;
 
 			@media screen and (max-width:$mobile-small) {
 				max-width: 337px;

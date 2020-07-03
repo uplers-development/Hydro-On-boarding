@@ -81,10 +81,10 @@ class RepClients extends React.Component {
 				<div className="bottom-content-block with-filter">
 
 					{/*<!--Clients main blok start-->*/}
-					<div className="d-flex flex-wrap clients-main">
+					<div className="d-flex flex-wrap clients-main-block">
 					
 					{/*<!--Top filter block Start-->*/}
-					<div className="fileter-block d-flex flex-wrap">
+					<div className="fileter-block d-flex flex-wrap border-bottom">
 						
 							{/*<!--Select box start-->*/}
 							<div className="select-box">
@@ -108,7 +108,7 @@ class RepClients extends React.Component {
 								<div className="auto-search-box">
 									<form>
 										<div className="autocomplete-ss">
-											<input id="myInput" type="text" name="hydro" />
+											<input placeholder="Search client" id="myInput" type="text" name="hydro" />
 										</div>
 									</form>
 								</div>
@@ -133,6 +133,53 @@ class RepClients extends React.Component {
 						
 					</div>
 					{/*<!--Top filter block End-->*/}
+
+
+					{/*<!--Top filter block Start-->*/}
+						<div className="clients-table">
+							<div className="table-responsive">
+							
+								{/*<!--Table Start-->*/}
+								<table className="table table-striped">
+   <thead>
+      <tr>
+         <th><div className="checkbox-cust">
+				 	<input type="checkbox" id="html" />
+      				<label for="html">HTML</label>	 
+			 </div>Name</th>
+         <th>Email</th>
+         <th>Role</th>
+         <th>Last updatetd</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="html" />
+      				<label for="html">HTML</label>	 
+			 </div>
+			 <div className="name-edit">
+				 <h3></h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>		
+			 </div>	 
+		 </td>
+		 <td>John.smith@gmail.com</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+      
+         </tbody>
+</table>
+								{/*<!--Table End-->*/}
+								
+							</div>	
+						</div>
+					{/*<!--Top filter block Start-->*/}
 						
 						
 					</div>

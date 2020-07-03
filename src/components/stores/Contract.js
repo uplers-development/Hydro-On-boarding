@@ -187,7 +187,7 @@ class Contract extends Component {
 
 							
 							<div className="bottom-content-block with-filter">
-								{!this.state.loader ?
+								
 								
 								<div className="d-flex flex-wrap contracts-main">
 
@@ -311,6 +311,8 @@ class Contract extends Component {
 									<div className="container">
 										
 										<div className="contracts-list d-flex flex-wrap">
+										{!this.state.loader ?
+										<>
 										{this.state.contractDetails.map((contractItem,index)=>
 											<div className="contracts-box" key={index} onClick={(e)=>window.open(site_url+contractItem.field_contract_document,"_blank")}>
 												<div className="d-flex flex-wrap sky-blue-light">
@@ -326,15 +328,17 @@ class Contract extends Component {
 												</div>
 											</div>
 										)}
+										</>:
+										<>
+											{cosmaticAsset.cosmatic.default.loader}
+										</>}
 										</div>
 										
 									</div>
 									
 
 								</div>:
-								<>
-									{cosmaticAsset.cosmatic.default.loader}
-								</>}
+								
 
 							</div>
 							

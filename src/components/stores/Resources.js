@@ -234,8 +234,6 @@ class Resources extends Component {
 
 				
 				<div className="bottom-content-block with-filter">
-
-					{!this.state.loader ?
 					<div className="d-flex flex-wrap resources-main">
 
 						
@@ -346,6 +344,7 @@ class Resources extends Component {
 							</div>
 						</div>
 						<div className="container">
+						{!this.state.loader ?
 							<div className="resources-list d-flex flex-wrap">
 							{this.state.ResourceList.map((resourceItem,index)=>
 								<div className="resources-box" key={index} onClick={(e)=>this.triggerWhilePdfOpen(e,resourceItem.nid,resourceItem.field_resources_document)}>
@@ -363,11 +362,13 @@ class Resources extends Component {
 								</div>
 							)}
 							</div>							
+							:
+							<>
+								{cosmaticAsset.cosmatic.default.loader}
+							</>
+						}
 						</div>
-					</div>:
-					<>
-						{cosmaticAsset.cosmatic.default.loader}
-					</>}
+					</div>
 				</div>
 			</div>
 		</div>

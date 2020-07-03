@@ -120,6 +120,7 @@ class Product extends Component {
 		}
 		//alert(sortByType);
 		e.target.parentNode.classList.add("active");
+		e.target.classList.add("active");
 		let pid=e.target.getAttribute("data-cat-id");
 		localStorage.setItem("product_id",pid);
 		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
@@ -152,6 +153,7 @@ class Product extends Component {
 		productSearchValue=document.querySelector("#myInput").value!=='' ? document.querySelector("#myInput").value : ''
 		})
 			e.target.parentNode.classList.add("active");
+			e.target.classList.add("active")
 		}else{
 			document.querySelectorAll(".product-sort-by > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -162,6 +164,7 @@ class Product extends Component {
 				 	productSelectedvalue=item.getAttribute("data-cat-id");
 				 }
 			})
+			e.target.parentNode.classList.add("active");
 			e.target.parentNode.classList.add("active");
 		}	
 		if(productSelectedvalue===undefined){
@@ -253,7 +256,7 @@ class Product extends Component {
 	render() {
 		return (
 			<section className="main-wrapper">
-			{!this.state.loader ?
+			
 			<div className="d-flex flex-wrap main-block">
 				<Sidebar/>
 			<div className="d-flex flex-wrap right-content-part">
@@ -370,6 +373,8 @@ class Product extends Component {
 						
 
 						<div className="your-product-list">
+						{!this.state.loader ?
+							<>
 							{this.state.productList.map((item,index)=>
 								<div className="your-product-box d-flex flex-wrap" key={index} >
 									<div className="product-image bg-cover" style={{backgroundImage: `url(${site_url+item.field_product_image})`}}>
@@ -391,7 +396,10 @@ class Product extends Component {
 									</div>
 								</div>
 							)}
-
+							</>:
+							<>
+								{cosmaticAsset.cosmatic.default.loader}
+							</>}
 						</div>
 
 
@@ -403,10 +411,8 @@ class Product extends Component {
 
 			</div>
 
-		</div>:
-		<>
-				{cosmaticAsset.cosmatic.default.loader}
-		</>}
+		</div>
+		
 	</section>
 		);
 	}

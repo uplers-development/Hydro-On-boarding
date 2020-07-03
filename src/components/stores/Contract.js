@@ -5,6 +5,7 @@ import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../constants/common';
+import {contractmsg} from'../constants/contract';
 
 
 class Contract extends Component {
@@ -17,6 +18,8 @@ class Contract extends Component {
 			ContractdropDownSearch:[],
 			mobileView:false,
 			loader:true,
+			noDatafound:contractmsg.contractmsg.contractmsg,
+			noData:false,
 		}
 		this.FilterContract=this.FilterContract.bind(this);
 		this.GetAllContractForSearch=this.GetAllContractForSearch.bind(this);
@@ -71,19 +74,25 @@ class Contract extends Component {
 	FilterContract =(e)=>{
 		e.preventDefault();
 		if(e.target.parentNode.parentNode.classList.contains("product-list-item")){
-			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
-				item.classList.remove("active")	
-			})
+			if(!e.target.classList.contains("active")){
+				document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
+					item.classList.remove("active")	
+				})
+			}
 		}else if(e.target.parentNode.parentNode.classList.contains("contract-filter-type")){
-			document.querySelectorAll(".contract-filter-type > li > a").forEach((item,index)=>{
-				item.classList.remove("active")	
-			})
+			if(!e.target.classList.contains("active")){
+				document.querySelectorAll(".contract-filter-type > li > a").forEach((item,index)=>{
+					item.classList.remove("active")	
+				})
+			}
 		}else if(e.target.parentNode.parentNode.classList.contains("contract-filter-sort")){
-			document.querySelectorAll(".contract-filter-sort > li > a").forEach((item,index)=>{
-				item.classList.remove("active")	
-			})
+			if(!e.target.classList.contains("active")){
+				document.querySelectorAll(".contract-filter-sort > li > a").forEach((item,index)=>{
+					item.classList.remove("active")	
+				})
+			}
 		}
-		e.target.classList.add("active");
+		e.target.classList.toggle("active");
 		let ProductId,resourceTypefilterId,resourceSortFilter;	
 		document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
 				if(item.classList[0]==="active"){
@@ -118,6 +127,11 @@ class Contract extends Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({contractDetails:data,loader:false});
+    		if(document.querySelectorAll(".contracts-box") && document.querySelectorAll(".contracts-box").length <= 0){
+    			this.setState({noData:true});
+    		}else{
+    			this.setState({noData:false});
+    		}	
     	})
 	}
 
@@ -156,6 +170,11 @@ class Contract extends Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({contractDetails:data})
+    		if(document.querySelectorAll(".contracts-box") && document.querySelectorAll(".contracts-box").length <= 0){
+    			this.setState({noData:true});
+    		}else{
+    			this.setState({noData:false});
+    		}
     	})
 	}
 	
@@ -332,6 +351,9 @@ class Contract extends Component {
 										<>
 											{cosmaticAsset.cosmatic.default.loader}
 										</>}
+										<>
+										{this.state.noData ? this.state.noDatafound :''}
+										</>
 										</div>
 										
 									</div>

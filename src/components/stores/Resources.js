@@ -5,6 +5,7 @@ import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../constants/common';
+import {resourcesmsg} from'../constants/resources';
 
 class Resources extends Component {
 	constructor(props) {
@@ -16,6 +17,8 @@ class Resources extends Component {
 			SearchList:[],
 			mobileview:false,
 			loader:true,
+			noDatafound:resourcesmsg.resources.resourcesListEmpty,
+			noData:false
 
 		}
 		this.ListResourcesforSearch=this.ListResourcesforSearch.bind(this);
@@ -45,20 +48,7 @@ class Resources extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({ResourceList:data});
-    	})
-
-    	fetch(Apiurl.GetResourcesList.url,{
-			headers: {
-                	 "Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
-                method:Apiurl.GetResourcesList.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({ResourceList:data});
+    			this.setState({ResourceList:data});
     	})
 
     	fetch(Apiurl.GetProductTitle.url,{
@@ -84,7 +74,8 @@ class Resources extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({ResourceTypelist:data,loader:false});
+    			this.setState({ResourceTypelist:data,loader:false});
+
     	})
 	}
 	
@@ -92,19 +83,27 @@ class Resources extends Component {
 	FiltersApplied=(e)=>{
 		this.setState({loader:true})
 		console.log(e.target);
+
 		if(e.target.parentNode.parentNode.classList.contains("product-list-item")){
-			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
-				item.classList.remove("active")	
-			})
+			if(!e.target.classList.contains("active")){
+				document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
+					item.classList.remove("active")	
+				})
+		     }
 		}if(e.target.parentNode.parentNode.classList.contains("resource-filter-type")){
-			document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
-				item.classList.remove("active")	
-			})
+			if(!e.target.classList.contains("active")){
+				document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+					item.classList.remove("active")	
+				})
+			}
 		} if(e.target.parentNode.parentNode.classList.contains("resource-filter-sort")){
-			document.querySelectorAll(".resource-filter-sort > li > a").forEach((item,index)=>{
-				item.classList.remove("active")	
-			})
+			if(!e.target.classList.contains("active")){
+				document.querySelectorAll(".resource-filter-sort > li > a").forEach((item,index)=>{
+					item.classList.remove("active")	
+			  })
+			}
 		}
+		e.target.classList.toggle("active");
 		//console.log(e.target.classList.add("active"));
 		let ProductId,resourceTypefilterId,resourceSortFilter;	
 		document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
@@ -117,13 +116,12 @@ class Resources extends Component {
 		 			resourceTypefilterId=item.getAttribute("data-resource-id")
 			 	}	
 			})
-		e.target.classList.add("active");
 		document.querySelectorAll(".resource-filter-sort > li > a").forEach((item,index)=>{
 				if(item.classList[0]==="active"){
 		 			resourceSortFilter=item.getAttribute("data-get-filterindex")
 			 	}	
 			})		
-		ProductId=ProductId!==undefined ?ProductId :'All';
+		ProductId=ProductId!==undefined ? ProductId :'';
 		resourceTypefilterId=resourceTypefilterId!==undefined ? "&field_resource_type_target_id="+resourceTypefilterId :'';
 		resourceSortFilter=resourceSortFilter!==undefined ?resourceSortFilter :'';
 		console.log(ProductId);
@@ -141,6 +139,11 @@ class Resources extends Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({ResourceList:data,loader:false});
+    		if(document.querySelectorAll(".resources-box") && document.querySelectorAll(".resources-box").length <= 0){
+    			this.setState({noData:true});
+    		}else{
+    			this.setState({noData:false});
+    		}	
     	})
 
 	}
@@ -203,6 +206,11 @@ class Resources extends Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({ResourceList:data});
+    		if(document.querySelectorAll(".resources-box") && document.querySelectorAll(".resources-box").length <= 0){
+    			this.setState({noData:true});
+    		}else{
+    			this.setState({noData:false});
+    		}	
     	})
 	}
 
@@ -367,6 +375,10 @@ class Resources extends Component {
 								{cosmaticAsset.cosmatic.default.loader}
 							</>
 						}
+
+						<>
+						{this.state.noData ? this.state.noDatafound :''}
+						</>
 						</div>
 					</div>
 				</div>

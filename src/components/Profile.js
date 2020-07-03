@@ -113,7 +113,8 @@ class Profile extends Component {
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		this.GetProfile();
+    		//this.GetProfile();
+    		this.props.history.push("/Dashboard");
     	})
     }else{
 		hasNull(updatedata.field_first_name[0].value) ? this.setState({firstnameState:true}): this.setState({firstnameState:false})
@@ -223,7 +224,7 @@ class Profile extends Component {
 
 						{/*<!--Your Profile info start-->*/}
 						<div className="your-profile-info">
-							<h2>Your profile information</h2>
+							<h2>{this.state.first_name}</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</div>
 						{/*<!--Your Profile info start-->*/}

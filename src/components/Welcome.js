@@ -6,6 +6,7 @@ import {cosmaticAsset} from'./constants/common';
 import Apiurl,{site_url} from './Apiurl'; 
 import Slider from "react-slick";
 
+const settings = {dots: true,infinite: true,speed: 500,slidesToShow: 1,slidesToScroll: 1};
 
 class Welcome extends Component {
 	constructor(props) {
@@ -26,7 +27,7 @@ class Welcome extends Component {
 		if(localStorage.getItem("access-token")!==null){
 			this.welcomeMainBlock();
 			this.welcomeThreeBlock();
-			window.addEventListener('load',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
+			window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})
 			window.addEventListener('resize',()=>{window.innerWidth>=767 ? this.setState({mobileView:false}) : this.setState({mobileView:true})})
 			console.log(this.state.mobileView);
 		}else{
@@ -64,7 +65,6 @@ class Welcome extends Component {
 	}
 
 	render() {
-		var settings = {dots: true,infinite: true,speed: 500,slidesToShow: 1,slidesToScroll: 1};
 		return (
 			<div><section className="main-wrapper">
 				{!this.state.loader ?

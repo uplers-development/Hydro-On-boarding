@@ -17,7 +17,7 @@ class Profile extends Component {
 			organization:null,
 			time_zone:null,
 			location:null,
-			userPicture:[],
+			userPicture:null,
 			firstnameState:false,
 			lastnameState:false,
 			emailState:false,
@@ -78,7 +78,9 @@ class Profile extends Component {
 						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
 						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
 						,location:data.field_location.length>0 ?data.field_location[0].value : '',
-						userPicture:data.user_picture.length>0 ? data.user_picture[0] :'',loader:false
+						userPicture:data.user_picture.length>0 ? data.user_picture[0] :'',
+						newuserPic_id:data.user_picture.length>0 ? data.user_picture[0].target_id:'',
+						loader:false
 					})
 			console.log(this.state.userPicture);
 		})
@@ -88,6 +90,7 @@ class Profile extends Component {
 	updateProfile = (e) =>{
 		e.preventDefault();
 		console.log(this.timeZoneref.current.value);
+		console.log(this.state.newuserPic_id);
 		let updatedata={
 			mail : [{ "value": document.querySelector("#email").value}],
 			field_contact_number : [{ "value": document.querySelector("#contact_number").value }],
@@ -96,7 +99,7 @@ class Profile extends Component {
 			field_location : [{ "value":  document.querySelector("#location").value }],
 			field_organisation : [{ "value": document.querySelector("#organization").value }],
 			timezone : [{ "value": this.timeZoneref.current.value}],
-			user_picture : [{ "target_id": document.querySelector("#user-pic").getAttribute("data-id")}]
+			user_picture : [{ "target_id":this.state.newuserPic_id}]
 		};
 		if(!hasNull(updatedata.mail[0].value) && !hasNull(updatedata.field_last_name[0].value) && !hasNull(updatedata.field_contact_number[0].value) && !hasNull(updatedata.field_first_name[0].value) && !hasNull(updatedata.field_location[0].value) && !hasNull(updatedata.field_organisation[0].value) && !hasNull(updatedata.user_picture[0].target_id)){
 		fetch(Apiurl.Updateprofile.url,{
@@ -149,7 +152,6 @@ class Profile extends Component {
 				  method: 'POST',
 				  headers: myHeaders,
 				  body: fullPath,
-				  redirect: 'follow'
 				};
 				fetch("http://staging.project-progress.net/projects/hydro/file/upload/user/user/user_picture?_format=json",requestOptions)
 				.then(res=>{return res.json()})
@@ -234,7 +236,7 @@ class Profile extends Component {
 							<div className="upload-profile-photo">
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
-									<img src={this.state.userPicture.url} alt="profile-img"/>
+									<img src={this.state.userPicture.url!==''? this.state.userPicture.url : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
 									<div className="upload-img">
 
 										<span>JPG, GIF or PNG. Max size of 1mb</span>

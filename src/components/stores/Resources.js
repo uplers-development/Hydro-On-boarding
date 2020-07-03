@@ -16,6 +16,7 @@ class Resources extends Component {
 			SearchList:[],
 			mobileview:false,
 			loader:true,
+
 		}
 		this.ListResourcesforSearch=this.ListResourcesforSearch.bind(this);
 		this.SearchResourcesByTitle=this.SearchResourcesByTitle.bind(this);
@@ -95,16 +96,16 @@ class Resources extends Component {
 			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
 				item.classList.remove("active")	
 			})
-		}else if(e.target.parentNode.parentNode.classList.contains("resource-filter-type")){
+		}if(e.target.parentNode.parentNode.classList.contains("resource-filter-type")){
 			document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
 				item.classList.remove("active")	
 			})
-		}else if(e.target.parentNode.parentNode.classList.contains("resource-filter-sort")){
+		} if(e.target.parentNode.parentNode.classList.contains("resource-filter-sort")){
 			document.querySelectorAll(".resource-filter-sort > li > a").forEach((item,index)=>{
 				item.classList.remove("active")	
 			})
 		}
-		e.target.classList.add("active");
+		//console.log(e.target.classList.add("active"));
 		let ProductId,resourceTypefilterId,resourceSortFilter;	
 		document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
 				if(item.classList[0]==="active"){
@@ -116,6 +117,7 @@ class Resources extends Component {
 		 			resourceTypefilterId=item.getAttribute("data-resource-id")
 			 	}	
 			})
+		e.target.classList.add("active");
 		document.querySelectorAll(".resource-filter-sort > li > a").forEach((item,index)=>{
 				if(item.classList[0]==="active"){
 		 			resourceSortFilter=item.getAttribute("data-get-filterindex")
@@ -143,134 +145,19 @@ class Resources extends Component {
 
 	}
 
-	/*GetProductBaseFilter=(e)=>{
-		alert("product");
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		else{
-			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.classList.add("active");
-		}
 
-
-		let product_id=e.target.getAttribute("data-pid");
-		localStorage.setItem("product_id",product_id);
-		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
-			headers: {
-                	 "Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
-                method:Apiurl.GetResourceProductbaseFilter.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({ResourceList:data});
-    	})
-
-	}
-
-	FilterByResourceId=(e)=>{
-		alert("type");
-		let resourceActive,resourceSortActive;
-		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
-			 console.log(item.classList[0]);
-			 if(item.classList[0]==="active"){
-			 	resourceActive=item.getAttribute("data-pid");
-			 }
-		})
-
-		document.querySelectorAll(".drop-down-menu ul li a").forEach((item,index)=>{
-			if(item.parentNode.classList[0]==="active"){
-			 	resourceSortActive=item.getAttribute("data-get-filterindex");
-			 }
-		})	
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		else{
-			document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.classList.add("active");
-		}
-		if(resourceSortActive===undefined){
-			resourceSortActive=''
-		}
-		alert(resourceSortActive);
-		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
-		let resource_id=e.target.getAttribute("data-resource-id");
-		fetch(resourceApi+"&field_resource_type_target_id="+resource_id+resourceSortActive,{
-			headers: {
-                	 "Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
+	triggerWhilePdfOpen=(e,nid,pdf)=>{
+		
+		fetch(`http://staging.project-progress.net/projects/hydro/node/${nid}?_format=json`,{
                 method:Apiurl.FilterByResourceId.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({ResourceList:data});
+    		window.open(site_url+pdf,"_blank");
     	})
 	}
-
-	SortResources=(e)=>{
-		let resourceActive,resourceTypefilterId;
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-
-		}else{
-			document.querySelectorAll(".drop-down-menu > ul > li a").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
-			 console.log(item.classList[0]);
-			 if(item.classList[0]==="active"){
-			 	resourceActive=item.getAttribute("data-pid");
-			 }
-		})
-		document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
-				 if(item.classList[0]==="active"){
-			 			resourceTypefilterId=item.getAttribute("data-resource-id");
-			 		}
-			})
-		if(resourceActive===undefined){
-			resourceActive='All'
-		}
-
-		if(resourceTypefilterId===undefined){
-			resourceTypefilterId=''
-		}
-		let filterType=e.target.getAttribute("data-get-filterindex");
-		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
-		fetch(resourceApi+"&field_resource_type_target_id="+resourceTypefilterId+filterType,{
-			headers: {
-                	 "Content-Type" : "application/json",
-                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
-                },
-                method:Apiurl.SortResources.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({ResourceList:data});
-    	})
-	}*/
-
+	
 	ListResourcesforSearch=(e)=>{
 		let resource_id;
 		let resourcenameString=e.target.value;
@@ -461,7 +348,7 @@ class Resources extends Component {
 						<div className="container">
 							<div className="resources-list d-flex flex-wrap">
 							{this.state.ResourceList.map((resourceItem,index)=>
-								<div className="resources-box" key={index} onClick={(e)=>window.open(site_url+resourceItem.field_resources_document,"_blank")}>
+								<div className="resources-box" key={index} onClick={(e)=>this.triggerWhilePdfOpen(e,resourceItem.nid,resourceItem.field_resources_document)}>
 									<div>
 										<div className="image-block">
 											<div className="bg-cover" style={{backgroundImage: `url(${site_url+resourceItem.field_resources_image})`}}></div>

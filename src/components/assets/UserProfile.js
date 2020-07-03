@@ -29,6 +29,7 @@ class UserProfile extends Component {
 	}
 
 	Logout=(e)=>{
+		e.preventDefault();
 		localStorage.clear();
 		this.setState({logout:true})
 	}
@@ -77,7 +78,7 @@ class UserProfile extends Component {
 					{this.state.dataLoaded ?
 						<>
 						<div className="user-image-name d-flex flex-wrap align-center">
-							<img src={this.state.userPicture!=='' ? this.state.userPicture.url : ''} alt="Prfile image"/>
+							<img src={this.state.userPicture!==''? this.state.userPicture.url : require("../../images/profile-logo-blue.svg")} alt="Prfile image"/>
 							<h2>{this.state.first_name+ " "+this.state.last_name }</h2>
 						</div>
 						<div className="drop-down-menu">

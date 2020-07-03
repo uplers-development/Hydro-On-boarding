@@ -21,7 +21,8 @@ class Login extends Component{
     		login_sign_button:null,
     		usernameState:false,
     		passwordState:false,
-    		loader:false
+    		loader:false,
+    		loginError:true
     	}
     	this.Login=this.Login.bind(this);
     }
@@ -80,7 +81,7 @@ class Login extends Component{
     	}).then(data=>{
     		console.log(data);
     		if(data.message){
-    			alert(data.message);
+    			this.setState({loginError:false})
     		}else{
     			localStorage.setItem("access-token",data.csrf_token);
     			localStorage.setItem("basic-auth",btoa(data.current_user.name+':'+logindata.pass));
@@ -133,6 +134,7 @@ class Login extends Component{
 									{this.state.login_rep_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_rep_button}</span></button>:''}
 									{this.state.login_admin_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_admin_button}</span></button>:''}
 								</div>
+								{!this.state.loginError ? cosmaticAsset.cosmatic.default.loginErrorMsg : ''}
 							</form>{/*<!--Login form end-->*/}
 							
 						</div>{/*<!--Login top details end-->*/}

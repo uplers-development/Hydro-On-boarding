@@ -101,7 +101,7 @@ class Contract extends Component {
 			 	}	
 			})		
 		ProductId=ProductId!==undefined ?"/"+ProductId :'';
-		resourceTypefilterId=resourceTypefilterId!==undefined ? "&field_resource_type_target_id="+resourceTypefilterId :'';
+		resourceTypefilterId=resourceTypefilterId!==undefined ? "&field_contract_document_type_target_id="+resourceTypefilterId :'';
 		resourceSortFilter=resourceSortFilter!==undefined ?resourceSortFilter :'';
 		console.log(ProductId);
 		console.log(resourceTypefilterId);
@@ -312,7 +312,7 @@ class Contract extends Component {
 										
 										<div className="contracts-list d-flex flex-wrap">
 										{this.state.contractDetails.map((contractItem,index)=>
-											<div className="contracts-box" key={index}>
+											<div className="contracts-box" key={index} onClick={(e)=>window.open(site_url+contractItem.field_contract_document,"_blank")}>
 												<div className="d-flex flex-wrap sky-blue-light">
 													<div className="image-block">
 														<img src={require("../../images/contract1.png")} alt="contract"/>

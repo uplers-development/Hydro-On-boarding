@@ -324,6 +324,12 @@ class Contract extends Component {
 															)}
 														</ul>
 
+											<h5>Types</h5>
+											<ul>
+												<li className="active"><a href="#" title="Brochure">Brochure</a></li>
+												
+											</ul>
+
 														<h5>Sort by</h5>
 														<ul>
 															<li><Link to={""} title="Purchase date newest" onClick={this.ContractSortByDateNew}>Purchase date newest</Link></li>
@@ -331,7 +337,10 @@ class Contract extends Component {
 															<li><Link to={""} title="A-Z" onClick={this.ContractSortA_Z}>A-Z</Link></li>
 
 														</ul>
-
+														
+											<div class="btn-block">
+												<button class="common-btn-blue"><span>Apply filters</span></button>
+											</div>
 													</div>
 
 												</div>

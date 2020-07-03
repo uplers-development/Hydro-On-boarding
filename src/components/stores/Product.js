@@ -349,6 +349,11 @@ class Product extends Component {
 													<li><Link to={""} sortby="&sort_by=title&sort_order=ASC" title="A-Z" onClick={this.SortProductByType}>A-Z</Link></li>
 													<li><Link to={""} sortby="&sort_by=title&sort_order=DESC" title="Z-A" onClick={this.SortProductByType}>Z-A</Link></li>
 												</ul>
+
+												<div class="btn-block">
+												<button class="common-btn-blue"><span>Apply filters</span></button>
+											</div>
+
 											</div>
 	
 										</div>

@@ -334,13 +334,20 @@ class Resources extends Component {
 										</div>
 
 										<div className="list-filter-mobile">
-											<h5>Applications</h5>
+											<h5>Product</h5>
 											<ul className='product-filter'>
 												{this.state.productList.map((productItem,index)=>
 													<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
 												 )}
 												
 											</ul>
+
+											<h5>Types</h5>
+											<ul className="list resource-filter-type list-type-mobile-filter">
+									{this.state.ResourceTypelist.map((resourcetitle,index)=>
+										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FilterByResourceId}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
+									)}
+								</ul>
 
 											<h5>Sort by</h5>
 											<ul className='sorting-filter'>
@@ -349,6 +356,12 @@ class Resources extends Component {
 												<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.SortResources}>Recently viewed</Link></li>
 												<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.SortResources}>Most viewed</Link></li>
 											</ul>
+
+											
+											<div class="btn-block">
+												<button class="common-btn-blue"><span>Apply filters</span></button>
+											</div>
+
 										</div>
 									</div>
 								</div>

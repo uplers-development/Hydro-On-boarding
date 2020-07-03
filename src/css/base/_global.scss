@@ -1697,14 +1697,14 @@ nav {
 		a {
 			font-size: 14px;
 			line-height: 22px;
-			padding: 6px 35px;
+			padding: 6px 15px 6px 35px;
 			width: 100%;
 			display: block;
 			font-family: $gibson;
 			font-weight: $font-normal;
 			color: $panton-gray;
 			text-decoration: none;
-			background-image: url(#{$imgpath}/ic_search.svg);
+			background-image: url(#{$imgpath}/ic_search_light.svg);
 			background-size: 17px;
 			background-repeat: no-repeat;
 			background-position: 5% center;

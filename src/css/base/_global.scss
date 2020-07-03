@@ -1394,11 +1394,11 @@ nav {
 		display: none;
 	}
 	> span {
-		font-size: 16px;
-		line-height: 22px;
 		color: $panton-gray;
 		font-family: $gibson;
 		font-weight: $font-semi-bold;
+		font-size: 16px;
+		line-height: 22px;
 		text-decoration: none;
 		padding: 11px 25px;
 		width: 100%;
@@ -1432,7 +1432,7 @@ nav {
 		width: 100%;
 		@include transition(all 0.5s ease-in-out);
 		a {
-			font-size: 14px;
+			font-size: 16px;
 			line-height: 22px;
 			padding: 6px 25px;
 			width: 100%;
@@ -2160,16 +2160,26 @@ a { @include transition(all 0.5s ease-in-out); }
     -webkit-overflow-scrolling: touch;
 	.table {
 		border-collapse: collapse;
-		width: 100%;
-		color: $black;
-		font-size: 18px;
-		line-height: 22px;
-		font-family: $arial;
-		font-weight: $font-normal;
+		table-layout: fixed;
+		max-width: 1320px;
 		&.table-striped {
 			thead {
+				border-bottom: 1px solid $black;
 				tr {
 					th{
+						.checkbox-cust {
+							display: inline-block;
+						}
+						> span {
+							display: inline-block;
+							padding-left: 10px;
+						}
+						font-size: 18px;
+						line-height: 28px;
+						font-family: $gibson;
+						color: $panton-gray;
+						font-weight: $font-normal;
+						padding: 16px 0;
 						&:nth-child(1)
 						{
 							width: 410px;	
@@ -2177,12 +2187,12 @@ a { @include transition(all 0.5s ease-in-out); }
 						}
 						&:nth-child(2)
 						{
-							width: 430px;	
+							width: 420px;	
 							text-align: left;
 						}
 						&:nth-child(3)
 						{
-							width: 347px;	
+							width: 340px;	
 							text-align: left;
 						}
 						&:nth-child(4)
@@ -2192,17 +2202,87 @@ a { @include transition(all 0.5s ease-in-out); }
 						}
 					}
 				}
-
+				
 			}
 			tbody {
 				tr{
 					td {
+						color: $black;
+						font-size: 18px;
+						line-height: 22px;
+						font-family: $arial;
+						font-weight: $font-normal;
+						&:first-child {
+							h3 {
+								color: $black;
+								font-size: 18px;
+								line-height: 22px;
+								font-family: $arial;
+								font-weight: $font-normal;
+								margin: 0 0 8px 0;
+							}
+						}
+						.action {
+							a{
+								text-decoration: none;
+								color: $panton-gray;
+								position: relative;
+								&:not(:last-child) {
+									padding-right: 25px;
+								}
+								&:not(:last-child):after {
+									content: "";
+									display: inline-block;
+									width: 1px;
+									height: 18px;
+									position: absolute;
+									top: 50%;
+									transform: translateY(-50%);
+									right: 11px;
+									background-color: $panton-gray;
+								}
+								
+							}
+						}
+						.checkbox-cust {
+							display: inline-block;
+    						vertical-align: middle;	
+						}
+						.name-edit {
+							display: inline-block;
+    						vertical-align: middle;	
+							padding-left: 25px;
+							.img-c
+							{
+								width: 60px;
+								display: inline-block;
+    							vertical-align: middle;	
+								img {
+									width: 60px;
+									height: 60px;
+									border-radius: 50%;
+								}
+							}
+							.right-detail
+							{
+								display: inline-block;
+    							vertical-align: middle;	
+								padding-left: 15px;
+							}
+						}
 						padding: 12px 0;
 						vertical-align: middle;
+					}
+					&:last-child {
+						span {
+							display: block;
+							text-align: right;
+						}
 					}
 				}
 			}
 		}
 	}
+	
 }
 

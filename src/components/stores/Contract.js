@@ -4,6 +4,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import {cosmaticAsset} from'../constants/common';
 
 
 class Contract extends Component {
@@ -15,23 +16,16 @@ class Contract extends Component {
 			contractType:[],
 			ContractdropDownSearch:[],
 			mobileView:false,
+			loader:true,
 		}
-		/*this.ContractTypeBaseFilter=this.ContractTypeBaseFilter.bind(this);
-		this.ContractSortByDateOld=this.ContractSortByDateOld.bind(this);
-		this.ContractSortByDateNew=this.ContractSortByDateNew.bind(this);
-		this.ContractSortA_Z=this.ContractSortA_Z.bind(this);*/
 		this.FilterContract=this.FilterContract.bind(this);
-		//this.ContractTypeProductBaseFilter=this.ContractTypeProductBaseFilter.bind(this);
 		this.GetAllContractForSearch=this.GetAllContractForSearch.bind(this);
 		this.ContractSearchListData=this.ContractSearchListData.bind(this);
 	}
 
 	componentDidMount(){
 	 if(localStorage.getItem("access-token")!==null){
-
 		this.GetContractForEndusers();
-		this.ProductCategory();
-		this.GetContractType();
 	}else{
 		this.props.history.push("/Login")
 	}
@@ -51,10 +45,8 @@ class Contract extends Component {
     		console.log(data);
     		this.setState({contractDetails:data})
     	})
-	}
 
-	ProductCategory=()=>{
-		fetch(Apiurl.GetContractProduct.url,{
+    	fetch(Apiurl.GetContractProduct.url,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -66,17 +58,14 @@ class Contract extends Component {
     		console.log(data);
     		this.setState({categoryfilter:data})
     	})
-	}
-
-	GetContractType =()=>{
 		fetch(Apiurl.GetContractType.url,{
-                method:Apiurl.GetContractType.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractType:data})
-    	})
+		                method:Apiurl.GetContractType.method,
+		    	}).then(res=>{
+		    		return res.json()
+		    	}).then(data=>{	
+		    		console.log(data);
+		    		this.setState({contractType:data,loader:false})
+		    	})
 	}
 
 	FilterContract =(e)=>{
@@ -128,49 +117,9 @@ class Contract extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({contractDetails:data});
+    		this.setState({contractDetails:data,loader:false});
     	})
 	}
-
-
-
-	/*ContractTypeProductBaseFilter=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		let uid=JSON.parse(localStorage.getItem("user-type")).uid
-		let nid=e.target.getAttribute("data-product-id");
-		fetch(Apiurl.ContractTypeProductBaseFilter.url+uid+'/'+nid+"?_format=json",{
-                method:Apiurl.ContractTypeProductBaseFilter.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}
-
-	ContractTypeBaseFilter=(e)=>{
-		e.preventDefault()
-		let typeId=e.target.getAttribute("data-contracttype-id");
-		fetch(Apiurl.ContractTypeBaseFilter.url+"&field_contract_document_type_target_id="+typeId,{
-				headers: {
-                	"Content-Type" : "application/json",
-                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
-                },
-                method:Apiurl.ContractTypeBaseFilter.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}*/
-
 
 	GetAllContractForSearch=(e)=>{
 		if(e.target.value!==''){
@@ -211,60 +160,6 @@ class Contract extends Component {
 	}
 	
 
-	/*ContractSortByDateOld=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		fetch(Apiurl.ContractSortByDate.url+"&sort_by=field_purchase_date_value&sort_order=DESC",{
-                method:Apiurl.ContractSortByDate.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}
-
-	ContractSortByDateNew=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		fetch(Apiurl.ContractSortByDate.url+"&sort_by=field_purchase_date_value&sort_order=ASC",{
-                method:Apiurl.ContractSortByDate.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}
-
-	ContractSortA_Z=(e)=>{
-		e.preventDefault()
-		if(window.innerWidth<=767){
-			document.querySelectorAll(".drop-down-menu > ul > li").forEach((item,index)=>{
-				if(item.classList.contains("active")){item.classList.remove("active")}
-			})
-			e.target.parentNode.classList.add("active");
-		}
-		fetch(Apiurl.ContractSortA_Z.url+"&sort_by=field_purchase_date_value&sort_order=DESC",{
-                method:Apiurl.ContractSortA_Z.method,
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{	
-    		console.log(data);
-    		this.setState({contractDetails:data})
-    	})
-	}*/
-
 	render() {
 		return (
 			<div>
@@ -292,7 +187,7 @@ class Contract extends Component {
 
 							
 							<div className="bottom-content-block with-filter">
-
+								{!this.state.loader ?
 								
 								<div className="d-flex flex-wrap contracts-main">
 
@@ -436,7 +331,10 @@ class Contract extends Component {
 									</div>
 									
 
-								</div>
+								</div>:
+								<>
+									{cosmaticAsset.cosmatic.default.loader}
+								</>}
 
 							</div>
 							

@@ -61,7 +61,6 @@ class UserProfile extends Component {
 	}
 
 	openToogle=(e)=>{
-		alert();
 		if(window.innerWidth<=767){
 			if(e.target.classList.contains("active")){
 				this.setState({openTooglecontent:false})

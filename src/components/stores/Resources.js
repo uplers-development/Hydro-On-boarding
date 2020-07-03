@@ -4,6 +4,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import {cosmaticAsset} from'../constants/common';
 
 class Resources extends Component {
 	constructor(props) {
@@ -13,11 +14,9 @@ class Resources extends Component {
 			productList:[],
 			ResourceTypelist:[],
 			SearchList:[],
-			mobileview:false
+			mobileview:false,
+			loader:true,
 		}
-	/*	this.GetProductBaseFilter=this.GetProductBaseFilter.bind(this);
-		this.FilterByResourceId=this.FilterByResourceId.bind(this);
-		this.SortResources=this.SortResources.bind(this);*/
 		this.ListResourcesforSearch=this.ListResourcesforSearch.bind(this);
 		this.SearchResourcesByTitle=this.SearchResourcesByTitle.bind(this);
 		this.FiltersApplied=this.FiltersApplied.bind(this);
@@ -84,12 +83,13 @@ class Resources extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({ResourceTypelist:data});
+    		this.setState({ResourceTypelist:data,loader:false});
     	})
 	}
 	
 
 	FiltersApplied=(e)=>{
+		this.setState({loader:true})
 		console.log(e.target);
 		if(e.target.parentNode.parentNode.classList.contains("product-list-item")){
 			document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
@@ -138,7 +138,7 @@ class Resources extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({ResourceList:data});
+    		this.setState({ResourceList:data,loader:false});
     	})
 
 	}
@@ -348,7 +348,7 @@ class Resources extends Component {
 				
 				<div className="bottom-content-block with-filter">
 
-					
+					{!this.state.loader ?
 					<div className="d-flex flex-wrap resources-main">
 
 						
@@ -477,7 +477,10 @@ class Resources extends Component {
 							)}
 							</div>							
 						</div>
-					</div>
+					</div>:
+					<>
+						{cosmaticAsset.cosmatic.default.loader}
+					</>}
 				</div>
 			</div>
 		</div>

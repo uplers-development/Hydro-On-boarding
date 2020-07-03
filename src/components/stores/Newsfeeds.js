@@ -117,7 +117,7 @@ class Newsfeeds extends Component {
 		return (
 			<div>
 				<section className="main-wrapper">
-				{!this.state.loader ? 
+				
 					<div className="d-flex flex-wrap main-block">
 					<Sidebar/>
 					<div className="d-flex flex-wrap right-content-part">
@@ -133,6 +133,7 @@ class Newsfeeds extends Component {
 					<div className="bottom-content-block">
 
 					{/*<!--News feed main blok start-->*/}
+					{!this.state.loader ? 
 					<div className="d-flex flex-wrap news-main">
 						<div className="news-feed-left">
 							 {this.state.newsFeedItems}
@@ -148,12 +149,13 @@ class Newsfeeds extends Component {
 							</div>
 						</div>
 					</div>
+					:
+					<>
+						{cosmaticAsset.cosmatic.default.loader}
+					</>}
 				</div>
 			</div>
-		</div>:
-		<>
-			{cosmaticAsset.cosmatic.default.loader}
-		</>}
+		</div>
 	</section>
 			</div>
 		);

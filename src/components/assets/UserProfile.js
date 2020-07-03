@@ -15,9 +15,11 @@ class UserProfile extends Component {
 			location:null,
 			userPicture:[],
 			logout:false,
-			dataLoaded:false
+			dataLoaded:false,
+			openTooglecontent:false,
 		}
 		this.Logout=this.Logout.bind(this);
+		this.openToogle=this.openToogle.bind(this);
 	}
 
 	componentDidMount(){
@@ -58,10 +60,21 @@ class UserProfile extends Component {
 		})
 	}
 
+	openToogle=(e)=>{
+		alert();
+		if(window.innerWidth<=767){
+			if(e.target.classList.contains("active")){
+				this.setState({openTooglecontent:false})
+			}else{
+				this.setState({openTooglecontent:true});
+			}
+		}
+	}
+
 	render() {
 		return (
 			<div>
-				<div className="d-flex flex-wrap user-log">
+				<div className={this.state.openTooglecontent ? "d-flex flex-wrap user-log active": "d-flex flex-wrap user-log "} onClick={this.openToogle}>
 					{this.state.dataLoaded ?
 						<>
 						<div className="user-image-name d-flex flex-wrap align-center">

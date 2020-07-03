@@ -83,7 +83,7 @@ class Resources extends Component {
 	}
 
 	GetProductBaseFilter=(e)=>{
-		let resourceTypeSelectedValue,resouceSorttarget;
+		alert("product");
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -95,29 +95,12 @@ class Resources extends Component {
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.classList.add("active");
-			document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
-				 if(item.classList[0]==="active"){
-				 	resourceTypeSelectedValue=item.getAttribute("data-resource-id");
-				 }
-			})
-			document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
-				 if(item.parentNode.classList[0]==="active"){
-				 	resouceSorttarget=item.getAttribute("data-get-filterindex");
-				 }
-			})
 		}
 
-		if(resourceTypeSelectedValue===undefined){
-			resourceTypeSelectedValue='';
-		} 
-		if(resouceSorttarget===undefined){
-			resouceSorttarget='';
-		}
-
+		
 		let product_id=e.target.getAttribute("data-pid");
 		localStorage.setItem("product_id",product_id);
-
-		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json"+"&field_resource_type_target_id="+resourceTypeSelectedValue+resouceSorttarget,{
+		fetch(Apiurl.GetResourceProductbaseFilter.url+product_id+"?_format=json",{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -132,18 +115,20 @@ class Resources extends Component {
 	}
 
 	FilterByResourceId=(e)=>{
-		let resourceProductItem,resouceSorttarget,resourceApi;
+		alert("type");
+		let resourceActive,resourceSortActive;
 		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
-			 	resourceProductItem=item.getAttribute("data-pid");
+			 	resourceActive=item.getAttribute("data-pid");
 			 }
 		})
-		document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
-				 if(item.parentNode.classList[0]==="active"){
-				 	resouceSorttarget=item.getAttribute("data-get-filterindex");
-				 }
-			})
+
+		document.querySelectorAll(".drop-down-menu ul li a").forEach((item,index)=>{
+			if(item.parentNode.classList[0]==="active"){
+			 	resourceSortActive=item.getAttribute("data-get-filterindex");
+			 }
+		})	
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .product-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
@@ -155,29 +140,14 @@ class Resources extends Component {
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.classList.add("active");
-		} 
-
-		alert(resourceProductItem);
-		alert(resouceSorttarget);
-		if(resouceSorttarget===undefined){
-			resouceSorttarget='';
 		}
-		if(resourceProductItem!==undefined && resourceProductItem!==undefined){
-			resourceApi=Apiurl.FilterByResourceId.url+"/"+resourceProductItem+resouceSorttarget+"?_format=json"			
+		if(resourceSortActive===undefined){
+			resourceSortActive=''
 		}
-		else if(resourceProductItem===undefined && resourceProductItem===undefined){
-			resourceApi=Apiurl.FilterByResourceId.url+"?_format=json"			
-		}
-		else if(resourceProductItem===undefined && resourceProductItem!==undefined){
-			resourceApi=Apiurl.FilterByResourceId.url+"/"+resourceProductItem+"?_format=json"			
-		}
-		else if(resourceProductItem!==undefined && resourceProductItem===undefined){
-			resourceApi=Apiurl.FilterByResourceId.url+resouceSorttarget+"?_format=json"			
-		}
-
-
+		alert(resourceSortActive);
+		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
 		let resource_id=e.target.getAttribute("data-resource-id");
-		fetch(resourceApi+"&field_resource_type_target_id="+resource_id,{
+		fetch(resourceApi+"&field_resource_type_target_id="+resource_id+resourceSortActive,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -192,44 +162,40 @@ class Resources extends Component {
 	}
 
 	SortResources=(e)=>{
-		let resourceProductItem,resouceSorttarget;
+		let resourceActive,resourceTypefilterId;
 		if(window.innerWidth<=767){
 			document.querySelectorAll(".list-filter-mobile > .sorting-filter > li").forEach((item,index)=>{
 				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.parentNode.classList.add("active");
+
 		}else{
-			document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
-				 console.log(item.classList[0]);
-				 if(item.classList[0]==="active"){
-				 	resourceProductItem=item.getAttribute("data-pid");
-				 }
-			})
-		document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
-				 if(item.parentNode.classList[0]==="active"){
-				 	resouceSorttarget=item.getAttribute("data-get-filterindex");
-				 }
+			document.querySelectorAll(".drop-down-menu > ul > li a").forEach((item,index)=>{
+				if(item.classList.contains("active")){item.classList.remove("active")}
 			})
 			e.target.parentNode.classList.add("active");
 		}
 		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
 			 console.log(item.classList[0]);
 			 if(item.classList[0]==="active"){
-			 	resourceProductItem=item.getAttribute("data-pid");
-			 }else{
-			 	resourceProductItem='All';
+			 	resourceActive=item.getAttribute("data-pid");
 			 }
 		})
-		if(resourceProductItem===undefined){
-			resourceProductItem='';
+		document.querySelectorAll(".resource-filter-type > li > a").forEach((item,index)=>{
+				 if(item.classList[0]==="active"){
+			 			resourceTypefilterId=item.getAttribute("data-resource-id");
+			 		}
+			})
+		if(resourceActive===undefined){
+			resourceActive='All'
 		}
-		if(resouceSorttarget===undefined){
-					resouceSorttarget='';
-				}
 
+		if(resourceTypefilterId===undefined){
+			resourceTypefilterId=''
+		}
 		let filterType=e.target.getAttribute("data-get-filterindex");
-		//localStorage.setItem("resource-filter-type",filterType);
-		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resourceProductItem+filterType+resouceSorttarget,{
+		let resourceApi=resourceActive!==undefined ? Apiurl.FilterByResourceId.url+resourceActive+"?_format=json" : Apiurl.FilterByResourceId.url+"?_format=json";
+		fetch(resourceApi+"&field_resource_type_target_id="+resourceTypefilterId+filterType,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -397,13 +363,20 @@ class Resources extends Component {
 										</div>
 
 										<div className="list-filter-mobile">
-											<h5>Applications</h5>
+											<h5>Product</h5>
 											<ul className='product-filter'>
 												{this.state.productList.map((productItem,index)=>
 													<li key={index}><Link title={ReactHtmlParser(productItem.title)} data-pid={productItem.nid} onClick={this.GetProductBaseFilter}>{ReactHtmlParser(productItem.title)}</Link></li>
 												 )}
 												
 											</ul>
+
+											<h5>Types</h5>
+											<ul className="list resource-filter-type list-type-mobile-filter">
+									{this.state.ResourceTypelist.map((resourcetitle,index)=>
+										<li key={index}><Link data-resource-id={resourcetitle.tid}  title={ReactHtmlParser(resourcetitle.name)} onClick={this.FilterByResourceId}>{ReactHtmlParser(resourcetitle.name)}</Link></li>
+									)}
+								</ul>
 
 											<h5>Sort by</h5>
 											<ul className='sorting-filter'>
@@ -412,6 +385,12 @@ class Resources extends Component {
 												<li><Link title="Recently viewed" data-get-filterindex="&sort_by=timestamp&sort_order=DESC" onClick={this.SortResources}>Recently viewed</Link></li>
 												<li><Link title="Most viewed" data-get-filterindex="&sort_by=totalcount&sort_order=DESC" onClick={this.SortResources}>Most viewed</Link></li>
 											</ul>
+
+											
+											<div class="btn-block">
+												<button class="common-btn-blue"><span>Apply filters</span></button>
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -420,7 +399,7 @@ class Resources extends Component {
 						<div className="container">
 							<div className="resources-list d-flex flex-wrap">
 							{this.state.ResourceList.map((resourceItem,index)=>
-								<div className="resources-box" key={index}>
+								<div className="resources-box" key={index} onClick={(e)=>window.open(site_url+resourceItem.field_resources_document,"_blank")}>
 									<div>
 										<div className="image-block">
 											<div className="bg-cover" style={{backgroundImage: `url(${site_url+resourceItem.field_resources_image})`}}></div>

@@ -810,7 +810,7 @@ nav {
 		background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 40%, rgba(254, 255, 255, 1) 42%, rgba(252, 254, 253, 1) 42%, rgba(253, 254, 255, 1) 45%, rgba(246, 251, 254, 1) 66%, rgba(246, 251, 254, 1) 100%);
 		width: 100%;
 		border-bottom: 1px solid $off-white;
-		padding: 36px 274px 36px 0;
+		padding: 36px 0 36px 0;
 
 		@media screen and (max-width:$large-mx) {
 			padding: 12px 20px 12px 0;
@@ -1214,7 +1214,7 @@ nav {
     width: 100%;
 	@include transition(all 0.5s ease-in-out);
 	position: absolute;
-	right: -27px;
+	right: 0;
     top: 0px;
 	
 	@media screen and (max-width:$large-mx) {

@@ -1,4 +1,8 @@
 .clients-main-block {
+	padding-bottom: 30px;
+	@media screen and (max-width: $mobile-small) {
+		padding-bottom: 10px;
+	}
 	.fileter-block {
 		.select-box {
 			width: 146px;
@@ -16,4 +20,61 @@
 			}
 		}
 	}
+	.clients-table {
+		padding-top: 8px;
+		@media screen and (max-width: $mobile-small) {
+			padding: 0 23px;
+		}
+	}
 }
+
+
+/*Checkboxcustom*/
+.checkbox-cust {
+	label {
+		width: 18px;
+		height: 18px;
+		border: 1px solid $dim-gray;
+		border-radius: 2px;
+		padding: 0;
+		display: inline-block;
+		overflow: hidden;
+		position: relative;
+		&:before {
+			content: "";
+			display: inline-block;
+			width: 12px;
+			height: 12px;
+			background-image: url(#{$imgpath}/ic_right.svg);
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: right center;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+			-webkit-transform: translate(-50%,-50%);
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+	input[type="checkbox"] 
+	{
+		visibility: hidden;
+		position: absolute;
+		opacity: 0;
+		&:checked {
+			+ label {
+				&:before {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+		}
+	}
+
+}
+
+
+
+

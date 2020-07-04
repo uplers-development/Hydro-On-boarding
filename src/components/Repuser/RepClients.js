@@ -96,7 +96,7 @@ class RepClients extends React.Component {
 									
 								</ul>
 							</div>
-							<div className="btn-block">
+							<div className="btn-block mobile-hide">
 								<button className="common-btn-blue"><span>APPLY</span></button>
 							</div>
 							{/*<!--Select box end-->*/}	
@@ -113,6 +113,49 @@ class RepClients extends React.Component {
 									</form>
 								</div>
 								{/*<!--Auto search box end-->*/}
+
+								{/*<!-Mobile filter box start-->*/}
+								<div className="mobile-filter">
+									<a href="javascript:void(0)" title="filter-btn" className="filter-open-btn">
+									<img src={require("../../images/ic_filter.svg")} alt="ic_filter" />
+												  
+									</a>
+
+									<div className="open-close-filter-block">
+										<div className="top-head d-flex flex-wrap align-center">
+											<div className="top-title d-flex flex-wrap">
+							<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter" />
+												<h4>Filters</h4>
+											</div>
+											<a href="javascript:void(0)" title="close-btn" className="filter-open-btn">
+												<img src={require("../../images/ic_close.svg")} alt="ic_close" />
+											</a>
+										</div>
+
+										<div className="list-filter-mobile">
+											<h5>Bulk Action</h5>
+											<ul>
+												<li><a href="#" title="Delete">Delete</a></li>
+												<li><a href="#" title="Action 1">Action</a></li>
+											</ul>
+											
+											<h5>Sort by</h5>
+											<ul>
+												<li className="active"><a href="#" title="Recently added">Recently added</a></li>
+												<li><a href="#" title="Oldest - Newest">Oldest - Newest</a></li>
+												<li><a href="#" title="Recently viewed">Recently viewed</a></li>
+												<li><a href="#" title="Moost Viewe">Moost Viewed</a></li>
+											</ul>
+											
+											<div className="btn-block">
+												<button className="common-btn-blue"><span>Apply filters</span></button>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+								{/*<!-Mobile filter box end-->*/}
 
 
 								{/*<!--Sort by start-->*/}
@@ -136,7 +179,7 @@ class RepClients extends React.Component {
 
 
 					{/*<!--Top filter block Start-->*/}
-						<div className="clients-table">
+						<div className="clients-table table-outer">
 							<div className="table-responsive">
 							
 								{/*<!--Table Start-->*/}
@@ -145,8 +188,8 @@ class RepClients extends React.Component {
       <tr>
          <th>
 		 <div className="checkbox-cust">
-				 	<input type="checkbox" id="html" />
-      				<label for="html"></label>	 
+				 	<input type="checkbox" id="checkbox1" />
+      				<label for="checkbox1"></label>	 
 			 </div><span>Name</span>
 		</th>
          <th>Email</th>
@@ -158,8 +201,8 @@ class RepClients extends React.Component {
       <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="html" />
-      				<label for="html"></label>	 
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -183,8 +226,8 @@ class RepClients extends React.Component {
 	<tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="html" />
-      				<label for="html"></label>	 
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -203,7 +246,156 @@ class RepClients extends React.Component {
 		 <td>John.smith@example.co.uk</td>				
 		 <td>Project manager</td>				
 		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>						  
+      </tr>	
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith2.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>		
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>	
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith2.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
       
          </tbody>
 </table>

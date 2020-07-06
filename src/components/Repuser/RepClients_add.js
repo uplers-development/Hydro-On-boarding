@@ -169,7 +169,7 @@ class RepClients_add extends React.Component {
 									<a href="javascript:void(0);">When product was released: 02/02/2020</a>
 								</div>
 								<div className="bottom-details">
-									<div className="left-prod-img" style={{backgroundImage: `url(../../../images/hydro-biofilter-porduct.jpg)`}}>
+									<div className="left-prod-img" style={{backgroundImage: `url(../../../images/hydro-biofilter-product.jpg)`}}>
 										
 									</div>
 									<div className="right-prod-upload">

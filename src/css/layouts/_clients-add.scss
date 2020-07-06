@@ -116,7 +116,10 @@
 		}
 		.list-add-product {
 			.list-box {
-				padding: 33px 0;
+				padding: 33px 30px;
+				.active {
+					background-color: $sky-blue-transparent-2;
+				}
 				border-bottom: 1px solid $off-white;
 				.top {
 					.checkbox-cust {

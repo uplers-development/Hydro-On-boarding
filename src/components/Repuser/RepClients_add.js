@@ -5,6 +5,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import hydroImage from '../../images/hydro-biofilter-product.jpg';
 
 class RepClients_add extends React.Component {
 	constructor(props) {
@@ -169,7 +170,7 @@ class RepClients_add extends React.Component {
 									<a href="javascript:void(0);">When product was released: 02/02/2020</a>
 								</div>
 								<div className="bottom-details">
-									<div className="left-prod-img" style={{backgroundImage: `url(../../../images/hydro-biofilter-porduct.jpg)`}}>
+									<div className="left-prod-img" style={{backgroundImage: `url(${hydroImage})`}}>
 										
 									</div>
 									<div className="right-prod-upload">

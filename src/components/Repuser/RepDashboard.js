@@ -40,9 +40,9 @@ class RepDashboard extends React.Component {
 		try{
 			fetch(Apiurl.RepDashboardNewUsers.url,{
 				headers:{
-						"Content-Type" : "application/json"
-						"Authorization": "Basic "+localStorage.getItem("basic-auth") ;
-				}
+						"Content-Type" : "application/json",
+                		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+				},
 				method:Apiurl.RepDashboardNewUsers.method
 			}).then(res=>{return res.json()}).then(data=>this.setState({repnewusers:data}));
 		}catch(err){

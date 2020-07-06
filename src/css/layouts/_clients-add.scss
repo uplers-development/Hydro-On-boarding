@@ -1,7 +1,8 @@
 .clients-add-main {
 	.fileter-block {
 		&.details-head-block {
-		    padding-bottom: 32px;	
+			padding-bottom: 32px;
+
 			h3 {
 				font-size: 16px;
 				line-height: 28px;
@@ -10,6 +11,7 @@
 				font-weight: $font-semi-bold;
 				font-family: $gibson;
 			}
+
 			h4 {
 				font-size: 16px;
 				line-height: 20px;
@@ -19,28 +21,35 @@
 				font-weight: $font-normal;
 			}
 		}
-	}	
+	}
+
 	.clients-add {
 		padding-top: 35px;
 		width: 100%;
+
 		.first-form {
 			form {
 				max-width: 635px;
 				width: 100%;
+
 				.form-group {
 					display: flex;
 					flex-wrap: wrap;
 					align-items: center;
 					margin-bottom: 12px;
-					input, select {
+
+					input,
+					select {
 						width: 481px;
 						border: 1px solid $dim-gray;
 					}
-					 input[type=number]{
+
+					input[type=number] {
 						-webkit-appearance: none;
-					   -moz-appearance:none;
-					   appearance:none;
+						-moz-appearance: none;
+						appearance: none;
 					}
+
 					label {
 						font-size: 18px;
 						line-height: 22px;
@@ -53,14 +62,42 @@
 						margin-bottom: 0;
 					}
 				}
+
+				.send-user-notification {
+					margin-top: 24px;
+					.notification {
+						.checkbox-cust {
+							label {
+								margin-bottom: 0;
+							}
+						}
+						h3 {
+							font-size: 18px;
+							line-height: 22px;
+							color: $black;
+							font-family: $arial;
+							font-weight: $font-normal;
+							margin: 0 8px 0 0;
+						}
+					}
+					p {
+						font-size: 16px;
+						line-height: 20px;
+						color: $light-black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						margin: 7px 0 0 0;
+					}
+				}
 			}
 		}
 	}
 	.client-add-product {
-		margin-top: 60px;
+		margin-top: 70px;
 		.pro-title {
-			padding: 10px 25px 10px 0;
+			padding: 16px 25px 10px 0;
 			position: relative;
+
 			&:after {
 				content: "";
 				display: block;
@@ -73,6 +110,7 @@
 				right: 0;
 				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
 			}
+
 			&:before {
 				content: "";
 				display: block;
@@ -85,6 +123,7 @@
 				right: 0;
 				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
 			}
+
 			.name-of-heading {
 				h3 {
 					font-size: 40px;
@@ -94,19 +133,23 @@
 					font-family: $gibson;
 					margin: 0;
 					padding-left: 19px;
+
 					@media screen and (max-width:$large-m) {
 						font-size: 30px;
 						line-height: 36px;
 					}
 				}
+
 				img {
 					width: 33px;
+
 					@media screen and (max-width:$large-m) {
 						width: 26px;
 					}
 				}
 			}
 		}
+
 		.auto-search-box {
 			form {
 				input[type="text"] {
@@ -114,40 +157,52 @@
 				}
 			}
 		}
+
 		.list-add-product {
+			padding-top: 40px;
 			.list-box {
 				padding: 0 30px;
+
 				&.active {
 					background-color: $sky-blue-transparent-2;
+
 					.bottom-details {
 						padding-bottom: 23px;
+						margin-top: 20px;
 					}
 				}
+
 				border-bottom: 1px solid $off-white;
+
 				.top {
-					padding: 12px 0 30px;
+					padding: 10px 37px 47px 0;
+
 					.checkbox-cust {
 						padding-top: 5px;
 					}
+
 					.title {
 						padding-left: 20px;
+
 						h4 {
 							margin: 0;
-							font-size:24px;
+							font-size: 24px;
 							line-height: 28px;
 							color: $cobalt-blue;
 							font-weight: $font-semi-bold;
 							font-family: $gibson;
 						}
+
 						h5 {
 							margin: 0;
-							font-size:18px;
+							font-size: 18px;
 							line-height: 22px;
 							color: $black;
 							font-family: $arial;
 							font-weight: $font-normal;
 						}
 					}
+
 					a {
 						margin-left: auto;
 						text-decoration: none;
@@ -157,8 +212,8 @@
 						font-family: $arial;
 						font-weight: $font-normal;
 						position: relative;
-						padding:15px 15px 0 0;
-						
+						padding: 15px 15px 0 0;
+
 						&:after {
 							content: "";
 							display: inline-block;
@@ -175,27 +230,35 @@
 						}
 					}
 				}
+
 				.bottom-details {
+					display: none;
 					padding-bottom: 10px;
+
 					.left-prod-img {
 						width: 385px;
-						padding-bottom: 27.56%;
+						padding-bottom: 21.20%;
 						background-position: center center;
 						background-repeat: no-repeat;
 						background-size: cover;
 					}
+
 					.right-prod-upload {
 						width: 400px;
 						margin-left: 65px;
+
 						.form-group {
 							display: flex;
 							flex-wrap: wrap;
 							align-items: center;
 							margin-bottom: 12px;
-							input, select {
+
+							input,
+							select {
 								width: 242px;
 								border: 1px solid $dim-gray;
 							}
+
 							label {
 								width: 154px;
 								padding-right: 15px;
@@ -204,13 +267,17 @@
 								color: $black;
 								font-family: $arial;
 								font-weight: $font-normal;
+								margin-bottom: 0;
 							}
 						}
+
 						.btn-block {
 							margin-top: 37px;
+
 							.upload-btn-wrapper {
 								.btn {
 									min-width: 216px;
+
 									&:after {
 										background-repeat: repeat-x;
 										background-size: contain;
@@ -224,8 +291,144 @@
 			}
 		}
 	}
+
+	.add-contract {
+		margin-top: 33px;
+
+		.pro-title {
+			padding: 10px 25px 10px 0;
+			position: relative;
+
+			&:after {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
+			}
+
+			&:before {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
+			}
+
+			.name-of-heading {
+				h3 {
+					font-size: 40px;
+					line-height: 46px;
+					color: $cobalt-blue;
+					font-weight: $font-semi-bold;
+					font-family: $gibson;
+					margin: 0;
+					padding-left: 19px;
+
+					@media screen and (max-width:$large-m) {
+						font-size: 30px;
+						line-height: 36px;
+					}
+				}
+
+				img {
+					width: 33px;
+
+					@media screen and (max-width:$large-m) {
+						width: 26px;
+					}
+				}
+			}
+		}
+
+		.form-contracts {
+			padding: 54px 30px 33px;
+			background-color: $sky-blue-transparent-2;
+			margin-top: 26px;
+
+			form {
+				max-width: 635px;
+				width: 100%;
+
+				.form-group {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					margin-bottom: 15px;
+					input,
+					select {
+						width: 481px;
+						border: 1px solid $dim-gray;
+					}
+
+					input[type=number] {
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						appearance: none;
+					}
+
+					label {
+						font-size: 18px;
+						line-height: 22px;
+						color: $black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						display: inherit;
+						width: 154px;
+						padding-right: 15px;
+						margin-bottom: 0;
+					}
+				}
+
+				.btn-block {
+					margin-top: 37px;
+
+					.upload-btn-wrapper {
+						.btn {
+							min-width: 216px;
+
+							&:after {
+								background-repeat: repeat-x;
+								background-size: contain;
+								width: auto;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.btn-block {
+		&.add-client {
+			padding-top: 35px;
+
+			.btn {
+				min-width: 214px;
+				padding: 8px 10px 4px;
+
+				span {
+					font-size: 20px;
+					line-height: 46px;
+				}
+
+				&:after {
+					background-repeat: repeat-x;
+					background-size: contain;
+					width: auto;
+					height: 74px;
+				}
+			}
+		}
+	}
 }
-
-
-
-

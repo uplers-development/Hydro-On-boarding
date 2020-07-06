@@ -59,7 +59,7 @@ class RepClients extends React.Component {
 					<div className="top-heading-continer d-flex flex-wrap align-center">
 						<div className="name-of-heading d-flex flex-wrap">
 							<img src={require("../../images/clients_ic_blue.svg")} alt="profile-logo" />
-							<h1>Clients</h1>
+							<h1>Clientss</h1>
 						</div>
 
 						<div className="d-flex flex-wrap user-log">
@@ -178,7 +178,7 @@ class RepClients extends React.Component {
 					{/*<!--Top filter block End-->*/}
 
 
-					{/*<!--Top filter block Start-->*/}
+					{/*<!--Top clients table block Start-->*/}
 						<div className="clients-table table-outer">
 							<div className="table-responsive">
 							
@@ -251,8 +251,8 @@ class RepClients extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+				 	<input type="checkbox" id="checkbox4" />
+      				<label for="checkbox4"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -276,8 +276,8 @@ class RepClients extends React.Component {
 	<tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+				 	<input type="checkbox" id="checkbox5" />
+      				<label for="checkbox5"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -300,8 +300,8 @@ class RepClients extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox6" />
+      				<label for="checkbox6"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -325,8 +325,8 @@ class RepClients extends React.Component {
 	<tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+				 	<input type="checkbox" id="checkbox7" />
+      				<label for="checkbox7"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -350,8 +350,8 @@ class RepClients extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+				 	<input type="checkbox" id="checkbox8" />
+      				<label for="checkbox8"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -375,8 +375,8 @@ class RepClients extends React.Component {
 	<tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+				 	<input type="checkbox" id="checkbox9" />
+      				<label for="checkbox9"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -403,7 +403,7 @@ class RepClients extends React.Component {
 								
 							</div>	
 						</div>
-					{/*<!--Top filter block Start-->*/}
+					{/*<!--Top clients table End-->*/}
 						
 						
 					</div>

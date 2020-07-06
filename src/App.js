@@ -41,7 +41,9 @@ class App extends Component {
                 <div className="Routes">
                     <Route path="/" exact component={Login} />
                     <Route path="/Login"  component={Login} />
-
+                    <Route path="/RepDashboard"  component={RepDashboard} />
+                    <Route path="/RepClients"  component={RepClients} />		  			
+                    <Route path="/RepClients_add"  component={RepClients_add} />
                     {this.state.sidebarItem.length > 0 ?
                       <>
                     <Route path="/Profile"  component={Profile} />

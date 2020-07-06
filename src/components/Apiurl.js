@@ -194,4 +194,17 @@ export default {
          url:base_url+`/jsonapi/user_sidebar/?_format=json`,
          method:'GET'
     },
+
+
+
+    /******************************************REP USERS API CALLS ******************************************/
+
+    RepDashboardRecentlyPublished:{
+        url:base_url+"/jsonapi/rep_recently_publish?_format=json",
+        method:"GET"
+    },
+    RepDashboardNewUsers:{
+        url:base_url+"/jsonapi/new_users?_format=json",
+        method:"GET"
+    }
 }

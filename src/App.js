@@ -40,8 +40,8 @@ class App extends Component {
                 <div className="Routes">
                     <Route path="/" exact component={Login} />
                     <Route path="/Login"  component={Login} />
-                    <Route path="/components/Repuser/RepDashboard"  component={RepDashboard} />
-                    <Route path="/components/Repuser/RepClients"  component={RepClients} />
+                    <Route path="/RepDashboard"  component={RepDashboard} />
+                    <Route path="/RepClients"  component={RepClients} />
                     {this.state.sidebarItem.length > 0 ?
                       <>
                     <Route path="/Profile"  component={Profile} />

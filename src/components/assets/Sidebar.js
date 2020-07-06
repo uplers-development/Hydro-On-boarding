@@ -65,30 +65,33 @@ class Sidebar extends Component {
 		return (
 			<div>
 				<nav className={this.state.changeClassnav ? "navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left" : "navbar white-bg-trnsparent navbar-expand-md navbar-dark bg-primary fixed-left"}>
-				<Link to={"/Dashboard"} className="navbar-logo" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
-				<ul>
-					{this.state.sidebarItem.map((item,index)=>
-						<li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
-								<img className="svg" src={site_url+item.field_icon} alt={item.title}/>
-						<span>{item.title}</span></Link></li>
-					)}
-				</ul>
-				
-				<div className="nav-bottom-master teal-color-bg">
-					<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")} alt="hydro-in-tab"/>
-					<p>{this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].body : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")  }
-					</p>
-					<a href={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_link : 'javascript:void(0)'} className="common-btn-blue"><span>Master CTA</span></a>
-				</div>
+					<Link to={"/Dashboard"} className="navbar-logo" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
+					<ul>
+						{this.state.sidebarItem.map((item,index)=>
+							<li key={index}>
+								<Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
+									<img className="svg" src={site_url+item.field_icon} alt={item.title}/>
+									<span>{item.title}</span>
+								</Link>
+							</li>
+						)}
+					</ul>
+					
+					<div className="nav-bottom-master teal-color-bg">
+						<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")} alt="hydro-in-tab"/>
+						<p>{this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].body : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")  }
+						</p>
+						<a href={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_link : 'javascript:void(0)'} className="common-btn-blue"><span>Master CTA</span></a>
+					</div>
 
-				<div className="pattern-block">
-				
-					<img src={require("../../images/pattern-nav-bottom.svg")} alt="Pattern img"/>	
-						
-						</div>
+					<div className="pattern-block">
+					
+						<img src={require("../../images/pattern-nav-bottom.svg")} alt="Pattern img"/>	
+							
+							</div>
 
-				<div className="nav-copyright">© 2020 Hydro International</div>
-			</nav>
+					<div className="nav-copyright">© 2020 Hydro International</div>
+				</nav>
 			</div>
 		);
 	}

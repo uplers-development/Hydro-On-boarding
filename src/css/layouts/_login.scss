@@ -229,6 +229,16 @@
 				}
 			}
 		}
+		h5 {
+			margin-top: 0;
+			span {
+				font-weight: $font-semi-bold;
+			}
+			@media screen and (max-width:$mobile-small) {
+				max-width: 337px;
+				margin: 0 auto;
+			}
+		}
 
 		.login-footer {
 			@media screen and (max-width:$mobile-small) {

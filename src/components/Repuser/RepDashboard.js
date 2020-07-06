@@ -36,7 +36,6 @@ class RepDashboard extends React.Component {
 							<img className="svg" src={require("../../images/bell-icon-logo.svg")} alt="Announcements" />
 							<span>Announcements</span></a></li>
 					
-					
 				</ul>
 				{/*<!--List of menu end-->*/}
 

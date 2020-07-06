@@ -5,6 +5,7 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import hydroImage from '../../images/hydro-biofilter-product.jpg';
 
 class RepClients_add extends React.Component {
 	constructor(props) {
@@ -168,11 +169,39 @@ class RepClients_add extends React.Component {
 									</div>	
 									<a href="javascript:void(0);">When product was released: 02/02/2020</a>
 								</div>
-								<div className="bottom-details">
-									<div className="left-prod-img" style={{backgroundImage: `url(../../../images/hydro-biofilter-product.jpg)`}}>
+								<div className="bottom-details d-flex flex-wrap">
+									<div className="left-prod-img" style={{backgroundImage: `url(${hydroImage})`}}>
 										
 									</div>
+
 									<div className="right-prod-upload">
+									<form>
+									<div className="form-group">
+									 <label>Seller</label>
+  									 <input type="text" name="seller" />
+									</div>
+<div className="form-group">
+									 <label>Purchase date</label>
+  									 <input type="text" name="purchase-date" />
+									</div>
+<div className="form-group">
+									 <label>Cost</label>
+  									 <input type="text" name="cost" />
+									</div>
+<div className="form-group">
+									 <label>Item ID</label>
+  									 <input type="text" name="item-id" />
+									</div>
+
+						<div className="btn-block">
+<div class="upload-btn-wrapper">
+											<input type="file" name="Upload Document" />
+											<button class="btn common-btn-blue">
+												<span>Upload Document</span></button>
+										</div>
+						</div>
+
+</form>
 									</div>
 								</div>
 							</div>

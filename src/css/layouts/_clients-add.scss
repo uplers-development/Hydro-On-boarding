@@ -116,12 +116,16 @@
 		}
 		.list-add-product {
 			.list-box {
-				padding: 33px 30px;
-				.active {
+				padding: 0 30px;
+				&.active {
 					background-color: $sky-blue-transparent-2;
+					.bottom-details {
+						padding-bottom: 23px;
+					}
 				}
 				border-bottom: 1px solid $off-white;
 				.top {
+					padding: 12px 0 30px;
 					.checkbox-cust {
 						padding-top: 5px;
 					}
@@ -174,12 +178,47 @@
 				.bottom-details {
 					padding-bottom: 10px;
 					.left-prod-img {
-						width: 300px;
-						height: 250px;
-						display: block;
+						width: 385px;
+						padding-bottom: 27.56%;
+						background-position: center center;
+						background-repeat: no-repeat;
+						background-size: cover;
 					}
 					.right-prod-upload {
-						
+						width: 400px;
+						margin-left: 65px;
+						.form-group {
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							margin-bottom: 12px;
+							input, select {
+								width: 242px;
+								border: 1px solid $dim-gray;
+							}
+							label {
+								width: 154px;
+								padding-right: 15px;
+								font-size: 18px;
+								line-height: 22px;
+								color: $black;
+								font-family: $arial;
+								font-weight: $font-normal;
+							}
+						}
+						.btn-block {
+							margin-top: 37px;
+							.upload-btn-wrapper {
+								.btn {
+									min-width: 216px;
+									&:after {
+										background-repeat: repeat-x;
+										background-size: contain;
+										width: auto;
+									}
+								}
+							}
+						}
 					}
 				}
 			}

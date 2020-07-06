@@ -224,7 +224,7 @@ class Profile extends Component {
 
 						{/*<!--Your Profile info start-->*/}
 						<div className="your-profile-info">
-							<h2>{this.state.first_name}</h2>
+							<h2>{this.state.first_name} profile information</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</div>
 						{/*<!--Your Profile info start-->*/}

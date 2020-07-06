@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import Apiurl,{site_url} from '../../Apiurl'; 
 
 const Activity = (props) => {
-console.log(props.recentActivity);
   return (
     	<div className="activity-left d-flex flex-wrap">
 				<h4>Recently published</h4>

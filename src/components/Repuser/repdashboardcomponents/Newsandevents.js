@@ -1,28 +1,23 @@
 import React from 'react';
+import {site_url} from '../../Apiurl';
+import ReactHtmlParser from 'react-html-parser';
 
 const Newsandevents = (props) => {
   return (
     <div className="news-and-events">
 		   <h3 className="common-title">News and events</h3>
 		   <ul>
-		      <li>
+		   {props.newsfeeds.map((item,index)=>
+		      <li key={index}>
 		         <div className="news-img">
-		            <img src={require("../../../images/news-feed1.jpg")} alt="News feed 1" />
+		            <img src={item.field_image!=='' ? site_url+item.field_image : require("../../../images/news-feed1.jpg")} alt="News feed 1" />
 		         </div>
 		         <div className="details-events">
-		            <h5>News feed</h5>
-		            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, lorem ipsum dolor sit amet, consectetur adipiscing elit…</p>
+		            <h5>{item.title}</h5>
+		            {ReactHtmlParser(item.body)}
 		         </div>
 		      </li>
-		      <li>
-		         <div className="news-img">
-		            <img src={require("../../../images/news-feed2.jpg")} alt="News feed 2" />
-		         </div>
-		         <div className="details-events">
-		            <h5>News feed</h5>
-		            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, lorem ipsum dolor sit amet, consectetur adipiscing elit…</p>
-		         </div>
-		      </li>
+		      )}
 		   </ul>
 	</div>
   )

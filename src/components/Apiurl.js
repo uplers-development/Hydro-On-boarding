@@ -197,7 +197,7 @@ export default {
 
 
 
-    /******************************************REP USERS API CALLS ******************************************/
+    /******************************************REP USERS API CALLS START******************************************/
 
     RepDashboardRecentlyPublished:{
         url:base_url+"/jsonapi/rep_recently_publish?_format=json",
@@ -206,5 +206,19 @@ export default {
     RepDashboardNewUsers:{
         url:base_url+"/jsonapi/new_users?_format=json",
         method:"GET"
+    },RepDashboardOverview:{
+        url:base_url+"/json-api/repglance.json",
+        method:"GET"
+    },RepDashboardLatestProducts:{
+        url:base_url+"/jsonapi/latest_products?_format=json",
+        method:"GET"
+    },RepDashboardNewsFeeds:{
+        url:base_url+"/jsonapi/rep_news_feed?_format=json",
+        method:"GET"
     }
+
+
+    /******************************************REP USERS API CALLS ENDS ******************************************/
+
+    
 }

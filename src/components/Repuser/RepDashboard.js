@@ -17,12 +17,18 @@ class RepDashboard extends React.Component {
 		this.state={
 			recentPublishedActivity:[],
 			repnewusers:[],
+			repnewsfeeds:[],
+			repglance:[],
+			replatestproducts:[],
 		}
 		
 	}
 	componentWillMount(){
 		this.Rep_recently_published();
 		this.Rep_new_users();
+		this.Rep_news_feeds();
+		this.Rep_glance();
+		this.Rep_latest_products();
 	}
 
 	Rep_recently_published = () =>{
@@ -45,6 +51,48 @@ class RepDashboard extends React.Component {
 				},
 				method:Apiurl.RepDashboardNewUsers.method
 			}).then(res=>{return res.json()}).then(data=>this.setState({repnewusers:data}));
+		}catch(err){
+			console.log(err)
+		}
+	}
+
+	Rep_glance = () =>{
+		try{
+			fetch(Apiurl.RepDashboardOverview.url,{
+				headers:{
+						"Content-Type" : "application/json",
+                		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+				},
+				method:Apiurl.RepDashboardOverview.method
+			}).then(res=>{return res.json()}).then(data=>this.setState({repglance:data}));
+		}catch(err){
+			console.log(err)
+		}
+	}
+
+	Rep_latest_products = () =>{
+		try{
+			fetch(Apiurl.RepDashboardLatestProducts.url,{
+				headers:{
+						"Content-Type" : "application/json",
+                		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+				},
+				method:Apiurl.RepDashboardLatestProducts.method
+			}).then(res=>{return res.json()}).then(data=>this.setState({replatestproducts:data}));
+		}catch(err){
+			console.log(err)
+		}
+	}
+
+	Rep_news_feeds = () =>{
+		try{
+			fetch(Apiurl.RepDashboardNewsFeeds.url,{
+				headers:{
+						"Content-Type" : "application/json",
+                		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+				},
+				method:Apiurl.RepDashboardNewsFeeds.method
+			}).then(res=>{return res.json()}).then(data=>this.setState({repnewsfeeds:data}));
 		}catch(err){
 			console.log(err)
 		}
@@ -139,17 +187,17 @@ class RepDashboard extends React.Component {
 							</div>
 							{/*<!--Dashboard top left End-->*/}
 							{/*<!--Dashboard top right start-->*/}	
-								<Overview/>
+								<Overview repglance={this.state.repglance}/>
 							{/*<!--Dashboard top right End-->*/}	
 						</div>
 						{/*<!--Dashboard top End-->*/}	
 							{/*<!--Dashboard Bottom start-->*/}
 							<div className="dashboard-bottom d-flex flex-wrap">
 								{/*<!--Latest Products start-->*/}
-								<Latestproduct/>
+								<Latestproduct replatestproductslist={this.state.replatestproducts}/>
 								{/*<!--Latest Products end-->*/}
 								{/*<!--News end events start-->*/}
-								<Newsandevents/>
+								<Newsandevents newsfeeds={this.state.repnewsfeeds}/>
 								{/*<!--News end events end-->*/}
 							</div>
 							{/*<!--Dashboard Bottom End-->*/}

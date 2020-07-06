@@ -8,15 +8,15 @@ const Overview = (props) => {
 	   <ul>
 	      <li>
 	         <span>Number of products</span>
-	         <small>150</small>
+	         <small>{props.repglance.products}</small>
 	      </li>
 	      <li>
 	         <span>Total of clients</span>
-	         <small>24</small>
+	         <small>{props.repglance.clients}</small>
 	      </li>
 	      <li>
 	         <span>Total Contracts</span>
-	         <small>88</small>
+	         <small>{props.repglance.contracts}</small>
 	      </li>
 	   </ul>
 	</div>

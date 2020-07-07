@@ -203,7 +203,7 @@ class RepClients_add extends React.Component {
 									</div>
 
 						<div className="btn-block">
-<div class="upload-btn-wrapper">
+<div className="upload-btn-wrapper">
 											<input type="file" name="Upload Document" />
 											<button className="btn common-btn-blue">
 												<span>Upload Document</span></button>

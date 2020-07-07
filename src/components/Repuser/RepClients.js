@@ -23,7 +23,8 @@ class RepClients extends React.Component {
 			   
 			   {/*<!--Nav fixed left block start-->*/}
 			<nav className="navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left">
-				<a className="navbar-logo" href="#" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></a>
+				<a className="navbar-logo" href="#" title="Main white logo">
+			   <img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></a>
 
 				{/*<!--List of menu start-->*/}
 				<ul>

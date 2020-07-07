@@ -30,6 +30,7 @@ class RepDashboard extends React.Component {
 	}
 
 	componentWillMount(){
+		this.GetProfile();
 		this.Rep_recently_published();
 		this.Rep_new_users();
 		this.Rep_news_feeds();
@@ -38,18 +39,22 @@ class RepDashboard extends React.Component {
 	}
 
 	GetProfile=()=>{
-		fetch(Apiurl.GetProfile.url,{
-				headers: {
-                	"Content-Type" : "application/json",
-                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
-                },
-                method:Apiurl.GetProfile.method,
-		}).then(res=>{
-			return res.json();
-		}).then(data=>{
-			console.log(data);
-			this.setState({repinfo:data})
-		})
+		try{
+			fetch(Apiurl.GetProfile.url,{
+					headers: {
+	                	"Content-Type" : "application/json",
+	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+	                },
+	                method:Apiurl.GetProfile.method,
+			}).then(res=>{
+				return res.json();
+			}).then(data=>{
+				console.log(data);
+				this.setState({repinfo:data})
+			})
+	 	}catch(err){
+	 		console.log(err);
+	 	}
 	}
 
 
@@ -128,7 +133,7 @@ class RepDashboard extends React.Component {
          <Repnav/>
          <div className="d-flex flex-wrap right-content-part">
             <div className="top-heading">
-               	<Repheader/>
+               	<Repheader repuserinfo={this.state.repinfo}/>
             </div>
 
             <div className="bottom-content-block">

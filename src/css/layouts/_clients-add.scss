@@ -3,7 +3,12 @@
 	.fileter-block {
 		&.details-head-block {
 			padding-bottom: 32px;
-
+			@media screen and (max-width:$mobile-small) {
+				padding-bottom: 15px;
+			}
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					padding-bottom: 15px;
+			}
 			h3 {
 				font-size: 16px;
 				line-height: 28px;
@@ -64,6 +69,16 @@
 						width: 154px;
 						padding-right: 15px;
 						margin-bottom: 0;
+						@media screen and (max-width:$mobile-small) {
+							padding: 0 0 5px;
+							font-size: 16px;
+    						line-height: 20px;
+						}
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							padding: 0 0 5px;
+							font-size: 16px;
+    						line-height: 20px;
+						}
 					}
 				}
 
@@ -96,6 +111,9 @@
 			}
 		}
 		@media screen and (max-width:$mobile-small) {
+			padding: 20px 23px 0;
+		}
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 			padding: 20px 23px 0;
 		}
 	}
@@ -132,6 +150,7 @@
 			}
 
 			.name-of-heading {
+				display: flex;
 				h3 {
 					font-size: 40px;
 					line-height: 46px;
@@ -148,6 +167,10 @@
 						font-size: 20px;
 						line-height: 25px;
 					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 20px;
+						line-height: 25px;
+					}
 				}
 
 				img {
@@ -155,6 +178,12 @@
 
 					@media screen and (max-width:$large-m) {
 						width: 26px;
+					}
+					@media screen and (max-width:$mobile-small) {
+						width: 20px;
+					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						width: 20px;
 					}
 				}
 			}
@@ -208,6 +237,14 @@
 							color: $cobalt-blue;
 							font-weight: $font-semi-bold;
 							font-family: $gibson;
+							@media screen and (max-width:$mobile-small) {
+								font-size: 18px;
+								line-height: 24px;
+							}
+							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								font-size: 18px;
+								line-height: 24px;
+							}
 						}
 
 						h5 {
@@ -217,6 +254,14 @@
 							color: $black;
 							font-family: $arial;
 							font-weight: $font-normal;
+							@media screen and (max-width:$mobile-small) {
+								font-size: 16px;
+								line-height: 20px;
+							}
+							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								font-size: 16px;
+								line-height: 20px;
+							}
 						}
 					}
 
@@ -233,6 +278,12 @@
 						@media screen and (max-width:$ipad-portrait) {
 							margin: 25px 0 0 0;
 							padding-top: 0;
+						}
+						@media screen and (max-width:$mobile-small) {
+							margin: 10px 0 0 10px;
+						}
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								margin: 10px 0 0 0;
 						}
 						&:after {
 							content: "";
@@ -305,6 +356,15 @@
 								font-family: $arial;
 								font-weight: $font-normal;
 								margin-bottom: 0;
+								@media screen and (max-width:$mobile-small) {
+									font-size: 16px;
+									line-height: 20px;
+								}
+								@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+									font-size: 16px;
+									line-height: 20px;
+								}
+								
 							}
 						}
 
@@ -326,6 +386,12 @@
 					}
 				}
 			}
+		}
+		@media screen and (max-width:$mobile-small) {
+			margin-top: 40px;
+		}
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				margin-top: 40px;
 		}
 	}
 
@@ -362,6 +428,7 @@
 			}
 
 			.name-of-heading {
+				display: flex;
 				h3 {
 					font-size: 40px;
 					line-height: 46px;
@@ -379,13 +446,21 @@
 						font-size: 20px;
 						line-height: 25px;
 					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 20px;
+						line-height: 25px;
+					}
 				}
-
 				img {
 					width: 33px;
-
 					@media screen and (max-width:$large-m) {
 						width: 26px;
+					}
+					@media screen and (max-width:$mobile-small) {
+						width: 20px;
+					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						width: 20px;
 					}
 				}
 			}
@@ -426,6 +501,14 @@
 						@media screen and (max-width:$ipad-landscape) {
 							margin-bottom: 5px;
 						}
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+							line-height: 20px;
+						}
 					}
 				}
 
@@ -442,11 +525,24 @@
 						font-family: $arial;
 						font-weight: $font-normal;
 						margin-bottom: 12px;
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+							line-height: 20px;
+						}
 					}
 					.upload-btn-wrapper {
 						.btn {
 							min-width: 216px;
-
+							@media screen and (max-width:$mobile-small) {
+								min-width: auto;
+							}
+							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								min-width: auto;
+							}
 							&:after {
 								background-repeat: repeat-x;
 								background-size: contain;
@@ -455,6 +551,12 @@
 						}
 					}
 				}
+			}
+			@media screen and (max-width:$mobile-small) {
+				padding: 30px 15px;
+			}
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				padding: 30px 15px;
 			}
 		}
 	}
@@ -473,6 +575,14 @@
 				span {
 					font-size: 20px;
 					line-height: 46px;
+					@media screen and (max-width:$mobile-small) {
+						font-size: 16px;
+						line-height: 34px;
+					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 16px;
+						line-height: 34px;
+					}
 				}
 
 				&:after {
@@ -483,5 +593,11 @@
 				}
 			}
 		}
+	}
+	@media screen and (max-width:$mobile-small) {
+		padding-bottom: 10px;
+	}
+	@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+		padding-bottom: 10px;
 	}
 }

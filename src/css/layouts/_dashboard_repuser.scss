@@ -77,6 +77,12 @@
 
 								border-bottom: 1px solid $light-black;
 							}
+							@media screen and (max-width:$mobile-small) {
+								width: 100%;
+							}
+							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								width: 100%;
+							}
 						}
 					}
 

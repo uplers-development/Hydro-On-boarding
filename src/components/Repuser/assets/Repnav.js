@@ -1,25 +1,24 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 
-
 const Repnav = (props) => {
+  console.log(props.repmenulisting);
   return (
      <nav className="navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left">
             <Link to={"/RepDashboard"} className="navbar-logo" title="Main white logo"><img src={require("../../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
-            {/*<!--List of menu start-->*/}
+
             <ul>
-               <li><Link to={""} title="Dashboard">
-                  <img className="svg" src={require("../../../images/dashboard-nav.svg")} alt="profile-logo" /><span>Dashboard</span></Link>
-               </li>
-               <li><Link to={""} href="#" title="Clients">
-                  <img className="svg" src={require("../../../images/clients_ic.svg")} alt="product-logo" /><span>Clients</span></Link>
-					  <ul>
-								<li><Link to={""} title="Clients">Add clients</Link></li></ul>
-               </li>
-               <li><Link to={""} title="Products">
-                  <img className="svg" src={require("../../../images/bell-icon-logo.svg")} alt="Announcements" />
-                  <span>Announcements</span></Link>
-               </li>
+              {props.repmenulisting.map((item,index)=>
+                   <li key={index}><Link to={item.field_react_route} title={item.title}>
+                      <img className="svg" src={item.field_icon!=='' ? item.field_icon :require("../../../images/bell-icon-logo.svg")} alt={item.title} />
+                      <span>{item.title}</span></Link>
+                      {item.child && item.child!=='' ? 
+                        <ul>
+                          <li key={index}><Link to={item.child[0].field_react_route} title={item.child[0].title}>{item.child[0].title}</Link></li>
+                        </ul>:''}
+                  </li>
+                )}
+
             </ul>
             {/*<!--List of menu end-->*/}
             <div className="pattern-block"><img src={require("../../../images/pattern-nav-bottom.svg")} alt="pattern-nav" /></div>

@@ -19,6 +19,7 @@ class RepDashboard extends React.Component {
 		super(props);
 		this.state={
 			repinfo:null,
+			menulisting:[],
 			recentPublishedActivity:[],
 			repnewusers:[],
 			repnewsfeeds:[],
@@ -30,12 +31,27 @@ class RepDashboard extends React.Component {
 	}
 
 	componentWillMount(){
+		this.Rep_nav_menu();
 		this.GetProfile();
 		this.Rep_recently_published();
 		this.Rep_new_users();
 		this.Rep_news_feeds();
 		this.Rep_glance();
 		this.Rep_latest_products();
+	}
+
+	Rep_nav_menu=()=>{
+		let menulist={
+			menu:"main-navigation-rep"
+		}
+		fetch(`https://staging.project-progress.net/projects/hydro/json-api/menu_list.json`,{
+		    headers:{
+		            "Content-Type" : "application/json",
+		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+		    },
+		    method:"POST",
+		    body:JSON.stringify(menulist)
+  		}).then(res=>res.json()).then(data=>this.setState({menulisting:data}));
 	}
 
 	GetProfile=()=>{
@@ -130,7 +146,7 @@ class RepDashboard extends React.Component {
 	render(){
 		return(<section className="main-wrapper">
       <div className="d-flex flex-wrap main-block">
-         <Repnav/>
+         <Repnav repmenulisting={this.state.menulisting}/>
          <div className="d-flex flex-wrap right-content-part">
             <div className="top-heading">
                	<Repheader repuserinfo={this.state.repinfo}/>

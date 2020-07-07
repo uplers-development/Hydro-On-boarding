@@ -37,6 +37,7 @@ ul {
 
 .d-flex {
 	display: flex;
+	  display: -ms-flexbox;
 }
 
 .align-center {
@@ -1387,7 +1388,6 @@ nav {
 			margin: 8px 0 0 15px;
 			padding-right: 20px;
 			position: relative;
-
 			@media screen and (max-width:$mobile-small) {
 				visibility: hidden;
 				opacity: 0;

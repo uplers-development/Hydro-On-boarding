@@ -6,11 +6,13 @@ const Repnav = (props) => {
             <a className="navbar-logo" href="#" title="Main white logo"><img src={require("../../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></a>
             {/*<!--List of menu start-->*/}
             <ul>
-               <li><a className="active" href="#" title="Dashboard">
+               <li><a href="#" title="Dashboard">
                   <img className="svg" src={require("../../../images/dashboard-nav.svg")} alt="profile-logo" /><span>Dashboard</span></a>
                </li>
-               <li><a href="#" title="Clients">
+               <li><a className="active" href="#" title="Clients">
                   <img className="svg" src={require("../../../images/clients_ic.svg")} alt="product-logo" /><span>Clients</span></a>
+					  <ul>
+								<li><a href="#" className="active" title="Clients">Add clients</a></li>							</ul>
                </li>
                <li><a href="#" title="Products">
                   <img className="svg" src={require("../../../images/bell-icon-logo.svg")} alt="Announcements" />

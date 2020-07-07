@@ -158,7 +158,7 @@ class RepClients_add extends React.Component {
 									</div>
 												  
 <div className="auto-search-box">
-<form><div className="autocomplete-ss"><input placeholder="Search client" id="myInput" type="text" className="hydro" /></div></form></div>			  
+<form><div className="autocomplete-ss"><input type="text" className="hydro" /></div></form></div>			  
 									
 								</div>
 								{/*<!--Add product Title End-->*/}
@@ -381,7 +381,7 @@ class RepClients_add extends React.Component {
 								{/*<!--Add product Title Start-->*/}
 								<div className="pro-title d-flex flex-wrap align-center">
 									<div className="name-of-heading d-flex flex-wrap align-center">
-										<img src={require("../../images/your-product-blue-logo.svg")} alt="product-logo"/>
+										<img src={require("../../images/contracts-logo-blue.svg")} alt="product-logo"/>
 										<h3>Add contract</h3>
 									</div>
 								</div>
@@ -408,6 +408,7 @@ class RepClients_add extends React.Component {
 									</div>
 
 						<div className="btn-block">
+						<label>Or</label>
 <div class="upload-btn-wrapper">
 											<input type="file" name="Upload Document" />
 											<button className="btn common-btn-blue">

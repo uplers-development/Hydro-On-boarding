@@ -18,6 +18,7 @@ class RepDashboard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
+			repinfo:null,
 			recentPublishedActivity:[],
 			repnewusers:[],
 			repnewsfeeds:[],
@@ -35,6 +36,22 @@ class RepDashboard extends React.Component {
 		this.Rep_glance();
 		this.Rep_latest_products();
 	}
+
+	GetProfile=()=>{
+		fetch(Apiurl.GetProfile.url,{
+				headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                },
+                method:Apiurl.GetProfile.method,
+		}).then(res=>{
+			return res.json();
+		}).then(data=>{
+			console.log(data);
+			this.setState({repinfo:data})
+		})
+	}
+
 
 	Rep_recently_published = () =>{
 		try{
@@ -113,7 +130,7 @@ class RepDashboard extends React.Component {
             <div className="top-heading">
                	<Repheader/>
             </div>
-            
+
             <div className="bottom-content-block">
                {!this.state.loader ? 
                <div className="d-flex flex-wrap dashboard-user-main">

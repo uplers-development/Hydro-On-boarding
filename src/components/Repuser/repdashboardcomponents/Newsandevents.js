@@ -7,7 +7,7 @@ const Newsandevents = (props) => {
     <div className="news-and-events">
 		   <h3 className="common-title">News and events</h3>
 		   <ul>
-		   {props.newsfeeds.map((item,index)=>
+		   {props.newsfeeds && props.newsfeeds.map((item,index)=>
 		      <li key={index}>
 		         <div className="news-img">
 		            <img src={item.field_image!=='' ? site_url+item.field_image : require("../../../images/news-feed1.jpg")} alt="News feed 1" />

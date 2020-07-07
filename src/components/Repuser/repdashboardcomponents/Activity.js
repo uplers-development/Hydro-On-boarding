@@ -7,7 +7,7 @@ const Activity = (props) => {
     	<div className="activity-left d-flex flex-wrap">
 				<h4>Recently published</h4>
 					<ul>
-					  {props.recentActivity.map((item,index)=>
+					  {props.recentActivity && props.recentActivity.map((item,index)=>
 						<li key={index}><Link to={""} title={item.title}>{item.title}</Link></li>
 						)}
 					</ul>

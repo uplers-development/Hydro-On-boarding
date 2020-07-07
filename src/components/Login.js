@@ -86,7 +86,15 @@ class Login extends Component{
     			localStorage.setItem("access-token",data.csrf_token);
     			localStorage.setItem("basic-auth",btoa(data.current_user.name+':'+logindata.pass));
     			localStorage.setItem("user-type",JSON.stringify(data.current_user));
-    			this.props.history.push({pathname:"/Welcome"});
+    			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="admin"){
+
+    			}
+    			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
+    				this.props.history.push({pathname:"/Welcome"});
+    			}
+    			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="rep"){
+    				this.props.history.push({pathname:"/RepDashboard"});
+    			}
     		}
     	})
       }else{

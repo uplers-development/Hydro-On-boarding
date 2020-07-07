@@ -1,4 +1,5 @@
 .clients-add-main {
+	padding-bottom: 40px;
 	.fileter-block {
 		&.details-head-block {
 			padding-bottom: 32px;
@@ -19,6 +20,9 @@
 				color: $light-black;
 				font-family: $arial;
 				font-weight: $font-normal;
+				@media screen and (max-width:$large-x) {
+					margin: 10px 0 0 0;
+				}
 			}
 		}
 	}
@@ -26,7 +30,7 @@
 	.clients-add {
 		padding-top: 35px;
 		width: 100%;
-
+	
 		.first-form {
 			form {
 				max-width: 635px;
@@ -91,6 +95,9 @@
 				}
 			}
 		}
+		@media screen and (max-width:$mobile-small) {
+			padding: 20px 23px 0;
+		}
 	}
 	.client-add-product {
 		margin-top: 70px;
@@ -133,10 +140,13 @@
 					font-family: $gibson;
 					margin: 0;
 					padding-left: 19px;
-
 					@media screen and (max-width:$large-m) {
 						font-size: 30px;
 						line-height: 36px;
+					}
+					@media screen and (max-width:$mobile-small) {
+						font-size: 20px;
+						line-height: 25px;
 					}
 				}
 
@@ -156,13 +166,18 @@
 					padding: 7px 25px 7px 33px;
 				}
 			}
+			@media screen and (max-width:$large-m) {
+				margin-top: 15px;
+			}
 		}
 
 		.list-add-product {
 			padding-top: 40px;
 			.list-box {
 				padding: 0 30px;
-
+				@media screen and (max-width:$large-x) {
+					padding: 0 15px;
+				}
 				&.active {
 					background-color: $sky-blue-transparent-2;
 
@@ -176,7 +191,9 @@
 
 				.top {
 					padding: 10px 37px 47px 0;
-
+					@media screen and (max-width:$large-x) {
+						padding: 10px 0 25px 0;
+					}
 					.checkbox-cust {
 						padding-top: 5px;
 					}
@@ -213,7 +230,10 @@
 						font-weight: $font-normal;
 						position: relative;
 						padding: 15px 15px 0 0;
-
+						@media screen and (max-width:$ipad-portrait) {
+							margin: 25px 0 0 0;
+							padding-top: 0;
+						}
 						&:after {
 							content: "";
 							display: inline-block;
@@ -234,19 +254,36 @@
 				.bottom-details {
 					display: none;
 					padding-bottom: 10px;
-
+					@media screen and (max-width:$large-x) {
+						align-content: flex-start;
+					}
 					.left-prod-img {
 						width: 385px;
 						padding-bottom: 21.20%;
 						background-position: center center;
 						background-repeat: no-repeat;
 						background-size: cover;
+						@media screen and (max-width:$large-x) {
+							width: calc(50% - 30px);
+							padding-bottom: 31%;
+						}
+						@media screen and (max-width:$ipad-portrait) {
+							width: 100%;
+							padding-bottom: 71%;
+							margin-bottom: 25px;
+						}
 					}
-
 					.right-prod-upload {
 						width: 400px;
 						margin-left: 65px;
-
+						@media screen and (max-width:$large-x) {
+							width: 50%;
+							margin-left: 30px;
+						}
+						@media screen and (max-width:$ipad-portrait) {
+							width: 100%;
+							margin-left: 0;
+						}
 						.form-group {
 							display: flex;
 							flex-wrap: wrap;
@@ -294,7 +331,6 @@
 
 	.add-contract {
 		margin-top: 33px;
-
 		.pro-title {
 			padding: 10px 25px 10px 0;
 			position: relative;
@@ -339,6 +375,10 @@
 						font-size: 30px;
 						line-height: 36px;
 					}
+					@media screen and (max-width:$mobile-small) {
+						font-size: 20px;
+						line-height: 25px;
+					}
 				}
 
 				img {
@@ -350,16 +390,13 @@
 				}
 			}
 		}
-
 		.form-contracts {
 			padding: 54px 30px 33px;
 			background-color: $sky-blue-transparent-2;
 			margin-top: 26px;
-
 			form {
 				max-width: 635px;
 				width: 100%;
-
 				.form-group {
 					display: flex;
 					flex-wrap: wrap;
@@ -370,7 +407,6 @@
 						width: 481px;
 						border: 1px solid $dim-gray;
 					}
-
 					input[type=number] {
 						-webkit-appearance: none;
 						-moz-appearance: none;
@@ -387,12 +423,26 @@
 						width: 154px;
 						padding-right: 15px;
 						margin-bottom: 0;
+						@media screen and (max-width:$ipad-landscape) {
+							margin-bottom: 5px;
+						}
 					}
 				}
 
 				.btn-block {
-					margin-top: 37px;
-
+					margin-top: 16px;
+					margin-left: 154px;
+					@media screen and (max-width:$ipad-landscape) {
+						margin-left: 0;
+					}
+					> label {
+						font-size: 18px;
+						line-height: 22px;
+						color: $black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						margin-bottom: 12px;
+					}
 					.upload-btn-wrapper {
 						.btn {
 							min-width: 216px;
@@ -416,7 +466,10 @@
 			.btn {
 				min-width: 214px;
 				padding: 8px 10px 4px;
-
+				@media screen and (max-width:$mobile-small) {
+					min-width: auto;
+					padding: 6px 10px 4px;
+				}
 				span {
 					font-size: 20px;
 					line-height: 46px;

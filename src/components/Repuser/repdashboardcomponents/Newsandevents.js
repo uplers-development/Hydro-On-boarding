@@ -13,7 +13,7 @@ const Newsandevents = (props) => {
 		            <img src={item.field_image!=='' ? site_url+item.field_image : require("../../../images/news-feed1.jpg")} alt="News feed 1" />
 		         </div>
 		         <div className="details-events">
-		            <h5>{item.title}</h5>
+		            <h5>{ReactHtmlParser(item.title)}</h5>
 		            {ReactHtmlParser(item.body)}
 		         </div>
 		      </li>

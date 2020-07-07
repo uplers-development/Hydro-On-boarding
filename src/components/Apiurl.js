@@ -184,10 +184,10 @@ export default {
     	 url: base_url+'entity/menu/main/tree',
          method: 'GET'
     },Leftsidebar_repuser: {
-    	 url: base_url+'entity/menu/main-navigation-rep/tree',
+    	 url: base_url+'/jsonapi/menu_list/main-navigation-rep?_format=json',
          method: 'GET'
     },Leftsidebar_adminuser: {
-    	 url: base_url+'entity/menu/main-navigation-admin/tree',
+    	 url: base_url+'/jsonapi/menu_list/main-navigation-admin?_format=json',
          method: 'GET'
     }, 
     LeftsidebarFooter:{

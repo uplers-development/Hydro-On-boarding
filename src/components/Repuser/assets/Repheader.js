@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect,useHistory  } from "react-router-dom";
 
 let divType = null;
 let hoverState=null;
+let logoutstate=false;
 
 const renderClass=(e)=>{
 		if(!divType.parentNode.classList.contains("active")){
@@ -22,6 +23,9 @@ const renderOutHover=()=>{
 	divType.parentNode.classList.remove("active")
 }
 
+const Logout=()=>{
+	localStorage.clear();
+}
 
 const Repheader = (props) => {
   return (
@@ -46,8 +50,8 @@ const Repheader = (props) => {
              </div>
              <div className="drop-down-menu">
                 <ul>
-                   <li><Link to={""} onClick={(e)=>e.preventDefault()} title="Profile">Profile</Link></li>
-                   <li><Link href={""} onClick={(e)=>e.preventDefault()} title="Sign out">Sign out</Link></li>
+                   <li><Link to={"/Profile"} title="Profile">Profile</Link></li>
+                   <li><Link to={"/Login"} onClick={Logout} title="Sign out">Sign out</Link></li>
                 </ul>
              </div>
           </div>

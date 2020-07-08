@@ -31,13 +31,18 @@ class RepDashboard extends React.Component {
 	}
 
 	componentWillMount(){
-		this.Rep_nav_menu();
-		this.GetProfile();
-		this.Rep_recently_published();
-		this.Rep_new_users();
-		this.Rep_news_feeds();
-		this.Rep_glance();
-		this.Rep_latest_products();
+		if(localStorage.getItem("access-token")!==null){
+			this.Rep_nav_menu();
+			this.GetProfile();
+			this.Rep_recently_published();
+			this.Rep_new_users();
+			this.Rep_news_feeds();
+			this.Rep_glance();
+			this.Rep_latest_products();
+		}else{
+			this.props.history.push('/Login')
+		}
+		
 	}
 
 	Rep_nav_menu=()=>{
@@ -121,7 +126,7 @@ class RepDashboard extends React.Component {
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
 				method:Apiurl.RepDashboardLatestProducts.method
-			}).then(res=>{return res.json()}).then(data=>this.setState({replatestproducts:data}));
+			}).then(res=>{return res.json()}).then(data=>this.setState({replatestproducts:data,loader:false}));
 		}catch(err){
 			console.log(err)
 		}
@@ -135,7 +140,7 @@ class RepDashboard extends React.Component {
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
 				method:Apiurl.RepDashboardNewsFeeds.method
-			}).then(res=>{return res.json()}).then(data=>this.setState({repnewsfeeds:data,loader:false}));
+			}).then(res=>{return res.json()}).then(data=>this.setState({repnewsfeeds:data}));
 		}catch(err){
 			console.log(err)
 		}

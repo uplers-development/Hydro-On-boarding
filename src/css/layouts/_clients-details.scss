@@ -38,7 +38,19 @@
 	}
 	.contract-list {
 		.contract-box {
-			padding: 22px 0;
+			padding: 22px 22px 15px 22px;
+			margin-bottom: 25px;
+			position: relative;
+			&:after {
+				content: "";
+				display: block;
+				width: calc(100% - 20px);
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
 			.contract-content {
 			> a {
 				font-size: 24px;
@@ -47,6 +59,8 @@
 				font-family: $gibson;
 				font-weight: $font-semi-bold;
 				text-decoration: none;
+				margin-bottom: 5px;
+				display: block;
 			}
 			h4 {
 				margin: 0;
@@ -58,14 +72,18 @@
 			}
 		}
 			.date {
-			margin-left: auto;
-			p {
-				font-size: 12px;
-				line-height: 18px;
-				color: $panton-gray;
-				margin: 0;
-			} 
-		}
+				margin-left: auto;
+				p {
+					font-size: 12px;
+					line-height: 18px;
+					color: $panton-gray;
+					margin: 0;
+				} 
+			}
+			&.active {
+				background-color: $sky-blue-transparent;
+				box-shadow: 0px 4px 16px $product-box-shadow;
+			}
 		}	
 	}
 	.contract  {

@@ -41,10 +41,10 @@
 					.activity-left {
 						width: 50%;
 						padding: 0 28px;
-						@media screen and (max-width:$large-x) {
-							padding: 0 15px;
+						@media screen and (max-width:$large-m) {
+							padding: 0 23px;
 						}
-						@media screen and (max-width:$mobile-small) {
+						@media screen and (max-width:$ipad-portrait) {
 							width: 100%;
 						}
 						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
@@ -74,9 +74,11 @@
 									font-weight: $font-normal;
 									padding: 20px 0;
 									display: block;
+									pointer-events: none;
+									word-break: break-word;
 								}
 
-								border-bottom: 1px solid $light-black;
+								border-bottom: 1px solid $panton-gray;
 							}
 							@media screen and (max-width:$mobile-small) {
 								width: 100%;
@@ -90,7 +92,7 @@
 					.activity-right {
 						width: 50%;
 						padding: 0 15px;
-						@media screen and (max-width:$mobile-small) {
+						@media screen and (max-width:$ipad-portrait) {
 							width: 100%;
 						}
 						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
@@ -111,22 +113,31 @@
 							padding-left: 0;
 							margin: 0;
 							width: 100%;
-
+							display: flex;
+    						flex-wrap: wrap;
+							width: 100%;
 							li {
 								border-bottom: 1px solid $light-black;
 								display: flex;
+								flex-wrap: wrap;
 								align-content: center;
 								padding: 22px 0 8px 8px;
-
+								width: 100%;	
 								.profile-img {
 									align-items: center;
 									display: flex;
 									width: 54px;
-
+									@media screen and (max-width:$large-m) {
+										width: 44px;
+									}
 									img {
 										width: 54px;
 										height: 54px;
 										border-radius: 50%;
+										@media screen and (max-width:$large-m) {
+											width: 44px;
+											height: 44px;
+										}
 									}
 								}
 
@@ -140,6 +151,26 @@
 									display: inherit;
 									align-items: center;
 									padding-left: 15px;
+									max-width: 90px;
+									word-break: break-word;
+									@media screen and (max-width:$large-m) {
+										padding-left: 10px;
+										max-width: 88px;
+									}
+									@media screen and (max-width:$ipad-landscape) {
+										width: calc(100% - 180px);
+										max-width: none;
+									}
+									@media screen and (max-width:$ipad-portrait) {
+										width: calc(100% - 210px);
+									}
+									@media screen and (max-width:$mobile-small) {
+										width: calc(100% - 54px);
+									}
+									@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+										width: calc(100% - 54px);
+										max-width: none;
+									}
 								}
 
 								small {
@@ -152,7 +183,24 @@
 									display: inherit;
 									align-items: center;
 									margin-left: auto;
-									padding-right: 13px;
+									padding:0 13px;
+									width: 165px;
+									word-break: break-word;
+									justify-content: flex-end;
+									@media screen and (max-width:$large-m) {
+										padding: 0 13px 0 5px;
+										width: 130px;
+										text-align: right;
+									}
+									@media screen and (max-width:$ipad-portrait) {
+										width: 160px;
+									}
+									@media screen and (max-width:$mobile-small) {
+										width: 100%;
+										padding: 0;
+										justify-content: flex-end;
+										margin-top: 5px;
+									}
 								}
 							}
 						}
@@ -208,6 +256,9 @@
 								color: $light-black;
 								font-family: $arial;
 								font-weight: $font-bold;
+								word-break: break-word;
+								width: calc(100% - 30px);
+								padding-right: 10px;
 							}
 							> small {
 								font-size: 16px;
@@ -217,6 +268,8 @@
 								font-family: $arial;
 								font-weight: $font-bold;
 								margin-left: auto;
+								max-width: 30px;
+								word-break: break-word;
 							}
 						
 					}
@@ -227,7 +280,7 @@
 
 		.dashboard-bottom {
 			margin-top: 27px;
-
+			align-items: flex-start;
 			.latest-products {
 				max-width: 480px;
 				width: 100%;
@@ -261,6 +314,7 @@
 							font-weight: $font-normal;
 							padding: 18px 0;
 							display: block;
+							pointer-events: none;
 						}
 
 						border-bottom: 1px solid $light-black;
@@ -286,6 +340,9 @@
 					margin: 20px 0 0 0;
 				}
 				@media screen and (max-width:$mobile-small) {
+					padding: 0 20px;
+				}
+				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 					padding: 0 20px;
 				}
 				ul {
@@ -317,6 +374,7 @@
 									left: 0;
 									width: 100%;
 								}
+								
 								@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 									left: 0;
 									width: 100%;

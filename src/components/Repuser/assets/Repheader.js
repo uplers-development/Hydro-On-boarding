@@ -5,10 +5,10 @@ let divType = null;
 let hoverState=null;
 
 const renderClass=(e)=>{
-		if(divType.parentNode.classList.contains("active")){
-			divType.parentNode.classList.remove("active")
-		}else{
+		if(!divType.parentNode.classList.contains("active")){
 			divType.parentNode.classList.add("active")
+		}else{
+			divType.parentNode.classList.remove("active")
 		}
 }
 
@@ -30,8 +30,8 @@ const Repheader = (props) => {
              <img src={require("../../../images/dashboard-nav-blue.svg")} alt="profile-logo" />
              <h1>Dashboard</h1>
           </div>
-          <div className="d-flex flex-wrap user-log"  onMouseEnter={renderInHover} onMouseLeave={renderOutHover}>
-             <div className="user-image-name d-flex flex-wrap align-center" onClick={renderClass} ref={(input) => { divType = input; }}>
+          <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
+             <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
                 {props.repuserinfo!==null ? 
                 	<>
 		                <img src={props.repuserinfo.user_picture[0]!=='' ? props.repuserinfo.user_picture[0].url : require("../../../images/john-smith.png")} alt="Prfile image" />

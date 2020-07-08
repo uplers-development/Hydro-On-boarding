@@ -9,8 +9,12 @@ const Repnav = (props) => {
 
             <ul>
               {props.repmenulisting.map((item,index)=>
-                   <li key={index}><Link to={item.field_react_route} title={item.title}>
-                      <img className="svg" src={item.field_icon!=='' ? item.field_icon :require("../../../images/bell-icon-logo.svg")} alt={item.title} />
+                   <li key={index}><Link to={item.field_react_route} title={item.title} onClick={(e)=>e.preventDefault()}>
+                      <object data={item.field_icon!=='' ? item.field_icon :require("../../../images/bell-icon-logo.svg")} type="image/svg+xml">
+                        <img src={item.field_icon!=='' ? item.field_icon :require("../../../images/bell-icon-logo.svg")} />
+                      </object>
+
+                      {/*<img className="svg" src={item.field_icon!=='' ? item.field_icon :require("../../../images/bell-icon-logo.svg")} alt={item.title} />*/}
                       <span>{item.title}</span></Link>
                       {item.child && item.child!=='' ? 
                         <ul>

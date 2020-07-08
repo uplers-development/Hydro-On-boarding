@@ -46,8 +46,8 @@ const Repheader = (props) => {
              </div>
              <div className="drop-down-menu">
                 <ul>
-                   <li><a href="#" title="Profile">Profile</a></li>
-                   <li><a href="#" title="Sign out">Sign out</a></li>
+                   <li><Link to={""} onClick={(e)=>e.preventDefault()} title="Profile">Profile</Link></li>
+                   <li><Link href={""} onClick={(e)=>e.preventDefault()} title="Sign out">Sign out</Link></li>
                 </ul>
              </div>
           </div>

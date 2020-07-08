@@ -7,7 +7,7 @@ const Latestproduct = (props) => {
 	   <h3 className="common-title">Latest Products</h3>
 	   <ul>
 	   	{props.replatestproductslist && props.replatestproductslist.map((item,index)=>
-	      <li key={index}><Link to={""} title={item.title}>{item.title}</Link></li>
+	      <li key={index}><Link to={""} onClick={(e)=>e.preventDefault()} title={item.title}>{item.title}</Link></li>
 	   	)}
 	   </ul>
 	</div>

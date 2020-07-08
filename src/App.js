@@ -27,9 +27,9 @@ class App extends Component {
 
 
   componentDidMount(){
-    console.log(localStorage.getItem("user-type"));
-    let LeftSideAPi;
-    if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="admin"){
+    //console.log(localStorage.getItem("user-type"));
+    //let LeftSideAPi;
+    /*if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="admin"){
       LeftSideAPi=Apiurl.Leftsidebar_adminuser.url
     }
     if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
@@ -37,7 +37,7 @@ class App extends Component {
     }
     if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="rep"){
       LeftSideAPi=Apiurl.Leftsidebar_repuser.url
-    }
+    }*/
 
 
       fetch(Apiurl.Leftsidebar_client.url,{

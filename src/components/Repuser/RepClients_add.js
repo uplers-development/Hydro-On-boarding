@@ -203,7 +203,7 @@ class RepClients_add extends React.Component {
 									</div>
 
 						<div className="btn-block">
-<div class="upload-btn-wrapper">
+<div className="upload-btn-wrapper">
 											<input type="file" name="Upload Document" />
 											<button className="btn common-btn-blue">
 												<span>Upload Document</span></button>
@@ -381,7 +381,7 @@ class RepClients_add extends React.Component {
 								{/*<!--Add product Title Start-->*/}
 								<div className="pro-title d-flex flex-wrap align-center">
 									<div className="name-of-heading d-flex flex-wrap align-center">
-										<img src={require("../../images/contracts-logo-blue.svg")} alt="product-logo"/>
+										<img src={require("../../images/contracts-logo-blue.svg")} alt="contract-logo"/>
 										<h3>Add contract</h3>
 									</div>
 								</div>

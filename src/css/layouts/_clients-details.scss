@@ -1,0 +1,79 @@
+.clients-detils-main {
+	.person-detils-box {
+		width: 100%;
+		max-width: 840px;
+		padding: 40px 44px 73px 40px;
+	}
+	.pro-title {
+		width: 100%;
+		margin-top: 45px;
+		.search-right {
+			margin-left: auto;
+			.btn-block {
+				margin-right: 24px;
+				.btn {
+					min-width: 210px;
+					margin-bottom: 0;
+					padding: 5px 15px;
+					span {
+						font-size: 18px;
+						line-height: 28px;
+					}
+					&:after {
+						width: auto;
+						background-repeat: repeat-x;
+						background-size: contain;
+					}
+				}
+			}
+		}
+		.search-right {
+			input[type="text"] {
+				padding: 9px 25px 5px 33px;
+			}
+		}
+	}
+	.your-product-list {
+		
+	}
+	.contract-list {
+		.contract-box {
+			padding: 22px 0;
+			.contract-content {
+			> a {
+				font-size: 24px;
+				line-height: 28px;
+				color: $cobalt-blue;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+				text-decoration: none;
+			}
+			h4 {
+				margin: 0;
+				font-size: 18px;
+				line-height: 22px;
+				color: $black;
+				font-family: $arial;
+				font-weight: $font-normal;
+			}
+		}
+			.date {
+			margin-left: auto;
+			p {
+				font-size: 12px;
+				line-height: 18px;
+				color: $panton-gray;
+				margin: 0;
+			} 
+		}
+		}	
+	}
+	.contract  {
+		&.pro-title {
+			padding-right: 0;
+			.btn-block {
+				margin-right: 0;
+			}
+		}
+	}
+}

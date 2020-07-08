@@ -588,6 +588,15 @@ nav {
 							@include transition(all 0.5s ease-in-out);
 						}
 					}
+					
+					/*When object*/
+					object {
+						svg {
+							.shp0 {
+								@include transition(all 0.5s ease-in-out);
+							}
+						}
+					}
 
 					&:hover {
 						span {
@@ -599,16 +608,34 @@ nav {
 								fill: $sky-blue;
 							}
 						}
+						/*When object*/
+						object {
+							svg {
+								.shp0 {
+									fill: $sky-blue;
+								}
+							}
+						}
+						
 					}
 
 					&.active {
 						span {
 							color: $white;
 						}
-
+						
 						svg {
-							.shp0 {
-								fill: $sky-blue;
+								.shp0 {
+									fill: $sky-blue;
+								}
+							}
+						
+						/*When object*/
+						object {
+							svg {
+								.shp0 {
+									fill: $sky-blue;
+								}
 							}
 						}
 					}
@@ -660,7 +687,7 @@ nav {
 						}
 					}
 
-					svg {
+					object {
 						max-width: 23px;
 						height: auto;
 						outline: none;
@@ -1300,7 +1327,7 @@ nav {
 	width: 100%;
 	@include transition(all 0.5s ease-in-out);
 	position: absolute;
-	right: 0;	
+	right: 8px;	
 	top: 0px;
 
 	@media screen and (max-width:$large-mx) {
@@ -2378,6 +2405,7 @@ a {
 						th {
 							.checkbox-cust {
 								display: inline-block;
+								vertical-align: middle;
 							}
 
 							> span {

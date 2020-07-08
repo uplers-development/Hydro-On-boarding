@@ -236,16 +236,25 @@ class RepClients_details extends React.Component {
 
 {/*<!--Contract list Start-->*/}
 <div className="contract-list">
+	
 	<div class="contract-box d-flex flex-wrap">
 		<div class="contract-content">
 		<a href="#" title="First Defense">Downstream Defender</a>
 		<h4>Subheader</h4>
 		</div>
-		<div class="date"><p>20-3-2020</p></div>
-	</div>		
+		<div class="date"><p>Contract expires: 02/02/2025</p></div>
+	</div>
+
+	<div class="contract-box d-flex flex-wrap active">
+		<div class="contract-content">
+		<a href="#" title="First Defense">Title of contract</a>
+		<h4>Subheader</h4>
+		</div>
+		<div class="date"><p>Contract expires: 02/02/2025</p></div>
+	</div>
+
 </div>
 {/*<!--Contract list End-->*/}
-
 
 </div>
 

@@ -6,16 +6,30 @@
 	.fileter-block {
 		.select-box {
 			width: 146px;
+			> span {
+				padding: 8px 25px;
+			}
+			ul {
+				top: 38px;
+			}
 		}
 		.btn-block {
 			margin-left: 14px;
 			.common-btn-blue {
 				min-width: 87px;
 				margin-bottom: 0;
-				padding: 9px 10px 7px;
+				padding: 6px 10px 4px;
 				span {
 					font-size: 18px;
 				    line-height: 28px;
+				}
+			}
+		}
+		.search-sort-block {
+			.auto-search-box {
+				input[type="text"]
+				{
+					padding: 7px 25px 7px 33px;
 				}
 			}
 		}

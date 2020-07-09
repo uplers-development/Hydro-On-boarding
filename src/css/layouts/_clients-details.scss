@@ -3,27 +3,66 @@
 		width: 100%;
 		max-width: 840px;
 		padding: 40px 44px 73px 40px;
+		@media screen and (max-width:$large-mx) {
+			padding: 30px;
+		}
+			.person-right {
+				width: calc(100% - 195px);
+				@media screen and (max-width:$large) {
+					width: calc(100% - 98px);
+				}
+				.person-details {
+					@media screen and (max-width:$large) {
+						width: 100%;
+					}
+					.left {
+						max-width: 200px;
+						width: 100%;
+					}
+				}
+			}
 	}
 	.pro-title {
 		width: 100%;
-		margin-top: 45px;
+		margin-top: 52px;
+		@media screen and (max-width:$large-m) {
+			margin-top: 30px;
+		}
 		.search-right {
 			margin-left: auto;
+			@media screen and (max-width:$ipad-portrait) {
+				margin-left: 0;
+				margin-top: 18px;
+			}
+			@media screen and (max-width: $mobile-small) {
+				margin-top: 0;
+			}
 			.btn-block {
 				margin-right: 24px;
 				.btn {
 					min-width: 210px;
 					margin-bottom: 0;
 					padding: 5px 15px;
+					@media screen and (max-width:$ipad-landscape) {
+						min-width: auto;
+					}
 					span {
 						font-size: 18px;
 						line-height: 28px;
+						@media screen and (max-width:$large) {
+							font-size: 16px;
+						}
 					}
 					&:after {
 						width: auto;
 						background-repeat: repeat-x;
 						background-size: contain;
 					}
+				}
+			}
+			.auto-search-box {
+				@media screen and (max-width:$mobile-small) {
+					margin-top: 15px;
 				}
 			}
 		}
@@ -34,13 +73,52 @@
 		}
 	}
 	.your-product-list {
-		
+		margin-top: 56px;
+		@media screen and (max-width:$large-m) {
+			margin-top: 35px;
+		}
+		.your-product-box {
+				margin-top: 32px;
+				.product-image {
+					width: 205px;
+					padding-bottom: 10.55%;	
+					@media screen and (max-width:$ipad-portrait) {
+						width: 100%;
+						padding-bottom: 56.25%;	
+					}
+				}
+				.product-content {
+					.purchase-date {
+						padding-top: 0;
+					}
+					@media screen and (max-width:$large) {
+						width: calc(100% - 205px);
+					}
+				}
+				.btn-block {
+					bottom: 24px;
+    				right: 87px;
+					@media screen and (max-width:$large) {
+						bottom: 15px;
+    					right: 30px;
+					}
+				}
+		}
+		@media screen and (max-width:$ipad-portrait) {
+			padding-right: 0;
+		}
+		@media screen and (max-width:$mobile-small) {
+			padding-left: 0;
+		}
 	}
 	.contract-list {
 		.contract-box {
-			padding: 22px 22px 15px 22px;
+			padding: 50px 22px 15px 32px;
 			margin-bottom: 25px;
 			position: relative;
+			@media screen and (max-width:$large-m) {
+				padding: 35px 20px 15px 25px;
+			}
 			&:after {
 				content: "";
 				display: block;
@@ -77,7 +155,7 @@
 					font-size: 12px;
 					line-height: 18px;
 					color: $panton-gray;
-					margin: 0;
+					margin: 10px 0 0 0;
 				} 
 			}
 			&.active {
@@ -89,9 +167,20 @@
 	.contract  {
 		&.pro-title {
 			padding-right: 0;
+			margin-top: 80px;
+			@media screen and (max-width:$large-m) {
+				margin-top: 30px;
+			}
 			.btn-block {
 				margin-right: 0;
 			}
 		}
 	}
+	@media screen and (max-width:$mobile-small) {
+			padding: 0 23px;
+	}
+}
+
+.right-content-part .bottom-content-block {
+	padding: 22px 0; 
 }

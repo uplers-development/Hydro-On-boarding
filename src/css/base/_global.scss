@@ -575,7 +575,7 @@ nav {
 					text-decoration: none;
 
 					@media screen and (max-width:$large-m) {
-						padding: 9px 0 9px 40px;
+						padding: 8px 0 8px 40px;
 					}
 
 					@media screen and (max-width:$mobile-small) {
@@ -584,6 +584,8 @@ nav {
 					}
 
 					svg {
+						width: 25px;
+						max-height: 35px;
 						.shp0 {
 							@include transition(all 0.5s ease-in-out);
 						}
@@ -904,7 +906,7 @@ nav {
 
 		@media screen and (max-width:$large-mx) {
 			padding: 12px 20px 12px 0;
-			width: calc(100% - 15px);
+			width: 100%;
 			margin-left: auto;
 		}
 

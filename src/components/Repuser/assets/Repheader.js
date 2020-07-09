@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect,useHistory  } from "react-router-dom";
+import {site_url} from '../../Apiurl'; 
 
 let divType = null;
 let hoverState=null;
@@ -28,17 +29,23 @@ const Logout=()=>{
 }
 
 const Repheader = (props) => {
+	console.log(props.menulisting);
+
   return (
     <div className="top-heading-continer d-flex flex-wrap align-center" >
           <div className="name-of-heading d-flex flex-wrap">
-             <img src={require("../../../images/dashboard-nav-blue.svg")} alt="profile-logo" />
-             <h1>Dashboard</h1>
+             {props.menulisting.map((item,index)=>
+             	{if(window.location.pathname===item.field_react_route){
+             		return(<><img key={index} src={item.field_icon} alt="profile-logo" />
+             				<h1 key={index}>{item.title}</h1></>)
+             	}}
+             )}
           </div>
           <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
              <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
                 {props.repuserinfo!==null ? 
                 	<>
-		                <img src={props.repuserinfo.user_picture[0]!=='' ? props.repuserinfo.user_picture[0].url : require("../../../images/john-smith.png")} alt="Prfile image" />
+		                <img src={props.repuserinfo.user_picture[0]!=='' ? props.repuserinfo.user_picture[0].url : require("../../../images/john-smith.png")} alt="Profile image" />
 	                	<h2>{props.repuserinfo.field_first_name[0].value+" "+props.repuserinfo.field_last_name[0].value}</h2>
                 	</>
                     :

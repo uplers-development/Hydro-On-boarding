@@ -237,6 +237,7 @@
 					font-family: $arial;
 					font-weight: $font-normal;
 					width: 100%;
+					word-break: break-word;
 				}
 
 				ul {
@@ -315,6 +316,7 @@
 							padding: 18px 0;
 							display: block;
 							pointer-events: none;
+							word-break: break-word;
 						}
 
 						border-bottom: 1px solid $light-black;
@@ -397,6 +399,7 @@
 								color: $light-black;
 								font-family: $arial;
 								font-weight: $font-normal;
+								word-break: break-word;
 							}
 							@media screen and (max-width:$mobile-small) {
 								padding: 10px 0 0 0;

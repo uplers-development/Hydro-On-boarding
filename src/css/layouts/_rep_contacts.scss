@@ -249,7 +249,7 @@
 				color: $cobalt-blue;
 				font-family: $gibson;
 				font-weight: $font-semi-bold;
-
+				word-break: break-word;
 				@media screen and (max-width:$large-m) {
 					font-size: 30px;
 					line-height: 36px;
@@ -272,7 +272,7 @@
 				color: $black;
 				font-family: $arial;
 				font-weight: $font-normal;
-
+				word-break: break-word;
 				@media screen and (max-width:$mobile-small) {
 					font-size: 14px;
 					margin: 0;
@@ -311,6 +311,7 @@
 				position: absolute;
 				top: 35px;
 				left: 140px;
+				width: calc(100% - 150px);
 			}
 			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
 				display: inline-block;

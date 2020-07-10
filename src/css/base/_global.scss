@@ -490,7 +490,7 @@ nav {
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 			top: auto;
-			z-index: 2;
+			z-index: 3;
 			padding: 13px 0 6px;
 			position: fixed;
 		}
@@ -586,6 +586,9 @@ nav {
 					svg {
 						width: 25px;
 						max-height: 35px;
+						@media screen and (max-width:$mobile-small) {
+							max-height: 20px;
+						}
 						.shp0 {
 							@include transition(all 0.5s ease-in-out);
 						}
@@ -1043,7 +1046,7 @@ nav {
 			padding: 15px 0;
 
 			@media screen and (max-width:$large-mx) {
-				padding: 15px;
+				padding: 15px 15px 15px 0;
 			}
 
 			@media screen and (max-width:$ipad-portrait) {
@@ -2405,6 +2408,7 @@ a {
 
 					tr {
 						th {
+							padding-right: 10px;
 							.checkbox-cust {
 								display: inline-block;
 								vertical-align: middle;
@@ -2458,6 +2462,8 @@ a {
 							line-height: 22px;
 							font-family: $arial;
 							font-weight: $font-normal;
+							word-break: break-word;
+							padding-right: 10px;
 							@media screen and (max-width: $mobile-small) {
 								font-size: 16px;
 								line-height: 18px;
@@ -2516,6 +2522,7 @@ a {
 								padding-left: 25px;
 								@media screen and (max-width: $mobile-small) {
 									padding-left: 15px;
+									width: calc(100% - 18px);
 								}
 								.img-c {
 									width: 60px;
@@ -2534,20 +2541,18 @@ a {
 										}
 									}
 								}
-
 								.right-detail {
 									display: inline-block;
 									vertical-align: middle;
 									padding-left: 15px;
+									width: calc(100% - 60px);
 										@media screen and (max-width: $mobile-small) {
 											padding-left: 10px;
 										}
 								}
 							}
-
-							padding: 17px 0 14px;
+							padding: 17px 10px 14px;
 							vertical-align: top;
-
 							&:last-child {
 								span {
 									display: block;
@@ -2624,6 +2629,7 @@ a {
 					@media screen and (max-width:$mobile-small) {
 						font-size: 20px;
 						line-height: 25px;
+						padding-left: 10px;
 					}
 					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 						font-size: 20px;

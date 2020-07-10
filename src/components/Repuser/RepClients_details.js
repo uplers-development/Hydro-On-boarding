@@ -136,7 +136,7 @@ class RepClients_details extends React.Component {
 <div className="container">
 
 	{/*<!--Product Title Start-->*/}
-		<div className="pro-title d-flex flex-wrap align-center">
+		<div className="pro-title prod d-flex flex-wrap align-center">
 									
 									<div className="name-of-heading d-flex flex-wrap align-center">
 										<img src={require("../../images/your-product-blue-logo.svg")} alt="product-logo"/>
@@ -149,8 +149,11 @@ class RepClients_details extends React.Component {
 	</div>												  
 													
 <div className="auto-search-box">
-<form><div className="autocomplete-ss"><input type="text" placeholder="Search Products" className="hydro" /></div></form></div>
-												  </div>
+<form>
+<div className="autocomplete-ss">
+	<input type="text" placeholder="Search Products" className="hydro" />
+</div></form></div>
+</div>
 {/*<!--Search right End-->*/}
 									
 								</div>

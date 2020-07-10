@@ -268,8 +268,8 @@ class RepClients_add extends React.Component {
 							{/*<!--List box Start-->*/}	
 							<div className="list-box">
 								<div className="top d-flex flex-wrap">
-									<div className="checkbox-cust"><input type="checkbox" id="checkbox2" />
-									<label for="checkbox2"></label></div>
+									<div className="checkbox-cust"><input type="checkbox" id="checkbox3" />
+									<label for="checkbox3"></label></div>
 									<div className="title">
 										<h4>Hydro Biofilter</h4>	
 										<h5>Stormwater management</h5>	
@@ -317,8 +317,8 @@ class RepClients_add extends React.Component {
 							{/*<!--List box Start-->*/}	
 							<div className="list-box">
 								<div className="top d-flex flex-wrap">
-									<div className="checkbox-cust"><input type="checkbox" id="checkbox1" />
-									<label for="checkbox1"></label></div>
+									<div className="checkbox-cust"><input type="checkbox" id="checkbox4" />
+									<label for="checkbox4"></label></div>
 									<div className="title">
 										<h4>First Defense</h4>	
 										<h5>Stormwater management</h5>	

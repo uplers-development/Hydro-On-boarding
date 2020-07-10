@@ -29,15 +29,14 @@ const Logout=()=>{
 }
 
 const Repheader = (props) => {
-	console.log(props.menulisting);
 
   return (
     <div className="top-heading-continer d-flex flex-wrap align-center" >
           <div className="name-of-heading d-flex flex-wrap">
              {props.menulisting.map((item,index)=>
              	{if(window.location.pathname===item.field_react_route){
-             		return(<><img key={index} src={item.field_icon} alt="profile-logo" />
-             				<h1 key={index}>{item.title}</h1></>)
+             		return(<React.Fragment key={index}><img src={item.field_icon} alt="profile-logo" />
+             				<h1>{item.title}</h1></React.Fragment>)
              	}}
              )}
           </div>

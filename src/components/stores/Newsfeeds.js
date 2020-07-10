@@ -13,7 +13,8 @@ class Newsfeeds extends Component {
 		this.state={
 			newsFeedItems:[],
 			recentViews:[],
-			loader:true
+			loader:true,
+			newsFeednotification:[]
 		}
 	}
 
@@ -38,10 +39,31 @@ class Newsfeeds extends Component {
 			});
 		this.newsFeedItems()
 		this.newsFeedRecentlyViewed();
+		this.Get_newsFeeds_notification();
 	 }else{
 	 	this.props.history.push('/Login')
 	 }
 	}	
+
+	Get_newsFeeds_notification=()=>{
+		let newsfeeds={
+			news_feeds:"1"
+		}
+
+		fetch(`http://staging.project-progress.net/projects/hydro/json-api/newsfeeds.json`,{
+    			headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+                method:'POST',
+                body:JSON.stringify(newsfeeds),
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{
+    		console.log(data);
+    		this.setState({newsFeednotification:data});
+    	})
+	}
 
 	newsFeedItems=()=>{
 		fetch(Apiurl.Newsfeeds.url,{
@@ -55,6 +77,11 @@ class Newsfeeds extends Component {
     		console.log(data);
     			let newsfeed = []
 				for (var i = 0; i < data.length; i++) {
+					 if(i > 0  && data[i-1].created_1!==data[i].created_1){     
+		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}</h4></div>);  	 
+		        	 }else if(i == 0){
+		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}<span></span></h4></div>);  	 
+		        	 }	  
 					 if(data[i].field_news_feed_type=="5"){
 					 	 newsfeed.push(<div className="datewise-common-block white-text teal-color-bg"><div className="top-title"><img className='svg' src={site_url+data[i].field_icon} alt="setting-logo"/><h4>{ReactHtmlParser(data[i].title)}</h4></div><div className="time-date">{data[i].created}</div>{ReactHtmlParser(data[i].body)}</div>);
 					 }else if(data[i].field_news_feed_type=="4"){
@@ -64,17 +91,12 @@ class Newsfeeds extends Component {
 					 }else if(data[i].field_news_feed_type=="3"){
 					 	 newsfeed.push(<div className="datewise-common-block white-bg-boxshadow"><div className="top-title"><img className='svg' src={site_url+data[i].field_icon} alt="issue-logo"/><h4>{data[i].title}</h4></div><div className="time-date">Today at {data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block"><button className="btn common-btn-white" type="submit"><span>{data[i].field_news_feed_button}</span></button></div></div>);
 					 }
-					 else if(data[i].field_news_feed_type=="13"){
+					 /*else if(data[i].field_news_feed_type=="13"){
 					 	 newsfeed.push(<div className="news-title sky-blue-bg"><img src={site_url+data[i].field_icon} alt="Bell logo"/><h3>{data[i].title}</h3><div className="time-date">Today at 8:30am</div>{ReactHtmlParser(data[i].body)}<img className="svg" src={require("../../images/login-screen-pattern-white-r.svg")} alt="login screen pattern"/></div>);
-					 }
-		        	 if(i > 0  && data[i-1].created_1!==data[i].created_1){     
-		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}</h4></div>);  	 
-		        	 }else if(i == 0){
-		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}<span></span></h4></div>);  	 
-		        	 }	   	
+					 }*/
+		        	 	
 		        }
     		this.setState({newsFeedItems:newsfeed,loader:false});
-	    		console.log(this.state.newsFeedItems);
 	    		$('img.svg').each(function () {
 				var $img = $(this);
 				var imgID = $img.attr('id');
@@ -136,7 +158,13 @@ class Newsfeeds extends Component {
 					{!this.state.loader ? 
 					<div className="d-flex flex-wrap news-main">
 						<div className="news-feed-left">
-							 {this.state.newsFeedItems}
+							{this.state.newsFeednotification.map((item,index)=>
+								<div className="news-title sky-blue-bg" key={index}><img src={require("../../images/bell-icon-logo.svg")} alt="Bell logo"/><h3>{ReactHtmlParser(item.title)}</h3><div className="time-date">Today at 8:30am</div>{ReactHtmlParser(item.body)}<img className="svg" src={require("../../images/login-screen-pattern-white-r.svg")} alt="login screen pattern"/></div>
+							)}
+						<>
+							{this.state.newsFeedItems}
+						</>
+
 						</div>
 						<div className="news-feed-right">
 							<div className="recently-viewed">

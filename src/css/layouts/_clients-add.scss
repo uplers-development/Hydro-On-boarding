@@ -28,6 +28,9 @@
 				@media screen and (max-width:$large-x) {
 					margin: 10px 0 0 0;
 				}
+				@media screen and (max-width:$mobile-small) {
+					width: 100%;
+				}
 			}
 		}
 	}
@@ -46,11 +49,13 @@
 					flex-wrap: wrap;
 					align-items: center;
 					margin-bottom: 12px;
-
 					input,
 					select {
 						width: 481px;
 						border: 1px solid $dim-gray;
+						@media screen and (max-width:$mobile-small) {
+							width: 100%;
+						}
 					}
 
 					input[type=number] {
@@ -122,7 +127,9 @@
 		.pro-title {
 			padding: 16px 25px 10px 0;
 			position: relative;
-
+			@media screen and (max-width: $ipad-portrait) {
+				padding: 16px 0 10px 0;
+			}
 			&:after {
 				content: "";
 				display: block;
@@ -193,10 +200,26 @@
 			form {
 				input[type="text"] {
 					padding: 7px 25px 7px 33px;
+					@media screen and (max-width:$mobile-small) {
+						padding: 7px 0 7px 33px;
+					}
 				}
 			}
 			@media screen and (max-width:$large-m) {
 				margin-top: 15px;
+			}
+			@media screen and (max-width:$ipad-portrait) {
+				margin-top: 0;
+			}
+			@media screen and (max-width:$mobile-small) {
+				margin-top: 0;
+				margin-left: auto;
+				margin-right: 0;
+			}
+			@media screen and (max-width:$small-medium) {
+				margin-top: 10px;
+				margin-left: 0;
+				margin-right: auto;
 			}
 		}
 
@@ -222,6 +245,10 @@
 					padding: 10px 37px 47px 0;
 					@media screen and (max-width:$large-x) {
 						padding: 10px 0 25px 0;
+						align-items: flex-start;
+					}
+					@media screen and (max-width:$mobile-small) {
+						padding: 20px 0;
 					}
 					.checkbox-cust {
 						padding-top: 5px;
@@ -283,7 +310,11 @@
 							margin: 10px 0 0 10px;
 						}
 						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
-								margin: 10px 0 0 0;
+								margin: 10px 0 0 auto;
+						}
+						
+						@media screen and (max-width:$small-x) {
+							margin: 10px 0 0 0;
 						}
 						&:after {
 							content: "";
@@ -487,7 +518,6 @@
 						-moz-appearance: none;
 						appearance: none;
 					}
-
 					label {
 						font-size: 18px;
 						line-height: 22px;
@@ -589,7 +619,7 @@
 					background-repeat: repeat-x;
 					background-size: contain;
 					width: auto;
-					height: 74px;
+					height: 94px;
 				}
 			}
 		}

@@ -6,10 +6,19 @@
 		@media screen and (max-width:$large-mx) {
 			padding: 30px;
 		}
+		@media screen and (max-width:$mobile-small) {
+			padding: 17px;
+		}
 			.person-right {
 				width: calc(100% - 195px);
 				@media screen and (max-width:$large) {
 					width: calc(100% - 98px);
+				}
+				@media screen and (max-width:$mobile-small) {
+					width: 100%;
+				}
+				@media (max-height: $mob-landscape-375) and (max-width: $iphone-x) and (orientation: landscape) {
+						width: 100%;
 				}
 				.person-details {
 					@media screen and (max-width:$large) {
@@ -31,8 +40,9 @@
 		.search-right {
 			margin-left: auto;
 			@media screen and (max-width:$ipad-portrait) {
-				margin-left: 0;
-				margin-top: 18px;
+				/*margin-left: 0;*/
+				margin-top: 5px;
+				margin-bottom: 5px;
 			}
 			@media screen and (max-width: $mobile-small) {
 				margin-top: 0;
@@ -45,6 +55,12 @@
 					padding: 5px 15px;
 					@media screen and (max-width:$ipad-landscape) {
 						min-width: auto;
+					}
+					@media screen and (max-width:$mobile-small	) {
+						padding: 5px 15px 2px;
+					}
+					@media (max-height: $mob-landscape-375) and (max-height: $iphone-x) and (orientation: landscape) {
+						padding: 5px 15px 3px;
 					}
 					span {
 						font-size: 18px;
@@ -62,7 +78,8 @@
 			}
 			.auto-search-box {
 				@media screen and (max-width:$mobile-small) {
-					margin-top: 15px;
+					margin-top: 0;
+					margin-left: 15px;
 				}
 			}
 		}
@@ -94,6 +111,10 @@
 					@media screen and (max-width:$large) {
 						width: calc(100% - 205px);
 					}
+					@media screen and (max-width:$ipad-portrait) {
+						width: 100%;
+						padding: 15px 50px 20px 16px;
+					}
 				}
 				.btn-block {
 					bottom: 24px;
@@ -101,6 +122,9 @@
 					@media screen and (max-width:$large) {
 						bottom: 15px;
     					right: 30px;
+					}
+					@media screen and (max-width:$ipad-portrait) {
+						right: 15px;
 					}
 				}
 		}
@@ -164,6 +188,40 @@
 			}
 		}	
 	}
+	.prod {
+		&.pro-title {
+			@media screen and (max-width:$mobile-small) {
+				padding-right: 0;
+			}
+			.search-right {
+				@media screen and (max-width:$mobile-small) {
+					margin-top: 0;
+					margin-left: auto;
+				}
+				.btn-block {
+					@media screen and (max-width:$mobile-small) {
+						margin: 10px 0;
+					}
+				}
+				.auto-search-box {
+					margin: 0;
+				}
+				@media screen and (max-width:$small-medium) {
+					margin-left: 0;
+					margin-top: 10px;
+				}
+				@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
+					margin-top: 0;
+					margin-left: auto;
+				}
+				.auto-search-box {
+					@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
+						margin-top: 0;margin-left: 10px;
+					}
+				}
+			}
+		}
+	}
 	.contract  {
 		&.pro-title {
 			padding-right: 0;
@@ -174,8 +232,18 @@
 			.btn-block {
 				margin-right: 0;
 			}
+			.search-right {
+				@media screen and (max-width:$mobile-small) {
+					margin-left: auto;
+				}
+				@media (max-height: $mob-landscape-375) and (max-width: $iphone-x) and (orientation: landscape) {
+					margin-left: auto;
+					margin-top: 0;
+				}
+			}
 		}
 	}
+	
 	@media screen and (max-width:$mobile-small) {
 			padding: 0 23px;
 	}

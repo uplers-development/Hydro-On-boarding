@@ -25,8 +25,8 @@ const  Repclienttabledata=(props)=>{
 							            <tr key={index}>
 							               <td>
 							                  <div className="checkbox-cust">
-							                     <input type="checkbox" id="checkbox" name="checkbox" />
-							                     <label htmlFor="checkbox2"></label>	 
+							                     <input type="checkbox" id={"checkbox"+index} name="checkbox" />
+							                     <label htmlFor={"checkbox"+index}></label>	 
 							                  </div>
 							                  <div className="name-edit">
 							                     <div className="img-c">

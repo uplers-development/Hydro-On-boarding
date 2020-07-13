@@ -88,6 +88,7 @@ class Announcements extends React.Component {
 						{/*<!--Announcements Head blok start-->*/}
 						<div className="fileter-block details-head-block d-flex flex-wrap border-bottom"><h3>Add an announcement</h3>
 						<h4>Add an announcement</h4></div>
+							
 						{/*<!--Announcements Head blok end-->*/}	
 	
 						{/*<!--Container start-->*/}
@@ -135,8 +136,12 @@ class Announcements extends React.Component {
 									<label>Subheading</label>
 									<input type="text" name="Subheading" /> 
 								</div>
-
 								
+								<div className="text-edit-bar">
+									<label>Text edit bar</label>
+									<textarea placeholder="Type the announcement here…"></textarea>
+								</div>
+
 								<div className="form-group">
 									<label>Button Copy</label>
 									<input type="text" name="Button Copy" /> 
@@ -150,6 +155,272 @@ class Announcements extends React.Component {
 							</form>
 						</div>
 						{/*<!--Announcements Form block End-->*/}
+
+						{/*<!--Announcements Clients title start-->*/}
+						<div className="pro-title d-flex flex-wrap align-center">
+							<div className="name-of-heading d-flex flex-wrap align-center">
+								<img src={require("../../images/clients_ic_blue.svg")} alt="Clients"/>
+									<h3>Clients</h3>
+							</div>
+						</div>
+						{/*<!--Announcements Clients title End-->*/}
+
+						{/*<!--Filter block Start-->*/}
+						<div className="pro-title d-flex flex-wrap align-center">
+							<h4>Select which clients you want to see the announcements</h4>
+							<div className="filter-right d-flex flex-wrap">
+								<div className="select-box location">
+									<span>Location</span>
+									<ul className="list product-list-item">
+									<li><a href="#" title="USA">USA</a></li>	
+									<li><a href="#" title="UK">UK</a></li>	
+									</ul>
+								</div>
+								<div className="select-box prod-type">
+									<span>Product Types</span>
+									<ul className="list product-list-item">
+									<li><a href="#" title="Type 1">Type 1</a></li>	
+									<li><a href="#" title="Type 2">Type 2</a></li>	
+									</ul>
+								</div>
+								<div className="select-box bulk-action">
+									<span>Bulk</span>
+									<ul className="list product-list-item">
+									<li><a href="#" title="Delete">Delete</a></li>	
+									</ul>
+								</div>
+							</div>
+						</div>
+						{/*<!--Filter block End-->*/}
+
+
+					{/*<!--Table block Start-->*/}
+						<div className="clients-table table-outer">
+							<div className="table-responsive">
+							
+								{/*<!--Table Start-->*/}
+								<table className="table table-striped">
+   <thead>
+      <tr>
+         <th>
+		 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox1" />
+      				<label for="checkbox1"></label>	 
+			 </div><span>Name</span>
+		</th>
+         <th>Email</th>
+         <th>Role</th>
+         <th>Last updatetd</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/girls-profile-img.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>	
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith2.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>		
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/girls-profile-img.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>	
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+							  
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c">
+					<img src={require("../../images/jane-smith2.png")} alt="Prfile image" />	 
+				 </div>
+				 <div className="right-detail">
+				 <h3>John Smith</h3>
+			     <div className="action d-flex flex-wrap">
+					<a href="#" title="Edit">Edit</a>	 
+					<a href="#" title="Delete">Delete</a>	 
+					<a href="#" title="View">View</a>	 
+				 </div>	
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>John.smith@example.co.uk</td>				
+		 <td>Project manager</td>				
+		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+      </tr>
+      
+         </tbody>
+</table>
+								{/*<!--Table End-->*/}
+								
+							</div>	
+						</div>
+					{/*<!--Table block End-->*/}
+						
 						
 						</div>
 						{/*<!--Container End-->*/}

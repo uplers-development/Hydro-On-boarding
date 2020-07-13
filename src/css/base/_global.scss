@@ -1546,6 +1546,9 @@ nav {
 		padding: 11px 25px;
 		width: 100%;
 		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
 		&:after {
 			content: "";
@@ -1582,11 +1585,14 @@ nav {
 			padding: 6px 25px;
 			width: 100%;
 			display: block;
+			cursor: pointer;
 			font-family: $gibson;
 			font-weight: $font-normal;
 			color: $panton-gray;
 			text-decoration: none;
-
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			&:hover {
 				color: $sky-blue;
 			}
@@ -2441,11 +2447,12 @@ a {
 							font-family: $gibson;
 							color: $panton-gray;
 							font-weight: $font-normal;
-							padding: 12px 0;
+							padding: 12px 14px;
 
 							&:nth-child(1) {
 								width: 410px;
 								text-align: left;
+								padding-left: 0;
 							}
 
 							&:nth-child(2) {
@@ -2583,6 +2590,9 @@ a {
 
 							&:last-child {
 								padding-right: 15px;
+							}
+							&:first-child {
+								padding-left: 0;
 							}
 						}
 

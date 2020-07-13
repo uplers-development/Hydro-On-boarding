@@ -1,4 +1,7 @@
 .announcements-main {
+	@media screen and (max-width:$mobile-small) {
+		padding: 0 23px;
+	}
 	.details-head-block {
 		h3 {
 			font-size: 16px;
@@ -15,8 +18,8 @@
 			color: $light-black;
 			font-family: $arial;
 			font-weight: $font-normal;
-			@media screen and (max-width:$large-x) {
-				margin: 10px 0 0 0;
+			@media screen and (max-width:$ipad-portrait) {
+				margin: 0 0 0 15px;
 			}
 			@media screen and (max-width:$mobile-small) {
 				width: 100%;
@@ -26,10 +29,16 @@
 	.anouncements-top-block {
 		width: 100%;
 		padding-top: 48px;
+		@media screen and (max-width: $ipad-landscape) {
+			padding-top: 30px;
+		}
 		.anouncements-check
 		{
 			padding: 0;
 			margin: 0 -18px; 
+			@media screen and (max-width: $ipad-landscape) {
+				    margin: 0 -10px;
+			}
 			justify-content: space-around;
 			li {
 				width: calc(25% - 36px);
@@ -37,6 +46,16 @@
 				background-color: $white;
 				align-items: center;
 				display: inherit;
+				@media screen and (max-width:$ipad-landscape) {
+					width: calc(25% - 20px);
+				}
+				@media screen and (max-width:$ipad-portrait) {
+					width: calc(50% - 20px);
+					margin:10px 0;
+				}
+				@media screen and (max-width:$mobile-small) {
+					width: calc(100% - 20px);
+				}
 				a {
 					width: 100%;
 					padding: 28px 15px 38px;
@@ -44,6 +63,9 @@
 					flex-wrap: wrap;
 					justify-content: center;
 					text-decoration: none;
+					@media screen and (max-width: $ipad-landscape) {
+						padding: 20px 15px;
+					}
 					span {
 						width: 100%;
 						text-align: center;
@@ -67,4 +89,128 @@
 			}
 		}
 	}
+	.anouncements-form {
+		padding-top: 48px;
+		form {
+			max-width: 980px;
+			width: 100%;
+			.form-group {
+				display: flex;
+				flex-wrap: wrap;
+				align-content: center;
+				max-width: 635px;
+				width: 100%;
+				margin-bottom: 12px;
+				input[type="text"] {
+					max-width: 481px;
+					width: 100%;
+				}
+				label {
+					font-size: 18px;
+					line-height: 22px;
+					font-family: $arial;
+					font-weight: $font-normal;
+					padding-right: 19px;
+					width: 100%;
+					max-width: 154px;
+					margin-bottom: 0;
+					@media screen and (max-width:$ipad-portrait) {
+						margin-bottom: 5px;
+					}
+				}
+			}
+			.text-edit-bar {
+				margin-bottom: 22px;
+				label {
+					background-color: $cadet-blue;
+					color: $white;
+					padding: 11px 19px;
+					margin-bottom: 24px;
+					font-size: 18px;
+					line-height: 22px;
+					font-family: $arial;
+					font-weight: $font-normal;
+				}
+				textarea {
+					padding: 13px 11px;
+					color: $light-black;
+					font-size: 14px;
+					line-height: 24px;
+					font-family: $arial;
+					font-weight: $font-normal;
+					font-style: italic;
+					height: 303px;
+					@media screen and (max-width:$mobile-small) {
+						height: 200px;
+					}
+				}
+			}
+		}
+	}
+	.pro-title {
+		padding: 15px 30px 15px 0;
+		margin-top: 30px;
+		@media screen and (max-width: $large-mx) {
+			padding: 15px 15px 15px 0;
+			margin-top: 20px;
+		}
+		h4 {
+			font-size: 16px;
+			line-height: 20px;
+			font-family: $arial;
+			font-weight: $font-normal;
+			margin: 5px 0;
+		}
+		&:before {
+			box-shadow: none;
+		}
+		&:after {
+			box-shadow: none;
+		}
+		.name-of-heading {
+			img {
+				width: 42px;
+				@media screen and (max-width: $ipad-portrait) {
+					width: 26px;
+				}
+			}
+			h3 {
+				
+			}
+		}
+		.filter-right {
+			margin-left: auto;
+			@media screen and (max-width: $ipad-landscape) {
+				margin-left: 0;
+			}
+			.select-box {
+				margin: 5px 0;
+				&.location {
+					width: 217px;
+					margin-right: 23px;
+					@media screen and (max-width: $large-mx) {
+						margin-right: 10px;
+					}
+				}
+				&.prod-type {
+					width: 282px;
+					margin-right: 31px;
+					@media screen and (max-width: $large-mx) {
+						margin-right: 10px;
+					}
+				}
+				&.bulk-action {
+					width: 146px;
+				}
+			}
+		}
+	}
+	
+	
 }
+
+
+
+
+
+

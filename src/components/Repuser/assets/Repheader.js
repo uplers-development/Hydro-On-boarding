@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect,useHistory  } from "react-router-dom";
 import {site_url} from '../../Apiurl'; 
+import ReactHtmlParser from 'react-html-parser';
 
 let divType = null;
 let hoverState=null;
@@ -35,7 +36,7 @@ const Repheader = (props) => {
           <div className="name-of-heading d-flex flex-wrap">
              {props.menulisting.map((item,index)=>
              	{if(window.location.pathname===item.field_react_route){
-             		return(<React.Fragment key={index}><img src={item.field_icon} alt="profile-logo" />
+             		return(<React.Fragment key={index}>{ReactHtmlParser(item.field_icon_svg)}
              				<h1>{item.title}</h1></React.Fragment>)
              	}}
              )}

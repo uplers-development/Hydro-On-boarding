@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import SVG from 'react-inlinesvg';
+import ReactHtmlParser from 'react-html-parser';
 
 const Repnav = (props) => {
       return(
@@ -10,9 +10,13 @@ const Repnav = (props) => {
             <ul>
               {props.repmenulisting.map((item,index)=>
                    <li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
-                      <object data={item.field_icon!=='' ? item.field_icon :require("../../../images/bell-icon-logo.svg")} type="image/svg+xml">
-                           <img className='svg' src={item.field_icon!=='' ? item.field_icon :require("../../../images/bell-icon-logo.svg")}/>
-                      </object>
+                      {item.field_icon_svg!=='' ? 
+                      <>
+                        {ReactHtmlParser(item.field_icon_svg)}
+                      </>
+                        :
+                      <img src={require("../../../images/bell-icon-logo.svg")}/>
+                     }
                       <span>{item.title}</span></Link>
                       {item.child && item.child!=='' ? 
                         <ul>

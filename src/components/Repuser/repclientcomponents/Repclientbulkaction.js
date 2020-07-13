@@ -28,7 +28,7 @@ render(){
 						<div className="modal d-flex flex-wrap align-center justify-center">
 							<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
 							className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
-							<button onClick={(e)=>alert()}>CANCEL</button>
+							<button onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}>CANCEL</button>
 							<button>YES</button>
 						<div>
 							<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>

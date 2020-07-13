@@ -25,17 +25,21 @@
 	}
 	.anouncements-top-block {
 		width: 100%;
+		padding-top: 48px;
 		.anouncements-check
 		{
 			padding: 0;
 			margin: 0 -18px; 
+			justify-content: space-around;
 			li {
-				width: 25%;
-				padding: 25px 18px 38px;
+				width: calc(25% - 36px);
+				box-shadow: 0px 4px 16px $gray-light;
+				background-color: $white;
+				align-items: center;
+				display: inherit;
 				a {
-					box-shadow: 0px 4px 16px $gray-light;
-					background-color: $white;
 					width: 100%;
+					padding: 28px 15px 38px;
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: center;
@@ -50,8 +54,14 @@
 						font-weight: $font-semi-bold;
 						margin-top: 5px;
 					}
+					img {
+						width: 28px;
+					}
 					&.active {
-						background-color: $sky-blue;
+							background-color: $sky-blue;
+							span {
+								color: $white;
+							}
 					}
 				}
 			}

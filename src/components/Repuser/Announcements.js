@@ -104,20 +104,20 @@ class Announcements extends React.Component {
 								</li>
 								<li>
 									<a href="#" alt="">
-										<img src={require("../../images/setting-logo-blue.svg")} alt="contract-logo"/>
-										<span>Update</span>	
+										<img src={require("../../images/question_mark_blue.svg")} alt="Question mark"/>
+										<span>Issue</span>	
 									</a>
 								</li>
 								<li>
 									<a href="#" alt="">
 										<img src={require("../../images/warning-logo-blue.svg")} alt="warning-logo"/>
-										<span>Update</span>	
+										<span>Warning</span>	
 									</a>
 								</li>
 							    <li>
 									<a href="#" className="active" alt="">
-										<img src={require("../../images/setting-logo-blue.svg")} alt="contract-logo"/>
-										<span>Update</span>	
+										<img src={require("../../images/ic_drop_plus_white.svg")} alt="Drop plus"/>
+										<span>New product</span>	
 									</a>
 								</li>
 							</ul>

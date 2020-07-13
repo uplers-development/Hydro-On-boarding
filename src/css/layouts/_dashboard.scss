@@ -17,6 +17,7 @@
 		bottom: 80px;
 		left: 0;
 		right: 0;
+		word-break: break-word;
 		@media screen and (max-width:$large-m) {
 			bottom: 35px;
 			padding: 38px 15px 12px;
@@ -164,6 +165,7 @@
 			{
 				max-width: 340px;
 				width: 100%;
+				word-break: break-word;
 				@media screen and (max-width:$ipad-portrait) {
 					max-width: 300px;
 				}

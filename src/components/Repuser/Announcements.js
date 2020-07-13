@@ -124,6 +124,33 @@ class Announcements extends React.Component {
 						</div>	
 						{/*<!--Announcements Top block end-->*/}
 
+						{/*<!--Announcements Form block Start-->*/}
+						<div className="anouncements-form">
+							<form>
+								<div className="form-group">
+									<label>Title</label>
+									<input type="text" name="Title" /> 
+								</div>
+								<div className="form-group">
+									<label>Subheading</label>
+									<input type="text" name="Subheading" /> 
+								</div>
+
+								
+								<div className="form-group">
+									<label>Button Copy</label>
+									<input type="text" name="Button Copy" /> 
+								</div>
+								<div className="form-group">
+									<label>Button link</label>
+									<input type="text" name="Button link" /> 
+								</div>
+								
+
+							</form>
+						</div>
+						{/*<!--Announcements Form block End-->*/}
+						
 						</div>
 						{/*<!--Container End-->*/}
 							

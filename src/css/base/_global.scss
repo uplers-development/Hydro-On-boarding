@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	word-break: break-word;
 }
 
 html {
@@ -654,7 +655,8 @@ nav {
 						line-height: 28px;
 						padding-left: 20px;
 						outline: none;
-
+						width: calc(100% - 25px);
+    					word-break: break-word;	
 						> span {
 							padding-left: 0;
 
@@ -1354,6 +1356,7 @@ nav {
 	.drop-down-menu {
 		visibility: hidden;
 		opacity: 0;
+		word-break: break-word;
 		@include transition(all 0.2s ease-in-out);
 
 		ul {
@@ -1420,6 +1423,8 @@ nav {
 			margin: 0 0 0 15px;
 			padding-right: 20px;
 			position: relative;
+			width: calc(100% - 55px);
+			word-break: break-all;
 			@media screen and (max-width:$mobile-small) {
 				visibility: hidden;
 				opacity: 0;

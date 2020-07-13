@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
+import {site_url,base_url} from '../../Apiurl'; 
 
 
 
@@ -15,8 +16,33 @@ class Repclientsorting extends React.Component {
 
 	SortClient=(e)=>{
 		e.preventDefault();
-		console.log(e.target.getAttribute("title"));
-		alert()
+		if(!e.target.classList.contains("active")){
+		document.querySelectorAll(".drop-down-menu ul li a").forEach((item,index)=>{
+			item.classList.remove("active");
+		})
+		e.target.classList.add("active");
+
+		fetch(`${base_url}/jsonapi/clients?_format=json${e.target.getAttribute("title")}`,{
+					headers: {
+		                	"Content-Type" : "application/json",
+		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+		                },
+				}).then(res=>res.json()).then(data=>{
+					console.log(data);
+					this.props.getSortedItems(data);
+				});
+		}else{
+			e.target.classList.remove("active");
+			fetch(`${base_url}/jsonapi/clients?_format=json`,{
+					headers: {
+		                	"Content-Type" : "application/json",
+		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+		                },
+				}).then(res=>res.json()).then(data=>{
+					console.log(data);
+					this.props.getSortedItems(data);
+				});
+		}
 	}
 
 

@@ -24,6 +24,7 @@ class RepClients extends React.Component {
 			repclientdata:[],
 		}
 		this.getSearchedItems = this.getSearchedItems.bind(this);
+		this.getSortedItem = this.getSortedItem.bind(this);
 	}
 
 	componentWillMount(){
@@ -41,6 +42,12 @@ class RepClients extends React.Component {
 
 		console.log(getSearchedItem);
 		document.querySelector("#myInput").value==='' ? this.client_data_Table() : this.setState({repclientdata:getSearchedItem});
+	}
+
+	getSortedItem =(getSortedItem) =>{
+
+		console.log(getSortedItem);
+		this.setState({repclientdata:getSortedItem});
 	}
 
 	client_data_Table=()=>{
@@ -102,7 +109,7 @@ class RepClients extends React.Component {
 			                     <div className="search-sort-block d-flex flex-wrap align-center">
 			                        <Repclientsearchbox getSearchedItems={this.getSearchedItems}/>
 			                        <Repclientmobilefilter/>
-			                        <Repclientsorting/>
+			                        <Repclientsorting getSortedItems={this.getSortedItem}/>
 			                     </div>
 			                  </div>
 			                <Repclienttabledata clientdataTable={this.state.repclientdata}/>

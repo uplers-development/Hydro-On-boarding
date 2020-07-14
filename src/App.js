@@ -59,8 +59,9 @@ class App extends Component {
                     <Route path="/" exact component={Login} />
                     <Route path="/Login"  component={Login} />
                     <Route path="/RepDashboard"  component={RepDashboard} />
-                    <Route path="/RepClients"  component={RepClients} />		  	<Route path="/RepClients_details" component={RepClients_details} />
-		  			<Route path="/Announcements" component={Announcements} />
+                    <Route path="/RepClients"  component={RepClients} />		  	
+                    <Route path="/RepClients_details" component={RepClients_details} />
+		  			       <Route path="/Announcements" component={Announcements} />
 		  
                     <Route path="/RepClients_add"  component={RepClients_add} />
                     {this.state.sidebarItem.length > 0 ?

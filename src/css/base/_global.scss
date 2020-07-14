@@ -585,8 +585,8 @@ nav {
 					}
 
 					svg {
-						/*width: 25px;
-						max-height: 35px*/;
+						width: 23px;
+						height: auto;
 						@media screen and (max-width:$mobile-small) {
 							max-height: 20px;
 						}
@@ -903,6 +903,9 @@ nav {
 		max-width: 1320px;
 		width: 100%;
 		position: relative;
+		.name-of-heading {
+			align-items: center;
+		}
 	}
 
 	.top-heading {
@@ -955,7 +958,7 @@ nav {
 			img {
 				margin-right: 15px;
 				max-width: 37px;
-
+				
 				@media screen and (max-width:$large-m) {
 					max-width: 30px;
 				}
@@ -965,6 +968,8 @@ nav {
 				}
 			}
 			svg {
+				width: 40px;
+				margin-right: 10px; 
 				.shp0 {
 					fill: $sky-blue;
 				}
@@ -1347,7 +1352,10 @@ nav {
 	position: absolute;
 	right: 8px;	
 	top: 0px;
-
+	@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+		padding: 10px;
+		max-width: 180px;
+	}
 	@media screen and (max-width:$large-mx) {
 		top: -7px;
 		right: 0;
@@ -1800,7 +1808,7 @@ nav {
 	}
 
 	&.border-bottom {
-		padding-bottom: 20px;
+		padding-bottom: 25px;
 		border-bottom: 1px solid $off-white;
 		position: relative;
 
@@ -2689,3 +2697,17 @@ a {
 				}
 			}
 		}
+/*Empty data message*/
+.data-empty {
+	display: block;
+	width: 100%;
+	text-align: center;
+	font-size: 22px;
+	color: $black;
+	font-family: $gibson;
+	font-weight: $font-semi-bold;
+	padding-top: 35px 15px;
+	@media screen and (max-width:$mobile-small) {
+		font-size: 18px;
+	}
+}

@@ -36,8 +36,8 @@ const Repheader = (props) => {
           <div className="name-of-heading d-flex flex-wrap">
              {props.menulisting.map((item,index)=>
              	{if(window.location.pathname===item.field_react_route){
-             		return(<React.Fragment key={index}>{ReactHtmlParser(item.field_icon_svg)}
-             				<h1>{item.title}</h1></React.Fragment>)
+             		return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
+             		<h1>{item.title}</h1></React.Fragment>)
              	}}
              )}
           </div>

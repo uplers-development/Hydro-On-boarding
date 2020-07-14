@@ -32,8 +32,6 @@ class Announcements extends React.Component {
 							<img className="svg" src={require("../../images/dashboard-nav.svg")} alt="profile-logo" /><span>Dashboard</span></a></li>
 					<li><a href="#" title="Clients">
 							<img className="svg" src={require("../../images/clients_ic.svg")} alt="product-logo" /><span>Clients</span></a>
-							<ul>
-								<li><a href="#" title="Clients">Add clients</a></li>							</ul>	
 							</li>
 					
 						<li><a className="active" href="#" title="Products">
@@ -59,7 +57,7 @@ class Announcements extends React.Component {
 					{/*<!--Top heading container start-->*/}
 					<div className="top-heading-continer d-flex flex-wrap align-center">
 						<div className="name-of-heading d-flex flex-wrap">
-							<img src={require("../../images/clients_ic_blue.svg")} alt="profile-logo" />
+							<img src={require("../../images/bell-icon-logo-blue.svg")} alt="profile-logo" />
 							<h1>Announcements</h1>
 						</div>
 
@@ -162,11 +160,53 @@ class Announcements extends React.Component {
 								<img src={require("../../images/clients_ic_blue.svg")} alt="Clients"/>
 									<h3>Clients</h3>
 							</div>
+										  
+							{/*<!--Mobile filter start-->*/}
+							<div className="mobile-filter">
+									<a href="javascript:void(0)" title="filter-btn" className="filter-open-btn">
+										<img src={require("../../images/ic_filter.svg")} alt="ic_filter" />
+									</a>
+
+									<div className="open-close-filter-block">
+										<div className="top-head d-flex flex-wrap align-center">
+											<div className="top-title d-flex flex-wrap">
+												<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter" />
+												<h4>Filters</h4>
+											</div>
+											<a href="javascript:void(0)" title="close-btn" className="filter-open-btn">
+												<img src={require("../../images/ic_close.svg")} alt="ic_close" />
+											</a>
+										</div>
+
+										<div className="list-filter-mobile">
+											<h5>Location</h5>
+											<ul>
+												<li><a href="#" title="USA">USA</a></li>
+												<li><a href="#" title="UK">UK</a></li>
+											</ul>
+
+											<h5>Product Types</h5>
+											<ul>
+											<li><a href="#" title="Type 1">Type 1</a></li>	
+									<li><a href="#" title="Type 2">Type 2</a></li>	
+											</ul>			  
+												
+											<h5>Bulk Action</h5>			  
+											<ul>
+												<li><a href="#" className="active"  title="Delete">Delete</a></li>
+											</ul>
+														  			
+										</div>
+
+									</div>
+								</div>
+							{/*<!--Mobile filter End-->*/}
+										  
 						</div>
 						{/*<!--Announcements Clients title End-->*/}
 
 						{/*<!--Filter block Start-->*/}
-						<div className="pro-title d-flex flex-wrap align-center">
+						<div className="announcements-filter d-flex flex-wrap align-center">
 							<h4>Select which clients you want to see the announcements</h4>
 							<div className="filter-right d-flex flex-wrap">
 								<div className="select-box location">
@@ -417,7 +457,10 @@ class Announcements extends React.Component {
 </table>
 								{/*<!--Table End-->*/}
 								
-							</div>	
+							</div>
+							<div className="btn-block">
+								<button className="btn common-btn-blue"><span>Publish announcement</span></button>	
+							</div>
 						</div>
 					{/*<!--Table block End-->*/}
 						

@@ -105,6 +105,9 @@
     		margin: 0 auto;
 			padding-bottom: 30px;
 		}
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+			padding: 15px;
+		}
 		.top-switch-user
 		{
 			h1
@@ -117,6 +120,10 @@
 				margin: 10px 68px 0 0;
 				@media screen and (max-width:$mobile-small) {
 					margin: 10px 10px 10px 0;
+				}
+				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					margin: 10px 10px 0 0;
+					font-size: 14px;
 				}
 			}
 			.user-log

@@ -12,13 +12,16 @@ import Repclientsearchbox from './repclientcomponents/Repclientsearchbox'
 import Repclientsorting from './repclientcomponents/Repclientsorting'
 import Repclientmobilefilter from './repclientcomponents/Repclientmobilefilter'
 import Repclienttabledata from './repclientcomponents/Repclienttabledata'
-
+import Repclientdetails from './repclientcomponents/Repclientdetails';
+import Repproductselection from './repclientcomponents/Repproductselection';
+import Repcontractdetails from './repclientcomponents/Repcontractdetails'
 class RepClients extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
 			menulisting:[],
 			repinfo:null,
+			viewpagecalled:false,
 			searchedItem:[],
 			searchedclientresult:[],
 			repclientdata:[],
@@ -48,6 +51,11 @@ class RepClients extends React.Component {
 
 		console.log(getSortedItem);
 		this.setState({repclientdata:getSortedItem});
+	}
+
+	check_view_page_call=(viewpagecalled)=>{
+		console.log(viewpagecalled);
+		this.setState({viewpagecall : viewpagecalled});
 	}
 
 	client_data_Table=()=>{
@@ -102,19 +110,38 @@ class RepClients extends React.Component {
 			            <div className="top-heading">
 			               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
 			            </div>
-			            <div className="bottom-content-block with-filter">
-			               <div className="d-flex flex-wrap clients-main-block">
-			                  <div className="fileter-block d-flex flex-wrap border-bottom">
-			                     <Repclientbulkaction/>
-			                     <div className="search-sort-block d-flex flex-wrap align-center">
-			                        <Repclientsearchbox getSearchedItems={this.getSearchedItems}/>
-			                        <Repclientmobilefilter/>
-			                        <Repclientsorting getSortedItems={this.getSortedItem}/>
-			                     </div>
-			                  </div>
-			                <Repclienttabledata clientdataTable={this.state.repclientdata}/>
-			               </div>
-			            </div>
+			            <>
+			            {!this.state.viewpagecall ? 
+			            	<div className="bottom-content-block with-filter">
+					               <div className="d-flex flex-wrap clients-main-block">
+					                  <div className="fileter-block d-flex flex-wrap border-bottom">
+					                     <Repclientbulkaction/>
+					                     <div className="search-sort-block d-flex flex-wrap align-center">
+					                        <Repclientsearchbox getSearchedItems={this.getSearchedItems}/>
+					                        <Repclientmobilefilter/>
+					                        <Repclientsorting getSortedItems={this.getSortedItem}/>
+					                     </div>
+					                  </div>
+					                	<Repclienttabledata clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call}/>
+					               </div>
+			            	</div>
+				             :
+				             <div className="bottom-content-block">
+					              <div className="d-flex flex-wrap right-content-part">
+										<div className="bottom-content-block">
+											{/*<!-Client details main start-->*/}
+												<div className="d-flex flex-wrap clients-detils-main">				
+													<Repclientdetails/>
+													<div className="container">
+														<Repproductselection/>
+														<Repcontractdetails/>
+													</div>
+												</div>
+										</div>
+								 </div>
+							</div>
+			         	}
+			         	</>
 			         </div>
 			      </div>
 			   </section>

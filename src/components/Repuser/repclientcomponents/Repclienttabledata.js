@@ -10,10 +10,16 @@ class Repclienttabledata extends React.Component{
 
 		}
 	this.handleChecked=this.handleChecked.bind(this);
+	this.handleViewEvent=this.handleViewEvent.bind(this);
 	}
 
 	handleChecked=()=>{
 		this.setState({parentchecked:true});
+	}
+
+	handleViewEvent=(e)=>{
+		e.preventDefault();
+		this.props.checkViewpageCall(true);
 	}
 
 	render(){
@@ -52,7 +58,7 @@ class Repclienttabledata extends React.Component{
 							                        <div className="action d-flex flex-wrap">
 							                           <Link to={"/RepClients_details"} title="Edit">Edit</Link>	 
 							                           <a href="#" title="Delete">Delete</a>	 
-							                           <Link to={"/RepClients_details"}	 title="View">View</Link>	 
+							                           <Link to={""} onClick={this.handleViewEvent} title="View">View</Link>	 
 							                        </div>
 							                     </div>
 							                  </div>

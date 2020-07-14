@@ -2,6 +2,12 @@
 	@media screen and (max-width:$mobile-small) {
 		padding: 0 23px;
 	}
+	.fileter-block
+	{
+		@media screen and (max-width:$mobile-small) {
+			padding: 0 0 15px;
+		}
+	}
 	.details-head-block {
 		h3 {
 			font-size: 16px;
@@ -21,8 +27,11 @@
 			@media screen and (max-width:$ipad-portrait) {
 				margin: 0 0 0 15px;
 			}
-			@media screen and (max-width:$mobile-small) {
+			@media screen and (max-width:$small-x) {
 				width: 100%;
+			}
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				width: auto;
 			}
 		}
 	}
@@ -58,7 +67,7 @@
 				}
 				a {
 					width: 100%;
-					padding: 28px 15px 38px;
+					padding: 28px 15px;
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: center;
@@ -91,13 +100,16 @@
 	}
 	.anouncements-form {
 		padding-top: 48px;
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+			padding-top: 20px;
+		}
 		form {
 			max-width: 980px;
 			width: 100%;
 			.form-group {
 				display: flex;
 				flex-wrap: wrap;
-				align-content: center;
+				align-items: center;
 				max-width: 635px;
 				width: 100%;
 				margin-bottom: 12px;
@@ -117,10 +129,17 @@
 					@media screen and (max-width:$ipad-portrait) {
 						margin-bottom: 5px;
 					}
+					@media screen and (max-width:$mobile-small) {
+						font-size: 16px;
+					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 16px;
+					}
 				}
 			}
 			.text-edit-bar {
 				margin-bottom: 22px;
+				margin: 34px 0 22px;
 				label {
 					background-color: $cadet-blue;
 					color: $white;
@@ -132,7 +151,7 @@
 					font-weight: $font-normal;
 				}
 				textarea {
-					padding: 13px 11px;
+					padding: 13px 34% 11px 11px;
 					color: $light-black;
 					font-size: 14px;
 					line-height: 24px;
@@ -144,15 +163,38 @@
 						height: 200px;
 					}
 				}
+				.textarea-block {
+					position: relative;
+					> img {
+						position: absolute;
+						/*height: 78%;*/
+						width: 29%;
+						right: 40px;
+						top: 50%;
+						transform: translateY(-50%);
+						-webkit-transform: translateY(-50%);
+						@media screen and (max-width: $ipad-portrait) {
+							right: 20px;
+						}
+						@media screen and (max-width: $small-medium) {
+							right: 10px;
+						}
+					}
+				}
 			}
 		}
 	}
-	.pro-title {
-		padding: 15px 30px 15px 0;
-		margin-top: 30px;
-		@media screen and (max-width: $large-mx) {
-			padding: 15px 15px 15px 0;
-			margin-top: 20px;
+	.announcements-filter
+	{
+		position: relative;
+		border-bottom: 1px solid $off-white;
+		padding: 18px 10px 8px 0;
+		@media screen and (max-width: $large-m)
+		{
+			padding: 30px 0 15px 0;
+		}
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+			padding: 20px 0 10px 0;
 		}
 		h4 {
 			font-size: 16px;
@@ -160,23 +202,6 @@
 			font-family: $arial;
 			font-weight: $font-normal;
 			margin: 5px 0;
-		}
-		&:before {
-			box-shadow: none;
-		}
-		&:after {
-			box-shadow: none;
-		}
-		.name-of-heading {
-			img {
-				width: 42px;
-				@media screen and (max-width: $ipad-portrait) {
-					width: 26px;
-				}
-			}
-			h3 {
-				
-			}
 		}
 		.filter-right {
 			margin-left: auto;
@@ -191,6 +216,10 @@
 					@media screen and (max-width: $large-mx) {
 						margin-right: 10px;
 					}
+					@media screen and (max-width: $large-m)
+					{
+						width: 200px;
+					}
 				}
 				&.prod-type {
 					width: 282px;
@@ -198,14 +227,78 @@
 					@media screen and (max-width: $large-mx) {
 						margin-right: 10px;
 					}
+					@media screen and (max-width: $large-m)
+					{
+						width: 270px;
+					}
 				}
 				&.bulk-action {
 					width: 146px;
 				}
 			}
 		}
+		&:after {
+			content: "";
+			display: block;
+			width: 100%;
+			height: 1px;
+			background-color: #F5F5F5;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
+		}
 	}
-	
+	.pro-title {
+		padding: 15px 30px 15px 0;
+		margin-top: 75px;
+		@media screen and (max-width: $large-mx) {
+			padding: 15px 15px 15px 0;
+			margin-top: 20px;
+		}
+		
+		&:before {
+			box-shadow: none;
+		}
+		&:after {
+			box-shadow: none;
+		}
+		.name-of-heading {
+			img {
+				width: 42px;
+				@media screen and (max-width: $ipad-portrait) {
+					width: 26px;
+				}
+			}
+		}
+		.mobile-filter {
+				margin-left: auto;
+		}
+	}
+	.clients-table {
+		.table-responsive {
+			padding-top: 3px;
+		}
+		.btn-block {
+			padding-top: 30px;
+			.btn {
+				min-width: 330px;
+				margin-bottom: 0;
+				@media screen and (max-width:$large-m) {
+					min-width: 280px;
+				}
+				@media screen and (max-width: $ipad-portrait) {
+					min-width: auto;
+				}
+				&:after {
+					background-size: contain;
+					background-repeat: repeat-x;
+					width: auto;
+				}
+			}
+		}
+	}
 	
 }
 

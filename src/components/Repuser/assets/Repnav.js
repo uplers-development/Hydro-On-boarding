@@ -11,9 +11,7 @@ const Repnav = (props) => {
               {props.repmenulisting.map((item,index)=>
                    <li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
                       {item.field_icon_svg!=='' ? 
-                      <>
-                       <div className="icons"> {ReactHtmlParser(item.field_icon_svg)} </div>
-                      </>
+                      <div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
                         :
                       <img src={require("../../../images/bell-icon-logo.svg")}/>
                      }

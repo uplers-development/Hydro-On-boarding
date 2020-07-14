@@ -126,19 +126,15 @@ class RepClients extends React.Component {
 					               </div>
 			            	</div>
 				             :
-				             <div className="bottom-content-block">
-					              <div className="d-flex flex-wrap right-content-part">
-										<div className="bottom-content-block">
-											{/*<!-Client details main start-->*/}
-												<div className="d-flex flex-wrap clients-detils-main">				
-													<Repclientdetails/>
-													<div className="container">
-														<Repproductselection/>
-														<Repcontractdetails/>
-													</div>
-												</div>
+							<div className="bottom-content-block">
+								{/*<!-Client details main start-->*/}
+									<div className="d-flex flex-wrap clients-detils-main">				
+										<Repclientdetails/>
+										<div className="container">
+											<Repproductselection/>
+											<Repcontractdetails/>
 										</div>
-								 </div>
+									</div>
 							</div>
 			         	}
 			         	</>

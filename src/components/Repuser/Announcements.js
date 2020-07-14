@@ -137,7 +137,10 @@ class Announcements extends React.Component {
 								
 								<div className="text-edit-bar">
 									<label>Text edit bar</label>
+									<div className="textarea-block">
+<img src={require("../../images/hydro-microscreen@2x.png")} alt="Microscreen"/>
 									<textarea placeholder="Type the announcement here…"></textarea>
+									</div>
 								</div>
 
 								<div className="form-group">

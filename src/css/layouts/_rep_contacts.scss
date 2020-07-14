@@ -220,6 +220,7 @@
 	}
 
 	.person-right {
+		margin-top: -6px;
 		@media screen and (max-width:$large-mx) {
 			width: calc(100% - 145px);
 			padding-left: 10px;

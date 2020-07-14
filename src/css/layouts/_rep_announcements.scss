@@ -2,6 +2,12 @@
 	@media screen and (max-width:$mobile-small) {
 		padding: 0 23px;
 	}
+	.fileter-block
+	{
+		@media screen and (max-width:$mobile-small) {
+			padding: 0 0 15px;
+		}
+	}
 	.details-head-block {
 		h3 {
 			font-size: 16px;
@@ -21,8 +27,11 @@
 			@media screen and (max-width:$ipad-portrait) {
 				margin: 0 0 0 15px;
 			}
-			@media screen and (max-width:$mobile-small) {
+			@media screen and (max-width:$small-x) {
 				width: 100%;
+			}
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				width: auto;
 			}
 		}
 	}
@@ -91,6 +100,9 @@
 	}
 	.anouncements-form {
 		padding-top: 48px;
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+			padding-top: 20px;
+		}
 		form {
 			max-width: 980px;
 			width: 100%;
@@ -117,6 +129,12 @@
 					@media screen and (max-width:$ipad-portrait) {
 						margin-bottom: 5px;
 					}
+					@media screen and (max-width:$mobile-small) {
+						font-size: 16px;
+					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 16px;
+					}
 				}
 			}
 			.text-edit-bar {
@@ -133,7 +151,7 @@
 					font-weight: $font-normal;
 				}
 				textarea {
-					padding: 13px 11px;
+					padding: 13px 34% 11px 11px;
 					color: $light-black;
 					font-size: 14px;
 					line-height: 24px;
@@ -145,6 +163,24 @@
 						height: 200px;
 					}
 				}
+				.textarea-block {
+					position: relative;
+					> img {
+						position: absolute;
+						/*height: 78%;*/
+						width: 29%;
+						right: 40px;
+						top: 50%;
+						transform: translateY(-50%);
+						-webkit-transform: translateY(-50%);
+						@media screen and (max-width: $ipad-portrait) {
+							right: 20px;
+						}
+						@media screen and (max-width: $small-medium) {
+							right: 10px;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -152,10 +188,13 @@
 	{
 		position: relative;
 		border-bottom: 1px solid $off-white;
-		padding: 30px 10px 15px 0;
+		padding: 18px 10px 8px 0;
 		@media screen and (max-width: $large-m)
 		{
 			padding: 30px 0 15px 0;
+		}
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+			padding: 20px 0 10px 0;
 		}
 		h4 {
 			font-size: 16px;
@@ -213,7 +252,7 @@
 	}
 	.pro-title {
 		padding: 15px 30px 15px 0;
-		margin-top: 85px;
+		margin-top: 75px;
 		@media screen and (max-width: $large-mx) {
 			padding: 15px 15px 15px 0;
 			margin-top: 20px;
@@ -238,6 +277,9 @@
 		}
 	}
 	.clients-table {
+		.table-responsive {
+			padding-top: 3px;
+		}
 		.btn-block {
 			padding-top: 30px;
 			.btn {

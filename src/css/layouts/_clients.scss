@@ -30,6 +30,9 @@
 				input[type="text"]
 				{
 					padding: 7px 25px 7px 33px;
+					@media screen and (max-width: $mobile-small) {
+						padding: 5px 9px 5px 35px;
+					}
 				}
 			}
 		}

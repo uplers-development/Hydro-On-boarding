@@ -143,6 +143,9 @@
 			@media screen and (max-width:$large-m) {
 				padding: 35px 20px 15px 25px;
 			}
+			@media screen and (max-width:$mobile-small) {
+				padding: 25px 15px 15px 15px;
+			}
 			&:after {
 				content: "";
 				display: block;
@@ -152,9 +155,15 @@
 				position: absolute;
 				bottom: 0;
 				right: 0;
+				@media screen and (max-width:$mobile-small) {
+					width: 100%;
+				}
 			}
 			.contract-content {
 				width: calc(100% - 165px);
+				@media screen and (max-width:$mobile-small) {
+					width: 100%;
+				}
 			> a {
 				font-size: 24px;
 				line-height: 28px;
@@ -164,6 +173,10 @@
 				text-decoration: none;
 				margin-bottom: 5px;
 				display: block;
+				@media screen and (max-width:$mobile-small) {
+					font-size: 20px;
+					line-height: 24px;
+				}
 			}
 			h4 {
 				margin: 0;
@@ -172,6 +185,10 @@
 				color: $black;
 				font-family: $arial;
 				font-weight: $font-normal;
+				@media screen and (max-width:$mobile-small) {
+					font-size: 16px;
+					line-height: 20px;
+				}
 			}
 		}
 			.date {
@@ -236,6 +253,10 @@
 			.search-right {
 				@media screen and (max-width:$mobile-small) {
 					margin-left: auto;
+				}
+				@media screen and (max-width:$small-x) {
+					margin-left: 0;
+					margin-top: 15px;
 				}
 				@media (max-height: $mob-landscape-375) and (max-width: $iphone-x) and (orientation: landscape) {
 					margin-left: auto;

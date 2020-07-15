@@ -418,7 +418,9 @@ form {
 		background-position: 97% center;
 		background-size: 14px;
 		background-repeat: no-repeat;
-
+		@media screen and (max-width: $mobile-small) {
+			background-position: calc(100% - 10px) center;
+		}
 		&:focus,
 		&:focus {
 			outline: none;
@@ -498,7 +500,7 @@ nav {
 
 		&:before {
 			content: "";
-			background: transparent linear-gradient(270deg, #00738100 0%, #003A41 100%) 0% 0% no-repeat;
+			background: linear-gradient(90deg, rgba(0,115,129,0) 0%, rgba(0,58,65,1) 100%);
 			opacity: 0.25;
 			height: 100%;
 			width: 100%;
@@ -645,7 +647,6 @@ nav {
 							}
 						}
 					}
-
 					span {
 						color: $white-transparent-menu-text;
 						text-decoration: none;
@@ -664,11 +665,9 @@ nav {
 								display: none;
 							}
 						}
-
 						@media screen and (max-width:$large-m) {
 							font-size: 18px;
 						}
-
 						@media screen and (max-width:$mobile-small) {
 							font-size: 12px;
 							line-height: 28px;
@@ -676,41 +675,33 @@ nav {
 							padding-left: 0;
 							text-align: center;
 						}
-
 						@media screen and (max-width:$small-x) {
 							font-size: 9px;
 							line-height: 22px;
 						}
 					}
-
 					img {
 						width: 23px;
 						height: auto;
 						outline: none;
-
 						@media screen and (max-width:$mobile-small) {
 							max-height: 20px;
 							max-width: 20px;
 						}
 					}
-
 					object {
 						max-width: 23px;
 						height: auto;
 						outline: none;
-
 						@media screen and (max-width:$large-m) {
 							max-width: 20px;
 						}
-
 						@media screen and (max-width:$mobile-small) {
 							max-width: 26px;
 						}
-
 						@media screen and (max-width:$small-x) {
 							max-width: 20px;
 						}
-
 						/*IE Support CSS */
 						@media all and (-ms-high-contrast:none) {
 							height: 23px;
@@ -720,7 +711,6 @@ nav {
 							max-height: 22px;
 						}
 					}
-
 					label {
 						height: 12px;
 						width: 12px;
@@ -737,13 +727,11 @@ nav {
 						position: absolute;
 						left: 54px;
 						bottom: 10px;
-
 						@media screen and (max-width:$mobile-small) {
 							left: 36px;
 							bottom: 22px;
 						}
 					}
-
 					&:after {
 						content: "";
 						display: block;
@@ -970,6 +958,9 @@ nav {
 			svg {
 				width: 40px;
 				margin-right: 10px; 
+				@media screen and (max-width:$mobile-small) {
+					width: 30px;
+				}
 				.shp0 {
 					fill: $sky-blue;
 				}

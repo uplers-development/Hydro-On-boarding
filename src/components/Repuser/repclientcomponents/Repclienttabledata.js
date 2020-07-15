@@ -17,9 +17,10 @@ class Repclienttabledata extends React.Component{
 		this.setState({parentchecked:true});
 	}
 
-	handleViewEvent=(e)=>{
+	handleViewEvent=(e,uid)=>{
 		e.preventDefault();
-		this.props.checkViewpageCall(true);
+		console.log(uid);
+		this.props.checkViewpageCall(true,uid);
 	}
 
 	render(){
@@ -58,7 +59,7 @@ class Repclienttabledata extends React.Component{
 							                        <div className="action d-flex flex-wrap">
 							                           <Link to={"/RepClients_details"} title="Edit">Edit</Link>	 
 							                           <a href="#" title="Delete">Delete</a>	 
-							                           <Link to={""} onClick={this.handleViewEvent} title="View">View</Link>	 
+							                           <Link to={""} onClick={(e)=>this.handleViewEvent(e,item.uid)} title="View">View</Link>	 
 							                        </div>
 							                     </div>
 							                  </div>

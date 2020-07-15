@@ -25,6 +25,7 @@ class RepClients extends React.Component {
 			searchedItem:[],
 			searchedclientresult:[],
 			repclientdata:[],
+			updatedRepclientId:null
 		}
 		this.getSearchedItems = this.getSearchedItems.bind(this);
 		this.getSortedItem = this.getSortedItem.bind(this);
@@ -53,9 +54,9 @@ class RepClients extends React.Component {
 		this.setState({repclientdata:getSortedItem});
 	}
 
-	check_view_page_call=(viewpagecalled)=>{
-		console.log(viewpagecalled);
-		this.setState({viewpagecall : viewpagecalled});
+	check_view_page_call=(viewpagecalled,uid)=>{
+		console.log(uid);
+		this.setState({updatedRepclientId : uid,viewpagecall : viewpagecalled});
 	}
 
 	client_data_Table=()=>{
@@ -129,10 +130,10 @@ class RepClients extends React.Component {
 							<div className="bottom-content-block">
 								{/*<!-Client details main start-->*/}
 									<div className="d-flex flex-wrap clients-detils-main">				
-										<Repclientdetails/>
+										<Repclientdetails repclientuid={this.state.updatedRepclientId}/>
 										<div className="container">
-											<Repproductselection/>
-											<Repcontractdetails/>
+											<Repproductselection repclientuid={this.state.updatedRepclientId}/>
+											<Repcontractdetails repclientuid={this.state.updatedRepclientId}/>
 										</div>
 									</div>
 							</div>

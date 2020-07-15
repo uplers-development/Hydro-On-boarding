@@ -6,27 +6,47 @@ import productImage from '../../../images/first-defense.jpg';
 class Repcontractdetails extends React.Component{
 	constructor(props){
 		super(props);
-		this.state={}
+		this.state={
+			clientcontractDetails:[]
+		}
+	}
+
+
+	componentDidMount(){
+		this.Get_client_contract_Details();
+		console.log(this.state.clientcontractDetails);
+	}
+
+
+	Get_client_contract_Details=()=>{
+			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/clients_contract_details/${this.props.repclientuid}?_format=json`,{
+			    headers:{
+			            "Content-Type" : "application/json",
+			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+			    },
+			    method:"GET",
+  			}).then(res=>res.json()).then(data=>this.setState({clientcontractDetails:data}));
+		}
+
+	call_the_contract_details=(e,nid,fieldcontractdocument)=>{
+		e.preventDefault();
+		console.log(nid);
+		window.open(site_url+fieldcontractdocument,"_target");
+
 	}
 
 	render(){
 		return(
 			<div className="contract-list">
+			{this.state.clientcontractDetails.map((item,index)=>
 				<div className="contract-box d-flex flex-wrap">
 					<div className="contract-content">
-					<a href="#" title="First Defense">Downstream Defender</a>
-					<h4>Subheader</h4>
+					<Link to={""} onClick={(e)=>this.call_the_contract_details(e,item.nid,item.field_contract_document)} title={item.title}>{item.title}</Link>
+					<h4>{item.field_sub_title}</h4>
 					</div>
-					<div className="date"><p>Contract expires: 02/02/2025</p></div>
+					<div className="date"><p>Contract expires: {item.field_contract_expiry}</p></div>
 				</div>
-
-				<div className="contract-box d-flex flex-wrap active">
-					<div className="contract-content">
-					<a href="#" title="First Defense">Title of contract</a>
-					<h4>Subheader</h4>
-					</div>
-					<div className="date"><p>Contract expires: 02/02/2025</p></div>
-				</div>
+			)}
 			</div>
 			)
 	}

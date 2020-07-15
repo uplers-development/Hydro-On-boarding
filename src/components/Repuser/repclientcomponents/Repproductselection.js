@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
+import ReactHtmlParser from 'react-html-parser';
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
 import productImage from '../../../images/first-defense.jpg';
 
@@ -7,12 +8,33 @@ class Repproductselection extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			parentchecked:false,
-
+			porductDetails:[],
 		}
 	}
 
+	componentDidMount(){
+			this.Get_client_Product_Details();
+		}
+
+
+	Get_client_Product_Details=()=>{
+			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json`,{
+			    headers:{
+			            "Content-Type" : "application/json",
+			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+			    },
+			    method:"GET",
+  			}).then(res=>res.json()).then(data=>this.setState({porductDetails:data}));
+		}
+
+	Call_selected_repclient_product=(e,nid)=>{
+		e.preventDefault();
+	}
+
+
+
 	render(){
+		console.log(this.state.porductDetails)
 		return(
 			<div>
 				<div className="pro-title prod d-flex flex-wrap align-center">
@@ -38,45 +60,24 @@ class Repproductselection extends React.Component{
 
 
 					<div className="your-product-list">
-					   <div className="your-product-box d-flex flex-wrap">							
-					      <div className="product-image bg-cover" style={{backgroundImage: `url(${productImage})`}}></div>
-						   <div className="product-content">
-						      <a href="#" title="First Defense">First Defense</a>
-						      <h4>Stormwater management</h4>
-						      <div className="purchase-date">Purchase Date: 02/02/2019</div>
-						   </div>
-						   <div className="btn-block">
-						      <a href="#" className="svg" title="Pdf download">
-						      <img src={require("../../../images/pdf-download-logo.svg")} alt="icon" className="svg" /> 
-						      </a>
-						   </div>
-						</div>
-						<div className="your-product-box d-flex flex-wrap">
-						    <div className="product-image bg-cover" style={{backgroundImage: `url(${productImage})`}}></div>
-							<div className="product-content">
-							   <a href="#" title="First Defense">Downstream Defender</a>
-							   <h4><span>Stormwater management </span> <span>Process water treatment</span></h4>
-							   <div className="purchase-date">Purchase Date: 02/02/2019</div>
+					   {this.state.porductDetails.map((item,index)=>
+						   <div className="your-product-box d-flex flex-wrap" key={index}>							
+							      <div className="product-image bg-cover" style={{backgroundImage: `url(${site_url+item.field_product_image})`}}></div>
+								   <div className="product-content">
+								      <Link to={""} onClick={(e)=>this.Call_selected_repclient_product(e,item.nid)}  title={ReactHtmlParser(item.title)}>{ReactHtmlParser(item.title)}</Link>
+								      <h4>{ReactHtmlParser(item.field_product_category)}</h4>
+								      <div className="purchase-date">Purchase Date: {item.field_purchase_date}</div>
+								   </div>
+								   <div className="btn-block">
+								      <Link to={""} className="svg" onClick={((e)=>{
+								      		e.preventDefault();
+								      		window.open(site_url+item.field_product_document,"_target");
+								      })} title="Pdf download">
+								      <img src={require("../../../images/pdf-download-logo.svg")} alt="icon" className="svg" /> 
+								      </Link>
+								   </div>
 							</div>
-							<div className="btn-block">
-							   <a href="#" className="svg" title="Pdf download">
-							   <img src={require("../../../images/pdf-download-logo.svg")} alt="icon" className="svg" /> 
-							   </a>
-							</div>
-						</div>
-						<div className="your-product-box d-flex flex-wrap">
-						   <div className="product-image bg-cover" style={{backgroundImage: `url(${productImage})`}}></div>
-							<div className="product-content">
-							   <a href="#" title="First Defense">Hydro Biofilter</a>
-							   <h4>Stormwater management</h4>
-							   <div className="purchase-date">Purchase Date: 02/02/2019</div>
-							</div>
-							<div className="btn-block">
-							   <a href="#" className="svg" title="Pdf download">
-							   <img src={require("../../../images/pdf-download-logo.svg")} alt="icon" className="svg" /> 
-							   </a>
-							</div>
-						</div>
+						)}
 					</div>
 
 					<div className="pro-title contract d-flex flex-wrap align-center">

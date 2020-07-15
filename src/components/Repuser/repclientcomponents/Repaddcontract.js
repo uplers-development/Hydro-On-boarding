@@ -11,18 +11,15 @@ class Repaddcontract extends React.Component{
 	
 
 		}
-		this.contractSection=React.createRef();
 	}
 
 	componentDidMount(){
-		console.log(this.props.checkcontractfrom);
-		if(this.props.checkcontractfrom){scrollToComponent(this.contractSection, { offset: 0, align: 'top', duration: 1000, ease:'inExpo'})}
 
 	}
 
 	render(){
 		return(
-			   <div className="add-contract" ref={(section) => { this.contractSection = section; }}>
+			   <div className="add-contract">
 		            <div className="container">
 		               <div className="pro-title d-flex flex-wrap align-center">
 		                  <div className="name-of-heading d-flex flex-wrap align-center">
@@ -59,6 +56,13 @@ class Repaddcontract extends React.Component{
 		                  </form>
 		               </div>
 		            </div>
+		            <div className="btn-block add-client">
+                        <div className="upload-btn-wrapper">
+                           <input type="file" name="Add new client" />
+                           <button className="btn common-btn-blue">
+                           <span>Add new client</span></button>
+                        </div>
+                     </div>
         	 </div>
 			)
 	}

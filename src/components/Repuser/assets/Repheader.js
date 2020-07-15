@@ -36,9 +36,12 @@ const Repheader = (props) => {
           <div className="name-of-heading d-flex flex-wrap">
              {props.menulisting.map((item,index)=>
              	{if(window.location.pathname===item.field_react_route){
-             		return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
-             		<h1>{item.title}</h1></React.Fragment>)
-             	}}
+                return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
+                <h1>{item.title}</h1></React.Fragment>)
+              }else if(item.child!==undefined && window.location.pathname===item.child[0].field_react_route){
+                return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: '' }} />
+                <h1>{item.child[0].title}</h1></React.Fragment>)
+              }}
              )}
           </div>
           <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>

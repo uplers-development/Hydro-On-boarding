@@ -13,6 +13,7 @@ import RepDashboard from "./components/Repuser/RepDashboard";
 import RepClients from "./components/Repuser/RepClients";
 import RepClients_add from "./components/Repuser/RepClients_add";
 import RepClients_details from "./components/Repuser/RepClients_details";
+import RepClients_add_old from "./components/Repuser/RepClients_add_old";
 import Announcements from "./components/Repuser/Announcements";
 import Admin_Resource from "./components/RepAdmin/Admin_Resource";
 import Apiurl,{site_url} from './components/Apiurl'; 
@@ -63,6 +64,7 @@ class App extends Component {
                     <Route path="/RepClients"  component={RepClients} />		  	
                     <Route path="/Admin_Resource"  component={Admin_Resource} />		  	
                     <Route path="/RepClients_details" component={RepClients_details} />
+                    <Route path="/RepClients_add_old" component={RepClients_add_old} />
 		  			       <Route path="/Announcements" component={Announcements} />
 		  
                     <Route path="/RepClients_add"  component={RepClients_add} />

@@ -48,6 +48,7 @@ class Repcontractdetails extends React.Component{
 				</div>
 			)}
 			</div>
+			
 			)
 	}
 

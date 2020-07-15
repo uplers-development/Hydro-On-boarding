@@ -12,17 +12,14 @@ class Repaddproduct extends React.Component{
 
 		}
 
-		this.productSection=React.createRef();
 	} 
 
 	componentDidMount(){
-		console.log(this.props.checkproductfrom);
-		if(this.props.checkproductfrom){scrollToComponent(this.productSection, { offset: 0, align: 'top', duration: 1000, ease:'inExpo'})}
 	}
 
 	render(){
 		return(
-                  <div className="client-add-product" ref={(section) => { this.productSection = section; }}>
+                  <div className="client-add-product">
                         {/*<!--Container Start-->*/}
                         <div className="container">
                            {/*<!--Add product Title Start-->*/}
@@ -223,6 +220,13 @@ class Repaddproduct extends React.Component{
                </div>
                {/*<!--Add product List End-->*/}
             </div>
+            <div className="btn-block add-client">
+                        <div className="upload-btn-wrapper">
+                           <input type="file" name="Add new client" />
+                           <button className="btn common-btn-blue">
+                           <span>Add new client</span></button>
+                        </div>
+                     </div>
             {/*<!--Container End-->*/}
          </div>
 			)

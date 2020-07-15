@@ -65,7 +65,7 @@ class Repclienttabledata extends React.Component{
 							                  </div>
 							               </td>
 				               			   <td>{item.mail}</td>
-				               			   <td>{item.roles_target_id}</td>
+				               			   <td>{item.field_job_title}</td>
 					               		   <td><span>{item.changed}</span></td>
 							            </tr>
 					               	)}

@@ -10,7 +10,7 @@ import hydroImage from '../../images/hydro-biofilter-product.jpg';
 import Repaddclient from './repclientcomponents/Repaddclient'
 import Repaddproduct from './repclientcomponents/Repaddproduct'
 import Repaddcontract from './repclientcomponents/Repaddcontract'
-class RepClients_add extends React.Component {
+class RepClients_add_old extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
@@ -72,7 +72,7 @@ class RepClients_add extends React.Component {
             <div className="d-flex flex-wrap main-block">
                <Repnav repmenulisting={this.state.menulisting}/>
                <div className="d-flex flex-wrap right-content-part">
-                  <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+                 {/* <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>*/}
                   <div className="bottom-content-block with-filter">
                      <div className="d-flex flex-wrap clients-add-main">
                         <div className="clients-add">
@@ -89,4 +89,4 @@ class RepClients_add extends React.Component {
 	}
 }
 		
-export default RepClients_add;			   
+export default RepClients_add_old;			   

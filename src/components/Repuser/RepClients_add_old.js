@@ -75,7 +75,7 @@ class RepClients_add_old extends React.Component {
                  {/* <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>*/}
                   <div className="bottom-content-block with-filter">
                      <div className="d-flex flex-wrap clients-add-main">
-                        <div className="clients-add">
+                     <div className={this.state.fromProductSec ? "clients-add only-add-product":"clients-add"}> 
                            {/*<Repaddclient/>*/}
                            {this.state.fromProductSec && <Repaddproduct/>}
                     		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec}/>}

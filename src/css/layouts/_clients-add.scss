@@ -122,6 +122,19 @@
 		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 			padding: 20px 23px 0;
 		}
+		&.only-add-product {
+			padding-top: 0;
+			.client-add-product {
+				margin-top: 10px;
+			}
+		}
+		&.only-add-contract {
+			padding-top: 0;
+			.client-add-product {
+				margin-top: 0;
+			}
+		}
+		
 	}
 	.client-add-product {
 		margin-top: 70px;

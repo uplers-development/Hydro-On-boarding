@@ -10,6 +10,8 @@ class Repproductselection extends React.Component{
 		this.state={
 			porductDetails:[],
 		}
+		this.clientProductSearch=React.createRef();
+		this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
 	}
 
 	componentDidMount(){
@@ -25,6 +27,28 @@ class Repproductselection extends React.Component{
 			    },
 			    method:"GET",
   			}).then(res=>res.json()).then(data=>this.setState({porductDetails:data}));
+		}
+
+
+	Search_client_Product_Details=(e)=>{
+		if(this.clientProductSearch.current.value!==''){
+			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
+			    headers:{
+			            "Content-Type" : "application/json",
+			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+			    },
+			    method:"GET",
+  			}).then(res=>res.json()).then(data=>{
+  				console.log(data);
+  				if(data.length>0){
+  					this.setState({porductDetails:data})
+  				}else{
+  					alert("sorry no records found");
+  				}
+  			});
+  		 }else{
+  		 	this.Get_client_Product_Details();
+  		 }
 		}
 
 	Call_selected_repclient_product=(e,nid)=>{
@@ -50,7 +74,7 @@ class Repproductselection extends React.Component{
 								<div className="auto-search-box">
 									<form>
 										<div className="autocomplete-ss">
-											<input type="text" placeholder="Search Products" className="hydro" />
+											<input type="text" placeholder="Search Products" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details} />
 										</div>
 									</form>
 								</div>

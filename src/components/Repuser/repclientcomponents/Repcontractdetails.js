@@ -39,7 +39,7 @@ class Repcontractdetails extends React.Component{
 		return(
 			<div className="contract-list">
 			{this.state.clientcontractDetails.map((item,index)=>
-				<div className="contract-box d-flex flex-wrap">
+				<div className="contract-box d-flex flex-wrap" key={index}>
 					<div className="contract-content">
 					<Link to={""} onClick={(e)=>this.call_the_contract_details(e,item.nid,item.field_contract_document)} title={item.title}>{item.title}</Link>
 					<h4>{item.field_sub_title}</h4>

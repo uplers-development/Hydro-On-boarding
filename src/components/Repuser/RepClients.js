@@ -132,7 +132,7 @@ class RepClients extends React.Component {
 									<div className="d-flex flex-wrap clients-detils-main">				
 										<Repclientdetails repclientuid={this.state.updatedRepclientId}/>
 										<div className="container">
-											<Repproductselection repclientuid={this.state.updatedRepclientId}/>
+											<Repproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
 											<Repcontractdetails repclientuid={this.state.updatedRepclientId}/>
 										</div>
 									</div>

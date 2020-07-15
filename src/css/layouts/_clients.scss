@@ -27,9 +27,15 @@
 		}
 		.search-sort-block {
 			.auto-search-box {
+				@media screen and (max-width: $mobile-small) {
+					width: 198px;
+				}
 				input[type="text"]
 				{
-					padding: 7px 25px 7px 33px;
+					padding: 8px 25px 6px 33px;
+					/*@media screen and (max-width: $mobile-small) {
+						padding: 5px 9px 5px 35px;
+					}*/
 				}
 			}
 		}

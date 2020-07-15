@@ -7,14 +7,76 @@ class Repclienttabledata extends React.Component{
 		super(props);
 		this.state={
 			parentchecked:false,
-
+			openPopup:false,
+			setSingleDeleteId:null
 		}
-	this.handleChecked=this.handleChecked.bind(this);
+	this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
+	this.singleSelect=this.singleSelect.bind(this);
 	this.handleViewEvent=this.handleViewEvent.bind(this);
 	}
 
-	handleChecked=()=>{
-		this.setState({parentchecked:true});
+	selectAllcheckbox=(e)=>{
+		 var ele=e.target;
+		 var checkboxes = document.getElementsByTagName('input');
+	     if (ele.checked) {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = true;
+	             }
+	         }
+	     }else {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             console.log(i)
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = false;
+	             }
+	         }
+	      }
+	}
+
+	singleSelect=(e)=>{
+		var checkboxes = document.querySelectorAll('.clientchecked');
+		var ele=document.querySelector(".parentcheck");
+		var checkedCheckboxes=document.querySelectorAll('.clientchecked:checked').length;
+		console.log(checkedCheckboxes);
+		if(e.target.checked===false){
+			document.querySelector(".parentcheck").checked=false
+		}else{
+			for(var i=1;i<=checkboxes.length ; i++){
+				if(checkedCheckboxes===checkboxes.length){
+					ele.checked=true;
+				}else{
+					ele.checked=false;
+				}
+			}
+		}	
+	}
+
+
+
+	deleteRecord = (e) =>{
+		e.preventDefault();
+		alert(this.state.setSingleDeleteId);
+		try{
+			fetch(`${base_url}user/${this.state.setSingleDeleteId}?_format=json`,{
+					headers: {
+	                	"Content-Type" : "application/json",
+	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+	                },
+	                method:'PATCH',
+			}).then(res=>{
+				return res.json();
+			}).then(data=>{
+				console.log(data);
+				this.setState({openPopup:false});
+	 			this.props.recordDelete(true);
+
+			})
+	 	}catch(err){
+	 		console.log(err);
+	 		alert(err);
+	 		this.setState({openPopup:false});
+	 	}
 	}
 
 	handleViewEvent=(e,uid)=>{
@@ -32,7 +94,7 @@ class Repclienttabledata extends React.Component{
 							            <tr>
 							               <th>
 							                  <div className="checkbox-cust">
-							                     <input type="checkbox" id="checkbox" name="checkbox" onChange={this.handleChecked} />
+							                     <input type="checkbox" className="parentcheck" id="checkbox" name="checkbox" onChange={this.selectAllcheckbox}/>
 							                     <label htmlFor="checkbox"></label>	 
 							                  </div>
 							                  <span>Name</span>
@@ -47,7 +109,7 @@ class Repclienttabledata extends React.Component{
 							            <tr key={index}>
 							               <td>
 							                  <div className="checkbox-cust">
-							                     <input type="checkbox" id={"checkbox"+index} className="clientchecked" checked={this.state.parentchecked ? true : false} name="checkbox" onChange={this.singleChecked} />
+							                     <input type="checkbox" id={"checkbox"+index} className="clientchecked" name="checkbox" onChange={this.singleSelect} defaultValue={item.uid}/>
 							                     <label htmlFor={"checkbox"+index}></label>	 
 							                  </div>
 							                  <div className="name-edit">
@@ -57,8 +119,11 @@ class Repclienttabledata extends React.Component{
 							                     <div className="right-detail">
 							                        <h3>{item.name}</h3>
 							                        <div className="action d-flex flex-wrap">
-							                           <Link to={"/RepClients_details"} title="Edit">Edit</Link>	 
-							                           <a href="#" title="Delete">Delete</a>	 
+							                           <Link to={""} onClick={(e)=>this.handleViewEvent(e,item.uid)} title="Edit">Edit</Link>	 
+							                           <Link to={""} onClick={((e)=>
+							                           	{	e.preventDefault();
+							                           		this.setState({openPopup:true,setSingleDeleteId:item.uid})}
+							                           	)} title="Delete">Delete</Link>	 
 							                           <Link to={""} onClick={(e)=>this.handleViewEvent(e,item.uid)} title="View">View</Link>	 
 							                        </div>
 							                     </div>
@@ -71,6 +136,26 @@ class Repclienttabledata extends React.Component{
 					               	)}
 						          	 </tbody>
 							      </table>
+
+							      {this.state.openPopup ? 
+											<div id="modal" className="modal-container">
+												<div className="modal d-flex flex-wrap align-center justify-center">
+													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+													
+												<div>
+													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+														<p>Are you sure you want to delete records?</p>
+
+													<div className="btn-blok">
+														<button onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})} className="btn common-btn-blue"><span>CANCEL</span></button>
+														<button className="btn common-btn-blue" onClick={this.deleteRecord}><span>YES</span></button>	
+													</div>
+													
+												</div>
+												</div>
+											</div>
+								: <></>}
 						   </div>
 			</div>
 		);

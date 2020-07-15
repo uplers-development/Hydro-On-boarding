@@ -18,7 +18,18 @@ const Repnav = (props) => {
                       <span>{item.title}</span></Link>
                       {item.child && item.child!=='' ? 
                         <ul>
-                          <li className={window.location.pathname===item.field_react_route ? "active" :''}  key={index}><Link to={item.child[0].field_react_route} title={item.child[0].title}>{item.child[0].title}</Link></li>
+                          <li className={window.location.pathname===item.child[0].field_react_route ? "active" :''}  key={index}>
+                           {item.field_icon_svg!=='' ? 
+                              <>
+                              <div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
+                              <Link className={window.location.pathname===item.child[0].field_react_route ? "active" :''} to={item.child[0].field_react_route} title={item.child[0].title}>{item.child[0].title}</Link>
+                              </>
+                              :
+                              <>
+                              <img src={require("../../../images/bell-icon-logo.svg")}/>}
+                              <Link className={window.location.pathname===item.child[0].field_react_route ? "active" :''} to={item.child[0].field_react_route} title={item.child[0].title}>{item.child[0].title}</Link>
+                              </>}
+                          </li>
                         </ul>:''}
                   </li>
                 )}

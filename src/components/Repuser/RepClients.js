@@ -25,7 +25,7 @@ class RepClients extends React.Component {
 			searchedItem:[],
 			searchedclientresult:[],
 			repclientdata:[],
-			updatedRepclientId:null
+			updatedRepclientId:null,
 		}
 		this.getSearchedItems = this.getSearchedItems.bind(this);
 		this.getSortedItem = this.getSortedItem.bind(this);
@@ -40,6 +40,10 @@ class RepClients extends React.Component {
 			this.props.history.push('/Login')
 		}
 		
+	}
+
+	checkAnyDelete=(recordDelete)=>{
+		if(recordDelete) {this.client_data_Table()} 
 	}
 
 	getSearchedItems =(getSearchedItem) =>{
@@ -116,14 +120,14 @@ class RepClients extends React.Component {
 			            	<div className="bottom-content-block with-filter">
 					               <div className="d-flex flex-wrap clients-main-block">
 					                  <div className="fileter-block d-flex flex-wrap border-bottom">
-					                     <Repclientbulkaction/>
+					                     <Repclientbulkaction recordDelete={this.checkAnyDelete}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
 					                        <Repclientsearchbox getSearchedItems={this.getSearchedItems}/>
 					                        <Repclientmobilefilter/>
 					                        <Repclientsorting getSortedItems={this.getSortedItem}/>
 					                     </div>
 					                  </div>
-					                	<Repclienttabledata clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call}/>
+					                	<Repclienttabledata clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>
 					               </div>
 			            	</div>
 				             :

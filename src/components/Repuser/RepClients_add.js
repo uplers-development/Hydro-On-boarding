@@ -10,15 +10,16 @@ import hydroImage from '../../images/hydro-biofilter-product.jpg';
 import Repaddclient from './repclientcomponents/Repaddclient'
 import Repaddproduct from './repclientcomponents/Repaddproduct'
 import Repaddcontract from './repclientcomponents/Repaddcontract'
-class RepClients_add_old extends React.Component {
+class RepClients_add extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
 			menulisting:[],
-         repinfo:null,
-			fromProductSec:this.props.location.state.productPage!=="undefined" ? this.props.location.state.productPage :'',
-			fromContractSec:this.props.location.state.contractPage!=="undefined" ? this.props.location.state.contractPage : '',
-         sectionCalldiversion:null,
+      repinfo:null,
+			fromProductSec:this.props.location.state!==undefined ? this.props.location.state.productPage :'',
+			fromContractSec:this.props.location.state!==undefined ? this.props.location.state.contractPage : '',
+      sectionCalldiversion:null,
+      calltheRoute:this.props.location.state!==undefined ? false : true,
 		}
 	}
 
@@ -31,6 +32,8 @@ class RepClients_add_old extends React.Component {
          }
          else if(!this.state.fromProductSec && this.state.fromContractSec){
             this.setState({sectionCalldiversion:"clients-add only-add-contract"})
+         }else{
+          this.setState({sectionCalldiversion:null})
          }
       }else{
          this.props.history.push('/Login')
@@ -80,15 +83,39 @@ class RepClients_add_old extends React.Component {
                <Repnav repmenulisting={this.state.menulisting}/>
                <div className="d-flex flex-wrap right-content-part">
                   <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+                  {!this.state.calltheRoute ? 
                   <div className="bottom-content-block with-filter">
                      <div className="d-flex flex-wrap clients-add-main">
                         <div className={this.state.sectionCalldiversion}>
                            {/*<Repaddclient/>*/}
-                           {this.state.fromProductSec && <Repaddproduct/>}
+                           {this.state.fromProductSec && <Repaddproduct callforproduct={this.state.calltheRoute}/>}
                     		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec}/>}
                         </div>
                      </div>
                   </div>
+                  : 
+                  <div className="bottom-content-block with-filter">
+                     <div className="d-flex flex-wrap clients-add-main">
+                        <div className="details-head-block fileter-block d-flex flex-wrap border-bottom">
+                            <h3>Add new client details</h3> 
+                            <h4>Create a brand new client user and add them to this site</h4> 
+                        </div>
+                        <div className="clients-add">
+                           <Repaddclient/>
+                           <Repaddproduct/>
+                           <Repaddcontract/>
+                        </div>
+                        <div className="btn-block add-client">
+                          <div className="upload-btn-wrapper">
+                                <input type="file" name="Add new client" />
+                                <button className="btn common-btn-blue">
+                                  <span>Add new client</span></button>
+                              </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  }
                </div>
             </div>
          </section>
@@ -96,4 +123,4 @@ class RepClients_add_old extends React.Component {
 	}
 }
 		
-export default RepClients_add_old;			   
+export default RepClients_add;			   

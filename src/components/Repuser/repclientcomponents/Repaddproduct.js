@@ -20,7 +20,6 @@ class Repaddproduct extends React.Component{
 
    openAccordian=(e)=>{
       e.preventDefault();
-      alert();
       console.log(this.openAccordianTab.current);
       this.openAccordianTab.current.classList.add("active");
    }
@@ -87,13 +86,15 @@ class Repaddproduct extends React.Component{
                            </div>
                         </div>
                    </div>
-                  <div className="btn-block add-client">
-                              <div className="upload-btn-wrapper">
-                                 <input type="file" name="Add new client" />
-                                 <button className="btn common-btn-blue">
-                                 <span>Add new client</span></button>
-                              </div>
-                           </div>
+                  {this.props.callforproduct ? 
+                     <div className="btn-block add-client">
+                                 <div className="upload-btn-wrapper">
+                                    <input type="file" name="Add new client" />
+                                    <button className="btn common-btn-blue">
+                                    <span>Add new product</span></button>
+                                 </div>
+                        </div>
+                  :''}
                   {/*<!--Container End-->*/}
                </div>
 			)

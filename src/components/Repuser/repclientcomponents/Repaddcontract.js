@@ -56,13 +56,15 @@ class Repaddcontract extends React.Component{
 		                  </form>
 		               </div>
 		            </div>
+		           {this.props.callforproduct ? 
 		            <div className="btn-block add-client">
                         <div className="upload-btn-wrapper">
                            <input type="file" name="Add new client" />
                            <button className="btn common-btn-blue">
-                           <span>Add new client</span></button>
+                           <span>Add new contract</span></button>
                         </div>
-                     </div>
+                     </div>:
+                     ""}
         	 </div>
 			)
 	}

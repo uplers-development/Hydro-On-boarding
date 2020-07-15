@@ -146,7 +146,7 @@ class Admin_Resource extends React.Component {
 
 
 					{/*<!--Client block Start-->*/}
-						<div className="clients-table table-outer">
+						<div className="resources-table table-outer">
 							<div className="table-responsive">
 							
 								{/*<!--Table Start-->*/}
@@ -173,9 +173,6 @@ class Admin_Resource extends React.Component {
       				<label for="checkbox2"></label>	 
 			 </div>
 			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
-				 </div>
 				 <div className="right-detail">
 				 <h3>John Smith</h3>
 			     <div className="action d-flex flex-wrap">
@@ -186,9 +183,10 @@ class Admin_Resource extends React.Component {
 				</div>	
 			 </div>	 
 		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
+		 <td>Simon</td>				
+		 <td>Last Modified 3 hours ago</td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020s</td>				
       </tr>
 							  
 	

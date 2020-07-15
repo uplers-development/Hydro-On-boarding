@@ -1,0 +1,46 @@
+.admin-resources-main {
+	.resources-table {
+		.table-responsive {
+			table {
+				thead {
+					th {
+						&:nth-child(1) {
+							width: 320px;
+						}
+
+						&:nth-child(2) {
+							width: 340px;
+						}
+
+						&:nth-child(3) {
+							width: 300px;
+						}
+
+						&:nth-child(4) {
+							width: 160px;
+							text-align: left;
+						}
+
+						&:nth-child(5) {
+							width: 200px;
+							text-align: left;
+						}
+					}
+				}
+
+				tbody {
+					tr {
+						td {
+							.name-edit {
+								width: calc(100% - 18px);
+								padding-left: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+}

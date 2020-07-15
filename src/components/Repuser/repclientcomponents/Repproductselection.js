@@ -9,6 +9,8 @@ class Repproductselection extends React.Component{
 		super(props);
 		this.state={
 			porductDetails:[],
+			productPage:false,
+			contractPage:false,
 		}
 		this.clientProductSearch=React.createRef();
 		this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
@@ -53,6 +55,7 @@ class Repproductselection extends React.Component{
 
 	Call_selected_repclient_product=(e,nid)=>{
 		e.preventDefault();
+		
 	}
 
 
@@ -69,7 +72,14 @@ class Repproductselection extends React.Component{
 						{/*<!--Search right Start-->*/}
 							<div className="search-right d-flex flex-wrap align-center">					  
 								<div className="btn-block">
-									<button className="btn common-btn-blue"><span>Add new Product</span></button>
+									<button className="btn common-btn-blue" onClick={((e)=>{
+										this.props.historyPush.history.push({
+											pathname:'/RepClients_add',
+											state:{
+												productPage:true
+											}
+										})
+									})}><span>Add new Product</span></button>
 								</div>												  
 								<div className="auto-search-box">
 									<form>
@@ -111,7 +121,14 @@ class Repproductselection extends React.Component{
 						</div>
 						<div className="search-right d-flex flex-wrap align-center">  
 							<div className="btn-block">
-								<button className="btn common-btn-blue"><span>Add new Contract</span></button>
+								<button className="btn common-btn-blue" onClick={((e)=>{
+										this.props.historyPush.history.push({
+											pathname:'/RepClients_add',
+											state:{
+												contractPage:true
+											}
+										})
+									})}><span>Add new Contract</span></button>
 							</div>												  
 						</div>
 					</div>

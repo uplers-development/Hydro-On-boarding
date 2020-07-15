@@ -18,6 +18,7 @@ class RepClients_add_old extends React.Component {
          repinfo:null,
 			fromProductSec:this.props.location.state.productPage!=="undefined" ? this.props.location.state.productPage :'',
 			fromContractSec:this.props.location.state.contractPage!=="undefined" ? this.props.location.state.contractPage : '',
+         sectionCalldiversion:null,
 		}
 	}
 
@@ -25,6 +26,12 @@ class RepClients_add_old extends React.Component {
       if(localStorage.getItem("access-token")!==null){
          this.Rep_nav_menu();
          this.GetProfile();
+         if(this.state.fromProductSec && !this.state.fromContractSec){
+            this.setState({sectionCalldiversion:"clients-add only-add-product"})
+         }
+         else if(!this.state.fromProductSec && this.state.fromContractSec){
+            this.setState({sectionCalldiversion:"clients-add only-add-contract"})
+         }
       }else{
          this.props.history.push('/Login')
       }
@@ -75,7 +82,7 @@ class RepClients_add_old extends React.Component {
                  {/* <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>*/}
                   <div className="bottom-content-block with-filter">
                      <div className="d-flex flex-wrap clients-add-main">
-                     <div className={this.state.fromProductSec ? "clients-add only-add-product":"clients-add"}> 
+                        <div className={this.state.sectionCalldiversion}>
                            {/*<Repaddclient/>*/}
                            {this.state.fromProductSec && <Repaddproduct/>}
                     		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec}/>}

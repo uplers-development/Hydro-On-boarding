@@ -74,7 +74,7 @@ class Repproductselection extends React.Component{
 								<div className="btn-block">
 									<button className="btn common-btn-blue" onClick={((e)=>{
 										this.props.historyPush.history.push({
-											pathname:'/RepClients_add_old',
+											pathname:'/RepClients_add',
 											state:{
 												productPage:true
 											}
@@ -123,7 +123,7 @@ class Repproductselection extends React.Component{
 							<div className="btn-block">
 								<button className="btn common-btn-blue" onClick={((e)=>{
 										this.props.historyPush.history.push({
-											pathname:'/RepClients_add_old',
+											pathname:'/RepClients_add',
 											state:{
 												contractPage:true
 											}

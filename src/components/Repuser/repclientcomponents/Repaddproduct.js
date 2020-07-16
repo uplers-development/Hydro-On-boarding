@@ -6,13 +6,9 @@ import scrollToComponent from 'react-scroll-to-component';
 import ReactHtmlParser from 'react-html-parser';
 import { Accordion, AccordionItem } from 'react-light-accordion';
 import 'react-light-accordion/demo/css/index.css';
-let titleitem=[];
-let target_id=[];
-let field_product=[];
-let field_purchase_date=[];
-let field_seller=[];
-let field_cost=[];
-let field_item_id=[];
+let object={};
+let productList=[];
+
 class Repaddproduct extends React.Component{
 	constructor(props){
 		super(props);
@@ -62,12 +58,7 @@ class Repaddproduct extends React.Component{
    }
 
    selectBoxChecked=(e)=>{
-      titleitem=[];
-      field_purchase_date=[];
-      field_product=[];
-      field_seller=[];
-      field_cost=[];
-      field_item_id=[];
+     object={};
       document.querySelectorAll(".list-box").forEach((item,index)=>{
             if(item.classList.contains("checked")){item.classList.remove("checked")}
       })
@@ -77,40 +68,32 @@ class Repaddproduct extends React.Component{
       }) 
 
       document.querySelectorAll(".checked .title h4").forEach((title,index)=>{
-            titleitem.push(title.textContent);
+            object['title']=title.textContent;
       })  
 
       document.querySelectorAll(".checked .purchase-date").forEach((purchase_date,index)=>{
-            field_purchase_date.push(purchase_date.value);
+            object['field_purchase_date']=purchase_date.value;
       })  
 
       document.querySelectorAll(".checked .productcheck").forEach((field_id,index)=>{
-            field_product.push(field_id.value);
+            object['field_product']=field_id.value[index]
       })  
 
       document.querySelectorAll(".checked .seller").forEach((seller,index)=>{
-            field_seller.push(seller.value);
+            object['field_seller']=seller.value;
       }) 
 
        document.querySelectorAll(".checked .cost").forEach((cost,index)=>{
-            field_cost.push(cost.value);
+            object['field_cost']=cost.value;
       })  
 
        document.querySelectorAll(".checked .item-id").forEach((item_id,index)=>{
-            field_item_id.push(item_id.value);
+            object['field_item_id']=item_id.value;
       })
+      object['type']='product_purchase';
+      object['field_user']=26;
 
-      let productList={
-
-            "title":[{"value":titleitem}],
-            "type":[{"target_id":"product_purchase"}],
-            "field_product":[{"target_id":field_product}],
-            "field_purchase_date":[{"value":field_purchase_date}],
-            "field_seller":[{"value":field_seller}],
-            "field_cost":[{"value":field_cost}],
-            "field_item_id":[{"value":field_item_id}],
-            "field_user":[{"target_id":26}]
-      }
+      productList.push(object)
       this.props.getproducttoadd(productList)
    }
 
@@ -151,19 +134,19 @@ class Repaddproduct extends React.Component{
                                  <form>
                                     <div className="form-group">
                                        <label>Seller</label>
-                                       <input type="text" name="seller"  className="seller"/>
+                                       <input type="text" name="seller" placeholder="Seller" className="seller"/>
                                     </div>
                                     <div className="form-group">
                                        <label>Purchase date</label>
-                                       <input type="text" name="purchase" className="purchase" />
+                                       <input type="text" placeholder='Purchase date' name="purchase" className="purchase" />
                                     </div>
                                     <div className="form-group">
                                        <label>Cost</label>
-                                       <input type="text" name="cost"  className="cost"/>
+                                       <input type="text" name="cost" placeholder="Cost" className="cost"/>
                                     </div>
                                     <div className="form-group">
                                        <label>Item ID</label>
-                                       <input type="text" name="item-id" className="item-id"  />
+                                       <input type="text" name="item-id" placeholder="Item ID" className="item-id"  />
                                     </div>
                                     <div className="btn-block">
                                        <div className="upload-btn-wrapper">

@@ -31,19 +31,19 @@ class Repaddcontract extends React.Component{
 		                  <form>
 		                     <div className="form-group">
 		                        <label>Title</label>
-		                        <input type="text" name="Title"  />
+		                        <input type="text" name="Title" placeholder="Title" />
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Description</label>
-		                        <input type="text" name="description" />
+		                        <input type="text" name="description" placeholder="Description" />
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Product tags</label>
-		                        <input type="text" name="product-tags" />
+		                        <input type="text" name="product-tags" placeholder="Product tags"/>
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Sharepoint URL</label>
-		                        <input type="text" name="sharepoint-url" />
+		                        <input type="text" name="sharepoint-url"  placeholder="Sharepoint URL"/>
 		                     </div>
 		                     <div className="btn-block">
 		                        <label>Or</label>

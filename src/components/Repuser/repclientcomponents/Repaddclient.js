@@ -18,13 +18,14 @@ class Repaddclient extends React.Component{
             checkedState:false,
 
 		}
-      this.inputValue=React.createRef();
+      this.form=React.createRef();
       this.submitAddClient=this.submitAddClient.bind(this);
 	}
 
 
    submitAddClient=(e)=>{
       e.preventDefault();
+      alert();
        let option={  
            "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],
            "field_last_name" : [{"value":document.getElementById("sname") && document.querySelector("#sname").value!=='' ? document.querySelector("#sname").value :''}],
@@ -48,40 +49,40 @@ class Repaddclient extends React.Component{
      
 		return(
 				 <div className="first-form">
-                        <form>
+                        <form  onSubmit={this.submitAddClient}>
                            <div className="form-group">
                               <label>First name</label>
-                                 <input type="text" id="fname"  onBlur={(e)=>
+                                 <input type="text" id="fname" placeholder="First name"  onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({firstnameState:true}): this.setState({firstnameState:false})}/>
                               {this.state.firstnameState ? ValidationMsg.common.default.firstname : ''}
                            </div>
                            <div className="form-group">
                               <label>Surname</label>
-                              <input type="text" id="sname"  onBlur={(e)=>
+                              <input type="text" id="sname" placeholder="Surname"  onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({SurnameState:true}): this.setState({SurnameState:false})}/>
                               {this.state.SurnameState ? ValidationMsg.common.default.surnamefield : ''}
                            </div>
                            <div className="form-group">
                               <label>Email</label>
-                              <input type="email" id="email"  onBlur={(e)=>
+                              <input type="email" id="email" placeholder="Email"  onBlur={(e)=>
                               !hasValidEmail(e.target.value) ? this.setState({emailstate:true}): this.setState({emailstate:false})}/>
                               {this.state.emailstate ? ValidationMsg.common.default.email : ''}
                            </div>
                            <div className="form-group">
                               <label>Company</label>
-                              <input type="text" id="company"  onBlur={(e)=>
+                              <input type="text" id="company" placeholder="Company" onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({companyState:true}): this.setState({companyState:false})}/>
                               {this.state.companyState ? ValidationMsg.common.default.company : ''}
                            </div>
                            <div className="form-group">
                               <label>Role</label>
-                              <input type="text" id="role"  onBlur={(e)=>
+                              <input type="text" id="role" placeholder="Role"  onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({roleState:true}): this.setState({roleState:false})}/>
                               {this.state.roleState ? ValidationMsg.common.default.role : ''}
                            </div>
                            <div className="form-group">
                               <label>Contact number</label>
-                              <input type="text" id="contact"  onBlur={(e)=>
+                              <input type="text" id="contact" placeholder="Contact number"  onBlur={(e)=>
                               !hasValidMobile(e.target.value)? this.setState({contactnumberState:true}): this.setState({contactnumberState:false})}/>
                               {this.state.contactnumberState ? ValidationMsg.common.default.contactNumber : ''}
                            </div>
@@ -94,7 +95,7 @@ class Repaddclient extends React.Component{
                            </div>
                            <div className="form-group">
                               <label>Password</label>
-                              <input type="password" id="password"  onBlur={(e)=>
+                              <input type="password" id="password" placeholder="Password"  onBlur={(e)=>
                               !hasValidPassword(e.target.value) ? this.setState({passowrdState:true}): this.setState({passowrdState:false})}/>
                               {this.state.passowrdState ? ValidationMsg.common.default.passwordfield : ''}
                            </div>

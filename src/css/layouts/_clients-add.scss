@@ -58,6 +58,10 @@
 							width: 100%;
 						}
 					}
+					.empty-field {
+						width: 481px;
+						margin: 2px 0 0 auto;
+					}
 
 					input[type=number] {
 						-webkit-appearance: none;
@@ -464,6 +468,20 @@
 									width: 100%;
 								}
 							}
+							.empty-field {
+								width: 242px;
+								margin:2px 0 0 auto;
+								@media screen and (max-width:$ipad-landscape) {
+									margin-left: 0;
+								}
+								@media screen and (max-width:$ipad-portrait) {
+									margin-left: auto;
+									width: 252px;
+								}
+								@media screen and (max-width:$mobile-small) {
+									margin-left: 0;
+								}
+							}
 							label {
 								width: 154px;
 								padding-right: 15px;
@@ -602,6 +620,10 @@
 					select {
 						width: 481px;
 						border: 1px solid $dim-gray;
+					}
+					.empty-field {
+						width: 481px;
+						margin: 2px 0 0 auto;
 					}
 					input[type=number] {
 						-webkit-appearance: none;

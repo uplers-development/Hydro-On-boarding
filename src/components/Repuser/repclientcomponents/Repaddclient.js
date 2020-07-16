@@ -19,62 +19,82 @@ class Repaddclient extends React.Component{
 
 		}
       this.inputValue=React.createRef();
+      this.submitAddClient=this.submitAddClient.bind(this);
 	}
 
 
+   submitAddClient=(e)=>{
+      e.preventDefault();
+       let option={  
+           "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],
+           "field_last_name" : [{"value":document.getElementById("sname") && document.querySelector("#sname").value!=='' ? document.querySelector("#sname").value :''}],
+           "mail" : [{"value":document.getElementById("email") && document.querySelector("#email").value!=='' ? document.querySelector("#email").value :''}],
+           "field_organisation" : [{"value":document.getElementById("company") && document.querySelector("#company").value!=='' ? document.querySelector("#company").value :''}],
+           "field_job_title" : [{"value":document.getElementById("role") && document.querySelector("#role").value!=='' ? document.querySelector("#role").value :''}],
+           "field_contact_number" : [{"value":document.getElementById("contact") && document.querySelector("#contact").value!=='' ? document.querySelector("#contact").value :''}],
+           "timezone" : [{"value":"UTC"}],
+           "name" : [{"value":document.getElementById("email") && document.querySelector("#email").value!=='' ? document.querySelector("#email").value :''}],
+           "pass" : [{"value":document.getElementById("password") && document.querySelector("#password").value!=='' ? document.querySelector("#password").value :''}],
+           "roles" : [{ "target_id":"client" }],
+           "status" : [{"value":1}]
+         }      
+      this.props.getClienttoadd(option);      
 
+   
+   }
 
 
 	render(){
+     
 		return(
 				 <div className="first-form">
                         <form>
                            <div className="form-group">
                               <label>First name</label>
-                                 <input type="text" name="fname"  onBlur={(e)=>
+                                 <input type="text" id="fname"  onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({firstnameState:true}): this.setState({firstnameState:false})}/>
                               {this.state.firstnameState ? ValidationMsg.common.default.firstname : ''}
                            </div>
                            <div className="form-group">
                               <label>Surname</label>
-                              <input type="text" name="sname"  onBlur={(e)=>
+                              <input type="text" id="sname"  onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({SurnameState:true}): this.setState({SurnameState:false})}/>
                               {this.state.SurnameState ? ValidationMsg.common.default.surnamefield : ''}
                            </div>
                            <div className="form-group">
                               <label>Email</label>
-                              <input type="email" name="fname"  onBlur={(e)=>
+                              <input type="email" id="email"  onBlur={(e)=>
                               !hasValidEmail(e.target.value) ? this.setState({emailstate:true}): this.setState({emailstate:false})}/>
                               {this.state.emailstate ? ValidationMsg.common.default.email : ''}
                            </div>
                            <div className="form-group">
                               <label>Company</label>
-                              <input type="text" name="company"  onBlur={(e)=>
+                              <input type="text" id="company"  onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({companyState:true}): this.setState({companyState:false})}/>
                               {this.state.companyState ? ValidationMsg.common.default.company : ''}
                            </div>
                            <div className="form-group">
                               <label>Role</label>
-                              <input type="text" name="role"  onBlur={(e)=>
+                              <input type="text" id="role"  onBlur={(e)=>
                               hasNull(e.target.value) ? this.setState({roleState:true}): this.setState({roleState:false})}/>
                               {this.state.roleState ? ValidationMsg.common.default.role : ''}
                            </div>
                            <div className="form-group">
                               <label>Contact number</label>
-                              <input type="text" name="contact"  onBlur={(e)=>
+                              <input type="text" id="contact"  onBlur={(e)=>
                               !hasValidMobile(e.target.value)? this.setState({contactnumberState:true}): this.setState({contactnumberState:false})}/>
                               {this.state.contactnumberState ? ValidationMsg.common.default.contactNumber : ''}
                            </div>
                            <div className="form-group">
                               <label>Time zone</label>
-                              <select name="timezone">
+                              <select id="timezone">
                                  <option value="GMT">GMT</option>
                                  <option value="UTC">UTC</option>
                               </select>
                            </div>
                            <div className="form-group">
                               <label>Password</label>
-                              <input type="password" name="password"  onBlur={(e)=>
+                              <input type="password" id="password"  onBlur={(e)=>
                               !hasValidPassword(e.target.value) ? this.setState({passowrdState:true}): this.setState({passowrdState:false})}/>
                               {this.state.passowrdState ? ValidationMsg.common.default.passwordfield : ''}
                            </div>

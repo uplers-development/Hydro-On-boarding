@@ -16,11 +16,15 @@ class RepClients_add extends React.Component {
 		this.state={
 			menulisting:[],
       repinfo:null,
+      getClientadd:null,
+      getProductadd:null,
+      getContractadd:null,
 			fromProductSec:this.props.location.state!==undefined ? this.props.location.state.productPage :'',
 			fromContractSec:this.props.location.state!==undefined ? this.props.location.state.contractPage : '',
       sectionCalldiversion:null,
       calltheRoute:this.props.location.state!==undefined ? false : true,
 		}
+    this.submitClientDetails=this.submitClientDetails.bind(this);
 	}
 
    componentWillMount(){
@@ -39,6 +43,21 @@ class RepClients_add extends React.Component {
          this.props.history.push('/Login')
       }
       
+   }
+
+   get_product_to_add=(get_product_value)=>{
+    console.log(get_product_value);
+    this.setState({getClientadd:get_product_value})
+   }
+
+   get_client_to_be_add=(get_client_add)=>{
+    console.log(get_client_add);
+    this.setState({getProductadd:get_client_add})
+   }
+
+    get_contract_to_be_add=(get_contract_add)=>{
+    console.log(get_contract_add)
+    this.setState({getContractadd : get_contract_add})
    }
 
 
@@ -75,6 +94,14 @@ class RepClients_add extends React.Component {
       }
    }
 
+
+  submitClientDetails=()=>{
+   console.log(this.state.getClientadd)
+   console.log(this.state.getProductadd)
+   console.log(this.state.getContractadd)
+  }
+
+
 	render(){
 		return(
       <div>
@@ -103,14 +130,13 @@ class RepClients_add extends React.Component {
                             <h4>Create a brand new client user and add them to this site</h4> 
                         </div>
                         <div className="clients-add">
-                           <Repaddclient/>
-                           <Repaddproduct/>
-                           <Repaddcontract/>
+                           <Repaddclient getClienttoadd={this.get_client_to_be_add}/>
+                           <Repaddproduct getproducttoadd={this.get_product_to_add}/>
+                           <Repaddcontract getcontracttoadd={this.get_contract_to_be_add}/>
                         </div>
                         <div className="btn-block add-client">
                           <div className="upload-btn-wrapper">
-                                <input type="file" name="Add new client" />
-                                <button className="btn common-btn-blue">
+                                <button className="btn common-btn-blue" onClick={this.submitClientDetails}>
                                   <span>Add new client</span></button>
                               </div>
                         </div>

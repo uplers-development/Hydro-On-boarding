@@ -82,7 +82,9 @@ class RepClients_add extends React.Component {
             <div className="d-flex flex-wrap main-block">
                <Repnav repmenulisting={this.state.menulisting}/>
                <div className="d-flex flex-wrap right-content-part">
-                  <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+                  <div className="top-heading">
+                    <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+                  </div>
                   {!this.state.calltheRoute ? 
                   <div className="bottom-content-block with-filter">
                      <div className="d-flex flex-wrap clients-add-main">

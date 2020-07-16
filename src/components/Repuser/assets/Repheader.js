@@ -32,7 +32,6 @@ const Logout=()=>{
 const Repheader = (props) => {
 
   return (
-   <div className="top-heading">
       <div className="top-heading-continer d-flex flex-wrap align-center" >
             <div className="name-of-heading d-flex flex-wrap">
                {props.menulisting.map((item,index)=>
@@ -66,7 +65,6 @@ const Repheader = (props) => {
                   </ul>
                </div>
             </div>
-      </div>
    </div>
   )
 }

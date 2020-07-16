@@ -8,7 +8,8 @@ class Repclientbulkaction extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={
-			openPopup:false
+			openPopup:false,
+			bulkIds:[]
 		}
 		this.bulkDelete=this.bulkDelete.bind(this);
 		this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
@@ -16,23 +17,28 @@ class Repclientbulkaction extends React.Component {
 
 	selectAllcheckbox=(e)=>{
 		e.preventDefault();
-		 var ele=document.querySelector(".parentcheck");
-		 var checkboxes = document.getElementsByTagName('input');
-	     for (var i = 0; i < checkboxes.length; i++) {
-	             if (checkboxes[i].type == 'checkbox') {
-	                 checkboxes[i].checked = true;
-	             }
-	         }
+		let collectId=[]
+		document.querySelectorAll(".clientchecked").forEach((item,index)=>{
+			if(item.checked===true){
+				collectId.push(item.value)
+			}
+		})
+		console.log(collectId);
+		this.setState({bulkIds:collectId});
 	}
 
 	bulkDelete=(e)=>{
+		let clientbulkid={
+				user_ids:this.state.bulkIds.toString()
+			}
 			try{
 				fetch(`${base_url}json-api/bulk_delete.json?_format=json`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:'PATCH',
+		                method:'POST',
+		                body:JSON.stringify(clientbulkid)
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{

@@ -57,6 +57,7 @@ class Repclienttabledata extends React.Component{
 	deleteRecord = (e) =>{
 		e.preventDefault();
 		alert(this.state.setSingleDeleteId);
+		let status={"status" : [{ "value":0}] }
 		try{
 			fetch(`${base_url}user/${this.state.setSingleDeleteId}?_format=json`,{
 					headers: {
@@ -64,6 +65,7 @@ class Repclienttabledata extends React.Component{
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
 	                method:'PATCH',
+	                body:JSON.stringify(status)
 			}).then(res=>{
 				return res.json();
 			}).then(data=>{

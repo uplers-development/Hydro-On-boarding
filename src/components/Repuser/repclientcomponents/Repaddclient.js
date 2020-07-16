@@ -9,7 +9,12 @@ class Repaddclient extends React.Component{
 	
 
 		}
+      this.inputValue=React.createRef();
 	}
+
+
+
+
 
 	render(){
 		return(
@@ -17,27 +22,27 @@ class Repaddclient extends React.Component{
                         <form>
                            <div className="form-group">
                               <label>First name</label>
-                              <input type="text" name="fname" />
+                              <input type="text" name="fname" ref={this.inputValue}/>
                            </div>
                            <div className="form-group">
                               <label>Surname</label>
-                              <input type="text" name="sname" />
+                              <input type="text" name="sname" ref={this.inputValue}/>
                            </div>
                            <div className="form-group">
                               <label>Email</label>
-                              <input type="email" name="fname" />
+                              <input type="email" name="fname" ref={this.inputValue}/>
                            </div>
                            <div className="form-group">
                               <label>Company</label>
-                              <input type="text" name="company" />
+                              <input type="text" name="company" ref={this.inputValue}/>
                            </div>
                            <div className="form-group">
                               <label>Role</label>
-                              <input type="text" name="role" />
+                              <input type="text" name="role" ref={this.inputValue}/>
                            </div>
                            <div className="form-group">
                               <label>Contact number</label>
-                              <input type="number" name="contact" />
+                              <input type="number" name="contact" ref={this.inputValue}/>
                            </div>
                            <div className="form-group">
                               <label>Time zone</label>
@@ -48,12 +53,12 @@ class Repaddclient extends React.Component{
                            </div>
                            <div className="form-group">
                               <label>Password</label>
-                              <input type="password" name="password" />
+                              <input type="password" name="password" ref={this.inputValue}/>
                            </div>
                            <div className="send-user-notification">
                               <div class="d-flex flex-wrap notification">
                                  <h3>Send User Notifications</h3>
-                                 <div className="checkbox-cust"><input type="checkbox" id="checkbox5" />
+                                 <div className="checkbox-cust"><input type="checkbox" id="checkbox5" ref={this.inputValue}/>
                                     <label for="checkbox5"></label>
                                  </div>
                               </div>

@@ -315,6 +315,8 @@
 						height: 100%;
 						overflow: visible;
 						padding-bottom: 10px;
+						visibility: visible;
+						opacity: 1;
 					}
 				}
 				border-bottom: 1px solid $off-white;
@@ -414,6 +416,9 @@
 				.bottom-details {
 					overflow: hidden;
 					height: 0;
+					visibility: hidden;
+					opacity: 0;
+					@include transition(0.2s all ease-in-out);
 					padding-top: 0;
 					padding-bottom: 0;
 					@media screen and (max-width:$large-x) {
@@ -662,6 +667,7 @@
 								background-repeat: repeat-x;
 								background-size: contain;
 								width: auto;
+								height: 90px;
 							}
 						}
 					}

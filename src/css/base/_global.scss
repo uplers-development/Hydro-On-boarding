@@ -88,6 +88,9 @@ ul {
 	outline: none;
 	display: inline-block;
 	text-decoration: none;
+	-webkit-backface-visibility: hidden; /* Safari */
+  	backface-visibility: hidden;
+	
 
 	span {
 		font-size: 20px;
@@ -159,7 +162,8 @@ ul {
 	overflow: hidden;
 	outline: none;
 	display: inline-block;
-
+	-webkit-backface-visibility: hidden; /* Safari */
+  	backface-visibility: hidden;
 	span {
 		color: $sky-blue;
 		font-size: 14px;
@@ -235,7 +239,8 @@ ul {
 	overflow: hidden;
 	outline: none;
 	display: inline-block;
-
+	-webkit-backface-visibility: hidden; /* Safari */
+	backface-visibility: hidden;
 	@media screen and (max-width: $mobile-small) {
 		padding: 4px 15px;
 	}
@@ -870,7 +875,8 @@ nav {
 		}
 		&.white-bg-trnsparent {
 			&:before {
-				opecity:0.1;
+				opacity:0.1;
+				background: transparent linear-gradient(270deg, #00738100 0%, #003A41 100%) 0% 0% no-repeat;
 			}
 		}
 	}

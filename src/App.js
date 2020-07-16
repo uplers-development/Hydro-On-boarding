@@ -14,7 +14,7 @@ import RepClients from "./components/Repuser/RepClients";
 import RepClients_add from "./components/Repuser/RepClients_add";
 import RepClients_details from "./components/Repuser/RepClients_details";
 import Announcements from "./components/Repuser/Announcements";
-import Admin_Resource from "./components/RepAdmin/Admin_Resource";
+import Admin_Resource from "./components/Admin/Admin_Resource";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 

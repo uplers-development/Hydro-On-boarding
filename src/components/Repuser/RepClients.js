@@ -123,7 +123,7 @@ class RepClients extends React.Component {
 					                     <Repclientbulkaction recordDelete={this.checkAnyDelete}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
 					                        <Repclientsearchbox getSearchedItems={this.getSearchedItems}/>
-					                        <Repclientmobilefilter/>
+					                        <Repclientmobilefilter getSortedItems={this.getSortedItem} recordDelete={this.checkAnyDelete}/>
 					                        <Repclientsorting getSortedItems={this.getSortedItem}/>
 					                     </div>
 					                  </div>

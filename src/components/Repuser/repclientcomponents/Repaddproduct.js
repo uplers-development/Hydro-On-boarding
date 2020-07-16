@@ -20,8 +20,11 @@ class Repaddproduct extends React.Component{
 
    openAccordian=(e)=>{
       e.preventDefault();
-      console.log(this.openAccordianTab.current);
-      this.openAccordianTab.current.classList.add("active");
+      if(!this.openAccordianTab.current.classList.contains("active")){
+         this.openAccordianTab.current.classList.add("active");
+      }else{
+         this.openAccordianTab.current.classList.remove("active");
+      }
    }
 
 	render(){

@@ -62,7 +62,7 @@ class Admin_Resource extends React.Component {
 
 						<div className="d-flex flex-wrap user-log">
 							<div className="user-image-name d-flex flex-wrap align-center">
-								<img src={require("../../images/john-smith.png")} alt="Prfile image" />
+								<img src={require("../../images/profile-2.png")} alt="Prfile image" />
 								<h2>Username</h2>
 							</div>
 							<div className="drop-down-menu">
@@ -174,7 +174,7 @@ class Admin_Resource extends React.Component {
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
-				 <h3>John Smith</h3>
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
 			     <div className="action d-flex flex-wrap">
 					<a href="#" title="Edit">Edit</a>	 
 					<a href="#" title="Delete">Delete</a>	 
@@ -184,10 +184,29 @@ class Admin_Resource extends React.Component {
 			 </div>	 
 		 </td>
 		 <td>Simon</td>				
-		 <td>Last Modified 3 hours ago</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
 		 <td>Contract</td>				
 		 <td>18th March 2020s</td>				
       </tr>
+	
+	<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020s</td>				
+      </tr>
+
 							  
 	
          </tbody>

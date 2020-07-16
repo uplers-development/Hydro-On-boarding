@@ -248,10 +248,22 @@
 					padding: 0 15px;
 				}
 				&.active {
+					
 					background-color: $sky-blue-transparent-2;
+					.top {
+						> a {
+							&:after {
+								transform: translateY(-50%) rotate(180deg);
+								-webkit-transform: translateY(-50%) rotate(180deg);
+							} 
+						}
+					}
 					.bottom-details {
 						padding-bottom: 23px;
 						margin-top: 20px;
+						height: 100%;
+						overflow: visible;
+						padding-bottom: 10px;
 					}
 				}
 				border-bottom: 1px solid $off-white;
@@ -348,8 +360,10 @@
 					}
 				}
 				.bottom-details {
-					display: none;
-					padding-bottom: 10px;
+					overflow: hidden;
+					height: 0;
+					padding-top: 0;
+					padding-bottom: 0;
 					@media screen and (max-width:$large-x) {
 						align-content: flex-start;
 					}

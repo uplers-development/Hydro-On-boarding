@@ -909,6 +909,7 @@ nav {
 
 		.name-of-heading {
 			align-items: center;
+			display: flex;
 		}
 	}
 
@@ -2754,4 +2755,9 @@ a {
 	@media screen and (max-width:$mobile-small) {
 		font-size: 18px;
 	}
+}
+
+.disable-bluk-opt {
+	pointer-events: none;
+	 cursor: default; 
 }

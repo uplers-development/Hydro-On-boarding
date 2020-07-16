@@ -18,6 +18,10 @@ export const ValidationMsg = {
             company:ReactHtmlParser('<span class="empty-field">Please enter your valid company name.</span>'),
             role:ReactHtmlParser('<span class="empty-field">Please enter your valid role.</span>'),
             usernotificationcheckbox:ReactHtmlParser('<span class="empty-field">Please select the above checkbox.</span>'),
+
+            purchaseProductdate:ReactHtmlParser('<span class="empty-field">Please insert valid purchase date and formate(YYYY-MM-DD).</span>'),
+            coststate:ReactHtmlParser('<span class="empty-field">Please insert valid cost and only numbers allowed.</span>'),
+            itemidstate:ReactHtmlParser('<span class="empty-field">Please insert valid item-id and only numbers allowed.</span>'),
     	}
     }
 }

@@ -14,6 +14,7 @@ class Repproductselection extends React.Component{
 		}
 		this.clientProductSearch=React.createRef();
 		this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
+
 	}
 
 	componentDidMount(){
@@ -76,7 +77,8 @@ class Repproductselection extends React.Component{
 										this.props.historyPush.history.push({
 											pathname:'/RepClients_add',
 											state:{
-												productPage:true
+												productPage:true,
+												senduid:this.props.repclientuid	
 											}
 										})
 									})}><span>Add new Product</span></button>

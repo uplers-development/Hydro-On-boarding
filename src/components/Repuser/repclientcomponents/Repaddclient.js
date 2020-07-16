@@ -19,37 +19,14 @@ class Repaddclient extends React.Component{
 
 		}
       this.form=React.createRef();
-      this.submitAddClient=this.submitAddClient.bind(this);
 	}
-
-
-   submitAddClient=(e)=>{
-      e.preventDefault();
-      alert();
-       let option={  
-           "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],
-           "field_last_name" : [{"value":document.getElementById("sname") && document.querySelector("#sname").value!=='' ? document.querySelector("#sname").value :''}],
-           "mail" : [{"value":document.getElementById("email") && document.querySelector("#email").value!=='' ? document.querySelector("#email").value :''}],
-           "field_organisation" : [{"value":document.getElementById("company") && document.querySelector("#company").value!=='' ? document.querySelector("#company").value :''}],
-           "field_job_title" : [{"value":document.getElementById("role") && document.querySelector("#role").value!=='' ? document.querySelector("#role").value :''}],
-           "field_contact_number" : [{"value":document.getElementById("contact") && document.querySelector("#contact").value!=='' ? document.querySelector("#contact").value :''}],
-           "timezone" : [{"value":"UTC"}],
-           "name" : [{"value":document.getElementById("email") && document.querySelector("#email").value!=='' ? document.querySelector("#email").value :''}],
-           "pass" : [{"value":document.getElementById("password") && document.querySelector("#password").value!=='' ? document.querySelector("#password").value :''}],
-           "roles" : [{ "target_id":"client" }],
-           "status" : [{"value":1}]
-         }      
-      this.props.getClienttoadd(option);      
-
-   
-   }
 
 
 	render(){
      
 		return(
 				 <div className="first-form">
-                        <form  onSubmit={this.submitAddClient}>
+                        <form >
                            <div className="form-group">
                               <label>First name</label>
                                  <input type="text" id="fname" placeholder="First name"  onBlur={(e)=>

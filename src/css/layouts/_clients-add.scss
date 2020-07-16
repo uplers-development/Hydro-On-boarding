@@ -187,6 +187,7 @@
 					@media screen and (max-width:$mobile-small) {
 						font-size: 20px;
 						line-height: 25px;
+						padding-left: 10px;
 					}
 					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 						font-size: 20px;
@@ -235,6 +236,16 @@
 				width: 198px;
 				margin-top: 0;
 			}
+			@media screen and (max-width:$mob-landscape-414) {
+				width: 158px;
+			}
+			@media screen and (max-width:$small-xx) {
+				width: 180px;
+				margin-left: 0;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+			
 		}
 		
 		.list-add-product {
@@ -244,14 +255,66 @@
 			}
 			.list-box {
 				padding: 0 30px;
+				position: relative;
 				@media screen and (max-width:$large-x) {
 					padding: 0 15px;
 				}
 				&.active {
+					&:after {
+						content: "";
+						display: block;
+						width:calc(100% - 30px);
+						height: 1px;
+						background-color: $off-white;
+						position: absolute;
+						top: 10px;
+						left: 0;
+						@media screen and (max-width:$mobile-small) {
+							width: 100%;
+						}
+					}
+					
+					padding: 20px 30px 20px;
 					background-color: $sky-blue-transparent-2;
+					@media screen and (max-width: $mobile-small) {
+						padding: 20px 15px 20px;
+					}
+					.top {
+						position: relative;
+						padding: 10px 37px 32px 0;
+						@media screen and (max-width: $ipad-portrait) {
+							padding: 10px 25px 25px 0;
+						}
+						> a {
+							&:after {
+								transform: translateY(-50%) rotate(180deg);
+								-webkit-transform: translateY(-50%) rotate(180deg);
+							} 
+						}
+						&:after {
+							content: "";
+							display: block;
+							width: calc(100% + 30px);
+							height: 1px;
+							background-color: $off-white;
+							position: absolute;
+							bottom: 0;
+							left: -30px;
+							right: 0;
+							@media screen and (max-width:$mobile-small) {
+								width: calc(100% + 30px);
+								left: -15px;
+							}
+						}
+
+						
+					}
 					.bottom-details {
 						padding-bottom: 23px;
 						margin-top: 20px;
+						height: 100%;
+						overflow: visible;
+						padding-bottom: 10px;
 					}
 				}
 				border-bottom: 1px solid $off-white;
@@ -271,9 +334,10 @@
 					.title {
 						padding-left: 20px;
 						width: calc(100% - 255px);	
-						@media screen and (max-width: $small-medium) {
+						@media screen and (max-width: $ipad-portrait) {
 							width: calc(100% - 25px);	
 						}
+						
 						h4 {
 							margin: 0;
 							font-size: 24px;
@@ -348,8 +412,10 @@
 					}
 				}
 				.bottom-details {
-					display: none;
-					padding-bottom: 10px;
+					overflow: hidden;
+					height: 0;
+					padding-top: 0;
+					padding-bottom: 0;
 					@media screen and (max-width:$large-x) {
 						align-content: flex-start;
 					}
@@ -389,6 +455,9 @@
 							select {
 								width: 242px;
 								border: 1px solid $dim-gray;
+								@media screen and (max-width:$mobile-small) {
+									width: 100%;
+								}
 							}
 							label {
 								width: 154px;
@@ -402,6 +471,7 @@
 								@media screen and (max-width:$mobile-small) {
 									font-size: 16px;
 									line-height: 20px;
+									margin-bottom: 5px;
 								}
 								@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 									font-size: 16px;
@@ -414,6 +484,9 @@
 							.upload-btn-wrapper {
 								.btn {
 									min-width: 216px;
+									@media screen and (max-width: $ipad-portrait) {
+										min-width: auto;
+									}
 									&:after {
 										background-repeat: repeat-x;
 										background-size: contain;
@@ -484,6 +557,7 @@
 					@media screen and (max-width:$mobile-small) {
 						font-size: 20px;
 						line-height: 25px;
+						padding-left: 10px;
 					}
 					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 						font-size: 20px;

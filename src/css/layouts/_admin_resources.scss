@@ -1,4 +1,18 @@
 .admin-resources-main {
+	.fileter-block {
+		.select-box {
+			max-width: 282px;
+			@media screen and (max-width: $large-m) {
+				max-width: 240px;
+			}
+			> span {
+				padding: 7px 25px;
+				@media screen and (max-width: $large-m) {
+					padding: 7px 15px;
+				}
+			}
+		}
+	}
 	.resources-table {
 		.table-responsive {
 			table {
@@ -27,13 +41,49 @@
 						}
 					}
 				}
-
 				tbody {
 					tr {
 						td {
+							vertical-align: middle;
 							.name-edit {
 								width: calc(100% - 18px);
 								padding-left: 0;
+								.right-detail {
+									h3 {
+										display: inline-block;
+										margin-bottom: 0;
+									}
+									> a {
+										display: inline-block;
+										text-decoration: none;
+										position: relative;
+										color: $black;
+										font-size: 18px;
+										line-height: 22px;
+										font-family: $arial;
+										font-weight: $font-normal;
+										padding-left: 15px;
+										&:before {
+											content: "";
+											display: inline-block;
+											color: $black;
+											background-color: $black;
+											position: absolute;
+											height: 18px;
+											width: 1px;
+											top: 50%;
+											left: 8px;
+											transform: translateY(-50%);
+											-webkit-transform: translateY(-50%);
+										}
+									}
+								}
+							}
+							&:nth-child(3) {
+								> span {
+									display: block;
+									width: 100%;
+								}
 							}
 						}
 					}

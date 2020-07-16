@@ -31,7 +31,7 @@ class Repaddcontract extends React.Component{
 		                  <form>
 		                     <div className="form-group">
 		                        <label>Title</label>
-		                        <input type="text" name="Title" />
+		                        <input type="text" name="Title"  />
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Description</label>

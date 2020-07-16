@@ -56,7 +56,7 @@ class Admin_Resource extends React.Component {
 					{/*<!--Top heading container start-->*/}
 					<div className="top-heading-continer d-flex flex-wrap align-center">
 						<div className="name-of-heading d-flex flex-wrap">
-							<img src={require("../../images/clients_ic_blue.svg")} alt="profile-logo" />
+							<img src={require("../../images/resources-logo-blue.svg")} alt="resources-logo" />
 							<h1>Resources</h1>
 						</div>
 

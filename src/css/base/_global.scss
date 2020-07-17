@@ -2757,13 +2757,23 @@ a {
 	font-family: $gibson;
 	font-weight: $font-semi-bold;
 	padding-top: 35px 15px;
-
 	@media screen and (max-width:$mobile-small) {
 		font-size: 18px;
 	}
 }
-
+/*Dev css*/
 .disable-bluk-opt {
 	pointer-events: none;
 	 cursor: default; 
+}
+/*File uplod msg*/
+.document-item {
+    margin: 3px;
+	font-size: 16px;
+	color: $black;
+	font-family: $gibson;
+	font-weight: $font-normal;
+	@media screen and (max-width:$mobile-small) {
+		font-size: 14px;
+	}
 }

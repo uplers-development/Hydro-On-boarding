@@ -152,6 +152,7 @@ class RepClients_add extends React.Component {
          }).then(data=>{
             console.log(data);
             this.setState({openPopup:true});
+
              let contractoptions={
                 "title":[{"value":document.querySelector("#title").value}],
                 "type":[{"target_id":"contracts"}],
@@ -215,37 +216,13 @@ class RepClients_add extends React.Component {
 
 
          })
-
-
       }catch(err){
          console.log(err);
       }
   }else{
-      
-        /*if(hasNull(document.querySelector("#fname").value)){
-          document.querySelector(".form-group #fname").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid firstname.</span>')
-        }
-        if(hasNull(document.querySelector("#sname").value)){
-          document.querySelector(".form-group #sname").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid surname.</span>')
-        }
-        if(!hasValidEmail(document.querySelector("#email").value)){
-          document.querySelector(".form-group #email").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid email.</span>')
-        } if(hasNull(document.querySelector("#company").value)){
-          document.querySelector(".form-group #company").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid company name.</span>')
-        }if(hasNull(document.querySelector("#role").value)){
-          document.querySelector(".form-group #role").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid role.</span>')
-        }if(!hasValidMobile(document.querySelector("#contact").value)){
-          document.querySelector(".form-group #contact").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid contactnumber.</span>')
-        }
-        if(!hasValidPassword(document.querySelector("#password").value)){
-          document.querySelector(".form-group #password").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid password.</span>')
-        }*/
 
-
-
-        console.log(this.state.firstname);
     }
-  }
+}
 
 
 	render(){
@@ -296,7 +273,7 @@ class RepClients_add extends React.Component {
             {this.state.openPopup ? 
           <div id="modal" className="modal-container">
             <div className="modal d-flex flex-wrap align-center justify-center">
-              <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+              <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false}); this.props.history.push("/RepClients");})}
               className="close" title="Close"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
               
             <div>

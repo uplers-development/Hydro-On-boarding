@@ -142,7 +142,7 @@ class RepClients_add extends React.Component {
                 "title":[{"value":document.querySelector("#title").value}],
                 "type":[{"target_id":"contracts"}],
                 //"field_contract_document_type":[{"target_id":"tid"}],
-                //"field_contract_document":[{"target_id":"fid"}],
+                "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
                 //"field_contract_expiry":[{"value":"2020-07-02"}],
                 "field_sub_title":[{"value":document.querySelector("#description").value}],
                 "field_contract_for_products":[{"target_id":"24"},{"target_id":"34"}],/*PRoduct tags Id*/
@@ -242,7 +242,8 @@ class RepClients_add extends React.Component {
               
             <div>
               <img className="svg" src={require("../../images/round-correct.svg")} alt="Right icon"/>
-                <p>Client added</p>
+                <h2>Client added</h2>
+                <p>Client details were submitted successfully</p>
             </div>
             </div>
           </div>

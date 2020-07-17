@@ -21,6 +21,7 @@ class Repaddproduct extends React.Component{
          fileuploadedname:'',
          imageFormateState:false,
          fid:'',
+         openPopup:false,
 		}
       this.clientProductSearch = React.createRef();
       this.openAccordian=this.openAccordian.bind(this);
@@ -195,6 +196,7 @@ class Repaddproduct extends React.Component{
                     return res.json()
                   }).then(data=>{
                       console.log(data);
+                      this.setState({openPopup:true});
                   });
                }else{
                      alert("please check the fields mighht be missing somewhere!!");
@@ -289,6 +291,20 @@ class Repaddproduct extends React.Component{
                            </div>
                   </div>
             :''}
+            {this.state.openPopup ? 
+             <div id="modal" className="modal-container">
+               <div className="modal d-flex flex-wrap align-center justify-center">
+                 <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+                 className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+                 
+               <div>
+                 <img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+                   <h2>Product added</h2>
+                   <p>Product details were submitted successfully</p>
+               </div>
+               </div>
+             </div>
+             : <></>}
             {/*<!--Container End-->*/}
          </div>
 			)

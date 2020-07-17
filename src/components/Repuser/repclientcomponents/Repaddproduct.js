@@ -19,6 +19,7 @@ class Repaddproduct extends React.Component{
          costState:false,
          itemidState:false,
          fileuploadedname:'',
+         imageFormateState:false,
          fid:'',
 		}
       this.clientProductSearch = React.createRef();
@@ -61,6 +62,8 @@ class Repaddproduct extends React.Component{
                  this.setState({fileuploadedname:filename})
              }
              console.log(filename);
+             if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt")){
+               this.setState({imageFormateState:false})
                var myHeaders = new Headers();
                   myHeaders.append("Content-Type", "application/octet-stream");
                   myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
@@ -79,8 +82,10 @@ class Repaddproduct extends React.Component{
                      console.log(data);
                      this.setState({fid:data.fid[0].value});
                   })
-      }
-
+      }else{
+         this.setState({imageFormateState:true})   
+     }
+  }
    }
 
    Search_client_Product_Details=(e)=>{
@@ -267,6 +272,7 @@ class Repaddproduct extends React.Component{
 
                                           <span className='document-item' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
                                        </div>
+                                       {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
                                     </div>
                                  </form>
                               </div>

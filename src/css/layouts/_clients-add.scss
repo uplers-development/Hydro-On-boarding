@@ -699,6 +699,10 @@
 							}
 						}
 					}
+					.empty-field {
+								width: 100%;
+								display: block;
+							}
 				}
 			}
 			@media screen and (max-width:$mobile-small) {

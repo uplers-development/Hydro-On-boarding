@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
 import CommonBackground from '../../images/common-bg.jpg';
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
@@ -21,6 +22,7 @@ class RepClients_add extends React.Component {
       getClientadd:null,
       getProductadd:null,
       getContractadd:null,
+      openPopup:false,
 			fromProductSec:this.props.location.state!==undefined ? this.props.location.state.productPage :'',
 			fromContractSec:this.props.location.state!==undefined ? this.props.location.state.contractPage : '',
       sectionCalldiversion:null,
@@ -135,6 +137,7 @@ class RepClients_add extends React.Component {
             return res.json();
          }).then(data=>{
             console.log(data);
+            this.setState({openPopup:true});
              let contractoptions={
                 "title":[{"value":document.querySelector("#title").value}],
                 "type":[{"target_id":"contracts"}],
@@ -231,6 +234,20 @@ class RepClients_add extends React.Component {
                   }
                </div>
             </div>
+            {this.state.openPopup ? 
+          <div id="modal" className="modal-container">
+            <div className="modal d-flex flex-wrap align-center justify-center">
+              <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+              className="close" title="Close"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+              
+            <div>
+              <img className="svg" src={require("../../images/round-correct.svg")} alt="Right icon"/>
+                <p>Client added</p>
+            </div>
+            </div>
+          </div>
+          : <></>}
+
          </section>
    </div>)  
 	}

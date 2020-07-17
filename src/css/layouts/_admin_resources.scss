@@ -1,19 +1,57 @@
 .admin-resources-main {
 	.fileter-block {
+		padding-right: 32px;
+		@media screen and (max-width: $large-m) {
+			padding-right: 20px;
+		}
 		.select-box {
 			max-width: 282px;
+
 			@media screen and (max-width: $large-m) {
 				max-width: 240px;
 			}
+
 			> span {
 				padding: 7px 25px;
+
 				@media screen and (max-width: $large-m) {
 					padding: 7px 15px;
 				}
 			}
+
+			.list {
+				top: 37px;
+				width: calc(100% + 2px);
+				left: -1px;
+			}
+
+			&:hover {
+				.list {
+					box-shadow: 0 15px 16px rgba(69, 91, 99, .08);
+				}
+			}
+		}
+		.search-sort-block {
+			.common-btn-blue {
+				min-width: 127px;
+				margin-bottom: 0;
+				padding: 5px 15px;
+
+				span {
+					font-size: 18px;
+					line-height: 28px;
+				}
+			}
+			@media screen and (max-width:$mobile-small) {
+				margin-left: auto;
+			}
+		}
+		@media screen and (max-width:$mobile-small) {
+			padding-bottom: 15px; 
 		}
 	}
 	.resources-table {
+		padding-top: 30px;
 		.table-responsive {
 			table {
 				thead {
@@ -23,36 +61,40 @@
 						}
 
 						&:nth-child(2) {
-							width: 340px;
+							width: 270px;
 						}
 
 						&:nth-child(3) {
-							width: 300px;
+							width: 260px;
 						}
 
 						&:nth-child(4) {
-							width: 160px;
+							width: 290px;
 							text-align: left;
 						}
 
 						&:nth-child(5) {
-							width: 200px;
+							width: 190px;
 							text-align: left;
 						}
 					}
 				}
+
 				tbody {
 					tr {
 						td {
 							vertical-align: middle;
+
 							.name-edit {
 								width: calc(100% - 18px);
 								padding-left: 0;
+
 								.right-detail {
 									h3 {
 										display: inline-block;
 										margin-bottom: 0;
 									}
+
 									> a {
 										display: inline-block;
 										text-decoration: none;
@@ -63,6 +105,7 @@
 										font-family: $arial;
 										font-weight: $font-normal;
 										padding-left: 15px;
+
 										&:before {
 											content: "";
 											display: inline-block;
@@ -76,9 +119,14 @@
 											transform: translateY(-50%);
 											-webkit-transform: translateY(-50%);
 										}
+
+										&:hover {
+											color: $sky-blue;
+										}
 									}
 								}
 							}
+
 							&:nth-child(3) {
 								> span {
 									display: block;
@@ -86,11 +134,20 @@
 								}
 							}
 						}
+						&:nth-child(even) {
+							td {
+								&:last-child {
+									border-right: 5px solid $dark-sky-blue; 
+								}
+							}
+						}
 					}
+					
 				}
 			}
 		}
-
+		@media screen and (max-width:$mobile-small) {
+			padding: 0 23px;
+		}
 	}
-
 }

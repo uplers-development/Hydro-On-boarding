@@ -144,6 +144,13 @@ ul {
 			-webkit-transform: translateY(-75px);
 		}
 	}
+	&.wide {
+		&:after {
+			width: auto;
+			background-repeat: repeat-x;
+			background-size: contain;
+		}
+	}
 }
 
 /*White Button*/
@@ -1439,6 +1446,7 @@ nav {
 	}
 
 	.user-image-name {
+		width: 100%;
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 		}
@@ -2471,8 +2479,8 @@ a {
 		.table {
 			border-collapse: collapse;
 			table-layout: fixed;
-			width: 1320px;
-
+			max-width: 1320px;
+			width: 100%;
 			thead {
 				border-bottom: 1px solid $black;
 

@@ -103,7 +103,6 @@ class RepClients_add extends React.Component {
 
   submitClientDetails=(e)=>{
     e.preventDefault();
-
     let option={  
            "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],
            "field_last_name" : [{"value":document.getElementById("sname") && document.querySelector("#sname").value!=='' ? document.querySelector("#sname").value :''}],
@@ -148,19 +147,38 @@ class RepClients_add extends React.Component {
                 "field_contract_for_products":[{"target_id":"24"},{"target_id":"34"}],/*PRoduct tags Id*/
                 "field_contract_for_client":[{"target_id":data.uid[0].value}]
             }       
-             this.state.getProductadd.reduce((unique, item)=>
-                unique.includes(item)? unique :[...unique,item],[]
-             ) 
-            this.state.getProductadd.map((item,index)=>{
-                item['type']=[{"target_id":"product_purchase"}];
-                item['field_user']=[{"target_id":data.uid[0].value}];
+              productList = []; 
+               document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
+                  let productdata = [];
+                  object = {};
+                  let title = document.querySelectorAll(".checked .title h4")[index].textContent;
+                  let purchase = document.querySelectorAll(".checked .purchase")[index].value;
+                  let productcheck = document.querySelectorAll(".checked .productcheck")[index].value;
+                  let seller = document.querySelectorAll(".checked .seller")[index].value;
+                  let cost = document.querySelectorAll(".checked .cost")[index].value;
+                  let item_id = document.querySelectorAll(".checked .item-id")[index].value;
+                  let file_id = document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id");
+                  object['title'] =  [{"value": title}];
+                  object['field_purchase_date'] =  [{"value":purchase}];
+                  object['field_product'] = [{"target_id":productcheck}];
+                  object['field_seller'] =  [{"value":seller}];
+                  object['field_cost'] =  [{"value":cost}];
+                  object['field_item_id'] = [{"value":item_id}];  
+                  object['field_purchase_doument']=[{"target_id":file_id}]
+                  object['type']=[{"target_id":"product_purchase"}];
+                  object['field_user']=[{"target_id":data.uid[0].value}];
+                  productList.push(object);
+               });  
+          //console.log(productList);
+            productList.map((item,index)=>{
+              console.log(productList[index]);
                   fetch(`${base_url}node?_format=json`,{
                         method:"POST",
                         headers: {
                            "Content-Type" : "application/json",
                            "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                          },
-                         body:JSON.stringify(this.state.getProductadd[index])
+                         body:JSON.stringify(productList[index])
                   }).then(res=>{
                     return res.json()
                   }).then(data=>{

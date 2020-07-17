@@ -158,7 +158,7 @@ class Repaddproduct extends React.Component{
             object['field_item_id']=[{"value":item_id.value}];
       })
       document.querySelectorAll(".checked .document-item").forEach((file_id,index)=>{
-            object['field_purchase_document']=[{"target_id":file_id.getAttribute("get-id")}];
+            object['field_purchase_doument']=[{"target_id":file_id.getAttribute("get-id")}];
       })
       productList.push(object);
       console.log(productList);

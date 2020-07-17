@@ -73,18 +73,19 @@ class Repaddproduct extends React.Component{
                     headers: myHeaders,
                     body: fullPath,
                   };
-                  /*fetch("http://staging.project-progress.net/projects/hydro/file/upload/user/user/user_picture?_format=json",requestOptions)
+                  fetch("http://staging.project-progress.net/projects/hydro/file/upload/node/product_purchase/field_purchase_doument?_format=json",requestOptions)
                   .then(res=>{return res.json()})
-                  .then(data=>{console.log(data);
-                     this.setState({fid:})
-                  })*/
+                  .then(data=>{
+                     console.log(data);
+                     this.setState({fid:data.fid[0].value});
+                  })
       }
 
    }
 
    Search_client_Product_Details=(e)=>{
       if(this.clientProductSearch.current.value!==''){
-         fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
+         fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/add_products?_format=json&title=${this.clientProductSearch.current.value}`,{
              headers:{
                      "Content-Type" : "application/json",
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -259,9 +260,11 @@ class Repaddproduct extends React.Component{
                                     </div>
                                     <div className="btn-block">
                                        <div className="upload-btn-wrapper">
+                                        <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx. Max size of 1mb</span>
                                           <input type="file" name="Upload Document" onChange={this.get_uploaded_file_path}/>
                                           <button className="btn common-btn-blue">
                                           <span>Upload Document</span></button>
+
                                           <span className='document-item' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
                                        </div>
                                     </div>

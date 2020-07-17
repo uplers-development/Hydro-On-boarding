@@ -113,7 +113,9 @@ class RepClients_add extends React.Component {
            "name" : [{"value":document.getElementById("email") && document.querySelector("#email").value!=='' ? document.querySelector("#email").value :''}],
            "pass" : [{"value":document.getElementById("password") && document.querySelector("#password").value!=='' ? document.querySelector("#password").value :''}],
            "roles" : [{ "target_id":"client" }],
-           "status" : [{"value":1}]
+           "status" : [{"value":1}],
+           "field_rep_reference" : [{"target_id":JSON.parse(localStorage.getItem("user-type")).uid}]
+
          }
 
    

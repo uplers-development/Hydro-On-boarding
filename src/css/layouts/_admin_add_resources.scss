@@ -1,0 +1,56 @@
+.admin-add-resources {
+	padding-top: 50px;
+	.upload-doc-block {
+		width: 100%;
+		border-bottom: 1px solid $off-white;
+		padding-bottom: 30px;
+		.form-group {
+			margin-bottom: 12px;
+			max-width: 660px;
+			width: 100%;
+			label {
+				width: 135px;
+				margin-bottom: 0;
+			}
+			input[type="text"] {
+				width: 481px;
+			}
+		}
+		.upload-btn-block {
+			padding-top: 15px;
+			.btn {
+				min-width: 211px;
+				span {
+					font-size: 18px;
+					line-height: 28px;
+				}
+			}
+		}
+	}
+	.upload-thumbnail {
+		border-bottom: 1px solid $off-white;
+		padding: 18px 0;
+		.upload-btn-block {
+			margin-right: 48px;
+			.btn {
+				min-width: 222px;
+			}
+		}
+		.upload-thumbnail-img {
+			padding-bottom: 21.20%;
+			display: block;
+			width: 390px;
+		}	
+	}
+	.btn-block {
+		padding-top: 32px;
+		.btn {
+			min-width: 207px;
+			padding: 8px 10px 4px;
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+

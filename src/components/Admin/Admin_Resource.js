@@ -28,13 +28,13 @@ class Admin_Resource extends React.Component {
 				{/*<!--List of menu start-->*/}
 				<ul>
 					<li><a className="active" href="#" title="Dashboard">
-							<img className="svg" src={require("../../images/dashboard-nav.svg")} alt="Resources" /><span>Resources</span></a></li>
+							<img className="svg" src={require("../../images/resources-logo.svg")} alt="Resources" /><span>Resources</span></a></li>
 					<li><a href="#" title="Clients">
-							<img className="svg" src={require("../../images/clients_ic.svg")} alt="Products" /><span>Products</span></a>
+							<img className="svg" src={require("../../images/ic_drop_plus_white.svg")} alt="Products" /><span>Products</span></a>
 							</li>
 					
 						<li><a href="#" title="Products">
-							<img className="svg" src={require("../../images/bell-icon-logo.svg")} alt="Reps" />
+							<img className="svg" src={require("../../images/user-logo-with-round.svg")} alt="Reps User" />
 							<span>Reps</span></a></li>
 					
 					
@@ -186,7 +186,7 @@ class Admin_Resource extends React.Component {
 		 <td>Simon</td>				
 		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
 		 <td>Contract</td>				
-		 <td>18th March 2020s</td>				
+		 <td>18th March 2020</td>				
       </tr>
 	
 	<tr>
@@ -204,7 +204,151 @@ class Admin_Resource extends React.Component {
 		 <td>Simon</td>				
 		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
 		 <td>Contract</td>				
-		 <td>18th March 2020s</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
+      </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+				</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Contract</td>				
+		 <td>18th March 2020</td>				
       </tr>
 
 							  

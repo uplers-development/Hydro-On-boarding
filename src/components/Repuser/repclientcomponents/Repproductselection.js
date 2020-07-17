@@ -11,6 +11,7 @@ class Repproductselection extends React.Component{
 			porductDetails:[],
 			productPage:false,
 			contractPage:false,
+			uidToPass:this.props.repclientuid!=='' ||this.props.repclientuid!==undefined ? this.props.repclientuid : ''
 		}
 		this.clientProductSearch=React.createRef();
 		this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
@@ -78,7 +79,7 @@ class Repproductselection extends React.Component{
 											pathname:'/RepClients_add',
 											state:{
 												productPage:true,
-												senduid:this.props.repclientuid	
+												senduid:this.state.uidToPass	
 											}
 										})
 									})}><span>Add new Product</span></button>
@@ -127,7 +128,8 @@ class Repproductselection extends React.Component{
 										this.props.historyPush.history.push({
 											pathname:'/RepClients_add',
 											state:{
-												contractPage:true
+												contractPage:true,
+												senduid:this.state.uidToPass
 											}
 										})
 									})}><span>Add new Contract</span></button>

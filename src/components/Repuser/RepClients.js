@@ -137,7 +137,7 @@ class RepClients extends React.Component {
 										<Repclientdetails repclientuid={this.state.updatedRepclientId}/>
 										<div className="container">
 											<Repproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
-											<Repcontractdetails repclientuid={this.state.updatedRepclientId}/>
+											<Repcontractdetails  historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
 										</div>
 									</div>
 							</div>

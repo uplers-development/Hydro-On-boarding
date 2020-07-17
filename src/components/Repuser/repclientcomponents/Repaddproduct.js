@@ -21,6 +21,7 @@ class Repaddproduct extends React.Component{
          fileuploadedname:'',
          imageFormateState:false,
          fid:'',
+         openPopup:false,
 		}
       this.clientProductSearch = React.createRef();
       this.openAccordian=this.openAccordian.bind(this);
@@ -129,8 +130,6 @@ class Repaddproduct extends React.Component{
    }
 
    selectBoxChecked=(e)=>{
-     object={};
-
       document.querySelectorAll(".list-box").forEach((item,index)=>{
             if(item.classList.contains("checked")){item.classList.remove("checked")}
       })
@@ -138,51 +137,34 @@ class Repaddproduct extends React.Component{
          console.log(item.parentNode.parentNode.parentNode)
          item.parentNode.parentNode.parentNode.classList.add("checked")
       }) 
-          
-      document.querySelectorAll(".checked .title h4").forEach((title,index)=>{
-            object['title']=[{"value":title.textContent}]
-      })  
-
-      document.querySelectorAll(".checked .purchase").forEach((purchase_date,index)=>{
-            object['field_purchase_date']=[{"value":purchase_date.value}];
-      })  
-
-      document.querySelectorAll(".checked .productcheck").forEach((field_id,index)=>{
-            object['field_product']=[{"target_id":field_id.value}]
-      })  
-
-      document.querySelectorAll(".checked .seller").forEach((seller,index)=>{
-            object['field_seller']=[{"value":seller.value}];
-      }) 
-
-       document.querySelectorAll(".checked .cost").forEach((cost,index)=>{
-            object['field_cost']=[{"value":cost.value}];
-      })  
-
-       document.querySelectorAll(".checked .item-id").forEach((item_id,index)=>{
-            object['field_item_id']=[{"value":item_id.value}];
-      })
-      document.querySelectorAll(".checked .document-item").forEach((file_id,index)=>{
-            object['field_purchase_doument']=[{"target_id":file_id.getAttribute("get-id")}];
-      })
-      productList.push(object);
-      console.log(productList);
-      productList.reduce((unique, item)=>
-          unique.includes(item)? unique :[...unique,item],[]
-      )   
-      if(!this.props.callforproduct){
-         this.props.getproducttoadd(productList);
-      }
    }
 
    addProduct=(e)=>{
       e.preventDefault();
-      productList.reduce((unique, item)=>
-                unique.includes(item)? unique :[...unique,item],[]
-             ) 
+     productList = []; 
+               document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
+                  let productdata = [];
+                  object = {};
+                  let title = document.querySelectorAll(".checked .title h4")[index].textContent;
+                  let purchase = document.querySelectorAll(".checked .purchase")[index].value;
+                  let productcheck = document.querySelectorAll(".checked .productcheck")[index].value;
+                  let seller = document.querySelectorAll(".checked .seller")[index].value;
+                  let cost = document.querySelectorAll(".checked .cost")[index].value;
+                  let item_id = document.querySelectorAll(".checked .item-id")[index].value;
+                  let file_id = document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id");
+                     object['title'] =  [{"value": title}];
+                     object['field_purchase_date'] =  [{"value":purchase}];
+                     object['field_product'] = [{"target_id":productcheck}];
+                     object['field_seller'] =  [{"value":seller}];
+                     object['field_cost'] =  [{"value":cost}];
+                     object['field_item_id'] = [{"value":item_id}];  
+                     object['field_purchase_doument']=[{"target_id":file_id}]
+                     object['type']=[{"target_id":"product_purchase"}];
+                     object['field_user']=[{"target_id":this.props.senduid}];
+                     productList.push(object);
+               });  
+         console.log(productList);
             productList.map((item,index)=>{
-                item['type']=[{"target_id":"product_purchase"}];
-                item['field_user']=[{"target_id":this.props.senduid}];
                 if(!this.state.purchseDatempty &&!this.state.costState &&!this.state.itemidState){
                   fetch(`${base_url}node?_format=json`,{
                         method:"POST",
@@ -195,6 +177,7 @@ class Repaddproduct extends React.Component{
                     return res.json()
                   }).then(data=>{
                       console.log(data);
+                      this.setState({openPopup:true});
                   });
                }else{
                      alert("please check the fields mighht be missing somewhere!!");
@@ -289,6 +272,20 @@ class Repaddproduct extends React.Component{
                            </div>
                   </div>
             :''}
+            {this.state.openPopup ? 
+             <div id="modal" className="modal-container">
+               <div className="modal d-flex flex-wrap align-center justify-center">
+                 <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+                 className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+                 
+               <div>
+                 <img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+                   <h2>Product added</h2>
+                   <p>Product details were submitted successfully</p>
+               </div>
+               </div>
+             </div>
+             : <></>}
             {/*<!--Container End-->*/}
          </div>
 			)

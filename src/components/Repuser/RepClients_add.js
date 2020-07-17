@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import CommonBackground from '../../images/common-bg.jpg';
+import{hasNull,isRequired,hasValidEmail,hasValidMobile,hasValidPassword} from '../validation';
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url,base_url} from '../Apiurl'; 
@@ -11,6 +12,8 @@ import hydroImage from '../../images/hydro-biofilter-product.jpg';
 import Repaddclient from './repclientcomponents/Repaddclient'
 import Repaddproduct from './repclientcomponents/Repaddproduct'
 import Repaddcontract from './repclientcomponents/Repaddcontract'
+import {ValidationMsg} from'../constants/validationmsg';
+
 let object={};
 let productList=[];
 class RepClients_add extends React.Component {
@@ -23,6 +26,13 @@ class RepClients_add extends React.Component {
       getProductadd:null,
       getContractadd:null,
       openPopup:false,
+      firstname:false,
+      company:false,
+      surname:false,
+      email:false,
+      role:false,
+      contact:false,
+      password:false,
 			fromProductSec:this.props.location.state!==undefined ? this.props.location.state.productPage :'',
 			fromContractSec:this.props.location.state!==undefined ? this.props.location.state.contractPage : '',
       sectionCalldiversion:null,
@@ -50,6 +60,8 @@ class RepClients_add extends React.Component {
       }
       
    }
+
+ 
 
    get_product_to_add=(get_product_value)=>{
     console.log(get_product_value);
@@ -103,7 +115,9 @@ class RepClients_add extends React.Component {
 
   submitClientDetails=(e)=>{
     e.preventDefault();
-
+    var e = document.getElementById("time_zone");
+    var strUser = e.options[e.selectedIndex].value;
+    if(hasValidEmail(document.querySelector("#email").value) && hasValidMobile(document.querySelector("#contact").value)){
     let option={  
            "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],
            "field_last_name" : [{"value":document.getElementById("sname") && document.querySelector("#sname").value!=='' ? document.querySelector("#sname").value :''}],
@@ -111,7 +125,7 @@ class RepClients_add extends React.Component {
            "field_organisation" : [{"value":document.getElementById("company") && document.querySelector("#company").value!=='' ? document.querySelector("#company").value :''}],
            "field_job_title" : [{"value":document.getElementById("role") && document.querySelector("#role").value!=='' ? document.querySelector("#role").value :''}],
            "field_contact_number" : [{"value":document.getElementById("contact") && document.querySelector("#contact").value!=='' ? document.querySelector("#contact").value :''}],
-           "timezone" : [{"value":"UTC"}],
+           "timezone" : [{"value":strUser}],
            "name" : [{"value":document.getElementById("email") && document.querySelector("#email").value!=='' ? document.querySelector("#email").value :''}],
            "pass" : [{"value":document.getElementById("password") && document.querySelector("#password").value!=='' ? document.querySelector("#password").value :''}],
            "roles" : [{ "target_id":"client" }],
@@ -142,25 +156,44 @@ class RepClients_add extends React.Component {
                 "title":[{"value":document.querySelector("#title").value}],
                 "type":[{"target_id":"contracts"}],
                 //"field_contract_document_type":[{"target_id":"tid"}],
-                //"field_contract_document":[{"target_id":"fid"}],
+                "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
                 //"field_contract_expiry":[{"value":"2020-07-02"}],
                 "field_sub_title":[{"value":document.querySelector("#description").value}],
                 "field_contract_for_products":[{"target_id":"24"},{"target_id":"34"}],/*PRoduct tags Id*/
                 "field_contract_for_client":[{"target_id":data.uid[0].value}]
             }       
-             this.state.getProductadd.reduce((unique, item)=>
-                unique.includes(item)? unique :[...unique,item],[]
-             ) 
-            this.state.getProductadd.map((item,index)=>{
-                item['type']=[{"target_id":"product_purchase"}];
-                item['field_user']=[{"target_id":data.uid[0].value}];
+              productList = []; 
+               document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
+                  let productdata = [];
+                  object = {};
+                  let title = document.querySelectorAll(".checked .title h4")[index].textContent;
+                  let purchase = document.querySelectorAll(".checked .purchase")[index].value;
+                  let productcheck = document.querySelectorAll(".checked .productcheck")[index].value;
+                  let seller = document.querySelectorAll(".checked .seller")[index].value;
+                  let cost = document.querySelectorAll(".checked .cost")[index].value;
+                  let item_id = document.querySelectorAll(".checked .item-id")[index].value;
+                  let file_id = document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id");
+                  object['title'] =  [{"value": title}];
+                  object['field_purchase_date'] =  [{"value":purchase}];
+                  object['field_product'] = [{"target_id":productcheck}];
+                  object['field_seller'] =  [{"value":seller}];
+                  object['field_cost'] =  [{"value":cost}];
+                  object['field_item_id'] = [{"value":item_id}];  
+                  object['field_purchase_doument']=[{"target_id":file_id}]
+                  object['type']=[{"target_id":"product_purchase"}];
+                  object['field_user']=[{"target_id":data.uid[0].value}];
+                  productList.push(object);
+               });  
+          //console.log(productList);
+            productList.map((item,index)=>{
+              console.log(productList[index]);
                   fetch(`${base_url}node?_format=json`,{
                         method:"POST",
                         headers: {
                            "Content-Type" : "application/json",
                            "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                          },
-                         body:JSON.stringify(this.state.getProductadd[index])
+                         body:JSON.stringify(productList[index])
                   }).then(res=>{
                     return res.json()
                   }).then(data=>{
@@ -187,6 +220,31 @@ class RepClients_add extends React.Component {
       }catch(err){
          console.log(err);
       }
+  }else{
+      
+        /*if(hasNull(document.querySelector("#fname").value)){
+          document.querySelector(".form-group #fname").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid firstname.</span>')
+        }
+        if(hasNull(document.querySelector("#sname").value)){
+          document.querySelector(".form-group #sname").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid surname.</span>')
+        }
+        if(!hasValidEmail(document.querySelector("#email").value)){
+          document.querySelector(".form-group #email").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid email.</span>')
+        } if(hasNull(document.querySelector("#company").value)){
+          document.querySelector(".form-group #company").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid company name.</span>')
+        }if(hasNull(document.querySelector("#role").value)){
+          document.querySelector(".form-group #role").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid role.</span>')
+        }if(!hasValidMobile(document.querySelector("#contact").value)){
+          document.querySelector(".form-group #contact").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid contactnumber.</span>')
+        }
+        if(!hasValidPassword(document.querySelector("#password").value)){
+          document.querySelector(".form-group #password").insertAdjacentHTML("afterend",'<span class="empty-field">Please enter your valid password.</span>')
+        }*/
+
+
+
+        console.log(this.state.firstname);
+    }
   }
 
 
@@ -218,7 +276,8 @@ class RepClients_add extends React.Component {
                             <h4>Create a brand new client user and add them to this site</h4> 
                         </div>
                         <div className="clients-add">
-                           <Repaddclient getClienttoadd={this.get_client_to_be_add}/>
+                           <Repaddclient getClienttoadd={this.get_client_to_be_add} firstname={
+                            this.state.firstname} company={this.state.company} lastname={this.state.surname} email={this.state.email} role={this.state.role} contact={this.state.contact} password={this.state.password} />
                            <Repaddproduct getproducttoadd={this.get_product_to_add}/>
                            <Repaddcontract getcontracttoadd={this.get_contract_to_be_add}/>
                         </div>
@@ -242,7 +301,8 @@ class RepClients_add extends React.Component {
               
             <div>
               <img className="svg" src={require("../../images/round-correct.svg")} alt="Right icon"/>
-                <p>Client added</p>
+                <h2>Client added</h2>
+                <p>Client details were submitted successfully</p>
             </div>
             </div>
           </div>

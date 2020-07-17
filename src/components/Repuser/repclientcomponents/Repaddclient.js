@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
 import{hasNull,isRequired,hasValidEmail,hasValidMobile,hasValidPassword} from '../../validation';
 import {ValidationMsg} from'../../constants/validationmsg';
+import ReactHtmlParser from 'react-html-parser';
 
 class Repaddclient extends React.Component{
 	constructor(props){
@@ -16,10 +17,30 @@ class Repaddclient extends React.Component{
             contactnumberState:false,
             passowrdState:false,
             checkedState:false,
-
+            timeZone:null,
 		}
       this.form=React.createRef();
+      this.timeZoneref=React.createRef();
 	}
+
+   componentDidMount(){
+      this.GetTimeZone();
+   }
+
+  GetTimeZone=()=>{
+    fetch(Apiurl.ProfiletimeZone.url,{
+        headers: {
+                  "Content-Type" : "application/json",
+                  "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                },
+                method:Apiurl.ProfiletimeZone.method,
+    }).then(res=>{
+      return res.json();
+    }).then(data=>{
+      console.log(data);
+      this.setState({timeZone:data.timezonehtml})
+    })
+  }
 
 
 	render(){
@@ -65,9 +86,8 @@ class Repaddclient extends React.Component{
                            </div>
                            <div className="form-group">
                               <label>Time zone</label>
-                              <select id="timezone">
-                                 <option value="GMT">GMT</option>
-                                 <option value="UTC">UTC</option>
+                              <select name="1" className="" tabIndex="6" id="time_zone" ref={this.timeZoneref} >
+                                 {this.state.timeZone!==null ? ReactHtmlParser(this.state.timeZone) : '' }
                               </select>
                            </div>
                            <div className="form-group">

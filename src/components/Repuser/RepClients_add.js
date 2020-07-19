@@ -38,6 +38,7 @@ class RepClients_add extends React.Component {
       sectionCalldiversion:null,
       calltheRoute:this.props.location.state!==undefined ? false : true,
       getClientuid:this.props.location.state!==undefined ? this.props.location.state.senduid :'',
+      getProductList:this.props.location.state!==undefined  ? this.props.location.state.productListDetails :'',
 		}
     console.log(this.props.repclientuid)
     this.submitClientDetails=this.submitClientDetails.bind(this);
@@ -152,6 +153,20 @@ class RepClients_add extends React.Component {
          }).then(data=>{
             console.log(data);
             this.setState({openPopup:true});
+            if(document.querySelector("#checkbox5").checked===true){
+             let notifictionvalue={"user_id":data.uid[0].value} 
+             fetch(`${base_url}json-api/usernotification.json`,{
+               method:"POST",
+               headers: {
+                     "Content-Type" : "application/json",
+                     "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                   },
+                   body:JSON.stringify(notifictionvalue)
+               }).then(res=>{
+                  return res.json();
+               }).then(data=>{console.log(data)});
+            }
+
 
              let contractoptions={
                 "title":[{"value":document.querySelector("#title").value}],
@@ -241,7 +256,7 @@ class RepClients_add extends React.Component {
                         <div className={this.state.sectionCalldiversion}>
                            {/*<Repaddclient/>*/}
                            {this.state.fromProductSec && <Repaddproduct callforproduct={this.state.fromProductSec} senduid={this.state.getClientuid}/>}
-                    		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec} senduid={this.state.getClientuid}/>}
+                    		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec} senduid={this.state.getClientuid} productDataList={this.state.getProductList}/>}
                         </div>
                      </div>
                   </div>

@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
 import productImage from '../../../images/first-defense.jpg';
+import {cosmaticAsset} from'../../constants/common';
 
 class Repproductselection extends React.Component{
 	constructor(props){
@@ -11,7 +12,8 @@ class Repproductselection extends React.Component{
 			porductDetails:[],
 			productPage:false,
 			contractPage:false,
-			uidToPass:this.props.repclientuid!=='' ||this.props.repclientuid!==undefined ? this.props.repclientuid : ''
+			uidToPass:this.props.repclientuid!=='' ||this.props.repclientuid!==undefined ? this.props.repclientuid : '',
+			loader:true
 		}
 		this.clientProductSearch=React.createRef();
 		this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
@@ -30,7 +32,7 @@ class Repproductselection extends React.Component{
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
 			    method:"GET",
-  			}).then(res=>res.json()).then(data=>this.setState({porductDetails:data}));
+  			}).then(res=>res.json()).then(data=>this.setState({porductDetails:data,loader:false}));
 		}
 
 
@@ -66,7 +68,9 @@ class Repproductselection extends React.Component{
 		console.log(this.state.porductDetails)
 		return(
 			<div>
-				<div className="pro-title prod d-flex flex-wrap align-center">
+				{!this.state.loader ?
+					<>
+					<div className="pro-title prod d-flex flex-wrap align-center">
 							<div className="name-of-heading d-flex flex-wrap align-center">
 								<img src={require("../../../images/your-product-blue-logo.svg")} alt="product-logo"/>
 								<h3>Products</h3>
@@ -95,7 +99,7 @@ class Repproductselection extends React.Component{
 					</div>
 
 
-
+				
 					<div className="your-product-list">
 					   {this.state.porductDetails.map((item,index)=>
 						   <div className="your-product-box d-flex flex-wrap" key={index}>							
@@ -129,13 +133,19 @@ class Repproductselection extends React.Component{
 											pathname:'/RepClients_add',
 											state:{
 												contractPage:true,
-												senduid:this.state.uidToPass
+												senduid:this.state.uidToPass,
+												productListDetails:this.state.porductDetails
 											}
 										})
 									})}><span>Add new Contract</span></button>
 							</div>												  
 						</div>
 					</div>
+					</>:
+					<>
+						{cosmaticAsset.cosmatic.default.loader}
+					</>
+				}
 				</div>
 			)
 	}

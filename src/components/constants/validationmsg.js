@@ -22,6 +22,10 @@ export const ValidationMsg = {
             purchaseProductdate:ReactHtmlParser('<span class="empty-field">Please insert valid purchase date and formate(YYYY-MM-DD).</span>'),
             coststate:ReactHtmlParser('<span class="empty-field">Please insert valid cost and only numbers allowed.</span>'),
             itemidstate:ReactHtmlParser('<span class="empty-field">Please insert valid item-id and only numbers allowed.</span>'),
+
+
+            addproductCheckboxcheckmissing:ReactHtmlParser('<span class="empty-field">Please select the checkbox of selected values.</span>'),
+            addproductfieldnotvalid:ReactHtmlParser('<span class="empty-field">Please check inserted valid field items there might be something missing.</span>')
     	}
     }
 }

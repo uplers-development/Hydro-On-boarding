@@ -22,6 +22,8 @@ class Repaddproduct extends React.Component{
          imageFormateState:false,
          fid:'',
          openPopup:false,
+         checkboxnotchecked:false,
+         fieldsNotvalid:false,
 		}
       this.clientProductSearch = React.createRef();
       this.openAccordian=this.openAccordian.bind(this);
@@ -141,6 +143,17 @@ class Repaddproduct extends React.Component{
 
    addProduct=(e)=>{
       e.preventDefault();
+      document.querySelectorAll(".list-box form input").forEach((item,index)=>{
+        console.log(item.value!=='' ? item : '');
+        if(item.value!==''){
+          //console.log(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0]);
+          if(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0].checked===false){
+            console.log(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0]);
+              this.setState({checkboxnotchecked:true});
+          }
+
+        }
+      })
      productList = []; 
                document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
                   let productdata = [];
@@ -177,10 +190,11 @@ class Repaddproduct extends React.Component{
                     return res.json()
                   }).then(data=>{
                       console.log(data);
-                      this.setState({openPopup:true});
+                      this.setState({openPopup:true,checkboxnotchecked:true,fieldsNotvalid:false});
                   });
                }else{
-                     alert("please check the fields mighht be missing somewhere!!");
+                    this.setState({fieldsNotvalid:true,checkboxnotchecked:false});
+                     //alert("please check the fields mighht be missing somewhere!!");
                    }
                });
 
@@ -220,7 +234,7 @@ class Repaddproduct extends React.Component{
                                  <div className="left-prod-img" style={{backgroundImage: `url(${site_url+item.field_product_image})`}}>
                               </div>
                               <div className="right-prod-upload">
-                                 <form>
+                                 <form onSubmit={(e)=>e.preventDefault()}>
                                     <div className="form-group">
                                        <label>Seller</label>
                                        <input type="text" name="seller" placeholder="Seller" className="seller"/>
@@ -264,13 +278,23 @@ class Repaddproduct extends React.Component{
                      )}
                   </div>
              </div>
-            {this.props.callforproduct ? 
+            {this.props.callforproduct ?  
+              <>
                <div className="btn-block add-client">
                            <div className="upload-btn-wrapper">
                               <button className="btn common-btn-blue" onClick={this.addProduct}>
                               <span>Add new product</span></button>
                            </div>
                   </div>
+                  <>
+                    <>
+                    {this.state.checkboxnotchecked  ? ValidationMsg.common.default.addproductCheckboxcheckmissing :''}
+                    </>
+                    <>
+                    {this.state.fieldsNotvalid  ? ValidationMsg.common.default.addproductfieldnotvalid :''}
+                    </>
+                  </>
+              </>
             :''}
             {this.state.openPopup ? 
              <div id="modal" className="modal-container">

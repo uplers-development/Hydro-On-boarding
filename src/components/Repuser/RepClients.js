@@ -14,7 +14,9 @@ import Repclientmobilefilter from './repclientcomponents/Repclientmobilefilter'
 import Repclienttabledata from './repclientcomponents/Repclienttabledata'
 import Repclientdetails from './repclientcomponents/Repclientdetails';
 import Repproductselection from './repclientcomponents/Repproductselection';
-import Repcontractdetails from './repclientcomponents/Repcontractdetails'
+import Repcontractdetails from './repclientcomponents/Repcontractdetails';
+import {cosmaticAsset} from'../constants/common';
+
 class RepClients extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,6 +28,7 @@ class RepClients extends React.Component {
 			searchedclientresult:[],
 			repclientdata:[],
 			updatedRepclientId:null,
+			loader:true,
 		}
 		this.getSearchedItems = this.getSearchedItems.bind(this);
 		this.getSortedItem = this.getSortedItem.bind(this);
@@ -69,7 +72,7 @@ class RepClients extends React.Component {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-		}).then(res=>res.json()).then(data=>this.setState({repclientdata:data}));
+		}).then(res=>res.json()).then(data=>this.setState({repclientdata:data,loader:false}));
 
 	}
 
@@ -115,6 +118,7 @@ class RepClients extends React.Component {
 			            <div className="top-heading">
 			               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
 			            </div>
+			            {!this.state.loader ?
 			            <>
 			            {!this.state.viewpagecall ? 
 			            	<div className="bottom-content-block with-filter">
@@ -143,6 +147,10 @@ class RepClients extends React.Component {
 							</div>
 			         	}
 			         	</>
+			         	:
+			         	<>
+			         		{cosmaticAsset.cosmatic.default.loader}
+			         	</>}
 			         </div>
 			      </div>
 			   </section>

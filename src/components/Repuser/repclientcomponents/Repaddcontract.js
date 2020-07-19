@@ -4,6 +4,14 @@ import Apiurl,{base_url,site_url} from '../../Apiurl';
 import hydroImage from '../../../images/hydro-biofilter-product.jpg';
 import scrollToComponent from 'react-scroll-to-component';
 import {ValidationMsg} from'../../constants/validationmsg';
+import { WithContext as ReactTags } from 'react-tag-input';
+ 
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+};
+ 
+const delimiters = [KeyCodes.comma,KeyCodes.enter,KeyCodes.tab];
 
 class Repaddcontract extends React.Component{
 	constructor(props){
@@ -13,10 +21,27 @@ class Repaddcontract extends React.Component{
 			imageFormateState:false,
          	fileuploadedname:'',
          	fid:'',
+          tags: [
+               
+             ],
+            suggestions: [
+              // this.props.productDataList
+                { uid: 'USA', text: 'USA',name:'djfjdf',props:'sdfbsdfj' },
+                { uid: 'Germany', text: 'Germany',name:'djfjdf',props:'sdfbsdfj' },
+                { uid: 'Austria', text: 'Austria',name:'djfjdf',props:'sdfbsdfj' },
+                { uid: 'Costa Rica', text: 'Costa Rica',name:'djfjdf',props:'sdfbsdfj' },
+                { uid: 'Sri Lanka', text: 'Sri Lanka',name:'djfjdf',props:'sdfbsdfj' },
+                { uid: 'Thailand', text: 'Thailand',name:'djfjdf',props:'sdfbsdfj' }
+          ]
 		}
+    console.log(this.state.suggestions);
+    console.log(this.props.productDataList);
 		console.log(this.props.checkcontractfrom);
 		console.log(this.props.senduid);
 		this.addContract=this.addContract.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
 	}
 
 
@@ -73,6 +98,9 @@ class Repaddcontract extends React.Component{
                 "field_contract_for_products":[{"target_id":"24"},{"target_id":"34"}],/*PRoduct tags Id*/
                 "field_contract_for_client":[{"target_id":this.props.senduid}]
             }   
+
+
+       if(document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#product-tags").value!==''|| document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
     	 fetch(`${base_url}node?_format=json`,{
                         method:"POST",
                         headers: {
@@ -86,11 +114,33 @@ class Repaddcontract extends React.Component{
                   	this.setState({openPopup:true});
                       console.log(data);
             })
+         } 
     }
 
-	
+	handleDelete(i) {
+        const { tags } = this.state;
+        this.setState({
+         tags: tags.filter((tag, index) => index !== i),
+        });
+    }
+ 
+    handleAddition(tag) {
+        this.setState(state => ({ tags: [...state.tags, tag] }));
+    }
+ 
+    handleDrag(tag, currPos, newPos) {
+        const tags = [...this.state.tags];
+        const newTags = tags.slice();
+        
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+ 
+        // re-render
+        this.setState({ tags: newTags });
+    }
 
 	render(){
+      const { tags, suggestions } = this.state;
 		return(
 			   <div className="add-contract">
 		            <div className="container">
@@ -101,7 +151,7 @@ class Repaddcontract extends React.Component{
 		                  </div>
 		               </div>
 		               <div className="form-contracts">
-		                  <form>
+		                  <form  onSubmit={(e)=>e.preventDefault()}>
 		                     <div className="form-group">
 		                        <label>Title</label>
 		                        <input type="text" name="Title" placeholder="Title" id="title" />
@@ -112,6 +162,12 @@ class Repaddcontract extends React.Component{
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Product tags</label>
+                            {/*  <ReactTags tags={tags}
+                                                              suggestions={suggestions}
+                                                              handleDelete={this.handleDelete}
+                                                              handleAddition={this.handleAddition}
+                                                              handleDrag={this.handleDrag}
+                                                              delimiters={delimiters} />*/}
 		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags"/>
 		                     </div>
 		                     <div className="form-group">

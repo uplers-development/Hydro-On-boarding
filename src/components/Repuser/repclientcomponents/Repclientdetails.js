@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import {cosmaticAsset} from'../../constants/common';
 
 class Repclientdetails extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
 			clientDetails:'',
+			loader:true
 		}
 		console.log(this.props.repclientuid);
 	}
@@ -24,12 +26,14 @@ class Repclientdetails extends React.Component{
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
 			    method:"GET",
-  			}).then(res=>res.json()).then(data=>this.setState({clientDetails:data[0]}));
+  			}).then(res=>res.json()).then(data=>this.setState({clientDetails:data[0],loader:false}));
 		}
 
 	render(){
 		return(
 			<div className="person-detils-box sky-blue-light-2 d-flex flex-wrap">
+			  {!this.state.loader ? 
+			   <>
 			   <div className="person-img">
 			      <img src={this.state.clientDetails.user_picture!=='' || this.state.clientDetails.user_picture!==undefined ? site_url+this.state.clientDetails.user_picture : require("../../../images/girls-profile-img.png")} alt="Client image" />
 			   </div>
@@ -69,6 +73,11 @@ class Repclientdetails extends React.Component{
 			         </div>
 			      </div>
 			   </div>
+			   </>:
+			   <>
+					{cosmaticAsset.cosmatic.default.loader}
+				</>
+			}
 			</div>
 			)
 

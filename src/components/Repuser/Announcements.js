@@ -8,6 +8,7 @@ import ReactHtmlParser from 'react-html-parser';
 import hydroImage from '../../images/hydro-biofilter-product.jpg';
 import Repnav from './assets/Repnav'
 import Repheader from './assets/Repheader'
+import Repannouncementadd from './repclientcomponents/Repannouncementadd'
 
 class Announcements extends React.Component {
 	constructor(props) {
@@ -22,6 +23,7 @@ class Announcements extends React.Component {
       if(localStorage.getItem("access-token")!==null){
          this.Rep_nav_menu();
          this.GetProfile();
+         this.get_announcements_list();
         /* if(this.state.fromProductSec && !this.state.fromContractSec){
             this.setState({sectionCalldiversion:"clients-add only-add-product"})
          }
@@ -72,6 +74,17 @@ class Announcements extends React.Component {
 	      }
 	   }
 
+	get_announcements_list = () =>{
+      fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/taxonomy_list/news_feed_type?_format=json`,{
+         /* headers:{
+                  "Content-Type" : "application/json",
+                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+          },*/
+          method:"GET",
+      }).then(res=>res.json()).then(data=>console.log(data));
+
+	}
+
 
 	render(){
 		return(<div>
@@ -82,8 +95,8 @@ class Announcements extends React.Component {
 			   	<div className="d-flex flex-wrap main-block">
 			   	
 			   {/*<!--Nav fixed left block start-->*/}
-					<Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
-			{/*<!--Nav fixed left block end-->*/}
+					<Repnav repmenulisting={this.state.menulisting}/>			
+				{/*<!--Nav fixed left block end-->*/}
 
 			{/*<!--Main right content block start-->*/}
 			<div className="d-flex flex-wrap right-content-part">
@@ -110,68 +123,7 @@ class Announcements extends React.Component {
 						<div className="container">
 							
 						{/*<!--Announcements Top block start-->*/}
-						<div className="anouncements-top-block">
-							<ul className="anouncements-check d-flex flex-wrap">
-								<li>
-									<a href="#" alt="">
-										<img src={require("../../images/setting-logo-blue.svg")} alt="setting-logo"/>
-										<span>Update</span>	
-									</a>
-								</li>
-								<li>
-									<a href="#" alt="">
-										<img src={require("../../images/question_mark_blue.svg")} alt="Question mark"/>
-										<span>Issue</span>	
-									</a>
-								</li>
-								<li>
-									<a href="#" alt="">
-										<img src={require("../../images/warning-logo-blue.svg")} alt="warning-logo"/>
-										<span>Warning</span>	
-									</a>
-								</li>
-							    <li>
-									<a href="#" className="active" alt="">
-										<img src={require("../../images/ic_drop_plus_white.svg")} alt="Drop plus"/>
-										<span>New product</span>	
-									</a>
-								</li>
-							</ul>
-						</div>	
-						{/*<!--Announcements Top block end-->*/}
-
-						{/*<!--Announcements Form block Start-->*/}
-						<div className="anouncements-form">
-							<form>
-								<div className="form-group">
-									<label>Title</label>
-									<input type="text" name="Title" /> 
-								</div>
-								<div className="form-group">
-									<label>Subheading</label>
-									<input type="text" name="Subheading" /> 
-								</div>
-								
-								<div className="text-edit-bar">
-									<label>Text edit bar</label>
-									<div className="textarea-block">
-<img src={require("../../images/hydro-microscreen@2x.png")} alt="Microscreen"/>
-									<textarea placeholder="Type the announcement here…"></textarea>
-									</div>
-								</div>
-
-								<div className="form-group">
-									<label>Button Copy</label>
-									<input type="text" name="Button Copy" /> 
-								</div>
-								<div className="form-group">
-									<label>Button link</label>
-									<input type="text" name="Button link" /> 
-								</div>
-								
-
-							</form>
-						</div>
+							<Repannouncementadd/>
 						{/*<!--Announcements Form block End-->*/}
 
 						{/*<!--Announcements Clients title start-->*/}

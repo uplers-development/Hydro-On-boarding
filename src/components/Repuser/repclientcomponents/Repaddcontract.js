@@ -176,7 +176,7 @@ class Repaddcontract extends React.Component{
 		                     </div>
 		                    <div className="btn-block">
                                        <div className="upload-btn-wrapper">
-                                        <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx. Max size of 1mb</span>
+                                        <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>
                                           <input type="file" name="Upload Document" onChange={this.get_uploaded_file_path}/>
                                           <button className="btn common-btn-blue">
                                           <span>Upload Document</span></button>

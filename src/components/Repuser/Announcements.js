@@ -6,48 +6,83 @@ import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import hydroImage from '../../images/hydro-biofilter-product.jpg';
+import Repnav from './assets/Repnav'
+import Repheader from './assets/Repheader'
 
 class Announcements extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			rightSide_data:[],
+			menulisting:[],
+			repinfo:null
 		}
 	}
+
+	componentWillMount(){
+      if(localStorage.getItem("access-token")!==null){
+         this.Rep_nav_menu();
+         this.GetProfile();
+        /* if(this.state.fromProductSec && !this.state.fromContractSec){
+            this.setState({sectionCalldiversion:"clients-add only-add-product"})
+         }
+         else if(!this.state.fromProductSec && this.state.fromContractSec){
+            this.setState({sectionCalldiversion:"clients-add only-add-contract"})
+         }else{
+          this.setState({sectionCalldiversion:null})
+         }*/
+      }else{
+         this.props.history.push('/Login')
+      }
+      
+   }
+
+
+
+   Rep_nav_menu=()=>{
+      let menulist={
+         menu:"main-navigation-rep"
+      }
+      fetch(`https://staging.project-progress.net/projects/hydro/json-api/menu_list.json`,{
+          headers:{
+                  "Content-Type" : "application/json",
+                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+          },
+          method:"POST",
+          body:JSON.stringify(menulist)
+      }).then(res=>res.json()).then(data=>this.setState({menulisting:data}));
+   }
+
+
+	 GetProfile=()=>{
+	      try{
+	         fetch(Apiurl.GetProfile.url,{
+	               headers: {
+	                     "Content-Type" : "application/json",
+	                     "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+	                   },
+	                   method:Apiurl.GetProfile.method,
+	         }).then(res=>{
+	            return res.json();
+	         }).then(data=>{
+	            console.log(data);
+	            this.setState({repinfo:data})
+	         })
+	      }catch(err){
+	         console.log(err);
+	      }
+	   }
+
+
 	render(){
 		return(<div>
 			   
 			    {/*<!--Main wrapper start-->*/}
-			   <section class="main-wrapper">
+			   <section className="main-wrapper">
 			     {/*<!-- Main block start-->*/}
-			   	<div class="d-flex flex-wrap main-block">
-			   
+			   	<div className="d-flex flex-wrap main-block">
+			   	
 			   {/*<!--Nav fixed left block start-->*/}
-			<nav className="navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left">
-				<a className="navbar-logo" href="#" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></a>
-
-				{/*<!--List of menu start-->*/}
-				<ul>
-					<li><a href="#" title="Dashboard">
-							<img className="svg" src={require("../../images/dashboard-nav.svg")} alt="profile-logo" /><span>Dashboard</span></a></li>
-					<li><a href="#" title="Clients">
-							<img className="svg" src={require("../../images/clients_ic.svg")} alt="product-logo" /><span>Clients</span></a>
-							</li>
-					
-						<li><a className="active" href="#" title="Products">
-							<img className="svg" src={require("../../images/bell-icon-logo.svg")} alt="Announcements" />
-							<span>Announcements</span></a></li>
-					
-					
-				</ul>
-				{/*<!--List of menu end-->*/}
-
-				
-
-				<div className="pattern-block"><img src={require("../../images/pattern-nav-bottom.svg")} alt="pattern-nav" /></div>
-
-				<div className="nav-copyright">© 2020 Hydro International</div>
-			</nav>
+					<Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
 			{/*<!--Nav fixed left block end-->*/}
 
 			{/*<!--Main right content block start-->*/}
@@ -55,25 +90,7 @@ class Announcements extends React.Component {
 				<div className="top-heading">
 					
 					{/*<!--Top heading container start-->*/}
-					<div className="top-heading-continer d-flex flex-wrap align-center">
-						<div className="name-of-heading d-flex flex-wrap">
-							<img src={require("../../images/bell-icon-logo-blue.svg")} alt="profile-logo" />
-							<h1>Announcements</h1>
-						</div>
-
-						<div className="d-flex flex-wrap user-log">
-							<div className="user-image-name d-flex flex-wrap align-center">
-								<img src={require("../../images/user-scond.png")} alt="Prfile image" />
-								<h2>Username</h2>
-							</div>
-							<div className="drop-down-menu">
-								<ul>
-									<li><a href="#" title="Profile">Profile</a></li>
-									<li><a href="#" title="Sign out">Sign out</a></li>
-								</ul>
-							</div>
-						</div>
-					</div> 
+						<Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
 					{/*<!--Top heading container end-->*/}
 				</div>
 
@@ -248,7 +265,7 @@ class Announcements extends React.Component {
          <th>
 		 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox1" />
-      				<label for="checkbox1"></label>	 
+      				<label htmlFor="checkbox1"></label>	 
 			 </div><span>Name</span>
 		</th>
          <th>Email</th>
@@ -261,7 +278,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+      				<label htmlFor="checkbox2"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -286,7 +303,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+      				<label htmlFor="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -311,7 +328,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+      				<label htmlFor="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -336,7 +353,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+      				<label htmlFor="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -360,7 +377,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+      				<label htmlFor="checkbox2"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -385,7 +402,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+      				<label htmlFor="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -410,7 +427,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+      				<label htmlFor="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">
@@ -435,7 +452,7 @@ class Announcements extends React.Component {
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
+      				<label htmlFor="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c">

@@ -11,15 +11,18 @@ import Repheader from './assets/Repheader'
 import Repannouncementadd from './repclientcomponents/Repannouncementadd'
 import Repclienttabledata from './repclientcomponents/Repclienttabledata'
 import Repannouncementsfilter from './repclientcomponents/Repannouncementsfilter'
-import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import Repannouncementmobile from './repclientcomponents/Repannouncementmobile'
+import Repclientdetails from './repclientcomponents/Repclientdetails';
+import Repproductselection from './repclientcomponents/Repproductselection';
+import Repcontractdetails from './repclientcomponents/Repcontractdetails';
+import {cosmaticAsset} from'../constants/common';
 
 
 class Announcements extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
+			loader:true,
 			menulisting:[],
 			repinfo:null,
 			announcementDetails:[],
@@ -27,8 +30,9 @@ class Announcements extends React.Component {
 			announcement:true,
 			updatedRepclientId:null,
 			viewpagecalled:false,
-			editorState: EditorState.createEmpty()
+			noDataforTable:false,
 		}
+		this.filtereddata=this.filtereddata.bind(this);
 	}
 
 	componentWillMount(){
@@ -43,14 +47,18 @@ class Announcements extends React.Component {
       
    }
 
-   onEditorStateChange=(editorState) => {
-    this.setState({
-      editorState,
-    });
-  }
-
+   
    checkAnyDelete=(recordDelete)=>{
 		if(recordDelete) {this.client_data_Table()} 
+	}
+
+	filtereddata=(filtersuccess)=>{
+		console.log(filtersuccess);
+		if(filtersuccess.length>0){
+			this.setState({noDataforTable:false,repclientdata:filtersuccess});
+		}else{
+			this.setState({noDataforTable:true})
+		}
 	}
 
 	getSearchedItems =(getSearchedItem) =>{
@@ -105,7 +113,7 @@ class Announcements extends React.Component {
 	   }
 
 	get_announcements_list = () =>{
-      fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/taxonomy_list/news_feed_type?_format=json`,{
+      fetch(`http://staging.project-progress.net/projects/hydro/json-api/news_feed_type.json`,{
          /* headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -122,138 +130,57 @@ class Announcements extends React.Component {
 
 	render(){
 		return(<div>
-			   
-			    {/*<!--Main wrapper start-->*/}
-			   <section className="main-wrapper">
-			     {/*<!-- Main block start-->*/}
-			   	<div className="d-flex flex-wrap main-block">
-			   	
-			   {/*<!--Nav fixed left block start-->*/}
-					<Repnav repmenulisting={this.state.menulisting}/>			
-				{/*<!--Nav fixed left block end-->*/}
-
-			{/*<!--Main right content block start-->*/}
-			<div className="d-flex flex-wrap right-content-part">
-				<div className="top-heading">
-					
-					{/*<!--Top heading container start-->*/}
-						<Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
-					{/*<!--Top heading container end-->*/}
-				</div>
-
-				{/*<!--Main content bottom block start-->*/}
-				<div className="bottom-content-block">
-
-					{/*<!--Announcements main blok start-->*/}
-					<div className="d-flex flex-wrap announcements-main">
-						
-						{/*<!--Announcements Head blok start-->*/}
-						<div className="fileter-block details-head-block d-flex flex-wrap border-bottom"><h3>Add an announcement</h3>
-						<h4>Add an announcement</h4></div>
-							
-						{/*<!--Announcements Head blok end-->*/}	
-	
-						{/*<!--Container start-->*/}
-						<div className="container">
-							
-						{/*<!--Announcements Top block start-->*/}
-							<Repannouncementadd addAnnouncementDetails={this.state.announcementDetails}/>
-						{/*<!--Announcements Form block End-->*/}
-
-						{/*<!--Announcements Clients title start-->*/}
-						<div className="pro-title d-flex flex-wrap align-center">
-							<div className="name-of-heading d-flex flex-wrap align-center">
-								<img src={require("../../images/clients_ic_blue.svg")} alt="Clients"/>
-									<h3>Clients</h3>
-							</div>
-							<Editor
-								  editorState={this.state.editorState}
-								  toolbarClassName="toolbarClassName"
-								  wrapperClassName="wrapperClassName"
-								  editorClassName="editorClassName"
-								  onEditorStateChange={this.onEditorStateChange}
-								  toolbar={{
-    								inline: { inDropdown: true },
-    								list: { inDropdown: true },
-    								textAlign: { inDropdown: true },
-    								link: { inDropdown: true },
-    								history: { inDropdown: true },
-    								image:{ inDropdown: false }
-  								  }}
-							/>				  
-							{/*<!--Mobile filter start-->*/}
-							<div className="mobile-filter">
-									<a href="javascript:void(0)" title="filter-btn" className="filter-open-btn">
-										<img src={require("../../images/ic_filter.svg")} alt="ic_filter" />
-									</a>
-
-									<div className="open-close-filter-block">
-										<div className="top-head d-flex flex-wrap align-center">
-											<div className="top-title d-flex flex-wrap">
-												<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter" />
-												<h4>Filters</h4>
-											</div>
-											<a href="javascript:void(0)" title="close-btn" className="filter-open-btn">
-												<img src={require("../../images/ic_close.svg")} alt="ic_close" />
-											</a>
+				   <section className="main-wrapper">
+				      <div className="d-flex flex-wrap main-block">
+				         <Repnav repmenulisting={this.state.menulisting}/>
+				         <div className="d-flex flex-wrap right-content-part">
+				            <div className="top-heading">
+				               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+				            </div>
+				            {!this.state.loader ?
+			            	<>
+		            		{!this.state.viewpagecall ?
+					            <div className="bottom-content-block">
+					               <div className="d-flex flex-wrap announcements-main">
+					                  <div className="fileter-block details-head-block d-flex flex-wrap border-bottom">
+					                     <h3>Add an announcement</h3>
+					                     <h4>Add an announcement</h4>
+					                  </div>
+					                  <div className="container">
+					                     <Repannouncementadd addAnnouncementDetails={this.state.announcementDetails}/>
+					                     <div className="pro-title d-flex flex-wrap align-center">
+					                        <div className="name-of-heading d-flex flex-wrap align-center">
+					                           <img src={require("../../images/clients_ic_blue.svg")} alt="Clients"/>
+					                           <h3>Clients</h3>
+					                        </div>
+					                        <Repannouncementmobile checkFiltereddata={this.filtereddata}/>
+					                     </div>
+					                     <Repannouncementsfilter checkFiltereddata={this.filtereddata}/>
+					                     <Repclienttabledata announcementPublish={this.state.announcement} clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete} noDatacall={this.state.noDataforTable}/>
+					                  </div>
+					               </div>
+					            </div>
+					            :
+					             <div className="bottom-content-block">
+									{/*<!-Client details main start-->*/}
+									<div className="d-flex flex-wrap clients-detils-main">				
+										<Repclientdetails repclientuid={this.state.updatedRepclientId}/>
+										<div className="container">
+											<Repproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
+											<Repcontractdetails  historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
 										</div>
-
-										<div className="list-filter-mobile">
-											<h5>Location</h5>
-											<ul>
-												<li><a href="#" title="USA">USA</a></li>
-												<li><a href="#" title="UK">UK</a></li>
-											</ul>
-
-											<h5>Product Types</h5>
-											<ul>
-											<li><a href="#" title="Type 1">Type 1</a></li>	
-									<li><a href="#" title="Type 2">Type 2</a></li>	
-											</ul>			  
-												
-											<h5>Bulk Action</h5>			  
-											<ul>
-												<li><a href="#" className="active"  title="Delete">Delete</a></li>
-											</ul>
-														  			
-										</div>
-
 									</div>
 								</div>
-							{/*<!--Mobile filter End-->*/}
-										  
-						</div>
-						{/*<!--Announcements Clients title End-->*/}
-
-						{/*<!--Filter block Start-->*/}
-						<Repannouncementsfilter/>
-						{/*<!--Filter block End-->*/}
-
-
-					{/*<!--Table block Start-->*/}
-								{/*<!--Table Start-->*/}
-								<Repclienttabledata announcementPublish={this.state.announcement} clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>
-								{/*<!--Table End-->*/}
-								
-					{/*<!--Table block End-->*/}
-						
-						
-								</div>
-								{/*<!--Container End-->*/}
-									
-							</div>
-							{/*<!--Announcements main blok end-->*/}
-
-						</div>
-						{/*<!--Main content bottom block end-->*/}
-
-					</div>
-			{/*<!--Main right content block start-->*/}
-			
-				</div>
-			</section>
-			   
-			   </div>)
+				        	}
+			         		</>
+			         		:
+			         		<>
+			         			{cosmaticAsset.cosmatic.default.loader}
+			         		</>}
+				         </div>
+				      </div>
+				   </section>
+				</div>)
 	}
 }
 		

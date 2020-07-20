@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import {RepLogoutPopup} from'../../constants/RepConstants';
 
 class Repclienttabledata extends React.Component{
 	constructor(props){
@@ -8,11 +9,13 @@ class Repclienttabledata extends React.Component{
 		this.state={
 			parentchecked:false,
 			openPopup:false,
-			setSingleDeleteId:null
+			setSingleDeleteId:null,
+			opensubmissionpopup:false
 		}
 	this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
 	this.singleSelect=this.singleSelect.bind(this);
 	this.handleViewEvent=this.handleViewEvent.bind(this);
+	this.submitAnnoucement=this.submitAnnoucement.bind(this);
 	}
 
 	selectAllcheckbox=(e)=>{
@@ -86,6 +89,40 @@ class Repclienttabledata extends React.Component{
 		this.props.checkViewpageCall(true,uid);
 	}
 
+	submitAnnoucement=(e)=>{
+		e.preventDefault();
+		let singlecheckedArray=[];
+		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
+				singlecheckedArray.push(item.value);
+		});
+
+		console.log(singlecheckedArray);
+			let options={
+				    "title":[{"value":document.querySelector("#Title").value}],
+			        "body":[{"value":document.querySelector("span[data-text=true]").textContent}],
+			        "type":[{"target_id":"article"}],
+			        "field_news_feed_button":[{"uri": "external:"+document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
+			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
+			        //"field_image":[{"target_id":fid of }],
+			        "field_client":[{"target_id":singlecheckedArray}]
+			}
+			console.log(options);
+			fetch(`https://staging.project-progress.net/projects/hydro/node?_format=json`,{
+		         method:'POST',
+				headers: {
+		                	"Content-Type" : "application/json",
+		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+		                },
+		                body:JSON.stringify(options)
+		            }).then(res=>{
+		            	return res.json();
+		            }).then(data=>{
+		            	console.log(data);
+		            	//this.setState({opensubmissionpopup:true})
+		            })
+		}
+
+
 	render(){
 		return (
 			<div className="clients-table table-outer">
@@ -106,8 +143,9 @@ class Repclienttabledata extends React.Component{
 							            </tr>
 							         </thead>
 							          <tbody>
-						             {this.props.clientdataTable.map((item,index)=>
-							            <tr key={index}>
+							         {!this.props.noDatacall ? 
+						             	this.props.clientdataTable.map((item,index)=>
+							            	<tr key={index}>
 							               <td>
 							                  <div className="checkbox-cust">
 							                     <input type="checkbox" id={"checkbox"+index} className="clientchecked" name="checkbox" onChange={this.singleSelect} defaultValue={item.uid}/>
@@ -133,8 +171,12 @@ class Repclienttabledata extends React.Component{
 				               			   <td>{item.mail}</td>
 				               			   <td>{item.field_job_title}</td>
 					               		   <td><span>{item.changed}</span></td>
-							            </tr>
-					               	)}
+							            	</tr>
+					               		)
+					               	:
+					               	<>
+					               		{RepLogoutPopup.default.noDatafound}
+					               	</>}
 						          	 </tbody>
 							      </table>
 
@@ -158,9 +200,26 @@ class Repclienttabledata extends React.Component{
 											</div>
 								: <></>}
 						   </div>
+						   <>
+						    {this.state.opensubmissionpopup ? 
+											<div id="modal" className="modal-container">
+												<div className="modal d-flex flex-wrap align-center justify-center">
+													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false})})}
+													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+													
+												<div>
+													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+														<h2>Announcement published</h2>
+                  										 <p>Your message was submitted successfully</p>
+												</div>
+												</div>
+											</div>
+								: <></>}
+						   </>
+
 						   {this.props.announcementPublish ? 
 						   		<div className="btn-block">
-									<button className="btn common-btn-blue"><span>Publish announcement</span></button>	
+									<button className="btn common-btn-blue" onClick={this.submitAnnoucement}><span>Publish announcement</span></button>	
 								</div>
 						: ''}
 			</div>

@@ -88,19 +88,19 @@ class Admin_addResource extends React.Component {
 									<div className="form-group d-flex flex-wrap align-center">
 										<label>Title*</label>
 										<div className="input-box">
-											<input type="text" name="Title" />
+											<input type="text" name="Title" id="title" />
 										</div>
 									</div>
 									<div className="form-group d-flex flex-wrap align-center">
 										<label>Description*</label>
 										<div className="input-box">
-											<input type="text" name="Description" />
+											<input type="text" name="Description" id="description" />
 										</div>
 									</div>
 									<div className="form-group d-flex flex-wrap align-center">
 										<label>Product tags*</label>
 										<div className="input-box">
-											<input type="text" name="Product tags" />
+											<input type="text" name="Product tags" id="product-tags" />
 										</div>
 									</div>
 									<div className="upload-btn-block">

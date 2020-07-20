@@ -155,8 +155,8 @@ class Admin_Resource extends React.Component {
       <tr>
          <th>
 		 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox1" />
-      				<label for="checkbox1"></label>	 
+				 	<input type="checkbox" id="checkbox0" />
+      				<label for="checkbox0"></label>	 
 			 </div><span>Title</span>
 		</th>
          <th>Author</th>
@@ -169,8 +169,8 @@ class Admin_Resource extends React.Component {
       <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox1" />
+      				<label for="checkbox1"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -210,8 +210,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox3" />
+      				<label for="checkbox3"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -228,8 +228,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox4" />
+      				<label for="checkbox4"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -246,8 +246,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox5" />
+      				<label for="checkbox5"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -264,8 +264,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox6" />
+      				<label for="checkbox6"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -282,8 +282,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox7" />
+      				<label for="checkbox7"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -300,8 +300,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox8" />
+      				<label for="checkbox8"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -318,8 +318,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox9" />
+      				<label for="checkbox9"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">
@@ -336,8 +336,8 @@ class Admin_Resource extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label for="checkbox2"></label>	 
+				 	<input type="checkbox" id="checkbox10" />
+      				<label for="checkbox10"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="right-detail">

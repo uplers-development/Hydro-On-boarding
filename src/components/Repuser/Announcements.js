@@ -9,13 +9,25 @@ import hydroImage from '../../images/hydro-biofilter-product.jpg';
 import Repnav from './assets/Repnav'
 import Repheader from './assets/Repheader'
 import Repannouncementadd from './repclientcomponents/Repannouncementadd'
+import Repclienttabledata from './repclientcomponents/Repclienttabledata'
+import Repannouncementsfilter from './repclientcomponents/Repannouncementsfilter'
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState } from 'draft-js';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 
 class Announcements extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
 			menulisting:[],
-			repinfo:null
+			repinfo:null,
+			announcementDetails:[],
+			repclientdata:[],
+			announcement:true,
+			updatedRepclientId:null,
+			viewpagecalled:false,
+			editorState: EditorState.createEmpty()
 		}
 	}
 
@@ -24,20 +36,38 @@ class Announcements extends React.Component {
          this.Rep_nav_menu();
          this.GetProfile();
          this.get_announcements_list();
-        /* if(this.state.fromProductSec && !this.state.fromContractSec){
-            this.setState({sectionCalldiversion:"clients-add only-add-product"})
-         }
-         else if(!this.state.fromProductSec && this.state.fromContractSec){
-            this.setState({sectionCalldiversion:"clients-add only-add-contract"})
-         }else{
-          this.setState({sectionCalldiversion:null})
-         }*/
+         this.client_data_Table();
       }else{
          this.props.history.push('/Login')
       }
       
    }
 
+   onEditorStateChange=(editorState) => {
+    this.setState({
+      editorState,
+    });
+  }
+
+   checkAnyDelete=(recordDelete)=>{
+		if(recordDelete) {this.client_data_Table()} 
+	}
+
+	getSearchedItems =(getSearchedItem) =>{
+
+		console.log(getSearchedItem);
+		document.querySelector("#myInput").value==='' ? this.client_data_Table() : this.setState({repclientdata:getSearchedItem});
+	}
+
+   client_data_Table=()=>{
+		fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json`,{
+			headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+		}).then(res=>res.json()).then(data=>this.setState({repclientdata:data,loader:false}));
+
+	}
 
 
    Rep_nav_menu=()=>{
@@ -81,8 +111,12 @@ class Announcements extends React.Component {
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
           },*/
           method:"GET",
-      }).then(res=>res.json()).then(data=>console.log(data));
+      }).then(res=>res.json()).then(data=>this.setState({announcementDetails:data}));
 
+	}
+	check_view_page_call=(viewpagecalled,uid)=>{
+		console.log(uid);
+		this.setState({updatedRepclientId : uid,viewpagecall : viewpagecalled});
 	}
 
 
@@ -123,7 +157,7 @@ class Announcements extends React.Component {
 						<div className="container">
 							
 						{/*<!--Announcements Top block start-->*/}
-							<Repannouncementadd/>
+							<Repannouncementadd addAnnouncementDetails={this.state.announcementDetails}/>
 						{/*<!--Announcements Form block End-->*/}
 
 						{/*<!--Announcements Clients title start-->*/}
@@ -132,7 +166,21 @@ class Announcements extends React.Component {
 								<img src={require("../../images/clients_ic_blue.svg")} alt="Clients"/>
 									<h3>Clients</h3>
 							</div>
-										  
+							<Editor
+								  editorState={this.state.editorState}
+								  toolbarClassName="toolbarClassName"
+								  wrapperClassName="wrapperClassName"
+								  editorClassName="editorClassName"
+								  onEditorStateChange={this.onEditorStateChange}
+								  toolbar={{
+    								inline: { inDropdown: true },
+    								list: { inDropdown: true },
+    								textAlign: { inDropdown: true },
+    								link: { inDropdown: true },
+    								history: { inDropdown: true },
+    								image:{ inDropdown: false }
+  								  }}
+							/>				  
 							{/*<!--Mobile filter start-->*/}
 							<div className="mobile-filter">
 									<a href="javascript:void(0)" title="filter-btn" className="filter-open-btn">
@@ -178,275 +226,28 @@ class Announcements extends React.Component {
 						{/*<!--Announcements Clients title End-->*/}
 
 						{/*<!--Filter block Start-->*/}
-						<div className="announcements-filter d-flex flex-wrap align-center">
-							<h4>Select which clients you want to see the announcements</h4>
-							<div className="filter-right d-flex flex-wrap">
-								<div className="select-box location">
-									<span>Location</span>
-									<ul className="list product-list-item">
-									<li><a href="#" title="USA">USA</a></li>	
-									<li><a href="#" title="UK">UK</a></li>	
-									</ul>
-								</div>
-								<div className="select-box prod-type">
-									<span>Product Types</span>
-									<ul className="list product-list-item">
-									<li><a href="#" title="Type 1">Type 1</a></li>	
-									<li><a href="#" title="Type 2">Type 2</a></li>	
-									</ul>
-								</div>
-								<div className="select-box bulk-action">
-									<span>Bulk</span>
-									<ul className="list product-list-item">
-									<li><a href="#" title="Delete">Delete</a></li>	
-									</ul>
-								</div>
-							</div>
-						</div>
+						<Repannouncementsfilter/>
 						{/*<!--Filter block End-->*/}
 
 
 					{/*<!--Table block Start-->*/}
-						<div className="clients-table table-outer">
-							<div className="table-responsive">
-							
 								{/*<!--Table Start-->*/}
-								<table className="table table-striped">
-   <thead>
-      <tr>
-         <th>
-		 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox1" />
-      				<label htmlFor="checkbox1"></label>	 
-			 </div><span>Name</span>
-		</th>
-         <th>Email</th>
-         <th>Role</th>
-         <th>Last updatetd</th>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label htmlFor="checkbox2"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>
-							  
-	<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label htmlFor="checkbox3"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/girls-profile-img.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>	
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label htmlFor="checkbox3"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/jane-smith.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>
-							  
-	<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label htmlFor="checkbox3"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/jane-smith2.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>		
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox2" />
-      				<label htmlFor="checkbox2"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/john-smith.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>
-							  
-	<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label htmlFor="checkbox3"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/girls-profile-img.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>	
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label htmlFor="checkbox3"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/jane-smith.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>
-							  
-	<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label htmlFor="checkbox3"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="img-c">
-					<img src={require("../../images/jane-smith2.png")} alt="Prfile image" />	 
-				 </div>
-				 <div className="right-detail">
-				 <h3>John Smith</h3>
-			     <div className="action d-flex flex-wrap">
-					<a href="#" title="Edit">Edit</a>	 
-					<a href="#" title="Delete">Delete</a>	 
-					<a href="#" title="View">View</a>	 
-				 </div>	
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>John.smith@example.co.uk</td>				
-		 <td>Project manager</td>				
-		 <td><span>22th Jan 2020</span><span>11.00 am</span></td>				
-      </tr>
-      
-         </tbody>
-</table>
+								<Repclienttabledata announcementPublish={this.state.announcement} clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>
 								{/*<!--Table End-->*/}
 								
-							</div>
-							<div className="btn-block">
-								<button className="btn common-btn-blue"><span>Publish announcement</span></button>	
-							</div>
-						</div>
 					{/*<!--Table block End-->*/}
 						
 						
+								</div>
+								{/*<!--Container End-->*/}
+									
+							</div>
+							{/*<!--Announcements main blok end-->*/}
+
 						</div>
-						{/*<!--Container End-->*/}
-							
+						{/*<!--Main content bottom block end-->*/}
+
 					</div>
-					{/*<!--Announcements main blok end-->*/}
-
-				</div>
-				{/*<!--Main content bottom block end-->*/}
-
-			</div>
 			{/*<!--Main right content block start-->*/}
 			
 				</div>

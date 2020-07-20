@@ -158,6 +158,11 @@ class Repclienttabledata extends React.Component{
 											</div>
 								: <></>}
 						   </div>
+						   {this.props.announcementPublish ? 
+						   		<div className="btn-block">
+									<button className="btn common-btn-blue"><span>Publish announcement</span></button>	
+								</div>
+						: ''}
 			</div>
 		);
 	}

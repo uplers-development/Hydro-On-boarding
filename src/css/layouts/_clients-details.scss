@@ -273,6 +273,26 @@
 					margin-left: auto;
 					margin-top: 0;
 				}
+				.btn-block {
+					.btn {
+						min-width: 223px;
+						padding: 7px 15px 5px;
+						@media screen and (max-width:$ipad-landscape) {
+							min-width: auto;
+						}
+					}
+				}
+			}
+			.name-of-heading {
+				img {
+					width:38px;
+					@media screen and (max-width: $large-m) {
+						width: 28px;
+					}
+					@media screen and (max-width: $mobile-small) {
+						width: 22px;
+					}
+				}
 			}
 		}
 	}

@@ -44,7 +44,7 @@
 
 		.contracts-box {
 			width: 50%;
-			padding: 0 30px;
+			padding: 30px;
 
 			> div {
 				position: relative;
@@ -233,9 +233,11 @@
 			}
 
 			@media screen and (max-width:$large-m) {
+				padding: 25px 15px;
+			}
+			@media screen and (max-width:$mobile-small) {
 				padding: 0 15px;
 			}
-
 			@media screen and (max-width:$ipad-portrait) {
 				width: 100%;
 

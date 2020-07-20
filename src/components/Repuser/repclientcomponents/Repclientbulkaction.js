@@ -59,7 +59,7 @@ class Repclientbulkaction extends React.Component {
 render(){	
 	  return (<>
 	  			<div className="select-box">
-				   <span>Bulk Action</span>
+				   <span>Bulk Actions</span>
 				   <ul className="list">
 				      <li><Link to={""} onClick={this.selectAllcheckbox} title="Delete">Delete</Link></li>
 				   </ul>

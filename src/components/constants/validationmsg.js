@@ -12,7 +12,7 @@ export const ValidationMsg = {
 			contactNumber:ReactHtmlParser('<span class="empty-field">Please enter your valid contactnumber.</span>'),
 			Organisation:ReactHtmlParser('<span class="empty-field">Please enter your valid Organisation.</span>'),
 			location:ReactHtmlParser('<span class="empty-field">Please enter your valid location.</span>'),
-            imageformate:ReactHtmlParser('<span class="empty-field">Please enter image fomate from given above.</span>'),
+            imageformate:ReactHtmlParser('<span class="empty-field">Please enter format from above list.</span>'),
 
             surnamefield:ReactHtmlParser('<span class="empty-field">Please enter your valid surname.</span>'),
             company:ReactHtmlParser('<span class="empty-field">Please enter your valid company name.</span>'),

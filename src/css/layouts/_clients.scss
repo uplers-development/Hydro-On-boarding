@@ -7,7 +7,9 @@
 		.select-box {
 			width: 146px;
 			> span {
-				padding: 8px 25px;
+				padding: 4px 25px 4px 15px;
+				font-size: 18px;
+				line-height: 28px;
 			}
 			ul {
 				top: 38px;
@@ -36,6 +38,16 @@
 					/*@media screen and (max-width: $mobile-small) {
 						padding: 5px 9px 5px 35px;
 					}*/
+				}
+			}
+			.sort-by {
+				.sort-selected {
+					h2 {
+						font-size: 18px;
+						line-height: 28px;
+						font-weight: $font-normal;
+						padding: 6px 25px;
+					}
 				}
 			}
 		}

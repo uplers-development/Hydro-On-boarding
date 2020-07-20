@@ -102,7 +102,7 @@ class Repclienttabledata extends React.Component{
 							               </th>
 							               <th>Email</th>
 							               <th>Role</th>
-							               <th>Last updatetd</th>
+							               <th>Last updated</th>
 							            </tr>
 							         </thead>
 							          <tbody>

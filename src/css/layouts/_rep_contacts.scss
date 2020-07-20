@@ -412,6 +412,9 @@
 									color: $light-black;
 									font-family: $arial;
 									font-weight: $font-normal;
+									strong {
+										padding-right: 3px;
+									}
 									@include transition(0.3s all ease-in-out);
 									@media screen and (max-width:$large-m) {
 										font-size: 14px;

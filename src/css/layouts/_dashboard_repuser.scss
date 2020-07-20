@@ -9,7 +9,13 @@
 			color: $cobalt-blue;
 			font-family: $gibson;
 			font-weight: $font-semi-bold;
-			    margin-bottom: 18px;
+			margin-bottom: 18px;
+			@media screen and (max-width: $mobile-small) {
+				margin-top: 10px;
+			}
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				margin-top: 10px;
+			}
 		}
 
 		.dashboard-top {
@@ -32,6 +38,18 @@
 				@media screen and (max-width:$mobile-small) {
 					padding: 15px;
 				}
+				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					padding: 15px;
+				}
+				.common-title {
+					@media screen and (max-width: $large-mx) {
+						margin-left: -5px;
+					}
+					@media screen and (max-width: $ipad-landscape) {
+						margin-left: 8px;
+					}
+				}
+				
 				.activity {
 					align-items: flex-start;
 					margin: 0 -28px;
@@ -94,6 +112,7 @@
 						padding: 0 15px;
 						@media screen and (max-width:$ipad-portrait) {
 							width: 100%;
+							padding-top: 20px;
 						}
 						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 								width: 100%;
@@ -191,6 +210,9 @@
 										padding: 0 5px 0 5px;
 										width: 140px;
 										text-align: right;
+									}
+									@media screen and (max-width: $ipad-landscape) {
+										width: 150px;
 									}
 									@media screen and (max-width:$ipad-portrait) {
 										width: 160px;
@@ -342,10 +364,10 @@
 					margin: 20px 0 0 0;
 				}
 				@media screen and (max-width:$mobile-small) {
-					padding: 0 20px;
+					padding: 10px 20px;
 				}
 				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
-					padding: 0 20px;
+					padding: 10px 20px;
 				}
 				ul {
 					padding-left: 0;

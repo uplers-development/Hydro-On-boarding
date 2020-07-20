@@ -270,7 +270,7 @@ class Announcements extends React.Component {
 		</th>
          <th>Email</th>
          <th>Role</th>
-         <th>Last updatetd</th>
+         <th>LLast updated</th>
       </tr>
    </thead>
    <tbody>

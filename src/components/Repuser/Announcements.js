@@ -33,6 +33,7 @@ class Announcements extends React.Component {
 			noDataforTable:false,
 		}
 		this.filtereddata=this.filtereddata.bind(this);
+		this.returnSummerNoteData=this.returnSummerNoteData.bind(this);
 	}
 
 	componentWillMount(){
@@ -59,6 +60,10 @@ class Announcements extends React.Component {
 		}else{
 			this.setState({noDataforTable:true})
 		}
+	}
+
+	returnSummerNoteData=(returnHtml)=>{
+		console.log(returnHtml);
 	}
 
 	getSearchedItems =(getSearchedItem) =>{
@@ -147,7 +152,7 @@ class Announcements extends React.Component {
 					                     <h4>Add an announcement</h4>
 					                  </div>
 					                  <div className="container">
-					                     <Repannouncementadd addAnnouncementDetails={this.state.announcementDetails}/>
+					                     <Repannouncementadd addAnnouncementDetails={this.state.announcementDetails} getsummernote={this.returnSummerNoteData}/>
 					                     <div className="pro-title d-flex flex-wrap align-center">
 					                        <div className="name-of-heading d-flex flex-wrap align-center">
 					                           <img src={require("../../images/clients_ic_blue.svg")} alt="Clients"/>

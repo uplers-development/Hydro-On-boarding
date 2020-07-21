@@ -3,7 +3,9 @@ import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
 import Apiurl,{site_url} from '../../Apiurl'; 
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState,ContentState,convertFromHTML,CompositeDecorator,convertToRaw,getDefaultKeyBinding } from 'draft-js';
+import { EditorState,ContentState,convertFromHTML,CompositeDecorator,convertToRaw,getDefaultKeyBinding, } from 'draft-js';
+/*import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';*/
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';	
 
 
@@ -16,9 +18,11 @@ class Repannouncementadd extends React.Component {
 	}
 
 	onEditorStateChange=(editorState) => {
-    this.setState({
-      editorState,
-    });
+	    this.setState({
+	      editorState,
+	    });
+
+//	   this.props.getsummernote(draftToHtml(convertToRaw(event.getCurrentContent())));
   }
 
 	selectannouncement=(e,getannouncementid,value)=>{
@@ -41,7 +45,7 @@ class Repannouncementadd extends React.Component {
 				     {this.props.addAnnouncementDetails.map((item,index)=>
 				      <li key={index}>
 				         <Link to={""} className="announcment-type"  id={item.tid}  onClick={(e)=>this.selectannouncement(e,item.tid,index)}>
-				         		{item.field_icon!=='' ? ReactHtmlParser(item.field_icon) : ''}
+				         		{item.field_icon!=='' ? <div dangerouslySetInnerHTML={{ __html: item.field_icon }} />: ''}
 				        		 <span>{item.name}</span>	
 				         </Link>
 				      </li>
@@ -77,6 +81,7 @@ class Repannouncementadd extends React.Component {
     								link: { inDropdown: true },
     								history: { inDropdown: true },
   								  }}
+  								  placeholder="Type the announcement here..."
 							/>		
 				           {/* <img src={require("../../../images/hydro-microscreen@2x.png")} alt="Microscreen"/>
 				           				            <textarea placeholder="Type the announcement here…"></textarea>*/}

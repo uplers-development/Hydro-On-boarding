@@ -263,7 +263,8 @@
 			}
 			.search-right {
 				@media screen and (max-width:$mobile-small) {
-					margin-left: auto;
+					margin-left: 0;
+					margin-top: 10px;
 				}
 				@media screen and (max-width:$small-x) {
 					margin-left: 0;
@@ -284,6 +285,9 @@
 				}
 			}
 			.name-of-heading {
+				@media screen and (max-width: $mobile-small) {
+					width: 100%;
+				}
 				img {
 					width:38px;
 					@media screen and (max-width: $large-m) {

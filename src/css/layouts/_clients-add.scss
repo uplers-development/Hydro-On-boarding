@@ -732,15 +732,83 @@
 					flex-wrap: wrap;
 					align-items: center;
 					margin-bottom: 15px;
-
-					input,
-					select {
+					.input-box {
 						width: 481px;
-						border: 1px solid $dim-gray;
-						&:focus {
-							border-color: $sky-blue;
+							input,
+						select {
+							width:100%;
+							border: 1px solid $dim-gray;
+							&:focus {
+								border-color: $sky-blue;
+							}
+						}
+						&.suggestion {
+							position: relative;
+							border: 1px solid $dim-gray;			
+							background-color: $white;
+							.shareall-email {
+								display: inline;
+								width: auto;
+								.emailall {
+									background: $sky-blue;
+									display: inline-block;
+									color: $white ;
+									border-radius: 20px;
+									margin: 3px;
+									font-size: 12px;
+									position: relative;
+									padding: 4px 20px 4px 10px;
+									margin-bottom: 4px;
+									.remove-email {
+										cursor: pointer;
+										position: absolute;
+										top: 3px;
+										right: 5px;
+										height: 15px;
+										width: 15px;
+										display: inline-block;
+										border-radius: 50%;
+										background-image: url(#{$imgpath}/close-gray.svg);
+										background-repeat: no-repeat;
+										background-position: 50%;
+									}
+								}
+							}	
+							input[type="text"] {
+								width: 200px;
+								display: inline-block;
+								border: none;
+								vertical-align: middle;
+								background-color: transparent;
+							}
+							.search-detail {
+								padding-left: 0;
+								margin: 0;
+								position: absolute;
+								top: 36px;
+								border-top: 0;
+								background-color: $white;
+								width: calc(100% + 2px);
+								left: -1px;
+								border: 1px solid $dim-gray;
+								z-index: 1;
+								li {
+									a {
+										text-decoration: none;
+										font-size: 14px;
+										line-height: 22px;
+										padding: 8px 12px;
+										width: 100%;
+										display: block;
+										font-family: $gibson;
+										font-weight: $font-normal;
+										color: $panton-gray;
+									}
+								}
+							}
 						}
 					}
+					
 					.empty-field {
 						width: 481px;
 						margin: 2px 0 0 auto;

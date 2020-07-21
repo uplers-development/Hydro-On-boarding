@@ -31,6 +31,7 @@ class Announcements extends React.Component {
 			updatedRepclientId:null,
 			viewpagecalled:false,
 			noDataforTable:false,
+			summernoteData:null
 		}
 		this.filtereddata=this.filtereddata.bind(this);
 		this.returnSummerNoteData=this.returnSummerNoteData.bind(this);
@@ -64,6 +65,7 @@ class Announcements extends React.Component {
 
 	returnSummerNoteData=(returnHtml)=>{
 		console.log(returnHtml);
+		this.setState({summernoteData:returnHtml})
 	}
 
 	getSearchedItems =(getSearchedItem) =>{
@@ -161,7 +163,7 @@ class Announcements extends React.Component {
 					                        <Repannouncementmobile checkFiltereddata={this.filtereddata}/>
 					                     </div>
 					                     <Repannouncementsfilter checkFiltereddata={this.filtereddata}/>
-					                     <Repclienttabledata announcementPublish={this.state.announcement} clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete} noDatacall={this.state.noDataforTable}/>
+					                     <Repclienttabledata announcementPublish={this.state.announcement} clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete} noDatacall={this.state.noDataforTable}  summernoteData={this.state.summernoteData} historyPush={this.props} />
 					                  </div>
 					               </div>
 					            </div>

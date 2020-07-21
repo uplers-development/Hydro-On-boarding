@@ -4,8 +4,8 @@ import ReactHtmlParser from 'react-html-parser';
 import Apiurl,{site_url} from '../../Apiurl'; 
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState,ContentState,convertFromHTML,CompositeDecorator,convertToRaw,getDefaultKeyBinding, } from 'draft-js';
-/*import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';*/
+import draftToHtml from 'draftjs-to-html';
+/*import htmlToDraft from 'html-to-draftjs';*/
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';	
 
 
@@ -21,8 +21,8 @@ class Repannouncementadd extends React.Component {
 	    this.setState({
 	      editorState,
 	    });
-
-//	   this.props.getsummernote(draftToHtml(convertToRaw(event.getCurrentContent())));
+	
+   this.props.getsummernote(draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())));
   }
 
 	selectannouncement=(e,getannouncementid,value)=>{

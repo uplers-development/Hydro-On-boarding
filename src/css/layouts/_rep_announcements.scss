@@ -90,19 +90,26 @@
 							line-height: 22px;
 						}
 					}
-					img {
+					img, svg {
 						width: 28px;
 						@media screen and (max-width: $mobile-small) {
 							width: 24px;
 						}
 					}
+				}
 					&.active {
-							background-color: $sky-blue;
+						background-color: $sky-blue;
+						a {
 							span {
 								color: $white;
 							}
+							svg {
+								.shp0 {
+									fill: $white;
+								}
+							}
+						}
 					}
-				}
 			}
 		}
 	}

@@ -93,7 +93,7 @@ class Repclienttabledata extends React.Component{
 		e.preventDefault();
 		let singlecheckedArray=[];
 		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
-				singlecheckedArray.push(item.value);
+				singlecheckedArray.push({"target_id":item.value});
 		});
 
 		console.log(singlecheckedArray);
@@ -101,10 +101,10 @@ class Repclienttabledata extends React.Component{
 				    "title":[{"value":document.querySelector("#Title").value}],
 			        "body":[{"value":document.querySelector("span[data-text=true]").textContent}],
 			        "type":[{"target_id":"article"}],
-			        "field_news_feed_button":[{"uri": "external:"+document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
+			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
 			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
 			        //"field_image":[{"target_id":fid of }],
-			        "field_client":[{"target_id":singlecheckedArray}]
+			        "field_client":singlecheckedArray
 			}
 			console.log(options);
 			fetch(`https://staging.project-progress.net/projects/hydro/node?_format=json`,{

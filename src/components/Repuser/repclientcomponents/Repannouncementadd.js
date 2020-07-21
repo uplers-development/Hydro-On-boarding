@@ -25,6 +25,8 @@ class Repannouncementadd extends React.Component {
 		e.preventDefault();
 		document.querySelectorAll(".announcment-type").forEach((item,index)=>{
 			item.classList.remove("active");
+			item.parentNode.classList.remove("active");
+			document.querySelectorAll(".announcment-type")[value].parentNode.classList.add("active");
 			document.querySelectorAll(".announcment-type")[value].classList.add("active");
 		});
 	}

@@ -610,7 +610,11 @@ nav {
 							}
 						}
 					}
-
+					svg {
+							.shp0 {
+								fill: $white;
+						}
+					}
 					&:hover {
 						span {
 							color: $white;

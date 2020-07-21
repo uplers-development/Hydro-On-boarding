@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
 import {RepLogoutPopup} from'../../constants/RepConstants';
+import {ValidationMsg} from'../../constants/validationmsg';
 
 class Repclienttabledata extends React.Component{
 	constructor(props){
@@ -91,15 +92,17 @@ class Repclienttabledata extends React.Component{
 
 	submitAnnoucement=(e)=>{
 		e.preventDefault();
+		console.log(this.props.summernoteData);
 		let singlecheckedArray=[];
 		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
 				singlecheckedArray.push({"target_id":item.value});
 		});
 
 		console.log(singlecheckedArray);
+		if(this.props.summernoteData!==null){
 			let options={
 				    "title":[{"value":document.querySelector("#Title").value}],
-			        "body":[{"value":document.querySelector("span[data-text=true]").textContent}],
+			        "body":[{"value":this.props.summernoteData}],
 			        "type":[{"target_id":"article"}],
 			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
 			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
@@ -118,8 +121,13 @@ class Repclienttabledata extends React.Component{
 		            	return res.json();
 		            }).then(data=>{
 		            	console.log(data);
-		            	//this.setState({opensubmissionpopup:true})
+		            	//if(data.length){
+		            		this.setState({opensubmissionpopup:true,formempty:false})
+		            	//}
 		            })
+		    }else{
+		    	this.setState({formempty:true})
+		    }
 		}
 
 
@@ -204,7 +212,10 @@ class Repclienttabledata extends React.Component{
 						    {this.state.opensubmissionpopup ? 
 											<div id="modal" className="modal-container">
 												<div className="modal d-flex flex-wrap align-center justify-center">
-													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false})})}
+													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
+														this.props.historyPush.history.push("/RepDashboard");
+
+													})}
 													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
 													
 												<div>
@@ -222,6 +233,15 @@ class Repclienttabledata extends React.Component{
 									<button className="btn common-btn-blue" onClick={this.submitAnnoucement}><span>Publish announcement</span></button>	
 								</div>
 						: ''}
+
+						{this.state.formempty ? 
+											<>
+												{ValidationMsg.common.default.fieldsEmptyAnnoucementform}
+											</>
+											:
+											''
+										}
+
 			</div>
 		);
 	}

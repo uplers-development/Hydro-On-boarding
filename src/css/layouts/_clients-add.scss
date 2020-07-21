@@ -793,6 +793,22 @@
 						}
 					}
 					.upload-btn-wrapper {
+						input[type='file'] {
+							&:hover {
+								+ .btn {
+									&:after {
+										@media screen and (max-width:$mobile-small) {
+											transform: translateY(-85px);
+    										-webkit-transform: translateY(-85px);
+										}
+										@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+											transform: translateY(-85px);
+    										-webkit-transform: translateY(-85px);
+										}
+									}
+								}		
+							}
+						}
 						.btn {
 							min-width: 216px;
 							@media screen and (max-width:$mobile-small) {
@@ -827,7 +843,12 @@
 	.btn-block {
 		&.add-client {
 			padding-top: 35px;
-
+			@media screen and (max-width:$mobile-small) {
+				padding-left: 23px;
+			}
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				padding-left: 23px;
+			}
 			.btn {
 				min-width: 214px;
 				padding: 8px 10px 4px;

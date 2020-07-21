@@ -74,7 +74,7 @@ class Repannouncementadd extends React.Component {
 								  editorClassName="editorClassName"
 								  onEditorStateChange={this.onEditorStateChange}
 								  toolbar={{
-								  	options: ['inline', 'list','colorPicker', 'link', 'emoji'],
+								  	options: ['inline', 'list','colorPicker', 'link', 'emoji','image'],
     								inline: { inDropdown: true },
     								list: { inDropdown: true },
     								textAlign: { inDropdown: true },

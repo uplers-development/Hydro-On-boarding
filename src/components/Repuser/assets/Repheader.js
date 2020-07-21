@@ -29,12 +29,21 @@ const Logout=()=>{
 	localStorage.clear();
 }
 
-const Repheader = (props) => {
+class Repheader extends React.Component{
+   constructor(props){
+      super(props);
+      this.state={
+         Repclient:false,
+      }
+   }
+
+
+render(){
 
   return (
       <div className="top-heading-continer d-flex flex-wrap align-center" >
             <div className="name-of-heading d-flex flex-wrap">
-               {props.menulisting.map((item,index)=>
+               {this.props.menulisting.map((item,index)=>
                   {if(window.location.pathname===item.field_react_route){
                   return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
                   <h1>{item.title}</h1></React.Fragment>)
@@ -46,10 +55,10 @@ const Repheader = (props) => {
             </div>
             <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
-                  {props.repuserinfo!==null ? 
+                  {this.props.repuserinfo!==null ? 
                      <>
-                        <img src={props.repuserinfo.user_picture[0]!=='' ? props.repuserinfo.user_picture[0].url : require("../../../images/john-smith.png")} alt="Profile image" />
-                        <h2>{props.repuserinfo.field_first_name[0].value+" "+props.repuserinfo.field_last_name[0].value}</h2>
+                        <img src={this.props.repuserinfo.user_picture[0]!=='' ? this.props.repuserinfo.user_picture[0].url : require("../../../images/john-smith.png")} alt="Profile image" />
+                        <h2>{this.props.repuserinfo.field_first_name[0].value+" "+this.props.repuserinfo.field_last_name[0].value}</h2>
                      </>
                      :
                      <>
@@ -60,13 +69,23 @@ const Repheader = (props) => {
                </div>
                <div className="drop-down-menu">
                   <ul>
-                     <li><Link to={"/Profile"} title="Profile">Profile</Link></li>
+                     <li><Link to={""} onClick={((e)=>{
+                                                e.preventDefault();
+                                                this.props.historyPush.history.push({
+                                                      pathname:'/Profile',
+                                                      state:{
+                                                         Repclient:true,
+                                                      }
+                                                })                           
+                                          })}  
+                     title="Profile">Profile</Link></li>
                      <li><Link to={"/Login"} onClick={Logout} title="Sign out">Sign out</Link></li>
                   </ul>
                </div>
             </div>
    </div>
   )
+ }
 }
 
 export default Repheader;

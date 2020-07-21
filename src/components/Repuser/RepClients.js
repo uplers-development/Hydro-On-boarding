@@ -23,16 +23,17 @@ class RepClients extends React.Component {
 		this.state={
 			menulisting:[],
 			repinfo:null,
-			viewpagecalled:false,
+			viewpagecall:this.props.location.state!==undefined ? this.props.location.state.contractsubmission:false,
 			searchedItem:[],
 			searchedclientresult:[],
 			repclientdata:[],
-			updatedRepclientId:null,
+			updatedRepclientId:this.props.location.state!==undefined ? this.props.location.state.targetSendid : null,
 			loader:true,
 		}
 		this.getSearchedItems = this.getSearchedItems.bind(this);
 		this.getSortedItem = this.getSortedItem.bind(this);
-	}
+		console.log(this.state.viewpagecall);
+	}	
 
 	componentWillMount(){
 		if(localStorage.getItem("access-token")!==null){
@@ -116,7 +117,7 @@ class RepClients extends React.Component {
 			         <Repnav repmenulisting={this.state.menulisting}/>
 			         <div className="d-flex flex-wrap right-content-part">
 			            <div className="top-heading">
-			               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+			               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo} historyPush={this.props}/>
 			            </div>
 			            {!this.state.loader ?
 			            <>

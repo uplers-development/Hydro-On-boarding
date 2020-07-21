@@ -15,19 +15,36 @@ class Repclientbulkaction extends React.Component {
 		this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
 	}
 
+
 	selectAllcheckbox=(e)=>{
-		e.preventDefault();
-		let collectId=[]
-		document.querySelectorAll(".clientchecked").forEach((item,index)=>{
-			if(item.checked===true){
-				collectId.push(item.value)
-			}
-		})
-		console.log(collectId);
-		this.setState({bulkIds:collectId});
+			e.preventDefault();
+			let collectId=[]
+			
+			if(document.querySelector(".parentcheck:checked")===false){
+				document.querySelectorAll(".clientchecked").forEach((item,index)=>{
+					if(item.checked===true){
+						collectId.push(item.value)
+					}
+				})
+				console.log(collectId);
+				this.setState({bulkIds:collectId});
+		}else{
+			 var ele=document.querySelector(".parentcheck");
+			 ele.checked=true;
+	         document.querySelectorAll(".clientchecked").forEach((item,index)=>{
+					item.checked=true;
+					if(item.checked===true){
+						collectId.push(item.value)
+					}
+				})
+				this.setState({bulkIds:collectId});
+		      }
 	}
 
+
 	bulkDelete=(e)=>{
+	
+		console.log(this.state.bulkIds);
 		let clientbulkid={
 				user_ids:this.state.bulkIds.toString()
 			}
@@ -78,7 +95,13 @@ render(){
 								<p>Are you sure you want to delete records?</p>
 
 							<div className="btn-blok">
-								<button onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})} className="btn common-btn-blue"><span>CANCEL</span></button>
+								<button onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})
+									document.querySelectorAll(".clientchecked").forEach((item,index)=>{
+										document.querySelector(".parentcheck").checked=false;
+										item.checked=false;
+									})
+
+							})} className="btn common-btn-blue"><span>CANCEL</span></button>
 								<button className="btn common-btn-blue" onClick={this.bulkDelete}><span>YES</span></button>	
 							</div>
 							

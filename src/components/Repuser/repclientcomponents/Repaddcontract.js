@@ -197,12 +197,21 @@ class Repaddcontract extends React.Component{
                      </div>:
                      ""}
                      {this.state.openPopup ? 
-			             <div id="modal" className="modal-container">
-			               <div className="modal d-flex flex-wrap align-center justify-center">
-			                 <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
-			                 className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
-			                 
-			               <div>
+    			             <div id="modal" className="modal-container">
+    			               <div className="modal d-flex flex-wrap align-center justify-center">
+    			                 <Link to={""} onClick={((e)=>{e.preventDefault();
+                            this.setState({openPopup:false});
+                            this.props.historyPush.history.push({
+                                pathname:"/RepClients",
+                                state:{
+                                  contractsubmission:true,
+                                  targetSendid:this.props.senduid
+                                }
+                              })
+                            })}
+    			                 className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+    			                 
+    			               <div>
 			                 <img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
 			                   <h2>Contract added</h2>
 			                   <p>Contract details were submitted successfully</p>

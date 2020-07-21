@@ -153,7 +153,7 @@ class RepClients_add extends React.Component {
          }).then(data=>{
             console.log(data);
             this.setState({openPopup:true});
-            if(document.querySelector("#checkbox5").checked===true){
+            if(document.querySelector("#checkboxmessage").checked===true){
              let notifictionvalue={"user_id":data.uid[0].value} 
              fetch(`${base_url}json-api/usernotification.json`,{
                method:"POST",
@@ -248,15 +248,15 @@ class RepClients_add extends React.Component {
                <Repnav repmenulisting={this.state.menulisting}/>
                <div className="d-flex flex-wrap right-content-part">
                   <div className="top-heading">
-                    <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+                    <Repheader historyPush={this.props} menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
                   </div>
                   {!this.state.calltheRoute ? 
                   <div className="bottom-content-block with-filter">
                      <div className="d-flex flex-wrap clients-add-main">
                         <div className={this.state.sectionCalldiversion}>
                            {/*<Repaddclient/>*/}
-                           {this.state.fromProductSec && <Repaddproduct callforproduct={this.state.fromProductSec} senduid={this.state.getClientuid}/>}
-                    		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec} senduid={this.state.getClientuid} productDataList={this.state.getProductList}/>}
+                           {this.state.fromProductSec && <Repaddproduct callforproduct={this.state.fromProductSec} senduid={this.state.getClientuid} historyPush={this.props}/>}
+                    		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec} senduid={this.state.getClientuid} productDataList={this.state.getProductList} historyPush={this.props}/>}
                         </div>
                      </div>
                   </div>

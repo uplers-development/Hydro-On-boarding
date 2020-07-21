@@ -154,7 +154,7 @@ class RepDashboard extends React.Component {
          <Repnav repmenulisting={this.state.menulisting}/>
          <div className="d-flex flex-wrap right-content-part">
             <div className="top-heading">
-               	<Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+               	<Repheader historyPush={this.props} menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
             </div>
 
             <div className="bottom-content-block">

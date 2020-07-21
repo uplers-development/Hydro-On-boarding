@@ -99,9 +99,9 @@ class Repaddclient extends React.Component{
                            <div className="send-user-notification">
                               <div class="d-flex flex-wrap notification">
                                  <h3>Send User Notifications</h3>
-                                 <div className="checkbox-cust"><input type="checkbox" id="checkbox5"  onBlur={(e)=>
+                                 <div className="checkbox-cust"><input type="checkbox" id="checkboxmessage"  onBlur={(e)=>
                                      hasNull(e.target.value) ? this.setState({checkedState:true}): this.setState({checkedState:false})}/>
-                                    <label for="checkbox5"></label>
+                                    <label for="checkboxmessage"></label>
                                     {this.state.checkedState ? ValidationMsg.common.default.usernotificationcheckbox : ''}
                                  </div>
                               </div>

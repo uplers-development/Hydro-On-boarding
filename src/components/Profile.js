@@ -27,11 +27,13 @@ class Profile extends Component {
 			imageFormateState:false,
 			timeZone:null,
 			newuserPic_id:null,
-			loader:true
+			loader:true,
+			redirectionFordashboard:this.props.location.state!==undefined ? this.props.location.state.Repclient : false, 
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
 		this.timeZoneref=React.createRef();
+		console.log(this.props.location.state);
 	}
 
 	componentDidMount(){
@@ -175,7 +177,7 @@ class Profile extends Component {
 
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
-				<Link className="navbar-logo" to={"/Dashboard"} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
+				<Link className="navbar-logo" to={this.state.redirectionFordashboard ? "/RepDashboard" : "/Dashboard"} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
 					<li><a className="active" href="#" title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>

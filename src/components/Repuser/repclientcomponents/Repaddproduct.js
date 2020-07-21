@@ -144,11 +144,12 @@ class Repaddproduct extends React.Component{
    addProduct=(e)=>{
       e.preventDefault();
       document.querySelectorAll(".list-box form input").forEach((item,index)=>{
-        console.log(item.value!=='' ? item : '');
+        //console.log(item.value!=='' ? item : '');
         if(item.value!==''){
           //console.log(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0]);
+
           if(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0].checked===false){
-            console.log(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0]);
+            alert();
               this.setState({checkboxnotchecked:true});
           }
 
@@ -190,10 +191,10 @@ class Repaddproduct extends React.Component{
                     return res.json()
                   }).then(data=>{
                       console.log(data);
-                      this.setState({openPopup:true,checkboxnotchecked:true,fieldsNotvalid:false});
+                      this.setState({openPopup:true,checkboxnotchecked:false,fieldsNotvalid:false});
                   });
                }else{
-                    this.setState({fieldsNotvalid:true,checkboxnotchecked:false});
+                    this.setState({fieldsNotvalid:true,checkboxnotchecked:true});
                      //alert("please check the fields mighht be missing somewhere!!");
                    }
                });
@@ -300,7 +301,16 @@ class Repaddproduct extends React.Component{
             {this.state.openPopup ? 
              <div id="modal" className="modal-container">
                <div className="modal d-flex flex-wrap align-center justify-center">
-                 <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+                 <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})
+                 this.props.historyPush.history.push({
+                                pathname:"/RepClients",
+                                state:{
+                                  contractsubmission:true,
+                                  targetSendid:this.props.senduid
+                                }
+                              })
+
+               })}
                  className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
                  
                <div>

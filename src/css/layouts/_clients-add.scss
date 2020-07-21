@@ -59,9 +59,8 @@
 						width: 481px;
 						border: 1px solid $dim-gray;
 						background-color: $white;
-
-						@media screen and (max-width:$mobile-small) {
-							width: 100%;
+						&:focus {
+							border-color: $sky-blue;
 						}
 					}
 
@@ -548,7 +547,9 @@
 							select {
 								width: 242px;
 								border: 1px solid $dim-gray;
-
+								&:focus {
+									border-color: $sky-blue;
+								}	
 								@media screen and (max-width:$mobile-small) {
 									width: 100%;
 								}
@@ -736,6 +737,9 @@
 					select {
 						width: 481px;
 						border: 1px solid $dim-gray;
+						&:focus {
+							border-color: $sky-blue;
+						}
 					}
 					.empty-field {
 						width: 481px;

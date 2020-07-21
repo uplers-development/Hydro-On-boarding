@@ -1,9 +1,14 @@
 .admin-resources-main {
 	.fileter-block {
 		padding-right: 32px;
-		@media screen and (max-width: $large-m) {
+		
+		@media screen and (max-width:$large-m) {
 			padding-right: 20px;
 		}
+		@media screen and (max-width:$ipad-portrait) {
+			padding-right: 0;
+		}
+		
 		.select-box {
 			max-width: 282px;
 
@@ -13,6 +18,8 @@
 
 			> span {
 				padding: 7px 25px;
+				font-size: 18px;
+				line-height: 22px;
 
 				@media screen and (max-width: $large-m) {
 					padding: 7px 15px;
@@ -31,7 +38,13 @@
 				}
 			}
 		}
+
 		.search-sort-block {
+			@media screen and (max-width: $ipad-portrait) {
+				margin-top: 5px;
+				margin-left: auto;
+				margin-right: 0;
+			}
 			.common-btn-blue {
 				min-width: 127px;
 				margin-bottom: 0;
@@ -42,16 +55,20 @@
 					line-height: 28px;
 				}
 			}
+
 			@media screen and (max-width:$mobile-small) {
 				margin-left: auto;
 			}
 		}
+
 		@media screen and (max-width:$mobile-small) {
-			padding-bottom: 15px; 
+			padding-bottom: 15px;
 		}
 	}
+
 	.resources-table {
 		padding-top: 30px;
+
 		.table-responsive {
 			table {
 				thead {
@@ -84,6 +101,9 @@
 					tr {
 						td {
 							vertical-align: middle;
+							font-size: 16px;
+							line-height: 20px;
+							color: $light-black;
 
 							.name-edit {
 								width: calc(100% - 18px);
@@ -93,6 +113,13 @@
 									h3 {
 										display: inline-block;
 										margin-bottom: 0;
+										font-size: 16px;
+										line-height: 20px;
+									}
+
+									.action {
+										font-size: 16px;
+										line-height: 20px;
 									}
 
 									> a {
@@ -100,8 +127,8 @@
 										text-decoration: none;
 										position: relative;
 										color: $black;
-										font-size: 18px;
-										line-height: 22px;
+										font-size: 16px;
+										line-height: 20px;
 										font-family: $arial;
 										font-weight: $font-normal;
 										padding-left: 15px;
@@ -134,18 +161,20 @@
 								}
 							}
 						}
+
 						&:nth-child(even) {
 							td {
 								&:last-child {
-									border-right: 5px solid $dark-sky-blue; 
+									border-right: 5px solid $dark-sky-blue;
 								}
 							}
 						}
 					}
-					
+
 				}
 			}
 		}
+
 		@media screen and (max-width:$mobile-small) {
 			padding: 0 23px;
 		}

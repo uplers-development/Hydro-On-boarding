@@ -154,11 +154,15 @@ class Repaddcontract extends React.Component{
 		                  <form  onSubmit={(e)=>e.preventDefault()}>
 		                     <div className="form-group">
 		                        <label>Title</label>
+<div className="input-box">
 		                        <input type="text" name="Title" placeholder="Title" id="title" />
+									</div>
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Description</label>
+								<div className="input-box">
 		                        <input type="text" name="description" placeholder="Description" id="description" />
+									</div>
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Product tags</label>
@@ -168,11 +172,24 @@ class Repaddcontract extends React.Component{
                                                               handleAddition={this.handleAddition}
                                                               handleDrag={this.handleDrag}
                                                               delimiters={delimiters} />*/}
+								<div className="input-box suggestion">
+									<div className="shareall-email">
+									<span className="emailall"><span className="remove-email"></span>es@gmail.com</span>
+										</div>
 		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags"/>
+								<ul className="search-detail">
+									<li>
+									<a href="#">Test</a> 
+									</li>
+								</ul>	
+								
+								</div>	
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Sharepoint URL</label>
+								<div className="input-box">
 		                        <input type="text" name="sharepoint-url"  placeholder="Sharepoint URL" id="sharepoint-url"/>
+									</div>
 		                     </div>
 		                    <div className="btn-block">
                                         <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>

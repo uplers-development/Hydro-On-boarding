@@ -296,7 +296,6 @@ ul {
 			-webkit-transform: translateY(-75px);
 		}
 	}
-
 	&:hover {
 		background-color: $white;
 		border-color: $white;
@@ -314,21 +313,18 @@ button.btn {
 	-moz-appearance: none;
 	appearance: none;
 }
-
 /*For upload custom button*/
 .upload-btn-wrapper {
 	position: relative;
 	overflow: hidden;
 	display: inline-block;
 	cursor: pointer;
-
 	.btn {
 		color: $white;
 		cursor: pointer;
 		min-width: 138px;
 		padding: 6px 10px 4px;
 		margin-bottom: 0;
-
 		span {
 			font-size: 16px;
 			color: $white;
@@ -337,19 +333,16 @@ button.btn {
 			font-weight: $font-semi-bold;
 			position: relative;
 			z-index: 1;
-
 			@media screen and (max-width:$mobile-small) {
 				font-size: 12px;
 				line-height: 29px;
 			}
 		}
-
 		@media screen and (max-width:$mobile-small) {
 			padding: 4px 10px 2px;
 			min-width: 101px;
 		}
 	}
-
 	input[type=file] {
 		font-size: 100px;
 		position: absolute;
@@ -374,7 +367,6 @@ button.btn {
 
 /*Common form field css*/
 form {
-
 	label {
 		display: block;
 		width: 100%;
@@ -385,7 +377,6 @@ form {
 		font-weight: $font-normal;
 		color: $black;
 	}
-
 	input[type="email"],
 	input[type="password"],
 	input[type="text"],
@@ -405,7 +396,6 @@ form {
 			border-color: $sky-blue;
 			outline: none;
 		}
-
 		@include placeholder {
 			line-height: 20px;
 			font-size: 16px;
@@ -416,7 +406,6 @@ form {
 			position: relative;
 		}
 	}
-
 	select {
 		font-size: 16px;
 		padding: 8px 12px;
@@ -435,12 +424,10 @@ form {
 		@media screen and (max-width: $mobile-small) {
 			background-position: calc(100% - 10px) center;
 		}
-
-		&:focus,
 		&:focus {
 			outline: none;
+			border-color: $sky-blue; 
 		}
-
 		option {
 			border: 0;
 			background-color: $white;
@@ -450,7 +437,6 @@ form {
 			font-size: 16px;
 			padding: 8px 12px;
 		}
-
 		&::-ms-expand {
 			display: none;
 		}
@@ -993,9 +979,14 @@ nav {
 			svg {
 				width: 40px;
 				margin-right: 10px;
-
-				@media screen and (max-width:$mobile-small) {
+				@media screen and (max-width:$large-m) {
 					width: 30px;
+				}
+				@media screen and (max-width:$ipad-portrait) {
+					width: 26px;
+				}
+				@media screen and (max-width:$mobile-small) {
+					width: 20px;
 				}
 
 				.shp0 {

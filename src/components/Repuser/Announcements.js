@@ -102,12 +102,12 @@ class Announcements extends React.Component {
 
 	 GetProfile=()=>{
 	      try{
-	         fetch(Apiurl.GetProfile.url,{
+	         fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
 	               headers: {
 	                     "Content-Type" : "application/json",
 	                     "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                   },
-	                   method:Apiurl.GetProfile.method,
+	                   method:"GET",
 	         }).then(res=>{
 	            return res.json();
 	         }).then(data=>{

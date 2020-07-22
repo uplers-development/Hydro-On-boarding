@@ -102,7 +102,8 @@ class Repclienttabledata extends React.Component{
 		if(this.props.summernoteData!==null){
 			let options={
 				    "title":[{"value":document.querySelector("#Title").value}],
-			        "body":[{"value":this.props.summernoteData}],
+			        "body":[{"value":this.props.summernoteData,
+			        		 "format": "basic_html"}],
 			        "type":[{"target_id":"article"}],
 			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
 			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],

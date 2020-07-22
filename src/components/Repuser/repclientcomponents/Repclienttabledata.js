@@ -161,7 +161,7 @@ class Repclienttabledata extends React.Component{
 							                  </div>
 							                  <div className="name-edit">
 							                     <div className="img-c">
-							                        <img src={item.user_picture!=='' ? site_url+item.user_picture : require("../../../images/john-smith.png")} alt="Profile image" />	 
+							                        <img src={item.user_picture!=='' ? site_url+item.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Profile image" />	 
 							                     </div>
 							                     <div className="right-detail">
 							                        <h3>{item.name}</h3>

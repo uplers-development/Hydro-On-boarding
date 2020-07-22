@@ -109,14 +109,29 @@
 						font-weight: $font-normal;
 				}
 			}
-
-			img {
+			.prof-user-img {
 				width: 123px;
 				height: 123px;
 				border-radius: 50%;
-				@media screen and (max-width:$mobile-small) {
-					width: 96px;
-					height: 96px;
+				position: relative;
+				img {
+					width: 123px;
+					height: 123px;
+					position: absolute;
+					height: 100%;
+					width: 100%;
+					left: 50%;
+					top: 50%;
+					transform: translate(-50%,-50%);
+					-webkit-transform: translate(-50%,-50%);
+					border-radius: 50%;
+					@media screen and (max-width:$mobile-small) {
+						width: 96px;
+						height: 96px;
+					}
+				}
+				.loader {
+					position: absolute;
 				}
 			}
 			&:after

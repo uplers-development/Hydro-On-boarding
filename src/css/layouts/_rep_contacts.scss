@@ -219,6 +219,16 @@
 		}
 	}
 
+	.no-client-details {
+		display: inherit;
+		align-items: center;
+		padding-left: 15px;
+		font-size: 18px;
+		color: $light-black;
+		font-family: $gibson;
+		font-weight: $font-semi-bold;
+	}
+
 	.person-right {
 		margin-top: -6px;
 		@media screen and (max-width:$large-mx) {

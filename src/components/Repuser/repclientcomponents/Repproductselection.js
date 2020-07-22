@@ -32,7 +32,9 @@ class Repproductselection extends React.Component{
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
 			    method:"GET",
-  			}).then(res=>res.json()).then(data=>this.setState({porductDetails:data,loader:false}));
+  			}).then(res=>res.json()).then(data=>{
+  				this.setState({porductDetails:data,loader:false})
+  			});
 		}
 
 

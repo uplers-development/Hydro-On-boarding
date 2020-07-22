@@ -33,6 +33,8 @@ class RepClients_add extends React.Component {
       role:false,
       contact:false,
       password:false,
+      contractProductAdmitted:false,
+      getProductListforcontract:[],
 			fromProductSec:this.props.location.state!==undefined ? this.props.location.state.productPage :'',
 			fromContractSec:this.props.location.state!==undefined ? this.props.location.state.contractPage : '',
       sectionCalldiversion:null,
@@ -42,6 +44,7 @@ class RepClients_add extends React.Component {
 		}
     console.log(this.props.repclientuid)
     this.submitClientDetails=this.submitClientDetails.bind(this);
+    this.getProductsforContract=this.getProductsforContract.bind(this);
 	}
 
    componentWillMount(){
@@ -62,7 +65,11 @@ class RepClients_add extends React.Component {
       
    }
 
- 
+  
+   getProductsforContract=(getvalid,getcontractproductlist)=>{
+    console.log(getcontractproductlist);
+    this.setState({contractProductAdmitted:getvalid,getProductListforcontract:getcontractproductlist})
+   }
 
    get_product_to_add=(get_product_value)=>{
     console.log(get_product_value);
@@ -167,7 +174,10 @@ class RepClients_add extends React.Component {
                }).then(data=>{console.log(data)});
             }
 
-
+             let productTagsId=[]
+                document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+                    productTagsId.push({"target_id":item.getAttribute("nid")});
+                })
              let contractoptions={
                 "title":[{"value":document.querySelector("#title").value}],
                 "type":[{"target_id":"contracts"}],
@@ -175,7 +185,7 @@ class RepClients_add extends React.Component {
                 "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
                 //"field_contract_expiry":[{"value":"2020-07-02"}],
                 "field_sub_title":[{"value":document.querySelector("#description").value}],
-                "field_contract_for_products":[{"target_id":"24"},{"target_id":"34"}],/*PRoduct tags Id*/
+                "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
                 "field_contract_for_client":[{"target_id":data.uid[0].value}]
             }       
               productList = []; 
@@ -270,8 +280,8 @@ class RepClients_add extends React.Component {
                         <div className="clients-add">
                            <Repaddclient getClienttoadd={this.get_client_to_be_add} firstname={
                             this.state.firstname} company={this.state.company} lastname={this.state.surname} email={this.state.email} role={this.state.role} contact={this.state.contact} password={this.state.password} />
-                           <Repaddproduct getproducttoadd={this.get_product_to_add}/>
-                           <Repaddcontract getcontracttoadd={this.get_contract_to_be_add}/>
+                           <Repaddproduct getproducttoadd={this.get_product_to_add} getProductList={this.getProductsforContract}/>
+                           {this.state.contractProductAdmitted &&  <Repaddcontract getcontracttoadd={this.get_contract_to_be_add} productDataList={this.state.getProductListforcontract} />}
                         </div>
                         <div className="btn-block add-client">
                           <div className="upload-btn-wrapper">

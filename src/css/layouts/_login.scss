@@ -194,7 +194,7 @@
 				text-decoration: none;
 				outline: none;
 
-				&:hover {
+				&:hover, &:focus {
 					color: $cobalt-blue;
 				}
 			}

@@ -62,14 +62,6 @@ ul {
 	}
 }
 
-.common-btn-blue:focus {
-	outline: none;
-}
-
-.common-btn-blue:hover {
-	background-color: $cobalt-blue;
-}
-
 .common-btn-blue {
 	text-decoration: none;
 	background-color: $sky-blue;
@@ -138,7 +130,7 @@ ul {
 		min-width: 130px;
 	}
 
-	&:hover {
+	&:hover, &:focus {
 		&:after {
 			transform: translateY(-75px);
 			-webkit-transform: translateY(-75px);
@@ -151,6 +143,11 @@ ul {
 			background-size: contain;
 		}
 	}
+	&:hover, &:focus {
+		background-color: $cobalt-blue;
+		outline: none;
+	}
+	
 }
 
 /*White Button*/
@@ -395,6 +392,7 @@ form {
 		&:focus {
 			border-color: $sky-blue;
 			outline: none;
+			
 		}
 		@include placeholder {
 			line-height: 20px;
@@ -2114,7 +2112,7 @@ a {
 	transform: translate(-50%, -50%);
 	-webkit-transform: translate(-50%, -50%);
 	position: fixed;
-	z-index: 11;
+	z-index: 111;
 
 	&:before {
 		content: "";

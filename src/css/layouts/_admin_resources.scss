@@ -164,8 +164,20 @@
 
 						&:nth-child(even) {
 							td {
+								position:relative;
 								&:last-child {
-									border-right: 5px solid $dark-sky-blue;
+									&:after {
+										content: "";
+										display: inline-block;
+										width: 5px;
+										height: 100%;
+										position: absolute;
+										right: 0;
+										top: 50%;
+										background-color: $dark-sky-blue;
+										transform: translateY(-50%);
+										-webkit-transform: translateY(-50%);
+									}
 								}
 							}
 						}

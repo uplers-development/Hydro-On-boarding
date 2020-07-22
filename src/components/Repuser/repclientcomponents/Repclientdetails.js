@@ -26,7 +26,14 @@ class Repclientdetails extends React.Component{
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
 			    method:"GET",
-  			}).then(res=>res.json()).then(data=>this.setState({clientDetails:data[0],loader:false}));
+  			}).then(res=>res.json()).then(data=>{
+  					console.log(data);
+  					if(data.length>0){
+  						this.setState({clientDetails:data[0],loader:false})
+  					}else{  	
+  						this.setState({loader:false,clientDetails:''})
+  					}
+  			});
 		}
 
 	render(){
@@ -35,44 +42,62 @@ class Repclientdetails extends React.Component{
 			  {!this.state.loader ? 
 			   <>
 			   <div className="person-img">
-			      <img src={this.state.clientDetails.user_picture!=='' ? site_url+this.state.clientDetails.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Client image" />
+			      <img src={this.state.clientDetails!=='' &&this.state.clientDetails.user_picture!==''  ? site_url+this.state.clientDetails.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Client image" />
 			   </div>
-			   <div className="person-right">
-			      <div className="person-title">
-			         <ul className="desktop-hide d-flex">
-			            <li><a href="https://twitter.com" title="Follow us">
-			               <img src={require("../../../images/ic_twitter_blue.svg")} alt="Twitter" />
-			               </a>
-			            </li>
-			            <li><a href="https://www.linkedin.com/" title="Connect">
-			               <img src={require("../../../images/ic_linkedin.svg")} alt="Linkedin" />
-			               </a>
-			            </li>
-			         </ul>
-			         <h3>{this.state.clientDetails.field_first_name} {this.state.clientDetails.field_last_name}</h3>
-			         <h4>{this.state.clientDetails.field_job_title!=='' ? this.state.clientDetails.field_job_title : 'Job title'}</h4>
-			      </div>
-			      <div className="person-details">
-			         <div className="bottom-details d-flex flex-wrap">
-			            <div className="left d-flex flex-wrap">
-			               <img src={require("../../../images/ic_location_marker.svg")} alt="Map marker"/>
-			               <span>{this.state.clientDetails.field_location}</span>
-			            </div>
-			            <div className="right">
-			               <ul>
-			                  <li><Link to={`tel:${this.state.clientDetails.field_contact_number}`} title={this.state.clientDetails.field_contact_number}>
-			                     <img src={require("../../../images/ic_telephone_blue.svg")} alt="Telephone marker"/>
-			                     <span><strong>Tel:</strong> {this.state.clientDetails.field_contact_number}</span></Link>
-			                  </li>
-			                  <li><Link to={`mailto:${this.state.clientDetails.mail}`} title={this.state.clientDetails.mail}>
-			                     <img src={require("../../../images/ic_mail_box_blue.svg")} alt="Mailbox marker"/>
-			                     <span><strong>Email:</strong>{this.state.clientDetails.mail}</span></Link>
-			                  </li>
-			               </ul>
-			            </div>
-			         </div>
-			      </div>
-			   </div>
+			   {this.state.clientDetails!=='' ? 
+				   <div className="person-right">
+				      <div className="person-title">
+				         <ul className="desktop-hide d-flex">
+				            <li><a href="https://twitter.com" title="Follow us">
+				               <img src={require("../../../images/ic_twitter_blue.svg")} alt="Twitter" />
+				               </a>
+				            </li>
+				            <li><a href="https://www.linkedin.com/" title="Connect">
+				               <img src={require("../../../images/ic_linkedin.svg")} alt="Linkedin" />
+				               </a>
+				            </li>
+				         </ul>
+				         {this.state.clientDetails.field_first_name!=='' || this.state.clientDetails.field_last_nam!=='' ?
+				        		 <>
+				        		 <h3>{this.state.clientDetails.field_first_name} {this.state.clientDetails.field_last_name}</h3>
+				         		<h4>{this.state.clientDetails.field_job_title!=='' ? this.state.clientDetails.field_job_title : 'Job title'}</h4>
+				         		</>
+				         		:''
+				         	}
+				      </div>
+				      <div className="person-details">
+				         <div className="bottom-details d-flex flex-wrap">
+
+				            <div className="left d-flex flex-wrap">
+				            {this.state.clientDetails.field_location!=='' ?
+				               <>
+				               <img src={require("../../../images/ic_location_marker.svg")} alt="Map marker"/>
+				               <span>{this.state.clientDetails.field_location}</span></>:''}
+				            </div>
+				            <div className="right">
+				               <ul>
+				               {this.state.clientDetails.field_contact_number!=='' ? 
+				                  <li><Link to={`tel:${this.state.clientDetails.field_contact_number}`} title={this.state.clientDetails.field_contact_number}>
+				                     <img src={require("../../../images/ic_telephone_blue.svg")} alt="Telephone marker"/>
+				                     <span><strong>Tel:</strong> {this.state.clientDetails.field_contact_number}</span></Link>
+				                  </li>
+				                  :''}
+				                  {this.state.clientDetails.mail!=='' ? 
+				                  <li><Link to={`mailto:${this.state.clientDetails.mail}`} title={this.state.clientDetails.mail}>
+				                     <img src={require("../../../images/ic_mail_box_blue.svg")} alt="Mailbox marker"/>
+				                     <span><strong>Email:</strong>{this.state.clientDetails.mail}</span></Link>
+				                  </li>:''}
+				               </ul>
+				            </div>
+				         </div>
+				      </div>
+				   </div>
+
+				   :
+				   <>
+				   	<div className='no-client-details'>No client details provided.</div>
+				   </>
+				}
 			   </>:
 			   <>
 					{cosmaticAsset.cosmatic.default.loader}

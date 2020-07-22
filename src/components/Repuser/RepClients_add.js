@@ -266,7 +266,7 @@ class RepClients_add extends React.Component {
                      <div className="d-flex flex-wrap clients-add-main">
                         <div className={this.state.sectionCalldiversion}>
                            {/*<Repaddclient/>*/}
-                           {this.state.fromProductSec && <Repaddproduct callforproduct={this.state.fromProductSec} senduid={this.state.getClientuid} historyPush={this.props}/>}
+                           {this.state.fromProductSec && <Repaddproduct callforproduct={this.state.fromProductSec} senduid={this.state.getClientuid} getProductList={this.getProductsforContract} historyPush={this.props}/>}
                     		   {this.state.fromContractSec && <Repaddcontract checkcontractfrom={this.state.fromContractSec} senduid={this.state.getClientuid} productDataList={this.state.getProductList} historyPush={this.props}/>}
                         </div>
                      </div>

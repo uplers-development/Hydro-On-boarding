@@ -150,7 +150,6 @@ class Repaddproduct extends React.Component{
           //console.log(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0]);
 
           if(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0].checked===false){
-            alert();
               this.setState({checkboxnotchecked:true});
           }
 

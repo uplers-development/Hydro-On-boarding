@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Apiurl from './Apiurl'; 
+import Apiurl,{site_url} from './Apiurl'; 
 import{hasNull,isRequired} from './validation';
 import {ValidationMsg} from'./constants/validationmsg';
 import ReactHtmlParser from 'react-html-parser';
@@ -28,6 +28,7 @@ class Profile extends Component {
 			timeZone:null,
 			newuserPic_id:null,
 			loader:true,
+			smallLoader:false,
 			redirectionFordashboard:this.props.location.state!==undefined ? this.props.location.state.Repclient : false, 
 		}
 		this.updateProfile=this.updateProfile.bind(this);
@@ -61,12 +62,12 @@ class Profile extends Component {
 	}
 
 	GetProfile=()=>{
-		fetch(Apiurl.GetProfile.url,{
+		fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.GetProfile.method,
+                method:"GET",
 		}).then(res=>{
 			return res.json();
 		}).then(data=>{
@@ -80,7 +81,7 @@ class Profile extends Component {
 						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
 						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
 						,location:data.field_location.length>0 ?data.field_location[0].value : '',
-						userPicture:data.user_picture.length>0 ? data.user_picture[0] :'',
+						userPicture:data.user_picture.length>0 ? data.user_picture[0].url :'',
 						newuserPic_id:data.user_picture.length>0 ? data.user_picture[0].target_id:'',
 						loader:false
 					})
@@ -138,6 +139,7 @@ class Profile extends Component {
 
 	updateProfilePic=(e)=>{
 		console.log(e.target.value)
+		this.setState({smallLoader:true});
 		var fullPath = e.target.files[0];
 		var exactfile=e.target.value;
 		var filename='';
@@ -166,11 +168,12 @@ class Profile extends Component {
 				fetch("http://staging.project-progress.net/projects/hydro/file/upload/user/user/user_picture?_format=json",requestOptions)
 				.then(res=>{return res.json()})
 				.then(data=>{console.log(data);
-					this.setState({newuserPic_id:data.fid[0]['value']})
+					this.setState({smallLoader:false,newuserPic_id:data.fid[0]['value'],userPicture:site_url+data.uri[0].url})
 					console.log(this.state.newuserPic_id);
+					console.log(this.state.userPicture);
 				})
 	  }else{
-	  	this.setState({imageFormateState:true})	
+	  	this.setState({smallLoader:false,imageFormateState:true})	
 	  }
 	}
 
@@ -246,7 +249,7 @@ class Profile extends Component {
 							<div className="upload-profile-photo">
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
-									<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null)? this.state.userPicture.url : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
+									<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null)? this.state.userPicture : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
 									<div className="upload-img">
 
 										<span>JPG, GIF or PNG. Max size of 1mb</span>

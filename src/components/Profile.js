@@ -249,7 +249,11 @@ class Profile extends Component {
 							<div className="upload-profile-photo">
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
-									<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null)? this.state.userPicture : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
+								<div className="prof-user-img">
+									<div className="loader"></div>
+									<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null && this.state.userPicture.length != null
+							&& this.state.userPicture.length > 0)? this.state.userPicture.url : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
+							</div>
 									<div className="upload-img">
 
 										<span>JPG, GIF or PNG. Max size of 1mb</span>

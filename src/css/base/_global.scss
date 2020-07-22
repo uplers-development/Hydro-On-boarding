@@ -316,6 +316,7 @@ button.btn {
 	overflow: hidden;
 	display: inline-block;
 	cursor: pointer;
+	vertical-align: middle;
 	.btn {
 		color: $white;
 		cursor: pointer;
@@ -2683,7 +2684,7 @@ a {
 	color: $black;
 	font-family: $gibson;
 	font-weight: $font-semi-bold;
-	padding-top: 35px 15px;
+	padding: 35px 15px;
 	@media screen and (max-width:$mobile-small) {
 		font-size: 18px;
 	}

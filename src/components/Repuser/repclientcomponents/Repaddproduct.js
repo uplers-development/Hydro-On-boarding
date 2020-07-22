@@ -270,8 +270,8 @@ class Repaddproduct extends React.Component{
                                           <button className="btn common-btn-blue">
                                           <span>Upload Document</span></button>
 
-                                          <span className='document-item' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
                                        </div>
+                                          <span className='document-item' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
                                        {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
                                     </div>
                                  </form>

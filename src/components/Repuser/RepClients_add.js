@@ -33,6 +33,7 @@ class RepClients_add extends React.Component {
       role:false,
       contact:false,
       password:false,
+      formEmpty:false,
       contractProductAdmitted:false,
       getProductListforcontract:[],
 			fromProductSec:this.props.location.state!==undefined ? this.props.location.state.productPage :'',
@@ -103,12 +104,12 @@ class RepClients_add extends React.Component {
 
    GetProfile=()=>{
       try{
-         fetch(Apiurl.GetProfile.url,{
+         fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
                headers: {
                      "Content-Type" : "application/json",
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                    },
-                   method:Apiurl.GetProfile.method,
+                   method:"GET",
          }).then(res=>{
             return res.json();
          }).then(data=>{
@@ -126,6 +127,7 @@ class RepClients_add extends React.Component {
     var e = document.getElementById("time_zone");
     var strUser = e.options[e.selectedIndex].value;
     if(hasValidEmail(document.querySelector("#email").value) && hasValidMobile(document.querySelector("#contact").value)){
+    this.setState({formEmpty:false});
     let option={  
            "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],
            "field_last_name" : [{"value":document.getElementById("sname") && document.querySelector("#sname").value!=='' ? document.querySelector("#sname").value :''}],
@@ -246,7 +248,7 @@ class RepClients_add extends React.Component {
          console.log(err);
       }
   }else{
-
+      this.setState({formEmpty:true});
     }
 }
 
@@ -288,9 +290,19 @@ class RepClients_add extends React.Component {
                           <div className="upload-btn-wrapper">
                                 <button className="btn common-btn-blue" onClick={this.submitClientDetails}>
                                   <span>Add new client</span></button>
+                               {this.state.formEmpty ? 
+                                  <>
+                                    {ValidationMsg.common.default.fieldsEmptyAnnoucementform}
+                                  </>
+                                       :
+                                  ''
+                                  } 
                               </div>
+                              
                         </div>
+                        
                      </div>
+                     
                   </div>
 
                   }

@@ -75,21 +75,18 @@ class UserProfile extends Component {
 		return (
 			<div>
 				<div className={this.state.openTooglecontent ? "d-flex flex-wrap user-log active": "d-flex flex-wrap user-log"} onClick={this.openToogle} onMouseEnter={(e)=>this.setState({openTooglecontent:true})} onMouseLeave={(e)=>this.setState({openTooglecontent:false})}>
-					{this.state.dataLoaded ?
-						<>
-						<div className="user-image-name d-flex flex-wrap align-center">
-							<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null && this.state.userPicture.length != null
-							&& this.state.userPicture.length > 0)  ? this.state.userPicture.url : require("../../images/profile-logo-blue.svg")} alt="Prfile image"/>
-							<h2>{this.state.first_name+ " "+this.state.last_name }</h2>
-						</div>
-						<div className="drop-down-menu">
-							<ul>
-								<li><Link to="./Profile" title="Profile">Profile</Link></li>
-								<li><Link to={""} title="Sign out" onClick={this.Logout}>Sign out</Link></li>
-							</ul>
-						</div>
-					</>
-			 		:''}
+						
+				<div className="user-image-name d-flex flex-wrap align-center">
+					<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null && this.state.userPicture.length != null
+					&& this.state.userPicture.length > 0)  ? this.state.userPicture.url : require("../../images/profile-logo-blue.svg")} alt="Prfile image"/>
+					<h2>{this.state.first_name+ " "+this.state.last_name }</h2>
+				</div>
+				<div className="drop-down-menu">
+					<ul>
+						<li><Link to="./Profile" title="Profile">Profile</Link></li>
+						<li><Link to={""} title="Sign out" onClick={this.Logout}>Sign out</Link></li>
+					</ul>
+				</div>
 				</div>
 				{this.state.logout ? this.logoutDone() :''}
 			</div>

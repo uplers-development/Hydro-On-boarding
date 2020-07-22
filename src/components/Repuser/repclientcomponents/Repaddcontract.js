@@ -2,48 +2,31 @@ import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
 import hydroImage from '../../../images/hydro-biofilter-product.jpg';
-import scrollToComponent from 'react-scroll-to-component';
 import {ValidationMsg} from'../../constants/validationmsg';
-import { WithContext as ReactTags } from 'react-tag-input';
  
-const KeyCodes = {
-  comma: 188,
-  enter: 13,
-};
  
-const delimiters = [KeyCodes.comma,KeyCodes.enter,KeyCodes.tab];
-
+let Suggestionbox;
 class Repaddcontract extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
 			openPopup:false,
 			imageFormateState:false,
-         	fileuploadedname:'',
-         	fid:'',
-          tags: [
-               
-             ],
-            suggestions: [
-              // this.props.productDataList
-                { uid: 'USA', text: 'USA',name:'djfjdf',props:'sdfbsdfj' },
-                { uid: 'Germany', text: 'Germany',name:'djfjdf',props:'sdfbsdfj' },
-                { uid: 'Austria', text: 'Austria',name:'djfjdf',props:'sdfbsdfj' },
-                { uid: 'Costa Rica', text: 'Costa Rica',name:'djfjdf',props:'sdfbsdfj' },
-                { uid: 'Sri Lanka', text: 'Sri Lanka',name:'djfjdf',props:'sdfbsdfj' },
-                { uid: 'Thailand', text: 'Thailand',name:'djfjdf',props:'sdfbsdfj' }
-          ]
-		}
+     	fileuploadedname:'',
+     	fid:'',
+	    producttagChanged:'',
+      productSuggestion:[]
+  	}
     console.log(this.state.suggestions);
     console.log(this.props.productDataList);
 		console.log(this.props.checkcontractfrom);
 		console.log(this.props.senduid);
-		this.addContract=this.addContract.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleAddition = this.handleAddition.bind(this);
-    this.handleDrag = this.handleDrag.bind(this);
-	}
+    this.productTaginput=React.createRef();
+    this.addContract=this.addContract.bind(this);
+    this.productTag=this.productTag.bind(this);
+    this.clearProductTag=this.clearProductTag.bind(this);
 
+	}
 
 	componentDidMount(){
 		console.log(this.props.senduid)
@@ -87,60 +70,91 @@ class Repaddcontract extends React.Component{
   		}
     }
 
-    addContract=(e)=>{
-    	   let contractoptions={
-                "title":[{"value":document.querySelector("#title").value}],
-                "type":[{"target_id":"contracts"}],
-                //"field_contract_document_type":[{"target_id":"tid"}],
-                "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
-                //"field_contract_expiry":[{"value":"2020-07-02"}],
-                "field_sub_title":[{"value":document.querySelector("#description").value}],
-                "field_contract_for_products":[{"target_id":"24"},{"target_id":"34"}],/*PRoduct tags Id*/
-                "field_contract_for_client":[{"target_id":this.props.senduid}]
-            }   
+  addContract=(e)=>{
+    let productTagsId=[]
+      document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+          productTagsId.push({"target_id":item.getAttribute("nid")});
+      })
 
+  	   let contractoptions={
+              "title":[{"value":document.querySelector("#title").value}],
+              "type":[{"target_id":"contracts"}],
+              //"field_contract_document_type":[{"target_id":"tid"}],
+              "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
+              //"field_contract_expiry":[{"value":"2020-07-02"}],
+              "field_sub_title":[{"value":document.querySelector("#description").value}],
+              "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
+              "field_contract_for_client":[{"target_id":this.props.senduid}]
+          }   
 
+      console.log(contractoptions);
        if(document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#product-tags").value!==''|| document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
-    	 fetch(`${base_url}node?_format=json`,{
-                        method:"POST",
-                        headers: {
-                           "Content-Type" : "application/json",
-                           "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
-                         },
-                         body:JSON.stringify(contractoptions)
-                  }).then(res=>{
-                    return res.json()
-                  }).then(data=>{
-                  	this.setState({openPopup:true});
-                      console.log(data);
-            })
+        	 fetch(`${base_url}node?_format=json`,{
+                            method:"POST",
+                            headers: {
+                               "Content-Type" : "application/json",
+                               "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                             },
+                             body:JSON.stringify(contractoptions)
+                      }).then(res=>{
+                        return res.json()
+                      }).then(data=>{
+                      	this.setState({openPopup:true});
+                          console.log(data);
+                })
          } 
+  }
+
+  productTag=(e)=>{
+    e.preventDefault();
+    console.log(this.productTaginput.current.value);
+    if(this.productTaginput.current.value!=='') {
+        this.props.productDataList.filter((value,index,array)=>{
+          this.state.productSuggestion=[];
+            if(value.title.match(this.productTaginput.current.value)){
+              console.log(value);
+              this.state.productSuggestion.push(value)
+            }
+        })
+
+       let suggestionforproduct=this.state.productSuggestion.map((item,index)=>{
+                                  return (<li key={index}>
+                                     <Link to={""} onClick={(e)=>this.productId(e,item.title,item.nid)}>{item.title}</Link> 
+                                  </li>)
+                                }) 
+      this.setState({producttagChanged:suggestionforproduct})
+      console.log(this.state.productSuggestion);
+        }else{
+          this.setState({producttagChanged:''})
+        }
     }
 
-	handleDelete(i) {
-        const { tags } = this.state;
-        this.setState({
-         tags: tags.filter((tag, index) => index !== i),
-        });
-    }
- 
-    handleAddition(tag) {
-        this.setState(state => ({ tags: [...state.tags, tag] }));
-    }
- 
-    handleDrag(tag, currPos, newPos) {
-        const tags = [...this.state.tags];
-        const newTags = tags.slice();
-        
-        newTags.splice(currPos, 1);
-        newTags.splice(newPos, 0, tag);
- 
-        // re-render
-        this.setState({ tags: newTags });
-    }
+
+  productId=(e,title,gid)=>{
+    e.preventDefault();
+      var node = document.createElement("SPAN");
+            node.classList.add("emailall");
+            var node2=document.createElement("SPAN");
+            node2.classList.add("remove-email");
+            node.appendChild(node2).addEventListener("click",this.clearProductTag,true);
+            var textnode = document.createTextNode(title);
+            var id=document.createAttribute("nid");
+            id.value=gid;
+            node.appendChild(textnode);
+            node.setAttributeNode(id);
+            document.querySelector(".shareall-email").appendChild(node);
+            if(document.querySelectorAll(".shareall-email .emailall").length>4){
+                e.target.style.display="none";
+            }
+
+  }
+
+  clearProductTag =(e)=>{  
+    e.preventDefault();
+    e.target.parentNode.remove();
+}
 
 	render(){
-      const { tags, suggestions } = this.state;
 		return(
 			   <div className="add-contract">
 		            <div className="container">
@@ -154,7 +168,7 @@ class Repaddcontract extends React.Component{
 		                  <form  onSubmit={(e)=>e.preventDefault()}>
 		                     <div className="form-group">
 		                        <label>Title</label>
-<div className="input-box">
+                      <div className="input-box">
 		                        <input type="text" name="Title" placeholder="Title" id="title" />
 									</div>
 		                     </div>
@@ -166,24 +180,16 @@ class Repaddcontract extends React.Component{
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Product tags</label>
-                            {/*  <ReactTags tags={tags}
-                                                              suggestions={suggestions}
-                                                              handleDelete={this.handleDelete}
-                                                              handleAddition={this.handleAddition}
-                                                              handleDrag={this.handleDrag}
-                                                              delimiters={delimiters} />*/}
-								<div className="input-box suggestion">
-									<div className="shareall-email">
-									<span className="emailall"><span className="remove-email"></span>es@gmail.com</span>
-										</div>
-		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags"/>
-								<ul className="search-detail">
-									<li>
-									<a href="#">Test</a> 
-									</li>
-								</ul>	
+              								<div className="input-box suggestion">
+              									<div className="shareall-email">
+              									
+              									</div>
+  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}/>
+              								  <ul className="search-detail">
+              									   {this.state.producttagChanged}
+              								</ul>	
 								
-								</div>	
+							             	</div>	
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Sharepoint URL</label>

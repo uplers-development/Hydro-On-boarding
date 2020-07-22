@@ -83,6 +83,7 @@ class Repaddcontract extends React.Component{
               //"field_contract_document_type":[{"target_id":"tid"}],
               "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
               //"field_contract_expiry":[{"value":"2020-07-02"}],
+              "field_contract_document_external":[{"uri":document.querySelector("#sharepoint-url").value ,"title":"","options": []}],
               "field_sub_title":[{"value":document.querySelector("#description").value}],
               "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
               "field_contract_for_client":[{"target_id":this.props.senduid}]

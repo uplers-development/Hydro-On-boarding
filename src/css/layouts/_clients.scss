@@ -12,7 +12,7 @@
 				line-height: 28px;
 			}
 			ul {
-				top: 38px;
+				top: 37px;
 			}
 		}
 		.btn-block {
@@ -46,8 +46,11 @@
 						font-size: 18px;
 						line-height: 28px;
 						font-weight: $font-normal;
-						padding: 6px 25px;
+						padding: 5px 25px;
 					}
+				}
+				.drop-down-menu {
+					top: 38px;
 				}
 			}
 		}
@@ -56,6 +59,75 @@
 		padding-top: 8px;
 		@media screen and (max-width: $mobile-small) {
 			padding: 0 23px;
+		}
+		&.table-outer {
+			.table-responsive {
+				table {
+					thead {
+						tr {
+							th {
+								@media screen and (max-width: $large-mx) {
+									font-size: 16px;
+									line-height: 22px;
+								}
+								&:nth-child(1) {
+									@media screen and (max-width: $large-mx) {
+										width: 30%;
+									}
+									@media screen and (max-width: $large) {
+										width: 410px;
+									}
+								}
+
+								&:nth-child(2) {
+									@media screen and (max-width: $large-mx) {
+										width: 25%;
+									}
+									@media screen and (max-width: $large) {
+										width: 435px;
+									}
+								}
+
+								&:nth-child(3) {
+									@media screen and (max-width: $large-mx) {
+										width: 25%;
+									}
+									@media screen and (max-width: $large) {
+										width: 340px;
+									}
+								}
+
+								&:nth-child(4) {
+									@media screen and (max-width: $large-mx) {
+										width: 20%;
+									}
+									@media screen and (max-width: $large) {
+										width: 150px;
+									}
+								}
+							}
+						}
+					}
+					tbody {
+						tr {
+							td {
+								@media screen and (max-width: $large-mx) {
+									font-size: 16px;
+									line-height: 20px;
+								}
+								&:nth-child(1) {
+									h3 {
+										@media screen and (max-width: $large-mx) {
+											font-size: 16px;
+											line-height: 20px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

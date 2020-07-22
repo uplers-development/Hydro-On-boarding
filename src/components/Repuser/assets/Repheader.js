@@ -46,7 +46,7 @@ render(){
                {this.props.menulisting.map((item,index)=>
                   {if(window.location.pathname===item.field_react_route){
                   return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
-                  <h1>{item.title}</h1></React.Fragment>)
+                  <h1>{!this.props.checkifPagecall ? item.title :'Client Details'}</h1></React.Fragment>)
                }else if(item.child!==undefined && window.location.pathname===item.child[0].field_react_route){
                   return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.child[0].field_icon_svg }} />
                   <h1>{item.child[0].title}</h1></React.Fragment>)

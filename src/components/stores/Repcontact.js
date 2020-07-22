@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
+import {Twitter,Linkdin} from '../assets/Clientsocialmediaicons';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 //import {cosmaticAsset} from'../constants/common';
@@ -109,8 +110,8 @@ class Repcontact extends React.Component {
 													<div className="person-right">
 														<div className="person-title">
 															<ul className="desktop-hide d-flex">
-																<li><a href="https://twitter.com" title="Follow us"><img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" /></a></li>
-																<li><a href="https://www.linkedin.com/" title="Connect"><img src={require("../../images/ic_linkedin.svg")} alt="Linkedin" /></a></li>
+																<Twitter/>
+																<Linkdin/>
 															</ul>
 															<h3>{this.state.repContactDetails.field_first_name[0].value} {this.state.repContactDetails.field_last_name[0].value}</h3>
 															<h4>{this.state.repContactDetails.field_job_title[0].value}</h4>
@@ -124,12 +125,12 @@ class Repcontact extends React.Component {
 
 																<div className="right">
 																	<ul>
-																		<li><a href={`tel:${this.state.repContactDetails.field_contact_number[0].value}`} title={this.state.repContactDetails.field_contact_number[0].value}><img src={require("../../images/ic_telephone_blue.svg")} alt="Telephone marker" />
-																				<span><strong>Tel:</strong> {this.state.repContactDetails.field_contact_number[0].value}</span></a>
+																		<li><Link to={`tel:${this.state.repContactDetails.field_contact_number[0].value}`} title={this.state.repContactDetails.field_contact_number[0].value}><img src={require("../../images/ic_telephone_blue.svg")} alt="Telephone marker" />
+																				<span><strong>Tel:</strong> {this.state.repContactDetails.field_contact_number[0].value}</span></Link>
 																		</li>
 
-																		<li><a href={`mailto:${this.state.repContactDetails.email}`} title= {this.state.repContactDetails.email}><img src={require("../../images/ic_mail_box_blue.svg")} alt="Mailbox marker" />
-																				<span><strong>Email:</strong> {this.state.repContactDetails.email}</span></a>
+																		<li><Link to={`mailto:${this.state.repContactDetails.email}`} title= {this.state.repContactDetails.email}><img src={require("../../images/ic_mail_box_blue.svg")} alt="Mailbox marker" />
+																				<span><strong>Email:</strong> {this.state.repContactDetails.email}</span></Link>
 																		</li>
 																	</ul>
 																</div>
@@ -156,8 +157,8 @@ class Repcontact extends React.Component {
 											<div className="rep-contracts-right mobile-hide">
 												<h6>Hydro on Social</h6>
 												<ul>
-													<li><a href="https://twitter.com" title="Follow us"><img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" /> <span>Follow us</span></a></li>
-													<li><a href="https://www.linkedin.com/" title="Connect"><img src={require("../../images/ic_linkedin.svg")} alt="Linkedin" /><span>Connect</span></a></li>
+													<Twitter/>
+													<Linkdin/>	
 												</ul>
 											</div>
 										</div>

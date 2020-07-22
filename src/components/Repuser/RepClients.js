@@ -29,6 +29,7 @@ class RepClients extends React.Component {
 			repclientdata:[],
 			updatedRepclientId:this.props.location.state!==undefined ? this.props.location.state.targetSendid : null,
 			loader:true,
+			pageTitleChange:false,
 		}
 		this.getSearchedItems = this.getSearchedItems.bind(this);
 		this.getSortedItem = this.getSortedItem.bind(this);
@@ -64,7 +65,7 @@ class RepClients extends React.Component {
 
 	check_view_page_call=(viewpagecalled,uid)=>{
 		console.log(uid);
-		this.setState({updatedRepclientId : uid,viewpagecall : viewpagecalled});
+		this.setState({updatedRepclientId : uid,viewpagecall : viewpagecalled , pageTitleChange:viewpagecalled});
 	}
 
 	client_data_Table=()=>{
@@ -117,7 +118,7 @@ class RepClients extends React.Component {
 			         <Repnav repmenulisting={this.state.menulisting}/>
 			         <div className="d-flex flex-wrap right-content-part">
 			            <div className="top-heading">
-			               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo} historyPush={this.props}/>
+			               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo} historyPush={this.props} checkifPagecall={this.state.pageTitleChange}/>
 			            </div>
 			            {!this.state.loader ?
 			            <>

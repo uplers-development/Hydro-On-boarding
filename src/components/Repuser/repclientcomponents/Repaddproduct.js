@@ -56,6 +56,10 @@ class Repaddproduct extends React.Component{
    get_uploaded_file_path=(e)=>{
       var fullPath = e.target.files[0];
       var exactfile=e.target.value;
+      console.log(e.target)
+      let fileElement=e.target;
+      var node;
+      let textnode;
       var filename='';
          if (exactfile) {
              var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
@@ -63,6 +67,12 @@ class Repaddproduct extends React.Component{
              if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
                  filename = filename.substring(1);
                  this.setState({fileuploadedname:filename})
+                  node = document.createElement("SPAN");
+                  node.classList.add("document-item");
+                  textnode=document.createTextNode(filename);
+                  node.appendChild(textnode);
+                  console.log(fileElement.parentNode.parentNode)
+                  fileElement.parentNode.parentNode.appendChild(node);
              }
              console.log(filename);
              if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt")){
@@ -84,11 +94,14 @@ class Repaddproduct extends React.Component{
                   .then(data=>{
                      console.log(data);
                      this.setState({fid:data.fid[0].value});
+                      var id=document.createAttribute("get-id");
+                      id.value=data.fid[0].value;
+                      node.setAttributeNode(id);
                   })
       }else{
          this.setState({imageFormateState:true})   
      }
-  }
+    }
    }
 
    Search_client_Product_Details=(e)=>{
@@ -103,8 +116,10 @@ class Repaddproduct extends React.Component{
             console.log(data);
             if(data.length>0){
                this.setState({purchaseProductList:data})
+               document.querySelectorAll(".right-prod-upload form").forEach((item,index)=>{
+                  item.reset();
+               })
             }else{
-               //alert("sorry no records found");
             }
          });
        }else{
@@ -144,18 +159,16 @@ class Repaddproduct extends React.Component{
 
    addProduct=(e)=>{
       e.preventDefault();
-      document.querySelectorAll(".list-box form input").forEach((item,index)=>{
-        //console.log(item.value!=='' ? item : '');
-        if(item.value!==''){
-          //console.log(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0]);
+      console.log(document.querySelectorAll(".list-box.checked").length);
+      let newArray=[]; 
+      if(document.querySelectorAll(".list-box.checked").length>0){
+         document.querySelectorAll(".checked form input").forEach((item,index)=>{
+          newArray.push(item);            
+         })
 
-          if(item.parentNode.parentNode.parentNode.parentNode.previousSibling.childNodes[0].childNodes[0].checked===false){
-              this.setState({checkboxnotchecked:true});
-          }
-
-        }
-      })
-     productList = []; 
+         newArray.forEach((ele,index)=>{
+              if(ele.value!==''){
+                    productList = []; 
                document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
                   let productdata = [];
                   object = {};
@@ -165,7 +178,7 @@ class Repaddproduct extends React.Component{
                   let seller = document.querySelectorAll(".checked .seller")[index].value;
                   let cost = document.querySelectorAll(".checked .cost")[index].value;
                   let item_id = document.querySelectorAll(".checked .item-id")[index].value;
-                  let file_id = document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id");
+                  let file_id = this.state.fid!== '' && document.querySelectorAll(".checked .document-item")[index] ? document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id") : '';
                      object['title'] =  [{"value": title}];
                      object['field_purchase_date'] =  [{"value":purchase}];
                      object['field_product'] = [{"target_id":productcheck}];
@@ -177,7 +190,7 @@ class Repaddproduct extends React.Component{
                      object['field_user']=[{"target_id":this.props.senduid}];
                      productList.push(object);
                });  
-         console.log(productList);
+            console.log(productList);
             productList.map((item,index)=>{
                 if(!this.state.purchseDatempty &&!this.state.costState &&!this.state.itemidState){
                   fetch(`${base_url}node?_format=json`,{
@@ -193,12 +206,17 @@ class Repaddproduct extends React.Component{
                       console.log(data);
                       this.setState({openPopup:true,checkboxnotchecked:false,fieldsNotvalid:false});
                   });
-               }else{
-                    this.setState({fieldsNotvalid:true,checkboxnotchecked:true});
-                     //alert("please check the fields mighht be missing somewhere!!");
-                   }
+                  }
                });
+              }else{
+                this.setState({fieldsNotvalid:true,checkboxnotchecked:false})
+              }
+         })
 
+
+           }else{
+              this.setState({fieldsNotvalid:false,checkboxnotchecked:true})
+           }
       }
 
 	render(){
@@ -219,7 +237,7 @@ class Repaddproduct extends React.Component{
 
                      <div className="list-add-product">
                      {this.state.purchaseProductList.map((item,index)=>
-                           <div className="list-box" key={index}>
+                           <div className={"list-box"+' ' +ReactHtmlParser(item.title)}  key={index}>
                               <div className="top d-flex flex-wrap">
                                  <div className="checkbox-cust"><input type="checkbox" id={"checkbox"+index} defaultValue={item.nid} className="productcheck" onChange={this.selectBoxChecked}/>
                                     <label htmlFor={"checkbox"+index}></label>
@@ -270,7 +288,6 @@ class Repaddproduct extends React.Component{
                                           <span>Upload Document</span></button>
 
                                        </div>
-                                          <span className='document-item' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
                                        {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
                                     </div>
                                  </form>

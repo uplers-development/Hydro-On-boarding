@@ -38,9 +38,12 @@ class Profile extends Component {
 	}
 
 	componentDidMount(){
+		var self=this;
 		if(localStorage.getItem("access-token")!==null){
 			this.GetTimeZone();
-    		this.GetProfile();
+			setTimeout(()=>{
+    			self.GetProfile();	
+			},2000)
      	}else{
      		this.props.history.push("/Login")
      	}
@@ -85,8 +88,11 @@ class Profile extends Component {
 						newuserPic_id:data.user_picture.length>0 ? data.user_picture[0].target_id:'',
 						loader:false
 					})
-			console.log(this.state.userPicture);
+			console.log(this.state.time_zone);
+			this.timeZoneref.current.value=this.state.time_zone;
 		})
+
+
 	}
 
 
@@ -250,9 +256,12 @@ class Profile extends Component {
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
 								<div className="prof-user-img">
-									<div className="loader"></div>
+									{this.state.smallLoader ? 
+										<div className="loader"></div>
+									:
 									<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null && this.state.userPicture.length != null
-							&& this.state.userPicture.length > 0)? this.state.userPicture.url : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
+							&& this.state.userPicture.length > 0)? this.state.userPicture : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
+							}
 							</div>
 									<div className="upload-img">
 
@@ -315,6 +324,7 @@ class Profile extends Component {
 										<label>Timezone*</label>
 										<select name="1" className="" tabIndex="6" id="time_zone" ref={this.timeZoneref} >
 											{this.state.timeZone!==null ? ReactHtmlParser(this.state.timeZone) : '' }
+										}
 										</select>
 									</div>
 

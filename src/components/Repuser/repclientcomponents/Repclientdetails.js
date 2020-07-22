@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
 import {cosmaticAsset} from'../../constants/common';
+import {Twitter,Linkdin} from'../assets/Repsocialmediaicons';
 
 class Repclientdetails extends React.Component{
 	constructor(props){
@@ -49,14 +50,8 @@ class Repclientdetails extends React.Component{
 				   <div className="person-right">
 				      <div className="person-title">
 				         <ul className="desktop-hide d-flex">
-				            <li><a href="https://twitter.com" title="Follow us">
-				               <img src={require("../../../images/ic_twitter_blue.svg")} alt="Twitter" />
-				               </a>
-				            </li>
-				            <li><a href="https://www.linkedin.com/" title="Connect">
-				               <img src={require("../../../images/ic_linkedin.svg")} alt="Linkedin" />
-				               </a>
-				            </li>
+				           	<Twitter/>
+				           	<Linkdin/>
 				         </ul>
 				         {this.state.clientDetails.field_first_name!=='' || this.state.clientDetails.field_last_nam!=='' ?
 				        		 <>

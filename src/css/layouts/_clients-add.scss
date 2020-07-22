@@ -959,6 +959,11 @@
 					height: 94px;
 				}
 			}
+			.empty-field {
+				width: 100%;
+				display: block;
+    			margin: 5px 0;
+			}
 			input[type=file] {
 				&:hover {
 					+ .btn {

@@ -114,6 +114,10 @@
 				height: 123px;
 				border-radius: 50%;
 				position: relative;
+				@media screen and (max-width:$mobile-small) {
+						width: 96px;
+						height: 96px;
+				}
 				img {
 					width: 123px;
 					height: 123px;

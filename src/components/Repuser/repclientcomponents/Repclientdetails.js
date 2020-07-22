@@ -35,7 +35,7 @@ class Repclientdetails extends React.Component{
 			  {!this.state.loader ? 
 			   <>
 			   <div className="person-img">
-			      <img src={this.state.clientDetails.user_picture!=='' || this.state.clientDetails.user_picture!==undefined ? site_url+this.state.clientDetails.user_picture : require("../../../images/girls-profile-img.png")} alt="Client image" />
+			      <img src={this.state.clientDetails.user_picture!=='' ? site_url+this.state.clientDetails.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Client image" />
 			   </div>
 			   <div className="person-right">
 			      <div className="person-title">

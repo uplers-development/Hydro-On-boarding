@@ -57,12 +57,12 @@ render(){
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
                   {this.props.repuserinfo!==null ? 
                      <>
-                        <img src={this.props.repuserinfo.user_picture[0]!=='' ? this.props.repuserinfo.user_picture[0].url : require("../../../images/john-smith.png")} alt="Profile image" />
+                        <img src={this.props.repuserinfo.user_picture[0]!=='' ? this.props.repuserinfo.user_picture[0].url : require("../../../images/profile-logo-blue.svg")} alt="Profile image" />
                         <h2>{this.props.repuserinfo.field_first_name[0].value+" "+this.props.repuserinfo.field_last_name[0].value}</h2>
                      </>
                      :
                      <>
-                        <img src={require("../../../images/john-smith.png")} alt="Prfile image" />
+                        <img src={require("../../../images/profile-logo-blue.svg")} alt="Prfile image" />
                         <h2>username</h2>
                      </>
                   }

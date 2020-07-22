@@ -9,7 +9,7 @@ const Newuserlist = (props) => {
 		   	 {props.newusers && props.newusers.map((item,index)=>
 		     	 <li key={index}>
 		        	 <div className="profile-img">
-			            <img src={item.user_picture!=='' ? site_url+item.user_picture : require("../../../images/john-smith.png")} alt="Prfile image" />
+			            <img src={item.user_picture!=='' ? site_url+item.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Prfile image" />
 			         </div>
 			         <span className="username">{item.name}</span>
 			         <small className="added-date">Added: {item.created}</small>

@@ -116,7 +116,14 @@ class Profile extends Component {
     	}).then(data=>{
     		console.log(data);
     		//this.GetProfile();
-    		this.props.history.push("/Dashboard");
+    		if(data.uid[0].value===3){
+    			this.props.history.push("/RepDashboard");	
+    		}
+    		if(data.uid[0].value===2){
+    			this.props.history.push("/Dashboard");
+    		}else{
+    			return false;
+    		}
     	})
     }else{
 		hasNull(updatedata.field_first_name[0].value) ? this.setState({firstnameState:true}): this.setState({firstnameState:false})
@@ -179,12 +186,12 @@ class Profile extends Component {
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
 				<Link className="navbar-logo" to={this.state.redirectionFordashboard ? "/RepDashboard" : "/Dashboard"} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
-					<li><a className="active" href="#" title="News Feed">
+					<li><Link to={""} onClick={(e)=>e.preventDefault()} className="active" href="#" title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>
-							<span>About <span>you</span></span></a></li>
-					<li><a href="#" title="Password">
+							<span>About <span>you</span></span></Link></li>
+					<li><Link  to={""} onClick={(e)=>e.preventDefault()} title="Password">
 							<img className="svg" src={require("./../images/lock-logo.svg")} alt="password-logo"/>
-							<span>Password</span></a></li>
+							<span>Password</span></Link></li>
 				</ul>
 
 				<div className="nav-copyright">© 2020 Hydro International</div>

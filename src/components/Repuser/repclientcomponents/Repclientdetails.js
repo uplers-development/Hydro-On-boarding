@@ -41,10 +41,11 @@ class Repclientdetails extends React.Component{
 			<div className="person-detils-box sky-blue-light-2 d-flex flex-wrap">
 			  {!this.state.loader ? 
 			   <>
+			  {this.state.clientDetails!=='' ? 
+			   <>
 			   <div className="person-img">
-			      <img src={this.state.clientDetails!=='' &&this.state.clientDetails.user_picture!==''  ? site_url+this.state.clientDetails.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Client image" />
+			      <img src={this.state.clientDetails!=='' && this.state.clientDetails.user_picture!==''  ? site_url+this.state.clientDetails.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Client image" />
 			   </div>
-			   {this.state.clientDetails!=='' ? 
 				   <div className="person-right">
 				      <div className="person-title">
 				         <ul className="desktop-hide d-flex">
@@ -92,7 +93,7 @@ class Repclientdetails extends React.Component{
 				         </div>
 				      </div>
 				   </div>
-
+				   </>
 				   :
 				   <>
 				   	<div className='no-client-details'>No client details provided.</div>

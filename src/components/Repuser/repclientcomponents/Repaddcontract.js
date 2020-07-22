@@ -146,16 +146,24 @@ class Repaddcontract extends React.Component{
             id.value=gid;
             node.appendChild(textnode);
             node.setAttributeNode(id);
+            this.setState({producttagChanged:''});
+            this.productTaginput.current.value='';
             document.querySelector(".shareall-email").appendChild(node);
-            if(document.querySelectorAll(".shareall-email .emailall").length>4){
-                e.target.style.display="none";
+            if(document.querySelectorAll(".shareall-email .emailall").length>0){
+                document.querySelector("#product-tags").removeAttribute("placeholder")
             }
+            this.productTaginput.current.focus();
 
   }
 
   clearProductTag =(e)=>{  
     e.preventDefault();
     e.target.parentNode.remove();
+    this.productTaginput.current.focus();
+     if(document.querySelectorAll(".shareall-email .emailall").length<=0){
+          document.querySelector("#product-tags").setAttribute("placeholder","Product tags")
+      }
+
 }
 
 	render(){

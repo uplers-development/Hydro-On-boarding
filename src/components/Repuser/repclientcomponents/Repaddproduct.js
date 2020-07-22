@@ -125,6 +125,7 @@ class Repaddproduct extends React.Component{
          }).then(data=>{
             console.log(data);
             this.setState({purchaseProductList:data});
+            this.props.getProductList(true,this.state.purchaseProductList);
          })
       }catch(err){
          console.log(err);

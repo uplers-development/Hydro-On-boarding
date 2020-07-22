@@ -15,7 +15,8 @@ class Repaddcontract extends React.Component{
      	fileuploadedname:'',
      	fid:'',
 	    producttagChanged:'',
-      productSuggestion:[]
+      productSuggestion:[],
+      fields_are_empty:false,
   	}
     console.log(this.state.suggestions);
     console.log(this.props.productDataList);
@@ -88,7 +89,7 @@ class Repaddcontract extends React.Component{
           }   
 
       console.log(contractoptions);
-       if(document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#product-tags").value!==''|| document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
+       if(document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
         	 fetch(`${base_url}node?_format=json`,{
                             method:"POST",
                             headers: {
@@ -99,18 +100,20 @@ class Repaddcontract extends React.Component{
                       }).then(res=>{
                         return res.json()
                       }).then(data=>{
-                      	this.setState({openPopup:true});
+                      	this.setState({openPopup:true,fields_are_empty:false});
                           console.log(data);
                 })
-         } 
+         }else{
+           this.setState({fields_are_empty:true})
+         }
   }
 
   productTag=(e)=>{
     e.preventDefault();
     console.log(this.productTaginput.current.value);
     if(this.productTaginput.current.value!=='') {
-        this.props.productDataList.filter((value,index,array)=>{
           this.state.productSuggestion=[];
+        this.props.productDataList.filter((value,index,array)=>{
             if(value.title.match(this.productTaginput.current.value)){
               console.log(value);
               this.state.productSuggestion.push(value)
@@ -212,12 +215,15 @@ class Repaddcontract extends React.Component{
 		               </div>
 		            </div>
 		           {this.props.checkcontractfrom ? 
-		            <div className="btn-block add-client">
+		              <>
+                  <div className="btn-block add-client">
                         <div className="upload-btn-wrapper">
                            <button className="btn common-btn-blue" onClick={this.addContract}>
                            <span>Add new contract</span></button>
                         </div>
-                     </div>:
+                     </div>
+                    {this.state.fields_are_empty  ? ValidationMsg.common.default.addproductfieldnotvalid :''}
+                    </> :
                      ""}
                      {this.state.openPopup ? 
     			             <div id="modal" className="modal-container">

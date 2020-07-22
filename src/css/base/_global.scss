@@ -542,7 +542,7 @@ nav {
 				margin-top: 0;
 				display: flex;
 				align-items: center;
-				justify-content: center;
+				justify-content: space-around;
 				flex-wrap: wrap;
 			}
 
@@ -1995,18 +1995,14 @@ nav {
 		-webkit-transform: translateY(100%);
 		@include transition(all 0.3s ease-in-out);
 		overflow-y: scroll;
-
 		.top-head {
 			border-bottom: 1px solid $off-white;
 			padding: 5px 30px;
-
 			.top-title {
 				min-width: 120px;
-
 				img {
 					width: 25px;
 				}
-
 				h4 {
 					font-size: 20px;
 					line-height: 46px;
@@ -2019,10 +2015,8 @@ nav {
 			}
 		}
 	}
-
 	.list-filter-mobile {
 		padding: 0 40px 40px 40px;
-
 		h5 {
 			font-size: 18px;
 			line-height: 28px;
@@ -2031,11 +2025,9 @@ nav {
 			color: $cobalt-blue;
 			margin: 33px 0 0 0;
 		}
-
 		ul {
 			padding-left: 0;
 			margin-top: 0;
-
 			li {
 				a {
 					font-size: 15px;
@@ -2048,10 +2040,8 @@ nav {
 					display: block;
 					width: 100%;
 					position: relative;
-
 					&.active {
 						color: $black;
-
 						&:after {
 							content: "";
 							display: inline-block;
@@ -2076,14 +2066,12 @@ nav {
 			}
 		}
 	}
-
 	&.filter-active {
 		.open-close-filter-block {
 			transform: translateY(0%);
 			-webkit-transform: translateY(0%);
 		}
 	}
-
 	.btn-block {
 		text-align: center;
 		margin-top: 25px;
@@ -2093,6 +2081,9 @@ nav {
 			margin-bottom: 0;
 			padding: 5px 10px 3px;
 		}
+	}
+	&.filter-active {
+		z-index: 111;
 	}
 }
 

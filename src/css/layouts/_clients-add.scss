@@ -795,7 +795,7 @@
 								li {
 									a {
 										text-decoration: none;
-										font-size: 14px;
+										font-size: 16px;
 										line-height: 22px;
 										padding: 8px 12px;
 										width: 100%;
@@ -803,6 +803,7 @@
 										font-family: $gibson;
 										font-weight: $font-normal;
 										color: $panton-gray;
+										opacity: 0.5;
 									}
 								}
 							}

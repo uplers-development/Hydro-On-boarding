@@ -17,7 +17,7 @@ class Repproductselection extends React.Component{
 		}
 		this.clientProductSearch=React.createRef();
 		this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
-
+		console.log(this.state.uidToPass);
 	}
 
 	componentDidMount(){
@@ -64,7 +64,7 @@ class Repproductselection extends React.Component{
 		
 	}
 
-
+///jsonapi/taxonomy_list/applications?_format=json
 
 	render(){
 		console.log(this.state.porductDetails)

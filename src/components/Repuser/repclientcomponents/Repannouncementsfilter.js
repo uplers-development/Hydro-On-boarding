@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import ReactHtmlParser from 'react-html-parser';
 
 class Repannouncementsfilter extends React.Component{
 	constructor(props){
@@ -23,7 +24,7 @@ class Repannouncementsfilter extends React.Component{
 	get_product_list=()=>{
 
 		try{
-			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/products?_format=json`,{
+			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/taxonomy_list/applications?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -115,10 +116,13 @@ class Repannouncementsfilter extends React.Component{
 					}
 				})
 			}
-			locationvalue=document.querySelector(".location-item") && document.querySelector(".location-item").classList.contains("active") ? document.querySelector(".location-item").getAttribute("title") : '';
-
+			document.querySelectorAll(".location-item").forEach((item,index)=>{
+				if(item.classList.contains("active")){
+					locationvalue=item.getAttribute("title");
+				}
+			})
 			try{
-				fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_category_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -200,7 +204,7 @@ class Repannouncementsfilter extends React.Component{
 									<span>Product Types</span>
 									<ul className="list product-list-item">
 									 {this.state.anouncementproductdropdown.map((item,index)=>
-											<li key={index}><Link className="product-item" to={""} data-id={item.nid} onClick={this.filterTheClientProduct} title={item.title}>{item.title}</Link></li>	
+											<li key={index}><Link className="product-item" to={""} data-id={item.tid} onClick={this.filterTheClientProduct} title={ReactHtmlParser(item.name)}>{ReactHtmlParser(item.name)}</Link></li>	
 									 	)}
 									</ul>
 								</div>

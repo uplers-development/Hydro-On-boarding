@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Apiurl from '../Apiurl'; 
 
+
+let divType = null;
 class UserProfile extends Component {
 	constructor(props) {
 		super(props);
@@ -65,40 +67,37 @@ class UserProfile extends Component {
 		})
 	}
 
-	/*openToogle=(e)=>{
-		if(window.innerWidth<=767){
-			if(e.target.classList.contains("active") || e.target.parentNode.parentNode.classList.contains("active") || e.target.parentNode.classList.contains("active")){
-				this.setState({openTooglecontent:false})
-			}else{
-				this.setState({openTooglecontent:true});
-			}
-		}
-	}*/
 
 	renderClass=(e)=>{
-		if(!this.opentoogler.current.parentNode.classList.contains("active")){
-			this.opentoogler.current.parentNode.classList.add("active")
+		if(!divType.parentNode.classList.contains("active")){
+			divType.parentNode.classList.add("active")
 		}else{
-			this.opentoogler.current.parentNode.classList.remove("active")
+			divType.parentNode.classList.remove("active")
 		}
 	}
 
 	renderInHover=()=>{
 		this.setState({hoverState:true})
-		this.opentoogler.current.parentNode.classList.add("active")
+		if(!divType.parentNode.classList.contains('active')){
+		  divType.parentNode.classList.add("active")
+		}
 	}
 
 	renderOutHover=()=>{
 		this.setState({hoverState:false})
-		this.opentoogler.current.parentNode.classList.remove("active")
+		if(divType.parentNode.classList.contains('active')){
+		  divType.parentNode.classList.remove("active")
+		}
 	}
+
+
 
 	render() {
 		return (
 			<div>
-				<div className={this.state.openTooglecontent ? "d-flex flex-wrap user-log active": "d-flex flex-wrap user-log"} onMouseLeave={this.renderOutHover}>
+				<div className="d-flex flex-wrap user-log" onMouseLeave={this.renderOutHover}>
 					{this.state.dataLoaded ? 	
-						<div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={this.renderInHover} onClick={this.renderClass} ref={this.opentoogler}>
+						<div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={this.renderInHover} onClick={this.renderClass} ref={(input) => { divType = input; }}>
 						<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null)  ? this.state.userPicture.url : require("../../images/profile-logo-blue.svg")} alt="Prfile image"/>
 						<h2>{this.state.first_name+ " "+this.state.last_name }</h2>
 					</div>

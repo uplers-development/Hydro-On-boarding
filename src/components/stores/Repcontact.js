@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
-import {Twitter,Linkdin} from '../assets/Clientsocialmediaicons';
+import {TwitterMob,LinkdinMob,Twitter,Linkdin} from '../assets/Clientsocialmediaicons';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 //import {cosmaticAsset} from'../constants/common';
@@ -95,7 +95,7 @@ class Repcontact extends React.Component {
 										<h1>Rep contacts</h1>
 									</div>
 
-									<UserProfile/>
+									<UserProfile historyPush={this.props}/>
 								</div>
 								
 							</div>
@@ -110,8 +110,8 @@ class Repcontact extends React.Component {
 													<div className="person-right">
 														<div className="person-title">
 															<ul className="desktop-hide d-flex">
-																<Twitter/>
-																<Linkdin/>
+																<TwitterMob/>
+																<LinkdinMob/>
 															</ul>
 															<h3>{this.state.repContactDetails.field_first_name[0].value} {this.state.repContactDetails.field_last_name[0].value}</h3>
 															<h4>{this.state.repContactDetails.field_job_title[0].value}</h4>

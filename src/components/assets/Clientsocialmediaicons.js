@@ -11,6 +11,7 @@ export  const Twitter = () => {
 	 	 	window.open("https://twitter.com","_blank");	
 	 	 })} title="Follow us">
 				               <img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" />
+				               <span>Follow us</span>
 	               	</Link>
 	            </li>
 
@@ -19,6 +20,36 @@ export  const Twitter = () => {
 }
 
 export  const Linkdin = () => {
+	return(
+		 <li><Link to={""} onClick={((e)=>{
+	 		e.preventDefault();
+	 	 	window.open("https://www.linkedin.com/","_blank");	
+	 	 })} title="Follow us">
+				              <img src={require("../../images/ic_linkedin.svg")} alt="Linkedin" />
+				              <span>Connect</span>
+	               	</Link>
+	            </li>
+	  )
+	
+	
+}
+
+export  const TwitterMob = () => {
+
+	return(
+	 <li><Link to={""} onClick={((e)=>{
+	 		e.preventDefault();
+	 	 	window.open("https://twitter.com","_blank");	
+	 	 })} title="Follow us">
+				               <img src={require("../../images/ic_twitter_blue.svg")} alt="Twitter" />
+	               	</Link>
+	            </li>
+
+	  )
+	
+}
+
+export  const LinkdinMob = () => {
 	return(
 		 <li><Link to={""} onClick={((e)=>{
 	 		e.preventDefault();

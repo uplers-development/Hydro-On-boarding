@@ -234,7 +234,7 @@ class Resources extends Component {
 							<img src={require("../../images/resources-logo-blue.svg")} alt="profile-logo"/>
 							<h1>Resources</h1>
 						</div>
-						<UserProfile/>
+						<UserProfile historyPush={this.props}/>
 					</div>
 					
 				</div>

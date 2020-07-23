@@ -119,6 +119,9 @@ class Repaddproduct extends React.Component{
                document.querySelectorAll(".right-prod-upload form").forEach((item,index)=>{
                   item.reset();
                })
+               document.querySelectorAll(".productcheck:checked").forEach((item,index)=>{
+                  item.checked=false;
+               })
             }else{
             }
          });

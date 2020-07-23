@@ -11,7 +11,7 @@ export  const Twitter = (props) => {
 	 		e.preventDefault();
 	 	 	window.open("https://twitter.com","_blank");	
 	 	 })} title="Follow us">
-				               <img src={require("../../../images/ic_twitter_blue.svg")} alt="Twitter" />
+	               <img src={require("../../../images/ic_twitter_blue.svg")} alt="Twitter" />
 	               	</Link>
 	            </li>
 

@@ -146,7 +146,7 @@ class Newsfeeds extends Component {
 									<img src={"../../images/home-logo- blue.svg"} alt="profile-logo"/>
 									<h1>News feed</h1>
 								</div>
-								<UserProfile/>
+								<UserProfile historyPush={this.props}/>
 							</div>
 						</div>
 					<div className="bottom-content-block">

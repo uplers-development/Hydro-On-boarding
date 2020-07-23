@@ -14,6 +14,7 @@ class Repannouncementadd extends React.Component {
 		super(props);
 		this.state={		
 			editorState: EditorState.createEmpty(),
+			smallLoader:false
 		}
 	}
 
@@ -87,6 +88,8 @@ class Repannouncementadd extends React.Component {
 				           				            <textarea placeholder="Type the announcement here…"></textarea>*/}
 				         </div>
 				      </div>
+
+
 				      <div className="form-group">
 				         <label>Button Copy</label>
 				         <input type="text" name="Button Copy" id="Button_Copy" placeholder="Button Copy"/> 

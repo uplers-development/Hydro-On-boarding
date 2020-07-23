@@ -23,7 +23,7 @@ class Repannouncementmobile extends React.Component {
 	get_product_list=()=>{
 
 		try{
-			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/products?_format=json`,{
+			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/taxonomy_list/applications?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -215,7 +215,7 @@ class Repannouncementmobile extends React.Component {
 			         <h5>Product Types</h5>
 			         <ul className="list product-list-item">
 			           {this.state.anouncementproductdropdown.map((item,index)=>
-							<li key={index}><Link className="product-item" to={""} data-id={item.nid} onClick={this.filterTheClientProduct} title={item.title}>{item.title}</Link></li>	
+							<li key={index}><Link className="product-item" to={""} data-id={item.tid} onClick={this.filterTheClientProduct} title={ReactHtmlParser(item.name)}>{ReactHtmlParser(item.name)}</Link></li>	
 						 )}
 			         </ul>
 			      </div>

@@ -66,13 +66,25 @@ class Repaddproduct extends React.Component{
              filename = exactfile.substring(startIndex);
              if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
                  filename = filename.substring(1);
-                 this.setState({fileuploadedname:filename})
+                 this.setState({fileuploadedname:filename});
+                 console.log(fileElement.parentNode.parentNode.childNodes);
+                 if(fileElement.parentNode.parentNode.childNodes[3]){
+                    fileElement.parentNode.parentNode.childNodes[3].remove();
+                    node = document.createElement("SPAN");
+                  node.classList.add("document-item");
+                  textnode=document.createTextNode(filename);
+                  node.appendChild(textnode);
+                  console.log(fileElement.parentNode.parentNode);
+                  fileElement.parentNode.parentNode.appendChild(node);
+
+                 }else{
                   node = document.createElement("SPAN");
                   node.classList.add("document-item");
                   textnode=document.createTextNode(filename);
                   node.appendChild(textnode);
-                  console.log(fileElement.parentNode.parentNode)
+                  console.log(fileElement.parentNode.parentNode);
                   fileElement.parentNode.parentNode.appendChild(node);
+                }
              }
              console.log(filename);
              if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt")){
@@ -164,35 +176,41 @@ class Repaddproduct extends React.Component{
       e.preventDefault();
       console.log(document.querySelectorAll(".list-box.checked").length);
       let newArray=[]; 
+      let valuecheck=false;
       if(document.querySelectorAll(".list-box.checked").length>0){
          document.querySelectorAll(".checked form input").forEach((item,index)=>{
-          newArray.push(item);            
+            newArray.push(item);            
          })
 
          newArray.forEach((ele,index)=>{
-              if(ele.value!==''){
-                    productList = []; 
-               document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
-                  let productdata = [];
-                  object = {};
-                  let title = document.querySelectorAll(".checked .title h4")[index].textContent;
-                  let purchase = document.querySelectorAll(".checked .purchase")[index].value;
-                  let productcheck = document.querySelectorAll(".checked .productcheck")[index].value;
-                  let seller = document.querySelectorAll(".checked .seller")[index].value;
-                  let cost = document.querySelectorAll(".checked .cost")[index].value;
-                  let item_id = document.querySelectorAll(".checked .item-id")[index].value;
-                  let file_id = this.state.fid!== '' && document.querySelectorAll(".checked .document-item")[index] ? document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id") : '';
-                     object['title'] =  [{"value": title}];
-                     object['field_purchase_date'] =  [{"value":purchase}];
-                     object['field_product'] = [{"target_id":productcheck}];
-                     object['field_seller'] =  [{"value":seller}];
-                     object['field_cost'] =  [{"value":cost}];
-                     object['field_item_id'] = [{"value":item_id}];  
-                     object['field_purchase_doument']=[{"target_id":file_id}]
-                     object['type']=[{"target_id":"product_purchase"}];
-                     object['field_user']=[{"target_id":this.props.senduid}];
-                     productList.push(object);
-               });  
+          if(ele.value!==''){
+            valuecheck=true;
+          }
+        });
+
+         if(valuecheck){   
+                productList = []; 
+                 document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
+                    let productdata = [];
+                    object = {};
+                    let title = document.querySelectorAll(".checked .title h4")[index].textContent;
+                    let purchase = document.querySelectorAll(".checked .purchase")[index].value;
+                    let productcheck = document.querySelectorAll(".checked .productcheck")[index].value;
+                    let seller = document.querySelectorAll(".checked .seller")[index].value;
+                    let cost = document.querySelectorAll(".checked .cost")[index].value;
+                    let item_id = document.querySelectorAll(".checked .item-id")[index].value;
+                    let file_id = this.state.fid!== '' && document.querySelectorAll(".checked .document-item")[index] ? document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id") : '';
+                       object['title'] =  [{"value": title}];
+                       object['field_purchase_date'] =  [{"value":purchase}];
+                       object['field_product'] = [{"target_id":productcheck}];
+                       object['field_seller'] =  [{"value":seller}];
+                       object['field_cost'] =  [{"value":cost}];
+                       object['field_item_id'] = [{"value":item_id}];  
+                       object['field_purchase_doument']=[{"target_id":file_id}]
+                       object['type']=[{"target_id":"product_purchase"}];
+                       object['field_user']=[{"target_id":this.props.senduid}];
+                       productList.push(object);
+                 });  
             console.log(productList);
             productList.map((item,index)=>{
                 if(!this.state.purchseDatempty &&!this.state.costState &&!this.state.itemidState){
@@ -214,9 +232,6 @@ class Repaddproduct extends React.Component{
               }else{
                 this.setState({fieldsNotvalid:true,checkboxnotchecked:false})
               }
-         })
-
-
            }else{
               this.setState({fieldsNotvalid:false,checkboxnotchecked:true})
            }

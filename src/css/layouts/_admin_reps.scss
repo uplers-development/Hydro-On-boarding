@@ -58,9 +58,92 @@
 				}
 			}
 		}
+		@media screen and (max-width:$mobile-small) {
+			padding: 0 0 10px 0;
+		}
 	}
+	
+	.reps-table {
+		.table-responsive {
+			.table {
+				thead {
+					tr {
+						th {
+							&:nth-child(1) {
+								width: 395px;
+								@media screen and (max-width:$large-mx) {
+									width: 30%;
+								}
+								@media screen and (max-width:$large) {
+									width: 410px;
+								}
+							}
+							&:nth-child(2) {
+								@media screen and (max-width:$large-mx) {
+									width: 25%;
+								}
+								@media screen and (max-width:$large) {
+									width: 435px;
+								}
+							}
+							&:nth-child(3) {
+								@media screen and (max-width:$large-mx) {
+									width: 25%;
+								}
+								@media screen and (max-width:$large) {
+									width: 340px;
+								}
+							}
+							&:nth-child(4) {
+								@media screen and (max-width:$large-mx) {
+									width: 20%;
+								}
+								@media screen and (max-width:$large) {
+									width: 150px;
+								}
+							}
+						}
+						&:first-child{
+							td {
+								padding-top: 40px;
+							}	
+						}
+					}
+				}
+				tbody {
+					tr {
+						&:nth-child(1)
+						{
+							td {
+								padding-top: 35px;
+								@media screen and (max-width: $mobile-small) {
+									padding-top: 20px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 }
 
+.right-content-part 
+{
+	.bottom-content-block {
+		&.reps-filter {
+			padding-top: 30px;
+			.border-bottom {
+				border: none;
+				padding-bottom: 20px;
+				&:after {
+					display: none;
+				}
+			}
+		}
+	}
+}
 
 
 

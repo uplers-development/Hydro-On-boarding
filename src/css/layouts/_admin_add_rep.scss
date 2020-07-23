@@ -1,0 +1,101 @@
+.add-rep-main {
+	.fileter-block {
+		h3 {
+			font-size: 16px;
+			line-height: 28px;
+			color: $panton-gray;
+			font-family: $gibson;
+			font-weight: $font-semi-bold;
+			margin: 0;
+		}
+
+		h4 {
+			font-size: 16px;
+			line-height: 20px;
+			color: $light-black;
+			font-family: $arial;
+			font-weight: $font-normal;
+			margin: 0 0 0 62px;
+
+			@media screen and (max-width:$ipad-portrait) {
+				margin: 0;
+			}
+
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				margin: 0 0 0 25px;
+			}
+
+			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
+				margin: 0;
+			}
+		}
+	}
+
+	.rep-add-form {
+		padding: 20px 0 40px;
+
+		@media screen and (max-width:$mobile-small) {
+			padding: 20px 23px;
+		}
+
+		form {
+			max-width: 635px;
+			width: 100%;
+
+			.form-group {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				margin-bottom: 12px;
+
+				> label {
+					font-size: 18px;
+					line-height: 22px;
+					color: $black;
+					font-family: $arial;
+					font-weight: $font-normal;
+					display: inherit;
+					width: 154px;
+					padding-right: 15px;
+					margin-bottom: 0;
+
+					@media screen and (max-width:$mobile-small) {
+						margin-bottom: 5px;
+						padding-right: 0;
+					}
+
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						margin-bottom: 5px;
+						padding-right: 0;
+					}
+				}
+
+				.input-box {
+					max-width: 481px;
+					width: 100%;
+
+					input {
+						width: 100%;
+					}
+				}
+			}
+
+			.btn-block {
+				margin-top: 55px;
+
+				@media screen and (max-width:$ipad-landscape) {
+					margin-top: 35px;
+				}
+
+				@media screen and (max-width:$mobile-small) {
+					margin-top: 25px;
+				}
+
+				.btn {
+					margin-bottom: 0;
+					min-width: 147px;
+				}
+			}
+		}
+	}
+}

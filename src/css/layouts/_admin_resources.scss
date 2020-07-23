@@ -75,24 +75,54 @@
 					th {
 						&:nth-child(1) {
 							width: 320px;
+							@media screen and (max-width:$large-mx) {
+								width: 30%;
+							}
+							@media screen and (max-width:$large) {
+								width: 320px;
+							}
 						}
 
 						&:nth-child(2) {
 							width: 270px;
+							@media screen and (max-width:$large-mx) {
+								width: 25%;
+							}
+							@media screen and (max-width:$large) {
+								width: 270px;
+							}
 						}
 
 						&:nth-child(3) {
 							width: 260px;
+							@media screen and (max-width:$large-mx) {
+								width: 15%;
+							}
+							@media screen and (max-width:$large) {
+								width: 260px;
+							}
 						}
 
 						&:nth-child(4) {
 							width: 290px;
 							text-align: left;
+							@media screen and (max-width:$large-mx) {
+								width: 15%;
+							}
+							@media screen and (max-width:$large) {
+								width: 290px;
+							}
 						}
 
 						&:nth-child(5) {
 							width: 190px;
 							text-align: left;
+							@media screen and (max-width:$large-mx) {
+								width: 15%;
+							}
+							@media screen and (max-width:$large) {
+								width: 190px;
+							}
 						}
 					}
 				}

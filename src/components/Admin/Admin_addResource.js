@@ -31,7 +31,7 @@ class Admin_addResource extends React.Component {
 					<li><a className="active" href="#" title="Dashboard">
 							<img className="svg" src={require("../../images/resources-logo.svg")} alt="Resources" /><span>Resources</span></a></li>
 					<li><a href="#" title="Clients">
-							<img className="svg" src={require("../../images/ic_drop_plus_white.svg")} alt="Products" /><span>Products</span></a>
+							<img className="svg" src={require("../../images/product-logo.svg")} alt="Products" /><span>Products</span></a>
 							</li>
 					
 						<li><a href="#" title="Products">

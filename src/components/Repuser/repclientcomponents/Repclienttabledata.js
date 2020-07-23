@@ -107,7 +107,7 @@ class Repclienttabledata extends React.Component{
 			        "type":[{"target_id":"article"}],
 			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
 			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
-			        //"field_image":[{"target_id":fid of }],
+			        "field_image":[{"target_id":document.querySelector("#announcement-image").getAttribute("data-id")}],
 			        "field_client":singlecheckedArray
 			}
 			console.log(options);

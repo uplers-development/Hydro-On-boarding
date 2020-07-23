@@ -4,6 +4,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Apiurl,{site_url} from '../../Apiurl'; 
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState,ContentState,convertFromHTML,CompositeDecorator,convertToRaw,getDefaultKeyBinding, } from 'draft-js';
+import {ValidationMsg} from'../../constants/validationmsg';
 import draftToHtml from 'draftjs-to-html';
 /*import htmlToDraft from 'html-to-draftjs';*/
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';	
@@ -14,8 +15,13 @@ class Repannouncementadd extends React.Component {
 		super(props);
 		this.state={		
 			editorState: EditorState.createEmpty(),
-			smallLoader:false
+			imageFormateState:false,
+			smallLoader:false,
+			announcement_image:false,
+			announcement_image_uploaded:'',
+			newuserPic_id:null,
 		}
+		this.updateAnnouncementPic=this.updateAnnouncementPic.bind(this);
 	}
 
 	onEditorStateChange=(editorState) => {
@@ -24,7 +30,48 @@ class Repannouncementadd extends React.Component {
 	    });
 	
    this.props.getsummernote(draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())));
+
   }
+
+  	updateAnnouncementPic=(e)=>{
+		console.log(e.target.value)
+		this.setState({smallLoader:true});
+		var fullPath = e.target.files[0];
+		var exactfile=e.target.value;
+		var filename='';
+			if (exactfile) {
+			    var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
+			    filename = exactfile.substring(startIndex);
+			    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+			        filename = filename.substring(1);
+			    }
+		}
+
+		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
+				this.setState({imageFormateState:false})	
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/octet-stream");
+				myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
+				myHeaders.append("Content-Disposition", "file;filename=\""+filename+"\"");
+				myHeaders.append("Authorization", "Basic "+localStorage.getItem("basic-auth"));
+				var file = filename;
+				console.log(file);
+				var requestOptions = {
+				  method: 'POST',
+				  headers: myHeaders,
+				  body: fullPath,
+				};
+				fetch("http://staging.project-progress.net/projects/hydro/file/upload/node/article/field_image?_format=json",requestOptions)
+				.then(res=>{return res.json()})
+				.then(data=>{console.log(data);
+					this.setState({smallLoader:false,announcement_image:true,newuserPic_id:data.fid[0]['value'],announcement_image_uploaded:site_url+data.uri[0].url})
+					console.log(this.state.newuserPic_id);
+				})
+	  }else{
+	  	this.setState({smallLoader:false,imageFormateState:true})	
+	  }
+	}
+  	
 
 	selectannouncement=(e,getannouncementid,value)=>{
 		e.preventDefault();
@@ -66,8 +113,7 @@ class Repannouncementadd extends React.Component {
 				         <input type="text" name="Subheading" id="Subheading" placeholder="Subheading" /> 
 				      </div>
 				      <div className="text-edit-bar">
-				         <label>Text edit bar</label>
-				         <div className="textarea-block">
+					         <div className="textarea-block">
 				         <Editor
 								  editorState={this.state.editorState}
 								  toolbarClassName="toolbarClassName"
@@ -75,7 +121,7 @@ class Repannouncementadd extends React.Component {
 								  editorClassName="editorClassName"
 								  onEditorStateChange={this.onEditorStateChange}
 								  toolbar={{
-								  	options: ['inline', 'list','colorPicker', 'link', 'emoji','image'],
+								  	options: ['inline', 'list','colorPicker', 'link', 'emoji'],
     								inline: { inDropdown: true },
     								list: { inDropdown: true },
     								textAlign: { inDropdown: true },
@@ -88,8 +134,30 @@ class Repannouncementadd extends React.Component {
 				           				            <textarea placeholder="Type the announcement here…"></textarea>*/}
 				         </div>
 				      </div>
+				      <div className="profile-form-block">
+				      <div className="upload-profile-photo">
+								{/*<label>Announcement photo</label>*/}
+								<div className=" d-flex flex-wrap align-center">
+								<div className="prof-user-img">
+									{this.state.smallLoader ? 
+										<div className="loader"></div>
+									:
+									<img src={this.state.announcement_image ? this.state.announcement_image_uploaded :require("../../../images/profile-logo-blue.svg")} alt="profile-img"/>
+							}
+							</div>
+									<div className="upload-img">
 
-
+										<span>JPG, GIF or PNG. Max size of 1mb</span>
+										<div className="upload-btn-wrapper">
+											<input type="file" name="CHOOSE FILE" id="announcement-image" onChange={this.updateAnnouncementPic} data-id={this.state.newuserPic_id}/>
+											<button className="btn common-btn-blue">
+												<span>CHOOSE FILE</span></button>
+										</div>
+										{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}	
+									</div>
+								</div>
+							</div>
+							</div>
 				      <div className="form-group">
 				         <label>Button Copy</label>
 				         <input type="text" name="Button Copy" id="Button_Copy" placeholder="Button Copy"/> 

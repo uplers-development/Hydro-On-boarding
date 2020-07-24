@@ -19,13 +19,15 @@ class UserProfile extends Component {
 			logout:false,
 			dataLoaded:false,
 			openTooglecontent:false,
-			hoverState:null
+			hoverState:null,
+			openPopup:false,
 		}
 		this.opentoogler=React.createRef();
 		this.Logout=this.Logout.bind(this);
 		this.renderClass=this.renderClass.bind(this);
 		this.renderInHover=this.renderInHover.bind(this);
 		this.renderOutHover=this.renderOutHover.bind(this);
+		console.log(this.props.historyPush);
 	}
 
 	componentDidMount(){
@@ -36,16 +38,8 @@ class UserProfile extends Component {
 
 	Logout=(e)=>{
 		e.preventDefault();
-		localStorage.clear();
-		this.setState({logout:true})
+		this.setState({openPopup:true});
 	}
-
-	logoutDone=()=>{
-		if(this.state.logout){
-			return <Redirect to="/Login"/>
-		}
-	}
-
 
 	GetProfile=()=>{
 		fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
@@ -69,24 +63,30 @@ class UserProfile extends Component {
 
 
 	renderClass=(e)=>{
+		if(divType!==null ){
 		if(!divType.parentNode.classList.contains("active")){
 			divType.parentNode.classList.add("active")
 		}else{
 			divType.parentNode.classList.remove("active")
 		}
+		}
 	}
 
 	renderInHover=()=>{
 		this.setState({hoverState:true})
+		if(divType!==null ){
 		if(!divType.parentNode.classList.contains('active')){
 		  divType.parentNode.classList.add("active")
+		}
 		}
 	}
 
 	renderOutHover=()=>{
 		this.setState({hoverState:false})
+		if(divType!==null){
 		if(divType.parentNode.classList.contains('active')){
 		  divType.parentNode.classList.remove("active")
+		}
 		}
 	}
 
@@ -114,7 +114,32 @@ class UserProfile extends Component {
 					</ul>
 				</div>
 				</div>
-				{this.state.logout ? this.logoutDone() :''}
+
+
+				  {this.state.openPopup ? 
+					<div id="modal" className="modal-container">
+						<div className="modal d-flex flex-wrap align-center justify-center">
+							<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+							className="close" title="Close"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+							
+						<div>
+							<img className="svg" src={require("../../images/round-correct.svg")} alt="Right icon"/>
+								<p>Are you sure you want to Sign out?</p>
+							<div className="btn-blok">
+								<button onClick={((e)=>{e.preventDefault();this.setState({openPopup:false});
+
+							})} className="btn common-btn-blue"><span>CANCEL</span></button>
+								<button className="btn common-btn-blue" onClick={((e)=>{
+										console.log(this.props.historyPush)
+										localStorage.clear();
+										this.props.historyPush.history.push("/Login");
+								})}><span>YES</span></button>	
+							</div>
+							
+						</div>
+						</div>
+					</div>
+					: <></>}
 			</div>
 		);
 	}

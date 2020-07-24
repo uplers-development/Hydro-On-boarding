@@ -198,7 +198,7 @@ class Contract extends Component {
 										<img src={require("../../images/contracts-logo-blue.svg")} alt="contracts-logo"/>
 										<h1>Contracts</h1>
 									</div>
-									<UserProfile/>
+									<UserProfile historyPush={this.props}/>
 								</div>
 								
 							</div>

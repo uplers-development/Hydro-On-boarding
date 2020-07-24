@@ -26,6 +26,7 @@ const renderOutHover=()=>{
 }
 
 const Logout=()=>{
+
 	localStorage.clear();
 }
 
@@ -34,8 +35,11 @@ class Repheader extends React.Component{
       super(props);
       this.state={
          Repclient:false,
+         openPopup:false
       }
    }
+
+
 
 
 render(){
@@ -79,9 +83,38 @@ render(){
                                                 })                           
                                           })}  
                      title="Profile">Profile</Link></li>
-                     <li><Link to={"/Login"} onClick={Logout} title="Sign out">Sign out</Link></li>
+                     <li><Link to={""} onClick={((e)=>{
+                              e.preventDefault();
+                              this.setState({openPopup:true});
+                     })} title="Sign out">Sign out</Link></li>
                   </ul>
                </div>
+               {this.state.openPopup ? 
+                     <div id="modal" className="modal-container">
+                        <div className="modal d-flex flex-wrap align-center justify-center">
+                           <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+                           className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+                           
+                        <div>
+                           <img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+                              <p>Are you sure you want to Sign out?</p>
+                           <div className="btn-blok">
+                              <button onClick={((e)=>{e.preventDefault();this.setState({openPopup:false});
+
+                           })} className="btn common-btn-blue"><span>CANCEL</span></button>
+                              <button className="btn common-btn-blue" onClick={((e)=>{
+                                    console.log(this.props.historyPush)
+                                    localStorage.clear();
+                                    this.props.historyPush.history.push("/Login");
+                              })}><span>YES</span></button> 
+                           </div>
+                           
+                        </div>
+                        </div>
+                     </div>
+                     : <></>}
+
+
             </div>
    </div>
   )

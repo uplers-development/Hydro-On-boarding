@@ -486,7 +486,7 @@ class Product extends Component {
 								<h1>Your products</h1>
 							</div>
 
-							<UserProfile/>
+							<UserProfile historyPush={this.props}/>
 						</div>
 				</div>
 

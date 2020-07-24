@@ -52,7 +52,7 @@ import {cosmaticAsset} from'./constants/common';
 			<div className="dashboard-switch-user">
 				<div className="top-switch-user d-flex flex-wrap">
 					<h1>Switch user - Demo only</h1>
-					<UserProfile/>
+					<UserProfile historyPush={this.props}/>
 				</div>
 				
 				{/*<!--Dashboard list start-->*/}

@@ -1,19 +1,19 @@
 /*********************************Staging Server*********************************************/
-export const base_url='//staging.project-progress.net/projects/hydro/';
-export const site_url='//staging.project-progress.net';
-let target_id=localStorage.getItem("user-type")!==null? JSON.parse(localStorage.getItem("user-type")).uid:'';
+export const base_url=process.env.NODE_ENV==='production' ? window.location.origin+'/backend' : '//staging.project-progress.net/projects/hydro';
+export const site_url=process.env.NODE_ENV==='production' ? window.location.origin :'//staging.project-progress.net';
+const target_id=localStorage.getItem("user-type")!==null? JSON.parse(localStorage.getItem("user-type")).uid:'';
 
 export default {
     Loginpagecontent:{
-        url:base_url+'json-api/login.json',
+        url:base_url+'/json-api/login.json',
         method:'GET'
     },
     Loginaction: {
-    	 url: base_url+'user/login?_format=json',
+    	 url: base_url+'/user/login?_format=json',
          method: 'POST'
     },
     Welcomeblockmain:{
-         url:base_url+'node/2?_format=json',
+         url:base_url+'/node/2?_format=json',
          method:'GET'
     },
     WelcomeThreeblock:{
@@ -164,24 +164,24 @@ export default {
     },
 
     GetProfile: {
-    	 url: base_url+`user/${target_id}?_format=json`,
+    	 url: base_url+`/user/${target_id}?_format=json`,
          method: 'GET'
     },Updateprofile: {
-         url: base_url+`user/${target_id}?_format=json`,
+         url: base_url+`/user/${target_id}?_format=json`,
          method: 'PATCH'
     }
     ,ProfiletimeZone: {
-         url: base_url+"json-api/timezones.json",
+         url: base_url+"/json-api/timezones.json",
          method: 'GET'
     },
     UpdateprofilePic: {
-         url: base_url+"file/upload/user/user/user_picture?_format=json",
+         url: base_url+"/file/upload/user/user/user_picture?_format=json",
          method: 'PATCH'
     },Leftsidebar_client: {
-    	 url: base_url+'jsonapi/menu_list/main?_format=json',
+    	 url: base_url+'/jsonapi/menu_list/main?_format=json',
          method: 'GET'
     },Leftsidebar_enduser: {
-    	 url: base_url+'entity/menu/main/tree',
+    	 url: base_url+'/entity/menu/main/tree',
          method: 'GET'
     },Leftsidebar_repuser: {
     	 url: base_url+'/jsonapi/menu_list/main-navigation-rep?_format=json',
@@ -220,5 +220,19 @@ export default {
 
     /******************************************REP USERS API CALLS ENDS ******************************************/
 
-    
+}
+
+export const Admin={
+    menulisting:{
+        url:base_url+'/json-api/menu_list.json',
+        method:'POST'
+    },
+    adminprofileinfo:{
+        url:base_url+`/user/${target_id}?_format=json`,
+        method:'GET'
+    },
+    adminresourcelisting:{
+        url:base_url+`/jsonapi/admin_resources?_format=json`,
+        method:'GET'
+    }
 }

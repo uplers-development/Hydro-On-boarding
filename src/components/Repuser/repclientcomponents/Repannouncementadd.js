@@ -61,7 +61,7 @@ class Repannouncementadd extends React.Component {
 				  headers: myHeaders,
 				  body: fullPath,
 				};
-				fetch("http://staging.project-progress.net/projects/hydro/file/upload/node/article/field_image?_format=json",requestOptions)
+				fetch("${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/file/upload/node/article/field_image?_format=json",requestOptions)
 				.then(res=>{return res.json()})
 				.then(data=>{console.log(data);
 					this.setState({smallLoader:false,announcement_image:true,newuserPic_id:data.fid[0]['value'],announcement_image_uploaded:site_url+data.uri[0].url})

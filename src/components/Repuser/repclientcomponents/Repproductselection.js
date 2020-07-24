@@ -26,7 +26,7 @@ class Repproductselection extends React.Component{
 
 
 	Get_client_Product_Details=()=>{
-			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json`,{
+			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json`,{
 			    headers:{
 			            "Content-Type" : "application/json",
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -40,7 +40,7 @@ class Repproductselection extends React.Component{
 
 	Search_client_Product_Details=(e)=>{
 		if(this.clientProductSearch.current.value!==''){
-			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
+			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
 			    headers:{
 			            "Content-Type" : "application/json",
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),

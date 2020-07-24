@@ -75,7 +75,7 @@ class Announcements extends React.Component {
 	}
 
    client_data_Table=()=>{
-		fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json`,{
+		fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json`,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -89,7 +89,7 @@ class Announcements extends React.Component {
       let menulist={
          menu:"main-navigation-rep"
       }
-      fetch(`https://staging.project-progress.net/projects/hydro/json-api/menu_list.json`,{
+      fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json-api/menu_list.json`,{
           headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -102,7 +102,7 @@ class Announcements extends React.Component {
 
 	 GetProfile=()=>{
 	      try{
-	         fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
+	         fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
 	               headers: {
 	                     "Content-Type" : "application/json",
 	                     "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -120,7 +120,7 @@ class Announcements extends React.Component {
 	   }
 
 	get_announcements_list = () =>{
-      fetch(`http://staging.project-progress.net/projects/hydro/json-api/news_feed_type.json`,{
+      fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json-api/news_feed_type.json`,{
          /* headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),

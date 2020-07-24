@@ -101,7 +101,7 @@ class Repaddproduct extends React.Component{
                     headers: myHeaders,
                     body: fullPath,
                   };
-                  fetch("http://staging.project-progress.net/projects/hydro/file/upload/node/product_purchase/field_purchase_doument?_format=json",requestOptions)
+                  fetch("${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/file/upload/node/product_purchase/field_purchase_doument?_format=json",requestOptions)
                   .then(res=>{return res.json()})
                   .then(data=>{
                      console.log(data);
@@ -118,7 +118,7 @@ class Repaddproduct extends React.Component{
 
    Search_client_Product_Details=(e)=>{
       if(this.clientProductSearch.current.value!==''){
-         fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/add_products?_format=json&title=${this.clientProductSearch.current.value}`,{
+         fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/add_products?_format=json&title=${this.clientProductSearch.current.value}`,{
              headers:{
                      "Content-Type" : "application/json",
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -145,7 +145,7 @@ class Repaddproduct extends React.Component{
 
    Get_Product_details=()=>{
        try{
-         fetch(`${base_url}jsonapi/add_products?_format=json`,{
+         fetch(`${base_url}/jsonapi/add_products?_format=json`,{
                headers: {
                      "Content-Type" : "application/json",
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -214,7 +214,7 @@ class Repaddproduct extends React.Component{
             console.log(productList);
             productList.map((item,index)=>{
                 if(!this.state.purchseDatempty &&!this.state.costState &&!this.state.itemidState){
-                  fetch(`${base_url}node?_format=json`,{
+                  fetch(`${base_url}/node?_format=json`,{
                         method:"POST",
                         headers: {
                            "Content-Type" : "application/json",

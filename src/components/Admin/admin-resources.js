@@ -16,9 +16,11 @@ class AdminResource extends React.Component {
 		super(props);
 		this.state={
 			sidebarvisible:false,
-			menulisting:null
+			menulisting:null,
+			resourcesFiltereddata:[]
 		}
 		this.admin_sidebar_listing=this.admin_sidebar_listing.bind(this);
+		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 	}
 
 	componentDidMount(){
@@ -30,6 +32,10 @@ class AdminResource extends React.Component {
 
    admin_sidebar_listing=(checkstatus,menulisting)=>{
    		this.setState({sidebarvisible:checkstatus, menulisting:menulisting});
+   }
+
+   resourcesafterFilter=(resourcesfiltereddata)=>{
+   		this.setState({resourcesFiltereddata:resourcesfiltereddata})
    }
 
 
@@ -63,7 +69,7 @@ class AdminResource extends React.Component {
 					<div className="fileter-block d-flex flex-wrap border-bottom">
 						
 							{/*<!--Select box start-->*/}
-							<Adminresourcesfilter/>
+							<Adminresourcesfilter checkresourcefilter={this.resourcesafterFilter}/>
 							{/*<!--Select box end-->*/}	
 							
 							{/*<!--Right search and sort block start-->*/}
@@ -78,7 +84,7 @@ class AdminResource extends React.Component {
 							{/*</div>*/}
 						
 					</div>
-						<Adminresourcetable/>
+						<Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata}/>
 						
 						
 					</div>

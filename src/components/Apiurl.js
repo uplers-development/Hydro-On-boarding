@@ -231,6 +231,10 @@ export const Admin={
         url:base_url+`/user/${target_id}?_format=json`,
         method:'GET'
     },
+    adminresourcedropdown:{
+        url:base_url+`/jsonapi/taxonomy_list/resource_type?_format=json`,
+        method:'GET'
+    }, 
     adminresourcelisting:{
         url:base_url+`/jsonapi/admin_resources?_format=json`,
         method:'GET'

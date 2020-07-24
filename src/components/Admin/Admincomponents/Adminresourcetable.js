@@ -12,12 +12,13 @@ class Adminresourcetable extends React.Component{
       	loader:true,
       	noDatacall:true,
       }
+      //console.log(this.props.getdatafromfilter);
       this.singleSelect=this.singleSelect.bind(this);
       this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
    }
 
    componentDidMount(){
-   	this.get_resource_table();
+   		this.get_resource_table();
    }
 
    selectAllcheckbox=(e)=>{
@@ -58,22 +59,27 @@ class Adminresourcetable extends React.Component{
 	}
 
    get_resource_table=()=>{
+   	if(this.props.getdatafromfilter.length <= 0 ){
    		fetch(Admin.adminresourcelisting.url,{
    	 		 headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcelisting.method,
-   	 }).then(res=>{return res.json()}).then(data=>{
-   	 		if(data.length>0){
-   	 			this.setState({noDatacall:false,adminresourcetabledata:data,loader:false})
-   	 		}else{
-   	 			this.setState({loader:false,noDatacall:true})
-   	 		}
-   	 });
+	   	 }).then(res=>{return res.json()}).then(data=>{
+	   	 		if(data.length>0){
+	   	 			this.setState({noDatacall:false,adminresourcetabledata:data,loader:false})
+	   	 		}else{
+	   	 			this.setState({loader:false,noDatacall:true})
+	   	 		}
+	   	 });
+   	}else{
+   		this.setState({loader:false,adminresourcetabledata:this.props.getdatafromfilter});
+   	}
    }
 
    render(){
+   		let newresourcedata=this.props.getdatafromfilter.length > 0 ? this.props.getdatafromfilter :this.state.adminresourcetabledata;	
    		return(
    				<div className="resources-table table-outer">
 				   <div className="table-responsive">
@@ -97,7 +103,7 @@ class Adminresourcetable extends React.Component{
 					         </thead>
 					         <tbody>
 					         {!this.state.noDatacall ?
-					         	this.state.adminresourcetabledata.map((item,index)=>
+					         	newresourcedata.map((item,index)=>
 					            <tr key={index}>
 					               <td>
 					                  <div className="checkbox-cust">

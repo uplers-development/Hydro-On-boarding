@@ -83,24 +83,23 @@ class Admin_add_Products extends React.Component {
 					<div className="d-flex flex-wrap admin-products-add">
 					
 					{/*<!--Product form add Start-->*/}
+					<form>
 						<div className="product-add-form">
-							<form>
-
 							<div className="form-group d-flex flex-wrap align-center">
 										<label>Product name</label>
 										<div className="input-box">
 											<input type="text" name="Product name" id="title" />
 										</div>
 									</div>
-									<div className="form-group d-flex flex-wrap align-center">
+							<div className="form-group d-flex flex-wrap align-center">
 										<label>Description*</label>
 										<div className="input-box">
 											<input type="text" name="Description" id="description" />
 										</div>
 									</div>
 
-								{/*<!-Upload thumbnail block Start-->*/}
-								<div className="upload-thumbnail d-flex flex-wrap">
+							{/*<!-Upload thumbnail block Start-->*/}
+							<div className="upload-thumbnail d-flex flex-wrap">
 									<div className="upload-btn-block">
 										<div className="upload-btn-wrapper">
 											<input type="file" name="Upload photo" />
@@ -111,10 +110,33 @@ class Admin_add_Products extends React.Component {
 									<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${ThumbnailImage_prod})`}}>
 									</div>	
 								</div>
-									{/*<!-Upload thumbnail block End-->*/}
-
-							</form>		
+							{/*<!-Upload thumbnail block End-->*/}
 						</div>
+						
+						<div className="product-sheet-title">
+
+						<div className="form-group d-flex flex-wrap align-center">
+										<label>Product sheet title</label>
+										<div className="input-box">
+											<input type="text" name="Product name" id="title" />
+										</div>
+						</div>
+						
+							<div className="upload-prod-sheet">
+							<div className="upload-btn-block">
+											<div className="upload-btn-wrapper">
+												<input type="file" name="Upload product sheet" />
+												<button className="btn wide common-btn-blue">
+												<span>Upload product sheet</span></button>
+											</div>
+										</div>
+							</div>
+						</div>
+						<div className="btn-block">
+							<button className="btn wide common-btn-blue">
+							<span>Add Product</span></button>
+							</div>
+						</form>	
 					{/*<!--Product form add End-->*/}
 						
 						

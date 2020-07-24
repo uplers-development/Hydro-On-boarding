@@ -23,6 +23,9 @@ import Admin_add_Products from "./components/Admin/Admin_add_Products";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
+
+
+console.log(process.env.NODE_ENV);
 class App extends Component {
   constructor(props){
     super(props);

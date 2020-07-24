@@ -1,9 +1,23 @@
-.admin-products-main {
+/*.admin-products-main {
 	.fileter-block {
 		.select-box {
 			width: 282px;
+			span {
+				font-size: 18px;
+				line-height: 22px;
+				padding: 7px 15px;
+			}
+			ul {
+				top: 37px;
+				width: calc(100% + 2px);
+				left: -1px;
+				li {
+					a {
+						padding: 7px 15px;
+					}
+				}
+			}
 		}
-
 		.search-sort-block {
 			.common-btn-blue {
 				margin-bottom: 0;
@@ -15,9 +29,14 @@
 					line-height: 28px;
 				}
 			}
+			@media screen and (max-width:$ipad-portrait) {
+				margin: 5px 0 0 auto;
+			}
+			.mobile-filter {
+				margin-left: auto;
+			}
 		}
 	}
-
 	.admin-products-table {
 		padding-top: 20px;
 		.table-responsive {
@@ -29,30 +48,51 @@
 
 							&:nth-child(1) {
 								width: 470px;
+
+								@media screen and (max-width:$large-mx) {
+									width: 350px;
+								}
 							}
 
 							&:nth-child(2) {
 								width: 180px;
-							}
 
+								@media screen and (max-width:$large-mx) {
+									width: 160px;
+								}
+							}
 							&:nth-child(3) {
 								width: 200px;
-							}
 
+								@media screen and (max-width:$large-mx) {
+									width: 170px;
+								}
+							}
 							&:nth-child(4) {
 								width: 300px;
 								text-align: left;
-							}
 
+								@media screen and (max-width:$large-mx) {
+									width: 210px;
+								}
+							}
 							&:nth-child(5) {
 								width: 200px;
 								text-align: right;
 								padding-right: 42px;
+
+								@media screen and (max-width:$mobile-small) {
+									padding-right: 20px;
+								}
+
+								@media screen and (max-width:$large-mx) {
+									width: 180px;
+									padding-right: 20px;
+								}
 							}
 						}
 					}
 				}
-
 				tbody {
 					tr {
 						td {
@@ -61,14 +101,16 @@
 							line-height: 18px;
 							color: $light-black;
 							vertical-align: middle;
+
 							.name-edit {
 								width: calc(100% - 18px);
 
 								.img-c {
-									height: 60px;
+									width: 62px;
+									height: 53px;
 								}
-
 								.right-detail {
+									width: calc(100% - 62px);
 									padding-left: 10px;
 									h3 {
 										display: inline-block;
@@ -82,6 +124,7 @@
 											font-size: 14px;
 										}
 									}
+
 									> a {
 										font-size: 16px;
 										line-height: 20px;
@@ -91,9 +134,11 @@
 										font-weight: $font-normal;
 										padding-left: 15px;
 										position: relative;
+
 										&:hover {
 											color: $sky-blue;
-										}	
+										}
+
 										&:after {
 											content: "";
 											display: inline-block;
@@ -112,6 +157,7 @@
 							&:nth-child(2) {
 								line-height: 20px;
 							}
+
 							&:nth-child(3) {
 								span {
 									width: 100%;
@@ -121,11 +167,28 @@
 							&:nth-child(5) {
 								text-align: right;
 								padding-right: 42px;
+
+								@media screen and (max-width:$large-mx) {
+									padding-right: 20px;
+								}
+
 							}
+
+							.checkbox-cust {
+								label {
+									background-color: $white;
+								}
+							}
+						}
+						&:nth-child(even) {
+							background-color: $off-white;
 						}
 					}
 				}
 			}
 		}
+		@media screen and (max-width:$mobile-small) {
+			padding: 0 23px;
+		}
 	}
-}
+}*/

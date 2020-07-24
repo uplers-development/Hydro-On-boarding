@@ -193,8 +193,8 @@ class Admin_Products extends React.Component {
 <tr>
          <td>
 			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox1" />
-      				<label for="checkbox1"></label>	 
+				 	<input type="checkbox" id="checkbox2" />
+      				<label for="checkbox2"></label>	 
 			 </div>
 			 <div className="name-edit">
 				 <div className="img-c bg-cover" style={{backgroundImage: `url(${adminProductImage2})`}}></div>

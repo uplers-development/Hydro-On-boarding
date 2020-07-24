@@ -1866,11 +1866,9 @@ nav {
 	margin-left: auto;
 	border: 1px solid $off-white;
 	z-index: 1;
-
 	@media screen and (max-width:$large-m) {
 		width: 200px;
 	}
-
 	@media screen and (max-width:$mobile-small) {
 		width: 268px;
 		padding: 0;
@@ -1944,7 +1942,6 @@ nav {
 			background-size: 17px;
 			background-repeat: no-repeat;
 			background-position: 5% center;
-
 			&:hover {
 				color: $sky-blue;
 			}

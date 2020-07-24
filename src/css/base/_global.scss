@@ -93,7 +93,10 @@ ul {
 		font-weight: $font-semi-bold;
 		position: relative;
 		z-index: 1;
-
+		@media screen and (max-width:$large-m) {
+			font-size: 18px;
+			line-height: 40px;
+		}
 		@media screen and (max-width:$mobile-small) {
 			font-size: 16px;
 			line-height: 39px;

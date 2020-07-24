@@ -189,6 +189,25 @@ class Admin_Products extends React.Component {
 		 <td>Stormwater Management</td>				
 		 <td>18th March 2020</td>				
       </tr>
+
+<tr>
+         <td>
+			 <div className="checkbox-cust">
+				 	<input type="checkbox" id="checkbox1" />
+      				<label for="checkbox1"></label>	 
+			 </div>
+			 <div className="name-edit">
+				 <div className="img-c bg-cover" style={{backgroundImage: `url(${adminProductImage2})`}}></div>
+				 <div className="right-detail">
+				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
+			 	</div>	
+			 </div>	 
+		 </td>
+		 <td>Simon</td>				
+		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
+		 <td>Stormwater Management</td>				
+		 <td>18th March 2020</td>				
+      </tr>
 	
 	
          </tbody>

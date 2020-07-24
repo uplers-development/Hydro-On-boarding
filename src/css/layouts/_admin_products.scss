@@ -3,62 +3,124 @@
 		.select-box {
 			width: 282px;
 		}
+
 		.search-sort-block {
 			.common-btn-blue {
 				margin-bottom: 0;
 				padding: 5px 15px;
 				min-width: 127px;
+
 				span {
 					font-size: 18px;
 					line-height: 28px;
 				}
-			}		
+			}
 		}
 	}
+
 	.admin-products-table {
+		padding-top: 20px;
 		.table-responsive {
 			.table {
 				thead {
 					tr {
 						th {
-							padding: 12px 14px;
+							padding: 12px 14px 4px;
+
 							&:nth-child(1) {
-								width: 384px;
+								width: 470px;
 							}
+
 							&:nth-child(2) {
-								width: 184px;
+								width: 180px;
 							}
+
 							&:nth-child(3) {
 								width: 200px;
 							}
+
 							&:nth-child(4) {
-								width: 200px;
+								width: 300px;
+								text-align: left;
 							}
+
 							&:nth-child(5) {
-								width: 150px;
+								width: 200px;
+								text-align: right;
+								padding-right: 42px;
 							}
 						}
 					}
 				}
+
 				tbody {
 					tr {
 						td {
-							padding: 12px 14px;
+							padding: 15px 14px;
+							font-size: 16px;
+							line-height: 18px;
+							color: $light-black;
+							vertical-align: middle;
 							.name-edit {
 								width: calc(100% - 18px);
+
 								.img-c {
 									height: 60px;
 								}
+
 								.right-detail {
+									padding-left: 10px;
 									h3 {
 										display: inline-block;
-									}	
+										color: $light-black;
+										font-size: 16px;
+										line-height: 20px;
+									}
+									.action {
+										a {
+											color: $panton-gray;
+											font-size: 14px;
+										}
+									}
 									> a {
 										font-size: 16px;
 										line-height: 20px;
 										color: $light-black;
+										text-decoration: none;
+										font-family: $arial;
+										font-weight: $font-normal;
+										padding-left: 15px;
+										position: relative;
+										&:hover {
+											color: $sky-blue;
+										}	
+										&:after {
+											content: "";
+											display: inline-block;
+											width: 1px;
+											height: 18px;
+											background-color: $light-black;
+											position: absolute;
+											top: 50%;
+											transform: translateY(-50%);
+											-webkit-transform: translateY(-50%);
+											left: 6px;
+										}
 									}
 								}
+							}
+							&:nth-child(2) {
+								line-height: 20px;
+							}
+							&:nth-child(3) {
+								span {
+									width: 100%;
+									display: block;
+								}
+							}
+							&:nth-child(5) {
+								text-align: right;
+								padding-right: 42px;
 							}
 						}
 					}

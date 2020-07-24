@@ -13,11 +13,31 @@ class Adminresourcetable extends React.Component{
       	noDatacall:true,
       }
       this.singleSelect=this.singleSelect.bind(this);
+      this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
    }
 
    componentDidMount(){
    	this.get_resource_table();
    }
+
+   selectAllcheckbox=(e)=>{
+		 var ele=e.target;
+		 var checkboxes = document.getElementsByTagName('input');
+	     if (ele.checked) {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = true;
+	             }
+	         }
+	     }else {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             console.log(i)
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = false;
+	             }
+	         }
+	      }
+	}
 
    singleSelect=(e)=>{
 		var checkboxes = document.querySelectorAll('.resourceschecked');
@@ -64,7 +84,7 @@ class Adminresourcetable extends React.Component{
 					            <tr>
 					               <th>
 					                  <div className="checkbox-cust">
-					                     <input type="checkbox" className="resourcesparentcheck" id="checkbox" />
+					                     <input type="checkbox" className="resourcesparentcheck" id="checkbox" onChange={this.selectAllcheckbox}/>
 					                     <label htmlFor="checkbox"></label>	 
 					                  </div>
 					                  <span>Title</span>

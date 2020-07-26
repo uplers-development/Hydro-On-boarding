@@ -76,6 +76,7 @@ class Adminheader extends React.Component{
             console.log(data);
             if(!data.message){
                this.setState({admininfo:data})
+               this.props.getAdminuid(this.state.admininfo);
             }
          })
       }catch(err){

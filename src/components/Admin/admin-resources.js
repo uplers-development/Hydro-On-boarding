@@ -8,6 +8,7 @@ import Adminnavbar from './assets/Adminnavbar';
 import Adminresourcesfilter from './Admincomponents/Adminresourcesfilter';
 import Adminresourcesmobilefilter from './Admincomponents/Adminresourcesmobilefilter';
 import Adminresourcetable from './Admincomponents/Adminresourcetable';
+import Adminresourceadd from './Admincomponents/Adminresourceadd';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -15,12 +16,15 @@ class AdminResource extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			/*sidebarvisible:false,*/
-			/*menulisting:null,*/
-			resourcesFiltereddata:[]
+				resourcesFiltereddata:[],
+				viewcaller:false,
+				resourcechangeid:null,
+				checkcallfrom:null,	
+				adminuid:null,
 		}
-		//this.admin_sidebar_listing=this.admin_sidebar_listing.bind(this);
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
+		this.checktheview=this.checktheview.bind(this);
+		this.getadmindetail=this.getadmindetail.bind(this);
 	}
 
 	componentDidMount(){
@@ -30,76 +34,50 @@ class AdminResource extends React.Component {
       }
    }
 
-  /* admin_sidebar_listing=(checkstatus,menulisting)=>{
-   		this.setState({sidebarvisible:checkstatus, menulisting:menulisting});
-   }
-*/
+  	
    resourcesafterFilter=(resourcesfiltereddata)=>{
    		this.setState({resourcesFiltereddata:resourcesfiltereddata})
+   }
+
+  checktheview=(callfrom,viewcall,getChangeid)=>{
+  		console.log(getChangeid);
+   		this.setState({checkcallfrom:callfrom,viewcaller:viewcall,resourcechangeid:getChangeid});
+   }  
+
+  getadmindetail=(admindetails)=>{
+  		console.log(admindetails);
+   		this.setState({adminuid:admindetails.uid[0]}.value);
    }
 
 
 
 	render(){
 		return(<div>
-			   
-			    {/*<!--Main wrapper start-->*/}
-			   <section className="main-wrapper">
-			     {/*<!-- Main block start-->*/}
-			   	<div className="d-flex flex-wrap main-block">
-			   
-			   {/*<!--Nav fixed left block start-->*/}
-				<Adminnavbar/>
-			{/*<!--Nav fixed left block end-->*/}
-
-			{/*<!--Main right content block start-->*/}
-			<div className="d-flex flex-wrap right-content-part">
-				<div className="top-heading">
-					<Adminheader historyPush={this.props}  />
-					
-				</div>
-
-				{/*<!--Main content bottom block start-->*/}
-				<div className="bottom-content-block with-filter">
-
-					{/*<!--Resources main blok start-->*/}
-					<div className="d-flex flex-wrap admin-resources-main">
-					
-					{/*<!--Top filter block Start-->*/}
-					<div className="fileter-block d-flex flex-wrap border-bottom">
-						
-							{/*<!--Select box start-->*/}
-							<Adminresourcesfilter checkresourcefilter={this.resourcesafterFilter}/>
-							{/*<!--Select box end-->*/}	
-							
-							{/*<!--Right search and sort block start-->*/}
-							<div className="search-sort-block d-flex flex-wrap align-center">
-							</div>	
-
-								{/*<!-Mobile filter box start-->*/}
-								<Adminresourcesmobilefilter/>
-								{/*<!-Mobile filter box end-->*/}
-
-
-							{/*</div>*/}
-						
-					</div>
-						<Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata}/>
-						
-						
-					</div>
-					{/*<!--Resource main blok end-->*/}
-
-				</div>
-				{/*<!--Main content bottom block end-->*/}
-
-			</div>
-			{/*<!--Main right content block start-->*/}
-			
-				</div>
-			</section>
-			   
-			   </div>)
+				   <section className="main-wrapper">
+				      <div className="d-flex flex-wrap main-block">
+				         <Adminnavbar/>
+				         <div className="d-flex flex-wrap right-content-part">
+				            <div className="top-heading">
+				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail}  />
+				            </div>
+				            <div className="bottom-content-block with-filter">
+				               {!this.state.viewcaller ? 
+				               		<div className="d-flex flex-wrap admin-resources-main">
+				                  <div className="fileter-block d-flex flex-wrap border-bottom">
+				                     <Adminresourcesfilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
+				                     <div className="search-sort-block d-flex flex-wrap align-center"></div>
+				                     <Adminresourcesmobilefilter/>
+				                  </div>
+				                  <Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview}/>
+				               		</div>
+								:
+								<Adminresourceadd/>					               
+				               }
+				            </div>
+				         </div>
+				      </div>
+				   </section>
+			  </div>)
 	}
 }
 		

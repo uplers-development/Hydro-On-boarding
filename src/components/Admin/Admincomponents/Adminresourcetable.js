@@ -11,8 +11,10 @@ class Adminresourcetable extends React.Component{
       	adminresourcetabledata:[],
       	loader:true,
       	noDatacall:true,
+      	checkdraftStatus:false,
+      	openDraftPopup:false
       }
-      //console.log(this.props.getdatafromfilter);
+	  console.log();
       this.singleSelect=this.singleSelect.bind(this);
       this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
    }
@@ -78,6 +80,23 @@ class Adminresourcetable extends React.Component{
    	}
    }
 
+   draft_resource=(e,draftid)=>{
+   		e.preventDefault();
+   		let target_=e.target;
+   		fetch(Admin.adminresourcedraft.url+`${draftid}?_format=json`,{
+   	 		 headers:{
+                  "Content-Type" : "application/json",
+                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+            },
+            method:Admin.adminresourcedraft.method,
+	   	 }).then(res=>{return res.json()}).then(data=>{
+	   	 	console.log(data);
+	   	 	this.setState({openDraftPopup:true});
+	   	 	target_.textContent='Published';
+	   	 	target_.setAttribute("title","Published");
+	   	 });
+   }
+
    render(){
    		let newresourcedata=this.props.getdatafromfilter.length > 0 ? this.props.getdatafromfilter :this.state.adminresourcetabledata;	
    		return(
@@ -113,11 +132,11 @@ class Adminresourcetable extends React.Component{
 					                  <div className="name-edit">
 					                     <div className="right-detail">
 					                        <h3>{item.title}</h3>
-					                        <Link to={""} onClick={e=>e.preventDefault()} title="Draft">Draft</Link>
+					                        <Link to={""} onClick={((e)=>this.draft_resource(e,item.nid))} title="Draft">Draft</Link>
 					                        <div className="action d-flex flex-wrap">
-					                           <Link to={""} onClick={e=>e.preventDefault()} title="Edit">Edit</Link>	 
+					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,true,item.nid)})} title="Edit">Edit</Link>	 
 					                           <Link to={""} onClick={e=>e.preventDefault()} title="Delete">Delete</Link>	 
-					                           <Link to={""} onClick={e=>e.preventDefault()} title="View">View</Link>	 
+					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(true,true,item.nid)})} title="View">View</Link>	 
 					                        </div>
 					                     </div>
 					                  </div>
@@ -142,6 +161,22 @@ class Adminresourcetable extends React.Component{
 					  	}
 				      {/*<!--Table End-->*/}
 				   </div>
+				   {this.state.openDraftPopup ? 
+
+				   		<div id="modal" className="modal-container">
+												<div className="modal d-flex flex-wrap align-center justify-center">
+													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openDraftPopup:false});
+													})}
+													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+													
+												<div>
+													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+														<h2>Resource draft published.</h2>
+												</div>
+												</div>
+											</div>
+								: <></>
+				   }
 				</div>
    			)
    }

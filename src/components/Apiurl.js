@@ -238,5 +238,9 @@ export const Admin={
     adminresourcelisting:{
         url:base_url+`/jsonapi/admin_resources?_format=json`,
         method:'GET'
+    },
+    adminresourcedraft:{
+        url:base_url+`/node/`,
+        method:'GET'
     }
 }

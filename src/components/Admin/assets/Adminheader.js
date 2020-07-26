@@ -59,7 +59,6 @@ class Adminheader extends React.Component{
             body:JSON.stringify(menulist)
       }).then(res=>{return res.json()}).then(data=>{
                this.setState({menulisting:data})
-               this.props.get_sidebar_menu_listing(true,this.state.menulisting)
       })
    }
 

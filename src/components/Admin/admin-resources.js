@@ -15,11 +15,11 @@ class AdminResource extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			sidebarvisible:false,
-			menulisting:null,
+			/*sidebarvisible:false,*/
+			/*menulisting:null,*/
 			resourcesFiltereddata:[]
 		}
-		this.admin_sidebar_listing=this.admin_sidebar_listing.bind(this);
+		//this.admin_sidebar_listing=this.admin_sidebar_listing.bind(this);
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 	}
 
@@ -30,10 +30,10 @@ class AdminResource extends React.Component {
       }
    }
 
-   admin_sidebar_listing=(checkstatus,menulisting)=>{
+  /* admin_sidebar_listing=(checkstatus,menulisting)=>{
    		this.setState({sidebarvisible:checkstatus, menulisting:menulisting});
    }
-
+*/
    resourcesafterFilter=(resourcesfiltereddata)=>{
    		this.setState({resourcesFiltereddata:resourcesfiltereddata})
    }
@@ -49,13 +49,13 @@ class AdminResource extends React.Component {
 			   	<div className="d-flex flex-wrap main-block">
 			   
 			   {/*<!--Nav fixed left block start-->*/}
-				{this.state.sidebarvisible && <Adminnavbar menulist={this.state.menulisting}/>}
+				<Adminnavbar/>
 			{/*<!--Nav fixed left block end-->*/}
 
 			{/*<!--Main right content block start-->*/}
 			<div className="d-flex flex-wrap right-content-part">
 				<div className="top-heading">
-					<Adminheader historyPush={this.props}  get_sidebar_menu_listing={this.admin_sidebar_listing}/>
+					<Adminheader historyPush={this.props}  />
 					
 				</div>
 

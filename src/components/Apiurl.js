@@ -250,6 +250,10 @@ export const Admin={
     adminresourceAdd:{
         url:base_url+`/node?_format=json`,
         method:'POST'
+    }, 
+    adminresourceProducttags:{
+        url:base_url+`/jsonapi/taxonomy_list/applications?_format=json`,
+        method:'GET'
     },
     adminresourceAdddocument:{
         url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,

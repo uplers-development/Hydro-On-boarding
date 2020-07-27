@@ -24,9 +24,14 @@
 			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 				margin: 0 0 0 25px;
 			}
-
+			@media (max-height: $mob-landscape-411) and (orientation: landscape) {
+				margin: 0;
+				margin: 0;
+				width: 100%;
+			}
 			@media (max-height: $mob-landscape-375) and (orientation: landscape) {
 				margin: 0;
+				width: 100%;
 			}
 		}
 	}
@@ -94,6 +99,14 @@
 				.btn {
 					margin-bottom: 0;
 					min-width: 147px;
+					span {
+						@media screen and (max-width:$mobile-small) {
+							line-height: 32px;
+						}
+					}
+					@media screen and (max-width:$mobile-small) {
+						min-width: 100px;
+					}
 				}
 			}
 		}

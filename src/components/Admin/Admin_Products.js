@@ -29,9 +29,9 @@ class Admin_Products extends React.Component {
 
 				{/*<!--List of menu start-->*/}
 				<ul>
-					<li><a className="active" href="#" title="Dashboard">
+					<li><a href="#" title="Dashboard">
 							<img className="svg" src={require("../../images/resources-logo.svg")} alt="Resources" /><span>Resources</span></a></li>
-					<li><a href="#" title="Clients">
+					<li><a className="active" href="#" title="Clients">
 							<img className="svg" src={require("../../images/product-logo.svg")} alt="Products" /><span>Products</span></a>
 							</li>
 					
@@ -99,7 +99,7 @@ class Admin_Products extends React.Component {
 							{/*<!--Right search and sort block start-->*/}
 							<div className="search-sort-block d-flex flex-wrap align-center">
 								
-								<div className="btn-block mobile-hide">
+								<div className="btn-block">
 								<button className="common-btn-blue"><span>ADD NEW</span></button>
 							</div>
 

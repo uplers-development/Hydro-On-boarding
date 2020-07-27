@@ -44,7 +44,7 @@
 				thead {
 					tr {
 						th {
-							padding: 12px 14px 4px;
+							padding: 18px 14px 4px;
 
 							&:nth-child(1) {
 								width: 470px;
@@ -69,7 +69,7 @@
 								}
 							}
 							&:nth-child(4) {
-								width: 300px;
+								width: 290px;
 								text-align: left;
 
 								@media screen and (max-width:$large-mx) {
@@ -77,9 +77,9 @@
 								}
 							}
 							&:nth-child(5) {
-								width: 200px;
+								width: 180px;
 								text-align: right;
-								padding-right: 42px;
+								padding-right: 38px;
 
 								@media screen and (max-width:$mobile-small) {
 									padding-right: 20px;
@@ -96,7 +96,7 @@
 				tbody {
 					tr {
 						td {
-							padding: 15px 14px;
+							padding: 15px 14px 10px;
 							font-size: 16px;
 							line-height: 18px;
 							color: $light-black;
@@ -182,6 +182,11 @@
 						}
 						&:nth-child(even) {
 							background-color: $off-white;
+						}
+						&:nth-child(1) {
+							td {
+								padding-top: 22px;
+							}
 						}
 					}
 				}

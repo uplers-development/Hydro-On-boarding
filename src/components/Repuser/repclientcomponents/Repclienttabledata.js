@@ -62,7 +62,7 @@ class Repclienttabledata extends React.Component{
 		e.preventDefault();
 		let status={"status" : [{ "value":0}] }
 		try{
-			fetch(`${base_url}user/${this.state.setSingleDeleteId}?_format=json`,{
+			fetch(`${base_url}/user/${this.state.setSingleDeleteId}?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -111,7 +111,7 @@ class Repclienttabledata extends React.Component{
 			        "field_client":singlecheckedArray
 			}
 			console.log(options);
-			fetch(`https://staging.project-progress.net/projects/hydro/node?_format=json`,{
+			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/node?_format=json`,{
 		         method:'POST',
 				headers: {
 		                	"Content-Type" : "application/json",

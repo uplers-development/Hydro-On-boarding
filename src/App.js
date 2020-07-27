@@ -14,7 +14,7 @@ import RepClients from "./components/Repuser/RepClients";
 import RepClients_add from "./components/Repuser/RepClients_add";
 import RepClients_details from "./components/Repuser/RepClients_details";
 import Announcements from "./components/Repuser/Announcements";
-import Admin_Resource from "./components/Admin/Admin_Resource";
+import AdminResource from "./components/Admin/admin-resources";
 import Admin_addResource from "./components/Admin/Admin_addResource";
 import Admin_Reps from "./components/Admin/Admin_Reps";
 import Admin_add_rep from "./components/Admin/Admin_add_rep";
@@ -69,7 +69,7 @@ class App extends Component {
                     <Route path="/Login"  component={Login} />
                     <Route path="/RepDashboard"  component={RepDashboard} />
                     <Route path="/RepClients"  component={RepClients} />		  	
-                    <Route path="/Admin_Resource"  component={Admin_Resource} />		  	
+                    <Route path="/admin-resources"  component={AdminResource} />		  	
                     <Route path="/Admin_addResource"  component={Admin_addResource} />		  	
                     <Route path="/Admin_Reps"  component={Admin_Reps} />		  	
                     <Route path="/Admin_add_rep"  component={Admin_add_rep} />		  	

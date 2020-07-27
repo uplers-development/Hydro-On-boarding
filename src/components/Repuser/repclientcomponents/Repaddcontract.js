@@ -59,7 +59,7 @@ class Repaddcontract extends React.Component{
                     headers: myHeaders,
                     body: fullPath,
                   };
-                  fetch("http://staging.project-progress.net/projects/hydro/file/upload/node/product_purchase/field_purchase_doument?_format=json",requestOptions)
+                  fetch("${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/file/upload/node/product_purchase/field_purchase_doument?_format=json",requestOptions)
                   .then(res=>{return res.json()})
                   .then(data=>{
                      console.log(data);
@@ -91,7 +91,7 @@ class Repaddcontract extends React.Component{
 
       console.log(contractoptions);
        if(document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
-        	 fetch(`${base_url}node?_format=json`,{
+        	 fetch(`${base_url}/node?_format=json`,{
                             method:"POST",
                             headers: {
                                "Content-Type" : "application/json",

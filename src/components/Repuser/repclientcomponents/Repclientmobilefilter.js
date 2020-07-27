@@ -94,7 +94,7 @@ class Repclientmobilefilter extends React.Component {
 				user_ids:this.state.bulkIds.toString()
 			}
 			try{
-				fetch(`${base_url}json-api/bulk_delete.json?_format=json`,{
+				fetch(`${base_url}/json-api/bulk_delete.json?_format=json`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),

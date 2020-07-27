@@ -24,7 +24,7 @@ class Repannouncementsfilter extends React.Component{
 	get_product_list=()=>{
 
 		try{
-			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/taxonomy_list/applications?_format=json`,{
+			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/taxonomy_list/applications?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -59,7 +59,7 @@ class Repannouncementsfilter extends React.Component{
 			productvalue=document.querySelector(".product-item") && document.querySelector(".product-item").classList.contains("active") ? document.querySelector(".product-item").getAttribute("data-id") : '';
 			console.log(productvalue);
 			try{
-				fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -81,7 +81,7 @@ class Repannouncementsfilter extends React.Component{
 			locationvalue='';
 
 			try{
-				fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -122,7 +122,7 @@ class Repannouncementsfilter extends React.Component{
 				}
 			})
 			try{
-				fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_category_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_category_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -143,7 +143,7 @@ class Repannouncementsfilter extends React.Component{
 			e.target.classList.remove("active");
 			productvalue='';
 			try{
-				fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -167,7 +167,7 @@ class Repannouncementsfilter extends React.Component{
 	get_location_list=()=>{
 
 		try{
-			fetch(`https://staging.project-progress.net/projects/hydro/json/company_list?_format=json`,{
+			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json/company_list?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),

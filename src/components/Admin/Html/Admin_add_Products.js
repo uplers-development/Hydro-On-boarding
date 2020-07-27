@@ -5,9 +5,11 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
-import ThumbnailImage from '../../images/thumbnail-image.png';
+import adminProductImage from '../../images/headcell2x.png';
+import adminProductImage2 from '../../images/hydro-gritcleanse2x.png';
+import ThumbnailImage_prod from '../../images/downstream-defender_prod.jpg';
 
-class Admin_addResource extends React.Component {
+class Admin_add_Products extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
@@ -28,17 +30,15 @@ class Admin_addResource extends React.Component {
 
 				{/*<!--List of menu start-->*/}
 				<ul>
-					<li><a className="active" href="#" title="Dashboard">
+					<li><a href="#" title="Dashboard">
 							<img className="svg" src={require("../../images/resources-logo.svg")} alt="Resources" /><span>Resources</span></a></li>
-					<li><a href="#" title="Clients">
+					<li><a className="active" href="#" title="Clients">
 							<img className="svg" src={require("../../images/product-logo.svg")} alt="Products" /><span>Products</span></a>
 							</li>
 					
 						<li><a href="#" title="Products">
 							<img className="svg" src={require("../../images/user-logo-with-round.svg")} alt="Reps User" />
 							<span>Reps</span></a></li>
-					
-					
 				</ul>
 				{/*<!--List of menu end-->*/}
 
@@ -57,8 +57,8 @@ class Admin_addResource extends React.Component {
 					{/*<!--Top heading container start-->*/}
 					<div className="top-heading-continer d-flex flex-wrap align-center">
 						<div className="name-of-heading d-flex flex-wrap">
-							<img src={require("../../images/resources-logo-blue.svg")} alt="resources-logo" />
-							<h1>Add resources</h1>
+							<img src={require("../../images/product-logo-blue.svg")} alt="products-logo" />
+							<h1>Add product</h1>
 						</div>
 
 						<div className="d-flex flex-wrap user-log">
@@ -78,17 +78,49 @@ class Admin_addResource extends React.Component {
 
 				{/*<!--Main content bottom block start-->*/}
 				<div className="bottom-content-block with-filter">
-							
-					{/*<!--Add Resources main blok Start-->*/}
-					<div className="d-flex flex-wrap admin-add-resources">
-						<div className="container">
 
-							
+					{/*<!--Resources main blok start-->*/}
+					<div className="d-flex flex-wrap admin-products-add">
+					
+					{/*<!--Product form add Start-->*/}
+						<div className="product-add-form">
+							<form>
 
+							<div className="form-group d-flex flex-wrap align-center">
+										<label>Product name</label>
+										<div className="input-box">
+											<input type="text" name="Product name" id="title" />
+										</div>
+									</div>
+									<div className="form-group d-flex flex-wrap align-center">
+										<label>Description*</label>
+										<div className="input-box">
+											<input type="text" name="Description" id="description" />
+										</div>
+									</div>
+
+								{/*<!-Upload thumbnail block Start-->*/}
+								<div className="upload-thumbnail d-flex flex-wrap">
+									<div className="upload-btn-block">
+										<div className="upload-btn-wrapper">
+											<input type="file" name="Upload photo" />
+											<button className="btn wide common-btn-blue">
+											<span>Upload photo</span></button>
+										</div>
+									</div>
+									<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${ThumbnailImage_prod})`}}>
+									</div>	
+								</div>
+									{/*<!-Upload thumbnail block End-->*/}
+
+							</form>		
 						</div>
+					{/*<!--Product form add End-->*/}
+						
+						
 					</div>
-					{/*<!--Add Resources main blok End-->*/}
-	
+					{/*<!--Resource main blok end-->*/}
+
 				</div>
 				{/*<!--Main content bottom block end-->*/}
 
@@ -102,4 +134,4 @@ class Admin_addResource extends React.Component {
 	}
 }
 		
-export default Admin_addResource;			   
+export default Admin_add_Products;			   

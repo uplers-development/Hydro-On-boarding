@@ -92,7 +92,7 @@ class RepClients_add extends React.Component {
       let menulist={
          menu:"main-navigation-rep"
       }
-      fetch(`https://staging.project-progress.net/projects/hydro/json-api/menu_list.json`,{
+      fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json-api/menu_list.json`,{
           headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -104,7 +104,7 @@ class RepClients_add extends React.Component {
 
    GetProfile=()=>{
       try{
-         fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
+         fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
                headers: {
                      "Content-Type" : "application/json",
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -164,7 +164,7 @@ class RepClients_add extends React.Component {
             this.setState({openPopup:true});
             if(document.querySelector("#checkboxmessage").checked===true){
              let notifictionvalue={"user_id":data.uid[0].value} 
-             fetch(`${base_url}json-api/usernotification.json`,{
+             fetch(`${base_url}/json-api/usernotification.json`,{
                method:"POST",
                headers: {
                      "Content-Type" : "application/json",
@@ -216,7 +216,7 @@ class RepClients_add extends React.Component {
           //console.log(productList);
             productList.map((item,index)=>{
               console.log(productList[index]);
-                  fetch(`${base_url}node?_format=json`,{
+                  fetch(`${base_url}/node?_format=json`,{
                         method:"POST",
                         headers: {
                            "Content-Type" : "application/json",
@@ -229,7 +229,7 @@ class RepClients_add extends React.Component {
                       console.log(data);
                   })
             })
-            fetch(`${base_url}node?_format=json`,{
+            fetch(`${base_url}/node?_format=json`,{
                         method:"POST",
                         headers: {
                            "Content-Type" : "application/json",

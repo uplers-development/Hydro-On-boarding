@@ -5,8 +5,10 @@ import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
+import adminProductImage from '../../images/headcell2x.png';
+import adminProductImage2 from '../../images/hydro-gritcleanse2x.png';
 
-class Admin_Resource extends React.Component {
+class Admin_Products extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
@@ -36,8 +38,6 @@ class Admin_Resource extends React.Component {
 						<li><a href="#" title="Products">
 							<img className="svg" src={require("../../images/user-logo-with-round.svg")} alt="Reps User" />
 							<span>Reps</span></a></li>
-					
-					
 				</ul>
 				{/*<!--List of menu end-->*/}
 
@@ -56,8 +56,8 @@ class Admin_Resource extends React.Component {
 					{/*<!--Top heading container start-->*/}
 					<div className="top-heading-continer d-flex flex-wrap align-center">
 						<div className="name-of-heading d-flex flex-wrap">
-							<img src={require("../../images/resources-logo-blue.svg")} alt="resources-logo" />
-							<h1>Resources</h1>
+							<img src={require("../../images/product-logo-blue.svg")} alt="products-logo" />
+							<h1>Products</h1>
 						</div>
 
 						<div className="d-flex flex-wrap user-log">
@@ -79,18 +79,18 @@ class Admin_Resource extends React.Component {
 				<div className="bottom-content-block with-filter">
 
 					{/*<!--Resources main blok start-->*/}
-					<div className="d-flex flex-wrap admin-resources-main">
+					<div className="d-flex flex-wrap admin-products-main">
 					
 					{/*<!--Top filter block Start-->*/}
 					<div className="fileter-block d-flex flex-wrap border-bottom">
 						
 							{/*<!--Select box start-->*/}
 							<div className="select-box">
-								<span>Content Types</span>
+								<span>Product types</span>
 								<ul className="list">
-									<li><a href="#" title="Content Types 1">Content Types 1</a></li>
-									<li><a href="#" title="Content Types 2">Content Types 2</a></li>
-									<li><a href="#" title="Content Types 3">Content Types 3</a></li>
+									<li><a href="#" title="Product types 1">Product types 1</a></li>
+									<li><a href="#" title="Product types 2">Product types 2</a></li>
+									<li><a href="#" title="Product types 3">Product types 3</a></li>
 									
 								</ul>
 							</div>
@@ -122,10 +122,10 @@ class Admin_Resource extends React.Component {
 										</div>
 
 										<div className="list-filter-mobile">
-											<h5>Content Types</h5>
+											<h5>Product types</h5>
 											<ul>
-												<li><a href="#" title="Content Types 1">Content Types 1</a></li>
-												<li><a href="#" title="Content Types 2">Content Types 2</a></li>
+												<li><a href="#" title="Product types 1">Product types 1</a></li>
+												<li><a href="#" title="Product types 2">Product types 2</a></li>
 											</ul>
 											
 											<div className="btn-block">
@@ -146,18 +146,18 @@ class Admin_Resource extends React.Component {
 
 
 					{/*<!--Client block Start-->*/}
-						<div className="resources-table table-outer">
+						<div className="admin-products-table table-outer">
 							<div className="table-responsive">
 							
 								{/*<!--Table Start-->*/}
-								<table className="table table-striped">
+								<table className="table table-striped striped-gray">
    <thead>
       <tr>
          <th>
 		 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox0" />
       				<label for="checkbox0"></label>	 
-			 </div><span>Title</span>
+			 </div><span>Product</span>
 		</th>
          <th>Author</th>
          <th>Data</th>
@@ -173,6 +173,7 @@ class Admin_Resource extends React.Component {
       				<label for="checkbox1"></label>	 
 			 </div>
 			 <div className="name-edit">
+				 <div className="img-c bg-cover" style={{backgroundImage: `url(${adminProductImage})`}}></div>
 				 <div className="right-detail">
 				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
 			     <div className="action d-flex flex-wrap">
@@ -185,173 +186,29 @@ class Admin_Resource extends React.Component {
 		 </td>
 		 <td>Simon</td>				
 		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
+		 <td>Stormwater Management</td>				
 		 <td>18th March 2020</td>				
       </tr>
-	
-	<tr>
+
+<tr>
          <td>
 			 <div className="checkbox-cust">
 				 	<input type="checkbox" id="checkbox2" />
       				<label for="checkbox2"></label>	 
 			 </div>
 			 <div className="name-edit">
+				 <div className="img-c bg-cover" style={{backgroundImage: `url(${adminProductImage2})`}}></div>
 				 <div className="right-detail">
 				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
+			 	</div>	
 			 </div>	 
 		 </td>
 		 <td>Simon</td>				
 		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
+		 <td>Stormwater Management</td>				
 		 <td>18th March 2020</td>				
       </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox3" />
-      				<label for="checkbox3"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox4" />
-      				<label for="checkbox4"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox5" />
-      				<label for="checkbox5"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox6" />
-      				<label for="checkbox6"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox7" />
-      				<label for="checkbox7"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox8" />
-      				<label for="checkbox8"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox9" />
-      				<label for="checkbox9"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-<tr>
-         <td>
-			 <div className="checkbox-cust">
-				 	<input type="checkbox" id="checkbox10" />
-      				<label for="checkbox10"></label>	 
-			 </div>
-			 <div className="name-edit">
-				 <div className="right-detail">
-				 <h3>Lorem ipsum dolor</h3><a href="#" title="Draft">Draft</a>
-				</div>	
-			 </div>	 
-		 </td>
-		 <td>Simon</td>				
-		 <td><span>Last Modified</span><span>3 hours ago</span></td>				
-		 <td>Contract</td>				
-		 <td>18th March 2020</td>				
-      </tr>
-
-							  
+	
 	
          </tbody>
 </table>
@@ -378,4 +235,4 @@ class Admin_Resource extends React.Component {
 	}
 }
 		
-export default Admin_Resource;			   
+export default Admin_Products;			   

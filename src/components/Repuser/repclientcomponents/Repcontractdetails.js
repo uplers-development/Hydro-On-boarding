@@ -19,7 +19,7 @@ class Repcontractdetails extends React.Component{
 
 
 	Get_client_contract_Details=()=>{
-			fetch(`https://staging.project-progress.net/projects/hydro/jsonapi/clients_contract_details/${this.props.repclientuid}?_format=json`,{
+			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/clients_contract_details/${this.props.repclientuid}?_format=json`,{
 			    headers:{
 			            "Content-Type" : "application/json",
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),

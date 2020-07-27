@@ -87,7 +87,7 @@ class Login extends Component{
     			localStorage.setItem("basic-auth",btoa(data.current_user.name+':'+logindata.pass));
     			localStorage.setItem("user-type",JSON.stringify(data.current_user));
     			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="admin"){
-
+    				this.props.history.push({pathname:"/admin-resources"});
     			}
     			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
     				this.props.history.push({pathname:"/Welcome"});

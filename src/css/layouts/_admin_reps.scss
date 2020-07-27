@@ -137,6 +137,9 @@
 			.border-bottom {
 				border: none;
 				padding-bottom: 20px;
+				@media screen and (max-width:$mobile-small) {
+					padding-bottom: 10px;
+				}
 				&:after {
 					display: none;
 				}

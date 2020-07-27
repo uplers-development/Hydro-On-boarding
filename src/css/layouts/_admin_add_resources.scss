@@ -33,6 +33,9 @@
 			padding-top: 15px;
 			.btn {
 				min-width: 222px;
+				@media screen and (max-width:$mobile-small) {
+					min-width: auto;
+				}
 				span {
 					font-size: 18px;
 					line-height: 28px;
@@ -49,6 +52,9 @@
 			width: 100%;
 			.btn {
 				min-width: 222px;
+				@media screen and (max-width:$mobile-small) {
+					min-width: auto;
+				}
 				span {
 					font-size: 18px;
 					line-height: 28px;
@@ -75,6 +81,12 @@
 			min-width: 207px;
 			padding: 8px 10px 4px;
 			margin-bottom: 0;
+			@media screen and (max-width:$mobile-small) {
+				min-width: auto;
+			}
+			span {
+				line-height: 30px;
+			}
 		}
 	}
 }

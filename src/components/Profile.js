@@ -114,7 +114,7 @@ class Profile extends Component {
 		fetch(Apiurl.Updateprofile.url,{
     			headers: {
                 	"Content-Type" : "application/json",
-                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 },
                 method:Apiurl.Updateprofile.method,
                 body:JSON.stringify(updatedata)

@@ -246,5 +246,15 @@ export const Admin={
     adminresourcedelete:{
         url:base_url+`/node/`,
         method:'DELETE'
+    },
+    adminresourceAdd:{
+        url:base_url+`/node?_format=json`,
+        method:'POST'
+    },
+    adminresourceAdddocument:{
+        url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,
+    },
+    adminresourceAddimage:{
+        url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,
     }
 }

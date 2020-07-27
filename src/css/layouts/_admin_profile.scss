@@ -1,0 +1,35 @@
+.admin-profile {
+	.profile-left-content {
+		.your-profile-info {
+			h2 {
+				font-size: 22px;
+				line-height: 46px;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+				margin-bottom: 0;
+			}
+		}
+		.upload-profile-photo {
+			.user-profile-image {
+				height: 130px;
+				width: 130px;
+				border-radius: 50%;
+				display: inline-block;
+				@media screen and (max-width:$ipad-landscape) {
+					height: 110px;
+					width: 110px;
+				}
+				@media screen and (max-width:$mobile-small) {
+					height: 96px;
+					width: 96px;
+				}
+			}
+		}
+		form {
+			input[type="text"], input[type="email"], select {
+				background-color: $off-white;
+			}
+		}
+		
+	}
+}

@@ -168,7 +168,7 @@ class Admin_Profile extends Component {
 
 	render() {
 		return (
-			<div><section className="main-wrapper">
+			<div><section className="main-wrapper off-white-bg">
 
 		{/*<!--Main block start-->*/}
 		<div className="d-flex flex-wrap main-block right-btm-pattern-gray">
@@ -190,7 +190,7 @@ class Admin_Profile extends Component {
 			{/*<!--Nav fixed left block end-->*/}
 
 			{/*<!--Main right content block start-->*/}
-			<div className="d-flex flex-wrap right-content-part">
+			<div className="d-flex flex-wrap right-content-part admin-profile">
 
 				{/*<!--Main content top heading start-->*/}
 				<div className="top-heading">
@@ -238,7 +238,7 @@ class Admin_Profile extends Component {
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
 					
-					<div className="user-profile-image" style={{backgroundImage:`url(${this.state.userPicture.url==='' ? this.state.userPicture.url : "../../../images/profile-logo-blue.svg"})`}}>
+					<div className="user-profile-image bg-cover" style={{backgroundImage:`url(${this.state.userPicture.url==='' ? this.state.userPicture.url : "../../../images/profile-logo-blue.svg"})`}}>
 									
 									</div>	
 					

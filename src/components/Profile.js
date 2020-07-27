@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{site_url} from './Apiurl'; 
+import Apiurl,{site_url,base_url} from './Apiurl'; 
 import{hasNull,isRequired} from './validation';
 import {ValidationMsg} from'./constants/validationmsg';
 import ReactHtmlParser from 'react-html-parser';
@@ -65,7 +65,7 @@ class Profile extends Component {
 	}
 
 	GetProfile=()=>{
-		fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
+		fetch(`${base_url}/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -171,7 +171,7 @@ class Profile extends Component {
 				  headers: myHeaders,
 				  body: fullPath,
 				};
-				fetch("http://staging.project-progress.net/projects/hydro/file/upload/user/user/user_picture?_format=json",requestOptions)
+				fetch(`${base_url}/file/upload/user/user/user_picture?_format=json`,requestOptions)
 				.then(res=>{return res.json()})
 				.then(data=>{console.log(data);
 					this.setState({smallLoader:false,newuserPic_id:data.fid[0]['value'],userPicture:site_url+data.uri[0].url})

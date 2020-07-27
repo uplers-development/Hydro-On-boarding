@@ -1,5 +1,5 @@
 /*********************************Staging Server*********************************************/
-export const base_url=process.env.NODE_ENV==='production' ? window.location.origin+'/backend' : '//staging.project-progress.net/projects/hydro';
+export const base_url=process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net/projects/hydro';
 export const site_url=process.env.NODE_ENV==='production' ? window.location.origin :'//staging.project-progress.net';
 const target_id=localStorage.getItem("user-type")!==null? JSON.parse(localStorage.getItem("user-type")).uid:'';
 
@@ -242,5 +242,9 @@ export const Admin={
     adminresourcedraft:{
         url:base_url+`/node/`,
         method:'GET'
+    },
+    adminresourcedelete:{
+        url:base_url+`/node/`,
+        method:'DELETE'
     }
 }

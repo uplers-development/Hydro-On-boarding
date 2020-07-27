@@ -66,7 +66,7 @@ class Adminresourcesfilter extends React.Component{
 									)}
 								</ul>
 							</div>	
-							<div className="btn-block mobile-hide">
+							<div className="btn-block">
 									<button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
 							</div>
 				   </>

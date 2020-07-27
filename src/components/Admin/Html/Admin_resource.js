@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import CommonBackground from '../../images/common-bg.jpg';
-import Sidebar from '../assets/Sidebar';
-import UserProfile from '../assets/UserProfile';
-import Apiurl,{site_url} from '../Apiurl'; 
+import CommonBackground from '../../../images/common-bg.jpg';
+import Sidebar from '../../assets/Sidebar';
+import UserProfile from '../../assets/UserProfile';
+import Apiurl,{site_url} from '../../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 
-class AdminResource extends React.Component {
+class Admin_resource extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
@@ -23,18 +23,18 @@ class AdminResource extends React.Component {
 			   
 			   {/*<!--Nav fixed left block start-->*/}
 			<nav className="navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left">
-				<a className="navbar-logo" href="#" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></a>
+				<a className="navbar-logo" href="#" title="Main white logo"><img src={require("../../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></a>
 
 				{/*<!--List of menu start-->*/}
 				<ul>
 					<li><a className="active" href="#" title="Dashboard">
-							<img className="svg" src={require("../../images/resources-logo.svg")} alt="Resources" /><span>Resources</span></a></li>
+							<img className="svg" src={require("../../../images/resources-logo.svg")} alt="Resources" /><span>Resources</span></a></li>
 					<li><a href="#" title="Clients">
-							<img className="svg" src={require("../../images/product-logo.svg")} alt="Products" /><span>Products</span></a>
+							<img className="svg" src={require("../../../images/product-logo.svg")} alt="Products" /><span>Products</span></a>
 							</li>
 					
 						<li><a href="#" title="Products">
-							<img className="svg" src={require("../../images/user-logo-with-round.svg")} alt="Reps User" />
+							<img className="svg" src={require("../../../images/user-logo-with-round.svg")} alt="Reps User" />
 							<span>Reps</span></a></li>
 					
 					
@@ -43,7 +43,7 @@ class AdminResource extends React.Component {
 
 				
 
-				<div className="pattern-block"><img src={require("../../images/pattern-nav-bottom.svg")} alt="pattern-nav" /></div>
+				<div className="pattern-block"><img src={require("../../../images/pattern-nav-bottom.svg")} alt="pattern-nav" /></div>
 
 				<div className="nav-copyright">© 2020 Hydro International</div>
 			</nav>
@@ -56,13 +56,13 @@ class AdminResource extends React.Component {
 					{/*<!--Top heading container start-->*/}
 					<div className="top-heading-continer d-flex flex-wrap align-center">
 						<div className="name-of-heading d-flex flex-wrap">
-							<img src={require("../../images/resources-logo-blue.svg")} alt="resources-logo" />
+							<img src={require("../../../images/resources-logo-blue.svg")} alt="resources-logo" />
 							<h1>Resources</h1>
 						</div>
 
 						<div className="d-flex flex-wrap user-log">
 							<div className="user-image-name d-flex flex-wrap align-center">
-								<img src={require("../../images/profile-2.png")} alt="Prfile image" />
+								<img src={require("../../../images/profile-2.png")} alt="Prfile image" />
 								<h2>Username</h2>
 							</div>
 							<div className="drop-down-menu">
@@ -106,18 +106,18 @@ class AdminResource extends React.Component {
 								{/*<!-Mobile filter box start-->*/}
 								<div className="mobile-filter">
 									<a href="javascript:void(0)" title="filter-btn" className="filter-open-btn">
-									<img src={require("../../images/ic_filter.svg")} alt="ic_filter" />
+									<img src={require("../../../images/ic_filter.svg")} alt="ic_filter" />
 												  
 									</a>
 
 									<div className="open-close-filter-block">
 										<div className="top-head d-flex flex-wrap align-center">
 											<div className="top-title d-flex flex-wrap">
-							<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter" />
+							<img src={require("../../../images/ic_filter-blue.svg")} alt="ic_filter" />
 												<h4>Filters</h4>
 											</div>
 											<a href="javascript:void(0)" title="close-btn" className="filter-open-btn">
-												<img src={require("../../images/ic_close.svg")} alt="ic_close" />
+												<img src={require("../../../images/ic_close.svg")} alt="ic_close" />
 											</a>
 										</div>
 
@@ -378,4 +378,4 @@ class AdminResource extends React.Component {
 	}
 }
 		
-export default AdminResource;			   
+export default Admin_resource;			   

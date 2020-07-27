@@ -20,6 +20,7 @@ import Admin_Reps from "./components/Admin/Admin_Reps";
 import Admin_add_rep from "./components/Admin/Admin_add_rep";
 import Admin_Products from "./components/Admin/Admin_Products";
 import Admin_add_Products from "./components/Admin/Admin_add_Products";
+import Admin_resource from "./components/Admin/Html/Admin_resource";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
@@ -69,7 +70,8 @@ class App extends Component {
                     <Route path="/Login"  component={Login} />
                     <Route path="/RepDashboard"  component={RepDashboard} />
                     <Route path="/RepClients"  component={RepClients} />		  	
-                    <Route path="/admin-resources"  component={AdminResource} />		  	
+                    <Route path="/admin-resources"  component={AdminResource} />        
+                    <Route path="/Admin_resource"  component={Admin_resource} />		  	
                     <Route path="/Admin_addResource"  component={Admin_addResource} />		  	
                     <Route path="/Admin_Reps"  component={Admin_Reps} />		  	
                     <Route path="/Admin_add_rep"  component={Admin_add_rep} />		  	

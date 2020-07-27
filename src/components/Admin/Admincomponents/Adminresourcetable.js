@@ -11,8 +11,11 @@ class Adminresourcetable extends React.Component{
       	adminresourcetabledata:[],
       	loader:true,
       	noDatacall:true,
+      	setSingleDeleteId:null,
       	checkdraftStatus:false,
-      	openDraftPopup:false
+      	openDraftPopup:false,
+      	openDeletepopup:false,
+      	draftstatus:''
       }
 	  console.log();
       this.singleSelect=this.singleSelect.bind(this);
@@ -60,6 +63,23 @@ class Adminresourcetable extends React.Component{
 		}	
 	}
 
+delete_single_resource=(e)=>{
+	e.preventDefault();
+	fetch(Admin.adminresourcedelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
+   	 		 headers:{
+                  "Content-Type" : "application/json",
+                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+            },
+            method:Admin.adminresourcedelete.method,
+	   	 }).then(data=>{
+	   	 		console.log(data);
+	   	 		if(data.status===204){
+	   	 			this.setState({openDeletepopup:false})
+	   	 			this.get_resource_table();
+	   	 		}
+	   	 });
+}	
+
    get_resource_table=()=>{
    	if(this.props.getdatafromfilter.length <= 0 ){
    		fetch(Admin.adminresourcelisting.url,{
@@ -83,17 +103,27 @@ class Adminresourcetable extends React.Component{
    draft_resource=(e,draftid)=>{
    		e.preventDefault();
    		let target_=e.target;
+   		let target_value=e.target.textContent==="Draft" ? false : true;
+   		console.log(target_value);
+   		let options={
+   			"type":[{target_id:"resources"}],
+   			"status": [{value: target_value}]
+   		};
+   		console.log(options);
    		fetch(Admin.adminresourcedraft.url+`${draftid}?_format=json`,{
    	 		 headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcedraft.method,
-	   	 }).then(res=>{return res.json()}).then(data=>{
+            body:JSON.stringify(options)
+	   	 }).then(data=>{
 	   	 	console.log(data);
-	   	 	this.setState({openDraftPopup:true});
-	   	 	target_.textContent='Published';
-	   	 	target_.setAttribute("title","Published");
+	   	 	if(data.status===204){
+	   	 		this.setState({openDraftPopup:true});
+	   	 		target_.textContent='Published';
+	   	 		target_.setAttribute("title","Published");
+	   	 	}
 	   	 });
    }
 
@@ -132,10 +162,13 @@ class Adminresourcetable extends React.Component{
 					                  <div className="name-edit">
 					                     <div className="right-detail">
 					                        <h3>{item.title}</h3>
-					                        <Link to={""} onClick={((e)=>this.draft_resource(e,item.nid))} title="Draft">Draft</Link>
+					                        <Link to={""} onClick={((e)=>this.draft_resource(e,item.nid))} title={item.status==="true" ? "Published" : "Draft"}>{item.status==="true" ? "Published" : "Draft"}</Link>
 					                        <div className="action d-flex flex-wrap">
 					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,true,item.nid)})} title="Edit">Edit</Link>	 
-					                           <Link to={""} onClick={e=>e.preventDefault()} title="Delete">Delete</Link>	 
+					                           <Link to={""} onClick={((e)=>
+							                           	{		e.preventDefault();
+							                           			this.setState({openDeletepopup:true,setSingleDeleteId:item.nid})}
+							                           	)} title="Delete">Delete</Link>	 
 					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(true,true,item.nid)})} title="View">View</Link>	 
 					                        </div>
 					                     </div>
@@ -172,6 +205,28 @@ class Adminresourcetable extends React.Component{
 												<div>
 													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
 														<h2>Resource draft published.</h2>
+												</div>
+												</div>
+											</div>
+								: <></>
+				   }
+
+				   {this.state.openDeletepopup ? 
+
+				   		<div id="modal" className="modal-container">
+												<div className="modal d-flex flex-wrap align-center justify-center">
+													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openDeletepopup:false})})}
+													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+													
+												<div>
+													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+														<p>Are you sure you want to delete records?</p>
+
+													<div className="btn-blok">
+														<button onClick={((e)=>{e.preventDefault();this.setState({openDeletepopup:false})})} className="btn common-btn-blue"><span>CANCEL</span></button>
+														<button className="btn common-btn-blue" onClick={this.delete_single_resource}><span>YES</span></button>	
+													</div>
+													
 												</div>
 												</div>
 											</div>

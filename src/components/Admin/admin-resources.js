@@ -65,8 +65,10 @@ class AdminResource extends React.Component {
 				               		<div className="d-flex flex-wrap admin-resources-main">
 				                  <div className="fileter-block d-flex flex-wrap border-bottom">
 				                     <Adminresourcesfilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
-				                     <div className="search-sort-block d-flex flex-wrap align-center"></div>
-				                     <Adminresourcesmobilefilter/>
+				                     <div className="search-sort-block d-flex flex-wrap align-center">
+				                 		<Adminresourcesmobilefilter/>
+				                     </div>
+
 				                  </div>
 				                  <Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview}/>
 				               		</div>

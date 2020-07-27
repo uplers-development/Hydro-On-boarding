@@ -4,6 +4,7 @@ import Apiurl,{site_url,Admin} from '../../Apiurl';
 import ReactHtmlParser from 'react-html-parser';
 import ThumbnailImage from '../../../images/thumbnail-image.png';
 import {ValidationMsg} from'../../constants/validationmsg';
+import{hasNull,isRequired} from '../../validation';
 
 
 class Adminresourceadd extends React.Component{
@@ -17,11 +18,15 @@ class Adminresourceadd extends React.Component{
      	fid:'',
      	uploadedresourceimage:'',
      	newresourceimageid:null,
-     	smallLoader:false
+     	smallLoader:false,
+     	resourcetitle:false,
+     	resourcedescription:false,
+     	resourceproduct:false,
       }
       this.productTaginput=React.createRef();
 	  this.productTag=this.productTag.bind(this);
 	  this.clearProductTag=this.clearProductTag.bind(this);
+	  this.OnSubmitResource=this.OnSubmitResource.bind(this);
    }
 
    productTag=(e)=>{
@@ -169,7 +174,8 @@ class Adminresourceadd extends React.Component{
 		            this.productTaginput.current.value='';
 		            document.querySelector(".shareall-email").appendChild(node);
 		            if(document.querySelectorAll(".shareall-email .emailall").length>0){
-		                document.querySelector("#product-tags").removeAttribute("placeholder")
+		                document.querySelector("#product-tags").removeAttribute("placeholder");
+		                this.setState({resourceproduct:false,})
 		            }
 		            this.productTaginput.current.focus();
 
@@ -181,28 +187,53 @@ class Adminresourceadd extends React.Component{
     this.productTaginput.current.focus();
      if(document.querySelectorAll(".shareall-email .emailall").length<=0){
           document.querySelector("#product-tags").setAttribute("placeholder","Product tags")
+		  this.setState({resourceproduct:false})
       }
 
 }
 
 
+OnSubmitResource=(e)=>{
+	e.preventDefault();
+	if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0){
+			let resourceoptions={
+		        "title":[{value:document.querySelector("#title").value}],
+		        //"type":[{target_id:resources}],        
+		        //"field_product_tags":[{target_id:nid}],
+		        "field__resources_description":[{value:document.querySelector("#description").value}],
+		        "field_resources_image":[{target_id:document.querySelector("#resource-image").getAttribute("data-id")}],
+		        //"field_resource_type":[{target_id:tid}],
+		        "field_resources_document":[{target_id:document.querySelector(".document-item-resource").getAttribute("get-id")}]
+			}
+			console.log(resourceoptions);
+	}else{
+		hasNull(document.querySelector("#title").value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})
+		hasNull(document.querySelector("#description").value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})
+		document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false})
+	}
+}
+
+//nid?_format=json
 
    render(){
    		return(
    			<div className="d-flex flex-wrap admin-add-resources">
 				   <div className="container">
-				      <form>
+				      <form onSubmit={this.OnSubmitResource}>
 				         <div className="upload-doc-block">
 				            <div className="form-group d-flex flex-wrap align-center">
 				               <label>Title*</label>
 				               <div className="input-box">
-				                  <input type="text" name="Title" id="title" placeholder="Title" />
+				                  <input type="text" name="Title" id="title" placeholder="Title"
+				                  onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})}/>
+                              	{this.state.resourcetitle ? ValidationMsg.common.default.resourcetitlefield : ''}
 				               </div>
 				            </div>
 				            <div className="form-group d-flex flex-wrap align-center">
 				               <label>Description*</label>
 				               <div className="input-box">
-				                  <input type="text" name="Description" id="description" placeholder="Description"/>
+				                  <input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})}/>
+                              	{this.state.resourcedescription ? ValidationMsg.common.default.resourcedescriptionfield : ''}
 				               </div>
 				            </div>
 				           {/* <div className="form-group d-flex flex-wrap align-center">
@@ -217,7 +248,8 @@ class Adminresourceadd extends React.Component{
 	  									<div className="shareall-email">
 	  									
 	  									</div>
-  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}/>
+  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false})}/>
+                              	{this.state.resourceproduct ? ValidationMsg.common.default.resourceproductfield : ''}
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}
               								</ul>	
@@ -230,7 +262,7 @@ class Adminresourceadd extends React.Component{
 				                  <button className="btn wide common-btn-blue">
 				                  <span >Upload Document</span></button>
 				               </div>
-				                  <span className='document-item document-item-contract' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
+				                  <span className='document-item document-item-resource' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
 				                  {this.state.doucmentformatestate ? ValidationMsg.common.default.imageformate : ''}
 				            </div>
 				         </div>

@@ -36,6 +36,9 @@
 					background-repeat: repeat-x;
 				}
 			}
+			@media screen and (max-width:$mobile-small) {
+				margin: 0 0 15px 0;
+			}
 		}
 		.search-sort-block {
 			.auto-search-box {
@@ -137,6 +140,9 @@
 			.border-bottom {
 				border: none;
 				padding-bottom: 20px;
+				@media screen and (max-width:$mobile-small) {
+					padding-bottom: 10px;
+				}
 				&:after {
 					display: none;
 				}

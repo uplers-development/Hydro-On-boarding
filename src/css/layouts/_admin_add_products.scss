@@ -95,6 +95,9 @@
 				margin-left: 179px;
 				margin-bottom: 25px;
 				margin-top: 25px;
+				@media screen and (max-width:$ipad-landscape) {
+					margin-bottom: 0;
+				}
 				@media screen and (max-width:$ipad-portrait) {
 					margin: 15px 0 0 auto;
 				}
@@ -106,6 +109,10 @@
 					span {
 						font-size: 18px;
 						line-height: 28px;
+					}
+					&:after {
+						height: 110px;
+						top: 50px;
 					}
 				}
 			}

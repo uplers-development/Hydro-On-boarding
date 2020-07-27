@@ -94,7 +94,7 @@ class Admin_Reps extends React.Component {
 				
 			</ul>
 		</div>
-		<div className="btn-block mobile-hide">
+		<div className="btn-block">
 			<button className="common-btn-blue"><span>Add Rep</span></button>
 		</div>
 		{/*<!--Select box end-->*/}	

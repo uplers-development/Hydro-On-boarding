@@ -21,6 +21,7 @@ import Admin_add_rep from "./components/Admin/Admin_add_rep";
 import Admin_Products from "./components/Admin/Admin_Products";
 import Admin_add_Products from "./components/Admin/Admin_add_Products";
 import Admin_resource from "./components/Admin/Html/Admin_resource";
+import Admin_Profile from "./components/Admin/Html/Admin_Profile";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
@@ -77,6 +78,7 @@ class App extends Component {
                     <Route path="/Admin_add_rep"  component={Admin_add_rep} />		  	
                     <Route path="/Admin_Products"  component={Admin_Products} />		  	
                     <Route path="/Admin_add_Products"  component={Admin_add_Products} />		  	
+                    <Route path="/Admin_Profile"  component={Admin_Profile} />		  	
                     <Route path="/RepClients_details" component={RepClients_details} />
 		  			       <Route path="/Announcements" component={Announcements} />
 		  

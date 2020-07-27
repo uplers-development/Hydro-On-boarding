@@ -256,7 +256,7 @@ export const Admin={
         method:'GET'
     },
     adminresourceAdddocument:{
-        url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,
+        url:base_url+`/file/upload/node/resources/field_resources_document?_format=json`,
     },
     adminresourceAddimage:{
         url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,

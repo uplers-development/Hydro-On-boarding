@@ -3,6 +3,7 @@ import { Link, Redirect,useHistory  } from "react-router-dom";
 import Apiurl,{site_url,Admin} from '../../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import ThumbnailImage from '../../../images/thumbnail-image.png';
+import {ValidationMsg} from'../../constants/validationmsg';
 
 
 class Adminresourceadd extends React.Component{
@@ -10,6 +11,13 @@ class Adminresourceadd extends React.Component{
       super(props);
       this.state={
       	producttagChanged:'',
+      	imageFormateState:false,
+      	doucmentformatestate:false,
+      	fileuploadedname:'',
+     	fid:'',
+     	uploadedresourceimage:'',
+     	newresourceimageid:null,
+     	smallLoader:false
       }
       this.productTaginput=React.createRef();
 	  this.productTag=this.productTag.bind(this);
@@ -64,27 +72,108 @@ class Adminresourceadd extends React.Component{
 }
 
 
-      productId=(e,title,gid)=>{
-    e.preventDefault();
-      var node = document.createElement("SPAN");
-            node.classList.add("emailall");
-            var node2=document.createElement("SPAN");
-            node2.classList.add("remove-email");
-            node.appendChild(node2).addEventListener("click",this.clearProductTag,true);
-            var textnode = document.createTextNode(title);
-            var id=document.createAttribute("nid");
-            id.value=gid;
-            node.appendChild(textnode);
-            node.setAttributeNode(id);
-            this.setState({producttagChanged:''});
-            this.productTaginput.current.value='';
-            document.querySelector(".shareall-email").appendChild(node);
-            if(document.querySelectorAll(".shareall-email .emailall").length>0){
-                document.querySelector("#product-tags").removeAttribute("placeholder")
-            }
-            this.productTaginput.current.focus();
 
-  }
+	upload_resource_document=(e)=>{
+		var fullPath = e.target.files[0];
+	      var exactfile=e.target.value;
+	      var filename='';
+         if (exactfile) {
+             var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
+             filename = exactfile.substring(startIndex);
+             if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                 filename = filename.substring(1);
+                 this.setState({fileuploadedname:filename})
+             }
+             console.log(filename);
+             if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt")){
+               this.setState({doucmentformatestate:false})
+               var myHeaders = new Headers();
+                  myHeaders.append("Content-Type", "application/octet-stream");
+                  myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
+                  myHeaders.append("Content-Disposition", "file;filename=\""+filename+"\"");
+                  myHeaders.append("Authorization", "Basic "+localStorage.getItem("basic-auth"));
+                  var file = filename;
+                  console.log(file);
+                  var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: fullPath,
+                  };
+                  fetch(Admin.adminresourceAdddocument.url,requestOptions)
+                  .then(res=>{return res.json()})
+                  .then(data=>{
+                     console.log(data);
+                     this.setState({fid:data.fid[0].value});
+                  })
+		      }else{
+		         this.setState({doucmentformatestate:true})   
+		     }
+  		}
+	}
+
+
+	update_resource_image=(e)=>{
+		console.log(e.target.value)
+		this.setState({smallLoader:true});
+		var fullPath = e.target.files[0];
+		var exactfile=e.target.value;
+		var filename='';
+			if (exactfile) {
+			    var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
+			    filename = exactfile.substring(startIndex);
+			    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+			        filename = filename.substring(1);
+			    }
+		}
+
+		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
+				this.setState({imageFormateState:false})	
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/octet-stream");
+				myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
+				myHeaders.append("Content-Disposition", "file;filename=\""+filename+"\"");
+				myHeaders.append("Authorization", "Basic "+localStorage.getItem("basic-auth"));
+				var file = filename;
+				console.log(file);
+				var requestOptions = {
+				  method: 'POST',
+				  headers: myHeaders,
+				  body: fullPath,
+				};
+				fetch(Admin.adminresourceAddimage.url,requestOptions)
+				.then(res=>{return res.json()})
+				.then(data=>{console.log(data);
+					this.setState({smallLoader:false,newresourceimageid:data.fid[0]['value'],uploadedresourceimage:site_url+data.uri[0].url})
+					console.log(this.state.newresourceimageid);
+					console.log(this.state.uploadedresourceimage);
+				})
+	  }else{
+	  	this.setState({smallLoader:false,imageFormateState:true})	
+	  }
+	}
+
+
+      productId=(e,title,gid)=>{
+		    e.preventDefault();
+		      var node = document.createElement("SPAN");
+		            node.classList.add("emailall");
+		            var node2=document.createElement("SPAN");
+		            node2.classList.add("remove-email");
+		            node.appendChild(node2).addEventListener("click",this.clearProductTag,true);
+		            var textnode = document.createTextNode(title);
+		            var id=document.createAttribute("nid");
+		            id.value=gid;
+		            node.appendChild(textnode);
+		            node.setAttributeNode(id);
+		            this.setState({producttagChanged:''});
+		            this.productTaginput.current.value='';
+		            document.querySelector(".shareall-email").appendChild(node);
+		            if(document.querySelectorAll(".shareall-email .emailall").length>0){
+		                document.querySelector("#product-tags").removeAttribute("placeholder")
+		            }
+		            this.productTaginput.current.focus();
+
+ 	 }
 
   clearProductTag =(e)=>{  
     e.preventDefault();
@@ -135,23 +224,32 @@ class Adminresourceadd extends React.Component{
 							             	</div>	
 		                     </div>
 				            <div className="upload-btn-block">
+				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>
 				               <div className="upload-btn-wrapper">
-				                  <input type="file" name="Upload Document" />
+				                  <input type="file" name="Upload Document" onChange={this.upload_resource_document}/>
 				                  <button className="btn wide common-btn-blue">
-				                  <span>Upload Document</span></button>
+				                  <span >Upload Document</span></button>
 				               </div>
+				                  <span className='document-item document-item-contract' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
+				                  {this.state.doucmentformatestate ? ValidationMsg.common.default.imageformate : ''}
 				            </div>
 				         </div>
 
 				         <div className="upload-thumbnail d-flex flex-wrap">
 					            <div className="upload-btn-block">
+					            <span>JPG, GIF or PNG. Max size of 1mb</span>
 					               <div className="upload-btn-wrapper">
-					                  <input type="file" name="Upload thumbnail" />
+					                  <input type="file" name="Upload thumbnail" id="resource-image" onChange={this.update_resource_image} data-id={this.state.newresourceimageid}/>
 					                  <button className="btn wide common-btn-blue">
 					                  <span>Upload thumbnail</span></button>
+					                  {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
 					               </div>
 					            </div>
-				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${ThumbnailImage})`}}></div>
+					            {this.state.smallLoader ? 
+										<div className="loader"></div>
+									:
+				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${this.state.uploadedresourceimage!=='' ? this.state.uploadedresourceimage : ThumbnailImage})`}}></div>
+				            }
 				   		</div>
 					   <div className="btn-block">
 						   <button className="btn wide common-btn-blue">

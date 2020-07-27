@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{site_url} from '../Apiurl'; 
+import Apiurl,{site_url,base_url} from '../Apiurl'; 
 import $ from "jquery";
 import ReactHtmlParser from 'react-html-parser';
 
@@ -25,7 +25,7 @@ class Sidebar extends Component {
 		let menulist={
 			menu:"main"
 		}
-		fetch(`https://staging.project-progress.net/projects/hydro/json-api/menu_list.json`,{
+		fetch(`${base_url}/json-api/menu_list.json`,{
 			  headers:{
 		            "Content-Type" : "application/json",
 		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),

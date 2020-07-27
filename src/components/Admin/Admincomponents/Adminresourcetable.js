@@ -15,6 +15,7 @@ class Adminresourcetable extends React.Component{
       	checkdraftStatus:false,
       	openDraftPopup:false,
       	openDeletepopup:false,
+      	draftstatus:''
       }
 	  console.log();
       this.singleSelect=this.singleSelect.bind(this);
@@ -102,17 +103,27 @@ delete_single_resource=(e)=>{
    draft_resource=(e,draftid)=>{
    		e.preventDefault();
    		let target_=e.target;
+   		let target_value=e.target.textContent==="Draft" ? false : true;
+   		console.log(target_value);
+   		let options={
+   			"type":[{target_id:"resources"}],
+   			"status": [{value: target_value}]
+   		};
+   		console.log(options);
    		fetch(Admin.adminresourcedraft.url+`${draftid}?_format=json`,{
    	 		 headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcedraft.method,
-	   	 }).then(res=>{return res.json()}).then(data=>{
+            body:JSON.stringify(options)
+	   	 }).then(data=>{
 	   	 	console.log(data);
-	   	 	this.setState({openDraftPopup:true});
-	   	 	target_.textContent='Published';
-	   	 	target_.setAttribute("title","Published");
+	   	 	if(data.status===204){
+	   	 		this.setState({openDraftPopup:true});
+	   	 		target_.textContent='Published';
+	   	 		target_.setAttribute("title","Published");
+	   	 	}
 	   	 });
    }
 
@@ -151,7 +162,7 @@ delete_single_resource=(e)=>{
 					                  <div className="name-edit">
 					                     <div className="right-detail">
 					                        <h3>{item.title}</h3>
-					                        <Link to={""} onClick={((e)=>this.draft_resource(e,item.nid))} title="Draft">Draft</Link>
+					                        <Link to={""} onClick={((e)=>this.draft_resource(e,item.nid))} title={item.status==="true" ? "Published" : "Draft"}>{item.status==="true" ? "Published" : "Draft"}</Link>
 					                        <div className="action d-flex flex-wrap">
 					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,true,item.nid)})} title="Edit">Edit</Link>	 
 					                           <Link to={""} onClick={((e)=>

@@ -241,7 +241,7 @@ export const Admin={
     },
     adminresourcedraft:{
         url:base_url+`/node/`,
-        method:'GET'
+        method:'PATCH'
     },
     adminresourcedelete:{
         url:base_url+`/node/`,

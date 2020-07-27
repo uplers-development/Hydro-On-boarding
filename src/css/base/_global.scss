@@ -551,7 +551,9 @@ nav {
 			li {
 				&:not(:last-child) {
 					margin-bottom: 13px;
-
+					@media screen and (max-width:$large-m) {
+						margin-bottom: 10px;
+					}
 					@media screen and (max-width:$mobile-small) {
 						margin-bottom: 0;
 					}

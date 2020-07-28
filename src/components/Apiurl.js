@@ -252,11 +252,11 @@ export const Admin={
         method:'POST'
     }, 
     adminviewresource:{
-        url:base_url+`/node/`,
+        url:base_url+`/jsonapi/resource_view/`,
         method:'GET'
     }, 
     adminresourceProducttags:{
-        url:base_url+`/jsonapi/taxonomy_list/applications?_format=json`,
+        url:base_url+`/jsonapi/admin_products?_format=json`,
         method:'GET'
     },
     adminresourceAdddocument:{

@@ -5,6 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 import ThumbnailImage from '../../../images/thumbnail-image.png';
 import {ValidationMsg} from'../../constants/validationmsg';
 import{hasNull,isRequired} from '../../validation';
+import {cosmaticAsset} from '../../constants/common'
 
 
 class Adminresourceadd extends React.Component{
@@ -22,6 +23,8 @@ class Adminresourceadd extends React.Component{
      	resourcetitle:false,
      	resourcedescription:false,
      	resourceproduct:false,
+     	insertedresourcedata:'',
+     	loader:true,
       }
       this.productTaginput=React.createRef();
 	  this.productTag=this.productTag.bind(this);
@@ -36,6 +39,8 @@ class Adminresourceadd extends React.Component{
    	console.log("resourceid:" +this.props.sendresourceId);
    	 if(!this.props.addstatus){
    		this.get_resources_details();
+   	 }else{
+   	 	this.setState({loader:false});
    	 }
    }
 
@@ -59,7 +64,7 @@ class Adminresourceadd extends React.Component{
 	          		console.log(data);
 	          		   this.state.productSuggestion=[];
 	          		   data.filter((value,index,array)=>{
-				            if(value.name.match(this.productTaginput.current.value)){
+				            if(value.title.match(this.productTaginput.current.value)){
 					              console.log(value);
 					              this.state.productSuggestion.push(value)
 				            }else{
@@ -69,7 +74,7 @@ class Adminresourceadd extends React.Component{
 
 				       let suggestionforproduct=this.state.productSuggestion.map((item,index)=>{
 				                                  return (<li key={index}>
-				                                     <Link to={""} title={ReactHtmlParser(item.name)}onClick={(e)=>this.productId(e,item.name,item.tid)}>{ReactHtmlParser(item.name)}</Link> 
+				                                     <Link to={""} title={ReactHtmlParser(item.title)}onClick={(e)=>this.productId(e,item.title,item.nid)}>{ReactHtmlParser(item.title)}</Link> 
 				                                  </li>)
 				                                }) 
 			      		this.setState({producttagChanged:suggestionforproduct})
@@ -204,15 +209,44 @@ class Adminresourceadd extends React.Component{
 	OnSubmitResource=(e)=>{
 		e.preventDefault();
 		if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0){
+			  let productTagsId=[]
+			      document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+			          productTagsId.push({"target_id":item.getAttribute("nid")});
+			      })
 				let resourceoptions={
 			        "title":[{value:document.querySelector("#title").value}],
-			        //"type":[{target_id:resources}],        
-			        //"field_product_tags":[{target_id:nid}],
+			        "type":[{target_id:"resources"}],        
+			        "field_product_tags":productTagsId,
 			        "field__resources_description":[{value:document.querySelector("#description").value}],
 			        "field_resources_image":[{target_id:document.querySelector("#resource-image").getAttribute("data-id")}],
 			        //"field_resource_type":[{target_id:tid}],
 			        "field_resources_document":[{target_id:document.querySelector(".document-item-resource").getAttribute("get-id")}]
 				}
+
+				try{
+					let status;
+					fetch(Admin.adminresourceAdd.url,{
+		          		headers: {
+		                       "Content-Type" : "application/json",
+		                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+		                 },
+             			 method:Admin.adminresourceAdd.method,
+             			 body:JSON.stringify(resourceoptions)
+				          }).then(res=>{
+				          	status=res.status;
+				          	return res.json();
+				          }).then(data=>{
+				          	if(status===200){
+						  		console.log(data);
+				          	}else{
+				          		console.log("something got wrong");
+				          	}
+						  })
+	        	}
+				catch(err){
+					console.log(err);
+				}
+
 				console.log(resourceoptions);
 		}else{
 			hasNull(document.querySelector("#title").value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})
@@ -233,8 +267,24 @@ class Adminresourceadd extends React.Component{
 	          }).then(res=>{
 	          	status=res.status;
 	          	return res.json();
-	          }).then(data=>{console.log(data)})
+	          }).then(data=>{
+	          	console.log(data);this.setState({insertedresourcedata:data,loader:false})
+	          /*	this.state.insertedresourcedata.field_product_tags.map((item,index)=>{
+	          		console.log(item);
+	          		  var node = document.createElement("SPAN");
+			            node.classList.add("emailall");
+			            var node2=document.createElement("SPAN");
+			            node2.classList.add("remove-email");
+			            node.appendChild(node2).addEventListener("click",this.clearProductTag,true);
+			            var textnode = document.createTextNode(item.target_type);
+			            var id=document.createAttribute("nid");
+			            id.value=item.target_id;
+			            node.appendChild(textnode);
+			            node.setAttributeNode(id);
+	          	})*/
+	          })
 	}
+
 
 //nid?_format=json
 
@@ -242,29 +292,24 @@ class Adminresourceadd extends React.Component{
    		return(
    			<div className="d-flex flex-wrap admin-add-resources">
 				   <div className="container">
+				 	{!this.state.loader ? 
 				      <form onSubmit={this.OnSubmitResource}>
 				         <div className="upload-doc-block">
 				            <div className="form-group d-flex flex-wrap align-center">
 				               <label>Title*</label>
 				               <div className="input-box">
 				                  <input type="text" name="Title" id="title" placeholder="Title"
-				                  onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})}/>
+				                  onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata[0].title : ''}/>
                               	{this.state.resourcetitle ? ValidationMsg.common.default.resourcetitlefield : ''}
 				               </div>
 				            </div>
 				            <div className="form-group d-flex flex-wrap align-center">
 				               <label>Description*</label>
 				               <div className="input-box">
-				                  <input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})}/>
+				                  <input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata[0].field__resources_description :''}/>
                               	{this.state.resourcedescription ? ValidationMsg.common.default.resourcedescriptionfield : ''}
 				               </div>
 				            </div>
-				           {/* <div className="form-group d-flex flex-wrap align-center">
-				           				               <label>Product tags*</label>
-				           				               <div className="input-box">
-				           				                  <input type="text" name="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag} />
-				           				               </div>
-				           				            </div>*/}
 				            <div className="form-group d-flex flex-wrap align-center">
 		                        <label>Product tags*</label>
 	  								<div className="input-box">
@@ -272,7 +317,7 @@ class Adminresourceadd extends React.Component{
 	  									<div className="shareall-email">
 	  									
 	  									</div>
-  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false})}/>
+  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproductfield:false})}/>
                               
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}
@@ -317,6 +362,9 @@ class Adminresourceadd extends React.Component{
 						   <span>Add Resource</span></button>
 					   </div>
 				  	 </form>
+				  	 :<>
+				  	 	{cosmaticAsset.cosmatic.default.loader}
+				  	 </>}
 				</div>
 			</div>
    			)

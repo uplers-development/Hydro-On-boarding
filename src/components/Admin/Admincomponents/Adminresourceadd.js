@@ -29,52 +29,62 @@ class Adminresourceadd extends React.Component{
 	  this.OnSubmitResource=this.OnSubmitResource.bind(this);
    }
 
+
+   componentDidMount(){
+   	console.log("add form:" +this.props.addstatus);
+   	console.log("readmode:" +this.props.readmode);
+   	console.log("resourceid:" +this.props.sendresourceId);
+   	 if(!this.props.addstatus){
+   		this.get_resources_details();
+   	 }
+   }
+
    productTag=(e)=>{
-    e.preventDefault();
-    console.log(this.productTaginput.current.value);
-    if(this.productTaginput.current.value!=='') {
-          
-          let status;
-          fetch(Admin.adminresourceProducttags.url,{
-          		headers: {
-                       "Content-Type" : "application/json",
-                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
-                 },
-                 method:Admin.adminresourceProducttags.method
-          }).then(res=>{
-          	status=res.status;
-          	return res.json();
-          }).then(data=>{
-          	if(status===200){
-          		console.log(data);
-          		   this.state.productSuggestion=[];
-          		   data.filter((value,index,array)=>{
-			            if(value.name.match(this.productTaginput.current.value)){
-				              console.log(value);
-				              this.state.productSuggestion.push(value)
-			            }else{
-			            	this.setState({producttagChanged:''})
-			            }
-		        	})
+	    e.preventDefault();
+	    console.log(this.productTaginput.current.value);
+	    if(this.productTaginput.current.value!=='') {
+	          
+	          let status;
+	          fetch(Admin.adminresourceProducttags.url,{
+	          		headers: {
+	                       "Content-Type" : "application/json",
+	                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+	                 },
+	                 method:Admin.adminresourceProducttags.method
+	          }).then(res=>{
+	          	status=res.status;
+	          	return res.json();
+	          }).then(data=>{
+	          	if(status===200){
+	          		console.log(data);
+	          		   this.state.productSuggestion=[];
+	          		   data.filter((value,index,array)=>{
+				            if(value.name.match(this.productTaginput.current.value)){
+					              console.log(value);
+					              this.state.productSuggestion.push(value)
+				            }else{
+				            	this.setState({producttagChanged:''})
+				            }
+			        	})
 
-			       let suggestionforproduct=this.state.productSuggestion.map((item,index)=>{
-			                                  return (<li key={index}>
-			                                     <Link to={""} title={ReactHtmlParser(item.name)}onClick={(e)=>this.productId(e,item.name,item.tid)}>{ReactHtmlParser(item.name)}</Link> 
-			                                  </li>)
-			                                }) 
-		      		this.setState({producttagChanged:suggestionforproduct})
-			      console.log(this.state.productSuggestion);
-			    }else{
-			          this.setState({producttagChanged:''})
-			        }
+				       let suggestionforproduct=this.state.productSuggestion.map((item,index)=>{
+				                                  return (<li key={index}>
+				                                     <Link to={""} title={ReactHtmlParser(item.name)}onClick={(e)=>this.productId(e,item.name,item.tid)}>{ReactHtmlParser(item.name)}</Link> 
+				                                  </li>)
+				                                }) 
+			      		this.setState({producttagChanged:suggestionforproduct})
+				      console.log(this.state.productSuggestion);
+				    }else{
+				          this.setState({producttagChanged:''})
+				        }
 
 
-          		
-          })
-    }else{
-		this.setState({producttagChanged:''})
-    }
-}
+	          		
+	          })
+	    }else{
+			this.setState({producttagChanged:''})
+	    }
+	}
 
 
 
@@ -158,7 +168,7 @@ class Adminresourceadd extends React.Component{
 	}
 
 
-      productId=(e,title,gid)=>{
+ 	productId=(e,title,gid)=>{
 		    e.preventDefault();
 		      var node = document.createElement("SPAN");
 		            node.classList.add("emailall");
@@ -178,40 +188,53 @@ class Adminresourceadd extends React.Component{
 		                this.setState({resourceproduct:false,})
 		            }
 		            this.productTaginput.current.focus();
+ 	}
 
- 	 }
-
-  clearProductTag =(e)=>{  
-    e.preventDefault();
-    e.target.parentNode.remove();
-    this.productTaginput.current.focus();
-     if(document.querySelectorAll(".shareall-email .emailall").length<=0){
-          document.querySelector("#product-tags").setAttribute("placeholder","Product tags")
-		  this.setState({resourceproduct:false})
-      }
-
-}
-
-
-OnSubmitResource=(e)=>{
-	e.preventDefault();
-	if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0){
-			let resourceoptions={
-		        "title":[{value:document.querySelector("#title").value}],
-		        //"type":[{target_id:resources}],        
-		        //"field_product_tags":[{target_id:nid}],
-		        "field__resources_description":[{value:document.querySelector("#description").value}],
-		        "field_resources_image":[{target_id:document.querySelector("#resource-image").getAttribute("data-id")}],
-		        //"field_resource_type":[{target_id:tid}],
-		        "field_resources_document":[{target_id:document.querySelector(".document-item-resource").getAttribute("get-id")}]
-			}
-			console.log(resourceoptions);
-	}else{
-		hasNull(document.querySelector("#title").value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})
-		hasNull(document.querySelector("#description").value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})
-		document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false})
+  	clearProductTag =(e)=>{  
+    	e.preventDefault();
+	    e.target.parentNode.remove();
+	    this.productTaginput.current.focus();
+	     if(document.querySelectorAll(".shareall-email .emailall").length<=0){
+	          document.querySelector("#product-tags").setAttribute("placeholder","Product tags")
+			  this.setState({resourceproduct:false})
+	      }
 	}
-}
+
+
+	OnSubmitResource=(e)=>{
+		e.preventDefault();
+		if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0){
+				let resourceoptions={
+			        "title":[{value:document.querySelector("#title").value}],
+			        //"type":[{target_id:resources}],        
+			        //"field_product_tags":[{target_id:nid}],
+			        "field__resources_description":[{value:document.querySelector("#description").value}],
+			        "field_resources_image":[{target_id:document.querySelector("#resource-image").getAttribute("data-id")}],
+			        //"field_resource_type":[{target_id:tid}],
+			        "field_resources_document":[{target_id:document.querySelector(".document-item-resource").getAttribute("get-id")}]
+				}
+				console.log(resourceoptions);
+		}else{
+			hasNull(document.querySelector("#title").value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})
+			hasNull(document.querySelector("#description").value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})
+			document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false})
+		}
+	}
+
+	get_resources_details=()=>{
+		console.log(this.props.sendresourceId);
+		let status;
+		fetch(Admin.adminviewresource.url+`${this.props.sendresourceId}?_format=json`,{
+	          		headers: {
+	                       "Content-Type" : "application/json",
+	                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+	                 },
+	                 method:Admin.adminviewresource.method
+	          }).then(res=>{
+	          	status=res.status;
+	          	return res.json();
+	          }).then(data=>{console.log(data)})
+	}
 
 //nid?_format=json
 

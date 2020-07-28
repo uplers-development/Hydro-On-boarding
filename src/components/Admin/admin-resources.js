@@ -21,6 +21,7 @@ class AdminResource extends React.Component {
 				resourcechangeid:null,
 				checkcallfrom:null,	
 				adminuid:null,
+				addStatus:null,
 		}
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 		this.checktheview=this.checktheview.bind(this);
@@ -39,9 +40,12 @@ class AdminResource extends React.Component {
    		this.setState({resourcesFiltereddata:resourcesfiltereddata})
    }
 
-  checktheview=(callfrom,viewcall,getChangeid)=>{
+  checktheview=(addpage,callfrom,viewcall,getChangeid)=>{
+  		console.log(addpage);
   		console.log(getChangeid);
-   		this.setState({checkcallfrom:callfrom,viewcaller:viewcall,resourcechangeid:getChangeid});
+  		console.log(callfrom);
+  		console.log(viewcall);
+   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,resourcechangeid:getChangeid});
    }  
 
   getadmindetail=(admindetails)=>{
@@ -70,10 +74,10 @@ class AdminResource extends React.Component {
 				                     </div>
 
 				                  </div>
-				                  <Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview}/>
+				                  <Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} />
 				               		</div>
 								:
-								<Adminresourceadd/>					               
+								<Adminresourceadd sendresourceId={this.state.resourcechangeid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}  />					               
 				               }
 				            </div>
 				         </div>

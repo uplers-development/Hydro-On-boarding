@@ -269,14 +269,14 @@ OnSubmitResource=(e)=>{
 
 				         <div className="upload-thumbnail d-flex flex-wrap">
 					            <div className="upload-btn-block">
-					            <span>JPG, GIF or PNG. Max size of 1mb</span>
+					            	<span>JPG, GIF or PNG. Max size of 1mb</span>
 					               <div className="upload-btn-wrapper">
 					                  <input type="file" name="Upload thumbnail" id="resource-image" onChange={this.update_resource_image} data-id={this.state.newresourceimageid}/>
 					                  <button className="btn wide common-btn-blue">
 					                  <span>Upload thumbnail</span></button>
-					                  {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
 					               </div>
 					            </div>
+					            {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
 					            {this.state.smallLoader ? 
 										<div className="loader"></div>
 									:

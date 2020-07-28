@@ -84,11 +84,12 @@ class Profile extends Component {
 						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
 						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
 						,location:data.field_location.length>0 ?data.field_location[0].value : '',
-						userPicture:data.user_picture.length>0 ? data.user_picture[0].url :'',
+						userPicture:data.user_picture[0].url,
 						newuserPic_id:data.user_picture.length>0 ? data.user_picture[0].target_id:'',
 						loader:false
 					})
 			console.log(this.state.time_zone);
+			console.log(this.state.userPicture);
 			this.timeZoneref.current.value=this.state.time_zone;
 		})
 
@@ -255,14 +256,12 @@ class Profile extends Component {
 							<div className="upload-profile-photo">
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
-								<div className="prof-user-img bg-cover">
-									{this.state.smallLoader ? 
+								{this.state.smallLoader ? 
 										<div className="loader"></div>
 									:
-									<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null && this.state.userPicture.length != null
-							&& this.state.userPicture.length > 0)? this.state.userPicture : require("./../images/profile-logo-blue.svg")} alt="profile-img"/>
+								<div className="prof-user-img bg-cover" style={{backgroundImage:`url(${this.state.userPicture!=='' ? this.state.userPicture : "./../images/profile-logo-blue.svg"})`}}>
+								</div>  
 							}
-							</div>
 									<div className="upload-img">
 
 										<span>JPG, GIF or PNG. Max size of 1mb</span>

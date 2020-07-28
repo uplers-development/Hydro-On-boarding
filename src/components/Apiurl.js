@@ -251,12 +251,16 @@ export const Admin={
         url:base_url+`/node?_format=json`,
         method:'POST'
     }, 
+    adminviewresource:{
+        url:base_url+`/node/`,
+        method:'GET'
+    }, 
     adminresourceProducttags:{
         url:base_url+`/jsonapi/taxonomy_list/applications?_format=json`,
         method:'GET'
     },
     adminresourceAdddocument:{
-        url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,
+        url:base_url+`/file/upload/node/resources/field_resources_document?_format=json`,
     },
     adminresourceAddimage:{
         url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,

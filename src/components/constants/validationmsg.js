@@ -26,7 +26,11 @@ export const ValidationMsg = {
 
             addproductCheckboxcheckmissing:ReactHtmlParser('<span class="empty-field">Please select the checkbox of selected values.</span>'),
             addproductfieldnotvalid:ReactHtmlParser('<span class="empty-field">Please check inserted valid field items there might be something missing.</span>'),
-            fieldsEmptyAnnoucementform:ReactHtmlParser('<span class="empty-field">Please fill the above form details.</span>')
+            fieldsEmptyAnnoucementform:ReactHtmlParser('<span class="empty-field">Please fill the above form details.</span>'),
+
+            resourcetitlefield:ReactHtmlParser('<span class="empty-field">Please enter resource title.</span>'),
+            resourcedescriptionfield:ReactHtmlParser('<span class="empty-field">Please enter resource description.</span>'),
+            resourceproductfield:ReactHtmlParser('<span class="empty-field">Please enter resource product tags.</span>'),
     	}
     }
 }

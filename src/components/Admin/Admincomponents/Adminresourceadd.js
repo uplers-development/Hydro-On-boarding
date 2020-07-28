@@ -291,8 +291,6 @@ class Adminresourceadd extends React.Component{
 	}
 
 
-//nid?_format=json
-
    render(){
    		return(
    			<div className="d-flex flex-wrap admin-add-resources">
@@ -356,15 +354,12 @@ class Adminresourceadd extends React.Component{
 								{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
 								</div>
 					            
-								
-								<div className="thumbnail-upload-right">
 					            {this.state.smallLoader ? 
 										<div className="loader"></div>
 									:
 				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${this.state.uploadedresourceimage!=='' ? this.state.uploadedresourceimage : ThumbnailImage})`}}>
-									
 								</div>
-				            }</div>
+				            }
 				   		</div>
 					   <div className="btn-block">
 						   <button className="btn wide common-btn-blue">

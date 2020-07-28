@@ -8,6 +8,9 @@
 		@media screen and (max-width:$ipad-portrait) {
 			padding-right: 0;
 		}
+		@media screen and (max-width:$mobile-small) {
+			padding-right: 23px;
+		}
 		.select-box {
 			max-width: 282px;
 			@media screen and (max-width: $large-m) {
@@ -53,6 +56,9 @@
 			}
 
 			@media screen and (max-width:$mobile-small) {
+				margin-left: auto;
+			}
+			.mobile-filter {
 				margin-left: auto;
 			}
 		}

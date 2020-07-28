@@ -227,8 +227,8 @@ class Adminresourceadd extends React.Component{
 				///node/nid?_format=json
 				try{
 					let status;
-					let apicall=!this.props.readmode ? Admin.adminresourceAdd.url : Admin.adminresourceUpdate.url+`${this.props.sendresourceId}?_format=json`;
-					let apimethod=!this.props.readmode ? Admin.adminresourceAdd.method : Admin.adminresourceUpdate.method;
+					let apicall=this.props.addstatus ? Admin.adminresourceAdd.url : Admin.adminresourceUpdate.url+`${this.props.sendresourceId}?_format=json`;
+					let apimethod=this.props.addstatus ? Admin.adminresourceAdd.method : Admin.adminresourceUpdate.method;
 					fetch(apicall,{
 		          		headers: {
 		                       "Content-Type" : "application/json",

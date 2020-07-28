@@ -2799,10 +2799,12 @@ a {
 
 
 /*Suggestion box*/
-/*.suggestion {
+
+.suggestion-box {
 	position: relative;
 	border: 1px solid $dim-gray;
 	background-color: $white;
+	z-index: 11;
 	.shareall-email {
 		display: inline;
 		width: auto;
@@ -2863,7 +2865,7 @@ a {
 			opacity: 0.5;
 		}
 	}
-}*/
+}
 
 
 

@@ -13,7 +13,6 @@ class Admin_add_Products extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			rightSide_data:[],
 		}
 	}
 	render(){

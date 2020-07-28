@@ -78,7 +78,7 @@ class AdminResource extends React.Component {
 					                 	    <div className="btn-block">
 												<button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
 											</div>
-				                 		<Adminresourcesmobilefilter/>
+				                 		<Adminresourcesmobilefilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 				                     </div>
 
 				                  </div>

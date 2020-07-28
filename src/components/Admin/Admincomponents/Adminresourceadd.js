@@ -286,7 +286,9 @@ OnSubmitResource=(e)=>{
 					            {this.state.smallLoader ? 
 										<div className="loader"></div>
 									:
-				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${this.state.uploadedresourceimage!=='' ? this.state.uploadedresourceimage : ThumbnailImage})`}}></div>
+				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${this.state.uploadedresourceimage!=='' ? this.state.uploadedresourceimage : ThumbnailImage})`}}>
+									<div className="loader"></div>
+								</div>
 				            }
 				   		</div>
 					   <div className="btn-block">

@@ -273,19 +273,20 @@ class Adminresourceadd extends React.Component{
 	          	return res.json();
 	          }).then(data=>{
 	          	console.log(data);this.setState({insertedresourcedata:data.node,loader:false})
-	          /*	this.state.insertedresourcedata.field_product_tags.map((item,index)=>{
+	          	this.state.insertedresourcedata.field_product_tags.map((item,index)=>{
 	          		console.log(item);
 	          		  var node = document.createElement("SPAN");
 			            node.classList.add("emailall");
 			            var node2=document.createElement("SPAN");
 			            node2.classList.add("remove-email");
 			            node.appendChild(node2).addEventListener("click",this.clearProductTag,true);
-			            var textnode = document.createTextNode(item.target_type);
+			            var textnode = document.createTextNode(item.title);
 			            var id=document.createAttribute("nid");
-			            id.value=item.target_id;
+			            id.value=item.nid;
 			            node.appendChild(textnode);
 			            node.setAttributeNode(id);
-	          	})*/
+			            document.querySelector(".shareall-email").appendChild(node);
+	          	})
 	          })
 	}
 

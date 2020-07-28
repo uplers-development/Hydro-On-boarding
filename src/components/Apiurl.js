@@ -252,8 +252,8 @@ export const Admin={
         method:'POST'
     }, 
     adminviewresource:{
-        url:base_url+`/jsonapi/resource_view/`,
-        method:'GET'
+        url:base_url+`/json-api/node_view.json`,
+        method:'POST'
     }, 
     adminresourceProducttags:{
         url:base_url+`/jsonapi/admin_products?_format=json`,

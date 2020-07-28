@@ -258,17 +258,21 @@ class Adminresourceadd extends React.Component{
 	get_resources_details=()=>{
 		console.log(this.props.sendresourceId);
 		let status;
-		fetch(Admin.adminviewresource.url+`${this.props.sendresourceId}?_format=json`,{
+		let resourceid={
+			"nid":this.props.sendresourceId
+		}
+		fetch(Admin.adminviewresource.url,{
 	          		headers: {
 	                       "Content-Type" : "application/json",
 	                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                 },
-	                 method:Admin.adminviewresource.method
+	                 method:Admin.adminviewresource.method,
+	                 body:JSON.stringify(resourceid)
 	          }).then(res=>{
 	          	status=res.status;
 	          	return res.json();
 	          }).then(data=>{
-	          	console.log(data);this.setState({insertedresourcedata:data,loader:false})
+	          	console.log(data);this.setState({insertedresourcedata:data.node,loader:false})
 	          /*	this.state.insertedresourcedata.field_product_tags.map((item,index)=>{
 	          		console.log(item);
 	          		  var node = document.createElement("SPAN");
@@ -299,14 +303,14 @@ class Adminresourceadd extends React.Component{
 				               <label>Title*</label>
 				               <div className="input-box">
 				                  <input type="text" name="Title" id="title" placeholder="Title"
-				                  onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata[0].title : ''}/>
+				                  onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata.title : ''}/>
                               	{this.state.resourcetitle ? ValidationMsg.common.default.resourcetitlefield : ''}
 				               </div>
 				            </div>
 				            <div className="form-group d-flex flex-wrap align-center">
 				               <label>Description*</label>
 				               <div className="input-box">
-				                  <input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata[0].field__resources_description :''}/>
+				                  <input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata.field__resources_description :''}/>
                               	{this.state.resourcedescription ? ValidationMsg.common.default.resourcedescriptionfield : ''}
 				               </div>
 				            </div>

@@ -102,7 +102,6 @@ class Admin_resource extends React.Component {
 								<div className="btn-block mobile-hide">
 								<button className="common-btn-blue"><span>ADD NEW</span></button>
 							</div>
-
 								{/*<!-Mobile filter box start-->*/}
 								<div className="mobile-filter">
 									<a href="javascript:void(0)" title="filter-btn" className="filter-open-btn">

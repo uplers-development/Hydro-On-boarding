@@ -70,6 +70,9 @@ class AdminResource extends React.Component {
 				                  <div className="fileter-block d-flex flex-wrap border-bottom">
 				                     <Adminresourcesfilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 				                     <div className="search-sort-block d-flex flex-wrap align-center">
+				                 	    <div className="btn-block">
+											<button className="common-btn-blue"><span>ADD NEW</span></button>
+										</div>
 				                 		<Adminresourcesmobilefilter/>
 				                     </div>
 

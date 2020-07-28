@@ -27,8 +27,10 @@ class Adminresourcesmobilefilter extends React.Component{
 			            <img src={require("../../../images/ic_filter-blue.svg")} alt="ic_filter" />
 			            <h4>Filters</h4>
 			         </div>
-			         <Link to={""} onClick={e=>
-			         e.preventDefault()} title="close-btn" className="filter-open-btn">
+			         <Link to={""} onClick={((e)=>{
+			         			         e.preventDefault()
+			         			         this.setState({openContainer:false})})
+			     } title="close-btn" className="filter-open-btn">
 			         <img src={require("../../../images/ic_close.svg")} alt="ic_close" />
 			         </Link>
 			      </div>

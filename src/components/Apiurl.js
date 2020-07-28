@@ -251,6 +251,10 @@ export const Admin={
         url:base_url+`/node?_format=json`,
         method:'POST'
     }, 
+    adminresourceUpdate:{
+        url:base_url+`/node/`,
+        method:'PATCH'
+    }, 
     adminviewresource:{
         url:base_url+`/json-api/node_view.json`,
         method:'POST'

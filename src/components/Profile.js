@@ -255,7 +255,7 @@ class Profile extends Component {
 							<div className="upload-profile-photo">
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
-								<div className="prof-user-img">
+								<div className="prof-user-img bg-cover">
 									{this.state.smallLoader ? 
 										<div className="loader"></div>
 									:

@@ -8,14 +8,11 @@
 		@media screen and (max-width:$ipad-portrait) {
 			padding-right: 0;
 		}
-		
 		.select-box {
 			max-width: 282px;
-
 			@media screen and (max-width: $large-m) {
 				max-width: 240px;
 			}
-
 			> span {
 				padding: 7px 25px;
 				font-size: 18px;
@@ -25,7 +22,6 @@
 					padding: 7px 15px;
 				}
 			}
-
 			.list {
 				top: 37px;
 				width: calc(100% + 2px);

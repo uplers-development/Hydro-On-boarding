@@ -40,6 +40,9 @@
 					font-size: 18px;
 					line-height: 28px;
 				}
+				&:after {
+					height: 95px;
+				}
 			}
 		}
 	}
@@ -58,6 +61,17 @@
 				span {
 					font-size: 18px;
 					line-height: 28px;
+				}
+			}
+			.empty-field {
+				margin-top: 3px;
+				display: block;
+			}
+			> span {
+				&:first-of-type {
+					font-size: 14px;
+					margin-bottom: 3px;
+					display: block;
 				}
 			}
 		}

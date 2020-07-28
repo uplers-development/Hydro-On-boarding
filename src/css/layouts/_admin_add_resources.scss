@@ -112,7 +112,10 @@
 			padding-bottom: 21.20%;
 			display: block;
 			width: 390px;
-
+			position: relative;
+			.loader {
+				position: absolute;
+			}
 			@media screen and (max-width:$ipad-landscape) {
 				padding-bottom: 31%;
 			}

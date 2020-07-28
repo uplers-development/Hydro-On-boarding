@@ -2,94 +2,144 @@
 	@media screen and (max-width: $ipad-portrait) {
 		padding-top: 20px;
 	}
+
 	@media screen and (max-width: $mobile-small) {
 		padding: 10px 23px 0;
 	}
+
 	padding-top: 50px;
+
 	.upload-doc-block {
 		width: 100%;
 		border-bottom: 1px solid $off-white;
 		padding-bottom: 30px;
+
 		.form-group {
 			margin-bottom: 12px;
 			max-width: 660px;
 			width: 100%;
+
 			label {
 				width: 135px;
 				margin-bottom: 0;
+
 				@media screen and (max-width: $ipad-portrait) {
 					margin-bottom: 5px;
 				}
 			}
+
 			.input-box {
 				max-width: 481px;
 				width: 100%;
+
 				input[type="text"] {
 					width: 100%;
 				}
+				.suggestion-box {
+					input[type="text"] {
+						width: 200px;
+					}
+				}
 			}
 		}
+
 		.upload-btn-block {
+			.empty-field {
+				width: 100%;
+				display: block;
+    			margin-top: 3px;
+			}
 			padding-top: 15px;
+
 			.btn {
 				min-width: 222px;
+
 				@media screen and (max-width:$mobile-small) {
 					min-width: auto;
 				}
+
 				span {
 					font-size: 18px;
 					line-height: 28px;
+				}
+
+				&:after {
+					height: 95px;
 				}
 			}
 		}
 	}
+
 	.upload-thumbnail {
 		border-bottom: 1px solid $off-white;
 		padding: 18px 0;
-		.upload-btn-block {
-			margin-right: 48px;
-			max-width: 222px;
-			width: 100%;
-			.btn {
-				min-width: 222px;
-				@media screen and (max-width:$mobile-small) {
-					min-width: auto;
+
+		.thumbnail-upload-left {
+				margin-right: 48px;
+				max-width: 222px;
+				width: 100%;
+			.upload-btn-block {
+				.btn {
+					min-width: 222px;
+
+					@media screen and (max-width:$mobile-small) {
+						min-width: auto;
+					}
+
+					span {
+						font-size: 18px;
+						line-height: 28px;
+					}
 				}
-				span {
-					font-size: 18px;
-					line-height: 28px;
+
+				.empty-field {
+					margin-top: 3px;
+					display: block;
+				}
+
+				> span {
+					&:first-of-type {
+						font-size: 14px;
+						margin-bottom: 3px;
+						display: block;
+					}
 				}
 			}
 		}
+
+
 		.upload-thumbnail-img {
 			padding-bottom: 21.20%;
 			display: block;
 			width: 390px;
+
 			@media screen and (max-width:$ipad-landscape) {
 				padding-bottom: 31%;
 			}
+
 			@media screen and (max-width:$ipad-portrait) {
 				padding-bottom: 56.25%;
 				width: 100%;
 				margin-top: 15px;
 			}
-		}	
+		}
 	}
+
 	.btn-block {
 		padding-top: 32px;
+
 		.btn {
 			min-width: 207px;
 			padding: 8px 10px 4px;
 			margin-bottom: 0;
+
 			@media screen and (max-width:$mobile-small) {
 				min-width: auto;
 			}
+
 			span {
 				line-height: 30px;
 			}
 		}
 	}
 }
-
-
-

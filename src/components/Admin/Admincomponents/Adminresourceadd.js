@@ -267,16 +267,19 @@ class Adminresourceadd extends React.Component{
 				           				            </div>*/}
 				            <div className="form-group d-flex flex-wrap align-center">
 		                        <label>Product tags*</label>
-	  								<div className="input-box suggestion">
+	  								<div className="input-box">
+										<div className="suggestion-box">			   	
 	  									<div className="shareall-email">
 	  									
 	  									</div>
   		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false})}/>
-                              	{this.state.resourceproduct ? ValidationMsg.common.default.resourceproductfield : ''}
+                              
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}
-              								</ul>	
-							             	</div>	
+              								</ul>
+											  </div>
+											  {this.state.resourceproduct ? ValidationMsg.common.default.resourceproductfield : ''}	  	
+									</div>	
 		                     </div>
 				            <div className="upload-btn-block">
 				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>
@@ -291,6 +294,7 @@ class Adminresourceadd extends React.Component{
 				         </div>
 
 				         <div className="upload-thumbnail d-flex flex-wrap">
+								<div className="thumbnail-upload-left">					   	
 					            <div className="upload-btn-block">
 					            	<span>JPG, GIF or PNG. Max size of 1mb</span>
 					               <div className="upload-btn-wrapper">
@@ -299,7 +303,9 @@ class Adminresourceadd extends React.Component{
 					                  <span>Upload thumbnail</span></button>
 					               </div>
 					            </div>
-					            {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
+								{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
+								</div>
+					            
 					            {this.state.smallLoader ? 
 										<div className="loader"></div>
 									:

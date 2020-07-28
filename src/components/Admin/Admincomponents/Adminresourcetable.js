@@ -15,7 +15,8 @@ class Adminresourcetable extends React.Component{
       	checkdraftStatus:false,
       	openDraftPopup:false,
       	openDeletepopup:false,
-      	draftstatus:''
+      	draftstatus:'',
+      	drafttext:'',
       }
 	  console.log();
       this.singleSelect=this.singleSelect.bind(this);
@@ -110,6 +111,7 @@ delete_single_resource=(e)=>{
    			"status": [{value: target_value}]
    		};
    		console.log(options);
+   		let status;
    		fetch(Admin.adminresourcedraft.url+`${draftid}?_format=json`,{
    	 		 headers:{
                   "Content-Type" : "application/json",
@@ -117,12 +119,21 @@ delete_single_resource=(e)=>{
             },
             method:Admin.adminresourcedraft.method,
             body:JSON.stringify(options)
+	   	 }).then(res=>{
+	   	 	status=res.status;
+	   	 	return res.json()
 	   	 }).then(data=>{
 	   	 	console.log(data);
-	   	 	if(data.status===204){
-	   	 		this.setState({openDraftPopup:true});
-	   	 		target_.textContent='Published';
-	   	 		target_.setAttribute("title","Published");
+	   	 	if(status===200){
+	   	 		if(data.status[0].value===true){
+	   	 			target_.textContent='Draft';
+	   	 			target_.setAttribute("title","Draft");
+	   	 			this.setState({openDraftPopup:true,drafttext:"Resource Published."});
+	   	 		}else{
+	   	 			target_.textContent='Published';
+	   	 			target_.setAttribute("title","Published");
+	   	 			this.setState({openDraftPopup:true,drafttext:"Resource save as Draft."});
+	   	 		}
 	   	 	}
 	   	 });
    }
@@ -162,14 +173,14 @@ delete_single_resource=(e)=>{
 					                  <div className="name-edit">
 					                     <div className="right-detail">
 					                        <h3>{item.title}</h3>
-					                        <Link to={""} onClick={((e)=>this.draft_resource(e,item.nid))} title={item.status==="true" ? "Published" : "Draft"}>{item.status==="true" ? "Published" : "Draft"}</Link>
+					                        <Link to={""} onClick={((e)=>this.draft_resource(e,item.nid))} title={item.status==="true" ? "Draft" : "Publish"}>{item.status==="true" ? "Draft" : "Publish"}</Link>
 					                        <div className="action d-flex flex-wrap">
-					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,true,item.nid)})} title="Edit">Edit</Link>	 
+					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,true,true,item.nid)})} title="Edit">Edit</Link>	 
 					                           <Link to={""} onClick={((e)=>
 							                           	{		e.preventDefault();
 							                           			this.setState({openDeletepopup:true,setSingleDeleteId:item.nid})}
 							                           	)} title="Delete">Delete</Link>	 
-					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(true,true,item.nid)})} title="View">View</Link>	 
+					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,false,true,item.nid)})} title="View">View</Link>	 
 					                        </div>
 					                     </div>
 					                  </div>
@@ -204,7 +215,7 @@ delete_single_resource=(e)=>{
 													
 												<div>
 													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
-														<h2>Resource draft published.</h2>
+														<h2>{this.state.drafttext}</h2>
 												</div>
 												</div>
 											</div>

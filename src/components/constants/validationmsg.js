@@ -31,6 +31,11 @@ export const ValidationMsg = {
             resourcetitlefield:ReactHtmlParser('<span class="empty-field">Please enter resource title.</span>'),
             resourcedescriptionfield:ReactHtmlParser('<span class="empty-field">Please enter resource description.</span>'),
             resourceproductfield:ReactHtmlParser('<span class="empty-field">Please enter resource product tags.</span>'),
+
+
+            productnamefield:ReactHtmlParser('<span class="empty-field">Please enter product name.</span>'),
+            productdescriptionfield:ReactHtmlParser('<span class="empty-field">Please enter description.</span>'),
+            productsheettitlefield:ReactHtmlParser('<span class="empty-field">Please enter product sheet title.</span>'),
     	}
     }
 }

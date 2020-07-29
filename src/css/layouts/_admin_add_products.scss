@@ -134,7 +134,9 @@
 				@media screen and (max-width:$ipad-portrait) {
 					margin: 15px 0 0 auto;
 				}
-
+				
+				.upload-btn-block {
+					
 				.btn {
 					min-width: 255px;
 
@@ -152,6 +154,17 @@
 						top: 50px;
 					}
 				}
+				.document-item {
+					@media screen and (max-width:$mobile-small) {
+						width: 100%; 
+						display: block;
+						margin: 5px 0;
+					}
+				}	
+				.empty-field { display: block; width: 100%; margin-top: 3px; }	
+					
+				}	
+				
 			}
 		}
 		.btn-block {

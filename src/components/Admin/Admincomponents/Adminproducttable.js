@@ -25,6 +25,9 @@ class Adminproducttable extends React.Component{
       this.selectAllcheckbox=this.selectAllcheckbox.bind(this);*/
    }
 
+
+   
+
    render(){
       return(
           <div className="admin-products-table table-outer">

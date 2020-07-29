@@ -19,9 +19,53 @@ class Adminproductadd extends React.Component{
 				productname:false,
 				description:false,
 				productsheettitle:false,
+				fid:'',
+				fileuploadedname:'',
+				doucmentformatestate:false
 			}
 			this.update_product_image=this.update_product_image.bind(this);
+			this.upload_product_document=this.upload_product_document.bind(this);
 		}
+
+
+		upload_product_document=(e)=>{
+			var fullPath = e.target.files[0];
+	      var exactfile=e.target.value;
+	      var filename='';
+         if (exactfile) {
+             var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
+             filename = exactfile.substring(startIndex);
+             if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                 filename = filename.substring(1);
+                 this.setState({fileuploadedname:filename})
+             }
+             console.log(filename);
+             if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt") || filename.includes(".csv")){
+               this.setState({doucmentformatestate:false})
+               var myHeaders = new Headers();
+                  myHeaders.append("Content-Type", "application/octet-stream");
+                  myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
+                  myHeaders.append("Content-Disposition", "file;filename=\""+filename+"\"");
+                  myHeaders.append("Authorization", "Basic "+localStorage.getItem("basic-auth"));
+                  var file = filename;
+                  console.log(file);
+                  var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: fullPath,
+                  };
+                  fetch(Admin.adminproductAdddocument.url,requestOptions)
+                  .then(res=>{return res.json()})
+                  .then(data=>{
+                     console.log(data);
+                     this.setState({fid:data.fid[0].value});
+                  })
+		      }else{
+		         this.setState({doucmentformatestate:true})   
+		     }
+  		}
+		}
+
 
 		update_product_image=(e)=>{
 		console.log(e.target.value)
@@ -120,10 +164,12 @@ class Adminproductadd extends React.Component{
 				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx, csv.</span>
 
 											<div className="upload-btn-wrapper">
-												<input type="file" name="Upload product sheet" />
+												<input type="file" name="Upload product sheet" onChange={this.upload_product_document}/>
 												<button className="btn wide common-btn-blue">
 												<span>Upload product sheet</span></button>
 											</div>
+											<span className='document-item document-item-product' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
+				                  			{this.state.doucmentformatestate ? ValidationMsg.common.default.imageformate : ''}
 										</div>
 							</div>
 						</div>

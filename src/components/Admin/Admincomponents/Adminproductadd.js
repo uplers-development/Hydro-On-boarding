@@ -85,6 +85,8 @@ class Adminproductadd extends React.Component{
 									</div>
 							<div className="upload-thumbnail d-flex flex-wrap">
 									<div className="upload-btn-block">
+						            <span className='suggestion-file-name'>JPG, GIF or PNG. Max size of 1mb.</span>
+
 										<div className="upload-btn-wrapper">
 											<input type="file" name="Upload photo" id="product-image" onChange={this.update_product_image} data-id={this.state.newproductimageid}/>
 											<button className="btn wide common-btn-blue">
@@ -115,6 +117,8 @@ class Adminproductadd extends React.Component{
 						
 							<div className="upload-prod-sheet">
 							<div className="upload-btn-block">
+				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx, csv.</span>
+
 											<div className="upload-btn-wrapper">
 												<input type="file" name="Upload product sheet" />
 												<button className="btn wide common-btn-blue">

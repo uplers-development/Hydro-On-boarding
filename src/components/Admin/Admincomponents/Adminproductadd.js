@@ -10,7 +10,7 @@ class Adminproductadd extends React.Component{
 		constructor(props){
 			super(props);
 			this.state={
-
+				smallLoader:false,
 			}
 		}
 
@@ -39,8 +39,12 @@ class Adminproductadd extends React.Component{
 											<span>Upload photo</span></button>
 										</div>
 									</div>
-									<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${ThumbnailImage_prod})`}}>
-									</div>	
+									{this.state.smallLoader ? 
+										<div className="loader"></div>
+						            	:
+										<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${ThumbnailImage_prod})`}}>
+										</div>	
+								    }
 								</div>
 						</div>
 						

@@ -120,14 +120,17 @@
 				margin: 10px 0 0 0;
 				width: calc(100% - 192px);
 				@media screen and (max-width:$ipad-portrait) {
-					margin: 15px 10px 0 0;
+					margin: 15px 0 0 0;
+					padding-right: 10px;
 				}
 				@media screen and (max-width:$mobile-small) {
-					margin: 10px 10px 10px 0;
+					margin: 10px 0 10px 0;
+					width: calc(100% - 150px);
 				}
 				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 					margin: 10px 10px 0 0;
 					font-size: 14px;
+					padding-right: 0;
 				}
 			}
 			> div {

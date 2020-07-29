@@ -12,7 +12,14 @@
 				line-height: 28px;
 			}
 			ul {
+				width: calc(100% + 2px);
+    			left: -1px;
 				top: 37px;
+				li {
+					a {
+						padding: 6px 15px;
+					}
+				}
 			}
 		}
 		.btn-block {

@@ -59,18 +59,26 @@
 		}
 		.upload-thumbnail {
 			padding: 8px 0 28px;
-			.upload-thumbnail-img {
+			
+			.upload-thumbnail-right {
 				height: 269px;
 				max-width: 481px;
 				width: 100%;
 				margin-left: 10px;
-				@media screen and (max-width:$ipad-portrait) {
-					margin-left: 0;
-					margin-top: 15px;
-					height: auto;
-					padding-bottom: 56.25%;
+				position: relative;
+				.upload-thumbnail-img {
+					position: absolute;
+					height: 100%;
+					width: 100%;
+					@media screen and (max-width:$ipad-portrait) {
+						margin-left: 0;
+						margin-top: 15px;
+						height: auto;
+						padding-bottom: 56.25%;
+					}
 				}
 			}
+			
 			.upload-btn-block {
 				.btn {
 					min-width: 172px;

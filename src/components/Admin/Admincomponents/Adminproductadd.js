@@ -87,6 +87,8 @@ class Adminproductadd extends React.Component{
 										</div>
 										{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
 									</div>
+				
+								<div className="upload-thumbnail-right">
 									{this.state.smallLoader ? 
 										<div className="loader"></div>
 						            	:

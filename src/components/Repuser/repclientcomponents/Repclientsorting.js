@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import {site_url,base_url} from '../../Apiurl'; 
+import {site_url,base_url,Repclient} from '../../Apiurl'; 
 
 
 
@@ -22,7 +22,7 @@ class Repclientsorting extends React.Component {
 		})
 		e.target.classList.add("active");
 
-		fetch(`${base_url}/jsonapi/clients?_format=json${e.target.getAttribute("title")}`,{
+		fetch(Repclient.Repclientdatatable.url+e.target.getAttribute("title"),{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -33,7 +33,7 @@ class Repclientsorting extends React.Component {
 				});
 		}else{
 			e.target.classList.remove("active");
-			fetch(`${base_url}/jsonapi/clients?_format=json`,{
+			fetch(Repclient.Repclientdatatable.url,{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),

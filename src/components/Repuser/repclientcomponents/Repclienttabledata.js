@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
 import {RepLogoutPopup} from'../../constants/RepConstants';
 import {ValidationMsg} from'../../constants/validationmsg';
 
@@ -62,12 +62,12 @@ class Repclienttabledata extends React.Component{
 		e.preventDefault();
 		let status={"status" : [{ "value":0}] }
 		try{
-			fetch(`${base_url}/user/${this.state.setSingleDeleteId}?_format=json`,{
+			fetch(Repclient.Repclientsingledelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:'PATCH',
+	                method:Repclient.Repclientsingledelete.method,
 	                body:JSON.stringify(status)
 			}).then(res=>{
 				return res.json();
@@ -111,8 +111,8 @@ class Repclienttabledata extends React.Component{
 			        "field_client":singlecheckedArray
 			}
 			console.log(options);
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/node?_format=json`,{
-		         method:'POST',
+			fetch(Repclient.Repclientdetailssubmissionproductlist.url,{
+		         method:Repclient.Repclientdetailssubmissionproductlist.method,
 				headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),

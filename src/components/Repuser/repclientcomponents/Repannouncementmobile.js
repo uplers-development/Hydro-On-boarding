@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
-import Apiurl,{site_url} from '../../Apiurl'; 
+import Apiurl,{site_url,Repclient} from '../../Apiurl'; 
 
 class Repannouncementmobile extends React.Component {
 	constructor(props){
@@ -23,12 +23,12 @@ class Repannouncementmobile extends React.Component {
 	get_product_list=()=>{
 
 		try{
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/taxonomy_list/applications?_format=json`,{
+			fetch(Repclient.RepAnnouncementproductlist.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:'GET',
+	                method:Repclient.RepAnnouncementproductlist.method,
 			}).then(res=>{
 				return res.json();
 			}).then(data=>{
@@ -58,12 +58,12 @@ class Repannouncementmobile extends React.Component {
 			productvalue=document.querySelector(".product-item") && document.querySelector(".product-item").classList.contains("active") ? document.querySelector(".product-item").getAttribute("data-id") : '';
 			console.log(productvalue);
 			try{
-				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:'GET',
+		                method:Repclient.RepAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -80,12 +80,12 @@ class Repannouncementmobile extends React.Component {
 			locationvalue='';
 
 			try{
-				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:'GET',
+		                method:Repclient.RepAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -118,12 +118,12 @@ class Repannouncementmobile extends React.Component {
 			locationvalue=document.querySelector(".location-item") && document.querySelector(".location-item").classList.contains("active") ? document.querySelector(".location-item").getAttribute("title") : '';
 
 			try{
-				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Repclient.RepAnnouncementfilterclientlocation.url`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:'GET',
+		                method:Repclient.RepAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -139,12 +139,12 @@ class Repannouncementmobile extends React.Component {
 			e.target.classList.remove("active");
 			productvalue='';
 			try{
-				fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Repclient.RepAnnouncementfilterclientlocation.url`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:'GET',
+		                method:Repclient.RepAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -163,12 +163,12 @@ class Repannouncementmobile extends React.Component {
 	get_location_list=()=>{
 
 		try{
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json/company_list?_format=json`,{
+			fetch(Repclient.RepAnnouncementlocationlist.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:'GET',
+	                method:Repclient.RepAnnouncementlocationlist.method,
 			}).then(res=>{
 				return res.json();
 			}).then(data=>{

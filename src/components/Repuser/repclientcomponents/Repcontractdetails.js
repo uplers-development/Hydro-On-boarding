@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
 import productImage from '../../../images/first-defense.jpg';
 
 class Repcontractdetails extends React.Component{
@@ -19,12 +19,12 @@ class Repcontractdetails extends React.Component{
 
 
 	Get_client_contract_Details=()=>{
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/clients_contract_details/${this.props.repclientuid}?_format=json`,{
+			fetch(Repclient.Repclientcontractdetails.url+`${this.props.repclientuid}?_format=json`,{
 			    headers:{
 			            "Content-Type" : "application/json",
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
-			    method:"GET",
+			    method:Repclient.Repclientcontractdetails.method,
   			}).then(res=>res.json()).then(data=>this.setState({clientcontractDetails:data}));
 		}
 

@@ -23,11 +23,13 @@ class AdminResource extends React.Component {
 				adminuid:null,
 				addStatus:null,
 				statusfiltered:false,
+				checkifselesctedropdown:false,
 		}
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 		this.checktheview=this.checktheview.bind(this);
 		this.getadmindetail=this.getadmindetail.bind(this);
 		this.updatedresourcestatus=this.updatedresourcestatus.bind(this);
+		this.checkdropdownselected=this.checkdropdownselected.bind(this);
 	}
 
 	componentDidMount(){
@@ -64,6 +66,11 @@ class AdminResource extends React.Component {
    		this.setState({viewcaller:checkupdatedresponse});
    }
 
+   checkdropdownselected=(checkstatus)=>{
+   		console.log(checkstatus);
+   		this.setState({checkifselesctedropdown:checkstatus})
+   }
+
 
 
 	render(){
@@ -79,19 +86,19 @@ class AdminResource extends React.Component {
 				               {!this.state.viewcaller ? 
 				               		<div className="d-flex flex-wrap admin-resources-main">
 				                  <div className="fileter-block d-flex flex-wrap border-bottom">
-				                     <Adminresourcesfilter loaderTrue={this.checkloadingfordata} checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
+				                     <Adminresourcesfilter selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
 					                 	    <div className="btn-block">
 												<button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
 											</div>
-				                 		<Adminresourcesmobilefilter loaderTrue={this.checkloadingfordata} checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
+				                 		<Adminresourcesmobilefilter selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 				                     </div>
 
 				                  </div>
-				                  <Adminresourcetable getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} />
+				                  <Adminresourcetable checkifselected={this.state.checkifselesctedropdown} getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} />
 				               		</div>
 								:
-								<Adminresourceadd sendresourceId={this.state.resourcechangeid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}
+								<Adminresourceadd sendresourceId={this.state.resourcechangeid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus} 
 									updatedTheresourceresponse={this.updatedresourcestatus}
 								  />					               
 				               }

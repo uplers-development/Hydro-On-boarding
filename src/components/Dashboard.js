@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import CommonBackground from './../images/common-bg.jpg';
 import Sidebar from './assets/Sidebar';
 import UserProfile from './assets/UserProfile';
-import Apiurl,{site_url} from './Apiurl'; 
+import Apiurl,{site_url,Client} from './Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'./constants/common';
 
@@ -25,11 +25,11 @@ import {cosmaticAsset} from'./constants/common';
 	}
 
 	rightSideMenu=()=>{	
-		fetch(Apiurl.DashboardRightSide.url,{
+		fetch(Client.DashboardRightSide.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 },
-                method:Apiurl.DashboardRightSide.method,
+                method:Client.DashboardRightSide.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{

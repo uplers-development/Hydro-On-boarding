@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
-import Apiurl,{site_url} from '../Apiurl'; 
+import Apiurl,{site_url,Client} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../constants/common';
 import {contractmsg} from'../constants/contract';
@@ -36,12 +36,12 @@ class Contract extends Component {
 
 
 	GetContractForEndusers=()=>{
-		fetch(Apiurl.GetContractForEndusers.url,{
+		fetch(Client.GetContractForEndusers.url,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.GetContractForEndusers.method,
+                method:Client.GetContractForEndusers.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -49,20 +49,20 @@ class Contract extends Component {
     		this.setState({contractDetails:data})
     	})
 
-    	fetch(Apiurl.GetContractProduct.url,{
+    	fetch(Client.GetContractProduct.url,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.GetContractProduct.method,
+                method:Client.GetContractProduct.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
     		this.setState({categoryfilter:data})
     	})
-		fetch(Apiurl.GetContractType.url,{
-		                method:Apiurl.GetContractType.method,
+		fetch(Client.GetContractType.url,{
+		                method:Client.GetContractType.method,
 		    	}).then(res=>{
 		    		return res.json()
 		    	}).then(data=>{	
@@ -116,12 +116,12 @@ class Contract extends Component {
 		console.log(resourceTypefilterId);
 		console.log(resourceSortFilter);
 		let uid=JSON.parse(localStorage.getItem("user-type")).uid
-		fetch(Apiurl.ContractTypeProductBaseFilter.url+uid+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
+		fetch(Client.ContractTypeProductBaseFilter.url+uid+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.ContractTypeProductBaseFilter.method,
+                method:Client.ContractTypeProductBaseFilter.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -138,12 +138,12 @@ class Contract extends Component {
 	GetAllContractForSearch=(e)=>{
 		if(e.target.value!==''){
 		var contractText=e.target.value;
-		fetch(Apiurl.GetAllContractForSearch.url+"&title="+contractText,{
+		fetch(Client.GetAllContractForSearch.url+"&title="+contractText,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.GetAllContractForSearch.method,
+                method:Client.GetAllContractForSearch.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -159,12 +159,12 @@ class Contract extends Component {
 		e.preventDefault()
 			
 		let textValue=e.target.textContent
-		fetch(Apiurl.GetAllContractForSearch.url+"&title="+textValue,{
+		fetch(Client.GetAllContractForSearch.url+"&title="+textValue,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.GetAllContractForSearch.method,
+                method:Client.GetAllContractForSearch.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -218,7 +218,7 @@ class Contract extends Component {
 											<span>Products</span>
 											<ul className="list product-list-item">
 											{this.state.categoryfilter.map((productItem,index)=>
-												<li key={index}><a href="javascript:void(0)" title={ReactHtmlParser(productItem.title)} data-product-id={productItem.nid} onClick={this.FilterContract}>{ReactHtmlParser(productItem.title)}</a></li>
+												<li key={index}><Link to={""} title={ReactHtmlParser(productItem.title)} data-product-id={productItem.nid} onClick={this.FilterContract}>{ReactHtmlParser(productItem.title)}</Link></li>
 											)}
 
 											</ul>
@@ -230,7 +230,7 @@ class Contract extends Component {
 											<span>Types</span>
 											<ul className="list contract-filter-type">
 											{this.state.contractType.map((contractType,index)=>
-												<li key={index}><a title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.FilterContract}>{contractType.name}</a></li>	
+												<li key={index}><Link to={""} title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.FilterContract}>{contractType.name}</Link></li>	
 											)}
 											</ul>
 										</div>
@@ -272,9 +272,9 @@ class Contract extends Component {
 
 											
 											<div className={this.state.mobileView ? "mobile-filter filter-active" : "mobile-filter"}>
-												<a href="#" title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
+												<Link to={""} title="filter-btn" className="filter-open-btn" onClick={((e)=>{e.preventDefault();this.setState({mobileView:true})})}>
 													<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
-												</a>
+												</Link>
 
 												<div className="open-close-filter-block">
 													<div className="top-head d-flex flex-wrap align-center">
@@ -282,23 +282,23 @@ class Contract extends Component {
 															<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
 															<h4>Filters</h4>
 														</div>
-														<a href="#" title="close-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:false})}>
+														<Link to={""} title="close-btn" className="filter-open-btn" onClick={((e)=>{e.preventDefault();this.setState({mobileView:false})})}>
 															<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
-														</a>
+														</Link>
 													</div>
 
 													<div className="list-filter-mobile">
 														<h5>Products</h5>
 														<ul className="product-list-item">
 															{this.state.categoryfilter.map((productItem,index)=>
-																<li key={index}><a href="javascript:void(0)" title={productItem.title} data-product-id={productItem.nid} onClick={this.FilterContract}>{productItem.title}</a></li>
+																<li key={index}><Link to={""} title={productItem.title} data-product-id={productItem.nid} onClick={this.FilterContract}>{productItem.title}</Link></li>
 															)}
 														</ul>
 
 														<h5>Types</h5>
 														<ul className="list contract-filter-type">
 														{this.state.contractType.map((contractType,index)=>
-															<li key={index}><a title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.FilterContract}>{contractType.name}</a></li>	
+															<li key={index}><Link to={""} title={contractType.name} data-contracttype-id={contractType.tid} onClick={this.FilterContract}>{contractType.name}</Link></li>	
 														)}
 														</ul>
 

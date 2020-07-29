@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
-import Apiurl,{site_url} from '../Apiurl'; 
+import Apiurl,{site_url,Client} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../constants/common';
 import $ from "jquery";
@@ -50,12 +50,12 @@ class Newsfeeds extends Component {
 			news_feeds:"1"
 		}
 
-		fetch(`http://staging.project-progress.net/projects/hydro/json-api/newsfeeds.json`,{
+		fetch(Client.NewsfeedsNotification.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:'POST',
+                method:Client.NewsfeedsNotification.method,
                 body:JSON.stringify(newsfeeds),
     	}).then(res=>{
     		return res.json()
@@ -66,7 +66,7 @@ class Newsfeeds extends Component {
 	}
 
 	newsFeedItems=()=>{
-		fetch(Apiurl.Newsfeeds.url,{
+		fetch(Client.Newsfeeds.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -116,12 +116,12 @@ class Newsfeeds extends Component {
 
 
 	newsFeedRecentlyViewed=()=>{
-		fetch(Apiurl.Newsfeeds_recentviews.url,{
+		fetch(Client.Newsfeeds_recentviews.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-               method:Apiurl.Newsfeeds_recentviews.method
+               method:Client.Newsfeeds_recentviews.method
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{

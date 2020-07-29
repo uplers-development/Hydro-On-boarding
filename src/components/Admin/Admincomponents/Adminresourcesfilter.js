@@ -36,7 +36,8 @@ class Adminresourcesfilter extends React.Component{
                if(item.classList.contains("active")){item.classList.remove("active")}
             })
              e.target.classList.add("active");
-      		 fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=${resourceid}`,{
+      		   this.props.selecteddropdown(true)
+           fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=${resourceid}`,{
       	 		 headers:{
                      "Content-Type" : "application/json",
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -50,6 +51,7 @@ class Adminresourcesfilter extends React.Component{
        }else{
          e.target.classList.remove('active');
          this.props.loaderTrue(true); 
+         this.props.selecteddropdown(false);
          fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=All`,{
                 headers:{
                      "Content-Type" : "application/json",

@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import {TwitterMob,LinkdinMob,Twitter,Linkdin} from '../assets/Clientsocialmediaicons';
-import Apiurl,{site_url} from '../Apiurl'; 
+import Apiurl,{site_url,Client} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 //import {cosmaticAsset} from'../constants/common';
 import{hasNull,isRequired} from '../validation';
@@ -33,12 +33,12 @@ class Repcontact extends React.Component {
 	}
 
 	GetRepContactDetails=()=>{
-		fetch(Apiurl.GetRepContactDetails.url,{
+		fetch(Client.GetRepContactDetails.url,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.GetRepContactDetails.method,
+                method:Client.GetRepContactDetails.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -56,12 +56,12 @@ class Repcontact extends React.Component {
 				message:this.textArea.current.value
 		}
 		if(!hasNull(QueryObj.message)){
-		fetch(Apiurl.SendRepContactQuery.url,{
+		fetch(Client.SendRepContactQuery.url,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
-                method:Apiurl.SendRepContactQuery.method,
+                method:Client.SendRepContactQuery.method,
                 body:JSON.stringify(QueryObj)
     	}).then(res=>{
     		return res.json()

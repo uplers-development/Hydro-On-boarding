@@ -65,12 +65,12 @@ class Profile extends Component {
 	}
 
 	GetProfile=()=>{
-		fetch(`${base_url}/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
+		fetch(Apiurl.GetProfile.url,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
-                method:"GET",
+                method:Apiurl.GetProfile.method,
 		}).then(res=>{
 			return res.json();
 		}).then(data=>{
@@ -172,7 +172,7 @@ class Profile extends Component {
 				  headers: myHeaders,
 				  body: fullPath,
 				};
-				fetch(`${base_url}/file/upload/user/user/user_picture?_format=json`,requestOptions)
+				fetch(Apiurl.UpdateprofilePic.url,requestOptions)
 				.then(res=>{return res.json()})
 				.then(data=>{console.log(data);
 					this.setState({smallLoader:false,newuserPic_id:data.fid[0]['value'],userPicture:site_url+data.uri[0].url})

@@ -1,5 +1,5 @@
 import React from 'react';
-import {site_url,base_url} from '../../Apiurl'; 
+import {site_url,base_url,Repclient} from '../../Apiurl'; 
 
 class  Repclientsearchbox extends React.Component{
 	constructor(props){
@@ -14,7 +14,7 @@ class  Repclientsearchbox extends React.Component{
 
 
 	searchByName=(e)=>{
-			fetch(`${base_url}/jsonapi/clients?_format=json&field_first_name_value=${this.searchRef.current.value}&field_last_name_value=${this.searchRef.current.value}`,{
+			fetch(Repclient.Repclientdatatable.url+`&field_first_name_value=${this.searchRef.current.value}&field_last_name_value=${this.searchRef.current.value}`,{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),

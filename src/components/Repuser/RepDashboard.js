@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import CommonBackground from '../../images/common-bg.jpg';
 import Apiurl,{site_url,Repclient} from './../Apiurl'; 
-import Sidebar from '../assets/Sidebar';
-import UserProfile from '../assets/UserProfile';
 import ReactHtmlParser from 'react-html-parser';
 import Repnav from './assets/Repnav'
 import Repheader from './assets/Repheader'
@@ -154,7 +152,7 @@ class RepDashboard extends React.Component {
          <Repnav repmenulisting={this.state.menulisting}/>
          <div className="d-flex flex-wrap right-content-part">
             <div className="top-heading">
-               	<Repheader historyPush={this.props} menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>
+               {this.state.repinfo!==null && <Repheader historyPush={this.props} menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>}
             </div>
 
             <div className="bottom-content-block">

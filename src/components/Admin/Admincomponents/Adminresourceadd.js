@@ -373,10 +373,11 @@ class Adminresourceadd extends React.Component{
 					            
 
 								<div className="thumbnail-upload-right">
-					            {this.state.smallLoader ? 
-											
-				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${this.state.uploadedresourceimage!=='' ? this.state.uploadedresourceimage : ThumbnailImage})`}}></div>:<div className="loader"></div>
-						    }
+					            {this.state.smallLoader ? 		
+					            <div className="loader"></div>
+					            :
+				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${this.state.uploadedresourceimage!=='' ? this.state.uploadedresourceimage : ThumbnailImage})`}}></div>
+						    	}
 				   		</div></div>
 					   <div className="btn-block">
 						   <button className="btn wide common-btn-blue" >

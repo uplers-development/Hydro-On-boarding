@@ -283,5 +283,11 @@ export const Admin={
     },admindraftproduct:{
         url:base_url+`/node/`,
         method:"PATCH",
-    }
+    },
+    adminproductAdddocument:{
+        url:base_url+`/file/upload/node/products/field_product_document?_format=json`,
+    },
+    adminproductAddimage:{
+        url:base_url+`/file/upload/node/products/field_product_image?_format=json`,
+    },
 }

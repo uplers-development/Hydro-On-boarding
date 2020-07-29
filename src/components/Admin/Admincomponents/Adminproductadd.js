@@ -72,17 +72,21 @@ class Adminproductadd extends React.Component{
 							<div className="form-group d-flex flex-wrap align-center">
 										<label>Product name*</label>
 										<div className="input-box">
-											<input type="text" name="Product name" id="title" placeholder="Product name"/>
+											<input type="text" name="Product name" id="title" placeholder="Product name" onBlur={(e)=>hasNull(e.target.value) ? this.setState({productname:true}): this.setState({productname:false})}/>
+											{this.state.productname ? ValidationMsg.common.default.productnamefield : ''}
 										</div>
 									</div>
 							<div className="form-group d-flex flex-wrap align-center">
 										<label>Description*</label>
 										<div className="input-box">
-											<input type="text" name="Description" id="description" placeholder="Description"/>
+											<input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({description:true}): this.setState({description:false})}/>
+											{this.state.description ? ValidationMsg.common.default.productdescriptionfield : ''}
 										</div>
 									</div>
 							<div className="upload-thumbnail d-flex flex-wrap">
 									<div className="upload-btn-block">
+						            <span className='suggestion-file-name'>JPG, GIF or PNG. Max size of 1mb.</span>
+
 										<div className="upload-btn-wrapper">
 											<input type="file" name="Upload photo" id="product-image" onChange={this.update_product_image} data-id={this.state.newproductimageid}/>
 											<button className="btn wide common-btn-blue">
@@ -106,12 +110,15 @@ class Adminproductadd extends React.Component{
 						<div className="form-group d-flex flex-wrap align-center">
 										<label>Product sheet title*</label>
 										<div className="input-box">
-											<input type="text" name="Product name" id="title" placeholder="Product sheet title" />
+											<input type="text" name="Product name" id="title" placeholder="Product sheet title" onBlur={(e)=>hasNull(e.target.value) ? this.setState({productsheettitle:true}): this.setState({productsheettitle:false})} />
+											{this.state.productsheettitle ? ValidationMsg.common.default.productsheettitlefield : ''}
 										</div>
 						</div>
 						
 							<div className="upload-prod-sheet">
 							<div className="upload-btn-block">
+				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx, csv.</span>
+
 											<div className="upload-btn-wrapper">
 												<input type="file" name="Upload product sheet" />
 												<button className="btn wide common-btn-blue">

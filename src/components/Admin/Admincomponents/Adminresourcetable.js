@@ -132,19 +132,20 @@ delete_single_resource=(e)=>{
 	   	 		}else{
 	   	 			target_.textContent='Published';
 	   	 			target_.setAttribute("title","Published");
-	   	 			this.setState({openDraftPopup:true,drafttext:"Resource save as Draft."});
+	   	 			this.setState({openDraftPopup:true,drafttext:"Resource saved as Draft."});
 	   	 		}
 	   	 	}
 	   	 });
    }
 
    render(){
+     	let checkloading=this.props.getifilteredstatus ? this.state.loader : !this.state.loader;
    		let newresourcedata=this.props.getdatafromfilter.length > 0 ? this.props.getdatafromfilter :this.state.adminresourcetabledata;	
    		return(
    				<div className="resources-table table-outer">
 				   <div className="table-responsive">
 				      {/*<!--Table Start-->*/}
-				      {!this.state.loader ? 
+				      {checkloading? 
 					      <table className="table table-striped">
 					         <thead>
 					            <tr>

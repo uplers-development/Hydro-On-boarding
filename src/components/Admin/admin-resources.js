@@ -22,6 +22,7 @@ class AdminResource extends React.Component {
 				checkcallfrom:null,	
 				adminuid:null,
 				addStatus:null,
+				statusfiltered:false,
 		}
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 		this.checktheview=this.checktheview.bind(this);
@@ -39,6 +40,11 @@ class AdminResource extends React.Component {
   	
    resourcesafterFilter=(resourcesfiltereddata)=>{
    		this.setState({resourcesFiltereddata:resourcesfiltereddata})
+   }
+
+   checkloadingfordata=(getstatus)=>{
+		console.log(getstatus);
+   		this.setState({statusfiltered:getstatus})
    }
 
   checktheview=(addpage,callfrom,viewcall,getChangeid)=>{
@@ -73,16 +79,16 @@ class AdminResource extends React.Component {
 				               {!this.state.viewcaller ? 
 				               		<div className="d-flex flex-wrap admin-resources-main">
 				                  <div className="fileter-block d-flex flex-wrap border-bottom">
-				                     <Adminresourcesfilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
+				                     <Adminresourcesfilter loaderTrue={this.checkloadingfordata} checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
 					                 	    <div className="btn-block">
 												<button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
 											</div>
-				                 		<Adminresourcesmobilefilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
+				                 		<Adminresourcesmobilefilter loaderTrue={this.checkloadingfordata} checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 				                     </div>
 
 				                  </div>
-				                  <Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} />
+				                  <Adminresourcetable getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} />
 				               		</div>
 								:
 								<Adminresourceadd sendresourceId={this.state.resourcechangeid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}

@@ -268,5 +268,20 @@ export const Admin={
     },
     adminresourceAddimage:{
         url:base_url+`/file/upload/node/resources/field_resources_image?_format=json`,
+    },
+    adminproductdropdown:{
+        url:base_url+`/jsonapi/taxonomy_list/applications?_format=json`,
+        method:"GET",
+    },
+    adminproducttabledata:{
+        url:base_url+`/jsonapi/admin_products?_format=json`,
+        method:"GET",
+    },
+    adminproductdelete:{
+        url:base_url+`/node/`,
+        method:"DELETE",
+    },admindraftproduct:{
+        url:base_url+`/node/`,
+        method:"PATCH",
     }
 }

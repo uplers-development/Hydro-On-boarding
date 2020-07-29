@@ -16,6 +16,9 @@ class Adminproductadd extends React.Component{
 				newproductimageid:null,
 				uploadedproductimage:'',
 				imageFormateState:false,
+				productname:false,
+				description:false,
+				productsheettitle:false,
 			}
 			this.update_product_image=this.update_product_image.bind(this);
 		}
@@ -96,7 +99,7 @@ class Adminproductadd extends React.Component{
 										</div>	
 								    }
 								</div>
-						</div>
+							</div>
 						
 						<div className="product-sheet-title">
 
@@ -121,6 +124,7 @@ class Adminproductadd extends React.Component{
 							<button className="btn wide common-btn-blue">
 							<span>{!this.props.readmode ? "Update Product":"Add Product"}</span></button>
 							</div>
+						</div>
 						</form>	
 					</div>		
 				)

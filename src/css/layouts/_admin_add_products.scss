@@ -15,7 +15,6 @@
 			margin-bottom: 15px;
 			max-width: 660px;
 			width: 100%;
-			
 			.input-box {
 				max-width: 481px;
 				width: 100%;
@@ -23,13 +22,11 @@
 					width: 100%;
 					border: 1px solid $dim-gray;
 					background-color: $white;
-
 					&:focus {
 						border-color: $sky-blue;
 					}
 				}
 			}
-
 			label {
 				font-size: 18px;
 				line-height: 22px;
@@ -48,88 +45,105 @@
 					font-size: 16px;
 					line-height: 20px;
 				}
-
 				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 					padding: 0 0 5px;
 					font-size: 16px;
 					line-height: 20px;
 				}
 			}
-			
+
 		}
 		.upload-thumbnail {
 			padding: 8px 0 28px;
-			
+
 			.upload-thumbnail-right {
 				height: 269px;
 				max-width: 481px;
 				width: 100%;
 				margin-left: 10px;
 				position: relative;
+
 				.loader {
 					position: absolute;
 				}
+
 				@media screen and (max-width:$ipad-portrait) {
-						margin-left: 0;
-						margin-top: 15px;
-						height: auto;
-						padding-bottom: 56.25%;
-					}
+					margin-left: 0;
+					margin-top: 15px;
+					height: auto;
+					padding-bottom: 56.25%;
+				}
+
 				.upload-thumbnail-img {
 					position: absolute;
 					height: 100%;
 					width: 100%;
 				}
 			}
-			
+
 			.upload-btn-block {
 				width: 172px;
+
 				@media screen and (max-width:$ipad-portrait) {
 					width: 100%;
 				}
+
 				.btn {
 					min-width: 172px;
+
 					span {
 						font-size: 18px;
 						line-height: 28px;
 					}
 				}
-			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+
+				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 					width: 100%;
-			}
+				}
+
 				> .empty-field {
 					margin-top: 3px;
 					display: block;
-						width: 100%;
+					width: 100%;
 				}
 			}
 		}
+
 		.product-sheet-title {
 			padding: 39px 0 28px;
+
 			@media screen and (max-width:$ipad-portrait) {
 				padding: 20px 0;
 			}
+
 			border-top: 1px solid $off-white;
 			border-bottom: 1px solid $off-white;
+
 			.upload-prod-sheet {
 				margin-left: 179px;
 				margin-bottom: 25px;
 				margin-top: 25px;
+
 				@media screen and (max-width:$ipad-landscape) {
 					margin-bottom: 0;
 				}
+
 				@media screen and (max-width:$ipad-portrait) {
 					margin: 15px 0 0 auto;
 				}
+
 				.btn {
 					min-width: 255px;
+
 					@media screen and (max-width:$ipad-portrait) {
 						min-width: auto;
 					}
+
 					span {
 						font-size: 18px;
 						line-height: 28px;
 					}
+
 					&:after {
 						height: 110px;
 						top: 50px;
@@ -139,15 +153,19 @@
 		}
 		.btn-block {
 			padding-top: 30px;
+
 			.btn {
 				margin-bottom: 0;
 				min-width: 196px;
+
 				@media screen and (max-width:$mobile-small) {
 					min-width: auto;
 				}
+
 				span {
 					font-size: 20px;
 					line-height: 46px;
+
 					@media screen and (max-width:$mobile-small) {
 						font-size: 18px;
 						line-height: 34px;
@@ -157,9 +175,3 @@
 		}
 	}
 }
-
-
-
-
-
-

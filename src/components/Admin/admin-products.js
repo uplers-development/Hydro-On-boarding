@@ -8,6 +8,7 @@ import Adminheader from './assets/Adminheader'
 import Adminproductfilter from './Admincomponents/Adminproductfilter'
 import Adminproductmobilefilter from './Admincomponents/Adminproductmobilefilter'
 import Adminproducttable from './Admincomponents/Adminproducttable'
+import Adminproductadd from './Admincomponents/Adminproductadd'
 import adminProductImage from '../../images/headcell2x.png';
 import adminProductImage2 from '../../images/hydro-gritcleanse2x.png';
 
@@ -15,11 +16,40 @@ class AdminProduct extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			adminuid:null
+			adminuid:null,
+			productFiltereddata:[],
+			statusfiltered:false,
+			productchangedid:null,
+			addStatus:null,
+			checkcallfrom:null,	
+			viewcaller:false
 		}
+		this.productafterFilter=this.productafterFilter.bind(this);
 		this.getadmindetail=this.getadmindetail.bind(this);
+		this.checkloadingfordata=this.checkloadingfordata.bind(this);
 	}
 
+	productafterFilter=(productfilteredata)=>{
+		console.log(productfilteredata);
+   		this.setState({productFiltereddata:productfilteredata})
+   }
+
+   checkloadingfordata=(getstatus)=>{
+		console.log(getstatus);
+   		this.setState({statusfiltered:getstatus})
+   }
+
+   checktheview=(addpage,callfrom,viewcall,getChangeid)=>{
+  		console.log(addpage);
+  		console.log(getChangeid);
+  		console.log(callfrom);
+  		console.log(viewcall);
+   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,productchangedid:getChangeid});
+   }  
+
+   updatedresourcestatus=(checkupdatedresponse)=>{		
+   		this.setState({viewcaller:checkupdatedresponse});
+   }
 
 	getadmindetail=(admindetails)=>{
   		console.log(admindetails);
@@ -28,59 +58,37 @@ class AdminProduct extends React.Component {
 
 	render(){
 		return(<div>
-			   
-			    {/*<!--Main wrapper start-->*/}
-			   <section className="main-wrapper">
-			     {/*<!-- Main block start-->*/}
-			   	<div className="d-flex flex-wrap main-block">
-					<Adminnavbar/>
-			<div className="d-flex flex-wrap right-content-part">
-				<div className="top-heading">
-					<Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} />
-						
-				</div>
+				   <section className="main-wrapper">
+				      <div className="d-flex flex-wrap main-block">
+				         <Adminnavbar/>
+				         <div className="d-flex flex-wrap right-content-part">
+				            <div className="top-heading">
+				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} />
+				            </div>
+				            <div className="bottom-content-block with-filter">
+				                {!this.state.viewcaller ? 
+				               <div className="d-flex flex-wrap admin-products-main">
+				                  <div className="fileter-block d-flex flex-wrap border-bottom">
 
-				{/*<!--Main content bottom block start-->*/}
-				<div className="bottom-content-block with-filter">
-
-					{/*<!--Resources main blok start-->*/}
-					<div className="d-flex flex-wrap admin-products-main">
-					
-					{/*<!--Top filter block Start-->*/}
-					<div className="fileter-block d-flex flex-wrap border-bottom">
-						
-							{/*<!--Select box start-->*/}
-								<Adminproductfilter/>
-							{/*<!--Select box end-->*/}	
-							
-							{/*<!--Right search and sort block start-->*/}
-							<div className="search-sort-block d-flex flex-wrap align-center">
-								<div className="btn-block">
-								<button className="common-btn-blue"><span>ADD NEW</span></button>
-							</div>
-
-								{/*<!-Mobile filter box start-->*/}
-								<Adminproductmobilefilter/>
-								{/*<!-Mobile filter box end-->*/}
-
-
-							</div>
-						
-					</div>
-						<Adminproducttable/>
-					</div>
-					{/*<!--Resource main blok end-->*/}
-
-				</div>
-				{/*<!--Main content bottom block end-->*/}
-
-			</div>
-			{/*<!--Main right content block start-->*/}
-			
-				</div>
-			</section>
-			   
-			   </div>)
+				                     <Adminproductfilter loaderTrue={this.checkloadingfordata}  checkproductfilter={this.productafterFilter} checktheviewcalled={this.checktheview}/>
+				                     <div className="search-sort-block d-flex flex-wrap align-center">
+				                        <div className="btn-block">
+				                           <button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
+				                        </div>
+				                        <Adminproductmobilefilter/>
+				                     </div>
+				                  </div>
+				                  <Adminproducttable  getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.productFiltereddata} checktheviewcalled={this.checktheview}/>
+				               </div>
+				               :
+				               <Adminproductadd sendproductId={this.state.productchangedid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}
+									updatedTheproductresponse={this.updatedproductstatus}/>
+				           }
+				            </div>
+				         </div>
+				      </div>
+				   </section>
+				</div>)
 	}
 }
 		

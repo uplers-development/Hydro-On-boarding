@@ -30,6 +30,7 @@ class Adminresourcesmobilefilter extends React.Component{
 
   adminfilterresources=(e,resourceid)=>{
    		e.preventDefault();
+          this.props.loaderTrue(true);
          if(!e.target.classList.contains('active')){
             document.querySelectorAll(".admin-resource-filter").forEach((item,index)=>{
                if(item.classList.contains("active")){item.classList.remove("active")}
@@ -41,16 +42,25 @@ class Adminresourcesmobilefilter extends React.Component{
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                },
                method:Admin.adminresourcelisting.method,
-      	 	}).then(res=>{return res.json()}).then(data=>{console.log(data);this.props.checkresourcefilter(data)});
+      	 	}).then(res=>{return res.json()}).then(data=>{
+                console.log(data);
+                this.props.checkresourcefilter(data)
+                this.props.loaderTrue(false);
+              });
        }else{
          e.target.classList.remove('active');
+          this.props.loaderTrue(true);
          fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=All`,{
                 headers:{
                      "Content-Type" : "application/json",
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                },
                method:Admin.adminresourcelisting.method,
-            }).then(res=>{return res.json()}).then(data=>{console.log(data);this.props.checkresourcefilter(data)});
+            }).then(res=>{return res.json()}).then(data=>{
+                console.log(data);
+                this.props.checkresourcefilter(data)
+                this.props.loaderTrue(false);
+             });
        }
    }
 

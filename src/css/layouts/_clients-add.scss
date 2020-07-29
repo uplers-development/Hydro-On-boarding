@@ -253,30 +253,24 @@
 					}
 				}
 			}
-
 			@media screen and (max-width:$large-m) {
-				margin-top: 15px;
+				margin-top: 0;
 			}
-
 			@media screen and (max-width:$ipad-portrait) {
 				margin-top: 0;
 			}
-
 			@media screen and (max-width:$mobile-small) {
 				margin-top: 0;
 				margin-left: auto;
 				margin-right: 0;
 			}
-
 			@media screen and (max-width:$small-medium) {
 				width: 198px;
 				margin-top: 0;
 			}
-
 			@media screen and (max-width:$mob-landscape-414) {
 				width: 158px;
 			}
-
 			@media screen and (max-width:$small-xx) {
 				width: 180px;
 				margin-left: 0;

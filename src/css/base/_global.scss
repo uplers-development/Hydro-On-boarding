@@ -687,6 +687,9 @@ nav {
 						outline: none;
 						width: calc(100% - 25px);
 						word-break: break-word;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						white-space: nowrap;
 
 						> span {
 							padding-left: 0;
@@ -1475,31 +1478,24 @@ nav {
 					color: $sky-blue;
 				}
 			}
-
 		}
-
 	}
-
 	.user-image-name {
 		width: 100%;
 
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 		}
-
 		> img, .person-profile-img {
 			width: 40px;
 			height: 40px;
 			border-radius: 50%;
-
 			@media screen and (max-width:$mobile-small) {
 				width: 30px;
 				height: 30px;
 				order: 2;
-
 			}
 		}
-
 		h2 {
 			font-size: 16px;
 			line-height: 20px;

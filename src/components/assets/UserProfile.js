@@ -54,8 +54,7 @@ class UserProfile extends Component {
 			console.log(data);
 			console.log(data.field_first_name);
 			if(data!==''){
-			this.setState({dataLoaded:true,first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:data.user_picture[0]
-					})
+			this.setState({dataLoaded:true,first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:data.user_picture[0].url})
 			console.log(this.state.userPicture);
 			}
 		})
@@ -98,12 +97,17 @@ class UserProfile extends Component {
 				<div className="d-flex flex-wrap user-log" onMouseLeave={this.renderOutHover}>
 					{this.state.dataLoaded ? 	
 						<div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={this.renderInHover} onClick={this.renderClass} ref={(input) => { divType = input; }}>
-						<img src={(typeof this.state.userPicture != "undefined" && this.state.userPicture != null)  ? this.state.userPicture.url : require("../../images/profile-logo-blue.svg")} alt="Prfile image"/>
+			
+						<div className="person-profile-img bg-cover" style={{backgroundImage:`url(${this.state.userPicture!=='' ? this.state.userPicture : "../../images/profile-logo-blue.svg"})`}}>
+						</div>
+						
 						<h2>{this.state.first_name+ " "+this.state.last_name }</h2>
 					</div>
 					:
 					<div className="user-image-name d-flex flex-wrap align-center">
-						<img src={require("../../images/profile-logo-blue.svg")} alt="Prfile image"/>
+<div className="person-profile-img bg-cover" style={{backgroundImage:"url( ../../images/profile-logo-blue.svg)"}}>
+						</div>
+
 						<h2>{"First name " + " " +"Last name" }</h2>
 					</div>
 				}

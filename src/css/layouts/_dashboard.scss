@@ -117,7 +117,8 @@
 				font-family: $gibson;
 				font-weight: $font-semi-bold;
 				color: $white;
-				margin: 10px 68px 0 0;
+				margin: 10px 0 0 0;
+				width: calc(100% - 192px);
 				@media screen and (max-width:$ipad-portrait) {
 					margin: 15px 10px 0 0;
 				}
@@ -129,6 +130,8 @@
 					font-size: 14px;
 				}
 			}
+			> div {
+			margin-left: auto;
 			.user-log
 			{
 				position: static;
@@ -157,6 +160,8 @@
 					position: absolute;
 					z-index: 1;
 				}
+			}
+				
 			}
 		}
 	}

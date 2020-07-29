@@ -119,6 +119,7 @@
 										line-height: 20px;
 									}
 									.action {
+										display: none;
 										a {
 											color: $panton-gray;
 											font-size: 14px;
@@ -186,6 +187,17 @@
 						&:nth-child(1) {
 							td {
 								padding-top: 22px;
+							}
+						}
+						&:hover {
+							td {
+								.name-edit {
+									.right-detail {
+										.action {
+											display: block;
+										}
+									}
+								}
 							}
 						}
 					}

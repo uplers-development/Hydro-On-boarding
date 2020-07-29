@@ -66,16 +66,16 @@
 				width: 100%;
 				margin-left: 10px;
 				position: relative;
-				.upload-thumbnail-img {
-					position: absolute;
-					height: 100%;
-					width: 100%;
-					@media screen and (max-width:$ipad-portrait) {
+				@media screen and (max-width:$ipad-portrait) {
 						margin-left: 0;
 						margin-top: 15px;
 						height: auto;
 						padding-bottom: 56.25%;
 					}
+				.upload-thumbnail-img {
+					position: absolute;
+					height: 100%;
+					width: 100%;
 				}
 			}
 			

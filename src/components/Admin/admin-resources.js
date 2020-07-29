@@ -26,6 +26,7 @@ class AdminResource extends React.Component {
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 		this.checktheview=this.checktheview.bind(this);
 		this.getadmindetail=this.getadmindetail.bind(this);
+		this.updatedresourcestatus=this.updatedresourcestatus.bind(this);
 	}
 
 	componentDidMount(){
@@ -53,6 +54,10 @@ class AdminResource extends React.Component {
    		this.setState({adminuid:admindetails.uid[0]}.value);
    }
 
+   updatedresourcestatus=(checkupdatedresponse)=>{		
+   		this.setState({viewcaller:checkupdatedresponse});
+   }
+
 
 
 	render(){
@@ -71,16 +76,18 @@ class AdminResource extends React.Component {
 				                     <Adminresourcesfilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
 					                 	    <div className="btn-block">
-												<button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,false,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
+												<button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
 											</div>
-				                 		<Adminresourcesmobilefilter/>
+				                 		<Adminresourcesmobilefilter checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
 				                     </div>
 
 				                  </div>
 				                  <Adminresourcetable getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} />
 				               		</div>
 								:
-								<Adminresourceadd sendresourceId={this.state.resourcechangeid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}  />					               
+								<Adminresourceadd sendresourceId={this.state.resourcechangeid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}
+									updatedTheresourceresponse={this.updatedresourcestatus}
+								  />					               
 				               }
 				            </div>
 				         </div>

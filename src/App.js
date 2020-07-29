@@ -15,13 +15,7 @@ import RepClients_add from "./components/Repuser/RepClients_add";
 import RepClients_details from "./components/Repuser/RepClients_details";
 import Announcements from "./components/Repuser/Announcements";
 import AdminResource from "./components/Admin/admin-resources";
-import Admin_addResource from "./components/Admin/Admin_addResource";
-import Admin_Reps from "./components/Admin/Admin_Reps";
-import Admin_add_rep from "./components/Admin/Admin_add_rep";
-import Admin_Products from "./components/Admin/Admin_Products";
-import Admin_add_Products from "./components/Admin/Admin_add_Products";
-import Admin_resource from "./components/Admin/Html/Admin_resource";
-import Admin_Profile from "./components/Admin/Html/Admin_Profile";
+import AdminProduct from "./components/Admin/admin-products";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
@@ -39,19 +33,6 @@ class App extends Component {
 
 
   componentDidMount(){
-    //console.log(localStorage.getItem("user-type"));
-    //let LeftSideAPi;
-    /*if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="admin"){
-      LeftSideAPi=Apiurl.Leftsidebar_adminuser.url
-    }
-    if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
-      LeftSideAPi=Apiurl.Leftsidebar_client.url
-    }
-    if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="rep"){
-      LeftSideAPi=Apiurl.Leftsidebar_repuser.url
-    }*/
-
-
       fetch(Apiurl.Leftsidebar_client.url,{
                   method:Apiurl.Leftsidebar_client.method,
         }).then(res=>{
@@ -72,13 +53,7 @@ class App extends Component {
                     <Route path="/RepDashboard"  component={RepDashboard} />
                     <Route path="/RepClients"  component={RepClients} />		  	
                     <Route path="/admin-resources"  component={AdminResource} />        
-                    <Route path="/Admin_resource"  component={Admin_resource} />		  	
-                    <Route path="/Admin_addResource"  component={Admin_addResource} />		  	
-                    <Route path="/Admin_Reps"  component={Admin_Reps} />		  	
-                    <Route path="/Admin_add_rep"  component={Admin_add_rep} />		  	
-                    <Route path="/Admin_Products"  component={Admin_Products} />		  	
-                    <Route path="/Admin_add_Products"  component={Admin_add_Products} />		  	
-                    <Route path="/Admin_Profile"  component={Admin_Profile} />		  	
+                    <Route path="/admin-products"  component={AdminProduct} />        
                     <Route path="/RepClients_details" component={RepClients_details} />
 		  			       <Route path="/Announcements" component={Announcements} />
 		  

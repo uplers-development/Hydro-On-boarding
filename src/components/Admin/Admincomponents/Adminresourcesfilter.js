@@ -30,7 +30,6 @@ class Adminresourcesfilter extends React.Component{
 
    adminfilterresources=(e,resourceid)=>{
    		e.preventDefault();
-   		alert(resourceid);
          if(!e.target.classList.contains('active')){
             document.querySelectorAll(".admin-resource-filter").forEach((item,index)=>{
                if(item.classList.contains("active")){item.classList.remove("active")}

@@ -25,11 +25,13 @@ class Adminresourceadd extends React.Component{
      	resourceproduct:false,
      	insertedresourcedata:'',
      	loader:true,
+     	openResourceSubmission:false,
       }
       this.productTaginput=React.createRef();
 	  this.productTag=this.productTag.bind(this);
 	  this.clearProductTag=this.clearProductTag.bind(this);
 	  this.OnSubmitResource=this.OnSubmitResource.bind(this);
+	  console.log(this.props.historypush);
    }
 
 
@@ -222,22 +224,25 @@ class Adminresourceadd extends React.Component{
 			        //"field_resource_type":[{target_id:tid}],
 			        "field_resources_document":[{target_id:document.querySelector(".document-item-resource").getAttribute("get-id")}]
 				}
-
+				///node/nid?_format=json
 				try{
 					let status;
-					fetch(Admin.adminresourceAdd.url,{
+					let apicall=this.props.addstatus ? Admin.adminresourceAdd.url : Admin.adminresourceUpdate.url+`${this.props.sendresourceId}?_format=json`;
+					let apimethod=this.props.addstatus ? Admin.adminresourceAdd.method : Admin.adminresourceUpdate.method;
+					fetch(apicall,{
 		          		headers: {
 		                       "Content-Type" : "application/json",
 		                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                 },
-             			 method:Admin.adminresourceAdd.method,
+             			 method:apimethod,
              			 body:JSON.stringify(resourceoptions)
 				          }).then(res=>{
 				          	status=res.status;
 				          	return res.json();
 				          }).then(data=>{
-				          	if(status===200){
+				          	if(status===201 || status===200){
 						  		console.log(data);
+						  		this.setState({openResourceSubmission:true})
 				          	}else{
 				          		console.log("something got wrong");
 				          	}
@@ -272,7 +277,18 @@ class Adminresourceadd extends React.Component{
 	          	status=res.status;
 	          	return res.json();
 	          }).then(data=>{
-	          	console.log(data);this.setState({insertedresourcedata:data.node,loader:false})
+	          	console.log(data);
+	          	var filename='';
+	          	var exactfile=data.node.field_document.url;
+					if (exactfile) {
+					    var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
+					    filename = exactfile.substring(startIndex);
+					    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+					        filename = filename.substring(1).split("%20").join(" ");
+					    }
+				}
+				console.log(filename);
+	          	this.setState({insertedresourcedata:data.node,loader:false,uploadedresourceimage:data.node.field_resources_image.url,newresourceimageid:data.node.field_resources_image.fid,fileuploadedname:filename,fid:data.node.field_document.fid})
 	          	this.state.insertedresourcedata.field_product_tags.map((item,index)=>{
 	          		console.log(item);
 	          		  var node = document.createElement("SPAN");
@@ -291,9 +307,8 @@ class Adminresourceadd extends React.Component{
 	}
 
 
-//nid?_format=json
-
    render(){
+   	console.log(this.state.uploadedresourceimage);
    		return(
    			<div className="d-flex flex-wrap admin-add-resources">
 				   <div className="container">
@@ -304,14 +319,14 @@ class Adminresourceadd extends React.Component{
 				               <label>Title*</label>
 				               <div className="input-box">
 				                  <input type="text" name="Title" id="title" placeholder="Title"
-				                  onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata.title : ''}/>
+				                  onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata.title : ''} />
                               	{this.state.resourcetitle ? ValidationMsg.common.default.resourcetitlefield : ''}
 				               </div>
 				            </div>
 				            <div className="form-group d-flex flex-wrap align-center">
 				               <label>Description*</label>
 				               <div className="input-box">
-				                  <input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata.field__resources_description :''}/>
+				                  <input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})} defaultValue={this.state.insertedresourcedata!=='' ? this.state.insertedresourcedata.field__resources_description :''} />
                               	{this.state.resourcedescription ? ValidationMsg.common.default.resourcedescriptionfield : ''}
 				               </div>
 				            </div>
@@ -322,7 +337,7 @@ class Adminresourceadd extends React.Component{
 	  									<div className="shareall-email">
 	  									
 	  									</div>
-  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproductfield:false})}/>
+  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproductfield:false})} />
                               
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}
@@ -334,7 +349,7 @@ class Adminresourceadd extends React.Component{
 				            <div className="upload-btn-block">
 				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>
 				               <div className="upload-btn-wrapper">
-				                  <input type="file" name="Upload Document" onChange={this.upload_resource_document}/>
+				                  <input type="file" name="Upload Document" onChange={this.upload_resource_document} />
 				                  <button className="btn wide common-btn-blue">
 				                  <span >Upload Document</span></button>
 				               </div>
@@ -348,7 +363,7 @@ class Adminresourceadd extends React.Component{
 					            <div className="upload-btn-block">
 					            	<span>JPG, GIF or PNG. Max size of 1mb</span>
 					               <div className="upload-btn-wrapper">
-					                  <input type="file" name="Upload thumbnail" id="resource-image" onChange={this.update_resource_image} data-id={this.state.newresourceimageid}/>
+					                  <input type="file" name="Upload thumbnail" id="resource-image" onChange={this.update_resource_image} data-id={this.state.newresourceimageid} />
 					                  <button className="btn wide common-btn-blue">
 					                  <span>Upload thumbnail</span></button>
 					               </div>
@@ -356,25 +371,42 @@ class Adminresourceadd extends React.Component{
 								{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
 								</div>
 					            
-								
-								<div className="thumbnail-upload-right">
 					            {this.state.smallLoader ? 
 										<div className="loader"></div>
 									:
 				            	<div className="upload-thumbnail-img bg-cover" style={{backgroundImage: `url(${this.state.uploadedresourceimage!=='' ? this.state.uploadedresourceimage : ThumbnailImage})`}}>
-									
 								</div>
-				            }</div>
+				            }
 				   		</div>
 					   <div className="btn-block">
-						   <button className="btn wide common-btn-blue">
-						   <span>Add Resource</span></button>
+						   <button className="btn wide common-btn-blue" >
+						   <span>{!this.props.readmode ? "Update Resource":"Add Resource"}</span></button>
 					   </div>
 				  	 </form>
 				  	 :<>
 				  	 	{cosmaticAsset.cosmatic.default.loader}
 				  	 </>}
 				</div>
+
+				{this.state.openResourceSubmission ? 
+					<div id="modal" className="modal-container">
+						<div className="modal d-flex flex-wrap align-center justify-center">
+									<Link to={""} onClick={((e)=>{e.preventDefault();
+										this.setState({openResourceSubmission:false});
+										this.props.updatedTheresourceresponse(false);
+									})}
+									className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+									
+								<div>
+									<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+										<h2>Resource published</h2>
+										<p>Content was submitted successfully</p>
+								</div>
+						</div>
+				</div>
+				:
+				<></>	
+				}
 			</div>
    			)
    }

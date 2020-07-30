@@ -26,6 +26,10 @@
 						border-color: $sky-blue;
 					}
 				}
+				.empty-field {
+					display: block;
+					margin-top: 3px;
+				}
 			}
 			label {
 				font-size: 18px;

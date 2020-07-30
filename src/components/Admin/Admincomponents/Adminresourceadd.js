@@ -151,7 +151,7 @@ class Adminresourceadd extends React.Component{
 		}
 
 		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
-				this.setState({imageFormateState:false})	
+				this.setState({imageFormateState:false,checkempty:false})	
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/octet-stream");
 				myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));

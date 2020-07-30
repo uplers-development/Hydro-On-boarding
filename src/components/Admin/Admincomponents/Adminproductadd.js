@@ -21,11 +21,26 @@ class Adminproductadd extends React.Component{
 				productsheettitle:false,
 				fid:'',
 				fileuploadedname:'',
-				doucmentformatestate:false
+				doucmentformatestate:false,
+				checkdocempty:false,
+				checkempty:false,
+				openProductSubmission:false,
+				insertedproduct:'',
+				loader:true,
 			}
 			this.update_product_image=this.update_product_image.bind(this);
 			this.upload_product_document=this.upload_product_document.bind(this);
 			this.productsheetselection=this.productsheetselection.bind(this);
+		}
+
+
+		componentDidMount(){
+			console.log(this.props.addstatus+"Add Stateus");
+			 if(!this.props.addstatus){
+		   		this.get_product_details();
+		   	 }else{
+		   	 	this.setState({loader:false});
+		   	 }
 		}
 
 		productsheetselection=(e)=>{
@@ -34,6 +49,38 @@ class Adminproductadd extends React.Component{
 		}
 
 
+		get_product_details=()=>{
+			console.log(this.props.sendproductId);
+			let status;
+			let productid={
+				"nid":this.props.sendproductId
+			}
+			console.log(productid);
+			fetch(Admin.adminviewproduct.url,{
+	          		headers: {
+	                       "Content-Type" : "application/json",
+	                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+	                 },
+	                 method:Admin.adminviewproduct.method,
+	                 body:JSON.stringify(productid)
+	          }).then(res=>{
+	          	status=res.status;
+	          	return res.json();
+	          }).then(data=>{
+	          	console.log(data);
+	          	var filename='';
+	          	var exactfile=data.node.field_document.url;
+					if (exactfile) {
+					    var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
+					    filename = exactfile.substring(startIndex);
+					    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+					        filename = filename.substring(1).split("%20").join(" ");
+					    }
+				}
+				console.log(filename);
+	          	this.setState({insertedproduct:data.node,loader:false,uploadedproductimage:data.node.field_product_image.url,newproductimageid:data.node.field_product_image.fid,fileuploadedname:filename,fid:data.node.field_document.fid})
+	      });
+	}
 		upload_product_document=(e)=>{
 			var fullPath = e.target.files[0];
 	      var exactfile=e.target.value;
@@ -50,7 +97,7 @@ class Adminproductadd extends React.Component{
              }
              console.log(filename);
              if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt") || filename.includes(".csv")){
-               this.setState({doucmentformatestate:false})
+               this.setState({doucmentformatestate:false,checkdocempty:false})
                var myHeaders = new Headers();
                   myHeaders.append("Content-Type", "application/octet-stream");
                   myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
@@ -70,7 +117,7 @@ class Adminproductadd extends React.Component{
                      this.setState({fid:data.fid[0].value});
                   })
 		      }else{
-		         this.setState({doucmentformatestate:true})   
+		         this.setState({doucmentformatestate:true,checkdocempty:false})   
 		     }
   		}
 		}
@@ -91,7 +138,7 @@ class Adminproductadd extends React.Component{
 		}
 
 		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
-				this.setState({imageFormateState:false})	
+				this.setState({imageFormateState:false,checkempty:false})	
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/octet-stream");
 				myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
@@ -112,43 +159,79 @@ class Adminproductadd extends React.Component{
 					console.log(this.state.uploadedproductimage);
 				})
 	  }else{
-	  	this.setState({smallLoader:false,imageFormateState:true})	
+	  	this.setState({smallLoader:false,imageFormateState:true,checkempty:false})	
 	  }
 	}
 
 	submitProduct=(e)=>{
 		e.preventDefault();
-		let options={
-		   	"title":[{value:document.querySelector("#title").value}],
-	        "type":[{target_id:"products"}],        
-	        "field_product_description":[{value:document.querySelector("#description").value}],
-	        "field_product_image":[{target_id:document.querySelector("#product-image").getAttribute("data-id")}],
-	        //"field_product_category":[{target_id:}],
-	        "field_product_sheet_title":[{value:document.querySelector("#product-title").value}],
-	        "field_product_document":[{target_id:document.querySelector(".document-item-product").getAttribute("get-id")}]
+
+		if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && !hasNull(document.querySelector("#product-title").vlaue) && this.state.newproductimageid!==null && this.state.fileuploadedname!==''){
+			let productadd={
+			   	"title":[{value:document.querySelector("#title").value}],
+		        "type":[{target_id:"products"}],        
+		        "field_product_description":[{value:document.querySelector("#description").value}],
+		        "field_product_image":[{target_id:document.querySelector("#product-image").getAttribute("data-id")}],
+		        //"field_product_category":[{target_id:}],
+		        "field_product_sheet_title":[{value:document.querySelector("#product-title").value}],
+		        "field_product_document":[{target_id:document.querySelector(".document-item-product").getAttribute("get-id")}]
+			}
+
+			try{
+				let status;
+				let apicall=this.props.addstatus ? Admin.adminaddproduct.url : Admin.adminupdateproduct.url+`${this.props.sendproductId}?_format=json`;
+					let apimethod=this.props.addstatus ? Admin.adminaddproduct.method : Admin.adminupdateproduct.method;
+				fetch(apicall,{
+					headers: {
+		                       "Content-Type" : "application/json",
+		                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+		                 },
+             			 method:apimethod,
+             			 body:JSON.stringify(productadd)
+             			}).then(res=>{
+             				status=res.status;
+             				return res.json();
+             			}).then(data=>{
+             				console.log(data);
+             				if(status===201 || status===200){
+						  		console.log(data);
+						  		this.setState({openProductSubmission:true})
+				          	}else{
+				          		console.log("something got wrong");
+				          	}
+             			})
+			}catch(err){
+				console.log(err)
+			}
+		}else{
+			hasNull(document.querySelector("#title").value) ? this.setState({productname:true}): this.setState({productname:false})
+			hasNull(document.querySelector("#description").value) ? this.setState({description:true}): this.setState({description:false});
+			hasNull(document.querySelector("#product-title").value) ? this.setState({productsheettitle:true}): this.setState({productsheettitle:false})
+
+			this.state.newproductimageid===null ? this.setState({checkempty :true,imageFormateState:false}) : this.setState({checkempty :false,imageFormateState:false});
+			this.state.fileuploadedname==='' ? this.setState({checkdocempty :true,doucmentformatestate:false}) : this.setState({checkdocempty :false,doucmentformatestate:false});
 		}
 
-		console.log(options);
-		return false;
 	}
 
 
 		render(){
 			return(
 					<div className="d-flex flex-wrap admin-products-add">
+					{!this.state.loader ? 
 					<form onSubmit={this.submitProduct}>
 						<div className="product-add-form">
 							<div className="form-group d-flex flex-wrap align-center">
 										<label>Product name*</label>
 										<div className="input-box">
-											<input type="text" name="Product name" id="title" placeholder="Product name" onBlur={(e)=>hasNull(e.target.value) ? this.setState({productname:true}): this.setState({productname:false})}/>
+											<input type="text" name="Product name" id="title" placeholder="Product name"  onBlur={(e)=>hasNull(e.target.value) ? this.setState({productname:true}): this.setState({productname:false})} defaultValue={this.state.insertedproduct!=='' ? this.state.insertedproduct.title : ''}/>
 											{this.state.productname ? ValidationMsg.common.default.productnamefield : ''}
 										</div>
 									</div>
 							<div className="form-group d-flex flex-wrap align-center">
 										<label>Description*</label>
 										<div className="input-box">
-											<input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({description:true}): this.setState({description:false})}/>
+											<input type="text" name="Description" id="description" placeholder="Description" onBlur={(e)=>hasNull(e.target.value) ? this.setState({description:true}): this.setState({description:false})} defaultValue={this.state.insertedproduct!=='' ? this.state.insertedproduct.field_product_description : ''}/>
 											{this.state.description ? ValidationMsg.common.default.productdescriptionfield : ''}
 										</div>
 									</div>
@@ -162,6 +245,7 @@ class Adminproductadd extends React.Component{
 											<span>Upload photo</span></button>
 										</div>
 										{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
+										{this.state.checkempty ? ValidationMsg.common.default.checkimageempty : ''}
 									</div>
 				
 								<div className="upload-thumbnail-right">
@@ -179,7 +263,7 @@ class Adminproductadd extends React.Component{
 						<div className="form-group d-flex flex-wrap align-center">
 										<label>Product sheet title*</label>
 										<div className="input-box">
-											<input type="text" name="Product name" id="product-title" placeholder="Product sheet title" onBlur={this.productsheetselection} />
+											<input type="text" name="Product name" id="product-title" placeholder="Product sheet title" onBlur={this.productsheetselection} defaultValue={this.state.insertedproduct!=='' ? this.state.insertedproduct.field_product_sheet_title : ''}/>
 											{this.state.productsheettitle ? ValidationMsg.common.default.productsheettitlefield : ''}
 										</div>
 						</div>
@@ -195,6 +279,7 @@ class Adminproductadd extends React.Component{
 											</div>
 											<span className='document-item document-item-product' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
 				                  			{this.state.doucmentformatestate ? ValidationMsg.common.default.imageformate : ''}
+				                  			{this.state.checkdocempty ? ValidationMsg.common.default.checkdocumentempty : ''}
 										</div>
 							</div>
 						</div>
@@ -203,7 +288,29 @@ class Adminproductadd extends React.Component{
 							<span>{!this.props.readmode ? "Update Product":"Add Product"}</span></button>
 							</div>
 						</div>
-						</form>	
+						</form>
+						 :<>
+				  	 	{cosmaticAsset.cosmatic.default.loader}
+				  	 </>}	
+						{this.state.openProductSubmission ? 
+							<div id="modal" className="modal-container">
+								<div className="modal d-flex flex-wrap align-center justify-center">
+											<Link to={""} onClick={((e)=>{e.preventDefault();
+												this.setState({openProductSubmission:false});
+												this.props.updatedTheproductresponse(false);
+											})}
+											className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+											
+										<div>
+											<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+												<h2>Product uploaded</h2>
+												<p>Product was submitted successfully</p>
+										</div>
+								</div>
+						</div>
+						:
+						<></>	
+						}
 					</div>		
 				)
 		}

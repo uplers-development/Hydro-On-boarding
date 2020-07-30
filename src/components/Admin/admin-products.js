@@ -49,7 +49,7 @@ class AdminProduct extends React.Component {
    		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,productchangedid:getChangeid});
    }  
 
-   updatedresourcestatus=(checkupdatedresponse)=>{		
+   updatedproductstatus=(checkupdatedresponse)=>{		
    		this.setState({viewcaller:checkupdatedresponse});
    }
 

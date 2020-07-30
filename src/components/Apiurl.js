@@ -294,6 +294,14 @@ export const Admin={
     adminproductAddimage:{
         url:base_url+`/file/upload/node/products/field_product_image?_format=json`,
     },
+    adminviewproduct:{
+        url:base_url+`/json-api/node_view.json`,
+        method:'POST'
+    }, 
+    adminupdateproduct:{
+        url:base_url+`/node/`,
+        method:'PATCH'
+    }, 
 }
 
 export default {

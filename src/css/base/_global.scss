@@ -11,7 +11,16 @@ body {
 	font-family: $arial;
 	height: 100%;
 }
-
+p {
+	font-size: 16px;
+	font-family: $arial;
+	font-weight: $font-normal;
+}
+h6 {
+	font-size: 14px;
+	font-family: $arial;
+	font-weight: $font-normal;
+}
 a:focus {
 	outline: none;
 }
@@ -824,9 +833,10 @@ nav {
 
 					> div {
 						width: 25px;
-
+						height: 26px;
 						svg {
 							width: 100%;
+							height: 100%;
 							overflow: visible;
 						}
 					}

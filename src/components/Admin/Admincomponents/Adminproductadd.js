@@ -25,6 +25,12 @@ class Adminproductadd extends React.Component{
 			}
 			this.update_product_image=this.update_product_image.bind(this);
 			this.upload_product_document=this.upload_product_document.bind(this);
+			this.productsheetselection=this.productsheetselection.bind(this);
+		}
+
+		productsheetselection=(e)=>{
+			e.preventDefault();
+			hasNull(e.target.value) ? this.setState({productsheettitle:true}): this.setState({productsheettitle:false});
 		}
 
 
@@ -36,7 +42,10 @@ class Adminproductadd extends React.Component{
              var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
              filename = exactfile.substring(startIndex);
              if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                 filename = filename.substring(1);
+             	let extension=filename.split(".")[1];
+             	
+             	console.log(extension);
+                 filename = document.querySelector("#product-title").value!=='' ? document.querySelector("#product-title").value+"."+extension:filename.substring(1);
                  this.setState({fileuploadedname:filename})
              }
              console.log(filename);
@@ -170,7 +179,7 @@ class Adminproductadd extends React.Component{
 						<div className="form-group d-flex flex-wrap align-center">
 										<label>Product sheet title*</label>
 										<div className="input-box">
-											<input type="text" name="Product name" id="product-title" placeholder="Product sheet title" onBlur={(e)=>hasNull(e.target.value) ? this.setState({productsheettitle:true}): this.setState({productsheettitle:false})} />
+											<input type="text" name="Product name" id="product-title" placeholder="Product sheet title" onBlur={this.productsheetselection} />
 											{this.state.productsheettitle ? ValidationMsg.common.default.productsheettitlefield : ''}
 										</div>
 						</div>

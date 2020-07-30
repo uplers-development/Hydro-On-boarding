@@ -207,7 +207,7 @@ class Profile extends Component {
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
 				<Link className="navbar-logo" to={setdefaultroute} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
-					<li><Link to={""} onClick={(e)=>e.preventDefault()} className="active" href="#" title="News Feed">
+					<li><Link to={""} onClick={(e)=>e.preventDefault()} className="active"  title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>
 							<span>About <span>you</span></span></Link></li>
 					<li><Link  to={""} onClick={(e)=>e.preventDefault()} title="Password">

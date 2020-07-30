@@ -38,7 +38,7 @@ class Adminproductfilter extends React.Component{
                if(item.classList.contains("active")){item.classList.remove("active")}
             })
              e.target.classList.add("active");
-             
+             this.props.selecteddropdown(true)
              fetch(Admin.adminproducttabledata.url+`&field_product_category_target_id=${productid}`,{
                 headers:{
                      "Content-Type" : "application/json",
@@ -46,19 +46,15 @@ class Adminproductfilter extends React.Component{
                },
                method:Admin.adminproducttabledata.method,
             }).then(res=>{return res.json()}).then(data=>{console.log(data);
-               if(data.lenght > 0 ){
-                  this.props.checkproductfilter(data);
-                  this.props.loaderTrue(false);
-               }else{
-                  this.props.checkproductfilter('');
-                   this.props.loaderTrue(false);
-               }
+                this.props.checkproductfilter(data);
+                this.props.loaderTrue(false);
                
             });
        }else{
 
          e.target.classList.remove('active');
          this.props.loaderTrue(true); 
+         this.props.selecteddropdown(true)
          fetch(Admin.adminproducttabledata.url+`&field_product_category_target_id=All`,{
                 headers:{
                      "Content-Type" : "application/json",
@@ -67,13 +63,8 @@ class Adminproductfilter extends React.Component{
                method:Admin.adminproducttabledata.method,
             }).then(res=>{return res.json()}).then(data=>{
                console.log(data);
-               if(data.lenght > 0 ){
                   this.props.checkproductfilter(data);
                    this.props.loaderTrue(false);
-               }else{
-                  this.props.checkproductfilter('');
-                   this.props.loaderTrue(false);
-               }
             });
        }
    }

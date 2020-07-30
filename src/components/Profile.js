@@ -6,6 +6,8 @@ import {ValidationMsg} from'./constants/validationmsg';
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'./constants/common';
 
+
+let setdefaultroute;
 class Profile extends Component {
 	constructor(props) {
 		super(props);
@@ -29,7 +31,6 @@ class Profile extends Component {
 			newuserPic_id:null,
 			loader:true,
 			smallLoader:false,
-			redirectionFordashboard:this.props.location.state!==undefined ? this.props.location.state.Repclient : false, 
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
@@ -84,7 +85,7 @@ class Profile extends Component {
 						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
 						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
 						,location:data.field_location.length>0 ?data.field_location[0].value : '',
-						userPicture:data.user_picture[0].url,
+						userPicture:data.user_picture.length>0 ? data.user_picture[0].url :'',
 						newuserPic_id:data.user_picture.length>0 ? data.user_picture[0].target_id:'',
 						loader:false
 					})
@@ -186,6 +187,16 @@ class Profile extends Component {
 
 
 	render() {
+		if(this.props.location.state!==undefined){
+			if(this.props.location.state.admin){
+				setdefaultroute="/admin-resources";
+			}
+			if(this.props.location.state.Repclient){
+				setdefaultroute="/RepDashboard";
+			}
+		}else{
+			setdefaultroute="/Dashboard";
+			}
 		return (
 			<div><section className="main-wrapper">
 
@@ -194,9 +205,9 @@ class Profile extends Component {
 
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
-				<Link className="navbar-logo" to={this.state.redirectionFordashboard ? "/RepDashboard" : "/Dashboard"} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
+				<Link className="navbar-logo" to={setdefaultroute} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
-					<li><Link to={""} onClick={(e)=>e.preventDefault()} className="active" href="#" title="News Feed">
+					<li><Link to={""} onClick={(e)=>e.preventDefault()} className="active"  title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>
 							<span>About <span>you</span></span></Link></li>
 					<li><Link  to={""} onClick={(e)=>e.preventDefault()} title="Password">
@@ -209,7 +220,7 @@ class Profile extends Component {
 			{/*<!--Nav fixed left block end-->*/}
 
 			{/*<!--Main right content block start-->*/}
-			<div className="d-flex flex-wrap right-content-part">
+			<div className="d-flex flex-wrap right-content-part ">
 
 				{/*<!--Main content top heading start-->*/}
 				<div className="top-heading">

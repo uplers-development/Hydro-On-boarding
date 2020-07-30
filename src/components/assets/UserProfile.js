@@ -54,7 +54,8 @@ class UserProfile extends Component {
 			console.log(data);
 			console.log(data.field_first_name);
 			if(data!==''){
-			this.setState({dataLoaded:true,first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:data.user_picture[0].url})
+			let clientuserpic=data.user_picture.length > 0 ? data.user_picture[0].url : '';
+			this.setState({dataLoaded:true,first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:clientuserpic})
 			console.log(this.state.userPicture);
 			}
 		})
@@ -94,7 +95,7 @@ class UserProfile extends Component {
 	render() {
 		return (
 			<div>
-				<div className="d-flex flex-wrap user-log" onMouseLeave={this.renderOutHover}>
+				<div className="d-flex flex-wrap user-log " onMouseLeave={this.renderOutHover}>
 					{this.state.dataLoaded ? 	
 						<div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={this.renderInHover} onClick={this.renderClass} ref={(input) => { divType = input; }}>
 			

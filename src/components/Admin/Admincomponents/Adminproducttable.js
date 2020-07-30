@@ -5,6 +5,8 @@ import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from '../../constants/common'
 import adminProductImage from '../../../images/headcell2x.png';
 
+let newproductdata,noDatacall;
+
 class Adminproducttable extends React.Component{
    constructor(props){
       super(props);
@@ -149,7 +151,21 @@ delete_single_product=(e)=>{
    render(){
 
       let checkloading=this.props.getifilteredstatus ? this.state.loader : !this.state.loader;
-      let newproductdata=this.props.getdatafromfilter.length > 0 ? this.props.getdatafromfilter :this.state.producttabledata;   
+      //let newproductdata=this.props.getdatafromfilter.length > 0 ? this.props.getdatafromfilter :this.state.producttabledata;   
+      
+       if(this.props.checkifselected && this.props.getdatafromfilter.length > 0){
+        noDatacall=!this.state.noDatacall;
+        newproductdata=this.props.getdatafromfilter;
+      }
+      else if(this.props.checkifselected && this.props.getdatafromfilter.length <= 0){
+        newproductdata='';
+        noDatacall=this.state.noDatacall;
+      }
+      else if(!this.props.checkifselected){
+        newproductdata=this.state.producttabledata;
+        noDatacall=!this.state.noDatacall;
+      }
+
       return(
           <div className="admin-products-table table-outer">
                   <div className="table-responsive">
@@ -171,7 +187,7 @@ delete_single_product=(e)=>{
                            </tr>
                         </thead>
                         <tbody>
-                           {!this.state.noDatacall ?
+                           {noDatacall ?
                                  newproductdata.map((item,index)=>
                                  <tr key={index}>
                                     <td>

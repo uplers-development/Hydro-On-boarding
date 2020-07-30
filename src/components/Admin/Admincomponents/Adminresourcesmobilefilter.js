@@ -36,6 +36,7 @@ class Adminresourcesmobilefilter extends React.Component{
                if(item.classList.contains("active")){item.classList.remove("active")}
             })
              e.target.classList.add("active");
+             this.props.selecteddropdown(true)
       		 fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=${resourceid}`,{
       	 		 headers:{
                      "Content-Type" : "application/json",
@@ -50,6 +51,7 @@ class Adminresourcesmobilefilter extends React.Component{
        }else{
          e.target.classList.remove('active');
           this.props.loaderTrue(true);
+          this.props.selecteddropdown(true)
          fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=All`,{
                 headers:{
                      "Content-Type" : "application/json",

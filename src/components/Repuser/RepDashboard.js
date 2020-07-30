@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import CommonBackground from '../../images/common-bg.jpg';
+import Apiurl,{site_url,Repclient} from './../Apiurl'; 
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import ReactHtmlParser from 'react-html-parser';
@@ -11,7 +12,6 @@ import Newuserlist from './repdashboardcomponents/Newuserlist'
 import Overview from './repdashboardcomponents/Overview'
 import Latestproduct from './repdashboardcomponents/Latestproduct'
 import Newsandevents from './repdashboardcomponents/Newsandevents'
-import Apiurl,{site_url} from './../Apiurl'; 
 import {cosmaticAsset} from'../constants/common';
 
 class RepDashboard extends React.Component {
@@ -49,24 +49,24 @@ class RepDashboard extends React.Component {
 		let menulist={
 			menu:"main-navigation-rep"
 		}
-		fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json-api/menu_list.json`,{
+		fetch(Apiurl.menulisting.url,{
 		    headers:{
 		            "Content-Type" : "application/json",
 		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		    },
-		    method:"POST",
+		    method:Apiurl.menulisting.method,
 		    body:JSON.stringify(menulist)
   		}).then(res=>res.json()).then(data=>this.setState({menulisting:data}));
 	}
 
 	GetProfile=()=>{
 		try{
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
+			fetch(Apiurl.GetProfile.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:"GET",
+	                method:Apiurl.GetProfile.method,
 			}).then(res=>{
 				return res.json();
 			}).then(data=>{
@@ -81,8 +81,8 @@ class RepDashboard extends React.Component {
 
 	Rep_recently_published = () =>{
 		try{
-			fetch(Apiurl.RepDashboardRecentlyPublished.url,{
-				method:Apiurl.RepDashboardRecentlyPublished.method
+			fetch(Repclient.RepDashboardRecentlyPublished.url,{
+				method:Repclient.RepDashboardRecentlyPublished.method
 			}).then(res=>{return res.json()}).then(data=>this.setState({recentPublishedActivity:data}));
 		}catch(err){
 			console.log(err)
@@ -92,12 +92,12 @@ class RepDashboard extends React.Component {
 
 	Rep_new_users = () =>{
 		try{
-			fetch(Apiurl.RepDashboardNewUsers.url,{
+			fetch(Repclient.RepDashboardNewUsers.url,{
 				headers:{
 						"Content-Type" : "application/json",
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
-				method:Apiurl.RepDashboardNewUsers.method
+				method:Repclient.RepDashboardNewUsers.method
 			}).then(res=>{return res.json()}).then(data=>this.setState({repnewusers:data}));
 		}catch(err){
 			console.log(err)
@@ -106,12 +106,12 @@ class RepDashboard extends React.Component {
 
 	Rep_glance = () =>{
 		try{
-			fetch(Apiurl.RepDashboardOverview.url,{
+			fetch(Repclient.RepDashboardOverview.url,{
 				headers:{
 						"Content-Type" : "application/json",
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
-				method:Apiurl.RepDashboardOverview.method
+				method:Repclient.RepDashboardOverview.method
 			}).then(res=>{return res.json()}).then(data=>this.setState({repglance:data}));
 		}catch(err){
 			console.log(err)
@@ -120,12 +120,12 @@ class RepDashboard extends React.Component {
 
 	Rep_latest_products = () =>{
 		try{
-			fetch(Apiurl.RepDashboardLatestProducts.url,{
+			fetch(Repclient.RepDashboardLatestProducts.url,{
 				headers:{
 						"Content-Type" : "application/json",
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
-				method:Apiurl.RepDashboardLatestProducts.method
+				method:Repclient.RepDashboardLatestProducts.method
 			}).then(res=>{return res.json()}).then(data=>this.setState({replatestproducts:data,loader:false}));
 		}catch(err){
 			console.log(err)
@@ -134,12 +134,12 @@ class RepDashboard extends React.Component {
 
 	Rep_news_feeds = () =>{
 		try{
-			fetch(Apiurl.RepDashboardNewsFeeds.url,{
+			fetch(Repclient.RepDashboardNewsFeeds.url,{
 				headers:{
 						"Content-Type" : "application/json",
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
-				method:Apiurl.RepDashboardNewsFeeds.method
+				method:Repclient.RepDashboardNewsFeeds.method
 			}).then(res=>{return res.json()}).then(data=>this.setState({repnewsfeeds:data}));
 		}catch(err){
 			console.log(err)

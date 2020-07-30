@@ -25,12 +25,12 @@ class Sidebar extends Component {
 		let menulist={
 			menu:"main"
 		}
-		fetch(`${base_url}/json-api/menu_list.json`,{
+		fetch(Apiurl.menulisting.url,{
 			  headers:{
 		            "Content-Type" : "application/json",
 		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		    	},
-              	method:"POST",
+              	method:Apiurl.menulisting.method,
 	   			 body:JSON.stringify(menulist)
     	}).then(res=>{
     		return res.json()

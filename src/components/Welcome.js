@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
 import CommonBackground from './../images/common-bg.jpg';
 import {cosmaticAsset} from'./constants/common';
-import Apiurl,{site_url} from './Apiurl'; 
+import Apiurl,{site_url,Client} from './Apiurl'; 
 import Slider from "react-slick";
 
 const settings = {dots: true,infinite: true,speed: 500,slidesToShow: 1,slidesToScroll: 1};
@@ -36,11 +36,11 @@ class Welcome extends Component {
 	}
 
 	welcomeMainBlock=()=>{
-		fetch(Apiurl.Welcomeblockmain.url,{
+		fetch(Client.Welcomeblockmain.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 },
-                method:Apiurl.Welcomeblockmain.method,
+                method:Client.Welcomeblockmain.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -51,11 +51,11 @@ class Welcome extends Component {
 
 
 	welcomeThreeBlock=()=>{
-		fetch(Apiurl.WelcomeThreeblock.url,{
+		fetch(Client.WelcomeThreeblock.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 },
-                method:Apiurl.WelcomeThreeblock.method,
+                method:Client.WelcomeThreeblock.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	

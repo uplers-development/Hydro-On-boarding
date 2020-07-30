@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
-import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
 import productImage from '../../../images/first-defense.jpg';
 import {cosmaticAsset} from'../../constants/common';
 
@@ -26,12 +26,12 @@ class Repproductselection extends React.Component{
 
 
 	Get_client_Product_Details=()=>{
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json`,{
+			fetch(Repclient.Repclientproductdetails.url+`${this.props.repclientuid}?_format=json`,{
 			    headers:{
 			            "Content-Type" : "application/json",
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
-			    method:"GET",
+			    method:Repclient.Repclientproductdetails.method,
   			}).then(res=>res.json()).then(data=>{
   				this.setState({porductDetails:data,loader:false})
   			});
@@ -40,12 +40,12 @@ class Repproductselection extends React.Component{
 
 	Search_client_Product_Details=(e)=>{
 		if(this.clientProductSearch.current.value!==''){
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/client_products_details/${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
+			fetch(Repclient.Repclientproductdetails.url+`${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
 			    headers:{
 			            "Content-Type" : "application/json",
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
-			    method:"GET",
+			    method:Repclient.Repclientproductdetails.method,
   			}).then(res=>res.json()).then(data=>{
   				console.log(data);
   				if(data.length>0){

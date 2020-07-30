@@ -1,17 +1,10 @@
 /*********************************Staging Server*********************************************/
-export const base_url=process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net/projects/hydro';
-export const site_url=process.env.NODE_ENV==='production' ? window.location.origin :'//staging.project-progress.net';
+export const base_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin : '//staging.project-progress.net/projects/hydro';
+export const site_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin :'//staging.project-progress.net';
 const target_id=localStorage.getItem("user-type")!==null? JSON.parse(localStorage.getItem("user-type")).uid:'';
 
-export default {
-    Loginpagecontent:{
-        url:base_url+'/json-api/login.json',
-        method:'GET'
-    },
-    Loginaction: {
-    	 url: base_url+'/user/login?_format=json',
-         method: 'POST'
-    },
+
+export const Client={
     Welcomeblockmain:{
          url:base_url+'/node/2?_format=json',
          method:'GET'
@@ -28,17 +21,13 @@ export default {
          url:base_url+`/jsonapi/menu_list/`,
          method:'GET'
     },
-    /*DashboardLeftSideRepuser:{
-         url:base_url+`/jsonapi/menu_list/main-navigation-rep?_format=json`,
-         method:'GET'
-    },
-    DashboardLeftSideAdmin:{
-         url:base_url+`/jsonapi/menu_list/main-navigation-admin?_format=json`,
-         method:'GET'
-    },*/
     Newsfeeds:{
         url:base_url+"/jsonapi/news_feed/?_format=json",
         method:"GET"
+    },
+    NewsfeedsNotification:{
+        url:base_url+"/json-api/newsfeeds.json",
+        method:"POST"
     },
     Newsfeeds_Pagination:{
         url:base_url+"/jsonapi/news_feed/?_format=json",
@@ -60,23 +49,10 @@ export default {
         url:base_url+"/jsonapi/product_list?_format=json",
         method:"GET"
     },
-    //for Sorting A-z after the filter pass field_product_category_target_id=6
     SortProduct:{
         url:base_url+"/jsonapi/product_list?_format=json",
         method:"GET"
     },
-    /*SortProductByNewDate:{
-        url:base_url+"/jsonapi/product_list?_format=json&sort_by=field_purchase_date_value&sort_order=ASC",
-        method:"GET"
-    },
-    SortProductByOldDate:{
-        url:base_url+"/jsonapi/product_list?_format=json&sort_by=field_purchase_date_value&sort_order=DESC",
-        method:"GET"
-    },
-    SortProductByA_Z:{
-        url:base_url+"/jsonapi/product_list?_format=json&sort_by=title&sort_order=ASC",
-        method:"GET"
-    },*/
     GetProductTitle:{
         url:base_url+"/jsonapi/product_list_title/?_format=json",
         method:"GET"
@@ -85,9 +61,7 @@ export default {
         url:base_url+"/jsonapi/product_list?_format=json",
         method:"GET"
     },
-
-    /**************************Resources API call******************************************/
-    GetResourcesList:{
+ GetResourcesList:{
         url:base_url+'/jsonapi/resources_listing/?_format=json',
         method:'GET'
     },
@@ -111,9 +85,6 @@ export default {
         url:base_url+"/jsonapi/resources_title?_format=json",
         method:'GET'
     },
-    /****************************Resources API call ends************************************/
-    /****************************Contract API call starts**********************************/
-
     GetContractForEndusers:{
         url:base_url+'/jsonapi/contract_list?_format=json',
         method:'GET'
@@ -151,9 +122,6 @@ export default {
         url:base_url+'/jsonapi/contract_list?_format=json',
         method:'GET'
     }, 
-
-    /*************************Contract API END*******************************/
-    /***********************REP Contact API Start***************************/
     GetRepContactDetails:{
         url:base_url+"/json-api/repdetails.json",
         method:"GET"
@@ -162,44 +130,10 @@ export default {
         url:`http://staging.project-progress.net/projects/hydro/json-api/repmail.json`,
         method:"POST"
     },
+}
 
-    GetProfile: {
-    	 url: base_url+`/user/${target_id}?_format=json`,
-         method: 'GET'
-    },Updateprofile: {
-         url: base_url+`/user/${target_id}?_format=json`,
-         method: 'PATCH'
-    }
-    ,ProfiletimeZone: {
-         url: base_url+"/json-api/timezones.json",
-         method: 'GET'
-    },
-    UpdateprofilePic: {
-         url: base_url+"/file/upload/user/user/user_picture?_format=json",
-         method: 'PATCH'
-    },Leftsidebar_client: {
-    	 url: base_url+'/jsonapi/menu_list/main?_format=json',
-         method: 'GET'
-    },Leftsidebar_enduser: {
-    	 url: base_url+'/entity/menu/main/tree',
-         method: 'GET'
-    },Leftsidebar_repuser: {
-    	 url: base_url+'/jsonapi/menu_list/main-navigation-rep?_format=json',
-         method: 'GET'
-    },Leftsidebar_adminuser: {
-    	 url: base_url+'/jsonapi/menu_list/main-navigation-admin?_format=json',
-         method: 'GET'
-    }, 
-    LeftsidebarFooter:{
-         url:base_url+`/jsonapi/user_sidebar/?_format=json`,
-         method:'GET'
-    },
-
-
-
-    /******************************************REP USERS API CALLS START******************************************/
-
-    RepDashboardRecentlyPublished:{
+export const Repclient={
+ RepDashboardRecentlyPublished:{
         url:base_url+"/jsonapi/rep_recently_publish?_format=json",
         method:"GET"
     },
@@ -215,10 +149,76 @@ export default {
     },RepDashboardNewsFeeds:{
         url:base_url+"/jsonapi/rep_news_feed?_format=json",
         method:"GET"
+    },
+    Repclientdatatable:{
+        url:base_url+"/jsonapi/clients?_format=json",
+        method:"GET"
+    },
+    Repclientdetailssubmission:{
+        url:base_url+"/entity/user?_format=json",
+        method:"POST"
+    },
+    Repclientdetailssubmissionnotification:{
+        url:base_url+"/json-api/usernotification.json",
+        method:"POST"
+    },
+    Repclientdetailssubmissionproductlist:{
+        url:base_url+"/node?_format=json",
+        method:"POST"
+    },
+    RepAnnouncementclienttable:{
+        url:base_url+"/jsonapi/announcement_clients?_format=json",
+        method:"GET"
+    },
+    RepAnnouncementclientnewsfeeds:{
+        url:base_url+"/json-api/news_feed_type.json",
+        method:"GET"
+    },
+    RepAddcontractuploadfile:{
+        url:base_url+"/file/upload/node/product_purchase/field_purchase_doument?_format=json",
+    }, 
+    RepAddproductuploadimage:{
+        url:base_url+"/file/upload/node/product_purchase/field_purchase_doument?_format=json",
+    }, 
+    RepAnnouncementaddimage:{
+        url:base_url+"/file/upload/node/article/field_image?_format=json",
+    },
+    RepAddproductsearch:{
+        url:base_url+"/jsonapi/add_products?_format=json",
+        method:"GET"
+    },
+    RepAddSingleproductdetails:{
+        url:base_url+"/jsonapi/add_products?_format=json",
+        method:"GET"
     }
-
-
-    /******************************************REP USERS API CALLS ENDS ******************************************/
+    ,RepAnnouncementproductlist:{
+        url:base_url+"/jsonapi/taxonomy_list/applications?_format=json",
+        method:"GET"
+    },
+    RepAnnouncementfilterclientlocation:{
+        url:base_url+"/jsonapi/announcement_clients?_format=json",
+        method:"GET"
+    },
+    RepAnnouncementlocationlist:{
+        url:base_url+"/json/company_list?_format=json",
+        method:"GET"
+    }, 
+    RepBulkdelete:{
+        url:base_url+"/json-api/bulk_delete.json?_format=json",
+        method:"POST"
+    },
+    Repclientsingledelete:{
+        url:base_url+"/user/",
+        method:"PATCH"
+    },
+    Repclientcontractdetails:{
+        url:base_url+"/jsonapi/clients_contract_details/",
+        method:"GET"
+    }, 
+    Repclientproductdetails:{
+        url:base_url+"/jsonapi/client_products_details/",
+        method:"GET"
+    }
 
 }
 
@@ -284,10 +284,62 @@ export const Admin={
         url:base_url+`/node/`,
         method:"PATCH",
     },
+    adminaddproduct:{
+        url:base_url+`/node?_format=json`,
+        method:"POST",
+    },
     adminproductAdddocument:{
         url:base_url+`/file/upload/node/products/field_product_document?_format=json`,
     },
     adminproductAddimage:{
         url:base_url+`/file/upload/node/products/field_product_image?_format=json`,
     },
+}
+
+export default {
+    Loginpagecontent:{
+        url:base_url+'/json-api/login.json',
+        method:'GET'
+    },
+    Loginaction: {
+         url: base_url+'/user/login?_format=json',
+         method: 'POST'
+    },
+    menulisting:{
+        url:base_url+"/json-api/menu_list.json",
+        method:"POST"
+    },
+        
+    GetProfile: {
+         url: base_url+`/user/${target_id}?_format=json`,
+         method: 'GET'
+    },Updateprofile: {
+         url: base_url+`/user/${target_id}?_format=json`,
+         method: 'PATCH'
+    }
+    ,ProfiletimeZone: {
+         url: base_url+"/json-api/timezones.json",
+         method: 'GET'
+    },
+    UpdateprofilePic: {
+         url: base_url+"/file/upload/user/user/user_picture?_format=json",
+         method: 'PATCH'
+    },Leftsidebar_client: {
+         url: base_url+'/jsonapi/menu_list/main?_format=json',
+         method: 'GET'
+    },Leftsidebar_enduser: {
+         url: base_url+'/entity/menu/main/tree',
+         method: 'GET'
+    },Leftsidebar_repuser: {
+         url: base_url+'/jsonapi/menu_list/main-navigation-rep?_format=json',
+         method: 'GET'
+    },Leftsidebar_adminuser: {
+         url: base_url+'/jsonapi/menu_list/main-navigation-admin?_format=json',
+         method: 'GET'
+    }, 
+    LeftsidebarFooter:{
+         url:base_url+`/jsonapi/user_sidebar/?_format=json`,
+         method:'GET'
+    },
+
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
 import hydroImage from '../../../images/hydro-biofilter-product.jpg';
 import {ValidationMsg} from'../../constants/validationmsg';
  
@@ -59,7 +59,7 @@ class Repaddcontract extends React.Component{
                     headers: myHeaders,
                     body: fullPath,
                   };
-                  fetch("${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/file/upload/node/product_purchase/field_purchase_doument?_format=json",requestOptions)
+                  fetch(Repclient.RepAddcontractuploadfile.url,requestOptions)
                   .then(res=>{return res.json()})
                   .then(data=>{
                      console.log(data);
@@ -91,8 +91,8 @@ class Repaddcontract extends React.Component{
 
       console.log(contractoptions);
        if(document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
-        	 fetch(`${base_url}/node?_format=json`,{
-                            method:"POST",
+        	 fetch(Repclient.Repclientdetailssubmissionproductlist.url,{
+                            method:Repclient.Repclientdetailssubmissionproductlist.method,
                             headers: {
                                "Content-Type" : "application/json",
                                "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),

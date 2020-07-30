@@ -42,12 +42,12 @@ class UserProfile extends Component {
 	}
 
 	GetProfile=()=>{
-		fetch(`https://staging.project-progress.net/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
+		fetch(Apiurl.GetProfile.url,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
-                method:"GET",
+                method:Apiurl.GetProfile.method,
 		}).then(res=>{
 			return res.json();
 		}).then(data=>{

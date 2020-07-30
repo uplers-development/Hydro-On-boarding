@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
 import hydroImage from '../../../images/hydro-biofilter-product.jpg';
 import scrollToComponent from 'react-scroll-to-component';
 import ReactHtmlParser from 'react-html-parser';
@@ -101,7 +101,7 @@ class Repaddproduct extends React.Component{
                     headers: myHeaders,
                     body: fullPath,
                   };
-                  fetch("${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/file/upload/node/product_purchase/field_purchase_doument?_format=json",requestOptions)
+                  fetch(Repclient.RepAddproductuploadimage.url,requestOptions)
                   .then(res=>{return res.json()})
                   .then(data=>{
                      console.log(data);
@@ -118,12 +118,12 @@ class Repaddproduct extends React.Component{
 
    Search_client_Product_Details=(e)=>{
       if(this.clientProductSearch.current.value!==''){
-         fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/add_products?_format=json&title=${this.clientProductSearch.current.value}`,{
+         fetch(Repclient.RepAddproductsearch.url+`&title=${this.clientProductSearch.current.value}`,{
              headers:{
                      "Content-Type" : "application/json",
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
              },
-             method:"GET",
+             method:Repclient.RepAddproductsearch.method,
          }).then(res=>res.json()).then(data=>{
             console.log(data);
             if(data.length>0){
@@ -145,7 +145,7 @@ class Repaddproduct extends React.Component{
 
    Get_Product_details=()=>{
        try{
-         fetch(`${base_url}/jsonapi/add_products?_format=json`,{
+         fetch(Repclient.RepAddSingleproductdetails.url,{
                headers: {
                      "Content-Type" : "application/json",
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -214,8 +214,8 @@ class Repaddproduct extends React.Component{
             console.log(productList);
             productList.map((item,index)=>{
                 if(!this.state.purchseDatempty &&!this.state.costState &&!this.state.itemidState){
-                  fetch(`${base_url}/node?_format=json`,{
-                        method:"POST",
+                  fetch(Repclient.Repclientdetailssubmissionproductlist.url,{
+                        method:Repclient.Repclientdetailssubmissionproductlist.method,
                         headers: {
                            "Content-Type" : "application/json",
                            "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),

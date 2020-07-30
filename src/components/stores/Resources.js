@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
-import Apiurl,{site_url} from '../Apiurl'; 
+import Apiurl,{site_url,Client} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../constants/common';
 import {resourcesmsg} from'../constants/resources';
@@ -38,12 +38,12 @@ class Resources extends Component {
 	}
 
 	GetFilterValues=()=>{
-		fetch(Apiurl.GetResourcesList.url,{
+		fetch(Client.GetResourcesList.url,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.GetResourcesList.method,
+                method:Client.GetResourcesList.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -51,12 +51,12 @@ class Resources extends Component {
     			this.setState({ResourceList:data});
     	})
 
-    	fetch(Apiurl.GetProductTitle.url,{
+    	fetch(Client.GetProductTitle.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.GetProductTitle.method,
+                method:Client.GetProductTitle.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -64,12 +64,12 @@ class Resources extends Component {
     		this.setState({productList:data})
     	})
 
-    	fetch(Apiurl.GetResourceTypeTitleId.url,{
+    	fetch(Client.GetResourceTypeTitleId.url,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.GetResourceTypeTitleId.method,
+                method:Client.GetResourceTypeTitleId.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -128,12 +128,12 @@ class Resources extends Component {
 		console.log(resourceTypefilterId);
 		console.log(resourceSortFilter);
 
-		fetch(Apiurl.FilterByResourceId.url+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
+		fetch(Client.FilterByResourceId.url+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.FilterByResourceId.method,
+                method:Client.FilterByResourceId.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -152,7 +152,7 @@ class Resources extends Component {
 	triggerWhilePdfOpen=(e,nid,pdf)=>{
 		
 		fetch(`http://staging.project-progress.net/projects/hydro/node/${nid}?_format=json`,{
-                method:Apiurl.FilterByResourceId.method,
+                method:Client.FilterByResourceId.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -174,12 +174,12 @@ class Resources extends Component {
 				})
 		if(resourcenameString!==''){
 			console.log(resourcenameString)
-			fetch(Apiurl.ListResourcesforSearch.url+"&field_resource_type_target_id="+resource_id+"&title="+resourcenameString,{
+			fetch(Client.ListResourcesforSearch.url+"&field_resource_type_target_id="+resource_id+"&title="+resourcenameString,{
 				headers: {
 	                	 "Content-Type" : "application/json",
 	                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
 	                },
-	                method:Apiurl.ListResourcesforSearch.method,
+	                method:Client.ListResourcesforSearch.method,
 	    	}).then(res=>{
 	    		return res.json()
 	    	}).then(data=>{	
@@ -195,12 +195,12 @@ class Resources extends Component {
 		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
 		let filterType=localStorage.getItem("resource-filter-type") && localStorage.getItem("resource-filter-type")!=='' ? localStorage.getItem("resource-filter-type") : '';
 		let searchValue=e.target.getAttribute("data-title-name");
-		fetch(Apiurl.SortResources.url+"&field_resource_type_target_id="+resource_id+filterType+"&title="+searchValue,{
+		fetch(Client.SortResources.url+"&field_resource_type_target_id="+resource_id+filterType+"&title="+searchValue,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.SortResources.method,
+                method:Client.SortResources.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -302,9 +302,9 @@ class Resources extends Component {
 
 								
 								<div className={this.state.mobileView ? "mobile-filter filter-active" : "mobile-filter"}>
-									<a href="#" title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
+									<Link to={""} title="filter-btn" className="filter-open-btn" onClick={((e)=>{e.preventDefault();this.setState({mobileView:true})})}>
 										<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
-									</a>
+									</Link>
 
 									<div className="open-close-filter-block">
 										<div className="top-head d-flex flex-wrap align-center">
@@ -312,9 +312,9 @@ class Resources extends Component {
 												<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
 												<h4>Filters</h4>
 											</div>
-											<a href="javascript:void(0)" title="close-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:false})}>
+											<Link to={""} title="close-btn" className="filter-open-btn" onClick={((e)=>{e.preventDefault();this.setState({mobileView:false})})}>
 												<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
-											</a>
+											</Link>
 										</div>
 
 										<div className="list-filter-mobile">

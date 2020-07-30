@@ -26,6 +26,8 @@ class Adminresourceadd extends React.Component{
      	insertedresourcedata:'',
      	loader:true,
      	openResourceSubmission:false,
+		checkdocempty:false,
+		checkempty:false
       }
       this.productTaginput=React.createRef();
 	  this.productTag=this.productTag.bind(this);
@@ -108,7 +110,7 @@ class Adminresourceadd extends React.Component{
              }
              console.log(filename);
              if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt")){
-               this.setState({doucmentformatestate:false})
+               this.setState({doucmentformatestate:false,checkdocempty:false})
                var myHeaders = new Headers();
                   myHeaders.append("Content-Type", "application/octet-stream");
                   myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
@@ -128,7 +130,7 @@ class Adminresourceadd extends React.Component{
                      this.setState({fid:data.fid[0].value});
                   })
 		      }else{
-		         this.setState({doucmentformatestate:true})   
+		         this.setState({doucmentformatestate:true,checkdocempty:false})   
 		     }
   		}
 	}
@@ -165,12 +167,12 @@ class Adminresourceadd extends React.Component{
 				fetch(Admin.adminresourceAddimage.url,requestOptions)
 				.then(res=>{return res.json()})
 				.then(data=>{console.log(data);
-					this.setState({smallLoader:false,newresourceimageid:data.fid[0]['value'],uploadedresourceimage:site_url+data.uri[0].url})
+					this.setState({smallLoader:false,newresourceimageid:data.fid[0]['value'],uploadedresourceimage:site_url+data.uri[0].url,checkempty:false})
 					console.log(this.state.newresourceimageid);
 					console.log(this.state.uploadedresourceimage);
 				})
 	  }else{
-	  	this.setState({smallLoader:false,imageFormateState:true})	
+	  	this.setState({smallLoader:false,imageFormateState:true,checkempty:false})	
 	  }
 	}
 
@@ -210,7 +212,7 @@ class Adminresourceadd extends React.Component{
 
 	OnSubmitResource=(e)=>{
 		e.preventDefault();
-		if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0){
+		if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0 && this.state.newresourceimageid!==null && this.state.fileuploadedname!==''){
 			  let productTagsId=[]
 			      document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
 			          productTagsId.push({"target_id":item.getAttribute("nid")});
@@ -254,9 +256,12 @@ class Adminresourceadd extends React.Component{
 
 				console.log(resourceoptions);
 		}else{
+			console.log(this.state.fid);
 			hasNull(document.querySelector("#title").value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})
 			hasNull(document.querySelector("#description").value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})
-			document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false})
+			document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false});
+			this.state.newresourceimageid===null ? this.setState({checkempty :true,imageFormateState:false}) : this.setState({checkempty :false,imageFormateState:false});
+			this.state.fileuploadedname==='' ? this.setState({checkdocempty :true,doucmentformatestate:false}) : this.setState({checkdocempty :false,doucmentformatestate:false});
 		}
 	}
 
@@ -355,6 +360,7 @@ class Adminresourceadd extends React.Component{
 				               </div>
 				                  <span className='document-item document-item-resource' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
 				                  {this.state.doucmentformatestate ? ValidationMsg.common.default.imageformate : ''}
+				                  {this.state.checkdocempty ? ValidationMsg.common.default.checkdocumentempty : ''}
 				            </div>
 				         </div>
 
@@ -369,6 +375,7 @@ class Adminresourceadd extends React.Component{
 					               </div>
 					            </div>
 								{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
+								{this.state.checkempty ? ValidationMsg.common.default.checkimageempty : ''}
 								</div>
 					            
 

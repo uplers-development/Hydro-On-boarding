@@ -3,7 +3,7 @@ import { Link, Redirect,useHistory  } from "react-router-dom";
 import Apiurl,{site_url,Admin} from '../../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from '../../constants/common'
-
+let newresourcedata,noDatacall;
 class Adminresourcetable extends React.Component{
    constructor(props){
       super(props);
@@ -17,6 +17,7 @@ class Adminresourcetable extends React.Component{
       	openDeletepopup:false,
       	draftstatus:'',
       	drafttext:'',
+      	isDeleted:false,
       }
 	  console.log();
       this.singleSelect=this.singleSelect.bind(this);
@@ -75,7 +76,7 @@ delete_single_resource=(e)=>{
 	   	 }).then(data=>{
 	   	 		console.log(data);
 	   	 		if(data.status===204){
-	   	 			this.setState({openDeletepopup:false})
+	   	 			this.setState({openDeletepopup:false,isDeleted:true})
 	   	 			this.get_resource_table();
 	   	 		}
 	   	 });
@@ -131,7 +132,7 @@ delete_single_resource=(e)=>{
 	   	 			this.setState({openDraftPopup:true,drafttext:"Resource Published."});
 	   	 		}else{
 	   	 			target_.textContent='Published';
-	   	 			target_.setAttribute("title","Published");
+	   	 			target_.setAttribute("title","Publish");
 	   	 			this.setState({openDraftPopup:true,drafttext:"Resource saved as Draft."});
 	   	 		}
 	   	 	}
@@ -139,9 +140,21 @@ delete_single_resource=(e)=>{
    }
 
    render(){
+   	console.log(this.props.checkifselected);
      	let checkloading=this.props.getifilteredstatus ? this.state.loader : !this.state.loader;
-   		let newresourcedata=this.props.getdatafromfilter.length > 0 ? this.props.getdatafromfilter :this.state.adminresourcetabledata;	
-   		return(
+		 if(this.props.checkifselected && this.props.getdatafromfilter.length > 0){
+   			noDatacall=!this.state.noDatacall;
+   			newresourcedata=this.props.getdatafromfilter;
+   		}
+   		else if(this.props.checkifselected && this.props.getdatafromfilter.length <= 0){
+   			newresourcedata='';
+   			noDatacall=this.state.noDatacall;
+   		}
+   		else if(!this.props.checkifselected){
+   			newresourcedata=this.state.adminresourcetabledata;
+   			noDatacall=!this.state.noDatacall;
+	   	}
+	   	return(
    				<div className="resources-table table-outer">
 				   <div className="table-responsive">
 				      {/*<!--Table Start-->*/}
@@ -163,7 +176,7 @@ delete_single_resource=(e)=>{
 					            </tr>
 					         </thead>
 					         <tbody>
-					         {!this.state.noDatacall ?
+					         {noDatacall ?
 					         	newresourcedata.map((item,index)=>
 					            <tr key={index}>
 					               <td>
@@ -193,9 +206,9 @@ delete_single_resource=(e)=>{
 					            </tr>
 					          )
 					          :
-					          <>
+					          <tr>
 					          	{cosmaticAsset.cosmatic.default.noDatafound}
-					          </>
+					          </tr>
 					      }
 					         </tbody>
 					      </table>

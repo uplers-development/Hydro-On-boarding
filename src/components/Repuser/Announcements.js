@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
+import Apiurl,{site_url,Repclient} from '../Apiurl'; 
 import CommonBackground from '../../images/common-bg.jpg';
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
-import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import hydroImage from '../../images/hydro-biofilter-product.jpg';
 import Repnav from './assets/Repnav'
@@ -75,7 +75,7 @@ class Announcements extends React.Component {
 	}
 
    client_data_Table=()=>{
-		fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/announcement_clients?_format=json`,{
+		fetch(Repclient.RepAnnouncementclienttable.url,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -89,12 +89,12 @@ class Announcements extends React.Component {
       let menulist={
          menu:"main-navigation-rep"
       }
-      fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json-api/menu_list.json`,{
+      fetch(Apiurl.menulisting.url,{
           headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
           },
-          method:"POST",
+          method:Apiurl.menulisting.method,
           body:JSON.stringify(menulist)
       }).then(res=>res.json()).then(data=>this.setState({menulisting:data}));
    }
@@ -102,12 +102,12 @@ class Announcements extends React.Component {
 
 	 GetProfile=()=>{
 	      try{
-	         fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/user/${JSON.parse(localStorage.getItem("user-type")).uid}?_format=json`,{
+	         fetch(Apiurl.GetProfile.url,{
 	               headers: {
 	                     "Content-Type" : "application/json",
 	                     "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                   },
-	                   method:"GET",
+	                   method:Apiurl.GetProfile.method,
 	         }).then(res=>{
 	            return res.json();
 	         }).then(data=>{
@@ -120,12 +120,12 @@ class Announcements extends React.Component {
 	   }
 
 	get_announcements_list = () =>{
-      fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/json-api/news_feed_type.json`,{
+      fetch(Repclient.RepAnnouncementclientnewsfeeds.url,{
          /* headers:{
                   "Content-Type" : "application/json",
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
           },*/
-          method:"GET",
+          method:Repclient.RepAnnouncementclientnewsfeeds.method,
       }).then(res=>res.json()).then(data=>this.setState({announcementDetails:data}));
 
 	}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
-import Apiurl,{site_url} from '../../Apiurl'; 
+import Apiurl,{site_url,Repclient} from '../../Apiurl'; 
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState,ContentState,convertFromHTML,CompositeDecorator,convertToRaw,getDefaultKeyBinding, } from 'draft-js';
 import {ValidationMsg} from'../../constants/validationmsg';
@@ -61,7 +61,7 @@ class Repannouncementadd extends React.Component {
 				  headers: myHeaders,
 				  body: fullPath,
 				};
-				fetch("${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/file/upload/node/article/field_image?_format=json",requestOptions)
+				fetch(Repclient.RepAnnouncementaddimage.url,requestOptions)
 				.then(res=>{return res.json()})
 				.then(data=>{console.log(data);
 					this.setState({smallLoader:false,announcement_image:true,newuserPic_id:data.fid[0]['value'],announcement_image_uploaded:site_url+data.uri[0].url})

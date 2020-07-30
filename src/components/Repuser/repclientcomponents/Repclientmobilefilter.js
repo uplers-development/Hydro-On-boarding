@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{site_url,base_url} from '../../Apiurl'; 
+import Apiurl,{site_url,base_url,Repclient} from '../../Apiurl'; 
 
 class Repclientmobilefilter extends React.Component {
 	constructor(props) {
@@ -25,7 +25,7 @@ class Repclientmobilefilter extends React.Component {
 		})
 		e.target.classList.add("active");
 
-		fetch(`${base_url}/jsonapi/clients?_format=json${e.target.getAttribute("title")}`,{
+		fetch(Repclient.Repclientdatatable.url+e.target.getAttribute("title"),{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -36,7 +36,7 @@ class Repclientmobilefilter extends React.Component {
 				});
 		}else{
 			e.target.classList.remove("active");
-			fetch(`${base_url}/jsonapi/clients?_format=json`,{
+			fetch(Repclient.Repclientdatatable.url,{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
@@ -94,12 +94,12 @@ class Repclientmobilefilter extends React.Component {
 				user_ids:this.state.bulkIds.toString()
 			}
 			try{
-				fetch(`${base_url}/json-api/bulk_delete.json?_format=json`,{
+				fetch(Repclient.RepBulkdelete.url,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:'POST',
+		                method:Repclient.RepBulkdelete.method,
 		                body:JSON.stringify(clientbulkid)
 				}).then(res=>{
 					return res.json();

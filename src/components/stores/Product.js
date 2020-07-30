@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
-import Apiurl,{site_url} from '../Apiurl'; 
+import Apiurl,{site_url,Client} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../constants/common';
 import {productmsg} from'../constants/products';
@@ -22,9 +22,6 @@ class Product extends Component {
 		this.filterProductCategoryById=this.filterProductCategoryById.bind(this);
 		this.MobfilterProductCategoryById=this.MobfilterProductCategoryById.bind(this);
 		this.SortProductByType=this.SortProductByType.bind(this);
-		/*this.SortProductCategoryByPurchaseDateNew=this.SortProductCategoryByPurchaseDateNew.bind(this);
-		this.SortProductCategoryByPurchaseDateOld=this.SortProductCategoryByPurchaseDateOld.bind(this);
-		this.SortProductCategoryById=this.SortProductCategoryById.bind(this);*/
 		this.ProductListTitleSearch=this.ProductListTitleSearch.bind(this);
 		this.GetProductTitleForSearch=this.GetProductTitleForSearch.bind(this);
 
@@ -41,12 +38,12 @@ class Product extends Component {
 	}
 
 	productList=()=>{
-		fetch(Apiurl.ProductListEnduser.url,{
+		fetch(Client.ProductListEnduser.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.ProductListEnduser.method,
+                method:Client.ProductListEnduser.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -56,12 +53,12 @@ class Product extends Component {
 	}
 
 	ProductCategory=()=>{
-		fetch(Apiurl.ProductCategoryId.url,{
+		fetch(Client.ProductCategoryId.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.ProductCategoryId.method,
+                method:Client.ProductCategoryId.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -91,12 +88,12 @@ class Product extends Component {
 		if(sortByType===undefined){
 			sortByType='';
 		}
-		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.FilterProductCategoryById.method,
+                method:Client.FilterProductCategoryById.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -122,12 +119,12 @@ class Product extends Component {
 				if(sortByType===undefined){
 					sortByType='';
 				}
-				fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+				fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
 		                },
-		                method:Apiurl.FilterProductCategoryById.method,
+		                method:Client.FilterProductCategoryById.method,
 		    	}).then(res=>{
 		    		return res.json()
 		    	}).then(data=>{	
@@ -171,12 +168,12 @@ class Product extends Component {
 		e.target.classList.add("active");
 		let pid=e.target.getAttribute("data-cat-id");
 		localStorage.setItem("product_id",pid);
-		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.FilterProductCategoryById.method,
+                method:Client.FilterProductCategoryById.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -214,12 +211,12 @@ class Product extends Component {
 		//alert(sortByType);
 		let pid='All';
 		localStorage.setItem("product_id",pid);
-		fetch(Apiurl.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.FilterProductCategoryById.method,
+                method:Client.FilterProductCategoryById.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -259,12 +256,12 @@ class Product extends Component {
 			productSelectedvalue="All";
 			}	
 			let sortByType=e.target.getAttribute("sortby")
-			fetch(Apiurl.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
+			fetch(Client.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
 				headers: {
 	                	"Content-Type" : "application/json",
 	                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
 	                },
-	                method:Apiurl.SortProduct.method,
+	                method:Client.SortProduct.method,
 	    	}).then(res=>{
 	    		return res.json()
 	    	}).then(data=>{
@@ -297,12 +294,12 @@ class Product extends Component {
 			productSelectedvalue="All";
 			}	
 			let sortByType=''
-			fetch(Apiurl.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
+			fetch(Client.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
 				headers: {
 	                	"Content-Type" : "application/json",
 	                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
 	                },
-	                method:Apiurl.SortProduct.method,
+	                method:Client.SortProduct.method,
 	    	}).then(res=>{
 	    		return res.json()
 	    	}).then(data=>{
@@ -338,12 +335,12 @@ class Product extends Component {
 								productSelectedvalue="All";
 								}	
 								let sortByType=e.target.getAttribute("sortby")
-								fetch(Apiurl.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
+								fetch(Client.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
 									headers: {
 						                	"Content-Type" : "application/json",
 						                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
 						                },
-						                method:Apiurl.SortProduct.method,
+						                method:Client.SortProduct.method,
 						    	}).then(res=>{
 						    		return res.json()
 						    	}).then(data=>{
@@ -376,12 +373,12 @@ class Product extends Component {
 								productSelectedvalue="All";
 								}	
 								let sortByType='';
-								fetch(Apiurl.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
+								fetch(Client.SortProduct.url+"&field_product_category_target_id="+productSelectedvalue+sortByType+"&title="+productSearchValue,{
 									headers: {
 						                	"Content-Type" : "application/json",
 						                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
 						                },
-						                method:Apiurl.SortProduct.method,
+						                method:Client.SortProduct.method,
 						    	}).then(res=>{
 						    		return res.json()
 						    	}).then(data=>{
@@ -426,12 +423,12 @@ class Product extends Component {
 
 		console.log(productSelectedvalue);
 		//return false;	
-		fetch(Apiurl.GetProductTitle.url+"&field_product_category_target_id="+productSelectedvalue+"&title="+productnamestring,{
+		fetch(Client.GetProductTitle.url+"&field_product_category_target_id="+productSelectedvalue+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.GetProductTitle.method,
+                method:Client.GetProductTitle.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -448,12 +445,12 @@ class Product extends Component {
 		e.preventDefault();
 		let productnamestring=e.target.getAttribute("data-title-name");
 		document.querySelector("#myInput").value=productnamestring;
-		fetch(Apiurl.ProductListTitleSearch.url+"&title="+productnamestring,{
+		fetch(Client.ProductListTitleSearch.url+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
-                method:Apiurl.ProductListTitleSearch.method,
+                method:Client.ProductListTitleSearch.method,
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	
@@ -547,9 +544,9 @@ class Product extends Component {
 
 								
 								<div className={this.state.mobileView ? "mobile-filter filter-active" : "mobile-filter"} >
-										<a title="filter-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:true})}>
+										<Link to={""} title="filter-btn" className="filter-open-btn" onClick={((e)=>{e.preventDefault();this.setState({mobileView:true})})}>
 											<img src={require("../../images/ic_filter.svg")} alt="ic_filter"/>
-										</a>
+										</Link>
 	
 										<div className="open-close-filter-block">
 											<div className="top-head d-flex flex-wrap align-center">
@@ -557,9 +554,9 @@ class Product extends Component {
 													<img src={require("../../images/ic_filter-blue.svg")} alt="ic_filter"/>
 													<h4>Filters</h4>
 												</div>
-												<a href="javascript:void(0)" title="close-btn" className="filter-open-btn" onClick={(e)=>this.setState({mobileView:false})}>
+												<Link to={""}  title="close-btn" className="filter-open-btn" onClick={((e)=>{e.preventDefault();this.setState({mobileView:false})})}>
 													<img src={require("../../images/ic_close.svg")} alt="ic_close"/>
-												</a>
+												</Link>
 											</div>
 	
 											<div className="list-filter-mobile">

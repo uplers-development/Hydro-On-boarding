@@ -107,11 +107,27 @@ class Adminproductadd extends React.Component{
 	  }
 	}
 
+	submitProduct=(e)=>{
+		e.preventDefault();
+		let options={
+		   	"title":[{value:document.querySelector("#title").value}],
+	        "type":[{target_id:"products"}],        
+	        "field_product_description":[{value:document.querySelector("#description").value}],
+	        "field_product_image":[{target_id:document.querySelector("#product-image").getAttribute("data-id")}],
+	        //"field_product_category":[{target_id:}],
+	        "field_product_sheet_title":[{value:document.querySelector("#product-title").value}],
+	        "field_product_document":[{target_id:document.querySelector(".document-item-product").getAttribute("get-id")}]
+		}
+
+		console.log(options);
+		return false;
+	}
+
 
 		render(){
 			return(
 					<div className="d-flex flex-wrap admin-products-add">
-					<form>
+					<form onSubmit={this.submitProduct}>
 						<div className="product-add-form">
 							<div className="form-group d-flex flex-wrap align-center">
 										<label>Product name*</label>
@@ -154,7 +170,7 @@ class Adminproductadd extends React.Component{
 						<div className="form-group d-flex flex-wrap align-center">
 										<label>Product sheet title*</label>
 										<div className="input-box">
-											<input type="text" name="Product name" id="title" placeholder="Product sheet title" onBlur={(e)=>hasNull(e.target.value) ? this.setState({productsheettitle:true}): this.setState({productsheettitle:false})} />
+											<input type="text" name="Product name" id="product-title" placeholder="Product sheet title" onBlur={(e)=>hasNull(e.target.value) ? this.setState({productsheettitle:true}): this.setState({productsheettitle:false})} />
 											{this.state.productsheettitle ? ValidationMsg.common.default.productsheettitlefield : ''}
 										</div>
 						</div>
@@ -164,7 +180,7 @@ class Adminproductadd extends React.Component{
 				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx, csv.</span>
 
 											<div className="upload-btn-wrapper">
-												<input type="file" name="Upload product sheet" onChange={this.upload_product_document}/>
+												<input type="file" name="Upload product sheet"  id="product-shet-upload"onChange={this.upload_product_document}/>
 												<button className="btn wide common-btn-blue">
 												<span>Upload product sheet</span></button>
 											</div>

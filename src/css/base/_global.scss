@@ -11,7 +11,16 @@ body {
 	font-family: $arial;
 	height: 100%;
 }
-
+p {
+	font-size: 16px;
+	font-family: $arial;
+	font-weight: $font-normal;
+}
+h6 {
+	font-size: 14px;
+	font-family: $arial;
+	font-weight: $font-normal;
+}
 a:focus {
 	outline: none;
 }
@@ -821,28 +830,23 @@ nav {
 							}
 						}
 					}
-
 					> div {
 						width: 25px;
-
+						height: 26px;
 						svg {
 							width: 100%;
+							height: 100%;
 							overflow: visible;
 						}
 					}
-
 				}
-
 				ul {
 					@media screen and (max-width:$mobile-small) {
 						display: none;
 					}
-
 					margin-top: 0;
-
 					li {
 						padding-left: 63px;
-
 						a {
 							color: $white-transparent-menu-text;
 							text-decoration: none;
@@ -852,7 +856,6 @@ nav {
 							line-height: 20px;
 							padding-left: 20px;
 						}
-
 						&:hover {
 							a {
 								color: $white;
@@ -862,7 +865,6 @@ nav {
 				}
 			}
 		}
-
 		.nav-copyright {
 			color: $white;
 			font-size: 10px;
@@ -922,15 +924,12 @@ nav {
 	margin-left: auto;
 	align-items: flex-start;
 	position: relative;
-
 	@media screen and (max-width:$large-mx) {
 		padding-left: 40px;
 	}
-
 	@media screen and (max-width:$large-m) {
 		padding-left: 20px;
 	}
-
 	@media screen and (max-width:$ipad-landscape) {
 		padding: 0 15px;
 	}
@@ -1656,7 +1655,7 @@ nav {
 		padding-left: 0;
 		margin: 0;
 		position: absolute;
-		top: 44px;
+		top: 43px;
 		height: 0;
 		visibility: hidden;
 		opacity: 0;

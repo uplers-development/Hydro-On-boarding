@@ -19,15 +19,15 @@ class Adminrepsort extends React.Component{
 	                        <div className="drop-down-menu">
 	                           <ul>
 	                              <li>
-	                                 <Link to={""} title="Purchase date newest">
+	                                 <Link to={""} onClick={e=>e.preventDefault()} title="Purchase date newest">
 	                                 Purchase date newest</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} title="Purchase date oldest">
+	                                 <Link to={""} onClick={e=>e.preventDefault()} title="Purchase date oldest">
 	                                 Purchase date oldest</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} title="A-Z">
+	                                 <Link to={""} onClick={e=>e.preventDefault()} title="A-Z">
 	                                 A-Z</Link>
 	                              </li>
 	                           </ul>

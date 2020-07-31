@@ -21,7 +21,7 @@ class AdminRep extends React.Component {
 
 	getadmindetail=(admindetails)=>{
   		console.log(admindetails);
-   		this.setState({adminuid:admindetails.uid[0]}.value);
+   		this.setState({adminuid:admindetails.uid[0].value});
    	}	
 
 

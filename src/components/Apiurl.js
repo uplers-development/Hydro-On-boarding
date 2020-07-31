@@ -302,6 +302,10 @@ export const Admin={
         url:base_url+`/node/`,
         method:'PATCH'
     }, 
+    adminreptablelisting:{
+        url:base_url+`/jsonapi/admin_reps?_format=json`,
+        method:"GET"
+    }
 }
 
 export default {

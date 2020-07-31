@@ -147,6 +147,13 @@
 										font-size: 16px;
 										line-height: 20px;
 										display: none;
+										a {
+											padding-right: 16px;
+											&:after {
+											    right: 8px;
+												height: 16px;
+											}
+										}
 									}
 
 									> a {
@@ -159,7 +166,6 @@
 										font-family: $arial;
 										font-weight: $font-normal;
 										padding-left: 15px;
-
 										&:before {
 											content: "";
 											display: inline-block;

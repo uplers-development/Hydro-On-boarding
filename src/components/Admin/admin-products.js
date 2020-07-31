@@ -24,6 +24,7 @@ class AdminProduct extends React.Component {
 			checkcallfrom:null,	
 			viewcaller:false,
 			checkifselesctedropdown:false,
+			pageTitleChange:false,
 		}
 		this.productafterFilter=this.productafterFilter.bind(this);
 		this.getadmindetail=this.getadmindetail.bind(this);
@@ -46,7 +47,7 @@ class AdminProduct extends React.Component {
   		console.log(getChangeid);
   		console.log(callfrom);
   		console.log(viewcall);
-   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,productchangedid:getChangeid});
+   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,productchangedid:getChangeid,pageTitleChange:viewcall});
    }  
 
    updatedproductstatus=(checkupdatedresponse)=>{		
@@ -70,7 +71,7 @@ class AdminProduct extends React.Component {
 				         <Adminnavbar/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
-				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} />
+				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} />
 				            </div>
 				            <div className="bottom-content-block with-filter">
 				                {!this.state.viewcaller ? 

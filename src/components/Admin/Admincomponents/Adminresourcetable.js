@@ -18,8 +18,9 @@ class Adminresourcetable extends React.Component{
       	draftstatus:'',
       	drafttext:'',
       	isDeleted:false,
+      	lenghtofcalspan:null
       }
-	  console.log();
+	  console.log(this.state.lenghtofcalspan);
       this.singleSelect=this.singleSelect.bind(this);
       this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
    }
@@ -92,13 +93,13 @@ delete_single_resource=(e)=>{
             method:Admin.adminresourcelisting.method,
 	   	 }).then(res=>{return res.json()}).then(data=>{
 	   	 		if(data.length>0){
-	   	 			this.setState({noDatacall:false,adminresourcetabledata:data,loader:false})
+	   	 			this.setState({noDatacall:false,adminresourcetabledata:data,loader:false,lenghtofcalspan:document.querySelectorAll(".table-striped tr th").length})
 	   	 		}else{
-	   	 			this.setState({loader:false,noDatacall:true})
+	   	 			this.setState({loader:false,noDatacall:true,lenghtofcalspan:document.querySelectorAll(".table-striped tr th").length})
 	   	 		}
 	   	 });
    	}else{
-   		this.setState({loader:false,adminresourcetabledata:this.props.getdatafromfilter});
+   		this.setState({loader:false,adminresourcetabledata:this.props.getdatafromfilter,lenghtofcalspan:document.querySelectorAll(".table-striped tr th").length});
    	}
    }
 
@@ -206,8 +207,10 @@ delete_single_resource=(e)=>{
 					            </tr>
 					          )
 					          :
-					          <tr>
-					          	{cosmaticAsset.cosmatic.default.noDatafound}
+					          <tr> 
+					          	<td className="no-desk-data" colSpan={this.state.lenghtofcalspan}>
+					          		{cosmaticAsset.cosmatic.default.noDatafound}
+					          	</td>
 					          </tr>
 					      }
 					         </tbody>

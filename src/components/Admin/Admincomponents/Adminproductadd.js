@@ -237,7 +237,7 @@ class Adminproductadd extends React.Component{
 									</div>
 							<div className="upload-thumbnail d-flex flex-wrap">
 									<div className="upload-btn-block">
-						            <span className='suggestion-file-name'>JPG, GIF or PNG. Max size of 1mb.</span>
+						            <span className='suggestion-file-name'>JPG, GIF or PNG.</span>
 
 										<div className="upload-btn-wrapper">
 											<input type="file" name="Upload photo" id="product-image" onChange={this.update_product_image} data-id={this.state.newproductimageid}/>

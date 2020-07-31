@@ -24,6 +24,7 @@ class AdminResource extends React.Component {
 				addStatus:null,
 				statusfiltered:false,
 				checkifselesctedropdown:false,
+				pageTitleChange:false,
 		}
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 		this.checktheview=this.checktheview.bind(this);
@@ -54,7 +55,7 @@ class AdminResource extends React.Component {
   		console.log(getChangeid);
   		console.log(callfrom);
   		console.log(viewcall);
-   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,resourcechangeid:getChangeid});
+   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,resourcechangeid:getChangeid,pageTitleChange:viewcall});
    }  
 
   getadmindetail=(admindetails)=>{
@@ -80,7 +81,7 @@ class AdminResource extends React.Component {
 				         <Adminnavbar/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
-				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail}  />
+				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange}  />
 				            </div>
 				            <div className="bottom-content-block with-filter">
 				               {!this.state.viewcaller ? 

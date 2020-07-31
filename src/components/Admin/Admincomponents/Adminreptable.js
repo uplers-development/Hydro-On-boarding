@@ -10,12 +10,71 @@ class Adminreptable extends React.Component{
 			adminreptabledata:[],
 			loader:true,
 			noDatacall:false,
+			openDeletepopup:false,
+			setSingleDeleteId:null,
 		}
+		this.singleSelect=this.singleSelect.bind(this);
+      	this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
 	}
 
 	componentDidMount(){
 		this.get_admin_rep_table_data();
 	}
+
+
+	selectAllcheckbox=(e)=>{
+		 var ele=e.target;
+		 var checkboxes = document.getElementsByTagName('input');
+	     if (ele.checked) {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = true;
+	             }
+	         }
+	     }else {
+	         for (var i = 0; i < checkboxes.length; i++) {
+	             console.log(i)
+	             if (checkboxes[i].type == 'checkbox') {
+	                 checkboxes[i].checked = false;
+	             }
+	         }
+	      }
+	}
+
+   singleSelect=(e)=>{
+		var checkboxes = document.querySelectorAll('.repchecked');
+		var ele=document.querySelector(".repparent");
+		var checkedCheckboxes=document.querySelectorAll('.repchecked:checked').length;
+		console.log(checkedCheckboxes);
+		if(e.target.checked===false){
+			document.querySelector(".repparent").checked=false
+		}else{
+			for(var i=1;i<=checkboxes.length ; i++){
+				if(checkedCheckboxes===checkboxes.length){
+					ele.checked=true;
+				}else{
+					ele.checked=false;
+				}
+			}
+		}	
+	}
+
+	delete_single_resource=(e)=>{
+		e.preventDefault();
+		fetch(Admin.adminrepdeletesingle.url+`${this.state.setSingleDeleteId}?_format=json`,{
+	   	 		 headers:{
+	                  "Content-Type" : "application/json",
+	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	            },
+	            method:Admin.adminrepdeletesingle.method,
+		   	 }).then(data=>{
+		   	 		console.log(data);
+		   	 		if(data.status===204){
+		   	 			this.setState({openDeletepopup:false,isDeleted:true})
+		   	 			this.get_resource_table();
+		   	 		}
+		   	 });
+	}	
 
 	get_admin_rep_table_data=()=>{
 		let status;
@@ -58,8 +117,8 @@ class Adminreptable extends React.Component{
                            <tr>
                               <th>
                                  <div className="checkbox-cust">
-                                    <input type="checkbox" id="checkbox1" />
-                                    <label htmlFor="checkbox1"></label>	 
+                                    <input type="checkbox" id="chheckbox" className="repparent" onChange={this.selectAllcheckbox}/>
+                                    <label htmlFor="chheckbox"></label>	 
                                  </div>
                                  <span>Name</span>
                               </th>
@@ -74,19 +133,22 @@ class Adminreptable extends React.Component{
                            <tr key={index}>
                               <td>
                                  <div className="checkbox-cust">
-                                    <input type="checkbox" id="checkbox2" />
-                                    <label htmlFor="checkbox2"></label>	 
+                                    <input type="checkbox" id={"checkbox"+index} className="repchecked" name="checkbox" onChange={this.singleSelect} defaultValue={item.uid} />
+                                    <label htmlFor={"checkbox"+index}></label>	 
                                  </div>
                                  <div className="name-edit">
                                     <div className="img-c">
-                                       <img src={require("../../../images/userrep_user2x.png")} alt="Prfile image" />	 
+                                       <img src={item.user_picture!=='' ? site_url+item.user_picture : require("../../../images/profile-logo-blue.svg")} alt="Prfile image" />	 
                                     </div>
                                     <div className="right-detail">
-                                       <h3>John Smith</h3>
+                                       <h3>{item.name_1}</h3>
                                        <div className="action d-flex flex-wrap">
                                           <Link to={""} onClick={e=>e.preventDefault()} title="Edit">
                                           Edit</Link>	 
-                                          <Link to={""} onClick={e=>e.preventDefault()} title="Delete">
+                                          <Link to={""} onClick={((e)=>
+							                           	{		e.preventDefault();
+							                           			this.setState({openDeletepopup:true,setSingleDeleteId:item.uid})}
+							                           	)} title="Delete">
                                           Delete</Link>	 
                                           <Link to={""} onClick={e=>e.preventDefault()} title="View">
                                           View</Link>	 
@@ -94,9 +156,9 @@ class Adminreptable extends React.Component{
                                     </div>
                                  </div>
                               </td>
-                              <td>John.smith@example.co.uk</td>
-                              <td>Project manager</td>
-                              <td><span>22th Jan 2020</span><span>11.00 am</span></td>
+                              <td>{item.mail}</td>
+                              <td>{item.field_job_title}</td>
+                              <td><span>{item.changed}</span></td>
                            </tr>
                            )
                            :
@@ -115,6 +177,27 @@ class Adminreptable extends React.Component{
 					 }
                      {/*<!--Table End-->*/}
                   </div>
+                  {this.state.openDeletepopup ? 
+
+				   		<div id="modal" className="modal-container">
+												<div className="modal d-flex flex-wrap align-center justify-center">
+													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openDeletepopup:false})})}
+													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+													
+												<div>
+													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+														<p>Are you sure you want to delete records?</p>
+
+													<div className="btn-blok">
+														<button onClick={((e)=>{e.preventDefault();this.setState({openDeletepopup:false})})} className="btn common-btn-blue"><span>CANCEL</span></button>
+														<button className="btn common-btn-blue" onClick={this.delete_single_resource}><span>YES</span></button>	
+													</div>
+													
+												</div>
+												</div>
+											</div>
+								: <></>
+				   }
            	  </div>
 			)
 	}

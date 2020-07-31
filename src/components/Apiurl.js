@@ -305,6 +305,10 @@ export const Admin={
     adminreptablelisting:{
         url:base_url+`/jsonapi/admin_reps?_format=json`,
         method:"GET"
+    },
+    adminrepdeletesingle:{
+        url:base_url+`/user/`,
+        method:"PATCH"
     }
 }
 

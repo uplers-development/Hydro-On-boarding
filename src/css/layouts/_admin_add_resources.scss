@@ -20,7 +20,7 @@
 			width: 100%;
 
 			label {
-				width: 135px;
+				width: 179px;
 				margin-bottom: 0;
 
 				@media screen and (max-width: $ipad-portrait) {
@@ -37,7 +37,7 @@
 				}
 				.suggestion-box {
 					input[type="text"] {
-						width: 200px;
+						width: auto;
 					}
 				}
 			}
@@ -99,9 +99,10 @@
 
 				> span {
 					&:first-of-type {
-						font-size: 14px;
+						font-size: 16px;
 						margin-bottom: 3px;
 						display: block;
+						text-transform: uppercase;
 					}
 				}
 			}
@@ -133,6 +134,7 @@
 				width: 100%;
 				top: 0;
 				left: 0;
+				background-size: contain;
 			}
 		}
 		
@@ -143,13 +145,8 @@
 			min-width: 207px;
 			padding: 8px 10px 4px;
 			margin-bottom: 0;
-
 			@media screen and (max-width:$mobile-small) {
 				min-width: auto;
-			}
-
-			span {
-				line-height: 30px;
 			}
 		}
 	}

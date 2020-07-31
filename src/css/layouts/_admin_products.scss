@@ -101,7 +101,9 @@
 							line-height: 18px;
 							color: $light-black;
 							vertical-align: middle;
-
+							&.no-desk-data {
+								padding: 30px 15px;
+							}
 							.name-edit {
 								width: calc(100% - 18px);
 
@@ -120,9 +122,15 @@
 									}
 									.action {
 										display: none;
+										@media screen and (max-width:$ipad-landscape) {
+											display: block;
+										}
 										a {
 											color: $panton-gray;
 											font-size: 14px;
+											&:hover {
+												color: $sky-blue;
+											}
 										}
 									}
 
@@ -180,6 +188,7 @@
 									background-color: $white;
 								}
 							}
+							
 						}
 						&:nth-child(even) {
 							background-color: $off-white;

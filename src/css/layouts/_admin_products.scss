@@ -120,6 +120,9 @@
 									}
 									.action {
 										display: none;
+										@media screen and (max-width:$ipad-landscape) {
+											display: block;
+										}
 										a {
 											color: $panton-gray;
 											font-size: 14px;

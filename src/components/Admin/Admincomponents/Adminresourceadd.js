@@ -244,7 +244,11 @@ class Adminresourceadd extends React.Component{
 				          }).then(data=>{
 				          	if(status===201 || status===200){
 						  		console.log(data);
-						  		this.setState({openResourceSubmission:true})
+						  		if(this.props.addstatus){
+						  			this.setState({openResourceSubmission:true})
+						  		}else{
+						  			this.setState({openResourceSubmission:true})
+						  		}
 				          	}else{
 				          		console.log("something got wrong");
 				          	}
@@ -367,7 +371,7 @@ class Adminresourceadd extends React.Component{
 				         <div className="upload-thumbnail d-flex flex-wrap">
 								<div className="thumbnail-upload-left">					   	
 					            <div className="upload-btn-block">
-					            	<span>JPG, GIF or PNG. Max size of 1mb</span>
+					            	<span>JPG, GIF or PNG.</span>
 					               <div className="upload-btn-wrapper">
 					                  <input type="file" name="Upload thumbnail" id="resource-image" onChange={this.update_resource_image} data-id={this.state.newresourceimageid} />
 					                  <button className="btn wide common-btn-blue">

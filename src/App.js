@@ -15,6 +15,7 @@ import RepClients_add from "./components/Repuser/RepClients_add";
 import RepClients_details from "./components/Repuser/RepClients_details";
 import Announcements from "./components/Repuser/Announcements";
 import AdminResource from "./components/Admin/admin-resources";
+import AdminRep from "./components/Admin/Admin_Reps";
 import AdminProduct from "./components/Admin/admin-products";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
@@ -54,8 +55,9 @@ class App extends Component {
                     <Route path="/RepClients"  component={RepClients} />		  	
                     <Route path="/admin-resources"  component={AdminResource} />        
                     <Route path="/admin-products"  component={AdminProduct} />        
+                    <Route path="/admin-rep"  component={AdminRep} />        
                     <Route path="/RepClients_details" component={RepClients_details} />
-		  			       <Route path="/Announcements" component={Announcements} />
+		  			        <Route path="/Announcements" component={Announcements} />
 		  
                     <Route path="/RepClients_add"  component={RepClients_add} />
                     {this.state.sidebarItem.length > 0 ?

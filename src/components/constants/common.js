@@ -8,7 +8,7 @@ export const cosmaticAsset = {
     		loader: ReactHtmlParser("<div class='loader'></div>"),
     		loginErrorMsg:ReactHtmlParser('<h5><span class="empty-field">Please provide valid credentials.</span></h5>'),
     		logoutPopup: ReactHtmlParser(/*'<div id="modal" class="modal-container logout" ><div class="modal d-flex flex-wrap align-center justify-center"><a href="javscript:void(0)" class="close" title="Close"></a><div><h2>Are you sure you want to logout?</h2><div class="btn-block"><button class="common-btn-blue"><span>Cancel</span></button></div><div class="btn-block"><button class="common-btn-blue"><span>YES</span></button></div></div></div></div>'*/),
-    		noDatafound:ReactHtmlParser('<h3 className="no-data-display">No Data Found.</h3>'),
+    		noDatafound:ReactHtmlParser('<h3 class="no-data-display">No Data Found.</h3>'),
     	}
     }
 }

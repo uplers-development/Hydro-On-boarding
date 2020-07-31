@@ -101,7 +101,9 @@
 							line-height: 18px;
 							color: $light-black;
 							vertical-align: middle;
-
+							&.no-desk-data {
+								padding: 30px 15px;
+							}
 							.name-edit {
 								width: calc(100% - 18px);
 
@@ -183,6 +185,7 @@
 									background-color: $white;
 								}
 							}
+							
 						}
 						&:nth-child(even) {
 							background-color: $off-white;

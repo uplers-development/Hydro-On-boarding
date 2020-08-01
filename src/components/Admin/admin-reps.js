@@ -14,15 +14,22 @@ import ReactHtmlParser from 'react-html-parser';
 class AdminRep extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state={
+		this.state={	
+			sortedrepdata:[]
 		}
 		this.getadmindetail=this.getadmindetail.bind(this);
+		this.getSortedfilterdata=this.getSortedfilterdata.bind(this);
 	}
 
 	getadmindetail=(admindetails)=>{
   		console.log(admindetails);
    		this.setState({adminuid:admindetails.uid[0].value});
    	}	
+
+   	getSortedfilterdata=(sortedrepdata)=>{
+   		console.log(sortedrepdata);
+   		this.setState({sortedrepdata:sortedrepdata});
+   	}
 
 
 	render(){
@@ -44,10 +51,10 @@ class AdminRep extends React.Component {
 						                  <div className="search-sort-block d-flex flex-wrap align-center">
 						                    	<Adminrepsearch/>
 						                    	<Adminrepmobilefilter/>
-						                   		<Adminrepsort/>
+						                   		<Adminrepsort sortedfilterdata={this.getSortedfilterdata}/>
 						                  </div>
 						               </div>
-						             	<Adminreptable/>
+						             	<Adminreptable getsorteddata={this.state.sortedrepdata}/>
 						            </div>
 						         </div>
 						      </div>

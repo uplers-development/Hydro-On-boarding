@@ -104,6 +104,7 @@ class Adminreptable extends React.Component{
 
 
 	render(){
+		console.log(this.props.getsorteddata);
 		let checkloading=this.state.loader;
 		let newrepdata=this.state.adminreptabledata;
 		let noDatacall=this.state.noDatacall;

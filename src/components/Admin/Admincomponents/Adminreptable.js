@@ -42,6 +42,8 @@ class Adminreptable extends React.Component{
 	      }
 	}
 
+
+
    singleSelect=(e)=>{
 		var checkboxes = document.querySelectorAll('.repchecked');
 		var ele=document.querySelector(".repparent");
@@ -107,23 +109,31 @@ class Adminreptable extends React.Component{
 		 this.setState({loader:false,adminreptabledata:this.props.getsorteddata});
 
 	}
+
+	
 }
-
-
+	
+	
 	render(){
 		let checkloading=this.props.getsorteddata ? this.state.loader : !this.state.loader;
-	 	if(this.props.checkifselected && this.props.getsorteddata.length > 0){
-	        noDatacall=!this.state.noDatacall;
-	        newrepdata=this.props.getsorteddata;
-	      }
-	      else if(this.props.checkifselected && this.props.getsorteddata.length <= 0){
-	        newrepdata='';
-	        noDatacall=this.state.noDatacall;
-	      }
-	      else if(!this.props.checkifselected){
-	        newrepdata=this.state.adminreptabledata;
-	        noDatacall=!this.state.noDatacall;
-	      }
+	 	if(document.getElementById("admin-rep-search") && document.querySelector("#admin-rep-search").value!==''){
+	 		newrepdata=this.props.filteredserachedstatus ? this.props.filterbyserach : ''; 
+	        noDatacall=this.props.filteredserachedstatus ? !this.state.noDatacall :this.state.noDatacall;
+	 	}else{
+		 	if(this.props.checkifselected && this.props.getsorteddata.length > 0){
+		        noDatacall=!this.state.noDatacall;
+		        newrepdata=this.props.getsorteddata;
+		      }
+		      else if(this.props.checkifselected && this.props.getsorteddata.length <= 0){
+		        newrepdata='';
+		        noDatacall=this.state.noDatacall;
+		      }
+		      else if(!this.props.checkifselected){
+		        newrepdata=this.state.adminreptabledata;
+		        noDatacall=!this.state.noDatacall;
+		      }
+		}
+
 		return(
 			  <div className="reps-table table-outer">
                   <div className="table-responsive">
@@ -160,15 +170,13 @@ class Adminreptable extends React.Component{
                                     <div className="right-detail">
                                        <h3>{item.name_1}</h3>
                                        <div className="action d-flex flex-wrap">
-                                          <Link to={""} onClick={e=>e.preventDefault()} title="Edit">
-                                          Edit</Link>	 
+                                          <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,false,true,item.uid)})} title="Edit">Edit</Link>
                                           <Link to={""} onClick={((e)=>
 							                           	{		e.preventDefault();
 							                           			this.setState({openDeletepopup:true,setSingleDeleteId:item.uid})}
 							                           	)} title="Delete">
                                           Delete</Link>	 
-                                          <Link to={""} onClick={e=>e.preventDefault()} title="View">
-                                          View</Link>	 
+                                          <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,false,true,item.uid)})} title="View">View</Link>  
                                        </div>
                                     </div>
                                  </div>

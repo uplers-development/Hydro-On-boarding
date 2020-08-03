@@ -334,7 +334,6 @@ class Profile extends Component {
 										<label>Timezone*</label>
 										<select name="1" className="" tabIndex="6" id="time_zone" ref={this.timeZoneref} >
 											{this.state.timeZone!==null ? ReactHtmlParser(this.state.timeZone) : '' }
-										}
 										</select>
 									</div>
 

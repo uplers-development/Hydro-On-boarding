@@ -309,6 +309,14 @@ export const Admin={
     adminrepdeletesingle:{
         url:base_url+`/user/`,
         method:"PATCH"
+    },
+    adminaddrepclient:{
+        url:base_url+`/entity/user/`,
+        method:"POST",
+    },
+    adminviewrepclient:{
+        url:base_url+`/user/`,
+        method:"GET",
     }
 }
 

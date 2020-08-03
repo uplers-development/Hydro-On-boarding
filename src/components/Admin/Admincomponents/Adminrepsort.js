@@ -77,19 +77,19 @@ class Adminrepsort extends React.Component{
 	                        <div className="drop-down-menu rep-admin-sort">
 	                           <ul>
 	                              <li>
-	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="Purchase date newest">
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="Purchase date newest">
 	                                 Purchase date newest</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="Purchase date oldest">
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="Purchase date oldest">
 	                                 Purchase date oldest</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="A-Z">
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="A-Z">
 	                                 A-Z</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} sortorder="DESC" onClick={this.sort_admin_rep_clients} title="Z-A">
+	                                 <Link to={""} sortorder="ASC" onClick={this.sort_admin_rep_clients} title="Z-A">
 	                                 Z-A</Link>
 	                              </li>
 	                           </ul>

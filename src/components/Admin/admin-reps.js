@@ -8,6 +8,7 @@ import Adminrepsearch from './Admincomponents/Adminrepsearch'
 import Adminrepmobilefilter from './Admincomponents/Adminrepmobilefilter'
 import Adminrepsort from './Admincomponents/Adminrepsort'
 import Adminreptable from './Admincomponents/Adminreptable'
+import Adminaddrep from './Admincomponents/Adminaddrep'
 import Apiurl,{site_url} from '../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -18,10 +19,19 @@ class AdminRep extends React.Component {
 			sortedrepdata:[],
 			checkifselesctedropdown:false,
 			statusfiltered:false,
+			getSearchedvalue:'',
+			searchedstatus:null,
+			addStatus:null,
+			checkcallfrom:null,
+			viewcaller:false,
+			repchangedid:null,
+			pageTitleChange:false,
 		}
 		this.getadmindetail=this.getadmindetail.bind(this);
 		this.checkloadingfordata=this.checkloadingfordata.bind(this);
 		this.getSortedfilterdata=this.getSortedfilterdata.bind(this);
+		this.returnserachedItem=this.returnserachedItem.bind(this);
+		this.updatedrepstatus=this.updatedrepstatus.bind(this);
 	}
 
 	checkloadingfordata=(getstatus)=>{
@@ -43,6 +53,22 @@ class AdminRep extends React.Component {
    		console.log(checkstatus);
    		this.setState({checkifselesctedropdown:checkstatus})
    }
+   returnserachedItem=(getdatastatus,getsearchedvalue)=>{
+   	console.log(getsearchedvalue);
+   	this.setState({searchedstatus:getdatastatus,getSearchedvalue:getsearchedvalue});
+   }
+
+    checktheview=(addpage,callfrom,viewcall,getChangeid)=>{
+  		console.log(addpage);
+  		console.log(getChangeid);
+  		console.log(callfrom);
+  		console.log(viewcall);
+   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,repchangedid:getChangeid,pageTitleChange:viewcall});
+   }  
+
+   updatedrepstatus=(checkupdatedresponse)=>{		
+   		this.setState({viewcaller:checkupdatedresponse});
+   }
 
 	render(){
 		return(<div>
@@ -54,20 +80,26 @@ class AdminRep extends React.Component {
 						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail}/>
 						         </div>
 						         <div className="bottom-content-block with-filter reps-filter">
+						         {!this.state.viewcaller ? 
 						            <div className="d-flex flex-wrap reps-main-block">
 						               <div className="fileter-block d-flex flex-wrap border-bottom">
 						                 <Adminrepbulkdelete/>
 						                  <div className="btn-block">
-						                     <button className="common-btn-blue"><span>Add Rep</span></button>
+						                     <button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>Add Rep</span></button>
 						                  </div>
 						                  <div className="search-sort-block d-flex flex-wrap align-center">
-						                    	<Adminrepsearch/>
+						                    	<Adminrepsearch getSearchedvalue={this.returnserachedItem}/>
 						                    	<Adminrepmobilefilter/>
 						                   		<Adminrepsort selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
 						                  </div>
 						               </div>
-						             	<Adminreptable checkifselected={this.state.checkifselesctedropdown} getsorteddata={this.state.sortedrepdata}/>
+						             	<Adminreptable filteredserachedstatus={this.state.searchedstatus} filterbyserach={this.state.getSearchedvalue} checkifselected={this.state.checkifselesctedropdown} getsorteddata={this.state.sortedrepdata} checktheviewcalled={this.checktheview}/>
 						            </div>
+						           :
+						           <div className="d-flex flex-wrap add-rep-main">
+						           		<Adminaddrep sendrepId={this.state.repchangedid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus} updatedThereresponse={this.updatedrepstatus}/>
+						           </div>
+						       	 }
 						         </div>
 						      </div>
 						   </div>

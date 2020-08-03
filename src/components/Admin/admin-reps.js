@@ -77,7 +77,7 @@ class AdminRep extends React.Component {
 						      <Adminnavbar/>
 						      <div className="d-flex flex-wrap right-content-part">
 						         <div className="top-heading">
-						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail}/>
+						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange}/>
 						         </div>
 						         <div className="bottom-content-block with-filter reps-filter">
 						         {!this.state.viewcaller ? 
@@ -89,7 +89,7 @@ class AdminRep extends React.Component {
 						                  </div>
 						                  <div className="search-sort-block d-flex flex-wrap align-center">
 						                    	<Adminrepsearch getSearchedvalue={this.returnserachedItem}/>
-						                    	<Adminrepmobilefilter/>
+						                    	<Adminrepmobilefilter selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
 						                   		<Adminrepsort selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
 						                  </div>
 						               </div>

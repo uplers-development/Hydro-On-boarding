@@ -87,14 +87,14 @@ class Adminheader extends React.Component{
 
 
 render(){
-//console.log(this.props.checkifPagecall,"View called");
+console.log(this.props.checkifPagecall,"View called");
   return (
       <div className="top-heading-continer d-flex flex-wrap align-center" >
             <div className="name-of-heading d-flex flex-wrap">
                {this.state.menulisting.map((item,index)=>
                   {if(window.location.pathname===item.field_react_route){
                      return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
-                     <h1>{!this.props.checkifPagecall ? item.title :"Add"+" "+(item.title==='Products' ? "product" : item.title.toLowerCase())}</h1></React.Fragment>)
+                     <h1>{!this.props.checkifPagecall ? item.title :"Add"+" "+(item.title==='Products' ? "product" : item.title==="Reps" ? "rep" : item.title.toLowerCase())}</h1></React.Fragment>)
                   }
                })}
             </div>

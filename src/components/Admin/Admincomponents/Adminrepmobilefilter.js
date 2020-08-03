@@ -1,19 +1,80 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{site_url,base_url,Repclient} from '../../Apiurl'; 
+import Apiurl,{site_url,base_url,Admin} from '../../Apiurl'; 
 
 class Adminremobilefilter extends React.Component{
 	constructor(props){
 		super(props)
 		this.state={
-
+			openContainer:false,
 		}
+	this.sort_admin_rep_clients=this.sort_admin_rep_clients.bind(this);
+
+	}
+
+
+	sort_admin_rep_clients=(e)=>{
+		e.preventDefault();	
+		this.props.loaderTrue(true); 
+		if(!e.target.classList.contains("active")){
+			document.querySelectorAll(".rep-admin-sort li a").forEach((item,index)=>{
+				console.log(item);
+				item.classList.remove("active");
+			});
+			e.target.classList.add("active");
+			 this.props.selecteddropdown(true);
+			try{
+				let status;
+				fetch(Admin.adminreptablelisting.url+`&sort_by=created&sort_order=${e.target.getAttribute("sortorder")}`,{
+					headers:{
+	                  "Content-Type" : "application/json",
+	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	            	},
+	            	method:Admin.adminreptablelisting.method
+				}).then(res=>{
+					status=res.status;
+					return res.json()
+				}).then(data=>{
+					console.log(data);
+					this.props.sortedfilterdata(data);
+					this.props.loaderTrue(false); 
+				})
+			}catch(err){
+				console.log(err)
+			}
+		}else{
+			e.target.classList.remove("active");
+			this.props.loaderTrue(true); 
+			this.props.selecteddropdown(false);
+			try{
+				let status;
+				fetch(Admin.adminreptablelisting.url,{
+					headers:{
+	                  "Content-Type" : "application/json",
+	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	            	},
+	            	method:Admin.adminreptablelisting.method
+				}).then(res=>{
+					status=res.status;
+					return res.json()
+				}).then(data=>{
+					console.log(data);
+					this.props.sortedfilterdata(data);
+					this.props.loaderTrue(false); 
+				})
+			}catch(err){
+				console.log(err)
+			}
+		}
+
 	}
 
 	render(){
 		return(
-				 <div className="mobile-filter">
-	                    <Link to={""} title="filter-btn" className="filter-open-btn">
+				 <div className={this.state.openContainer ? "mobile-filter filter-active" : "mobile-filter"}>
+	                     <Link to={""} title="filter-btn" className="filter-open-btn" onClick={((e)=>{e.preventDefault()
+	                                 	this.setState({openContainer:true})
+	                                 })}>
 	                    <img src={require("../../../images/ic_filter.svg")} alt="ic_filter" />
 	                    </Link>
 	                    <div className="open-close-filter-block">
@@ -22,9 +83,12 @@ class Adminremobilefilter extends React.Component{
 	                             <img src={require("../../../images/ic_filter-blue.svg")} alt="ic_filter" />
 	                             <h4>Filters</h4>
 	                          </div>
-	                          <Link to={""} title="close-btn" className="filter-open-btn">
-	                          <img src={require("../../../images/ic_close.svg")} alt="ic_close" />
-	                          </Link>
+	                          <Link to={""} onClick={((e)=>{
+			         			         e.preventDefault()
+			         			         this.setState({openContainer:false})})} 
+	                          title="close-btn" className="filter-open-btn">
+			         <img src={require("../../../images/ic_close.svg")} alt="ic_close" />
+			         </Link>
 	                       </div>
 	                       <div className="list-filter-mobile">
 	                          <h5>Bulk Action</h5>
@@ -39,26 +103,29 @@ class Adminremobilefilter extends React.Component{
 	                             </li>
 	                          </ul>
 	                          <h5>Sort by</h5>
-	                          <ul>
-	                             <li className="active">
-	                                <Link to={""} title="Recently added">
-	                                Recently added</Link>
-	                             </li>
-	                             <li>
-	                                <Link to={""} title="Oldest - Newest">
-	                                Oldest - Newest</Link>
-	                             </li>
-	                             <li>
-	                                <Link to={""} title="Recently viewed">
-	                                Recently viewed</Link>
-	                             </li>
-	                             <li>
-	                                <Link to={""} title="Moost Viewe">
-	                                Moost Viewed</Link>
-	                             </li>
+	                          <ul className="rep-admin-sort">
+                                  <li>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="Purchase date newest">
+	                                 Purchase date newest</Link>
+	                              </li>
+	                              <li>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="Purchase date oldest">
+	                                 Purchase date oldest</Link>
+	                              </li>
+	                              <li>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="A-Z">
+	                                 A-Z</Link>
+	                              </li>
+	                              <li>
+	                                 <Link to={""} sortorder="ASC" onClick={this.sort_admin_rep_clients} title="Z-A">
+	                                 Z-A</Link>
+	                              </li>
 	                          </ul>
 	                          <div className="btn-block">
-	                             <button className="common-btn-blue"><span>Apply filters</span></button>
+	                             <button className="common-btn-blue" onClick={((e)=>{
+	                                 	e.preventDefault();
+	                                 	this.setState({openContainer:false})
+	                                 })}><span>Apply filters</span></button>
 	                          </div>
 	                       </div>
 	                    </div>

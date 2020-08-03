@@ -39,7 +39,7 @@ class App extends Component {
         }).then(res=>{
           return res.json()
         }).then(data=>{
-          console.log(data);
+         // console.log(data);
           this.setState({sidebarItem:data});
         })
   }

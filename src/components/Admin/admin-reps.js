@@ -15,11 +15,19 @@ class AdminRep extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={	
-			sortedrepdata:[]
+			sortedrepdata:[],
+			checkifselesctedropdown:false,
+			statusfiltered:false,
 		}
 		this.getadmindetail=this.getadmindetail.bind(this);
+		this.checkloadingfordata=this.checkloadingfordata.bind(this);
 		this.getSortedfilterdata=this.getSortedfilterdata.bind(this);
 	}
+
+	checkloadingfordata=(getstatus)=>{
+		console.log(getstatus);
+   		this.setState({statusfiltered:getstatus})
+   }
 
 	getadmindetail=(admindetails)=>{
   		console.log(admindetails);
@@ -31,6 +39,10 @@ class AdminRep extends React.Component {
    		this.setState({sortedrepdata:sortedrepdata});
    	}
 
+   	checkdropdownselected=(checkstatus)=>{
+   		console.log(checkstatus);
+   		this.setState({checkifselesctedropdown:checkstatus})
+   }
 
 	render(){
 		return(<div>
@@ -51,10 +63,10 @@ class AdminRep extends React.Component {
 						                  <div className="search-sort-block d-flex flex-wrap align-center">
 						                    	<Adminrepsearch/>
 						                    	<Adminrepmobilefilter/>
-						                   		<Adminrepsort sortedfilterdata={this.getSortedfilterdata}/>
+						                   		<Adminrepsort selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
 						                  </div>
 						               </div>
-						             	<Adminreptable getsorteddata={this.state.sortedrepdata}/>
+						             	<Adminreptable checkifselected={this.state.checkifselesctedropdown} getsorteddata={this.state.sortedrepdata}/>
 						            </div>
 						         </div>
 						      </div>

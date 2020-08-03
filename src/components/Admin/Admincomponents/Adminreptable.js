@@ -3,13 +3,14 @@ import { Link, Redirect } from "react-router-dom";
 import Apiurl,{site_url,base_url,Admin} from '../../Apiurl'; 
 import {cosmaticAsset} from '../../constants/common'
 
+let newrepdata,noDatacall;
 class Adminreptable extends React.Component{
 	constructor(props){
 		super(props)
 		this.state={
 			adminreptabledata:[],
 			loader:true,
-			noDatacall:false,
+			noDatacall:true,
 			openDeletepopup:false,
 			setSingleDeleteId:null,
 		}
@@ -78,6 +79,8 @@ class Adminreptable extends React.Component{
 
 	get_admin_rep_table_data=()=>{
 		let status;
+		console.log(this.props.getsorteddata);
+		if(this.props.getsorteddata.length<=0){
 		try{
 			fetch(Admin.adminreptablelisting.url,{
 				headers:{
@@ -91,23 +94,36 @@ class Adminreptable extends React.Component{
 			}).then(data=>{
 				if(status===200){
 					console.log(data);
-					this.setState({loader:false,noDatafound:false,adminreptabledata:data});
+					this.setState({loader:false,noDatacall:false,adminreptabledata:data});
 				}else{
-					this.setState({loader:false,noDatafound:true});
+					this.setState({loader:false,noDatacall:true});
 				}
 			})
 		}catch(err){
 			console.log(err);
 			this.setState({loader:false});
 		}
+	}else{
+		 this.setState({loader:false,adminreptabledata:this.props.getsorteddata});
+
 	}
+}
 
 
 	render(){
-		console.log(this.props.getsorteddata);
-		let checkloading=this.state.loader;
-		let newrepdata=this.state.adminreptabledata;
-		let noDatacall=this.state.noDatacall;
+		let checkloading=this.props.getsorteddata ? this.state.loader : !this.state.loader;
+	 	if(this.props.checkifselected && this.props.getsorteddata.length > 0){
+	        noDatacall=!this.state.noDatacall;
+	        newrepdata=this.props.getsorteddata;
+	      }
+	      else if(this.props.checkifselected && this.props.getsorteddata.length <= 0){
+	        newrepdata='';
+	        noDatacall=this.state.noDatacall;
+	      }
+	      else if(!this.props.checkifselected){
+	        newrepdata=this.state.adminreptabledata;
+	        noDatacall=!this.state.noDatacall;
+	      }
 		return(
 			  <div className="reps-table table-outer">
                   <div className="table-responsive">
@@ -129,7 +145,7 @@ class Adminreptable extends React.Component{
                            </tr>
                         </thead>
                         <tbody>
-                         {!noDatacall ?
+                         {noDatacall ?
 					       newrepdata.map((item,index)=>
                            <tr key={index}>
                               <td>

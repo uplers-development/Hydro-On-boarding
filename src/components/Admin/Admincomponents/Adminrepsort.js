@@ -14,13 +14,14 @@ class Adminrepsort extends React.Component{
 
 	sort_admin_rep_clients=(e)=>{
 		e.preventDefault();	
-		alert(123);
+		this.props.loaderTrue(true); 
 		if(!e.target.classList.contains("active")){
 			document.querySelectorAll(".rep-admin-sort ul li a").forEach((item,index)=>{
 				console.log(item);
 				item.classList.remove("active");
 			});
 			e.target.classList.add("active");
+			 this.props.selecteddropdown(true);
 			try{
 				let status;
 				fetch(Admin.adminreptablelisting.url+`&sort_by=created&sort_order=${e.target.getAttribute("sortorder")}`,{
@@ -35,13 +36,34 @@ class Adminrepsort extends React.Component{
 				}).then(data=>{
 					console.log(data);
 					this.props.sortedfilterdata(data);
+					this.props.loaderTrue(false); 
 				})
 			}catch(err){
 				console.log(err)
 			}
 		}else{
 			e.target.classList.remove("active");
-
+			this.props.loaderTrue(true); 
+			this.props.selecteddropdown(false);
+			try{
+				let status;
+				fetch(Admin.adminreptablelisting.url,{
+					headers:{
+	                  "Content-Type" : "application/json",
+	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	            	},
+	            	method:Admin.adminreptablelisting.method
+				}).then(res=>{
+					status=res.status;
+					return res.json()
+				}).then(data=>{
+					console.log(data);
+					this.props.sortedfilterdata(data);
+					this.props.loaderTrue(false); 
+				})
+			}catch(err){
+				console.log(err)
+			}
 		}
 
 	}

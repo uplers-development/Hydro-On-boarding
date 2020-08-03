@@ -73,7 +73,7 @@ class Adminheader extends React.Component{
          }).then(res=>{
             return res.json();
          }).then(data=>{
-            console.log(data);
+            // console.log(data);
             if(!data.message){
                this.setState({admininfo:data})
                this.props.getAdminuid(this.state.admininfo);
@@ -87,7 +87,7 @@ class Adminheader extends React.Component{
 
 
 render(){
-console.log(this.props.checkifPagecall,"View called");
+//console.log(this.props.checkifPagecall,"View called");
   return (
       <div className="top-heading-continer d-flex flex-wrap align-center" >
             <div className="name-of-heading d-flex flex-wrap">

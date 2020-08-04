@@ -94,11 +94,11 @@ class Adminremobilefilter extends React.Component{
 	                          <h5>Bulk Action</h5>
 	                          <ul>
 	                             <li>
-	                                <Link to={""} title="Delete">
+	                                <Link to={""} onClick={e=>e.preventDefault()} title="Delete">
 	                                Delete</Link>
 	                             </li>
 	                             <li>
-	                                <Link to={""} title="Action 1">
+	                                <Link to={""} onClick={e=>e.preventDefault()} title="Action 1">
 	                                Action</Link>
 	                             </li>
 	                          </ul>

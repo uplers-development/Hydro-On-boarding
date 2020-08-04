@@ -63,8 +63,9 @@ class Adminheader extends React.Component{
    }
 
    GetProfile=()=>{
+      let target_id=JSON.parse(localStorage.getItem("user-type")).uid;
       try{
-         fetch(Admin.adminprofileinfo.url,{
+         fetch(Admin.adminprofileinfo.url+`${target_id}?_format=json`,{
                headers: {
                      "Content-Type" : "application/json",
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),

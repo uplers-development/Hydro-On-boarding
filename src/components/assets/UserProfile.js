@@ -42,7 +42,8 @@ class UserProfile extends Component {
 	}
 
 	GetProfile=()=>{
-		fetch(Apiurl.GetProfile.url,{
+		let target_id=JSON.parse(localStorage.getItem("user-type")).uid;
+		fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),

@@ -228,7 +228,7 @@ export const Admin={
         method:'POST'
     },
     adminprofileinfo:{
-        url:base_url+`/user/${target_id}?_format=json`,
+        url:base_url+`/user/`,
         method:'GET'
     },
     adminresourcedropdown:{
@@ -313,6 +313,10 @@ export const Admin={
     adminaddrepclient:{
         url:base_url+`/entity/user/`,
         method:"POST",
+    }, 
+    adminaddupdaterepclient:{
+        url:base_url+`/user/`,
+        method:"PATCH",
     },
     adminviewrepclient:{
         url:base_url+`/user/`,
@@ -335,7 +339,7 @@ export default {
     },
         
     GetProfile: {
-         url: base_url+`/user/${target_id}?_format=json`,
+         url: base_url+`/user/`,
          method: 'GET'
     },Updateprofile: {
          url: base_url+`/user/${target_id}?_format=json`,

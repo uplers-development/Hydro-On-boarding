@@ -63,7 +63,8 @@ class Login extends Component{
     }
 
 
-    Login = () =>{
+    Login = (e) =>{
+    	e.preventDefault();
     	var logindata={
     		name:document.querySelector('#email').value,
     		pass:document.querySelector('#password').value,
@@ -118,7 +119,7 @@ class Login extends Component{
 							<a className="logo" href="#"><img src={this.state.login_logo}/></a>
 							
 							{/*<!--Login form start-->*/}
-							<form>
+							<form onSubmit={this.Login}>
 								<div className="form-group">
 									<label>{this.state.login_email_title}</label>
 									<input type="email" placeholder={this.state.login_email_title} id='email' name='email' tabIndex="1" onBlur={(e)=>
@@ -137,7 +138,7 @@ class Login extends Component{
 								</div>
 
 								<div className="button-group">
-									<button className="btn common-btn-blue" type="button"  onClick={this.Login}  tabIndex="4">
+									<button className="btn common-btn-blue"  tabIndex="4">
 										<span>{this.state.login_sign_button}</span></button>
 									{this.state.login_rep_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_rep_button}</span></button>:''}
 									{this.state.login_admin_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_admin_button}</span></button>:''}
@@ -150,8 +151,8 @@ class Login extends Component{
 						{/*<!--Login footer start-->*/}
 						<div className="login-footer d-flex flex-wrap">
 							<ul className="links d-flex flex-wrap">
-								<li><a href="#" title="Contact">Contact</a></li>
-								<li><a href="#" title="Privacy">Privacy</a></li>
+								<li><Link to={""} onClick={e=>e.preventDefault()} title="Contact">Contact</Link></li>
+								<li><Link to={""} onClick={e=>e.preventDefault()} title="Privacy">Privacy</Link></li>
 							</ul>
 							<div className="copyright"> &copy; 2020 Hydro International</div>
 						</div>{/*<!--Login footer end-->*/}

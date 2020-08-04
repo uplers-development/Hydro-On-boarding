@@ -64,17 +64,19 @@ class Adminreptable extends React.Component{
 
 	delete_single_resource=(e)=>{
 		e.preventDefault();
+		let deletestatus={  "status" : [{ "value":0}] }
 		fetch(Admin.adminrepdeletesingle.url+`${this.state.setSingleDeleteId}?_format=json`,{
 	   	 		 headers:{
 	                  "Content-Type" : "application/json",
 	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 	            },
 	            method:Admin.adminrepdeletesingle.method,
+	            body:JSON.stringify(deletestatus)
 		   	 }).then(data=>{
 		   	 		console.log(data);
-		   	 		if(data.status===204){
+		   	 		if(data.status===200){
 		   	 			this.setState({openDeletepopup:false,isDeleted:true})
-		   	 			this.get_resource_table();
+		   	 			this.get_admin_rep_table_data();
 		   	 		}
 		   	 });
 	}	
@@ -110,11 +112,11 @@ class Adminreptable extends React.Component{
 
 	}
 
-	
 }
 	
 	
 	render(){
+		
 		let checkloading=this.props.getsorteddata ? this.state.loader : !this.state.loader;
 	 	if(document.getElementById("admin-rep-search") && document.querySelector("#admin-rep-search").value!==''){
 	 		newrepdata=this.props.filteredserachedstatus ? this.props.filterbyserach : ''; 
@@ -133,7 +135,6 @@ class Adminreptable extends React.Component{
 		        noDatacall=!this.state.noDatacall;
 		      }
 		}
-
 		return(
 			  <div className="reps-table table-outer">
                   <div className="table-responsive">
@@ -141,7 +142,7 @@ class Adminreptable extends React.Component{
                     {!checkloading ? 
                      <table className="table table-striped">
                         <thead>
-                           <tr>
+                           <tr >
                               <th>
                                  <div className="checkbox-cust">
                                     <input type="checkbox" id="chheckbox" className="repparent" onChange={this.selectAllcheckbox}/>
@@ -188,7 +189,7 @@ class Adminreptable extends React.Component{
                            )
                            :
                            <tr> 
-					          	<td className="no-desk-data" >
+					          	<td className="no-desk-data" colSpan={!noDatacall ? document.querySelectorAll(".table-striped thead tr th").length : ''}>
 					          		{cosmaticAsset.cosmatic.default.noDatafound}
 					          	</td>
 					          </tr>

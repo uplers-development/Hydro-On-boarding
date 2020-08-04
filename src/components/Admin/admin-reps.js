@@ -81,7 +81,7 @@ class AdminRep extends React.Component {
 						         <div className="top-heading">
 						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange}/>
 						         </div>
-						         <div className="bottom-content-block with-filter reps-filter">
+						         <div className="bottom-content-block with-filter reps-filter add">
 						         {!this.state.viewcaller ? 
 						            <div className="d-flex flex-wrap reps-main-block">
 						               <div className="fileter-block d-flex flex-wrap border-bottom">

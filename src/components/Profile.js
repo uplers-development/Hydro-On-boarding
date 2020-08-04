@@ -31,6 +31,7 @@ class Profile extends Component {
 			newuserPic_id:null,
 			loader:true,
 			smallLoader:false,
+			checkempty:false,
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
@@ -113,11 +114,13 @@ class Profile extends Component {
 			timezone : [{ "value": this.timeZoneref.current.value}],
 			user_picture : [{ "target_id":this.state.newuserPic_id}]
 		};
+		console.log(hasNull(updatedata.user_picture[0].target_id));
 		if(!hasNull(updatedata.mail[0].value) && !hasNull(updatedata.field_last_name[0].value) && !hasNull(updatedata.field_contact_number[0].value) && !hasNull(updatedata.field_first_name[0].value) && !hasNull(updatedata.field_location[0].value) && !hasNull(updatedata.field_organisation[0].value) && !hasNull(updatedata.user_picture[0].target_id)){
 		fetch(Apiurl.Updateprofile.url,{
     			headers: {
                 	"Content-Type" : "application/json",
                 	"X-CSRF-Token" : localStorage.getItem("access-token"),
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.Updateprofile.method,
                 body:JSON.stringify(updatedata)
@@ -131,6 +134,8 @@ class Profile extends Component {
     		}
     		if(data.uid[0].value===2){
     			this.props.history.push("/Dashboard");
+    		}if(data.roles[0].target_id==="admin"){
+    			this.props.history.push("/admin-resources");
     		}else{
     			return false;
     		}
@@ -142,6 +147,7 @@ class Profile extends Component {
 		hasNull(updatedata.field_contact_number[0].value) ? this.setState({contactNumberState:true}): this.setState({contactNumberState:false})
 		hasNull(updatedata.field_organisation[0].value) ? this.setState({OrganisationState:true}): this.setState({OrganisationState:false})
 		hasNull(updatedata.field_location[0].value) ? this.setState({locationState:true}): this.setState({locationState:false})
+		hasNull(updatedata.user_picture[0].target_id) ? this.setState({checkempty:true}) :this.setState({checkempty:false})
 
      }
 	}
@@ -161,7 +167,7 @@ class Profile extends Component {
 		}
 
 		if(filename.includes(".jpg") || filename.includes(".gif") || filename.includes(".png")){
-				this.setState({imageFormateState:false})	
+				this.setState({imageFormateState:false,checkempty:false})	
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/octet-stream");
 				myHeaders.append("X-CSRF-Token", localStorage.getItem("access-token"));
@@ -177,12 +183,12 @@ class Profile extends Component {
 				fetch(Apiurl.UpdateprofilePic.url,requestOptions)
 				.then(res=>{return res.json()})
 				.then(data=>{console.log(data);
-					this.setState({smallLoader:false,newuserPic_id:data.fid[0]['value'],userPicture:site_url+data.uri[0].url})
+					this.setState({smallLoader:false,newuserPic_id:data.fid[0]['value'],userPicture:site_url+data.uri[0].url,checkempty:false})
 					console.log(this.state.newuserPic_id);
 					console.log(this.state.userPicture);
 				})
 	  }else{
-	  	this.setState({smallLoader:false,imageFormateState:true})	
+	  	this.setState({smallLoader:false,imageFormateState:true,checkempty:false})	
 	  }
 	}
 
@@ -283,6 +289,7 @@ class Profile extends Component {
 												<span>CHOOSE FILE</span></button>
 										</div>
 										{this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
+										{this.state.checkempty ? ValidationMsg.common.default.checkimageempty : ''}
 									</div>
 								</div>
 							</div>
@@ -290,7 +297,7 @@ class Profile extends Component {
 
 							{/*<!--Profile form start-->*/}
 							<div className="form-block">
-								<form className="row">
+								<form className="row" onSubmit={this.updateProfile}>
 									<div className="form-group one-by-two">
 										<label>First Name*</label>
 										<input type="text" id='first_name' defaultValue={this.state.first_name} placeholder="First Name" tabIndex="1" onBlur={(e)=>
@@ -347,7 +354,7 @@ class Profile extends Component {
 									</div>
 
 									<div className="button-group full">
-										<button className="btn common-btn-blue" type="submit" tabIndex="4" onClick={this.updateProfile}>
+										<button className="btn common-btn-blue" type="submit" tabIndex="4">
 											<span>Save settings</span></button>
 									</div>
 								</form>

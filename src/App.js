@@ -17,6 +17,7 @@ import Announcements from "./components/Repuser/Announcements";
 import AdminResource from "./components/Admin/admin-resources";
 import AdminRep from "./components/Admin/admin-reps";
 import AdminProduct from "./components/Admin/admin-products";
+import Admin_add_rep from "./components/Admin/Admin_add_rep";
 import Apiurl,{site_url} from './components/Apiurl'; 
 import "./css/style.scss";
 
@@ -56,6 +57,7 @@ class App extends Component {
                     <Route path="/admin-resources"  component={AdminResource} />        
                     <Route path="/admin-products"  component={AdminProduct} />        
                     <Route path="/admin-reps"  component={AdminRep} />        
+                    <Route path="/Admin_add_rep"  component={Admin_add_rep} />        
                     <Route path="/RepClients_details" component={RepClients_details} />
 		  			        <Route path="/Announcements" component={Announcements} />
 		  

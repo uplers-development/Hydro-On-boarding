@@ -154,6 +154,7 @@ delete_single_resource=(e)=>{
    			newresourcedata=this.state.adminresourcetabledata;
    			noDatacall=!this.state.noDatacall;
 	   	}
+	   	console.log(noDatacall);
 	   	return(
    				<div className="resources-table table-outer">
 				   <div className="table-responsive">
@@ -207,7 +208,7 @@ delete_single_resource=(e)=>{
 					          )
 					          :
 					          <tr> 
-					          	<td className="no-desk-data" colSpan={!noDatacall ? document.querySelectorAll(".table-striped thead tr th").length : ''}>
+					          	<td className="no-desk-data" colSpan={/*!noDatacall ? document.querySelectorAll(".table-striped thead tr th").length :*/5}>
 					          		{cosmaticAsset.cosmatic.default.noDatafound}
 					          	</td>
 					          </tr>

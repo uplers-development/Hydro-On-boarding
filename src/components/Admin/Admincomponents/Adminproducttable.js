@@ -221,7 +221,7 @@ delete_single_product=(e)=>{
                                     :
 
                                      <tr> 
-                                         <td className="no-desk-data" colSpan={!noDatacall ? document.querySelectorAll(".table-striped thead tr th").length : ''}>
+                                         <td className="no-desk-data" colSpan={5/*!noDatacall ? document.querySelectorAll(".table-striped thead tr th").length : ''*/}>
                                           {cosmaticAsset.cosmatic.default.noDatafound}
                                         </td>
                                     </tr>                                    

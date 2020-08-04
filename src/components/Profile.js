@@ -275,7 +275,7 @@ class Profile extends Component {
 								<h3>Upload profile photo</h3>
 								<div className=" d-flex flex-wrap align-center">
 								{this.state.smallLoader ? 
-										<div className="loader"></div>
+								<div className="loader"></div>
 									:
 								<div className="prof-user-img bg-cover" style={{backgroundImage:`url(${this.state.userPicture!=='' ? this.state.userPicture : "./../images/profile-logo-blue.svg"})`}}>
 								</div>  

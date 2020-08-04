@@ -20,7 +20,8 @@ class Adminaddrep extends React.Component{
    	  		passwordstate:false,
    	  		openRepsubmission:false,
    	  		repdetails:'',
-   	  		loader:true
+   	  		loader:true,
+   	  		popupmsg:''
    		}   
 
    		this.timeZoneref=React.createRef();
@@ -69,8 +70,8 @@ class Adminaddrep extends React.Component{
 		        "status": [{ "value":1}]
 			}
 			console.log(addrepoptions);
-			let apicall=this.props.addstatus ? Admin.adminaddrepclient.url+`?_format=json` : Admin.adminaddrepclient.url+`${this.props.sendrepId}?_format=json`;
-			let apimethod=this.props.addstatus ? Admin.adminaddrepclient.method : Admin.adminaddrepclient.method;
+			let apicall=this.props.addstatus ? Admin.adminaddrepclient.url+`?_format=json` : Admin.adminaddupdaterepclient.url+`${this.props.sendrepId}?_format=json`;
+			let apimethod=this.props.addstatus ? Admin.adminaddrepclient.method : Admin.adminaddupdaterepclient.method;
 			try{
 				let status;
 				fetch(apicall,{
@@ -85,7 +86,9 @@ class Adminaddrep extends React.Component{
 					return res.json();
 				}).then(data=>{
 					if(status===201){
-						this.setState({openRepsubmission:true});
+						this.setState({openRepsubmission:true,popupmsg:"Rep added"});
+					}else if(status===200){
+						this.setState({openRepsubmission:true,popupmsg:"Rep updated"});
 					}
 					console.log(data);
 				})
@@ -203,7 +206,7 @@ class Adminaddrep extends React.Component{
 											
 										<div>
 											<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
-												<h2>Rep added</h2>
+												<h2>{this.state.popupmsg}</h2>
 												<p>Rep was submitted successfully</p>
 										</div>
 								</div>

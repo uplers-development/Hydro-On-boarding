@@ -31,7 +31,6 @@ class RepDashboard extends React.Component {
 	componentWillMount(){
 		if(localStorage.getItem("access-token")!==null){
 			this.Rep_nav_menu();
-			this.GetProfile();
 			this.Rep_recently_published();
 			this.Rep_new_users();
 			this.Rep_news_feeds();
@@ -57,25 +56,7 @@ class RepDashboard extends React.Component {
   		}).then(res=>res.json()).then(data=>this.setState({menulisting:data}));
 	}
 
-	GetProfile=()=>{
-		try{
-			fetch(Apiurl.GetProfile.url,{
-					headers: {
-	                	"Content-Type" : "application/json",
-	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
-	                },
-	                method:Apiurl.GetProfile.method,
-			}).then(res=>{
-				return res.json();
-			}).then(data=>{
-				console.log(data);
-				this.setState({repinfo:data})
-			})
-	 	}catch(err){
-	 		console.log(err);
-	 	}
-	}
-
+	
 
 	Rep_recently_published = () =>{
 		try{
@@ -152,7 +133,7 @@ class RepDashboard extends React.Component {
          <Repnav repmenulisting={this.state.menulisting}/>
          <div className="d-flex flex-wrap right-content-part">
             <div className="top-heading">
-               {this.state.repinfo!==null && <Repheader historyPush={this.props} menulisting={this.state.menulisting} repuserinfo={this.state.repinfo}/>}
+               <Repheader historyPush={this.props} menulisting={this.state.menulisting}/>
             </div>
 
             <div className="bottom-content-block">

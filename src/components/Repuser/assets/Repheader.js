@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect,useHistory  } from "react-router-dom";
-import {site_url} from '../../Apiurl'; 
+import Apiurl,{site_url} from '../../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 
 let divType = null;
@@ -35,15 +35,44 @@ class Repheader extends React.Component{
       super(props);
       this.state={
          Repclient:false,
-         openPopup:false
+         openPopup:false,
+         repinfo:null
+      }
+   }
+
+   componentDidMount(){
+      if(localStorage.getItem("access-token")!==null){
+        this.GetProfile();
+      }
+   }
+
+   GetProfile=()=>{
+      let target_id=JSON.parse(localStorage.getItem("user-type")).uid;
+      try{
+         fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
+               headers: {
+                     "Content-Type" : "application/json",
+                     "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                   },
+                   method:Apiurl.GetProfile.method,
+         }).then(res=>{
+            return res.json();
+         }).then(data=>{
+            console.log(data);
+            this.setState({repinfo:data})
+            console.log(this.state.repinfo)
+         })
+      }catch(err){
+         console.log(err);
       }
    }
 
 
 
 
-render(){
 
+render(){
+console.log(this.state.repinfo);
   return (
       <div className="top-heading-continer d-flex flex-wrap align-center" >
             <div className="name-of-heading d-flex flex-wrap">
@@ -59,10 +88,10 @@ render(){
             </div>
             <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
-                  {this.props.repuserinfo!==null ? 
+                  {this.state.repinfo!==null ? 
                      <>
-                        <div className="person-profile-img bg-cover" style={{backgroundImage: `url(${ this.props.repuserinfo.user_picture[0]!=='' ? this.props.repuserinfo.user_picture[0].url : "../../../images/profile-logo-blue.svg"})`}}></div>
-                        <h2>{this.props.repuserinfo.field_first_name[0].value+" "+this.props.repuserinfo.field_last_name[0].value}</h2>
+                        <div className="person-profile-img bg-cover" style={{backgroundImage: `url(${ this.state.repinfo.user_picture[0]!=='' ? this.state.repinfo.user_picture[0].url : "../../../images/profile-logo-blue.svg"})`}}></div>
+                        <h2>{this.state.repinfo.field_first_name[0].value+" "+this.state.repinfo.field_last_name[0].value}</h2>
                      </>
                      :
                      <>

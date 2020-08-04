@@ -22,7 +22,6 @@ class RepClients extends React.Component {
 		super(props);
 		this.state={
 			menulisting:[],
-			repinfo:null,
 			viewpagecall:this.props.location.state!==undefined ? this.props.location.state.contractsubmission:false,
 			searchedItem:[],
 			searchedclientresult:[],
@@ -39,7 +38,6 @@ class RepClients extends React.Component {
 	componentWillMount(){
 		if(localStorage.getItem("access-token")!==null){
 			this.Rep_nav_menu();
-			this.GetProfile();
 			this.client_data_Table();
 		}else{
 			this.props.history.push('/Login')
@@ -92,24 +90,6 @@ class RepClients extends React.Component {
   		}).then(res=>res.json()).then(data=>this.setState({menulisting:data}));
 	}
 
-	GetProfile=()=>{
-		try{
-			fetch(Apiurl.GetProfile.url,{
-					headers: {
-	                	"Content-Type" : "application/json",
-	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
-	                },
-	                method:Apiurl.GetProfile.method,
-			}).then(res=>{
-				return res.json();
-			}).then(data=>{
-				console.log(data);
-				this.setState({repinfo:data})
-			})
-	 	}catch(err){
-	 		console.log(err);
-	 	}
-	}
 
 	render(){
 		return(<div>
@@ -118,7 +98,7 @@ class RepClients extends React.Component {
 			         <Repnav repmenulisting={this.state.menulisting}/>
 			         <div className="d-flex flex-wrap right-content-part">
 			            <div className="top-heading">
-			               <Repheader menulisting={this.state.menulisting} repuserinfo={this.state.repinfo} historyPush={this.props} checkifPagecall={this.state.pageTitleChange}/>
+			               <Repheader menulisting={this.state.menulisting}  historyPush={this.props} checkifPagecall={this.state.pageTitleChange}/>
 			            </div>
 			            {!this.state.loader ?
 			            <>

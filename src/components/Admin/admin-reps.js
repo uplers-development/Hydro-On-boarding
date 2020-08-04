@@ -70,7 +70,9 @@ class AdminRep extends React.Component {
    		this.setState({viewcaller:checkupdatedresponse});
    }
 
+
 	render(){
+	
 		return(<div>
 			   		<section className="main-wrapper">
 						   <div className="d-flex flex-wrap main-block">

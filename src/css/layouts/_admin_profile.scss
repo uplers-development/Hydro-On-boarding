@@ -26,19 +26,22 @@
 				margin-bottom: 0;
 			}
 		}
-		.upload-profile-photo {
-			.user-profile-image {
-				height: 130px;
-				width: 130px;
-				border-radius: 50%;
-				display: inline-block;
-				@media screen and (max-width:$ipad-landscape) {
-					height: 110px;
-					width: 110px;
-				}
-				@media screen and (max-width:$mobile-small) {
-					height: 96px;
-					width: 96px;
+		.profile-form-block {
+			padding-right: 10px;
+			.upload-profile-photo {
+				.prof-user-img {
+					height: 130px;
+					width: 130px;
+					border-radius: 50%;
+					display: inline-block;
+					@media screen and (max-width:$ipad-landscape) {
+						height: 110px;
+						width: 110px;
+					}
+					@media screen and (max-width:$mobile-small) {
+						height: 96px;
+						width: 96px;
+					}
 				}
 			}
 		}

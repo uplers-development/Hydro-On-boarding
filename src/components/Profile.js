@@ -32,6 +32,7 @@ class Profile extends Component {
 			loader:true,
 			smallLoader:false,
 			checkempty:false,
+			addClass: false,
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
@@ -94,6 +95,10 @@ class Profile extends Component {
 			console.log(this.state.time_zone);
 			console.log(this.state.userPicture);
 			this.timeZoneref.current.value=this.state.time_zone;
+			let self=this;
+			setTimeout(function(){
+				self.setState({addClass:true})
+			},800)
 		})
 
 
@@ -208,7 +213,7 @@ class Profile extends Component {
 			<div><section className={this.props.location.state!==undefined && this.props.location.state.admin ? "main-wrapper off-white-bg" : "main-wrapper"}>
 
 		{/*<!--Main block start-->*/}
-		<div className="d-flex flex-wrap main-block right-btm-pattern-gray">
+		<div className={this.state.addClass  ? "d-flex profile-cust flex-wrap main-block right-btm-pattern-gray animation-bottom":"d-flex profile-cust flex-wrap main-block right-btm-pattern-gray"}>
 
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">

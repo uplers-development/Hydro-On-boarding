@@ -413,11 +413,35 @@
 }
 
 .dashboard-main {
-	transition: 0.3s all linear;
-	transform: translateY(-100%);
+	top: 100vh;
+    position: relative;
+	transition: all 0.5s ease-in-out;
 		&.animation-top {
-			transform: translateY(0%);
-			-webkit-transform: translateY(0%);
+			top: 0;		
+			nav.fixed-left {
+				transform: translateY(0%);
+			}
+		}
+		nav.fixed-left {
+			transform: translateY(100%);
+			transition: all 0.5s ease-in-out;
+		}
+}
+
+
+.profile-cust {
+	top: 100vh;
+    position: relative;
+	transition: all 0.5s ease-in-out;
+		&.animation-bottom {
+			top: 0;		
+			nav.fixed-left {
+				transform: translateY(0%);
+			}
+		}
+		nav.fixed-left {
+			transform: translateY(100%);
+			transition: all 0.5s ease-in-out;
 		}
 }
 

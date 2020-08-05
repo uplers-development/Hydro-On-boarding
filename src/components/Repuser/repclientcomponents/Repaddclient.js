@@ -97,11 +97,11 @@ class Repaddclient extends React.Component{
                               {this.state.passowrdState ? ValidationMsg.common.default.passwordfield : ''}
                            </div>
                            <div className="send-user-notification">
-                              <div class="d-flex flex-wrap notification">
+                              <div className="d-flex flex-wrap notification">
                                  <h3>Send User Notifications</h3>
                                  <div className="checkbox-cust"><input type="checkbox" id="checkboxmessage"  onBlur={(e)=>
                                      hasNull(e.target.value) ? this.setState({checkedState:true}): this.setState({checkedState:false})}/>
-                                    <label for="checkboxmessage"></label>
+                                    <label htmlFor="checkboxmessage"></label>
                                     {this.state.checkedState ? ValidationMsg.common.default.usernotificationcheckbox : ''}
                                  </div>
                               </div>

@@ -15,6 +15,7 @@ import {cosmaticAsset} from'./constants/common';
 			loader:true,
 			addClass:false,
 		}
+		this.createClassRef=React.createRef();
 	}
 
 	componentDidMount(){
@@ -40,6 +41,10 @@ import {cosmaticAsset} from'./constants/common';
     		setTimeout(function(){
     			self.setState({addClass:true})
     		},800)
+
+    		setTimeout(function(){
+    			self.createClassRef.current.classList.add("no-amiation");
+    		},1600)
     	})
 	}
 
@@ -51,7 +56,7 @@ import {cosmaticAsset} from'./constants/common';
 			<div>
 			<section className="main-wrapper">
 			{!this.state.loader ? 
-			<div className={this.state.addClass ? "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover animation-top" : "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover"} style={{backgroundImage:`url(${CommonBackground})`}} >
+			<div className={this.state.addClass ? "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover animation-top" : "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover"} ref={this.createClassRef} style={{backgroundImage:`url(${CommonBackground})`}} >
 			<Sidebar/>
 			
 			{/*<!--Dashboard switch user block start-->*/}

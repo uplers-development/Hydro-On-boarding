@@ -96,9 +96,11 @@ class Profile extends Component {
 			console.log(this.state.userPicture);
 			this.timeZoneref.current.value=this.state.time_zone;
 			let self=this;
-			setTimeout(function(){
-				self.setState({addClass:true})
-			},800)
+			if(this.props.location.state===undefined){
+				setTimeout(function(){
+					self.setState({addClass:true})
+				},800)
+			}
 		})
 
 
@@ -213,7 +215,7 @@ class Profile extends Component {
 			<div><section className={this.props.location.state!==undefined && this.props.location.state.admin ? "main-wrapper off-white-bg" : "main-wrapper"}>
 
 		{/*<!--Main block start-->*/}
-		<div className={this.state.addClass  ? "d-flex profile-cust flex-wrap main-block right-btm-pattern-gray animation-bottom":"d-flex profile-cust flex-wrap main-block right-btm-pattern-gray"}>
+		<div className={this.props.location.state===undefined && this.state.addClass  ? "d-flex profile-cust flex-wrap main-block right-btm-pattern-gray animation-bottom":"d-flex profile-cust flex-wrap main-block right-btm-pattern-gray no-animation"}>
 
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">

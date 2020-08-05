@@ -18,6 +18,7 @@ class AdminProduct extends React.Component {
 		this.state={
 			adminuid:null,
 			productFiltereddata:[],
+			getAllproducts:[],
 			statusfiltered:false,
 			productchangedid:null,
 			addStatus:null,
@@ -30,6 +31,7 @@ class AdminProduct extends React.Component {
 		this.getadmindetail=this.getadmindetail.bind(this);
 		this.checkloadingfordata=this.checkloadingfordata.bind(this);
 		this.checkdropdownselected=this.checkdropdownselected.bind(this);
+		this.getallproduct=this.getallproduct.bind(this);
 	}
 
 	productafterFilter=(productfilteredata)=>{
@@ -49,6 +51,10 @@ class AdminProduct extends React.Component {
   		console.log(viewcall);
    		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,productchangedid:getChangeid,pageTitleChange:viewcall});
    }  
+
+   getallproduct=(getallproducts)=>{
+   		this.setState({getAllproducts:getallproducts});
+   }
 
    updatedproductstatus=(checkupdatedresponse)=>{		
    		this.setState({viewcaller:checkupdatedresponse});
@@ -78,18 +84,18 @@ class AdminProduct extends React.Component {
 				               <div className="d-flex flex-wrap admin-products-main">
 				                  <div className="fileter-block d-flex flex-wrap border-bottom">
 
-				                     <Adminproductfilter selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata}  checkproductfilter={this.productafterFilter} checktheviewcalled={this.checktheview}/>
+				                     <Adminproductfilter getallproducts={this.getallproduct} selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata}  checkproductfilter={this.productafterFilter} checktheviewcalled={this.checktheview}/>
 				                     <div className="search-sort-block d-flex flex-wrap align-center">
 				                        <div className="btn-block">
 				                           <button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
 				                        </div>
-				                        <Adminproductmobilefilter selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata}  checkproductfilter={this.productafterFilter} checktheviewcalled={this.checktheview}/>
+				                        <Adminproductmobilefilter getallproducts={this.getallproduct}  selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata}  checkproductfilter={this.productafterFilter} checktheviewcalled={this.checktheview}/>
 				                     </div>
 				                  </div>
 				                  <Adminproducttable checkifselected={this.state.checkifselesctedropdown}  getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.productFiltereddata} checktheviewcalled={this.checktheview}/>
 				               </div>
 				               :
-				               <Adminproductadd sendproductId={this.state.productchangedid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}
+				               <Adminproductadd sendproducttitle={this.state.getAllproducts} sendproductId={this.state.productchangedid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}
 									updatedTheproductresponse={this.updatedproductstatus}/>
 				           }
 				            </div>

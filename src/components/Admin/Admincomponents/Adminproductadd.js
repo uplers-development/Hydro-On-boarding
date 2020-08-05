@@ -28,6 +28,7 @@ class Adminproductadd extends React.Component{
 				insertedproduct:'',
 				loader:true,
 			}
+			this.producttype=React.createRef();
 			this.update_product_image=this.update_product_image.bind(this);
 			this.upload_product_document=this.upload_product_document.bind(this);
 			this.productsheetselection=this.productsheetselection.bind(this);
@@ -51,6 +52,7 @@ class Adminproductadd extends React.Component{
 
 		get_product_details=()=>{
 			console.log(this.props.sendproductId);
+			console.log(this.producttype);
 			let status;
 			let productid={
 				"nid":this.props.sendproductId
@@ -79,6 +81,7 @@ class Adminproductadd extends React.Component{
 				}
 				console.log(filename);
 	          	this.setState({insertedproduct:data.node,loader:false,uploadedproductimage:data.node.field_product_image.url,newproductimageid:data.node.field_product_image.fid,fileuploadedname:filename,fid:data.node.field_document.fid})
+	          	this.producttype.current.value=data.node.field_product_category.length > 0 ?data.node.field_product_category[0].tid:this.producttype.current[0].value
 	      });
 	}
 		upload_product_document=(e)=>{
@@ -172,7 +175,7 @@ class Adminproductadd extends React.Component{
 		        "type":[{target_id:"products"}],        
 		        "field_product_description":[{value:document.querySelector("#description").value}],
 		        "field_product_image":[{target_id:document.querySelector("#product-image").getAttribute("data-id")}],
-		        //"field_product_category":[{target_id:}],
+		        "field_product_category":[{target_id:this.producttype.current.value}],
 		        "field_product_sheet_title":[{value:document.querySelector("#product-title").value}],
 		        "field_product_document":[{target_id:document.querySelector(".document-item-product").getAttribute("get-id")}]
 			}
@@ -226,6 +229,16 @@ class Adminproductadd extends React.Component{
 										<div className="input-box">
 											<input type="text" name="Product name" id="title" placeholder="Product name"  onBlur={(e)=>hasNull(e.target.value) ? this.setState({productname:true}): this.setState({productname:false})} defaultValue={this.state.insertedproduct!=='' ? this.state.insertedproduct.title : ''}/>
 											{this.state.productname ? ValidationMsg.common.default.productnamefield : ''}
+										</div>
+									</div>
+							<div className="form-group d-flex flex-wrap align-center">
+										<label>Product category*</label>
+										<div className="input-box">
+											<select name="1" className="" tabIndex="0" id="product_type" ref={this.producttype} >
+						              		{this.props.sendproducttitle && this.props.sendproducttitle.map((item,index)=>
+												<option key={index} value={item.tid}>{ReactHtmlParser(item.name)}</option>
+						              		)}
+									</select>
 										</div>
 									</div>
 							<div className="form-group d-flex flex-wrap align-center">

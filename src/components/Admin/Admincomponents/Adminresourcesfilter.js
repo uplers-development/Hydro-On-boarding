@@ -24,7 +24,11 @@ class Adminresourcesfilter extends React.Component{
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcedropdown.method,
-   	 }).then(res=>{return res.json()}).then(data=>{console.log(data);this.setState({adminresourcesdropdown:data})});
+   	 }).then(res=>{return res.json()}).then(data=>{
+                   console.log(data);
+                   this.setState({adminresourcesdropdown:data});
+                   this.props.getResources(data);
+                 });
    }
 
 

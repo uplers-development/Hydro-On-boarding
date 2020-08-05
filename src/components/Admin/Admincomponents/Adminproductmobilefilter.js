@@ -23,7 +23,7 @@ class Adminproductmobilefilter extends React.Component{
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminproductdropdown.method,
-   	 }).then(res=>{return res.json()}).then(data=>{console.log(data);this.setState({adminproductdropdown:data})});
+   	 }).then(res=>{return res.json()}).then(data=>{console.log(data);this.setState({adminproductdropdown:data});this.props.getallproducts(data)});
    }
 
   adminfilterproduct=(e,productid)=>{

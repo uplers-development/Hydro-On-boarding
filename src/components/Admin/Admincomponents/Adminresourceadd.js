@@ -30,6 +30,7 @@ class Adminresourceadd extends React.Component{
 		checkempty:false
       }
       this.productTaginput=React.createRef();
+      this.resourcetype=React.createRef();
 	  this.productTag=this.productTag.bind(this);
 	  this.clearProductTag=this.clearProductTag.bind(this);
 	  this.OnSubmitResource=this.OnSubmitResource.bind(this);
@@ -41,6 +42,7 @@ class Adminresourceadd extends React.Component{
    	console.log("add form:" +this.props.addstatus);
    	console.log("readmode:" +this.props.readmode);
    	console.log("resourceid:" +this.props.sendresourceId);
+   	console.log(this.props.sendresourcetitle);
    	 if(!this.props.addstatus){
    		this.get_resources_details();
    	 }else{
@@ -223,7 +225,7 @@ class Adminresourceadd extends React.Component{
 			        "field_product_tags":productTagsId,
 			        "field__resources_description":[{value:document.querySelector("#description").value}],
 			        "field_resources_image":[{target_id:document.querySelector("#resource-image").getAttribute("data-id")}],
-			        //"field_resource_type":[{target_id:tid}],
+			        "field_resource_type":[{target_id:this.resourcetype.current.value}],
 			        "field_resources_document":[{target_id:document.querySelector(".document-item-resource").getAttribute("get-id")}]
 				}
 				///node/nid?_format=json
@@ -298,6 +300,7 @@ class Adminresourceadd extends React.Component{
 				}
 				console.log(filename);
 	          	this.setState({insertedresourcedata:data.node,loader:false,uploadedresourceimage:data.node.field_resources_image.url,newresourceimageid:data.node.field_resources_image.fid,fileuploadedname:filename,fid:data.node.field_document.fid})
+	          	this.resourcetype.current.value=data.node.field_resource_type.length > 0 ? data.node.field_resource_type[0].tid : this.resourcetype.current[0].value;
 	          	this.state.insertedresourcedata.field_product_tags.map((item,index)=>{
 	          		console.log(item);
 	          		  var node = document.createElement("SPAN");
@@ -311,9 +314,13 @@ class Adminresourceadd extends React.Component{
 			            node.appendChild(textnode);
 			            node.setAttributeNode(id);
 			            document.querySelector(".shareall-email").appendChild(node);
+			              if(document.querySelectorAll(".shareall-email .emailall").length>0){
+		                document.querySelector("#product-tags").removeAttribute("placeholder");
+		            }
 	          	})
 	          })
 	}
+
 
 
    render(){
@@ -340,10 +347,12 @@ class Adminresourceadd extends React.Component{
 				               </div>
 				            </div>
 				            <div className="form-group d-flex flex-wrap align-center">
-				               <label>Reource type*</label>
+				               <label>Resource type*</label>
 				               <div className="input-box">
 					              	<select name="1" className="" tabIndex="0" id="resource_type" ref={this.resourcetype} >
-										<option value="0">none</option>
+					              		{this.props.sendresourcetitle && this.props.sendresourcetitle.map((item,index)=>
+											<option key={index} value={item.tid}>{ReactHtmlParser(item.name)}</option>
+					              		)}
 									</select>
 								</div>
 				            </div>

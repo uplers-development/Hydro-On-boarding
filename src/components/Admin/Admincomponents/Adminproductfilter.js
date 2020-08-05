@@ -26,6 +26,7 @@ class Adminproductfilter extends React.Component{
        }).then(res=>{return res.json()}).then(data=>{
          console.log(data);
          this.setState({adminproductdropdown:data})
+         this.props.getallproducts(data)
       });
    }
 

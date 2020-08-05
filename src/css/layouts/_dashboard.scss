@@ -412,7 +412,14 @@
 	
 }
 
-
+.dashboard-main {
+	transition: 10s all ease-in-out;
+	transform: translateY(-100%);
+		&.animation-top {
+			transform: translateY(0%);
+			-webkit-transform: translateY(0%);
+		}
+}
 
 
 

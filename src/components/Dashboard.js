@@ -12,7 +12,8 @@ import {cosmaticAsset} from'./constants/common';
 		super(props);
 		this.state={
 			rightSide_data:[],
-			loader:true
+			loader:true,
+			addClass:false,
 		}
 	}
 
@@ -34,7 +35,7 @@ import {cosmaticAsset} from'./constants/common';
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		this.setState({rightSide_data:data,loader:false});
+    		this.setState({rightSide_data:data,loader:false,addClass:true});
     	})
 	}
 
@@ -43,9 +44,10 @@ import {cosmaticAsset} from'./constants/common';
 
 	render() {
 		return (
-			<div><section className="main-wrapper">
+			<div>
+			<section className="main-wrapper">
 			{!this.state.loader ? 
-			<div className="d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover" style={{backgroundImage:`url(${CommonBackground})`}} >
+			<div className={this.state.addClass ? "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover animation-top" : "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover"} style={{backgroundImage:`url(${CommonBackground})`}} >
 			<Sidebar/>
 			
 			{/*<!--Dashboard switch user block start-->*/}

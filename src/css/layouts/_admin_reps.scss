@@ -155,6 +155,9 @@
 								.right-detail {
 									.action {
 										display: none;
+										@media screen and (max-width: $ipad-landscape) {
+											display: block;
+										}
 										a {
 											font-size: 18px;
 											line-height: 22px;

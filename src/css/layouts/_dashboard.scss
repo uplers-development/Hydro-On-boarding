@@ -447,6 +447,19 @@
 			transform: translateY(100%);
 			transition: all 0.5s ease-in-out;
 		}
+	&.no-animation {
+		top: auto;
+		position: static;
+		&.animation-bottom {
+			top: auto;		
+			nav.fixed-left {
+				transform: none;
+			}
+		}
+		nav.fixed-left {
+			transform: none;
+		}
+	}
 }
 
 

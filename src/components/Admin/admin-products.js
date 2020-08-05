@@ -74,7 +74,7 @@ class AdminProduct extends React.Component {
 		return(<div>
 				   <section className="main-wrapper">
 				      <div className="d-flex flex-wrap main-block">
-				         <Adminnavbar/>
+				         <Adminnavbar historyPush={this.props}/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
 				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} />

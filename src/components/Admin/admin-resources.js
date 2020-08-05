@@ -33,6 +33,7 @@ class AdminResource extends React.Component {
 		this.getallresources=this.getallresources.bind(this);
 		this.updatedresourcestatus=this.updatedresourcestatus.bind(this);
 		this.checkdropdownselected=this.checkdropdownselected.bind(this);
+		this.sendViewercallfalse=this.sendViewercallfalse.bind(this);
 	}
 
 	componentDidMount(){
@@ -77,13 +78,16 @@ class AdminResource extends React.Component {
    		this.setState({checkifselesctedropdown:checkstatus})
    }
 
+   sendViewercallfalse=(closeviewcall,changesthetitle)=>{
+   		this.setState({viewcaller:closeviewcall,pageTitleChange:changesthetitle})
+   }
 
 
 	render(){
 		return(<div>
 				   <section className="main-wrapper">
 				      <div className="d-flex flex-wrap main-block">
-				         <Adminnavbar/>
+				         <Adminnavbar checktheviewercall={this.sendViewercallfalse} sendviewcall={this.state.viewcaller} historyPush={this.props}/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
 				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange}  />

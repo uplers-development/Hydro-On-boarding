@@ -30,9 +30,20 @@ class Adminnavbar extends React.Component {
    }
 
    render(){
-  return(
+  return(  
      <nav className="navbar teal-color-bg navbar-expand-md navbar-dark bg-primary fixed-left">
-            <Link to={"/admin-resources"} className="navbar-logo"><img src={require("../../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
+            <Link to={""} onClick={((e)=>{
+                e.preventDefault();
+                if(window.location.pathname==="/admin-resources"){
+                  if(this.props.sendviewcall){
+                    this.props.checktheviewercall(false,false);
+                    this.props.historyPush.history.push("/admin-resources");
+                  }
+                }else{
+                  this.props.historyPush.history.push("/admin-resources");
+                }
+
+            })} className="navbar-logo"><img src={require("../../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 
             <ul>
               {this.state.menulisting.map((item,index)=>

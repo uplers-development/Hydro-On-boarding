@@ -78,6 +78,10 @@ delete_single_resource=(e)=>{
 	   	 		if(data.status===204){
 	   	 			this.setState({openDeletepopup:false,isDeleted:true})
 	   	 			this.get_resource_table();
+	   	 			document.querySelector(".resourcesparentcheck").checked=false;
+	   	 			document.querySelectorAll(".resourceschecked:checked").forEach((item,index)=>{
+		   	 				item.checked=false;
+		   	 			})
 	   	 		}
 	   	 });
 }	

@@ -39,7 +39,7 @@ import {cosmaticAsset} from'./constants/common';
     		let self=this;
     		setTimeout(function(){
     			self.setState({addClass:true})
-    		},2000)
+    		},800)
     	})
 	}
 

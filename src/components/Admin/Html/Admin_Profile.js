@@ -6,7 +6,7 @@ import {ValidationMsg} from'../../constants/validationmsg';
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../../constants/common';
 
-class Admin_Profile extends Component {
+class AdminProfile extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
@@ -59,7 +59,8 @@ class Admin_Profile extends Component {
 	}
 
 	GetProfile=()=>{
-		fetch(Apiurl.GetProfile.url,{
+		 let target_id=JSON.parse(localStorage.getItem("user-type")).uid;
+		fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
@@ -346,4 +347,4 @@ class Admin_Profile extends Component {
 	}
 }
 
-export default Admin_Profile;
+export default AdminProfile;

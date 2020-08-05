@@ -35,7 +35,11 @@ import {cosmaticAsset} from'./constants/common';
     		return res.json()
     	}).then(data=>{
     		console.log(data);
-    		this.setState({rightSide_data:data,loader:false,addClass:true});
+    		this.setState({rightSide_data:data,loader:false});
+    		let self=this;
+    		setTimeout(function(){
+    			self.setState({addClass:true})
+    		},4000)
     	})
 	}
 

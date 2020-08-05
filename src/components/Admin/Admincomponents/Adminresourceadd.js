@@ -340,6 +340,14 @@ class Adminresourceadd extends React.Component{
 				               </div>
 				            </div>
 				            <div className="form-group d-flex flex-wrap align-center">
+				               <label>Reource type*</label>
+				               <div className="input-box">
+					              	<select name="1" className="" tabIndex="0" id="resource_type" ref={this.resourcetype} >
+										<option value="0">none</option>
+									</select>
+								</div>
+				            </div>
+				            <div className="form-group d-flex flex-wrap align-center">
 		                        <label>Product tags*</label>
 	  								<div className="input-box">
 										<div className="suggestion-box">			   	

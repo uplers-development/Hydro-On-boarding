@@ -202,10 +202,10 @@ class Profile extends Component {
 				setdefaultroute="/RepDashboard";
 			}
 		}else{
-			setdefaultroute="/Dashboard";
+				setdefaultroute="/Dashboard";
 			}
 		return (
-			<div><section className="main-wrapper">
+			<div><section className={this.props.location.state!==undefined && this.props.location.state.admin ? "main-wrapper off-white-bg" : "main-wrapper"}>
 
 		{/*<!--Main block start-->*/}
 		<div className="d-flex flex-wrap main-block right-btm-pattern-gray">
@@ -227,7 +227,7 @@ class Profile extends Component {
 			{/*<!--Nav fixed left block end-->*/}
 
 			{/*<!--Main right content block start-->*/}
-			<div className="d-flex flex-wrap right-content-part ">
+			<div className={this.props.location.state!==undefined && this.props.location.state.admin ? "d-flex flex-wrap right-content-part admin-profile" : "d-flex flex-wrap right-content-part"}>
 
 				{/*<!--Main content top heading start-->*/}
 				<div className="top-heading">

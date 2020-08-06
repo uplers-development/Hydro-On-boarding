@@ -78,7 +78,7 @@ export const Client={
         method:'GET'
     },
     SortResources:{
-        url:base_url+"/jsonapi/resources_listing/",
+        url:base_url+"/jsonapi/resources_listing/?_format=json",
         method:'GET'
     },
     ListResourcesforSearch:{

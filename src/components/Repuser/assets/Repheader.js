@@ -90,7 +90,7 @@ console.log(this.state.repinfo);
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
                   {this.state.repinfo!==null ? 
                      <>
-                        <div className="person-profile-img bg-cover" style={{backgroundImage: `url(${ this.state.repinfo.user_picture[0]!=='' ? this.state.repinfo.user_picture[0].url : "../../../images/profile-logo-blue.svg"})`}}></div>
+                        <div className="person-profile-img bg-cover" style={{backgroundImage: `url(${this.state.repinfo.user_picture.length>0 && this.state.repinfo.user_picture[0]!=='' ? this.state.repinfo.user_picture[0].url : "../../../images/profile-logo-blue.svg"})`}}></div>
                         <h2>{this.state.repinfo.field_first_name[0].value+" "+this.state.repinfo.field_last_name[0].value}</h2>
                      </>
                      :

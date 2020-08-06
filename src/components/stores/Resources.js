@@ -193,6 +193,8 @@ class Resources extends Component {
 	    	})
     	}else{
     		this.setState({SearchList:''});
+    		this.GetFilterValues();
+
    		}
 	}
 
@@ -200,6 +202,8 @@ class Resources extends Component {
 		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
 		let filterType=localStorage.getItem("resource-filter-type") && localStorage.getItem("resource-filter-type")!=='' ? localStorage.getItem("resource-filter-type") : '';
 		let searchValue=e.target.getAttribute("data-title-name");
+		document.querySelector("#myInput").value=searchValue;
+
 		fetch(Client.SortResources.url+"&field_resource_type_target_id="+resource_id+filterType+"&title="+searchValue,{
 			headers: {
                 	 "Content-Type" : "application/json",
@@ -212,9 +216,10 @@ class Resources extends Component {
     		console.log(data);
     		this.setState({ResourceList:data});
     		if(document.querySelectorAll(".resources-box") && document.querySelectorAll(".resources-box").length <= 0){
-    			this.setState({noData:true});
+    			this.setState({noData:true,SearchList:''});
+
     		}else{
-    			this.setState({noData:false});
+    			this.setState({noData:false,SearchList:''});
     		}	
     	})
 	}

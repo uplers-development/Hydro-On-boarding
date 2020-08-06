@@ -152,13 +152,15 @@ class Contract extends Component {
     	})
      }else{
     	this.setState({ContractdropDownSearch:''})
+    	this.GetContractForEndusers();
      }
 	}
 
 	ContractSearchListData=(e)=>{
 		e.preventDefault()
 			
-		let textValue=e.target.textContent
+		let textValue=e.target.textContent;
+		document.querySelector("#myInput").value=textValue;
 		fetch(Client.GetAllContractForSearch.url+"&title="+textValue,{
 				headers: {
                 	"Content-Type" : "application/json",
@@ -169,11 +171,11 @@ class Contract extends Component {
     		return res.json()
     	}).then(data=>{	
     		console.log(data);
-    		this.setState({contractDetails:data})
+    		this.setState({contractDetails:data,ContractdropDownSearch:''})
     		if(document.querySelectorAll(".contracts-box") && document.querySelectorAll(".contracts-box").length <= 0){
     			this.setState({noData:true});
     		}else{
-    			this.setState({noData:false});
+    			this.setState({noData:false,ContractdropDownSearch:''});
     		}
     	})
 	}

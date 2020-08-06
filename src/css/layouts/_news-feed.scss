@@ -37,10 +37,15 @@
 				font-weight: $font-semi-bold;
 				margin-top: 16px;
     			margin-bottom: 0;
+				max-width: calc(100% - 320px);
+				@media screen and (max-width:$large-mx) {
+					max-width: calc(100% - 230px);
+				}
 				@media screen and (max-width:$mobile-small) {
 					font-size: 16px;
 					line-height: 28px;	
 					margin-top: 0;
+					max-width: none;
 				}
 			}
 			p{
@@ -109,18 +114,25 @@
 			}
 		}
 		svg {
-			position: absolute;
-			right: 0;
-			bottom: -27%;
-			width: 33.62%;
-			top: auto;
-			@media screen and (max-width:$large-m) {
-				bottom: -44%;
+				position: absolute;
+				right: -30px;
+				bottom: -10px;
+				width: 328px;
+				top: auto;
+				max-height: 91%;
+				height: 230px;
+			@media screen and (max-width:$large-mx) {
+					right: -6px;
+					bottom: -10px;
+					width: 228px;
+					top: auto;
+					height: 160px;
 			}
 			@media screen and (max-width:$mobile-small) {
-				width: 186px;
-				bottom: -65%;
-				opacity: 18%;
+				    width: 186px;
+					bottom: 0;
+					opacity: 18%;
+					height: 129px;
 			}
 		}
 		.datewise-common-block

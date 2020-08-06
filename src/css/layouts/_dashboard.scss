@@ -1,10 +1,9 @@
 /*Dashboard css goes here*/
-.main-block
-{
+.main-block {
 	min-height: 100vh;
 	align-items: flex-start;
-	.nav-bottom-master
-	{
+
+	.nav-bottom-master {
 		max-width: 209px;
 		width: 100%;
 		margin: 0 auto;
@@ -18,18 +17,22 @@
 		left: 0;
 		right: 0;
 		word-break: break-word;
+
 		@media screen and (max-width:$large-m) {
 			top: 60px;
 			padding: 38px 15px 12px;
 		}
+
 		@media screen and (max-width:$ipad-portrait) {
 			bottom: 60px;
 			padding: 45px 15px 12px;
 		}
+
 		@media screen and (max-width:$mobile-small) {
 			display: none;
 		}
-		p{
+
+		p {
 			color: $white;
 			font-size: 16px;
 			line-height: 20px;
@@ -38,15 +41,17 @@
 			text-align: center;
 			margin-top: 0;
 			overflow-y: auto;
-    		max-height: 62px;
+			max-height: 66px;
+
 			@media screen and (max-width:$large-m) {
 				margin-bottom: 5px;
 			}
-			strong
-			{
+
+			strong {
 				font-weight: $font-semi-bold;
 			}
 		}
+
 		img {
 			position: absolute;
 			top: -52px;
@@ -56,64 +61,68 @@
 			right: 0;
 			/*transition: 0.2s all ease-in-out;*/
 			@include transition(0.2s all ease-in-out);
+
 			@media screen and (max-width:$large-m) {
 				max-width: 150px;
 			}
 		}
-		&:hover
-		{
-			img{
+
+		&:hover {
+			img {
 				top: -62px;
 			}
 		}
-		.common-btn-blue
-		{
+
+		.common-btn-blue {
 			min-width: 138px;
 			margin-bottom: 0;
 			padding: 10px;
-			span
-			{
+
+			span {
 				font-size: 14px;
 				line-height: 16px;
 			}
 		}
 	}
-	
-	.dashboard-switch-user
-	{
+
+	.dashboard-switch-user {
 		margin-left: auto;
-    	margin-right: 208px;
+		margin-right: 208px;
 		position: relative;
 		z-index: 1;
 		background-color: $black-transparent;
 		min-height: 100vh;
 		max-width: 521px;
-    	width: 100%;
+		width: 100%;
 		padding: 40px 30px 34px 49px;
 		border-right: 6px solid $white;
+
 		@media screen and (max-width:$large-m) {
 			padding: 30px 30px 34px 40px;
 		}
+
 		@media screen and (max-width:$large) {
 			margin-right: 130px;
 		}
+
 		@media screen and (max-width:$ipad-portrait) {
 			margin-right: 70px;
 			max-width: 420px;
 			padding: 15px;
 		}
+
 		@media screen and (max-width:$mobile-small) {
 			width: calc(100% - 30px);
-    		margin: 0 auto;
+			margin: 0 auto;
 			padding-bottom: 30px;
 		}
+
 		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 			padding: 15px;
 		}
-		.top-switch-user
-		{
-			h1
-			{
+
+		.top-switch-user {
+			h1 {
 				font-size: 16px;
 				line-height: 28px;
 				font-family: $gibson;
@@ -121,81 +130,95 @@
 				color: $white;
 				margin: 10px 0 0 0;
 				width: calc(100% - 192px);
+
 				@media screen and (max-width:$ipad-portrait) {
 					margin: 15px 0 0 0;
 					padding-right: 10px;
 				}
+
 				@media screen and (max-width:$mobile-small) {
 					margin: 10px 0 10px 0;
 					width: calc(100% - 150px);
 				}
+
 				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 					margin: 10px 10px 0 0;
 					font-size: 14px;
 					padding-right: 0;
 				}
 			}
+
 			> div {
-			margin-left: auto;
-			.user-log
-			{
-				position: static;
 				margin-left: auto;
-    			right: 0;
-				top: auto;
-				@media screen and (max-width:$ipad-portrait) {
-					margin-left: 0;
-				}
-				h2
-				{
-					color: $white;
-					&:after {
-						border-top-color: $white;	
+
+				.user-log {
+					position: static;
+					margin-left: auto;
+					right: 0;
+					top: auto;
+
+					@media screen and (max-width:$ipad-portrait) {
+						margin-left: 0;
 					}
-				}
-				&.active{
+
 					h2 {
-						color: $black;
+						color: $white;
+
 						&:after {
-							border-top-color: $black;	
+							border-top-color: $white;
 						}
 					}
+
+					&.active {
+						h2 {
+							color: $black;
+
+							&:after {
+								border-top-color: $black;
+							}
+						}
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						position: absolute;
+						z-index: 1;
+					}
 				}
-				@media screen and (max-width:$mobile-small) {
-					position: absolute;
-					z-index: 1;
-				}
-			}
-				
+
 			}
 		}
 	}
-	.list-of-view
-	{
+
+	.list-of-view {
 		padding-top: 50px;
+
 		@media screen and (max-width:$large-m) {
 			padding-top: 30px;
 		}
-		.boxes 
-		{
-			    position: relative;
-				margin-bottom: 32px;
-				padding-bottom: 33px;
-			.left-details
-			{
+
+		.boxes {
+			position: relative;
+			margin-bottom: 32px;
+			padding-bottom: 33px;
+
+			.left-details {
 				max-width: 340px;
 				width: 100%;
 				word-break: break-word;
+
 				@media screen and (max-width:$ipad-portrait) {
 					max-width: 300px;
 				}
+
 				@media screen and (max-width:$mobile-small) {
 					max-width: none;
 					order: 2;
 				}
+
 				img {
 					width: 38px;
 				}
+
 				h3 {
 					color: $white;
 					font-size: 22px;
@@ -203,12 +226,14 @@
 					font-family: $gibson;
 					font-weight: $font-semi-bold;
 					margin-bottom: 0;
+
 					@media screen and (max-width:$large) {
 						margin-top: 10px;
 						font-size: 20px;
-    					line-height: 26px;
+						line-height: 26px;
 					}
 				}
+
 				p {
 					color: $white;
 					font-size: 16px;
@@ -216,11 +241,13 @@
 					font-family: $arial;
 					font-weight: $font-normal;
 					margin-top: 10px;
+
 					@media screen and (max-width:$large) {
 						font-size: 14px;
-    					line-height: 22px;
+						line-height: 22px;
 					}
 				}
+
 				a {
 					color: $white;
 					font-size: 16px;
@@ -230,18 +257,19 @@
 					text-decoration: none;
 					position: relative;
 					margin-top: 2px;
-    				display: inline-block;
+					display: inline-block;
 					padding-right: 20px;
 					@include transition(0.2s all ease-in-out);
-					&:hover
-					{
+
+					&:hover {
 						color: $sky-blue;
+
 						&:after {
 							border-left-color: $sky-blue;
 						}
 					}
-					&:after 
-					{
+
+					&:after {
 						content: "";
 						display: inline-block;
 						position: absolute;
@@ -258,37 +286,39 @@
 					}
 				}
 			}
-			.right-image
-			{
+
+			.right-image {
 				position: absolute;
 				top: 50%;
 				transform: translateY(-50%);
 				-webkit-transform: translateY(-50%);
 				max-width: 250px;
-    			right: -40%;
-				img
-				{
+				right: -40%;
+
+				img {
 					max-width: 100%;
 					width: auto;
 				}
 			}
-			&:not(:last-child)
-			{
-				border-bottom: 1px solid $off-white; 
+
+			&:not(:last-child) {
+				border-bottom: 1px solid $off-white;
 			}
-			&.two-ipad
-			{
-				.right-image
-				{
+
+			&.two-ipad {
+				.right-image {
 					max-width: 285px;
+
 					@media screen and (max-width:$large-m) {
 						max-width: 220px;
 						right: -32%;
 					}
+
 					@media screen and (max-width:$ipad-portrait) {
 						max-width: 180px;
 						right: -22%;
 					}
+
 					@media screen and (max-width:$mobile-small) {
 						right: 0;
 						order: 1;
@@ -297,64 +327,69 @@
 						position: static;
 						transform: none;
 					}
-					img 
-					{
+
+					img {
 						@include transition(0.2s all ease-in-out);
-						&:nth-child(1)
-						{
+
+						&:nth-child(1) {
 							position: relative;
-    						top: 30px;
+							top: 30px;
+
 							@media screen and (max-width:$large-m) {
 								top: 20px;
 							}
 						}
-						&:nth-child(2)
-						{
+
+						&:nth-child(2) {
 							position: relative;
-    						top: -80px;
+							top: -80px;
+
 							@media screen and (max-width:$large-m) {
 								top: -60px;
 							}
 						}
 					}
+
 					&:hover {
 						img {
-							&:nth-child(1)
-							{
+							&:nth-child(1) {
 								position: relative;
 								top: 20px;
+
 								@media screen and (max-width:$large-m) {
 									top: 15px;
 								}
 							}
-							&:nth-child(2)
-							{
+
+							&:nth-child(2) {
 								position: relative;
 								top: -70px;
+
 								@media screen and (max-width:$large-m) {
 									top: -55px;
 								}
 							}
 						}
 					}
-				
+
 				}
-				
+
 			}
-			
-			&.editor-letter
-			{
-				.right-image
-				{
+
+			&.editor-letter {
+				.right-image {
 					max-width: 250px;
+
 					@media screen and (max-width:$large-m) {
 						max-width: 220px;
 						right: -33%;
 					}
+
 					@media screen and (max-width:$ipad-portrait) {
 						max-width: 170px;
 						right: -25%;
 					}
+
 					@media screen and (max-width:$mobile-small) {
 						margin: 0 auto;
 						right: 0;
@@ -364,9 +399,12 @@
 						position: static;
 						order: 1;
 					}
+
 					top: 42%;
+
 					img {
 						@include transition(0.2s all ease-in-out);
+
 						&:hover {
 							transform: scale(1.1);
 							-webkit-transform: scale(1.1);
@@ -374,19 +412,21 @@
 					}
 				}
 			}
-			&.user-rounded
-			{
-				.right-image
-				{
+
+			&.user-rounded {
+				.right-image {
 					max-width: 222px;
+
 					@media screen and (max-width:$large-m) {
 						max-width: 190px;
 						right: -29%;
 					}
+
 					@media screen and (max-width:$ipad-portrait) {
 						max-width: 150px;
 						right: -22%;
 					}
+
 					@media screen and (max-width:$mobile-small) {
 						order: 1;
 						position: static;
@@ -396,10 +436,13 @@
 						transform: none;
 						-webkit-transform: none;
 					}
+
 					right: -34%;
 					top: 52%;
+
 					img {
 						@include transition(0.2s all ease-in-out);
+
 						&:hover {
 							transform: scale(1.1);
 							-webkit-transform: scale(1.1);
@@ -407,9 +450,9 @@
 					}
 				}
 			}
-		}	
+		}
 	}
-	
+
 }
 
 
@@ -417,18 +460,21 @@
 
 .dashboard-main {
 	top: 100vh;
-    position: relative;
+	position: relative;
 	transition: all 0.5s ease-in-out;
-		&.animation-top {
-			top: 0;		
-			nav.fixed-left {
-				transform: translateY(0%);
-			}
-		}
+
+	&.animation-top {
+		top: 0;
+
 		nav.fixed-left {
-			transform: translateY(100%);
-			transition: all 0.5s ease-in-out;
+			transform: translateY(0%);
 		}
+	}
+
+	nav.fixed-left {
+		transform: translateY(100%);
+		transition: all 0.5s ease-in-out;
+	}
 }
 
 /*Animation css for Profile*/
@@ -438,21 +484,37 @@
 		top: -150vh;
 		position: relative;
 		transition: all 0.5s ease-in-out;
-			&.animation-bottom {
-				top: 0;		
-				nav.fixed-left {
-					transform: translateY(0%);
-				}
-				nav.fixed-left {
-					transform: translateY(0%);
-					transition: all 0.5s ease-in-out;
-				}
-			}
+
+		&.animation-bottom {
+			top: 0;
+
 			nav.fixed-left {
-				transform: translateY(-100%);
+				transform: translateY(0%);
+			}
+
+			nav.fixed-left {
+				transform: translateY(0%);
 				transition: all 0.5s ease-in-out;
 			}
 
+		}
+		nav.fixed-left {
+			transform: translateY(-100%);
+			transition: all 0.5s ease-in-out;
+		}
+	}
+	.right-btm-pattern-gray {
+		&:after {
+			transition: all 0.5s ease-in-out;
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		&.animation-bottom {
+			&:after {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
 	}
 }
-

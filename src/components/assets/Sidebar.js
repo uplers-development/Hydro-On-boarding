@@ -91,17 +91,17 @@ class Sidebar extends Component {
 						{this.state.sidebarItem.map((item,index)=>
 							 <li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
 			                      {item.field_icon_svg!=='' ? 
-			                      <>
+			                      <div className="with-counter">
 			                      <div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }}/>
 			                      
 			                      {item.title==='News Feed' && this.state.newsFeedcounts > 0 ? <span className='counter'>{this.state.newsFeedcounts}</span>: ''}
-			                      </>
+			                      </div>
 			                        :
-			                       <>
+			                       <div className="with-counter">
 			                      <img src={require("../../images/bell-icon-logo.svg")}/>
 			                      
 			                      {item.title==='News Feed' && this.state.newsFeedcounts > 0 ? <span className='counter'>{this.state.newsFeedcounts}</span>: ''}
-			                      </>
+			                      </div>
 			                     }
 							 	
 			                      <span>{item.title}</span></Link>

@@ -34,6 +34,7 @@ export const ValidationMsg = {
             resourcetitlefield:ReactHtmlParser('<span class="empty-field">Please enter resource title.</span>'),
             resourcedescriptionfield:ReactHtmlParser('<span class="empty-field">Please enter resource description.</span>'),
             resourceproductfield:ReactHtmlParser('<span class="empty-field">Please enter resource product tags.</span>'),
+            resourceduplicateproduct:ReactHtmlParser('<span class="empty-field">Duplicate product tags are not alllowed.</span>'),
 
 
             productnamefield:ReactHtmlParser('<span class="empty-field">Please enter product name.</span>'),

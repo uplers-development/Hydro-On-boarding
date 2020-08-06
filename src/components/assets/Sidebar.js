@@ -33,7 +33,7 @@ class Sidebar extends Component {
           })
 		let self=this;
 		if((localStorage.getItem("user-type")!==null || localStorage.getItem("user-type")!==undefined || localStorage.getItem("user-type")!=='') && JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
-		/*setInterval(function(){
+		setInterval(function(){
           fetch(Client.NewsfeedsNotification.url,{
               headers: {
                       "Content-Type" : "application/json",
@@ -46,7 +46,7 @@ class Sidebar extends Component {
               console.log(data);
               self.setState({newsFeedcounts:data.length})
           })
-        },10000);*/
+        },10000);
         }
 	}
 

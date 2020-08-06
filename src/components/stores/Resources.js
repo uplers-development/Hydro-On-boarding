@@ -226,7 +226,7 @@ class Resources extends Component {
 				<section className="main-wrapper">
 		<div className="d-flex flex-wrap main-block">
 
-			<Sidebar/>
+			<Sidebar historyPush={this.props}/>
 
 			
 			<div className="d-flex flex-wrap right-content-part">

@@ -57,7 +57,7 @@ import {cosmaticAsset} from'./constants/common';
 			<section className="main-wrapper">
 			{!this.state.loader ? 
 			<div className={this.state.addClass ? "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover animation-top" : "d-flex flex-wrap main-block dashboard-main black-overlay-transparent bg-cover"} ref={this.createClassRef} style={{backgroundImage:`url(${CommonBackground})`}} >
-			<Sidebar/>
+			<Sidebar historyPush={this.props}/>
 			
 			{/*<!--Dashboard switch user block start-->*/}
 			<div className="dashboard-switch-user">

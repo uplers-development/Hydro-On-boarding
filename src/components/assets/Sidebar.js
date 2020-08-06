@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{site_url,base_url} from '../Apiurl'; 
+import Apiurl,{site_url,base_url,Client} from '../Apiurl'; 
 import $ from "jquery";
 import ReactHtmlParser from 'react-html-parser';
 
@@ -10,7 +10,8 @@ class Sidebar extends Component {
 		this.state={
 			sidebarItem:[],
 			sidebarItemFooter:[],
-			changeClassnav:false
+			changeClassnav:false,
+			newsFeedcounts:0
 		}
 	}
 
@@ -18,6 +19,34 @@ class Sidebar extends Component {
 		this.SidebarItems();
 		this.FooterItems();
 		window.location.pathname==='/newsfeed' || window.location.pathname==='/Dashboard' ? this.setState({changeClassnav:false}) :this.setState({changeClassnav:true});
+		fetch(Client.NewsfeedsNotification.url,{
+              headers: {
+                      "Content-Type" : "application/json",
+                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                    },
+                   method:Client.NewsfeedsNotification.method
+          }).then(res=>{
+            return res.json()
+          }).then(data=>{
+              console.log(data);
+              this.setState({newsFeedcounts:data.length})
+          })
+		let self=this;
+		setInterval(function(){
+          fetch(Client.NewsfeedsNotification.url,{
+              headers: {
+                      "Content-Type" : "application/json",
+                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                    },
+                   method:Client.NewsfeedsNotification.method
+          }).then(res=>{
+            return res.json()
+          }).then(data=>{
+              console.log(data);
+              self.setState({newsFeedcounts:data.length})
+              console.log(self.state.newsFeedcounts > 0 ? true :false)
+          })
+        },10000);
 	}
 
 	SidebarItems=()=>{
@@ -53,13 +82,14 @@ class Sidebar extends Component {
 
 
 	render() {
+
 		return (
 			<div>
 				<nav className={this.state.changeClassnav ? "navbar cadet-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left" : "navbar white-bg-trnsparent navbar-expand-md navbar-dark bg-primary fixed-left"}>
 					<Link to={"/Dashboard"} className="navbar-logo" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 					<ul>
 						{this.state.sidebarItem.map((item,index)=>
-							 <li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
+							 <li key={index}>{item.title==='News Feed' && this.state.newsFeedcounts > 0 ? <span className='counter'>{this.state.newsFeedcounts}</span>: ''}<Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
 			                      {item.field_icon_svg!=='' ? 
 			                      <div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
 			                        :

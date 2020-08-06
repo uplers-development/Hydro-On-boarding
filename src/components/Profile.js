@@ -44,9 +44,9 @@ class Profile extends Component {
 		var self=this;
 		if(localStorage.getItem("access-token")!==null){
 			this.GetTimeZone();
-			setTimeout(()=>{
+			//setTimeout(()=>{
     			self.GetProfile();	
-			},2000)
+			//},2000)
      	}else{
      		this.props.history.push("/Login")
      	}
@@ -99,7 +99,7 @@ class Profile extends Component {
 			if(this.props.location.state===undefined){
 				setTimeout(function(){
 					self.setState({addClass:true})
-				},800)
+				},1600)
 			}
 		})
 
@@ -215,7 +215,7 @@ class Profile extends Component {
 			<div><section className={this.props.location.state!==undefined && this.props.location.state.admin ? "main-wrapper off-white-bg" : "main-wrapper"}>
 
 		{/*<!--Main block start-->*/}
-		<div className={this.props.location.state===undefined && this.state.addClass  ? "d-flex profile-cust flex-wrap main-block right-btm-pattern-gray animation-bottom":"d-flex profile-cust flex-wrap main-block right-btm-pattern-gray no-animation"}>
+		<div className={this.props.location.state===undefined && !this.state.addClass  ? "d-flex profile-cust flex-wrap main-block right-btm-pattern-gray animation-bottom":"d-flex profile-cust flex-wrap main-block right-btm-pattern-gray no-animation"}>
 
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">

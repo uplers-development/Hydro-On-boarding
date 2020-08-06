@@ -45,22 +45,7 @@ class App extends Component {
           this.setState({sidebarItem:data});
         })
 
-      /*  fetch(Client.Newsfeeds_recentviews.url,{
-            headers: {
-                    "Content-Type" : "application/json",
-                    "Authorization": "Basic "+localStorage.getItem("basic-auth"),
-                  },
-                 method:Client.Newsfeeds_recentviews.method
-        }).then(res=>{
-          return res.json()
-        }).then(data=>{
-          console.log(data);
-          //this.setState({recentViews:data});
-          //console.log(this.state.recentViews);
-          //if(data.length > 0 && localStorage.getItem("news-viewed")===1){
-            localStorage.setItem("new-viewed",0);
-          //}
-        })*/
+        
   }
 
    render() {

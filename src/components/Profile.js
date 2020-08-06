@@ -211,7 +211,7 @@ class Profile extends Component {
 				setdefaultroute="/Dashboard";
 			}
 		return (
-			<div className={this.props.location.state===undefined && this.state.addClass  ? "animation-container" :''}>
+			<div className={this.props.location.state===undefined ? "animation-container" :''}>
 			<section className={this.props.location.state!==undefined && this.props.location.state.admin ? "main-wrapper off-white-bg" : "main-wrapper"}>
 
 		{/*<!--Main block start-->*/}

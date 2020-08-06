@@ -211,7 +211,8 @@ class Profile extends Component {
 				setdefaultroute="/Dashboard";
 			}
 		return (
-			<div><section className={this.props.location.state!==undefined && this.props.location.state.admin ? "main-wrapper off-white-bg" : "main-wrapper"}>
+			<div className={this.props.location.state===undefined && this.state.addClass  ? "animation-container" :''}>
+			<section className={this.props.location.state!==undefined && this.props.location.state.admin ? "main-wrapper off-white-bg" : "main-wrapper"}>
 
 		{/*<!--Main block start-->*/}
 		<div className={this.props.location.state===undefined && this.state.addClass  ? "d-flex profile-cust flex-wrap main-block right-btm-pattern-gray animation-bottom":"d-flex profile-cust flex-wrap main-block right-btm-pattern-gray"}>

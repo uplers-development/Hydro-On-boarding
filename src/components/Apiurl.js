@@ -127,9 +127,13 @@ export const Client={
         method:"GET"
     },
     SendRepContactQuery:{
-        url:`http://staging.project-progress.net/projects/hydro/json-api/repmail.json`,
+        url:base_url+`/json-api/repmail.json`,
         method:"POST"
     },
+    tirggerResourcedf:{
+        url:base_url+`/json-api/recenlty_read.json`,
+        method:"POST"
+    }
 }
 
 export const Repclient={

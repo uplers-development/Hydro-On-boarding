@@ -150,9 +150,14 @@ class Resources extends Component {
 
 
 	triggerWhilePdfOpen=(e,nid,pdf)=>{
-		
-		fetch(`http://staging.project-progress.net/projects/hydro/node/${nid}?_format=json`,{
-                method:Client.FilterByResourceId.method,
+		let bodyparam={"nid":nid};
+		fetch(Client.tirggerResourcedf.url,{
+				headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Client.tirggerResourcedf.method,
+                body:JSON.stringify(bodyparam),
     	}).then(res=>{
     		return res.json()
     	}).then(data=>{	

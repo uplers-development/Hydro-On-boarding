@@ -128,7 +128,7 @@ class Resources extends Component {
 		console.log(resourceTypefilterId);
 		console.log(resourceSortFilter);
 
-		fetch(Client.FilterByResourceId.url+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
+		fetch(Client.FilterByResourceId.url+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter+"&title="+document.querySelector("#myInput").value,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -167,19 +167,21 @@ class Resources extends Component {
 	}
 	
 	ListResourcesforSearch=(e)=>{
-		let resource_id;
 		let resourcenameString=e.target.value;
-				document.querySelectorAll(".resource-filter-type li a").forEach((item,index)=>{
+			/*	document.querySelectorAll(".resource-filter-type li a").forEach((item,index)=>{
 					 console.log(item.classList[0]);
 					 if(item.classList[0]==="active"){
 					 	resource_id=item.getAttribute("data-resource-id");
 					 }else{
 					 	resource_id='All';
 					 }
-				})
+				})*/
+		let resource_id=document.querySelectorAll(".product-list-item li a.active").length > 0 ? document.querySelector(".product-list-item li a.active").getAttribute("data-pid") : 'All';
+		let filterType=document.querySelectorAll(".resource-filter-type li a.active").length > 0 ? document.querySelector(".resource-filter-type li a.active").getAttribute("data-resource-id") : 'All';
+
 		if(resourcenameString!==''){
 			console.log(resourcenameString)
-			fetch(Client.ListResourcesforSearch.url+"&field_resource_type_target_id="+resource_id+"&title="+resourcenameString,{
+			fetch(Client.ListResourcesforSearch.url+"&field_resource_type_target_id="+filterType+"&field_product_category_target_id="+resource_id+"&title="+resourcenameString,{
 				headers: {
 	                	 "Content-Type" : "application/json",
 	                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -192,19 +194,49 @@ class Resources extends Component {
 	    		this.setState({SearchList:data});
 	    	})
     	}else{
-    		this.setState({SearchList:''});
-    		this.GetFilterValues();
+    		let self=this;
+    		setTimeout(()=>{
+    			self.setState({SearchList:''});
+    			self.callResourceListAfterSearchEmpty();
+    		},800);
 
    		}
 	}
 
+
+	callResourceListAfterSearchEmpty=()=>{
+		let resource_id=document.querySelectorAll(".product-list-item li a.active").length > 0 ? document.querySelector(".product-list-item li a.active").getAttribute("data-pid") : 'All';
+		let filterType=document.querySelectorAll(".resource-filter-type li a.active").length > 0 ? document.querySelector(".resource-filter-type li a.active").getAttribute("data-resource-id") : 'All';
+
+		fetch(Client.SortResources.url+"&field_resource_type_target_id="+filterType+"&field_product_category_target_id="+resource_id+"&title=",{
+			headers: {
+                	 "Content-Type" : "application/json",
+                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+                },
+                method:Client.SortResources.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({ResourceList:data});
+    		if(document.querySelectorAll(".resources-box") && document.querySelectorAll(".resources-box").length <= 0){
+    			this.setState({noData:true,SearchList:''});
+
+    		}else{
+    			this.setState({noData:false,SearchList:''});
+    		}	
+    	})
+	}
+
 	SearchResourcesByTitle=(e)=>{
-		let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
-		let filterType=localStorage.getItem("resource-filter-type") && localStorage.getItem("resource-filter-type")!=='' ? localStorage.getItem("resource-filter-type") : '';
+		/*let resource_id=localStorage.getItem("resource-id") && localStorage.getItem("resource-id")!=='' ? localStorage.getItem("resource-id") : 'All';
+		let filterType=localStorage.getItem("resource-filter-type") && localStorage.getItem("resource-filter-type")!=='' ? localStorage.getItem("resource-filter-type") : '';*/
+		let resource_id=document.querySelectorAll(".product-list-item li a.active").length > 0 ? document.querySelector(".product-list-item li a.active").getAttribute("data-pid") : 'All';
+		let filterType=document.querySelectorAll(".resource-filter-type li a.active").length > 0 ? document.querySelector(".resource-filter-type li a.active").getAttribute("data-resource-id") : 'All';
 		let searchValue=e.target.getAttribute("data-title-name");
 		document.querySelector("#myInput").value=searchValue;
 
-		fetch(Client.SortResources.url+"&field_resource_type_target_id="+resource_id+filterType+"&title="+searchValue,{
+		fetch(Client.SortResources.url+"&field_resource_type_target_id="+filterType+"&field_product_category_target_id="+resource_id+"&title="+searchValue,{
 			headers: {
                 	 "Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")

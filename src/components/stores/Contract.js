@@ -151,8 +151,11 @@ class Contract extends Component {
     		this.setState({ContractdropDownSearch:data})
     	})
      }else{
-    	this.setState({ContractdropDownSearch:''})
-    	this.GetContractForEndusers();
+     	let self=this;
+     	setTimeout(()=>{
+    		this.setState({ContractdropDownSearch:''})
+    		self.GetContractForEndusers();
+    	},800);
      }
 	}
 
@@ -179,6 +182,32 @@ class Contract extends Component {
     		}
     	})
 	}
+
+
+	/*callcontractListAfterSearchEmpty=()=>{
+		let producttitle=document.querySelectorAll(".product-list-item li a.active").length>0 ? document.querySelector(".product-list-item li a.active").getAttribute("data-product-id") : "";
+
+		let contracttype=document.querySelectorAll(".contract-filter-type li a.active").length>0 ? document.querySelector(".contract-filter-type li a.active").getAttribute("data-product-id") : "All"
+		let uid=JSON.parse(localStorage.getItem("user-type")).uid;
+
+		fetch(Client.ContractTypeProductBaseFilter.url+uid+producttitle+"?_format=json"+"&field_contract_document_type_target_id="+contracttype+"&title=",{
+				headers: {
+                	"Content-Type" : "application/json",
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+                method:Client.ContractTypeProductBaseFilter.method,
+    	}).then(res=>{
+    		return res.json()
+    	}).then(data=>{	
+    		console.log(data);
+    		this.setState({contractDetails:data,ContractdropDownSearch:''})
+    		if(document.querySelectorAll(".contracts-box") && document.querySelectorAll(".contracts-box").length <= 0){
+    			this.setState({noData:true});
+    		}else{
+    			this.setState({noData:false,ContractdropDownSearch:''});
+    		}
+    	})
+	}*/
 	
 
 	render() {

@@ -69,26 +69,16 @@ class Product extends Component {
 
 	filterProductCategoryById =(e) =>{
 		e.preventDefault();
-		let sortByType;
+		let sortByType=document.querySelectorAll(".drop-down-menu ul li a.active").length > 0 ? 
+		document.querySelector(".drop-down-menu ul li a.active").getAttribute("sortby") : '';
+
 		if(!e.target.classList.contains("active")){
 		document.querySelectorAll(".product-filter-desktop li a").forEach((item,index)=>{
 			if(item.classList.contains("active")){item.classList.remove("active")}
 		})
-		document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
-				 if(item.parentNode.classList[0]==="active"){
-					console.log(item);
-				 	sortByType=item.getAttribute("sortby");
-                    console.log(sortByType)
-				 }
-			})
 		e.target.classList.add("active");
-
-		let pid=e.target.getAttribute("data-cat-id");
-		localStorage.setItem("product_id",pid);
-		if(sortByType===undefined){
-			sortByType='';
-		}
-		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+		;
+		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+e.target.getAttribute("data-cat-id")+sortByType+"&title="+document.querySelector("#myInput").value,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -107,19 +97,7 @@ class Product extends Component {
 	    	})
         }else{
 				e.target.classList.remove("active");
-				document.querySelectorAll(".drop-down-menu > ul > li > a").forEach((item,index)=>{
-						 if(item.parentNode.classList[0]==="active"){
-							console.log(item);
-						 	sortByType=item.getAttribute("sortby");
-		                    console.log(sortByType)
-						 }
-					})
-				let pid='All';
-				localStorage.setItem("product_id",pid);
-				if(sortByType===undefined){
-					sortByType='';
-				}
-				fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+				fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id=All"+sortByType+"&title="+document.querySelector("#myInput").value,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -168,7 +146,7 @@ class Product extends Component {
 		e.target.classList.add("active");
 		let pid=e.target.getAttribute("data-cat-id");
 		localStorage.setItem("product_id",pid);
-		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType+"&title="+document.querySelector("#myInput").value,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -211,7 +189,7 @@ class Product extends Component {
 		//alert(sortByType);
 		let pid='All';
 		localStorage.setItem("product_id",pid);
-		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType,{
+		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType+"&title="+document.querySelector("#myInput").value,{
 				headers: {
                 	"Content-Type" : "application/json",
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
@@ -435,10 +413,38 @@ class Product extends Component {
     		console.log(data);
     		this.setState({getTileListforSearch:data});
     	})
-     }else if(productSelectedvalue!==''){
-    		this.setState({getTileListforSearch:''});
-
+     }else{
+    		let self=this;
+    		setTimeout(()=>{
+    			self.setState({getTileListforSearch:''});
+    			self.callProductListAfterSearchEmpty();
+    		},800)
         }
+	}
+
+	callProductListAfterSearchEmpty=()=>{
+		let ProductId=document.querySelectorAll(".product-filter-desktop li a.active").length>0 ? document.querySelector(".product-filter-desktop li a.active").getAttribute("data-cat-id") : "All";
+		let SortBy=document.querySelectorAll(".drop-down-menu ul li a.active").length > 0 ? 
+		document.querySelector(".drop-down-menu ul li a.active").getAttribute("sortby") : '';
+
+		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+ProductId+SortBy,{
+						headers: {
+		                	"Content-Type" : "application/json",
+		                	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
+		                },
+		                method:Client.FilterProductCategoryById.method,
+		    	}).then(res=>{
+		    		return res.json()
+		    	}).then(data=>{	
+		    		console.log(data);
+		    			this.setState({productList:data,loader:false})
+		    			if(document.querySelectorAll(".your-product-box") && document.querySelectorAll(".your-product-box").length <= 0){
+		    				this.setState({noData:true});
+		    			}else{
+		    				this.setState({noData:false});
+		    			}	
+			    	})
+
 	}
 
 	ProductListTitleSearch =(e) =>{

@@ -498,14 +498,11 @@
 			}
 
 		}
-
 		nav.fixed-left {
 			transform: translateY(-100%);
 			transition: all 0.5s ease-in-out;
 		}
-
 	}
-
 	.right-btm-pattern-gray {
 		&:after {
 			transition: all 0.5s ease-in-out;

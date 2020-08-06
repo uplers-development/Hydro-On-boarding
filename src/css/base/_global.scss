@@ -847,9 +847,9 @@ nav {
 							padding: 0;
 							align-items: center;
 							justify-content: center;
-							height: 10px;
-							width: 10px;
-							font-size: 7px;
+							height: 12px;
+							width: 12px;
+							font-size: 10px;
 							border-radius: 50%;
 							overflow: hidden;
 							background-color: $red;
@@ -1438,7 +1438,7 @@ nav {
 	background-color: transparent;
 	position: relative;
 	padding: 10px 15px;
-	max-width: 192px;
+	max-width: 194px;
 	width: 100%;
 	@include transition(all 0.5s ease-in-out);
 	position: absolute;
@@ -1532,7 +1532,7 @@ nav {
 			padding-right: 20px;
 			position: relative;
 			width: calc(100% - 55px);
-			word-break: break-all;
+			word-break: break-word;
 
 			@media screen and (max-width:$mobile-small) {
 				visibility: hidden;

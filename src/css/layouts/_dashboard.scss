@@ -19,7 +19,7 @@
 		right: 0;
 		word-break: break-word;
 		@media screen and (max-width:$large-m) {
-			bottom: 35px;
+			top: 60px;
 			padding: 38px 15px 12px;
 		}
 		@media screen and (max-width:$ipad-portrait) {
@@ -433,31 +433,26 @@
 
 /*Animation css for Profile*/
 
-.profile-cust {
-	top: 100vh;
-    position: relative;
-	transition: all 0.5s ease-in-out;
-		&.animation-bottom {
-			top: 0;		
-			nav.fixed-left {
-				transform: translateY(0%);
+.animation-container {
+	.profile-cust {
+		top: -100vh;
+		position: relative;
+		transition: all 0.5s ease-in-out;
+			&.animation-bottom {
+				top: 0;		
+				nav.fixed-left {
+					transform: translateY(0%);
+				}
+				nav.fixed-left {
+					transform: translateY(0%);
+					transition: all 0.5s ease-in-out;
+				}
 			}
-		}
-		nav.fixed-left {
-			transform: translateY(100%);
-			transition: all 0.5s ease-in-out;
-		}
-	&.no-animation {
-		top: auto;
-		position: static;
-		&.animation-bottom {
-			top: auto;		
 			nav.fixed-left {
-				transform: none;
+				transform: translateY(-100%);
+				transition: all 0.5s ease-in-out;
 			}
-		}
-		nav.fixed-left {
-			transform: none;
-		}
+
 	}
 }
+

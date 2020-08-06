@@ -19,7 +19,7 @@ import AdminRep from "./components/Admin/admin-reps";
 import AdminProduct from "./components/Admin/admin-products";
 import Admin_add_rep from "./components/Admin/Admin_add_rep";
 import AdminProfile from "./components/Admin/Html/Admin_Profile";
-import Apiurl,{site_url} from './components/Apiurl'; 
+import Apiurl,{site_url,Client} from './components/Apiurl'; 
 import "./css/style.scss";
 
 
@@ -44,6 +44,23 @@ class App extends Component {
          // console.log(data);
           this.setState({sidebarItem:data});
         })
+
+      /*  fetch(Client.Newsfeeds_recentviews.url,{
+            headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                  },
+                 method:Client.Newsfeeds_recentviews.method
+        }).then(res=>{
+          return res.json()
+        }).then(data=>{
+          console.log(data);
+          //this.setState({recentViews:data});
+          //console.log(this.state.recentViews);
+          //if(data.length > 0 && localStorage.getItem("news-viewed")===1){
+            localStorage.setItem("new-viewed",0);
+          //}
+        })*/
   }
 
    render() {

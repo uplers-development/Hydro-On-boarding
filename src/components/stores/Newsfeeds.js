@@ -116,19 +116,19 @@ class Newsfeeds extends Component {
 
 
 	newsFeedRecentlyViewed=()=>{
-		fetch(Client.Newsfeeds_recentviews.url,{
-    			headers: {
-                	"Content-Type" : "application/json",
-                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
-                },
-               method:Client.Newsfeeds_recentviews.method
-    	}).then(res=>{
-    		return res.json()
-    	}).then(data=>{
-    		console.log(data);
-    		this.setState({recentViews:data});
-    		console.log(this.state.recentViews);
-    	})
+			fetch(Client.Newsfeeds_recentviews.url,{
+	    			headers: {
+	                	"Content-Type" : "application/json",
+	                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	                },
+	               method:Client.Newsfeeds_recentviews.method
+	    	}).then(res=>{
+	    		return res.json()
+	    	}).then(data=>{
+	    		console.log(data);
+	    		this.setState({recentViews:data});
+	    		console.log(this.state.recentViews);
+	    	})
 	}
 
 

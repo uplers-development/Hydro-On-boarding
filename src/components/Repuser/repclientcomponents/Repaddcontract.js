@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
+import{hasValidDate,hasNumeric} from '../../validation';
 import hydroImage from '../../../images/hydro-biofilter-product.jpg';
 import {ValidationMsg} from'../../constants/validationmsg';
  
@@ -17,6 +18,7 @@ class Repaddcontract extends React.Component{
 	    producttagChanged:'',
       productSuggestion:[],
       fields_are_empty:false,
+      purchseDatempty:false,
   	}
     console.log(this.state.suggestions);
     console.log(this.props.productDataList);
@@ -82,7 +84,7 @@ class Repaddcontract extends React.Component{
               "type":[{"target_id":"contracts"}],
               //"field_contract_document_type":[{"target_id":"tid"}],
               "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
-              //"field_contract_expiry":[{"value":"2020-07-02"}],
+              "field_contract_expiry":[{"value":document.querySelector("#expirydate").value}],
               "field_contract_document_external":[{"uri":document.querySelector("#sharepoint-url").value ,"title":"","options": []}],
               "field_sub_title":[{"value":document.querySelector("#description").value}],
               "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
@@ -90,7 +92,7 @@ class Repaddcontract extends React.Component{
           }   
 
       console.log(contractoptions);
-       if(document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
+       if(document.querySelector("#expirydate").value!=='' || document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
         	 fetch(Repclient.Repclientdetailssubmissionproductlist.url,{
                             method:Repclient.Repclientdetailssubmissionproductlist.method,
                             headers: {
@@ -185,11 +187,20 @@ class Repaddcontract extends React.Component{
 									</div>
 		                     </div>
 		                     <div className="form-group">
-		                        <label>Description</label>
-								<div className="input-box">
-		                        <input type="text" name="description" placeholder="Description" id="description" />
-									</div>
-		                     </div>
+                            <label>Description</label>
+                <div className="input-box">
+                            <input type="text" name="description" placeholder="Description" id="description" />
+                  </div>
+                  </div>
+                  <div className="form-group">
+		                        <label>Expiry date</label>
+      								<div className="input-box">
+      		            <input type="text" name="expirydate" placeholder="Expiry date" id="expirydate"  onBlur={((e)=>{
+                                             !hasValidDate(e.target.value) ? this.setState({purchseDatempty:true}) : this.setState({purchseDatempty:false}) 
+                                       })}/>
+                      {this.state.purchseDatempty ? ValidationMsg.common.default.contractexpirydate : ''}
+      									</div>
+                   </div>
 		                     <div className="form-group">
 		                        <label>Product tags</label>
               								<div className="input-box suggestion">

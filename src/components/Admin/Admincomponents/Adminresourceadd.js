@@ -53,8 +53,7 @@ class Adminresourceadd extends React.Component{
    productTag=(e)=>{
 	    e.preventDefault();
 	    console.log(this.productTaginput.current.value);
-	    if(this.productTaginput.current.value!=='') {
-	          
+	    if(document.querySelector("#product-tags").value!=='') {
 	          let status;
 	          fetch(Admin.adminresourceProducttags.url,{
 	          		headers: {
@@ -68,8 +67,8 @@ class Adminresourceadd extends React.Component{
 	          }).then(data=>{
 	          	if(status===200){
 	          		console.log(data);
-	          		   this.state.productSuggestion=[];
-	          		   data.filter((value,index,array)=>{
+	          		    this.state.productSuggestion=[];
+	          		    data.filter((value,index,array)=>{
 				            if(value.title.match(this.productTaginput.current.value)){
 					              console.log(value);
 					              this.state.productSuggestion.push(value)
@@ -79,18 +78,15 @@ class Adminresourceadd extends React.Component{
 			        	})
 
 				       let suggestionforproduct=this.state.productSuggestion.map((item,index)=>{
-				                                  return (<li key={index}>
-				                                     <Link to={""} title={ReactHtmlParser(item.title)}onClick={(e)=>this.productId(e,item.title,item.nid)}>{ReactHtmlParser(item.title)}</Link> 
-				                                  </li>)
-				                                }) 
+	                          return (<li key={index}>
+	                             <Link to={""} title={ReactHtmlParser(item.title)} onClick={(e)=>this.productId(e,item.title,item.nid)}>{ReactHtmlParser(item.title)}</Link> 
+	                          </li>)
+                            }) 
 			      		this.setState({producttagChanged:suggestionforproduct})
-				      console.log(this.state.productSuggestion);
+				        console.log(this.state.productSuggestion);
 				    }else{
-				          this.setState({producttagChanged:''})
-				        }
-
-
-	          		
+			            this.setState({producttagChanged:''})
+		        	}
 	          })
 	    }else{
 			this.setState({producttagChanged:''})
@@ -196,8 +192,11 @@ class Adminresourceadd extends React.Component{
 		            document.querySelector(".shareall-email").appendChild(node);
 		            if(document.querySelectorAll(".shareall-email .emailall").length>0){
 		                document.querySelector("#product-tags").removeAttribute("placeholder");
-		                this.setState({resourceproduct:false,})
+		                this.setState({resourceproduct:false})
 		            }
+		          	/*document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+		            	console.log(document.querySelectorAll(".shareall-email .emailall")[index]);
+		            })*/
 		            this.productTaginput.current.focus();
  	}
 
@@ -210,7 +209,6 @@ class Adminresourceadd extends React.Component{
 			  this.setState({resourceproduct:false})
 	      }
 	}
-
 
 	OnSubmitResource=(e)=>{
 		e.preventDefault();
@@ -228,7 +226,7 @@ class Adminresourceadd extends React.Component{
 			        "field_resource_type":[{target_id:this.resourcetype.current.value}],
 			        "field_resources_document":[{target_id:document.querySelector(".document-item-resource").getAttribute("get-id")}]
 				}
-				///node/nid?_format=json
+
 				try{
 					let status;
 					let apicall=this.props.addstatus ? Admin.adminresourceAdd.url : Admin.adminresourceUpdate.url+`${this.props.sendresourceId}?_format=json`;

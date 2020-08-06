@@ -77,6 +77,10 @@ class Adminreptable extends React.Component{
 		   	 		if(data.status===200){
 		   	 			this.setState({openDeletepopup:false,isDeleted:true})
 		   	 			this.get_admin_rep_table_data();
+		   	 			document.querySelector(".repparent").checked=false;
+		   	 			document.querySelectorAll(".repchecked:checked").forEach((item,index)=>{
+		   	 				item.checked=false;
+		   	 			})
 		   	 		}
 		   	 });
 	}	

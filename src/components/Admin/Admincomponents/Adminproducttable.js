@@ -83,6 +83,10 @@ delete_single_product=(e)=>{
                if(data.status===204){
                   this.setState({openDeletepopup:false})
                   this.get_admin_product_data();
+                  document.querySelector(".productparentcheck").checked=false;
+                  document.querySelectorAll(".productcheck:checked").forEach((item,index)=>{
+                      item.checked=false;
+                    })
                }
           });
 }  

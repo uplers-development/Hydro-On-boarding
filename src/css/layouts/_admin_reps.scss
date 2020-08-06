@@ -151,16 +151,33 @@
 						}
 
 						td {
+							vertical-align: middle;
+							font-size: 16px;
+							line-height: 20px;
+							color: $light-black;
 							.name-edit {
 								.right-detail {
+									h3 {
+										display: inline-block;
+										margin-bottom: 0;
+										font-size: 16px;
+										line-height: 20px;
+										color: $light-black;
+									}
+
 									.action {
 										display: none;
-										@media screen and (max-width: $ipad-landscape) {
+										@media screen and (max-width:$ipad-landscape) {
 											display: block;
 										}
 										a {
-											font-size: 18px;
-											line-height: 22px;
+											padding-right: 16px;
+											font-size: 16px;
+										line-height: 22px;
+											&:after {
+											    right: 8px;
+												height: 16px;
+											}
 										}
 									}
 								}

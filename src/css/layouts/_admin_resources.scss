@@ -145,14 +145,14 @@
 									}
 
 									.action {
-										font-size: 16px;
-										line-height: 20px;
 										display: none;
 										@media screen and (max-width:$ipad-landscape) {
 											display: block;
 										}
 										a {
 											padding-right: 16px;
+											font-size: 16px;
+											line-height: 22px;
 											&:after {
 											    right: 8px;
 												height: 16px;

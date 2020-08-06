@@ -261,8 +261,8 @@ class Contract extends Component {
 												</div>
 												<div className="drop-down-menu">
 													<ul className="contract-filter-sort">
-														<li><Link to={""} title="Expire date newest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=DESC" onClick={this.FilterContract}>Purchase date newest</Link></li>
-														<li><Link to={""} title="Expire date oldest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=ASC" onClick={this.FilterContract}>Purchase date oldest</Link></li>
+														<li><Link to={""} title="Expire date newest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=DESC" onClick={this.FilterContract}>Expire date newest</Link></li>
+														<li><Link to={""} title="Expire date oldest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=ASC" onClick={this.FilterContract}>Expire date oldest</Link></li>
 														<li><Link to={""} title="A-Z" data-contactractsort-index="&sort_by=title&sort_order=ASC" onClick={this.FilterContract}>A-Z</Link></li>
 														<li><Link to={""} title="Z-A" data-contactractsort-index="&sort_by=title&sort_order=DESC" onClick={this.FilterContract}>Z-A</Link></li>
 
@@ -307,8 +307,8 @@ class Contract extends Component {
 
 														<h5>Sort by</h5>
 														<ul className="contract-filter-sort">
-															<li><Link to={""} title="Expire date newest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=DESC" onClick={this.FilterContract}>Purchase date newest</Link></li>
-														<li><Link to={""} title="Expire date oldest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=ASC" onClick={this.FilterContract}>Purchase date oldest</Link></li>
+															<li><Link to={""} title="Expire date newest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=DESC" onClick={this.FilterContract}>Expire date newest</Link></li>
+														<li><Link to={""} title="Expire date oldest" data-contactractsort-index="&sort_by=field_contract_expiry_value&sort_order=ASC" onClick={this.FilterContract}>Expire date oldest</Link></li>
 														<li><Link to={""} title="A-Z" data-contactractsort-index="&sort_by=title&sort_order=ASC" onClick={this.FilterContract}>A-Z</Link></li>
 														<li><Link to={""} title="Z-A" data-contactractsort-index="&sort_by=title&sort_order=DESC" onClick={this.FilterContract}>Z-A</Link></li>
 

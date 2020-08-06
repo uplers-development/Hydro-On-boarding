@@ -89,12 +89,21 @@ class Sidebar extends Component {
 					<Link to={"/Dashboard"} className="navbar-logo" title="Main white logo"><img src={require("../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 					<ul>
 						{this.state.sidebarItem.map((item,index)=>
-							 <li key={index}>{item.title==='News Feed' && this.state.newsFeedcounts > 0 ? <span className='counter'>{this.state.newsFeedcounts}</span>: ''}<Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
+							 <li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
 			                      {item.field_icon_svg!=='' ? 
-			                      <div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
+			                      <>
+			                      <div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }}/>
+			                      
+			                      {item.title==='News Feed' && this.state.newsFeedcounts > 0 ? <span className='counter'>{this.state.newsFeedcounts}</span>: ''}
+			                      </>
 			                        :
+			                       <>
 			                      <img src={require("../../images/bell-icon-logo.svg")}/>
+			                      
+			                      {item.title==='News Feed' && this.state.newsFeedcounts > 0 ? <span className='counter'>{this.state.newsFeedcounts}</span>: ''}
+			                      </>
 			                     }
+							 	
 			                      <span>{item.title}</span></Link>
 			                  </li>
 						)}

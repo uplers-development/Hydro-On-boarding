@@ -138,7 +138,7 @@ class Newsfeeds extends Component {
 				<section className="main-wrapper">
 				
 					<div className="d-flex flex-wrap main-block">
-					<Sidebar/>
+					<Sidebar historyPush={this.props}/>
 					<div className="d-flex flex-wrap right-content-part">
 				    	<div className="top-heading">
 					 		<div className="top-heading-continer d-flex flex-wrap align-center">

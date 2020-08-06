@@ -71,6 +71,10 @@ class Sidebar extends Component {
 
 	FooterItems=()=>{
 		fetch(Apiurl.LeftsidebarFooter.url,{
+			 headers:{
+		            "Content-Type" : "application/json",
+		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+		    	},
                 method:Apiurl.LeftsidebarFooter.method,
     	}).then(res=>{
     		return res.json()
@@ -82,7 +86,7 @@ class Sidebar extends Component {
 
 
 	render() {
-
+		console.log(this.props)
 		return (
 			<div>
 				<nav className={this.state.changeClassnav ? "navbar cadet-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left" : "navbar white-bg-trnsparent navbar-expand-md navbar-dark bg-primary fixed-left"}>
@@ -111,9 +115,13 @@ class Sidebar extends Component {
 					{this.state.sidebarItemFooter.length > 0 ? 
 					<div className="nav-bottom-master teal-color-bg">
 						<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")} alt="hydro-in-tab"/>
-						<p>{this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].body : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")  }
+						<p>{this.state.sidebarItemFooter.length > 0 ? ReactHtmlParser(this.state.sidebarItemFooter[0].body) : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")}
 						</p>
-						<a href={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_link : 'javascript:void(0)'} className="common-btn-blue"><span>Master CTA</span></a>
+						<Link to={""} onClick={((e)=>{
+								e.preventDefault();
+								
+								window.open(this.state.sidebarItemFooter[0].field_block_link,"_target")
+							})} className="common-btn-blue"><span>{this.state.sidebarItemFooter[0].field_block_link_1}</span></Link>
 					</div>
 					:''}
 					<div className="pattern-block">

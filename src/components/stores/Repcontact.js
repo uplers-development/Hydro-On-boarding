@@ -86,7 +86,7 @@ class Repcontact extends React.Component {
 				<section className="main-wrapper">
 					{!this.state.showPop ? 
 					<div className="d-flex flex-wrap main-block right-btm-pattern-gray">
-						<Sidebar/>
+						<Sidebar historyPush={this.props}/>
 						<div className="d-flex flex-wrap right-content-part">
 							<div className="top-heading">
 								<div className="top-heading-continer d-flex flex-wrap align-center">

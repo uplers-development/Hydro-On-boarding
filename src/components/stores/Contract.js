@@ -186,7 +186,7 @@ class Contract extends Component {
 					<div className="d-flex flex-wrap main-block">
 
 						
-						<Sidebar/>						
+						<Sidebar historyPush={this.props}/>						
 						
 						<div className="d-flex flex-wrap right-content-part">
 							

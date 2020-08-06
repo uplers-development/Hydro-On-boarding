@@ -108,14 +108,14 @@ class Sidebar extends Component {
 			                  </li>
 						)}
 					</ul>
-					
+					{this.state.sidebarItemFooter.length > 0 ? 
 					<div className="nav-bottom-master teal-color-bg">
 						<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")} alt="hydro-in-tab"/>
 						<p>{this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].body : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")  }
 						</p>
 						<a href={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_link : 'javascript:void(0)'} className="common-btn-blue"><span>Master CTA</span></a>
 					</div>
-
+					:''}
 					<div className="pattern-block">
 					
 						<img src={require("../../images/pattern-nav-bottom.svg")} alt="Pattern img"/>	

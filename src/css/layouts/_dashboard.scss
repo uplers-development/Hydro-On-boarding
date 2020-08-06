@@ -432,9 +432,9 @@
 }
 
 /*Animation css for Profile*/
-/*.animation-container {
+.animation-container {
 	.profile-cust {
-		top: 100vh;
+		top: -100vh;
 		position: relative;
 		transition: all 0.5s ease-in-out;
 			&.animation-bottom {
@@ -442,28 +442,16 @@
 				nav.fixed-left {
 					transform: translateY(0%);
 				}
-			}
-			nav.fixed-left {
-				transform: translateY(100%);
-				transition: all 0.5s ease-in-out;
-			}
-
-	}
-}*/
-
-.profile-cust {
-		top: 100vh;
-		position: relative;
-		transition: all 0.5s ease-in-out;
-			&.animation-bottom {
-				top: 0;		
 				nav.fixed-left {
 					transform: translateY(0%);
+					transition: all 0.5s ease-in-out;
 				}
 			}
 			nav.fixed-left {
-				transform: translateY(100%);
+				transform: translateY(-100%);
 				transition: all 0.5s ease-in-out;
 			}
 
 	}
+}
+

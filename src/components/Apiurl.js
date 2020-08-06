@@ -373,5 +373,9 @@ export default {
          url:base_url+`/jsonapi/user_sidebar/?_format=json`,
          method:'GET'
     },
+    LogoutCall:{
+        url:base_url+`/json-api/user_logout.json`,
+        method:"POST"
+    }
 
 }

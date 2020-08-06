@@ -32,6 +32,7 @@ class Sidebar extends Component {
               this.setState({newsFeedcounts:data.length})
           })
 		let self=this;
+		if(localStorage.getItem("access-token")!==null){
 		setInterval(function(){
           fetch(Client.NewsfeedsNotification.url,{
               headers: {
@@ -47,6 +48,7 @@ class Sidebar extends Component {
               console.log(self.state.newsFeedcounts > 0 ? true :false)
           })
         },10000);
+        }
 	}
 
 	SidebarItems=()=>{

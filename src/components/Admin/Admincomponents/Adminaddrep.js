@@ -124,7 +124,10 @@ class Adminaddrep extends React.Component{
 		}).then(data=>{
 			if(status===200){
 				this.setState({repdetails:data,loader:false});
-				this.timeZoneref.current.value=this.state.repdetails.timezone[0].value;
+				let self=this;
+				setTimeout(()=>{
+					self.timeZoneref.current.value=self.state.repdetails.timezone[0].value;
+				},800)
 			}
 		})
 	}

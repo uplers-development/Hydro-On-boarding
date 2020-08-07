@@ -2622,7 +2622,7 @@ a {
 							display: inline-block;
 							vertical-align: middle;
 							padding-left: 25px;
-
+							width: calc(100% - 23px);
 							@media screen and (max-width: $mobile-small) {
 								padding-left: 15px;
 								width: calc(100% - 18px);

@@ -120,8 +120,8 @@ class Sidebar extends Component {
 					{this.state.sidebarItemFooter.length > 0 ? 
 					<div className="nav-bottom-master teal-color-bg">
 						<img src={this.state.sidebarItemFooter.length > 0 ? site_url+this.state.sidebarItemFooter[0].field_block_image : require("../../images/hydro-in-tab.png")} alt="hydro-in-tab"/>
-						<p>{this.state.sidebarItemFooter.length > 0 ? ReactHtmlParser(this.state.sidebarItemFooter[0].body) : ReactHtmlParser("Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.")}
-						</p>
+						{this.state.sidebarItemFooter.length > 0 ? ReactHtmlParser(this.state.sidebarItemFooter[0].body) : ReactHtmlParser("<p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit.</p>")}
+						
 						<Link to={""} onClick={((e)=>{
 								e.preventDefault();
 								

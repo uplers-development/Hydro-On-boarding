@@ -386,16 +386,21 @@ class Profile extends Component {
 
 						:
 
-						<div >
+						<div class="password-chnge-block">
 						 <form>
-							<div>
+							<div className="form-group" tabindex="1">
 								<label>Password</label>
 								<input type="password" name='password' id='password'/>
 								</div>
-								<div>
+
+								<div className="form-group" tabindex="2">
 								<label>Confirm password</label>
 								<input type="password" name='password' id='password'/>
 								</div>
+								
+								<div className="button-group">
+							<button className="btn common-btn-blue" type="submit" tabindex="3"><span>submit</span></button></div>
+
 							</form>
 						</div>
 						}

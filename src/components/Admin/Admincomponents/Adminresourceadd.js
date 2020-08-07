@@ -387,7 +387,7 @@ class Adminresourceadd extends React.Component{
 	  									<div className="shareall-email">
 	  									
 	  									</div>
-  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag} onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproductfield:false})} />
+  		                        <input type="text" name="product-tags" autoComplete="off" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag} onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproductfield:false})} />
                               
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}

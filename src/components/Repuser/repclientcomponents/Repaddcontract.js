@@ -229,7 +229,7 @@ class Repaddcontract extends React.Component{
               									<div className="shareall-email">
               									
               									</div>
-  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}/>
+  		                        <input type="text" name="product-tags" autoComplete="off" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}/>
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}
               								</ul>	

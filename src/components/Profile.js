@@ -91,7 +91,7 @@ class Profile extends Component {
 						 email:data.mail.length>0 ? data.mail[0].value :''
 						,contact_number:data.field_contact_number.length>0 ? data.field_contact_number[0].value :''
 						,organization:data.field_organisation.length>0 ? data.field_organisation[0].value :''
-						,time_zone:data.timezone.length>0 ? data.timezone[0].value :''
+						,time_zone:data.timezone!=='' ? data.timezone[0].value :''
 						,location:data.field_location.length>0 ?data.field_location[0].value : '',
 						userPicture:data.user_picture.length>0 ? data.user_picture[0].url :'',
 						newuserPic_id:data.user_picture.length>0 ? data.user_picture[0].target_id:'',
@@ -99,8 +99,10 @@ class Profile extends Component {
 					})
 			console.log(this.state.time_zone);
 			console.log(this.state.userPicture);
-			this.timeZoneref.current.value=this.state.time_zone;
 			let self=this;
+			setTimeout(function(){
+				self.timeZoneref.current.value=self.state.time_zone;
+			},2000)
 			if(this.props.location.state===undefined){
 				setTimeout(function(){
 					self.setState({addClass:true})
@@ -234,10 +236,10 @@ class Profile extends Component {
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
 				<Link className="navbar-logo" to={setdefaultroute} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
-					<li><Link to={""} onClick={this.showScreen} className={this.state.checktablist1 ? "about-you active":"about-you"}  title="News Feed">
+					<li><Link to={""} onClick={e=>e.preventDefault()} className={this.state.checktablist1 ? "about-you active":"about-you"}  title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>
 							<span>About <span>you</span></span></Link></li>
-					<li><Link  to={""} onClick={this.showScreen} className={this.state.checktablist2 ? "password active" : "password"} title="Password">
+					<li><Link  to={""} onClick={e=>e.preventDefault()} className={this.state.checktablist2 ? "password active" : "password"} title="Password">
 							<img className="svg" src={require("./../images/lock-logo.svg")} alt="password-logo"/>
 							<span>Password</span></Link></li>
 				</ul>

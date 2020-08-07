@@ -99,6 +99,13 @@
 					span {
 						font-size: 18px;
 						line-height: 28px;
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+						}
+
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+						}
 					}
 				}
 
@@ -152,6 +159,13 @@
 					span {
 						font-size: 18px;
 						line-height: 28px;
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+						}
+
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+						}
 					}
 
 					&:after {
@@ -186,11 +200,16 @@
 				span {
 					font-size: 20px;
 					line-height: 46px;
+					
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+							line-height: 36px;
+						}
 
-					@media screen and (max-width:$mobile-small) {
-						font-size: 18px;
-						line-height: 34px;
-					}
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+							line-height: 36px;
+						}
 				}
 			}
 		}

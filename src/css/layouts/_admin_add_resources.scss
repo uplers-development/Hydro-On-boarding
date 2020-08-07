@@ -35,6 +35,7 @@
 				input[type="text"] {
 					width: 100%;
 				}
+
 				.suggestion-box {
 					input[type="text"] {
 						width: auto;
@@ -47,12 +48,17 @@
 			.empty-field {
 				width: 100%;
 				display: block;
-    			margin-top: 3px;
+				margin-top: 3px;
 			}
+
 			padding-top: 15px;
 
 			.btn {
 				min-width: 222px;
+
+				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					min-width: 200px;
+				}
 
 				@media screen and (max-width:$mobile-small) {
 					min-width: auto;
@@ -61,6 +67,14 @@
 				span {
 					font-size: 18px;
 					line-height: 28px;
+
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 16px;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						font-size: 16px;
+					}
 				}
 
 				&:after {
@@ -75,12 +89,17 @@
 		padding: 18px 0;
 
 		.thumbnail-upload-left {
-				margin-right: 48px;
-				max-width: 222px;
-				width: 100%;
+			margin-right: 48px;
+			max-width: 222px;
+			width: 100%;
+
 			.upload-btn-block {
 				.btn {
 					min-width: 222px;
+
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						min-width: 200px;
+					}
 
 					@media screen and (max-width:$mobile-small) {
 						min-width: auto;
@@ -89,6 +108,14 @@
 					span {
 						font-size: 18px;
 						line-height: 28px;
+
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+						}
+
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+						}
 					}
 				}
 
@@ -107,14 +134,14 @@
 				}
 			}
 		}
-		
+
 		.thumbnail-upload-right {
 			position: relative;
 			padding-bottom: 21.20%;
 			display: block;
 			width: 390px;
 			position: relative;
-			
+
 			@media screen and (max-width:$ipad-landscape) {
 				padding-bottom: 31%;
 			}
@@ -124,12 +151,13 @@
 				width: 100%;
 				margin-top: 15px;
 			}
-			
+
 			.loader {
 				position: absolute;
 			}
+
 			.upload-thumbnail-img {
-			position: absolute;
+				position: absolute;
 				height: 100%;
 				width: 100%;
 				top: 0;
@@ -137,16 +165,30 @@
 				background-size: contain;
 			}
 		}
-		
+
 	}
+
 	.btn-block {
 		padding-top: 32px;
+
 		.btn {
 			min-width: 207px;
 			padding: 8px 10px 4px;
 			margin-bottom: 0;
+
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				min-width: 160px;
+				padding: 4px 10px 2px;
+			}
+
 			@media screen and (max-width:$mobile-small) {
 				min-width: auto;
+			}
+
+			span {
+				@media screen and (max-width:$mobile-small) {
+					line-height: 28px;
+				}
 			}
 		}
 	}

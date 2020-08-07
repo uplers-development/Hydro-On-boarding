@@ -56,8 +56,8 @@ class Repclientsorting extends React.Component {
 						</div>
 						<div className="drop-down-menu">
 							<ul>
-								<li><Link to={""} title="&sort_by=created&sort_order=ASC"  onClick={this.SortClient}>Newest user</Link></li>
-								<li><Link to={""} title="&sort_by=created&sort_order=DESC"  onClick={this.SortClient}>Oldest user</Link></li>
+								<li><Link to={""} title="&sort_by=created&sort_order=DESC"  onClick={this.SortClient}>Newest user</Link></li>
+								<li><Link to={""} title="&sort_by=created&sort_order=ASC"  onClick={this.SortClient}>Oldest user</Link></li>
 								<li><Link to={""} title="&sort_by=field_first_name_value&sort_order=ASC"  onClick={this.SortClient}>A-Z</Link></li>
 								<li><Link to={""} title="&sort_by=field_first_name_value&sort_order=DESC"  onClick={this.SortClient}>Z-A</Link></li>
 							</ul>

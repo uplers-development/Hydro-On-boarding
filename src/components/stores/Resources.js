@@ -7,6 +7,7 @@ import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'../constants/common';
 import {resourcesmsg} from'../constants/resources';
 
+
 class Resources extends Component {
 	constructor(props) {
 		super(props);
@@ -63,6 +64,15 @@ class Resources extends Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({productList:data})
+    		document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
+    			if(item.getAttribute("data-pid")===localStorage.getItem("for-resources")){
+    				item.click();
+    				setTimeout(()=>{
+    					item.classList.add("active");
+    				},1000)
+    			}
+    		})
+
     	})
 
     	fetch(Client.GetResourceTypeTitleId.url,{
@@ -85,7 +95,9 @@ class Resources extends Component {
 	FiltersApplied=(e)=>{
 		this.setState({loader:true})
 		console.log(e.target);
-
+		if(localStorage.getItem("for-resources")!=='' && localStorage.getItem("for-resources")!==null && localStorage.getItem("for-resources")){
+			localStorage.removeItem("for-resources")
+		}
 		if(e.target.parentNode.parentNode.classList.contains("product-list-item")){
 			if(!e.target.classList.contains("active")){
 				document.querySelectorAll(".product-list-item > li > a").forEach((item,index)=>{
@@ -123,7 +135,12 @@ class Resources extends Component {
 		 			resourceSortFilter=item.getAttribute("data-get-filterindex")
 			 	}	
 			})		
-		ProductId=ProductId!==undefined ? ProductId :'';
+		if(ProductId!==undefined){
+			ProductId=ProductId;
+		}else{
+			localStorage.removeItem("for-resources")
+			ProductId='';
+		}
 		resourceTypefilterId=resourceTypefilterId!==undefined ? "&field_resource_type_target_id="+resourceTypefilterId :'';
 		resourceSortFilter=resourceSortFilter!==undefined ?resourceSortFilter :'';
 		console.log(ProductId);

@@ -226,7 +226,11 @@ export const Repclient={
     Repclientdetails:{
         url:base_url+"/jsonapi/client_details/",
         method:"GET"
-    }
+    },
+    contracttypes:{
+        url:base_url+`/jsonapi/taxonomy_list/contract_type?_format=json`,
+        method:'GET'
+    }, 
 
 }
 

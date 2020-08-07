@@ -20,9 +20,12 @@ class Repannouncementadd extends React.Component {
 			announcement_image:false,
 			announcement_image_uploaded:'',
 			newuserPic_id:null,
+			hidedefaultimageblock:false,
 		}
 		this.updateAnnouncementPic=this.updateAnnouncementPic.bind(this);
 	}
+
+
 
 	onEditorStateChange=(editorState) => {
 	    this.setState({
@@ -75,6 +78,12 @@ class Repannouncementadd extends React.Component {
 
 	selectannouncement=(e,getannouncementid,value)=>{
 		e.preventDefault();
+		if(getannouncementid==="4"){
+			this.setState({hidedefaultimageblock:true})
+		}else{
+			this.setState({hidedefaultimageblock:false})
+		}
+		//hidedefaultimageblock
 		document.querySelectorAll(".announcment-type").forEach((item,index)=>{
 			item.classList.remove("active");
 			item.parentNode.classList.remove("active");
@@ -134,6 +143,7 @@ class Repannouncementadd extends React.Component {
 				           				            <textarea placeholder="Type the announcement here…"></textarea>*/}
 				         </div>
 				      </div>
+				      {this.state.hidedefaultimageblock ?
 				      <div className="profile-form-block">
 				      <div className="upload-profile-photo">
 								{/*<label>Announcement photo</label>*/}
@@ -158,6 +168,7 @@ class Repannouncementadd extends React.Component {
 								</div>
 							</div>
 							</div>
+					 : ''}
 				      <div className="form-group">
 				         <label>Button Copy</label>
 				         <input type="text" name="Button Copy" id="Button_Copy" placeholder="Button Copy"/> 

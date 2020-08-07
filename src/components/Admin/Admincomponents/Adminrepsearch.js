@@ -23,7 +23,7 @@ class Adminrepsearch extends React.Component{
 		//return false;
 		//&sort_by=&sort_order=${sortedselected!==undefined ? sortedselected :"All"}
 		let status,datastatus;
-		fetch(Admin.adminreptablelisting.url+`&field_first_name_value=${this.repnamesearch.current.value}&field_first_name_value=${this.repnamesearch.current.value}`,{
+		fetch(Admin.adminreptablelisting.url+`&field_first_name_value=${this.repnamesearch.current.value}&field_last_name_value=${this.repnamesearch.current.value}`,{
 					headers:{
 	                  "Content-Type" : "application/json",
 	                  "X-CSRF-Token" : localStorage.getItem("access-token"),

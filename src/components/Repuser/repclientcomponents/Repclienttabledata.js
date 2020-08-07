@@ -101,7 +101,9 @@ class Repclienttabledata extends React.Component{
 
 		console.log(singlecheckedArray);
 		if(this.props.summernoteData!==null){
-			let options={
+			let options;
+			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
+				options={
 				    "title":[{"value":document.querySelector("#Title").value}],
 			        "body":[{"value":this.props.summernoteData,
 			        		 "format": "basic_html"}],
@@ -110,6 +112,17 @@ class Repclienttabledata extends React.Component{
 			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
 			        "field_image":[{"target_id":document.querySelector("#announcement-image").getAttribute("data-id")}],
 			        "field_client":singlecheckedArray
+			}
+			}else{
+				options={
+				    "title":[{"value":document.querySelector("#Title").value}],
+			        "body":[{"value":this.props.summernoteData,
+			        		 "format": "basic_html"}],
+			        "type":[{"target_id":"article"}],
+			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
+			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
+			        "field_client":singlecheckedArray
+				}
 			}
 			console.log(options);
 			fetch(Repclient.Repclientdetailssubmissionproductlist.url,{

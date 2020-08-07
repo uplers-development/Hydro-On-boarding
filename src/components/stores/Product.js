@@ -24,6 +24,7 @@ class Product extends Component {
 		this.SortProductByType=this.SortProductByType.bind(this);
 		this.ProductListTitleSearch=this.ProductListTitleSearch.bind(this);
 		this.GetProductTitleForSearch=this.GetProductTitleForSearch.bind(this);
+		this.selectedIdforResource=this.selectedIdforResource.bind(this);
 
 	}
 
@@ -482,6 +483,12 @@ class Product extends Component {
 		window.open(site_url+value,"_target")
 	}
 
+	selectedIdforResource=(e,productid)=>{
+		e.preventDefault();
+		localStorage.setItem("for-resources",productid);
+		this.props.history.push('/Resources')
+	}
+
 	render() {
 		return (
 			<section className="main-wrapper">
@@ -620,7 +627,7 @@ class Product extends Component {
 										<div className="purchase-date">Purchase Date: {item.field_purchase_date}</div>
 									</div>
 									<div className="btn-block">
-										<Link to={"/Resources"} title="Resources logo blue"><img src={require("../../images/resources-logo-blue-round.svg")} alt="icon" className="svg"/> </Link>
+										<Link to={"/Resources"} title="Resources logo blue"><img src={require("../../images/resources-logo-blue-round.svg")} alt="icon" className="svg" onClick={((e)=>this.selectedIdforResource(e,item.nid))}/> </Link>
 										<Link to={""} className="svg" title="Pdf download" onClick={((e)=>this.callPDF(e,item.field_product_document))}><img src={require("../../images/pdf-download-logo.svg")} alt="icon" className="svg" /> </Link>
 									</div>
 								</div>

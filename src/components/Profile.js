@@ -339,7 +339,7 @@ class Profile extends Component {
 
 									<div className="form-group one-by-two">
 										<label>Email*</label>
-										<input type="email" id='email' defaultValue={this.state.email} placeholder="Email" tabIndex="3" onBlur={(e)=>
+										<input type="email" id='email' defaultValue={this.state.email} placeholder="Email" tabIndex="3" readOnly  onBlur={(e)=>
 												hasNull(e.target.value) ? this.setState({emailState:true}): this.setState({emailState:false})
 									}/>
 									{this.state.emailState ? ValidationMsg.common.default.email : ''}

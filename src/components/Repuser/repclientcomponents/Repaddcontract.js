@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
+import ReactHtmlParser from 'react-html-parser';
 import{hasValidDate,hasNumeric} from '../../validation';
 import hydroImage from '../../../images/hydro-biofilter-product.jpg';
 import {ValidationMsg} from'../../constants/validationmsg';
@@ -20,12 +21,14 @@ class Repaddcontract extends React.Component{
       fields_are_empty:false,
       purchseDatempty:false,
       duplicateProducts:false,
+      contractType:[]
   	}
     console.log(this.state.suggestions);
     console.log(this.props.productDataList);
 		console.log(this.props.checkcontractfrom);
 		console.log(this.props.senduid);
     this.productTaginput=React.createRef();
+    this.contractype=React.createRef();
     this.addContract=this.addContract.bind(this);
     this.productTag=this.productTag.bind(this);
     this.clearProductTag=this.clearProductTag.bind(this);
@@ -34,7 +37,23 @@ class Repaddcontract extends React.Component{
 
 	componentDidMount(){
 		console.log(this.props.senduid)
+    this.contracttypes();
 	}
+
+
+  contracttypes=()=>{
+      fetch(Repclient.contracttypes.url,{
+         headers:{
+                  "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
+                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+            },
+            method:Repclient.contracttypes.method,
+     }).then(res=>{return res.json()}).then(data=>{
+                   console.log(data);
+                   this.setState({contractType:data});
+                 });
+  }
 
 	get_uploaded_file_path=(e)=>{
       var fullPath = e.target.files[0];
@@ -83,7 +102,7 @@ class Repaddcontract extends React.Component{
   	   let contractoptions={
               "title":[{"value":document.querySelector("#title").value}],
               "type":[{"target_id":"contracts"}],
-              //"field_contract_document_type":[{"target_id":"tid"}],
+              "field_contract_document_type":[{"target_id":this.contractype.current.value}],
               "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
               "field_contract_expiry":[{"value":document.querySelector("#expirydate").value}],
               "field_contract_document_external":[{"uri":document.querySelector("#sharepoint-url").value ,"title":"","options": []}],
@@ -239,10 +258,20 @@ class Repaddcontract extends React.Component{
                             {this.state.duplicateProducts ? ValidationMsg.common.default.resourceduplicateproduct : ''} 
 		                     </div>
 		                     <div className="form-group">
-		                        <label>Sharepoint URL</label>
-								<div className="input-box">
-		                        <input type="text" name="sharepoint-url"  placeholder="Sharepoint URL" id="sharepoint-url"/>
-									</div>
+                            <label>Sharepoint URL</label>
+                <div className="input-box">
+                            <input type="text" name="sharepoint-url"  placeholder="Sharepoint URL" id="sharepoint-url"/>
+                  </div> 
+                  </div>
+                   <div className="form-group">
+		                        <label>Type of Contract</label>
+								            <div className="input-box">
+                             <select name="1" className="" tabIndex="0" id="type-of-contract" ref={this.contractype} >
+                                {this.state.contractType.map((item,index)=>
+                          <option key={index} value={item.tid}>{ReactHtmlParser(item.name)}</option>
+                                )}
+                            </select>
+									          </div>
 		                     </div>
 		                    <div className="btn-block">
                                         <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>

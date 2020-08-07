@@ -23,8 +23,7 @@ import Apiurl,{site_url,Client} from './components/Apiurl';
 import "./css/style.scss";
 
 
-
-console.log(process.env.NODE_ENV);
+console.log=function(){}
 class App extends Component {
   constructor(props){
     super(props);

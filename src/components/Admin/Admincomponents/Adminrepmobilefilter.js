@@ -107,19 +107,19 @@ class Adminremobilefilter extends React.Component{
 	                          <h5>Sort by</h5>
 	                          <ul className="rep-admin-sort">
                                   <li>
-	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="Purchase date newest">
-	                                 Purchase date newest</Link>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="Newest">
+	                                 Newest</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="Purchase date oldest">
-	                                 Purchase date oldest</Link>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="Oldest">
+	                                 Oldest</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="A-Z">
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="A-Z">
 	                                 A-Z</Link>
 	                              </li>
 	                              <li>
-	                                 <Link to={""} sortorder="ASC" onClick={this.sort_admin_rep_clients} title="Z-A">
+	                                 <Link to={""} sortorder="DESC" onClick={this.sort_admin_rep_clients} title="Z-A">
 	                                 Z-A</Link>
 	                              </li>
 	                          </ul>

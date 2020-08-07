@@ -385,38 +385,22 @@ class Profile extends Component {
 						</div>
 
 						:
+						<div>
+						 <form>
+							<div className="form-group" tabindex="1">
+								<label>Password</label>
+								<input type="password" name='password' id='password'/>
+								</div>
 
-						<div >
-						 <form className="row" onSubmit={this.updateProfile}>
-									<div className="form-group ">
-										<label>Current Password*</label>
-										<input type="password" id='currpassword' placeholder="Password" tabIndex="1" onBlur={(e)=>
-												hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
-									}/>
-									{this.state.passwordState ? ValidationMsg.common.default.password : ''}
-									</div>
+								<div className="form-group" tabindex="2">
+								<label>Confirm password</label>
+								<input type="password" name='password' id='password'/>
+								</div>
+								
+								<div className="button-group">
+							<button className="btn common-btn-blue" type="submit" tabindex="3"><span>submit</span></button></div>
 
-									<div className="form-group">
-										<label>New Password*</label>
-										<input type="password" id='newpass' placeholder="Password" tabIndex="1" onBlur={(e)=>
-												hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
-									}/>
-									{this.state.passwordState ? ValidationMsg.common.default.password : ''}
-									</div>
-									<div className="form-group">
-										<label>Confirm Password*</label>
-										<input type="password" id='newpass' placeholder="Password" tabIndex="1" onBlur={(e)=>
-												hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
-									}/>
-									{this.state.passwordState ? ValidationMsg.common.default.password : ''}
-									</div>
-
-									<div className="button-group full">
-										<button className="btn common-btn-blue" type="submit" tabIndex="4">
-											<span>Update Password</span></button>
-									</div>
-								</form>
-
+							</form>
 						</div>
 						}
 						{/*<!--Profile form block info end-->*/}

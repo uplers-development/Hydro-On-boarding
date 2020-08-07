@@ -387,15 +387,16 @@ class Profile extends Component {
 						:
 
 						<div >
+						 <form>
 							<div>
-							<label>Password</label>
-							<input type="password" name='password' id='password'/>
-							</div>
-							<div>
-							<label>Confirm password</label>
-							<input type="password" name='password' id='password'/>
-							</div>
-
+								<label>Password</label>
+								<input type="password" name='password' id='password'/>
+								</div>
+								<div>
+								<label>Confirm password</label>
+								<input type="password" name='password' id='password'/>
+								</div>
+							</form>
 						</div>
 						}
 						{/*<!--Profile form block info end-->*/}

@@ -22,6 +22,7 @@ class Sidebar extends Component {
 		fetch(Client.NewsfeedsNotification.url,{
               headers: {
                       "Content-Type" : "application/json",
+                      "X-CSRF-Token" : localStorage.getItem("access-token"),
                       "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                     },
                    method:Client.NewsfeedsNotification.method
@@ -37,6 +38,7 @@ class Sidebar extends Component {
           fetch(Client.NewsfeedsNotification.url,{
               headers: {
                       "Content-Type" : "application/json",
+                      "X-CSRF-Token" : localStorage.getItem("access-token"),
                       "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                     },
                    method:Client.NewsfeedsNotification.method
@@ -58,6 +60,7 @@ class Sidebar extends Component {
 		fetch(Apiurl.menulisting.url,{
 			  headers:{
 		            "Content-Type" : "application/json",
+		            "X-CSRF-Token" : localStorage.getItem("access-token"),
 		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		    	},
               	method:Apiurl.menulisting.method,
@@ -74,6 +77,7 @@ class Sidebar extends Component {
 		fetch(Apiurl.LeftsidebarFooter.url,{
 			 headers:{
 		            "Content-Type" : "application/json",
+		            "X-CSRF-Token" : localStorage.getItem("access-token"),
 		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		    	},
                 method:Apiurl.LeftsidebarFooter.method,

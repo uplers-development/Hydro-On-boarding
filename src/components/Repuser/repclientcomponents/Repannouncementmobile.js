@@ -26,6 +26,7 @@ class Repannouncementmobile extends React.Component {
 			fetch(Repclient.RepAnnouncementproductlist.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
+	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
 	                method:Repclient.RepAnnouncementproductlist.method,
@@ -61,6 +62,7 @@ class Repannouncementmobile extends React.Component {
 				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
 		                method:Repclient.RepAnnouncementfilterclientlocation.method,
@@ -83,6 +85,7 @@ class Repannouncementmobile extends React.Component {
 				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
 		                method:Repclient.RepAnnouncementfilterclientlocation.method,
@@ -121,6 +124,7 @@ class Repannouncementmobile extends React.Component {
 				fetch(Repclient.RepAnnouncementfilterclientlocation.url`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
 		                method:Repclient.RepAnnouncementfilterclientlocation.method,
@@ -142,6 +146,7 @@ class Repannouncementmobile extends React.Component {
 				fetch(Repclient.RepAnnouncementfilterclientlocation.url`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
 		                method:Repclient.RepAnnouncementfilterclientlocation.method,
@@ -166,6 +171,7 @@ class Repannouncementmobile extends React.Component {
 			fetch(Repclient.RepAnnouncementlocationlist.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
+	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
 	                method:Repclient.RepAnnouncementlocationlist.method,

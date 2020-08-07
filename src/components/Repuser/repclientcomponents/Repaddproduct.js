@@ -121,6 +121,7 @@ class Repaddproduct extends React.Component{
          fetch(Repclient.RepAddproductsearch.url+`&title=${this.clientProductSearch.current.value}`,{
              headers:{
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
              },
              method:Repclient.RepAddproductsearch.method,
@@ -148,6 +149,7 @@ class Repaddproduct extends React.Component{
          fetch(Repclient.RepAddSingleproductdetails.url,{
                headers: {
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                    },
          }).then(res=>{
@@ -218,6 +220,7 @@ class Repaddproduct extends React.Component{
                         method:Repclient.Repclientdetailssubmissionproductlist.method,
                         headers: {
                            "Content-Type" : "application/json",
+                           "X-CSRF-Token" : localStorage.getItem("access-token"),
                            "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                          },
                          body:JSON.stringify(productList[index])

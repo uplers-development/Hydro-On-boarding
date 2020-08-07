@@ -53,6 +53,7 @@ class Adminheader extends React.Component{
       fetch(Admin.menulisting.url,{
           headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.menulisting.method,
@@ -68,6 +69,7 @@ class Adminheader extends React.Component{
          fetch(Admin.adminprofileinfo.url+`${target_id}?_format=json`,{
                headers: {
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                    },
                    method:Admin.adminprofileinfo.method,
@@ -152,6 +154,7 @@ console.log(this.props.checkifPagecall,"View called");
                                     fetch(Apiurl.LogoutCall.url,{
                                        headers: {
                                              "Content-Type" : "application/json",
+                                             "X-CSRF-Token" : localStorage.getItem("access-token"),
                                              "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                                            },
                                        method:Apiurl.LogoutCall.method

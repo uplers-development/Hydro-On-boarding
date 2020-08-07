@@ -61,6 +61,7 @@ class Adminproductadd extends React.Component{
 			fetch(Admin.adminviewproduct.url,{
 	          		headers: {
 	                       "Content-Type" : "application/json",
+	                       "X-CSRF-Token" : localStorage.getItem("access-token"),
 	                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                 },
 	                 method:Admin.adminviewproduct.method,
@@ -187,6 +188,7 @@ class Adminproductadd extends React.Component{
 				fetch(apicall,{
 					headers: {
 		                       "Content-Type" : "application/json",
+		                       "X-CSRF-Token" : localStorage.getItem("access-token"),
 		                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                 },
              			 method:apimethod,

@@ -36,6 +36,7 @@ class Repcontact extends React.Component {
 		fetch(Client.GetRepContactDetails.url,{
 			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.GetRepContactDetails.method,
@@ -59,6 +60,7 @@ class Repcontact extends React.Component {
 		fetch(Client.SendRepContactQuery.url,{
 			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.SendRepContactQuery.method,

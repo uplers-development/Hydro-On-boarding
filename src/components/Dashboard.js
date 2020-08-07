@@ -30,6 +30,7 @@ import {cosmaticAsset} from'./constants/common';
 		fetch(Client.DashboardRightSide.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 },
                 method:Client.DashboardRightSide.method,
     	}).then(res=>{

@@ -17,6 +17,7 @@ class  Repclientsearchbox extends React.Component{
 			fetch(Repclient.Repclientdatatable.url+`&field_first_name_value=${this.searchRef.current.value}&field_last_name_value=${this.searchRef.current.value}`,{
 					headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		                },
 				}).then(res=>res.json()).then(data=>{

@@ -28,6 +28,7 @@ class Repclientmobilefilter extends React.Component {
 		fetch(Repclient.Repclientdatatable.url+e.target.getAttribute("title"),{
 					headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		                },
 				}).then(res=>res.json()).then(data=>{
@@ -39,6 +40,7 @@ class Repclientmobilefilter extends React.Component {
 			fetch(Repclient.Repclientdatatable.url,{
 					headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		                },
 				}).then(res=>res.json()).then(data=>{
@@ -97,6 +99,7 @@ class Repclientmobilefilter extends React.Component {
 				fetch(Repclient.RepBulkdelete.url,{
 						headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
 		                method:Repclient.RepBulkdelete.method,

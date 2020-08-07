@@ -29,6 +29,7 @@ class Repproductselection extends React.Component{
 			fetch(Repclient.Repclientproductdetails.url+`${this.props.repclientuid}?_format=json`,{
 			    headers:{
 			            "Content-Type" : "application/json",
+			            "X-CSRF-Token" : localStorage.getItem("access-token"),
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
 			    method:Repclient.Repclientproductdetails.method,
@@ -43,6 +44,7 @@ class Repproductselection extends React.Component{
 			fetch(Repclient.Repclientproductdetails.url+`${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
 			    headers:{
 			            "Content-Type" : "application/json",
+			            "X-CSRF-Token" : localStorage.getItem("access-token"),
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
 			    method:Repclient.Repclientproductdetails.method,

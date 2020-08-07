@@ -22,6 +22,7 @@ class Repcontractdetails extends React.Component{
 			fetch(Repclient.Repclientcontractdetails.url+`${this.props.repclientuid}?_format=json`,{
 			    headers:{
 			            "Content-Type" : "application/json",
+			            "X-CSRF-Token" : localStorage.getItem("access-token"),
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
 			    method:Repclient.Repclientcontractdetails.method,

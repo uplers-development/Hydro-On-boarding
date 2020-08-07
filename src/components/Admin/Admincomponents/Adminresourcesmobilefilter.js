@@ -22,6 +22,7 @@ class Adminresourcesmobilefilter extends React.Component{
    	 fetch(Admin.adminresourcedropdown.url,{
    	 		 headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcedropdown.method,
@@ -40,6 +41,7 @@ class Adminresourcesmobilefilter extends React.Component{
       		 fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=${resourceid}`,{
       	 		 headers:{
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                },
                method:Admin.adminresourcelisting.method,
@@ -55,6 +57,7 @@ class Adminresourcesmobilefilter extends React.Component{
          fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=All`,{
                 headers:{
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                },
                method:Admin.adminresourcelisting.method,

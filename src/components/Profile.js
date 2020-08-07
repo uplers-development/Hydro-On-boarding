@@ -55,6 +55,7 @@ class Profile extends Component {
 		fetch(Apiurl.ProfiletimeZone.url,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.ProfiletimeZone.method,
@@ -71,6 +72,7 @@ class Profile extends Component {
 		fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.GetProfile.method,
@@ -135,10 +137,10 @@ class Profile extends Component {
     	}).then(data=>{
     		console.log(data);
     		//this.GetProfile();
-    		if(data.uid[0].value===3){
+    		if(data.roles[0].target_id==="rep"){
     			this.props.history.push("/RepDashboard");	
     		}
-    		if(data.uid[0].value===2){
+    		if(data.roles[0].target_id==="client"){
     			this.props.history.push("/Dashboard");
     		}if(data.roles[0].target_id==="admin"){
     			this.props.history.push("/admin-resources");

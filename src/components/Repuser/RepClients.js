@@ -70,6 +70,7 @@ class RepClients extends React.Component {
 		fetch(Repclient.Repclientdatatable.url,{
 			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
 		}).then(res=>res.json()).then(data=>this.setState({repclientdata:data,loader:false}));
@@ -83,6 +84,7 @@ class RepClients extends React.Component {
 		fetch(Apiurl.menulisting.url,{
 		    headers:{
 		            "Content-Type" : "application/json",
+		            "X-CSRF-Token" : localStorage.getItem("access-token"),
 		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		    },
 		    method:Apiurl.menulisting.method,

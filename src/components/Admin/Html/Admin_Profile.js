@@ -47,6 +47,7 @@ class AdminProfile extends Component {
 		fetch(Apiurl.ProfiletimeZone.url,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.ProfiletimeZone.method,
@@ -63,6 +64,7 @@ class AdminProfile extends Component {
 		fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.GetProfile.method,
@@ -106,6 +108,7 @@ class AdminProfile extends Component {
 		fetch(Apiurl.Updateprofile.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.Updateprofile.method,

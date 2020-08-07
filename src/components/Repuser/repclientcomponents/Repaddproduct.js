@@ -281,8 +281,8 @@ class Repaddproduct extends React.Component{
                                     </div>
                                     <div className="form-group">
                                        <label>Purchase date</label>
-                                       <input type="text" placeholder='Purchase date' name="purchase" className="purchase" onBlur={((e)=>{
-                                             !hasValidDate(e.target.value) ? this.setState({purchseDatempty:true}) : this.setState({purchseDatempty:false}) 
+                                       <input type="date"  name="purchase" className="purchase" onBlur={((e)=>{
+                                             hasValidDate(e.target.value) ? this.setState({purchseDatempty:true}) : this.setState({purchseDatempty:false}) 
                                        })}/>
                                        {this.state.purchseDatempty ? ValidationMsg.common.default.purchaseProductdate : ''}
                                     </div>

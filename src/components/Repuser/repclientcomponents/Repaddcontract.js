@@ -217,8 +217,8 @@ class Repaddcontract extends React.Component{
                   <div className="form-group">
 		                        <label>Expiry date</label>
       								<div className="input-box">
-      		            <input type="text" name="expirydate" placeholder="Expiry date" id="expirydate"  onBlur={((e)=>{
-                                             !hasValidDate(e.target.value) ? this.setState({purchseDatempty:true}) : this.setState({purchseDatempty:false}) 
+      		            <input type="date" name="expirydate" placeholder="Expiry date" id="expirydate"  onBlur={((e)=>{
+                                             hasValidDate(e.target.value) ? this.setState({purchseDatempty:true}) : this.setState({purchseDatempty:false}) 
                                        })}/>
                       {this.state.purchseDatempty ? ValidationMsg.common.default.contractexpirydate : ''}
       									</div>

@@ -21,8 +21,8 @@ export const ValidationMsg = {
             role:ReactHtmlParser('<span class="empty-field">Please enter your valid role.</span>'),
             usernotificationcheckbox:ReactHtmlParser('<span class="empty-field">Please select the above checkbox.</span>'),
 
-            purchaseProductdate:ReactHtmlParser('<span class="empty-field">Please insert valid purchase date and use formate(YYYY-MM-DD).</span>'),
-            contractexpirydate:ReactHtmlParser('<span class="empty-field">Please insert valid contract expiry date and use formate(YYYY-MM-DD).</span>'),
+            purchaseProductdate:ReactHtmlParser('<span class="empty-field">Please enter product purchase date.</span>'),
+            contractexpirydate:ReactHtmlParser('<span class="empty-field">Please enter contract expire date.</span>'),
             coststate:ReactHtmlParser('<span class="empty-field">Please insert valid cost and only numbers allowed.</span>'),
             itemidstate:ReactHtmlParser('<span class="empty-field">Please insert valid item-id and only numbers allowed.</span>'),
 

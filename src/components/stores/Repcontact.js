@@ -45,7 +45,7 @@ class Repcontact extends React.Component {
     	}).then(data=>{	
     		console.log(data);
     		this.setState({repContactDetails:data,repcontactRendered:false})
-    		console.log(this.state.repContactDetails.user_picture.url);
+    		//console.log(this.state.repContactDetails.user_picture.url);
 
     	})
 	}
@@ -107,7 +107,7 @@ class Repcontact extends React.Component {
 											<div className="rep-contracts-left">
 												<div className="person-detils-box sky-blue-light-2 d-flex flex-wrap">
 													<div className="person-img">
-														<img src={this.state.repContactDetails.user_picture!=='' ? this.state.repContactDetails.user_picture :require("../../images/hydro-in-tab.png")} alt="User image"/>
+														<img src={(this.state.repContactDetails.user_picture &&  this.state.repContactDetails.user_picture!=='' )? this.state.repContactDetails.user_picture :require("../../images/hydro-in-tab.png")} alt="User image"/>
 													</div>
 													<div className="person-right">
 														<div className="person-title">
@@ -115,14 +115,14 @@ class Repcontact extends React.Component {
 																<TwitterMob/>
 																<LinkdinMob/>
 															</ul>
-															<h3>{this.state.repContactDetails.field_first_name[0].value} {this.state.repContactDetails.field_last_name[0].value}</h3>
-															<h4>{this.state.repContactDetails.field_job_title[0].value}</h4>
+															<h3>{this.state.repContactDetails.field_first_name.length>0 ?this.state.repContactDetails.field_first_name[0].value :''} {this.state.repContactDetails.field_last_name.length > 0 ? this.state.repContactDetails.field_last_name[0].value :''}</h3>
+															<h4>{this.state.repContactDetails.field_job_title.length > 0 ? this.state.repContactDetails.field_job_title[0].value : ''}</h4>
 														</div>
 														<div className="person-details">
 															<div className="bottom-details d-flex flex-wrap">
 																<div className="left d-flex flex-wrap">
 																	<img src={require("../../images/ic_location_marker.svg")} alt="Map marker"/>
-																	<span>{this.state.repContactDetails.field_organisation[0].value}, {this.state.repContactDetails.field_location[0].value}</span>
+																	<span>{this.state.repContactDetails.field_organisation.length > 0 ? this.state.repContactDetails.field_organisation[0].value : ''}, {this.state.repContactDetails.field_location.length > 0 ?this.state.repContactDetails.field_location[0].value :''}</span>
 																</div>
 
 																<div className="right">

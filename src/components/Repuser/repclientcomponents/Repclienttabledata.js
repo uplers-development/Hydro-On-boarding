@@ -133,6 +133,7 @@ class Repclienttabledata extends React.Component{
 
 
 	render(){
+		console.log(this.props.noDatacall);
 		return (
 			<div className="clients-table table-outer">
 						   <div className="table-responsive">
@@ -152,7 +153,7 @@ class Repclienttabledata extends React.Component{
 							            </tr>
 							         </thead>
 							          <tbody>
-							         {!this.props.noDatacall ? 
+							         { this.props.clientdataTable.length > 0 ?
 						             	this.props.clientdataTable.map((item,index)=>
 							            	<tr key={index}>
 							               <td>
@@ -183,9 +184,11 @@ class Repclienttabledata extends React.Component{
 							            	</tr>
 					               		)
 					               	:
-					               	<>
-					               		{RepLogoutPopup.default.noDatafound}
-					               	</>}
+					               	<tr>
+					               		<td className="no-desk-data" colSpan={4}>
+					               			{RepLogoutPopup.default.noDatafound}
+					               		</td>
+					               	</tr>}
 						          	 </tbody>
 							      </table>
 

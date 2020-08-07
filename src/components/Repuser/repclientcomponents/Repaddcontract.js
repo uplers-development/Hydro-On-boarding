@@ -6,7 +6,7 @@ import hydroImage from '../../../images/hydro-biofilter-product.jpg';
 import {ValidationMsg} from'../../constants/validationmsg';
  
  
-let Suggestionbox;
+let Suggestionbox,sameIdArray=[];
 class Repaddcontract extends React.Component{
 	constructor(props){
 		super(props);
@@ -19,6 +19,7 @@ class Repaddcontract extends React.Component{
       productSuggestion:[],
       fields_are_empty:false,
       purchseDatempty:false,
+      duplicateProducts:false,
   	}
     console.log(this.state.suggestions);
     console.log(this.props.productDataList);
@@ -92,7 +93,7 @@ class Repaddcontract extends React.Component{
           }   
 
       console.log(contractoptions);
-       if(document.querySelector("#expirydate").value!=='' || document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!==''){
+       if(document.querySelector("#expirydate").value!=='' || document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!=='' && !this.state.duplicateProducts){
         	 fetch(Repclient.Repclientdetailssubmissionproductlist.url,{
                             method:Repclient.Repclientdetailssubmissionproductlist.method,
                             headers: {
@@ -154,6 +155,18 @@ class Repaddcontract extends React.Component{
             if(document.querySelectorAll(".shareall-email .emailall").length>0){
                 document.querySelector("#product-tags").removeAttribute("placeholder")
             }
+            sameIdArray=[];
+                document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+                  sameIdArray.push(item.getAttribute("nid"));
+                  //console.log(item.getAttribute("nid").length );
+                })
+                console.log(sameIdArray);
+                if(sameIdArray.length !== new Set(sameIdArray).size) {
+                this.setState({duplicateProducts:true})
+          }else{
+            console.log(false)  ;
+            this.setState({duplicateProducts:false})
+          }
             this.productTaginput.current.focus();
 
   }
@@ -164,6 +177,14 @@ class Repaddcontract extends React.Component{
     this.productTaginput.current.focus();
      if(document.querySelectorAll(".shareall-email .emailall").length<=0){
           document.querySelector("#product-tags").setAttribute("placeholder","Product tags")
+      }
+      sameIdArray=[];
+          document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+            sameIdArray.push(item.getAttribute("nid"));
+          })
+          console.log(sameIdArray);
+          if(sameIdArray.length === new Set(sameIdArray).size) {
+          this.setState({duplicateProducts:false})
       }
 
 }
@@ -211,8 +232,10 @@ class Repaddcontract extends React.Component{
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}
               								</ul>	
-								
+								        
 							             	</div>	
+
+                            {this.state.duplicateProducts ? ValidationMsg.common.default.resourceduplicateproduct : ''} 
 		                     </div>
 		                     <div className="form-group">
 		                        <label>Sharepoint URL</label>

@@ -90,7 +90,7 @@ console.log(this.state.repinfo);
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
                   {this.state.repinfo!==null ? 
                      <>
-                        <div className="person-profile-img bg-cover" style={{backgroundImage: `url(${ this.state.repinfo.user_picture[0]!=='' ? this.state.repinfo.user_picture[0].url : "../../../images/profile-logo-blue.svg"})`}}></div>
+                        <div className="person-profile-img bg-cover" style={{backgroundImage: `url(${this.state.repinfo.user_picture.length>0 && this.state.repinfo.user_picture[0]!=='' ? this.state.repinfo.user_picture[0].url : "../../../images/profile-logo-blue.svg"})`}}></div>
                         <h2>{this.state.repinfo.field_first_name[0].value+" "+this.state.repinfo.field_last_name[0].value}</h2>
                      </>
                      :
@@ -135,8 +135,24 @@ console.log(this.state.repinfo);
                            })} className="btn common-btn-blue"><span>CANCEL</span></button>
                               <button className="btn common-btn-blue" onClick={((e)=>{
                                     console.log(this.props.historyPush)
-                                    localStorage.clear();
-                                    this.props.historyPush.history.push("/Login");
+                                    let status;
+                                    fetch(Apiurl.LogoutCall.url,{
+                                       headers: {
+                                             "Content-Type" : "application/json",
+                                             "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                                           },
+                                       method:Apiurl.LogoutCall.method
+                                    }).then(res=>{
+                                       status=res.status;
+                                       res.json()
+                                    }).then(data=>{
+                                       if(status===200){
+                                          localStorage.clear();
+                                          this.props.historyPush.history.push("/Login");
+                                       }else{
+                                          return false;
+                                       }
+                                    })
                               })}><span>YES</span></button> 
                            </div>
                            

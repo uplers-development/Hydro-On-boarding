@@ -126,7 +126,7 @@ class RepClients_add extends React.Component {
     e.preventDefault();
     var e = document.getElementById("time_zone");
     var strUser = e.options[e.selectedIndex].value;
-    if(hasValidEmail(document.querySelector("#email").value) && hasValidMobile(document.querySelector("#contact").value)){
+    if(hasValidEmail(document.querySelector("#email").value) && hasValidMobile(document.querySelector("#contact").value) && document.querySelectorAll(".productcheck:checked").length > 0){
     this.setState({formEmpty:false});
     let option={  
            "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],

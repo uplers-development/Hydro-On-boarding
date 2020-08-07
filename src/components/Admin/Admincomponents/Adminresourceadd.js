@@ -7,7 +7,7 @@ import {ValidationMsg} from'../../constants/validationmsg';
 import{hasNull,isRequired} from '../../validation';
 import {cosmaticAsset} from '../../constants/common'
 
-
+let sameIdArray=[]
 class Adminresourceadd extends React.Component{
    constructor(props){
       super(props);
@@ -27,7 +27,8 @@ class Adminresourceadd extends React.Component{
      	loader:true,
      	openResourceSubmission:false,
 		checkdocempty:false,
-		checkempty:false
+		checkempty:false,
+		duplicateProducts:false
       }
       this.productTaginput=React.createRef();
       this.resourcetype=React.createRef();
@@ -69,7 +70,7 @@ class Adminresourceadd extends React.Component{
 	          		console.log(data);
 	          		    this.state.productSuggestion=[];
 	          		    data.filter((value,index,array)=>{
-				            if(value.title.match(this.productTaginput.current.value)){
+				            if(value.title.match(document.querySelector("#product-tags").value)){
 					              console.log(value);
 					              this.state.productSuggestion.push(value)
 				            }else{
@@ -83,13 +84,15 @@ class Adminresourceadd extends React.Component{
 	                          </li>)
                             }) 
 			      		this.setState({producttagChanged:suggestionforproduct})
-				        console.log(this.state.productSuggestion);
 				    }else{
 			            this.setState({producttagChanged:''})
 		        	}
 	          })
 	    }else{
-			this.setState({producttagChanged:''})
+	    	let self=this;
+	    	setTimeout(()=>{
+				self.setState({producttagChanged:''})
+			},800);
 	    }
 	}
 
@@ -187,17 +190,29 @@ class Adminresourceadd extends React.Component{
 		            id.value=gid;
 		            node.appendChild(textnode);
 		            node.setAttributeNode(id);
-		            this.setState({producttagChanged:''});
-		            this.productTaginput.current.value='';
+		            document.querySelector("#product-tags").value='';
 		            document.querySelector(".shareall-email").appendChild(node);
 		            if(document.querySelectorAll(".shareall-email .emailall").length>0){
 		                document.querySelector("#product-tags").removeAttribute("placeholder");
 		                this.setState({resourceproduct:false})
 		            }
-		          	/*document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
-		            	console.log(document.querySelectorAll(".shareall-email .emailall")[index]);
-		            })*/
+		            sameIdArray=[];
+		          	document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+		          		sameIdArray.push(item.getAttribute("nid"));
+		            	//console.log(item.getAttribute("nid").length	);
+		            })
+		            console.log(sameIdArray);
+		            if(sameIdArray.length !== new Set(sameIdArray).size) {
+   							this.setState({duplicateProducts:true})
+					}else{
+						console.log(false)	;
+						this.setState({duplicateProducts:false})
+					}
 		            this.productTaginput.current.focus();
+		            let self=this;
+		            setTimeout(()=>{
+		            	self.setState({producttagChanged:''});
+		            },800)
  	}
 
   	clearProductTag =(e)=>{  
@@ -206,13 +221,21 @@ class Adminresourceadd extends React.Component{
 	    this.productTaginput.current.focus();
 	     if(document.querySelectorAll(".shareall-email .emailall").length<=0){
 	          document.querySelector("#product-tags").setAttribute("placeholder","Product tags")
-			  this.setState({resourceproduct:false})
+			  this.setState({resourceproduct:false,duplicateProducts:false})
 	      }
+	        sameIdArray=[];
+          	document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
+          		sameIdArray.push(item.getAttribute("nid"));
+            })
+            console.log(sameIdArray);
+            if(sameIdArray.length === new Set(sameIdArray).size) {
+						this.setState({duplicateProducts:false})
+			}
 	}
 
 	OnSubmitResource=(e)=>{
 		e.preventDefault();
-		if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0 && this.state.newresourceimageid!==null && this.state.fileuploadedname!==''){
+		if(!hasNull(document.querySelector("#title").value) && !hasNull(document.querySelector("#description").value) && document.querySelectorAll(".shareall-email .emailall").length>0 && this.state.newresourceimageid!==null && this.state.fileuploadedname!=='' && !this.state.duplicateProducts){
 			  let productTagsId=[]
 			      document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
 			          productTagsId.push({"target_id":item.getAttribute("nid")});
@@ -263,7 +286,7 @@ class Adminresourceadd extends React.Component{
 			console.log(this.state.fid);
 			hasNull(document.querySelector("#title").value) ? this.setState({resourcetitle:true}): this.setState({resourcetitle:false})
 			hasNull(document.querySelector("#description").value) ? this.setState({resourcedescription:true}): this.setState({resourcedescription:false})
-			document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproduct:false});
+			document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true,duplicateProducts:false}): this.setState({resourceproduct:false,duplicateProducts:false});
 			this.state.newresourceimageid===null ? this.setState({checkempty :true,imageFormateState:false}) : this.setState({checkempty :false,imageFormateState:false});
 			this.state.fileuploadedname==='' ? this.setState({checkdocempty :true,doucmentformatestate:false}) : this.setState({checkdocempty :false,doucmentformatestate:false});
 		}
@@ -361,13 +384,14 @@ class Adminresourceadd extends React.Component{
 	  									<div className="shareall-email">
 	  									
 	  									</div>
-  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag}onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproductfield:false})} />
+  		                        <input type="text" name="product-tags" placeholder="Product tags" id="product-tags" ref={this.productTaginput} onChange={this.productTag} onBlur={(e)=>hasNull(e.target.value) && document.querySelectorAll(".shareall-email .emailall").length<=0 ? this.setState({resourceproduct:true}): this.setState({resourceproductfield:false})} />
                               
               								  <ul className="search-detail">
               									   {this.state.producttagChanged}
               								</ul>
 											  </div>
-											  {this.state.resourceproduct ? ValidationMsg.common.default.resourceproductfield : ''}	  	
+											  {this.state.resourceproduct ? ValidationMsg.common.default.resourceproductfield : ''}	 
+											  {this.state.duplicateProducts ? ValidationMsg.common.default.resourceduplicateproduct : ''}	  	
 									</div>	
 		                     </div>
 				            <div className="upload-btn-block">

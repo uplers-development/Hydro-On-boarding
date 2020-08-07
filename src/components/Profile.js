@@ -387,16 +387,36 @@ class Profile extends Component {
 						:
 
 						<div >
-						 <form>
-							<div>
-								<label>Password</label>
-								<input type="password" name='password' id='password'/>
-								</div>
-								<div>
-								<label>Confirm password</label>
-								<input type="password" name='password' id='password'/>
-								</div>
-							</form>
+						 <form className="row" onSubmit={this.updateProfile}>
+									<div className="form-group ">
+										<label>Current Password*</label>
+										<input type="password" id='currpassword' placeholder="Password" tabIndex="1" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
+									}/>
+									{this.state.passwordState ? ValidationMsg.common.default.password : ''}
+									</div>
+
+									<div className="form-group">
+										<label>New Password*</label>
+										<input type="password" id='newpass' placeholder="Password" tabIndex="1" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
+									}/>
+									{this.state.passwordState ? ValidationMsg.common.default.password : ''}
+									</div>
+									<div className="form-group">
+										<label>Confirm Password*</label>
+										<input type="password" id='newpass' placeholder="Password" tabIndex="1" onBlur={(e)=>
+												hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
+									}/>
+									{this.state.passwordState ? ValidationMsg.common.default.password : ''}
+									</div>
+
+									<div className="button-group full">
+										<button className="btn common-btn-blue" type="submit" tabIndex="4">
+											<span>Update Password</span></button>
+									</div>
+								</form>
+
 						</div>
 						}
 						{/*<!--Profile form block info end-->*/}

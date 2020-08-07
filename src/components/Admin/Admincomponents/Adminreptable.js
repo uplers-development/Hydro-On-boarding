@@ -68,6 +68,7 @@ class Adminreptable extends React.Component{
 		fetch(Admin.adminrepdeletesingle.url+`${this.state.setSingleDeleteId}?_format=json`,{
 	   	 		 headers:{
 	                  "Content-Type" : "application/json",
+	                  "X-CSRF-Token" : localStorage.getItem("access-token"),
 	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 	            },
 	            method:Admin.adminrepdeletesingle.method,
@@ -93,6 +94,7 @@ class Adminreptable extends React.Component{
 			fetch(Admin.adminreptablelisting.url,{
 				headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             	},
             	method:Admin.adminreptablelisting.method

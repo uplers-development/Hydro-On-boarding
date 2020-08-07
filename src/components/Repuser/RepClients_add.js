@@ -95,6 +95,7 @@ class RepClients_add extends React.Component {
       fetch(Apiurl.menulisting.url,{
           headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
           },
           method:Apiurl.menulisting.method,
@@ -107,6 +108,7 @@ class RepClients_add extends React.Component {
          fetch(Apiurl.GetProfile.url,{
                headers: {
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                    },
                    method:Apiurl.GetProfile.method,
@@ -149,6 +151,7 @@ class RepClients_add extends React.Component {
                method:Repclient.Repclientdetailssubmission.method,
                headers: {
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                    },
                    body:JSON.stringify(option)
@@ -163,6 +166,7 @@ class RepClients_add extends React.Component {
                method:Repclient.Repclientdetailssubmissionnotification.method,
                headers: {
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                    },
                    body:JSON.stringify(notifictionvalue)
@@ -215,6 +219,7 @@ class RepClients_add extends React.Component {
                         method:"POST",
                         headers: {
                            "Content-Type" : "application/json",
+                           "X-CSRF-Token" : localStorage.getItem("access-token"),
                            "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                          },
                          body:JSON.stringify(productList[index])
@@ -228,6 +233,7 @@ class RepClients_add extends React.Component {
                         method:Repclient.Repclientdetailssubmissionproductlist.method,
                         headers: {
                            "Content-Type" : "application/json",
+                           "X-CSRF-Token" : localStorage.getItem("access-token"),
                            "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                          },
                          body:JSON.stringify(contractoptions)

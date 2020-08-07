@@ -98,6 +98,7 @@ class Repaddcontract extends React.Component{
                             method:Repclient.Repclientdetailssubmissionproductlist.method,
                             headers: {
                                "Content-Type" : "application/json",
+                               "X-CSRF-Token" : localStorage.getItem("access-token"),
                                "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                              },
                              body:JSON.stringify(contractoptions)

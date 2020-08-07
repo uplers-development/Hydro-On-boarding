@@ -59,6 +59,7 @@ class Adminresourceadd extends React.Component{
 	          fetch(Admin.adminresourceProducttags.url,{
 	          		headers: {
 	                       "Content-Type" : "application/json",
+	                       "X-CSRF-Token" : localStorage.getItem("access-token"),
 	                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                 },
 	                 method:Admin.adminresourceProducttags.method
@@ -257,6 +258,7 @@ class Adminresourceadd extends React.Component{
 					fetch(apicall,{
 		          		headers: {
 		                       "Content-Type" : "application/json",
+		                       "X-CSRF-Token" : localStorage.getItem("access-token"),
 		                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                 },
              			 method:apimethod,
@@ -301,6 +303,7 @@ class Adminresourceadd extends React.Component{
 		fetch(Admin.adminviewresource.url,{
 	          		headers: {
 	                       "Content-Type" : "application/json",
+	                       "X-CSRF-Token" : localStorage.getItem("access-token"),
 	                       "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                 },
 	                 method:Admin.adminviewresource.method,

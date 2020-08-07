@@ -65,6 +65,7 @@ class Repclienttabledata extends React.Component{
 			fetch(Repclient.Repclientsingledelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
+	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
 	                method:Repclient.Repclientsingledelete.method,
@@ -115,6 +116,7 @@ class Repclienttabledata extends React.Component{
 		         method:Repclient.Repclientdetailssubmissionproductlist.method,
 				headers: {
 		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
 		                body:JSON.stringify(options)

@@ -53,6 +53,7 @@ class Newsfeeds extends Component {
 		fetch(Client.NewsfeedsNotification.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.NewsfeedsNotification.method,
@@ -69,6 +70,7 @@ class Newsfeeds extends Component {
 		fetch(Client.Newsfeeds.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
     	}).then(res=>{

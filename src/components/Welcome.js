@@ -39,6 +39,7 @@ class Welcome extends Component {
 		fetch(Client.Welcomeblockmain.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 },
                 method:Client.Welcomeblockmain.method,
     	}).then(res=>{
@@ -54,6 +55,7 @@ class Welcome extends Component {
 		fetch(Client.WelcomeThreeblock.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 },
                 method:Client.WelcomeThreeblock.method,
     	}).then(res=>{

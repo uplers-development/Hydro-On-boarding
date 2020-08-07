@@ -41,6 +41,7 @@ class Adminaddrep extends React.Component{
 		fetch(Apiurl.ProfiletimeZone.url,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.ProfiletimeZone.method,
@@ -77,6 +78,7 @@ class Adminaddrep extends React.Component{
 				fetch(apicall,{
 					headers:{
 		                  "Content-Type" : "application/json",
+		                  "X-CSRF-Token" : localStorage.getItem("access-token"),
 		                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		            	},
 		            method:apimethod,
@@ -112,6 +114,7 @@ class Adminaddrep extends React.Component{
 		fetch(Admin.adminviewrepclient.url+`${this.props.sendrepId}?_format=json`,{
 			headers:{
 		                  "Content-Type" : "application/json",
+		                  "X-CSRF-Token" : localStorage.getItem("access-token"),
 		                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		            	},
             method:Admin.adminviewrepclient.method,

@@ -49,6 +49,7 @@ class RepDashboard extends React.Component {
 		fetch(Apiurl.menulisting.url,{
 		    headers:{
 		            "Content-Type" : "application/json",
+		            "X-CSRF-Token" : localStorage.getItem("access-token"),
 		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 		    },
 		    method:Apiurl.menulisting.method,
@@ -74,6 +75,7 @@ class RepDashboard extends React.Component {
 			fetch(Repclient.RepDashboardNewUsers.url,{
 				headers:{
 						"Content-Type" : "application/json",
+						"X-CSRF-Token" : localStorage.getItem("access-token"),
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
 				method:Repclient.RepDashboardNewUsers.method
@@ -88,6 +90,7 @@ class RepDashboard extends React.Component {
 			fetch(Repclient.RepDashboardOverview.url,{
 				headers:{
 						"Content-Type" : "application/json",
+						"X-CSRF-Token" : localStorage.getItem("access-token"),
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
 				method:Repclient.RepDashboardOverview.method
@@ -102,6 +105,7 @@ class RepDashboard extends React.Component {
 			fetch(Repclient.RepDashboardLatestProducts.url,{
 				headers:{
 						"Content-Type" : "application/json",
+						"X-CSRF-Token" : localStorage.getItem("access-token"),
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
 				method:Repclient.RepDashboardLatestProducts.method
@@ -116,6 +120,7 @@ class RepDashboard extends React.Component {
 			fetch(Repclient.RepDashboardNewsFeeds.url,{
 				headers:{
 						"Content-Type" : "application/json",
+						"X-CSRF-Token" : localStorage.getItem("access-token"),
                 		"Authorization": "Basic "+localStorage.getItem("basic-auth"),
 				},
 				method:Repclient.RepDashboardNewsFeeds.method

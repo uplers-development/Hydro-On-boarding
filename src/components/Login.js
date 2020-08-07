@@ -74,6 +74,7 @@ class Login extends Component{
     	fetch(Apiurl.Loginaction.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 },
                 method:Apiurl.Loginaction.method,
                 body: JSON.stringify(logindata),
@@ -95,7 +96,10 @@ class Login extends Component{
     			}
     			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="rep"){
     				this.props.history.push({pathname:"/RepDashboard"});
+    			}if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="administrator"){
+    				this.props.history.push({pathname:"/user"});
     			}
+
     		}
     	})
       }else{

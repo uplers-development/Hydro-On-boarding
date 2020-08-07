@@ -39,6 +39,7 @@ class Contract extends Component {
 		fetch(Client.GetContractForEndusers.url,{
 			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.GetContractForEndusers.method,
@@ -52,6 +53,7 @@ class Contract extends Component {
     	fetch(Client.GetContractProduct.url,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.GetContractProduct.method,
@@ -119,6 +121,7 @@ class Contract extends Component {
 		fetch(Client.ContractTypeProductBaseFilter.url+uid+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter,{
 			headers: {
                 	 "Content-Type" : "application/json",
+                	 "X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.ContractTypeProductBaseFilter.method,
@@ -141,6 +144,7 @@ class Contract extends Component {
 		fetch(Client.GetAllContractForSearch.url+"&title="+contractText,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.GetAllContractForSearch.method,
@@ -167,6 +171,7 @@ class Contract extends Component {
 		fetch(Client.GetAllContractForSearch.url+"&title="+textValue,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.GetAllContractForSearch.method,
@@ -193,6 +198,7 @@ class Contract extends Component {
 		fetch(Client.ContractTypeProductBaseFilter.url+uid+producttitle+"?_format=json"+"&field_contract_document_type_target_id="+contracttype+"&title=",{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
                 },
                 method:Client.ContractTypeProductBaseFilter.method,

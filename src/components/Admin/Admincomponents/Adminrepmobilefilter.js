@@ -28,6 +28,7 @@ class Adminremobilefilter extends React.Component{
 				fetch(Admin.adminreptablelisting.url+`&sort_by=created&sort_order=${e.target.getAttribute("sortorder")}`,{
 					headers:{
 	                  "Content-Type" : "application/json",
+	                  "X-CSRF-Token" : localStorage.getItem("access-token"),
 	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 	            	},
 	            	method:Admin.adminreptablelisting.method
@@ -51,6 +52,7 @@ class Adminremobilefilter extends React.Component{
 				fetch(Admin.adminreptablelisting.url,{
 					headers:{
 	                  "Content-Type" : "application/json",
+	                  "X-CSRF-Token" : localStorage.getItem("access-token"),
 	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 	            	},
 	            	method:Admin.adminreptablelisting.method

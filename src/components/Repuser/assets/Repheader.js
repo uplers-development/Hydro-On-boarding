@@ -52,6 +52,7 @@ class Repheader extends React.Component{
          fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
                headers: {
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                    },
                    method:Apiurl.GetProfile.method,
@@ -139,6 +140,7 @@ console.log(this.state.repinfo);
                                     fetch(Apiurl.LogoutCall.url,{
                                        headers: {
                                              "Content-Type" : "application/json",
+                                             "X-CSRF-Token" : localStorage.getItem("access-token"),
                                              "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                                            },
                                        method:Apiurl.LogoutCall.method

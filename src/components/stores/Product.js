@@ -41,6 +41,7 @@ class Product extends Component {
 		fetch(Client.ProductListEnduser.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.ProductListEnduser.method,
@@ -56,6 +57,7 @@ class Product extends Component {
 		fetch(Client.ProductCategoryId.url,{
     			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.ProductCategoryId.method,
@@ -81,6 +83,7 @@ class Product extends Component {
 		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+e.target.getAttribute("data-cat-id")+sortByType+"&title="+document.querySelector("#myInput").value,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.FilterProductCategoryById.method,
@@ -149,6 +152,7 @@ class Product extends Component {
 		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType+"&title="+document.querySelector("#myInput").value,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.FilterProductCategoryById.method,
@@ -192,6 +196,7 @@ class Product extends Component {
 		fetch(Client.FilterProductCategoryById.url+"&field_product_category_target_id="+pid+sortByType+"&title="+document.querySelector("#myInput").value,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.FilterProductCategoryById.method,
@@ -404,6 +409,7 @@ class Product extends Component {
 		fetch(Client.GetProductTitle.url+"&field_product_category_target_id="+productSelectedvalue+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.GetProductTitle.method,
@@ -454,6 +460,7 @@ class Product extends Component {
 		fetch(Client.ProductListTitleSearch.url+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.ProductListTitleSearch.method,

@@ -70,6 +70,7 @@ delete_single_resource=(e)=>{
 	fetch(Admin.adminresourcedelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
    	 		 headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcedelete.method,
@@ -91,6 +92,7 @@ delete_single_resource=(e)=>{
    		fetch(Admin.adminresourcelisting.url,{
    	 		 headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcelisting.method,
@@ -120,6 +122,7 @@ delete_single_resource=(e)=>{
    		fetch(Admin.adminresourcedraft.url+`${draftid}?_format=json`,{
    	 		 headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminresourcedraft.method,

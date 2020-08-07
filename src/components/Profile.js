@@ -32,10 +32,14 @@ class Profile extends Component {
 			loader:true,
 			smallLoader:false,
 			checkempty:false,
-			addClass: false,}
+			addClass: false,
+			checktablist1:true,
+			checktablist2:false,
+		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
 		this.timeZoneref=React.createRef();
+		this.showScreen=this.showScreen.bind(this);
 		console.log(this.props.location.state);
 	}
 
@@ -55,6 +59,7 @@ class Profile extends Component {
 		fetch(Apiurl.ProfiletimeZone.url,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.ProfiletimeZone.method,
@@ -71,6 +76,7 @@ class Profile extends Component {
 		fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
                 	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
                 },
                 method:Apiurl.GetProfile.method,
@@ -135,10 +141,10 @@ class Profile extends Component {
     	}).then(data=>{
     		console.log(data);
     		//this.GetProfile();
-    		if(data.uid[0].value===3){
+    		if(data.roles[0].target_id==="rep"){
     			this.props.history.push("/RepDashboard");	
     		}
-    		if(data.uid[0].value===2){
+    		if(data.roles[0].target_id==="client"){
     			this.props.history.push("/Dashboard");
     		}if(data.roles[0].target_id==="admin"){
     			this.props.history.push("/admin-resources");
@@ -199,6 +205,13 @@ class Profile extends Component {
 	}
 
 
+
+	showScreen=(e)=>{
+		e.preventDefault();
+		if(e.target.classList.contains("about-you")){this.setState({checktablist1:true,checktablist2:false})}
+		else if(e.target.classList.contains("password")){this.setState({checktablist1:false,checktablist2:true})}
+	}
+
 	render() {
 		if(this.props.location.state!==undefined){
 			if(this.props.location.state.admin){
@@ -221,10 +234,10 @@ class Profile extends Component {
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
 				<Link className="navbar-logo" to={setdefaultroute} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 				<ul>
-					<li><Link to={""} onClick={(e)=>e.preventDefault()} className="active"  title="News Feed">
+					<li><Link to={""} onClick={this.showScreen} className={this.state.checktablist1 ? "about-you active":"about-you"}  title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>
 							<span>About <span>you</span></span></Link></li>
-					<li><Link  to={""} onClick={(e)=>e.preventDefault()} title="Password">
+					<li><Link  to={""} onClick={this.showScreen} className={this.state.checktablist2 ? "password active" : "password"} title="Password">
 							<img className="svg" src={require("./../images/lock-logo.svg")} alt="password-logo"/>
 							<span>Password</span></Link></li>
 				</ul>
@@ -275,6 +288,7 @@ class Profile extends Component {
 
 
 						{/*<!--Profile form block info start-->*/}
+						{!this.state.checktablist2 ? 
 						<div className="profile-form-block">
 
 							{/*<!--Profile photo upload start-->*/}
@@ -368,8 +382,23 @@ class Profile extends Component {
 
 							</div>
 							{/*<!--Profile form end-->*/}
-
 						</div>
+
+						:
+
+						<div >
+						 <form>
+							<div>
+								<label>Password</label>
+								<input type="password" name='password' id='password'/>
+								</div>
+								<div>
+								<label>Confirm password</label>
+								<input type="password" name='password' id='password'/>
+								</div>
+							</form>
+						</div>
+						}
 						{/*<!--Profile form block info end-->*/}
 
 					</div>

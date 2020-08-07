@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
 import {cosmaticAsset} from'../../constants/common';
 import {Twitter,Linkdin} from'../assets/Repsocialmediaicons';
 
@@ -21,12 +21,13 @@ class Repclientdetails extends React.Component{
 
 
 		Get_client_Details=()=>{
-			fetch(`${process.env.NODE_ENV==='production' ? window.location.origin : '//staging.project-progress.net'}/projects/hydro/jsonapi/client_details/${this.props.repclientuid}?_format=json`,{
+			fetch(Repclient.Repclientdetails.url+`${this.props.repclientuid}?_format=json`,{
 			    headers:{
 			            "Content-Type" : "application/json",
+			            "X-CSRF-Token" : localStorage.getItem("access-token"),
 			            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
 			    },
-			    method:"GET",
+			    method:Repclient.Repclientdetails.method,
   			}).then(res=>res.json()).then(data=>{
   					console.log(data);
   					if(data.length>0){

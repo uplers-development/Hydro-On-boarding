@@ -9,6 +9,7 @@ export function get_admin_header_item(retrunmenulisting){
          fetch(Admin.menulisting.url,{
              headers:{
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                },
                method:Admin.menulisting.method,

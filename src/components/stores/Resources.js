@@ -41,6 +41,7 @@ class Resources extends Component {
 		fetch(Client.GetResourcesList.url,{
 			headers: {
                 	 "Content-Type" : "application/json",
+                	 "X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.GetResourcesList.method,
@@ -67,6 +68,7 @@ class Resources extends Component {
     	fetch(Client.GetResourceTypeTitleId.url,{
 			headers: {
                 	 "Content-Type" : "application/json",
+                	 "X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.GetResourceTypeTitleId.method,
@@ -131,6 +133,7 @@ class Resources extends Component {
 		fetch(Client.FilterByResourceId.url+ProductId+"?_format=json"+resourceTypefilterId+resourceSortFilter+"&title="+document.querySelector("#myInput").value,{
 			headers: {
                 	 "Content-Type" : "application/json",
+                	 "X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.FilterByResourceId.method,
@@ -154,6 +157,7 @@ class Resources extends Component {
 		fetch(Client.tirggerResourcedf.url,{
 				headers: {
                 	 "Content-Type" : "application/json",
+                	 "X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.tirggerResourcedf.method,
@@ -211,6 +215,7 @@ class Resources extends Component {
 		fetch(Client.SortResources.url+"&field_resource_type_target_id="+filterType+"&field_product_category_target_id="+resource_id+"&title=",{
 			headers: {
                 	 "Content-Type" : "application/json",
+                	 "X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.SortResources.method,
@@ -239,6 +244,7 @@ class Resources extends Component {
 		fetch(Client.SortResources.url+"&field_resource_type_target_id="+filterType+"&field_product_category_target_id="+resource_id+"&title="+searchValue,{
 			headers: {
                 	 "Content-Type" : "application/json",
+                	 "X-CSRF-Token" : localStorage.getItem("access-token"),
                 	 "Authorization": "Basic "+localStorage.getItem("basic-auth")
                 },
                 method:Client.SortResources.method,

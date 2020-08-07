@@ -75,6 +75,7 @@ delete_single_product=(e)=>{
    fetch(Admin.adminproductdelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
              headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminproductdelete.method,
@@ -96,6 +97,7 @@ delete_single_product=(e)=>{
       fetch(Admin.adminproducttabledata.url,{
              headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminproducttabledata.method,
@@ -126,6 +128,7 @@ delete_single_product=(e)=>{
          fetch(Admin.admindraftproduct.url+`${draftid}?_format=json`,{
              headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.admindraftproduct.method,

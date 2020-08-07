@@ -20,6 +20,7 @@ class Adminproductfilter extends React.Component{
       fetch(Admin.adminproductdropdown.url,{
              headers:{
                   "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
                   "Authorization": "Basic "+localStorage.getItem("basic-auth"),
             },
             method:Admin.adminproductdropdown.method,
@@ -43,6 +44,7 @@ class Adminproductfilter extends React.Component{
              fetch(Admin.adminproducttabledata.url+`&field_product_category_target_id=${productid}`,{
                 headers:{
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                },
                method:Admin.adminproducttabledata.method,
@@ -59,6 +61,7 @@ class Adminproductfilter extends React.Component{
          fetch(Admin.adminproducttabledata.url+`&field_product_category_target_id=All`,{
                 headers:{
                      "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
                },
                method:Admin.adminproducttabledata.method,

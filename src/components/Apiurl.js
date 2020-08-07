@@ -222,6 +222,10 @@ export const Repclient={
     Repclientproductdetails:{
         url:base_url+"/jsonapi/client_products_details/",
         method:"GET"
+    },
+    Repclientdetails:{
+        url:base_url+"/jsonapi/client_details/",
+        method:"GET"
     }
 
 }

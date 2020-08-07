@@ -164,7 +164,7 @@ console.log(this.props.checkifPagecall,"View called");
                                     }).then(data=>{
                                        if(status===200){
                                           localStorage.clear();
-                                          this.props.historyPush.history.push("/Login");
+                                          this.props.historyPush.history.push("/");
                                        }else{
                                           return false;
                                        }

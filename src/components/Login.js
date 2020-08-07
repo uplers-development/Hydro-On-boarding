@@ -42,7 +42,7 @@ class Login extends Component{
 			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="rep"){
 				this.props.history.push({pathname:"/RepDashboard"});
 			}if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="administrator"){
-				this.props.history.push({pathname:"/user"});
+				//this.props.history.push({pathname:"/user"});
 			}
 		}
 

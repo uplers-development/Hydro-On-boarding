@@ -389,12 +389,14 @@ class Profile extends Component {
 						 <form>
 							<div className="form-group" tabindex="1">
 								<label>Password</label>
-								<input type="password" name='password' id='password'/>
+								<input type="password" name='password' id='password' onBlur={""}/>
+								{this.state.blankRepeatPasswordvalid===false ? <span className="Error">{this.state.blankRepeatPassword}</span> : ''}
 								</div>
 
 								<div className="form-group" tabindex="2">
 								<label>Confirm password</label>
-								<input type="password" name='password' id='password'/>
+								<input type="password" name='rpassword' id='rpassword' className="no-cpoy-cpass" onBlur={""}/>
+								{this.state.blankRepeatPasswordvalid===false ? <span className="Error">{this.state.blankRepeatPassword}</span> : ''}
 								</div>
 								
 								<div className="button-group">

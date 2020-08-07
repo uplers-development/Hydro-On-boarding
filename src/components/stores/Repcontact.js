@@ -127,12 +127,12 @@ class Repcontact extends React.Component {
 
 																<div className="right">
 																	<ul>
-																		<li><Link to={`tel:${this.state.repContactDetails.field_contact_number[0].value}`} title={this.state.repContactDetails.field_contact_number[0].value}><img src={require("../../images/ic_telephone_blue.svg")} alt="Telephone marker" />
-																				<span><strong>Tel:</strong> {this.state.repContactDetails.field_contact_number[0].value}</span></Link>
+																		<li><a href={`tel:${this.state.repContactDetails.field_contact_number[0].value}`} title={this.state.repContactDetails.field_contact_number[0].value}><img src={require("../../images/ic_telephone_blue.svg")} alt="Telephone marker" />
+																				<span><strong>Tel:</strong> {this.state.repContactDetails.field_contact_number[0].value}</span></a>
 																		</li>
 
-																		<li><Link to={`mailto:${this.state.repContactDetails.email}`} title= {this.state.repContactDetails.email}><img src={require("../../images/ic_mail_box_blue.svg")} alt="Mailbox marker" />
-																				<span><strong>Email:</strong> {this.state.repContactDetails.email}</span></Link>
+																		<li><a href={`mailto:${this.state.repContactDetails.email}`} title= {this.state.repContactDetails.email}><img src={require("../../images/ic_mail_box_blue.svg")} alt="Mailbox marker" />
+																				<span><strong>Email:</strong> {this.state.repContactDetails.email}</span></a>
 																		</li>
 																	</ul>
 																</div>

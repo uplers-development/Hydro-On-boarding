@@ -32,6 +32,22 @@ class Login extends Component{
 
     getLoginPageContent =() =>{
     	this.setState({loader:true})
+    	if(localStorage.getItem("user-type")){
+	    	if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="admin"){
+				this.props.history.push({pathname:"/admin-resources"});
+			}
+			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
+				this.props.history.push({pathname:"/Dashboard"});
+			}
+			if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="rep"){
+				this.props.history.push({pathname:"/RepDashboard"});
+			}if(JSON.parse(localStorage.getItem("user-type")).roles[1]==="administrator"){
+				this.props.history.push({pathname:"/user"});
+			}
+		}
+
+
+
     	fetch(Apiurl.Loginpagecontent.url,{
     			headers: {
                 	"Content-Type" : "application/json",

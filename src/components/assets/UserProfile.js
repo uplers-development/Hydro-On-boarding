@@ -111,7 +111,7 @@ class UserProfile extends Component {
 <div className="person-profile-img bg-cover" style={{backgroundImage:"url( ../../images/profile-logo-blue.svg)"}}>
 						</div>
 
-						<h2>{"First name " + " " +"Last name" }</h2>
+						<h2>{}</h2>
 					</div>
 				}
 				<div className="drop-down-menu">

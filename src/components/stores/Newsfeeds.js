@@ -78,20 +78,28 @@ class Newsfeeds extends Component {
     	}).then(data=>{
     		console.log(data);
     			let newsfeed = []
+    			let dataofi;
 				for (var i = 0; i < data.length; i++) {
 					 if(i > 0  && data[i-1].created_1!==data[i].created_1){     
 		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}</h4></div>);  	 
 		        	 }else if(i == 0){
 		        	 	newsfeed.push(<div className="news-date"><h4>{data[i].created_2}<span></span></h4></div>);  	 
 		        	 }	  
+		        	 dataofi=data[0];
 					 if(data[i].field_news_feed_type=="5"){
 					 	 newsfeed.push(<div className="datewise-common-block white-text teal-color-bg"><div className="top-title"><img  src={site_url+data[i].field_icon} alt="setting-logo"/><h4>{ReactHtmlParser(data[i].title)}</h4></div><div className="time-date">{new Date()===new Date(data[i].created) ? data[i].created : data[i].created}</div>{ReactHtmlParser(data[i].body)}</div>);
 					 }else if(data[i].field_news_feed_type=="4"){
-					 	 newsfeed.push(<div className="white-text datewise-common-block d-flex flex-wrap padding-0"><div className="left-content cobalt-blue-bg"><div className="top-title"><img  src={site_url+data[i].field_icon}/><h4>New product launch</h4></div><div className="time-date">{new Date()===new Date(data[i].created) ? data[i].created : data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block"><Link className="btn btn-cobalt-blue" to={""} onClick={e=>e.preventDefault()}><span>{data[i].field_news_feed_button}</span></Link></div></div><div className="image-block bg-cover" style={{backgroundImage: `url(${site_url+data[i].field_image})`}}></div></div>);
+					 	 newsfeed.push(<div className="white-text datewise-common-block d-flex flex-wrap padding-0"><div className="left-content cobalt-blue-bg"><div className="top-title"><img  src={site_url+data[i].field_icon}/><h4>New product launch</h4></div><div className="time-date">{new Date()===new Date(data[i].created) ? data[i].created : data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block"><Link className="btn btn-cobalt-blue" to={data[i].field_news_feed_button_1!=='' ? data[i].field_news_feed_button_1 :'/Newsfeed'}><span>{data[i].field_news_feed_button}</span></Link></div></div><div className="image-block bg-cover" style={{backgroundImage: `url(${site_url+data[i].field_image})`}}></div></div>);
 					 }else if(data[i].field_news_feed_type=="2"){
-					 	 newsfeed.push(<div className="datewise-common-block white-bg-boxshadow"><div className="top-title"><img  src={site_url+data[i].field_icon} alt="warning-logo"/><h4><span>{data[i].title}</span></h4></div><div className="time-date">{new Date()===new Date(data[i].created) ? data[i].created : data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block">{data[i].field_news_feed_button!=='' ? <button className="btn common-btn-white" type="submit"><span>{data[i].field_news_feed_button}</span></button> : ''}</div></div>);
+					 	 newsfeed.push(<div className="datewise-common-block white-bg-boxshadow"><div className="top-title"><img  src={site_url+data[i].field_icon} alt="warning-logo"/><h4><span>{data[i].title}</span></h4></div><div className="time-date">{new Date()===new Date(data[i].created) ? data[i].created : data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block">{data[i].field_news_feed_button!=='' ? <button className="btn common-btn-white" type="submit" onClick={((e)=>{
+					 	 		e.preventDefault();
+					 	 		this.props.history.push(dataofi.field_news_feed_button_1!=='' ? dataofi.field_news_feed_button_1 :'/Newsfeed')
+					 	 	})}><span>{data[i].field_news_feed_button}</span></button> : ''}</div></div>);
 					 }else if(data[i].field_news_feed_type=="3"){
-					 	 newsfeed.push(<div className="datewise-common-block white-bg-boxshadow"><div className="top-title"><img  src={site_url+data[i].field_icon} alt="issue-logo"/><h4>{data[i].title}</h4></div><div className="time-date">{new Date()===new Date(data[i].created) ? data[i].created : data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block">{data[i].field_news_feed_button!=='' ? <button className="btn common-btn-white" type="submit"><span>{data[i].field_news_feed_button}</span></button> : ''}</div></div>);
+					 	 newsfeed.push(<div className="datewise-common-block white-bg-boxshadow"><div className="top-title"><img  src={site_url+data[i].field_icon} alt="issue-logo"/><h4>{data[i].title}</h4></div><div className="time-date">{new Date()===new Date(data[i].created) ? data[i].created : data[i].created}</div>{ReactHtmlParser(data[i].body)}<div className="btn-block">{data[i].field_news_feed_button!=='' ? <button className="btn common-btn-white" type="submit" onClick={((e)=>{
+					 	 		e.preventDefault();
+					 	 		this.props.history.push(dataofi.field_news_feed_button_1!=='' ? dataofi.field_news_feed_button_1 :'/Newsfeed')
+					 	 	})}><span>{data[i].field_news_feed_button}</span></button> : ''}</div></div>);
 					 }
 		        	 	
 		        }

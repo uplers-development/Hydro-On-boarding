@@ -7,9 +7,12 @@ class Adminremobilefilter extends React.Component{
 		super(props)
 		this.state={
 			openContainer:false,
+			openPopup:false,
 		}
-	this.sort_admin_rep_clients=this.sort_admin_rep_clients.bind(this);
-
+		this.bulkdelete=React.createRef();
+		this.sort_admin_rep_clients=this.sort_admin_rep_clients.bind(this);	
+		this.selectAlltheRep=this.selectAlltheRep.bind(this);
+		this.bulkDelete=this.bulkDelete.bind(this);
 	}
 
 
@@ -71,6 +74,97 @@ class Adminremobilefilter extends React.Component{
 
 	}
 
+	selectAlltheRep=(e)=>{
+		e.preventDefault();
+		this.bulkdelete.current.classList.toggle("active");
+		var ele=document.querySelector(".repparent");
+		var checkboxes = document.getElementsByTagName('input');
+		if(this.bulkdelete.current.classList.contains("active")){
+		document.querySelector(".repparent").checked=true;
+		
+		 if (ele.checked) {
+			  for (var i = 0; i < checkboxes.length; i++) {
+					if (checkboxes[i].type == 'checkbox') {
+						 checkboxes[i].checked = true;
+					}
+			  }
+		 }else {
+			  for (var i = 0; i < checkboxes.length; i++) {
+					console.log(i)
+					if (checkboxes[i].type == 'checkbox') {
+						 checkboxes[i].checked = false;
+					}
+			  }
+		  }
+		}else{
+			document.querySelector(".repparent").checked=false;
+			for (var i = 0; i < checkboxes.length; i++) {
+				console.log(i)
+				if (checkboxes[i].type == 'checkbox') {
+					 checkboxes[i].checked = false;
+				}
+		  }
+		}
+	}
+
+
+	bulkDelete=(e)=>{
+		let collectId=[];
+		document.querySelectorAll(".repchecked:checked").forEach((item,index)=>{
+				collectId.push(item.value)
+		})
+		console.log(collectId);
+		let clientbulkid={
+				user_ids:collectId.toString()
+			}
+			try{
+				fetch(Admin.adminrepBulkDelete.url,{
+						headers: {
+		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+		                },
+		                method:Admin.adminrepBulkDelete.method,
+		                body:JSON.stringify(clientbulkid)
+				}).then(res=>{
+					return res.json();
+				}).then(data=>{
+					console.log(data);
+					this.setState({openPopup:false});
+					let status;
+					fetch(Admin.adminreptablelisting.url,{
+						headers:{
+								"Content-Type" : "application/json",
+								"X-CSRF-Token" : localStorage.getItem("access-token"),
+								"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+							},
+							method:Admin.adminreptablelisting.method
+					}).then(res=>{
+						status=res.status;
+						return res.json()
+					}).then(data=>{
+						if(status===200){
+							this.props.recordDelete(true,data);
+							this.bulkdelete.current.classList.remove("active");
+							this.setState({openContainer:false});
+						}
+					})
+					document.querySelector(".repparent").checked=false;
+				   document.querySelectorAll(".repchecked:checked").forEach((item,index)=>{
+						item.checked=false;
+					})
+
+
+					 
+				})
+		 	}catch(err){
+		 		console.log(err);
+		 		alert(err);
+		 		this.setState({openPopup:false});
+		 	}
+			
+	}
+
 	render(){
 		return(
 				 <div className={this.state.openContainer ? "mobile-filter filter-active" : "mobile-filter"}>
@@ -96,11 +190,11 @@ class Adminremobilefilter extends React.Component{
 	                          <h5>Bulk Action</h5>
 	                          <ul>
 	                             <li>
-	                                <Link to={""} onClick={e=>e.preventDefault()} title="Delete">
+	                                <Link to={""} onClick={this.selectAlltheRep} title="Delete" ref={this.bulkdelete}>
 	                                Delete</Link>
 	                             </li>
 	                             <li>
-	                                <Link to={""} onClick={e=>e.preventDefault()} title="Action 1">
+	                                <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:true})})} title="Action 1">
 	                                Action</Link>
 	                             </li>
 	                          </ul>
@@ -131,6 +225,31 @@ class Adminremobilefilter extends React.Component{
 	                          </div>
 	                       </div>
 	                    </div>
+							  {this.state.openPopup ? 
+					<div id="modal" className="modal-container">
+						<div className="modal d-flex flex-wrap align-center justify-center">
+							<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}
+							className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+							
+						<div>
+							<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+								<p>Are you sure you want to delete records?</p>
+
+							<div className="btn-blok">
+								<button onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})
+									document.querySelectorAll(".repchecked").forEach((item,index)=>{
+										document.querySelector(".repparent").checked=false;
+										item.checked=false;
+									})
+
+							})} className="btn common-btn-blue"><span>CANCEL</span></button>
+								<button className="btn common-btn-blue" onClick={this.bulkDelete}><span>YES</span></button>	
+							</div>
+							
+						</div>
+						</div>
+					</div>
+					: <></>}
                  </div>
 			)
 	}

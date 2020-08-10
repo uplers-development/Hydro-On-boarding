@@ -11,16 +11,15 @@ constructor(props){
 		}
 		this.bulkdelete=React.createRef();
 		this.selectAlltheRep=this.selectAlltheRep.bind(this);
-		//this.bulkDelete=this.bulkDelete.bind(this);
-		//this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
 	}
 
 	selectAlltheRep=(e)=>{
 		e.preventDefault();
-		this.bulkdelete.current.classList.add("active");
-		document.querySelector(".repparent").checked=true;
+		this.bulkdelete.current.classList.toggle("active");
 		var ele=document.querySelector(".repparent");
 		var checkboxes = document.getElementsByTagName('input');
+		if(this.bulkdelete.current.classList.contains("active")){
+		document.querySelector(".repparent").checked=true;
 		 if (ele.checked) {
 			  for (var i = 0; i < checkboxes.length; i++) {
 					if (checkboxes[i].type == 'checkbox') {
@@ -35,6 +34,15 @@ constructor(props){
 					}
 			  }
 		  }
+		}else{
+			document.querySelector(".repparent").checked=false;	
+			for (var i = 0; i < checkboxes.length; i++) {
+				console.log(i)
+				if (checkboxes[i].type == 'checkbox') {
+					 checkboxes[i].checked = false;
+				}
+		  }
+		}
 	}
 
 

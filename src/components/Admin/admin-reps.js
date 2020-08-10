@@ -95,7 +95,7 @@ class AdminRep extends React.Component {
 						                  </div>
 						                  <div className="search-sort-block d-flex flex-wrap align-center">
 						                    	<Adminrepsearch getSearchedvalue={this.returnserachedItem}/>
-						                    	<Adminrepmobilefilter selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
+						                    	<Adminrepmobilefilter recordDelete={this.recordDelete} selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
 						                   		<Adminrepsort selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
 						                  </div>
 						               </div>

@@ -333,6 +333,10 @@ export const Admin={
     adminviewrepclient:{
         url:base_url+`/user/`,
         method:"GET",
+    },
+    adminrepBulkDelete:{
+        url:base_url + '/json-api/bulk_delete.json',
+        method:'POST'
     }
 }
 

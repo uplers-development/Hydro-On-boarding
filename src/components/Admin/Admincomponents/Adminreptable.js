@@ -127,7 +127,21 @@ class Adminreptable extends React.Component{
 	 	if(document.getElementById("admin-rep-search") && document.querySelector("#admin-rep-search").value!==''){
 	 		newrepdata=this.props.filteredserachedstatus ? this.props.filterbyserach : ''; 
 	        noDatacall=this.props.filteredserachedstatus ? !this.state.noDatacall :this.state.noDatacall;
-	 	}else{
+	 	}else if(this.props.getrefreshtableafterdelete){
+				if(this.props.getrefreshtableafterdelete && this.props.getupdateAfterBulkDelete.length > 0){
+					noDatacall=!this.state.noDatacall;
+					newrepdata=this.props.getupdateAfterBulkDelete;
+				}
+				else if(this.props.getrefreshtableafterdelete && this.props.getupdateAfterBulkDelete.length <= 0){
+					newrepdata='';
+					noDatacall=this.state.noDatacall;
+				}
+				else if(!this.props.getrefreshtableafterdelete){
+					newrepdata=this.state.adminreptabledata;
+					noDatacall=!this.state.noDatacall;
+				}
+
+		 }else{
 		 	if(this.props.checkifselected && this.props.getsorteddata.length > 0){
 		        noDatacall=!this.state.noDatacall;
 		        newrepdata=this.props.getsorteddata;

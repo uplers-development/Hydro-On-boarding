@@ -90,7 +90,7 @@ class AdminResource extends React.Component {
 				         <Adminnavbar checktheviewercall={this.sendViewercallfalse} sendviewcall={this.state.viewcaller} historyPush={this.props}/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
-				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange}  />
+				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom}  />
 				            </div>
 				            <div className="bottom-content-block with-filter">
 				               {!this.state.viewcaller ? 

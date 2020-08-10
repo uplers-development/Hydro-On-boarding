@@ -26,6 +26,7 @@ class AdminRep extends React.Component {
 			viewcaller:false,
 			repchangedid:null,
 			pageTitleChange:false,
+			mulitdeleteSuccess:false,
 		}
 		this.getadmindetail=this.getadmindetail.bind(this);
 		this.checkloadingfordata=this.checkloadingfordata.bind(this);
@@ -70,6 +71,9 @@ class AdminRep extends React.Component {
    		this.setState({viewcaller:checkupdatedresponse});
    }
 
+	recordDelete=(returnrecords,returnsrecords)=>{
+		this.setState({mulitdeleteSuccess:returnrecords,bulkdeleteupdate:returnsrecords})
+	}
 
 	render(){
 	
@@ -79,13 +83,13 @@ class AdminRep extends React.Component {
 						      <Adminnavbar historyPush={this.props}/>
 						      <div className="d-flex flex-wrap right-content-part">
 						         <div className="top-heading">
-						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange}/>
+						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom}/>
 						         </div>
 						         <div className="bottom-content-block with-filter reps-filter add">
 						         {!this.state.viewcaller ? 
 						            <div className="d-flex flex-wrap reps-main-block">
 						               <div className="fileter-block d-flex flex-wrap border-bottom">
-						                 <Adminrepbulkdelete/>
+						                 <Adminrepbulkdelete recordDelete={this.recordDelete}/>
 						                  <div className="btn-block">
 						                     <button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>Add Rep</span></button>
 						                  </div>
@@ -95,7 +99,7 @@ class AdminRep extends React.Component {
 						                   		<Adminrepsort selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} sortedfilterdata={this.getSortedfilterdata}/>
 						                  </div>
 						               </div>
-						             	<Adminreptable filteredserachedstatus={this.state.searchedstatus} filterbyserach={this.state.getSearchedvalue} checkifselected={this.state.checkifselesctedropdown} getsorteddata={this.state.sortedrepdata} checktheviewcalled={this.checktheview}/>
+						             	<Adminreptable filteredserachedstatus={this.state.searchedstatus} filterbyserach={this.state.getSearchedvalue} checkifselected={this.state.checkifselesctedropdown} getsorteddata={this.state.sortedrepdata} checktheviewcalled={this.checktheview} getrefreshtableafterdelete={this.state.mulitdeleteSuccess} getupdateAfterBulkDelete={this.state.bulkdeleteupdate}/>
 						            </div>
 						           :
 						           <div className="d-flex flex-wrap add-rep-main">

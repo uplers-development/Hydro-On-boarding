@@ -91,13 +91,23 @@ class Adminheader extends React.Component{
 
 render(){
 console.log(this.props.checkifPagecall,"View called");
+console.log(this.props.checkveiworaddclass,"View for the ADD or View");
   return (
       <div className="top-heading-continer d-flex flex-wrap align-center" >
             <div className="name-of-heading d-flex flex-wrap">
                {this.state.menulisting.map((item,index)=>
                   {if(window.location.pathname===item.field_react_route){
                      return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
-                     <h1>{!this.props.checkifPagecall ? item.title :"Add"+" "+(item.title==='Products' ? "product" : item.title==="Reps" ? "rep" : item.title.toLowerCase())}</h1></React.Fragment>)
+                     {this.props.checkveiworaddclass ? 
+                     
+                     <h1>{!this.props.checkifPagecall  ? item.title :"Add"+" "+(item.title==='Resources' ?"resources" : item.title==='Products' ? "product" : item.title==="Reps" ? "rep" : item.title.toLowerCase())}</h1>
+                     
+                      : 
+                      
+                      <h1>{!this.props.checkifPagecall  ? item.title :"View"+" "+(item.title==='Resources' ?"resources" :item.title==='Products' ? "product" : item.title==="Reps" ? "rep" : item.title.toLowerCase())}</h1>
+                      }
+                      </React.Fragment>
+                      )
                   }
                })}
             </div>

@@ -110,8 +110,8 @@ constructor(props){
 	                     <span>Bulk Action</span>
 	                     <ul className="list">
 	                        <li>
-	                           <Link to={""} onClick={this.selectAlltheRep} title="Bulk Action 1" ref={this.bulkdelete}>
-	                           Bulk Action 1</Link>
+	                           <Link to={""} onClick={this.selectAlltheRep} title="Delete" ref={this.bulkdelete}>
+	                          Delete</Link>
 	                        </li>
 	                     </ul>
                   </div>

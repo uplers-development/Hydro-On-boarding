@@ -263,7 +263,7 @@ class Profile extends Component {
 					status2=res.status2;
 					res.json()
 				}).then(data=>{
-					if(status===200){
+					if(status2===200){
 						localStorage.clear();
 						this.props.history.push("/");
 					}else{

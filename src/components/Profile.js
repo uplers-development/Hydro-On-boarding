@@ -261,7 +261,7 @@ class Profile extends Component {
 					method:Apiurl.LogoutCall.method
 				}).then(res=>{
 					status2=res.status2;
-					res.json()
+					return res.json()
 				}).then(data=>{
 					if(status2===200){
 						localStorage.clear();

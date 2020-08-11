@@ -251,8 +251,25 @@ class Profile extends Component {
 			if(status===200){
 				console.log(data);
 				this.setState({loader:false});
-				localStorage.clear();
-				this.props.history.push("/")
+				let status2;
+				fetch(Apiurl.LogoutCall.url,{
+					headers: {
+	                	"Content-Type" : "application/json",
+	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+	                },
+					method:Apiurl.LogoutCall.method
+				}).then(res=>{
+					status2=res.status2;
+					res.json()
+				}).then(data=>{
+					if(status===200){
+						localStorage.clear();
+						this.props.history.push("/");
+					}else{
+						return false;
+					}
+				})
 			}
 		})
 		}
@@ -463,12 +480,12 @@ class Profile extends Component {
 						<div>
 						 <form onSubmit={this.update_password}>
 							<div className="form-group" tabIndex="1">
-								<label>Password</label>
+								<label>Current password</label>
 								<input type="password" name='currenpassword' id='currenpassword' onBlur={(e)=>!hasValidPassword(e.target.value) ? this.setState({currentpasswordcheck:true}): this.setState({currentpasswordcheck:false})}/>
 								{this.state.currentpasswordcheck ? ValidationMsg.common.default.currentpasswordfield  : ''}
 								</div>
 							<div className="form-group" tabIndex="2">
-															<label>Password</label>
+															<label>New password</label>
 															<input type="password" name='newpassword' id='newpassword' onBlur={(e)=>!hasValidPassword(e.target.value) ? this.setState({newapsswordcheck:true}): this.setState({newapsswordcheck:false})}/>
 															{this.state.newapsswordcheck ? ValidationMsg.common.default.newpasswordfield : ''}
 															</div>

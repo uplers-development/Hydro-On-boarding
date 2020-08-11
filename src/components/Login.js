@@ -22,9 +22,13 @@ class Login extends Component{
     		usernameState:false,
     		passwordState:false,
     		loader:false,
-    		loginError:true
+    		loginError:true,
+    		showHidePasswordfield:false,
+    		showresetpassworderror:false,
+    		showresetpassworderrormsg:'',
     	}
     	this.Login=this.Login.bind(this);
+    	this.updateresetpassword=this.updateresetpassword.bind(this);
     }
     componentDidMount(){
     	this.getLoginPageContent();
@@ -124,6 +128,48 @@ class Login extends Component{
       }
 	}
 
+	updateresetpassword=(e)=>{
+		e.preventDefault();
+		var resetPassworddata={
+    		mail:document.querySelector('#email').value,
+    	}
+		if(!hasNull(resetPassworddata.mail)){
+		try{
+			var status;
+			fetch(Apiurl.forgotPassword.url,{
+                method:Apiurl.forgotPassword.method,
+                body: JSON.stringify(resetPassworddata),
+    	}).then(res=>{
+    		status=res.status;
+    		if(status!==200){
+    			return res.json(); 
+    		}
+    	}).then(data=>{
+    		console.log(data);
+    		if(status===200){
+    			this.setState({showresetpassworderror:false,showresetpassworderrormsg:'Email is sent to you registered emailid.'});
+    			let self=this;
+    			setTimeout(()=>{
+    				self.setState({showHidePasswordfield:false,showresetpassworderrormsg:''})
+    				document.querySelector("#email").value='';
+    			},5000)
+    		}else{    			
+    			this.setState({showresetpassworderror:true,showresetpassworderrormsg:data.message});
+    		}
+    	});
+		}catch(err){
+			console.log(err);
+		}
+	}else{
+			hasNull(resetPassworddata.mail) ? this.setState({usernameState:true}): this.setState({usernameState:false})
+	}
+	}
+
+	resetPassword=(e)=>{
+		e.preventDefault();
+		this.setState({showHidePasswordfield:true});
+	}
+
    render(){
    		return(
    		<section className="main-wrapper">
@@ -139,7 +185,7 @@ class Login extends Component{
 							<a className="logo" href="#"><img src={this.state.login_logo}/></a>
 							
 							{/*<!--Login form start-->*/}
-							<form onSubmit={this.Login}>
+							<form onSubmit={!this.state.showHidePasswordfield ? this.Login : this.updateresetpassword}>
 								<div className="form-group">
 									<label>{this.state.login_email_title}</label>
 									<input type="email" placeholder={this.state.login_email_title} id='email' name='email' tabIndex="1" onBlur={(e)=>
@@ -147,23 +193,32 @@ class Login extends Component{
 									}/>
 									{this.state.usernameState ? ValidationMsg.common.default.userfield : ''}
 								</div>
-
+								{!this.state.showHidePasswordfield ? 
 								<div className="form-group">
 									<label>{this.state.login_password_title}</label>
 									<input type="password" placeholder="******" id='password' name='password' tabIndex="2" onBlur={(e)=>
 										hasNull(e.target.value) ? this.setState({passwordState:true}): this.setState({passwordState:false})
 									}/>
 									{this.state.passwordState ? ValidationMsg.common.default.passwordfield : ''}
-									<a href="#" title="Reset your password" tabIndex="3">Reset your password</a>
+									<Link to={""} onClick={this.resetPassword} title="Reset your password" tabIndex="3">Reset your password</Link>
 								</div>
-
+								:<></>}
+								{!this.state.showHidePasswordfield ? 
 								<div className="button-group">
 									<button className="btn common-btn-blue"  tabIndex="4">
 										<span>{this.state.login_sign_button}</span></button>
 									{this.state.login_rep_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_rep_button}</span></button>:''}
 									{this.state.login_admin_button!=='' ? <button className="btn common-btn-blue" type="submit"><span>{this.state.login_admin_button}</span></button>:''}
+
 								</div>
+								:
+								<div className="button-group">
+									<button className="btn common-btn-blue"  tabIndex="4">
+										<span>Submit</span></button>
+									</div>
+								}
 								{!this.state.loginError ? cosmaticAsset.cosmatic.default.loginErrorMsg : ''}
+								{this.state.showresetpassworderror ? <h5><span className="empty-field">{this.state.showresetpassworderrormsg}</span></h5> :  <h5><span className="empty-field">{this.state.showresetpassworderrormsg}</span></h5>}
 							</form>{/*<!--Login form end-->*/}
 							
 						</div>{/*<!--Login top details end-->*/}

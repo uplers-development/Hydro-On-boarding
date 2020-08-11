@@ -388,6 +388,14 @@ export default {
     LogoutCall:{
         url:base_url+`/json-api/user_logout.json`,
         method:"POST"
+    },
+    updatePassword:{
+        url:base_url+`/user/`,
+        method:'PATCH'
+    },
+    forgotPassword:{
+        url:base_url+`/user/password?_format=json`,
+        method:'POST'
     }
 
 }

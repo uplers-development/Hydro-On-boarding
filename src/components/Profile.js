@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Apiurl,{site_url,base_url} from './Apiurl'; 
-import{hasNull,isRequired} from './validation';
+import{hasNull,isRequired,hasValidPassword} from './validation';
 import {ValidationMsg} from'./constants/validationmsg';
 import ReactHtmlParser from 'react-html-parser';
 import {cosmaticAsset} from'./constants/common';
 
 
-let setdefaultroute;
+let setdefaultroute,timezonetimer;
 class Profile extends Component {
 	constructor(props) {
 		super(props);
@@ -35,24 +35,28 @@ class Profile extends Component {
 			addClass: false,
 			checktablist1:true,
 			checktablist2:false,
+			currentpasswordcheck:false,
+			newapsswordcheck:false,
+			confirmpasswordcheck:false,
+			confirmpasswordmsg:'',
+			dataLoaded:false,
 		}
 		this.updateProfile=this.updateProfile.bind(this);
 		this.updateProfilePic=this.updateProfilePic.bind(this);
 		this.timeZoneref=React.createRef();
 		this.showScreen=this.showScreen.bind(this);
+		this.update_password=this.update_password.bind(this);
 		console.log(this.props.location.state);
 	}
 
 	componentDidMount(){
-		var self=this;
 		if(localStorage.getItem("access-token")!==null){
+    		this.GetProfile();	
 			this.GetTimeZone();
-			//setTimeout(()=>{
-    			self.GetProfile();	
-			//},2000)
      	}else{
      		this.props.history.push("/Login")
      	}
+
 	}
 
 	GetTimeZone=()=>{
@@ -68,6 +72,8 @@ class Profile extends Component {
 		}).then(data=>{
 			console.log(data);
 			this.setState({timeZone:data.timezonehtml})
+			this.timeZoneref.current.value=this.state.time_zone;
+			this.setState({dataLoaded:true})
 		})
 	}
 
@@ -100,9 +106,6 @@ class Profile extends Component {
 			console.log(this.state.time_zone);
 			console.log(this.state.userPicture);
 			let self=this;
-			setTimeout(function(){
-				self.timeZoneref.current.value=self.state.time_zone;
-			},2000)
 			if(this.props.location.state===undefined){
 				setTimeout(function(){
 					self.setState({addClass:true})
@@ -210,11 +213,80 @@ class Profile extends Component {
 
 	showScreen=(e)=>{
 		e.preventDefault();
-		if(e.target.classList.contains("about-you")){this.setState({checktablist1:true,checktablist2:false})}
-		else if(e.target.classList.contains("password")){this.setState({checktablist1:false,checktablist2:true})}
+		if(e.target.classList.contains("about-you")){
+			this.setState({checktablist1:true,checktablist2:false})
+			this.GetProfile();
+			this.GetTimeZone();
+		}
+		else if(e.target.classList.contains("password")){
+			this.setState({checktablist1:false,checktablist2:true,confirmpasswordcheck:false,currentpasswordcheck:false,newapsswordcheck:false})
+		}
 	}
 
+
+	update_password=(e)=>{
+		e.preventDefault();
+		let passwordreset={
+			"pass" : [{"existing":document.querySelector("#currenpassword").value, "value":document.querySelector("#newpassword").value }]
+		}
+		console.log(passwordreset);
+		if(this.comparePassword(document.querySelector("#rpassword").value) && hasValidPassword(passwordreset.pass[0].existing) && hasValidPassword(passwordreset.pass[0].value)){
+		this.setState({loader:true});	
+		let target_id=JSON.parse(localStorage.getItem("user-type")).uid;
+		console.log(passwordreset);
+		try{
+		let status;
+		fetch(Apiurl.updatePassword.url+`${target_id}?_format=json`,{
+			headers: {
+                	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+                },
+                method:Apiurl.updatePassword.method,
+                body:JSON.stringify(passwordreset)
+		}).then(res=>{
+			status=res.status;
+			return res.json()
+		}).then(data=>{
+			if(status===200){
+				console.log(data);
+				this.setState({loader:false});
+				localStorage.clear();
+				this.props.history.push("/")
+			}
+		})
+		}
+		catch(err){
+			console.log(err);
+		}
+	}else{
+		!this.comparePassword(document.querySelector("#rpassword").value) ? this.setState({confirmpasswordcheck:true}) : this.setState({confirmpasswordcheck:true});
+		!hasValidPassword(passwordreset.pass[0].existing) ? this.setState({currentpasswordcheck:true}) : this.setState({currentpasswordcheck:true});
+		!hasValidPassword(passwordreset.pass[0].value) ? this.setState({newapsswordcheck:true}) : this.setState({newapsswordcheck:true})
+	}
+	}
+
+	comparePassword = (value) => {
+        // event.preventDefault();
+        if (!isRequired(value)) {
+            if (value !== document.querySelector("#newpassword").value) {
+            	let invalidArgument=ReactHtmlParser('<span class="empty-field">New password and confirm password are not same.</span>');
+                this.setState({confirmpasswordcheck:true,confirmpasswordmsg:invalidArgument })
+                return false;
+            }
+            else {
+                this.setState({ confirmpasswordcheck:false,confirmpasswordmsg:'' })
+                return true
+            }
+        } else {
+        	let invalidArgument=ReactHtmlParser('<span class="empty-field">Please enter your valid confirm password.</span>');
+            this.setState({confirmpasswordcheck: true,confirmpasswordmsg:invalidArgument })
+            return false;
+        }
+    }
+
 	render() {
+
 		if(this.props.location.state!==undefined){
 			if(this.props.location.state.admin){
 				setdefaultroute="/admin-resources";
@@ -235,15 +307,16 @@ class Profile extends Component {
 			{/*<!--Nav fixed left block-->*/}
 			<nav className="navbar cobalt-blue-bg navbar-expand-md navbar-dark bg-primary fixed-left">
 				<Link className="navbar-logo" to={setdefaultroute} title="Main white logo"><img src={require("./../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
-				<ul>
-					<li><Link to={""} onClick={e=>e.preventDefault()} className={this.state.checktablist1 ? "about-you active":"about-you"}  title="News Feed">
+				{this.state.dataLoaded ? 
+					<ul>
+					<li><Link to={""} onClick={this.showScreen} className={this.state.checktablist1 ? "about-you active":"about-you"}  title="News Feed">
 							<img className="svg" src={require("./../images/profile-logo-blue.svg")} alt="profile-logo"/>
 							<span>About <span>you</span></span></Link></li>
-					<li><Link  to={""} onClick={e=>e.preventDefault()} className={this.state.checktablist2 ? "password active" : "password"} title="Password">
+					<li><Link  to={""} onClick={this.showScreen} className={this.state.checktablist2 ? "password active" : "password"} title="Password">
 							<img className="svg" src={require("./../images/lock-logo.svg")} alt="password-logo"/>
 							<span>Password</span></Link></li>
-				</ul>
-
+				</ul>:
+				<></>}
 				<div className="nav-copyright">© 2020 Hydro International</div>
 			</nav>
 			{/*<!--Nav fixed left block end-->*/}
@@ -290,7 +363,7 @@ class Profile extends Component {
 
 
 						{/*<!--Profile form block info start-->*/}
-						{!this.state.checktablist2 ? 
+						{this.state.checktablist1 ? 
 						<div className="profile-form-block">
 
 							{/*<!--Profile photo upload start-->*/}
@@ -388,21 +461,26 @@ class Profile extends Component {
 
 						:
 						<div>
-						 <form>
-							<div className="form-group" tabindex="1">
+						 <form onSubmit={this.update_password}>
+							<div className="form-group" tabIndex="1">
 								<label>Password</label>
-								<input type="password" name='password' id='password' onBlur={""}/>
-								{this.state.blankRepeatPasswordvalid===false ? <span className="Error">{this.state.blankRepeatPassword}</span> : ''}
+								<input type="password" name='currenpassword' id='currenpassword' onBlur={(e)=>!hasValidPassword(e.target.value) ? this.setState({currentpasswordcheck:true}): this.setState({currentpasswordcheck:false})}/>
+								{this.state.currentpasswordcheck ? ValidationMsg.common.default.currentpasswordfield  : ''}
 								</div>
+							<div className="form-group" tabIndex="2">
+															<label>Password</label>
+															<input type="password" name='newpassword' id='newpassword' onBlur={(e)=>!hasValidPassword(e.target.value) ? this.setState({newapsswordcheck:true}): this.setState({newapsswordcheck:false})}/>
+															{this.state.newapsswordcheck ? ValidationMsg.common.default.newpasswordfield : ''}
+															</div>
 
-								<div className="form-group" tabindex="2">
+								<div className="form-group" tabIndex="3">
 								<label>Confirm password</label>
-								<input type="password" name='rpassword' id='rpassword' className="no-cpoy-cpass" onBlur={""}/>
-								{this.state.blankRepeatPasswordvalid===false ? <span className="Error">{this.state.blankRepeatPassword}</span> : ''}
+								<input type="password" name='rpassword' id='rpassword' className="no-cpoy-cpass" onPaste={(e)=>e.preventDefault()}  onBlur={((e)=>this.comparePassword(e.target.value))}/>
+								{this.state.confirmpasswordcheck ? this.state.confirmpasswordmsg : ''}
 								</div>
 								
 								<div className="button-group">
-							<button className="btn common-btn-blue" type="submit" tabindex="3"><span>submit</span></button></div>
+							<button className="btn common-btn-blue" type="submit" tabIndex="4"><span>submit</span></button></div>
 
 							</form>
 						</div>

@@ -40,6 +40,12 @@ export const ValidationMsg = {
             productnamefield:ReactHtmlParser('<span class="empty-field">Please enter product name.</span>'),
             productdescriptionfield:ReactHtmlParser('<span class="empty-field">Please enter description.</span>'),
             productsheettitlefield:ReactHtmlParser('<span class="empty-field">Please enter product sheet title.</span>'),
+
+            currentpasswordfield: ReactHtmlParser('<span class="empty-field">Please enter your valid current password.</span>'),
+            newpasswordfield: ReactHtmlParser('<span class="empty-field">Please enter your valid new password.</span>'),
+            confirmpasswordfield: ReactHtmlParser('<span class="empty-field">Please enter your valid confirm password.</span>'),
+            confirmpasswordmismatch: ReactHtmlParser('<span class="empty-field">New password and confirm password are not same.</span>'),
+
     	}
     }
 }

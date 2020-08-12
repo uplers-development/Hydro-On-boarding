@@ -251,7 +251,6 @@ class Profile extends Component {
 			if(status===200){
 				console.log(data);
 				this.setState({loader:false});
-				let status2;
 				fetch(Apiurl.LogoutCall.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
@@ -260,16 +259,15 @@ class Profile extends Component {
 	                },
 					method:Apiurl.LogoutCall.method
 				}).then(res=>{
-					status2=res.status2;
 					return res.json()
 				}).then(data=>{
-					if(status2===200){
-						localStorage.clear();
-						this.props.history.push("/");
-					}else{
-						return false;
-					}
+					localStorage.clear();
+					this.props.history.push("/");
 				})
+			}else{
+				alert(data.message);
+				!hasValidPassword(passwordreset.pass[0].existing) ? this.setState({currentpasswordcheck:true}) : this.setState({currentpasswordcheck:true});
+				this.setState({loader:false});
 			}
 		})
 		}

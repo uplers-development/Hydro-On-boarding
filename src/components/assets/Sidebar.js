@@ -33,24 +33,27 @@ class Sidebar extends Component {
               this.setState({newsFeedcounts:data.length})
           })
 		let self=this;
-		if((localStorage.getItem("user-type")!==null || localStorage.getItem("user-type")!==undefined || localStorage.getItem("user-type")!=='') && JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
-		setInterval(function(){
-          fetch(Client.NewsfeedsNotification.url,{
-              headers: {
-                      "Content-Type" : "application/json",
-                      "X-CSRF-Token" : localStorage.getItem("access-token"),
-                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
-                    },
-                   method:Client.NewsfeedsNotification.method
-          }).then(res=>{
-            return res.json()
-          }).then(data=>{
-              console.log(data);
-              self.setState({newsFeedcounts:data.length})
-          })
+		let setint = setInterval(function(){
+				if(localStorage.getItem("user-type") && (localStorage.getItem("user-type")!==null || localStorage.getItem("user-type")!==undefined || localStorage.getItem("user-type")!=='') && JSON.parse(localStorage.getItem("user-type")).roles[1]==="client"){
+		          fetch(Client.NewsfeedsNotification.url,{
+		              headers: {
+		                      "Content-Type" : "application/json",
+		                      "X-CSRF-Token" : localStorage.getItem("access-token"),
+		                      "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+		                    },
+		                   method:Client.NewsfeedsNotification.method
+		          }).then(res=>{
+		            return res.json()
+		          }).then(data=>{
+		              console.log(data);
+		              self.setState({newsFeedcounts:data.length})
+		          })
+		      	}else{
+		      		clearInterval(setint);
+		      	}
         },10000);
         }
-	}
+
 
 	SidebarItems=()=>{
 			

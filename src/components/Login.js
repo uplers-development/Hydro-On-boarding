@@ -26,6 +26,7 @@ class Login extends Component{
     		showHidePasswordfield:false,
     		showresetpassworderror:false,
     		showresetpassworderrormsg:'',
+    		loginfailmsg:'',
     	}
     	this.Login=this.Login.bind(this);
     	this.updateresetpassword=this.updateresetpassword.bind(this);
@@ -103,8 +104,9 @@ class Login extends Component{
     	}).then(data=>{
     		console.log(data);
     		if(data.message){
-    			this.setState({loginError:false})
+    			this.setState({loginError:false,loginfailmsg:data.message})
     		}else{
+    			this.setState({loginError:true,loginfailmsg:''});
     			localStorage.setItem("access-token",data.csrf_token);
     			localStorage.setItem("basic-auth",btoa(data.current_user.name+':'+logindata.pass));
     			localStorage.setItem("user-type",JSON.stringify(data.current_user));
@@ -217,7 +219,7 @@ class Login extends Component{
 										<span>Submit</span></button>
 									</div>
 								}
-								{!this.state.loginError ? cosmaticAsset.cosmatic.default.loginErrorMsg : ''}
+								{!this.state.loginError ? <h5><span className="empty-field">{this.state.loginfailmsg}</span></h5> : ''}
 								{this.state.showresetpassworderror ? <h5><span className="empty-field">{this.state.showresetpassworderrormsg}</span></h5> :  <h5><span className="empty-field">{this.state.showresetpassworderrormsg}</span></h5>}
 							</form>{/*<!--Login form end-->*/}
 							

@@ -517,7 +517,7 @@ nav {
 		padding: 48px 0 35px 0;
 		overflow: hidden;
 		z-index: 1;
-
+		min-height: 500px;
 		@media screen and (max-width:$large-m) {
 			padding: 25px 0 35px 0;
 		}
@@ -529,9 +529,10 @@ nav {
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 			top: auto;
-			z-index: 3;
+			z-index: 111;
 			padding: 13px 0 6px;
 			position: fixed;
+			min-height: auto;
 		}
 
 		&:before {
@@ -1508,9 +1509,10 @@ nav {
 	}
 	.user-image-name {
 		width: 100%;
-
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
+			padding-right: 20px;
+    		position: relative;
 		}
 		> img, .person-profile-img {
 			width: 40px;
@@ -1564,40 +1566,24 @@ nav {
 				}
 			}
 		}
+		&:after {
+			content: "";
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background-image: url(#{$imgpath}/arrow-select.svg);
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+			position: absolute;
+			right: 4px;
+			top: 10px;
+			@include transition(all 0.2s ease-in-out);
+		}
+		
 	}
 
-	/*&:hover
-		{
-			background-color: $white;
-			box-shadow: 0px 4px 16px $gray-light;
-			h2 {
-				&:after {
-					border-top-color: $black;  
-				}
-			}
-			.drop-down-menu
-			{	
-				visibility: visible;
-				opacity: 1;
-			}
-		}
 	
-	&:hover
-		{
-			z-index: 11;
-			box-shadow: 0px 4px 16px $gray-light;
-			.user-image-name
-			{
-				h2 {
-					color: $black;
-					visibility: visible;
-					opacity: 1;
-				}
-			}
-			
-		}
-	*/
-
 	&.active {
 		background-color: $white;
 		box-shadow: 0px 4px 16px rgba(69, 91, 99, 0.08);
@@ -1616,6 +1602,15 @@ nav {
 			opacity: 1;
 		}
 	}
+	
+	&.active {
+			.user-image-name {
+				&:after {
+					transform: rotate(180deg);
+					-webkit-transform: rotate(180deg);
+				}
+			}
+		}
 }
 
 /*White bg box shdow gray*/

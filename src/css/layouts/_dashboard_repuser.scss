@@ -424,12 +424,12 @@
 								word-break: break-word;
 							}
 							@media screen and (max-width:$mobile-small) {
-								padding: 10px 0 0 0;
-								width: 100%;
+								padding: 0 0 0 10px;
+    							width: calc(100% - 87px);
 							}
 							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
-								padding: 10px 0 0 0;
-								width: 100%;
+								padding: 0 0 0 10px;
+    							width: calc(100% - 87px);
 							}
 						}
 						&:not(:last-child) {

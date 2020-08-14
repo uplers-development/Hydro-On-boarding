@@ -76,10 +76,14 @@
 					width: calc(50% - 20px);
 					margin: 10px 0;
 				}
-
-				@media screen and (max-width:$mobile-small) {
-					width: calc(100% - 20px);
+				
+				@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
+					width: calc(25% - 20px);
 				}
+
+				/*@media screen and (max-width:$mobile-small) {
+					width: calc(100% - 20px);
+				}*/
 
 				a {
 					width: 100%;
@@ -222,7 +226,8 @@
 
 				.textarea-block {
 					position: relative;
-
+					border: 1px solid $light-black-2;
+					
 					> img {
 						position: absolute;
 						/*height: 78%;*/
@@ -240,6 +245,7 @@
 							right: 10px;
 						}
 					}
+					.rdw-editor-main { padding: 0 10px; }
 				}
 			}
 			
@@ -485,8 +491,8 @@
 				}
 			}
 		}
-
-
 	}
-
+	.rdw-editor-toolbar {
+		border: 0;
+	}
 }

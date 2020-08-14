@@ -36,15 +36,21 @@
 	.pro-title {
 		width: 100%;
 		margin-top: 52px;
+		position: relative;
 		@media screen and (max-width:$large-m) {
 			margin-top: 30px;
+		}
+		@media screen and (max-width:$ipad-portrait) {
+			padding-right: 0;
 		}
 		.search-right {
 			margin-left: auto;
 			@media screen and (max-width:$ipad-portrait) {
 				/*margin-left: 0;*/
-				margin-top: 5px;
+				margin-top: 15px;
 				margin-bottom: 5px;
+				margin-left: 0;
+				width: 100%;
 			}
 			@media screen and (max-width: $mobile-small) {
 				margin-top: 0;
@@ -59,7 +65,7 @@
 						min-width: auto;
 					}
 					@media screen and (max-width:$mobile-small	) {
-						padding: 5px 15px 2px;
+						padding: 5px 10px 2px;
 					}
 					@media (max-height: $mob-landscape-375) and (max-height: $iphone-x) and (orientation: landscape) {
 						padding: 5px 15px 3px;
@@ -70,6 +76,10 @@
 						@media screen and (max-width:$large) {
 							font-size: 16px;
 						}
+						@media screen and (max-width: $small-x) {
+							font-size: 15px;
+						}
+						
 					}
 					&:after {
 						width: auto;
@@ -77,17 +87,30 @@
 						background-size: contain;
 					}
 				}
+				@media screen and (max-width:$ipad-portrait) {
+					position: absolute;
+					top: 10px;
+					right: 0;
+					margin-right: 0;
+				}
 			}
 			.auto-search-box {
+				@media screen and (max-width:$ipad-portrait) {
+					width: 100%;
+				}
 				@media screen and (max-width:$mobile-small) {
 					margin-top: 0;
 					margin-left: 15px;
 				}
+				
 			}
 		}
 		.search-right {
 			input[type="text"] {
 				padding: 9px 25px 5px 33px;
+				@media screen and (max-width:$ipad-portrait) {
+					background-position: 2% center;
+				}
 			}
 		}
 	}
@@ -216,35 +239,37 @@
 		&.pro-title {
 			@media screen and (max-width:$mobile-small) {
 				padding-right: 0;
+				position: relative;
+    			padding-bottom: 10px;
 			}
 			.search-right {
 				.auto-search-box {
 					margin: 0;
 					@media screen and (max-width:$mobile-small) {
-						width: 200px;
-						margin-left: 15px;
+						width: 100%;
+						margin-left: 0;
 					}
-					@media screen and (max-width:$small-medium) {
-						width: 180px;
-						margin-left: 10px;
-					}
+					
 					@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
-						margin-top: 0;
-						margin-left: 10px;
+						margin-top: 15px; 
+						margin-left: 0;
 					}
 				}
 				@media screen and (max-width:$mobile-small) {
-					margin-top: 0;
+					margin-top: 15px;
 					margin-left: auto;
+					width: 100%;
 				}
 				.btn-block {
 					@media screen and (max-width:$mobile-small) {
 						margin: 10px 0;
+						position: absolute; 
+						right: 0;
+						top: 0;
 					}
 				}
 				@media screen and (max-width:$small-medium) {
 					margin-left: 0;
-					margin-top: 10px;
 				}
 				@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
 					margin-top: 0;
@@ -265,13 +290,11 @@
 			}
 			.search-right {
 				@media screen and (max-width:$mobile-small) {
-					margin-left: 0;
-					margin-top: 10px;
+					margin-left: auto;
+					margin-top: 0;
+					margin-bottom: 0;
 				}
-				@media screen and (max-width:$small-x) {
-					margin-left: 0;
-					margin-top: 15px;
-				}
+				
 				@media (max-height: $mob-landscape-375) and (max-width: $iphone-x) and (orientation: landscape) {
 					margin-left: auto;
 					margin-top: 0;
@@ -283,12 +306,17 @@
 						@media screen and (max-width:$ipad-landscape) {
 							min-width: auto;
 						}
+						span {
+							@media screen and (max-width: $small-x) {
+								font-size: 15px;
+							}
+						}
 					}
 				}
 			}
 			.name-of-heading {
 				@media screen and (max-width: $mobile-small) {
-					width: 100%;
+					width: auto;
 				}
 				img {
 					width:38px;
@@ -296,7 +324,7 @@
 						width: 28px;
 					}
 					@media screen and (max-width: $mobile-small) {
-						width: 22px;
+						width: 17px;
 					}
 				}
 			}

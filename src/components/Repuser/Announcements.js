@@ -37,6 +37,29 @@ class Announcements extends React.Component {
 	}
 
 	componentWillMount(){
+			let menulist={
+			menu:"main-navigation-rep"
+		};
+		let status;
+		fetch(Apiurl.menulisting.url,{
+		    headers:{
+		            "Content-Type" : "application/json",
+		            "X-CSRF-Token" : localStorage.getItem("access-token"),
+		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+		    },
+		    method:Apiurl.menulisting.method,
+		    body:JSON.stringify(menulist)
+  		}).then(res=>{status=res.status;
+  					  if(status===200){
+  							return res.json()
+  				     	}  		
+  		}).then(data=>{if(status!==200){
+  			localStorage.clear();
+    		this.props.history.push("/")
+    	}else{
+    		this.setState({menulisting:data})
+    	}
+    });
       if(localStorage.getItem("access-token")!==null){
          this.Rep_nav_menu();
          this.get_announcements_list();

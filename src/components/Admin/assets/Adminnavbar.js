@@ -13,10 +13,13 @@ class Adminnavbar extends React.Component {
 
   componentDidMount(){
     this.get_admin_header_item();
+        console.log(this.props.historyPush);
+
   }
 
   get_admin_header_item(){
       let menulist={menu:"main-navigation-admin"};
+      let status;
       fetch(Admin.menulisting.url,{
           headers:{
                   "Content-Type" : "application/json",
@@ -25,8 +28,15 @@ class Adminnavbar extends React.Component {
             },
             method:Admin.menulisting.method,
             body:JSON.stringify(menulist)
-      }).then(res=>{return res.json()}).then(data=>{
-               this.setState({menulisting:data})
+      }).then(res=>{status = res.status;
+                     if(status===200) return res.json();
+      }).then(data=>{
+            if(status!==200){
+               localStorage.clear();
+              this.props.historyPush.history.push("/");
+         }else{
+            this.setState({menulisting:data})
+            }
       })
    }
 

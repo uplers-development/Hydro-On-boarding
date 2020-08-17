@@ -43,6 +43,7 @@ class UserProfile extends Component {
 
 	GetProfile=()=>{
 		let target_id=JSON.parse(localStorage.getItem("user-type")).uid;
+		let status;
 		fetch(Apiurl.GetProfile.url+`${target_id}?_format=json`,{
 				headers: {
                 	"Content-Type" : "application/json",
@@ -51,14 +52,15 @@ class UserProfile extends Component {
                 },
                 method:Apiurl.GetProfile.method,
 		}).then(res=>{
-			return res.json();
+			status=res.status;
+			if(status===200)return res.json();
 		}).then(data=>{
+			if(status===200){
 			console.log(data);
 			console.log(data.field_first_name);
-			if(data!==''){
-			let clientuserpic=data.user_picture.length > 0 ? data.user_picture[0].url : '';
-			this.setState({dataLoaded:true,first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:clientuserpic})
-			console.log(this.state.userPicture);
+				let clientuserpic=data.user_picture.length > 0 ? data.user_picture[0].url : '';
+				this.setState({dataLoaded:true,first_name:data.field_first_name[0].value,last_name:data.field_last_name[0].value,userPicture:clientuserpic})
+				console.log(this.state.userPicture);
 			}
 		})
 	}

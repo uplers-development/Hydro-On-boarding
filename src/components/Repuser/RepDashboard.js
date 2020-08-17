@@ -45,7 +45,8 @@ class RepDashboard extends React.Component {
 	Rep_nav_menu=()=>{
 		let menulist={
 			menu:"main-navigation-rep"
-		}
+		};
+		let status;
 		fetch(Apiurl.menulisting.url,{
 		    headers:{
 		            "Content-Type" : "application/json",
@@ -54,8 +55,18 @@ class RepDashboard extends React.Component {
 		    },
 		    method:Apiurl.menulisting.method,
 		    body:JSON.stringify(menulist)
-  		}).then(res=>res.json()).then(data=>this.setState({menulisting:data}));
-	}
+  		}).then(res=>{status=res.status;
+  					  if(status===200){
+  							return res.json()
+  				     	}  		
+  		}).then(data=>{if(status!==200){
+  			localStorage.clear();
+    		this.props.history.push("/")
+    	}else{
+    		this.setState({menulisting:data})
+    	}
+    });
+  }
 
 	
 

@@ -264,7 +264,7 @@ class Repaddproduct extends React.Component{
                                     <label htmlFor={"checkbox"+index}></label>
                                     {this.state.purchseDatempty ? <span className='error-msg'></span>:''}
                                  </div>
-                                 <div className="title">
+                                 <div className="title" onClick={((e)=>e.target.parentNode.parentNode.childNodes[0].childNodes[0].click())}>
                                     <h4>{ReactHtmlParser(item.title)}</h4>
                                     <h5>{ReactHtmlParser(item.field_product_category)}</h5>
                                  </div>

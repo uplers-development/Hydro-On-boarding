@@ -50,6 +50,7 @@ class Adminheader extends React.Component{
 
    get_admin_header_item(){
       let menulist={menu:"main-navigation-admin"};
+      let status;
       fetch(Admin.menulisting.url,{
           headers:{
                   "Content-Type" : "application/json",
@@ -58,8 +59,9 @@ class Adminheader extends React.Component{
             },
             method:Admin.menulisting.method,
             body:JSON.stringify(menulist)
-      }).then(res=>{return res.json()}).then(data=>{
-               this.setState({menulisting:data})
+      }).then(res=>{return res.json();
+      }).then(data=>{
+            this.setState({menulisting:data})
       })
    }
 

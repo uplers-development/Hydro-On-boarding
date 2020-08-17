@@ -27,16 +27,20 @@ import {cosmaticAsset} from'./constants/common';
 	}
 
 	rightSideMenu=()=>{	
+		let status;
 		fetch(Client.DashboardRightSide.url,{
     			headers: {
                 	"Content-Type" : "application/json",
-                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+                	/*"X-CSRF-Token" : localStorage.getItem("access-token"),
+                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),*/
                 },
                 method:Client.DashboardRightSide.method,
     	}).then(res=>{
-    		return res.json()
+    		status=res.status;
+    		if(status===200) return res.json();
     	}).then(data=>{
     		console.log(data);
+    		if(status===200){
     		this.setState({rightSide_data:data,loader:false});
     		let self=this;
     		setTimeout(function(){
@@ -44,8 +48,10 @@ import {cosmaticAsset} from'./constants/common';
     		},800)
 
     		setTimeout(function(){
-    			self.createClassRef.current.classList.add("no-amiation");
+    			console.log(self.createClassRef);
+    			if(self.createClassRef.current!==null)self.createClassRef.current.classList.add("no-amiation");
     		},1600)
+    		}
     	})
 	}
 

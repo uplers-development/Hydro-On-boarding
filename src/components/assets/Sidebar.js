@@ -11,7 +11,8 @@ class Sidebar extends Component {
 			sidebarItem:[],
 			sidebarItemFooter:[],
 			changeClassnav:false,
-			newsFeedcounts:0
+			newsFeedcounts:0,
+			APIfailur:false,
 		}
 	}
 
@@ -59,7 +60,8 @@ class Sidebar extends Component {
 			
 		let menulist={
 			menu:"main"
-		}
+		};
+		let status;
 		fetch(Apiurl.menulisting.url,{
 			  headers:{
 		            "Content-Type" : "application/json",
@@ -69,10 +71,16 @@ class Sidebar extends Component {
               	method:Apiurl.menulisting.method,
 	   			 body:JSON.stringify(menulist)
     	}).then(res=>{
-    		return res.json()
+    		status=res.status;
+    		if(status===200) return res.json();
     	}).then(data=>{
+    		if(status!==200){
+    			localStorage.clear();
+    			this.props.historyPush.history.push("/");
+    		}else{
     		console.log(data);
     			this.setState({sidebarItem:data});
+    		}
 			});
 	}
 

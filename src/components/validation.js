@@ -15,7 +15,7 @@ export function hasValidEmail(array) {
     }
 }
 export function hasValidMobile(array) {
-    var pattern = /^([0-9]{10})+$/;
+    var pattern = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{6})$/;
     return pattern.test(String(array).toLowerCase());
 }
 

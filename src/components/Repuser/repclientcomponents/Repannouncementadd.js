@@ -35,6 +35,10 @@ class Repannouncementadd extends React.Component {
    this.props.getsummernote(draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())));
 
   }
+  	componentDidMount(){
+  		document.querySelector(".announcment-type").parentNode.classList.add("active")
+		document.querySelector(".announcment-type").classList.add("active");
+  	}
 
   	updateAnnouncementPic=(e)=>{
 		console.log(e.target.value)

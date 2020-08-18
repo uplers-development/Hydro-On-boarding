@@ -241,6 +241,12 @@ class Repclienttabledata extends React.Component{
 													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
 														<h2>Announcement published</h2>
                   										 <p>Your message was submitted successfully</p>
+                  										 <div className="btn-block">
+																<button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
+														this.props.historyPush.history.push("/RepDashboard");
+
+													})}><span>OK</span></button>	
+														</div>
 												</div>
 												</div>
 											</div>

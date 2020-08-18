@@ -318,6 +318,21 @@ class Repaddcontract extends React.Component{
 			                 <img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
 			                   <h2>Contract added</h2>
 			                   <p>Contract details were submitted successfully</p>
+                         <div className="btn-block add-client">
+                        <div className="upload-btn-wrapper">
+                           <button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();
+                            this.setState({openPopup:false});
+                            this.props.historyPush.history.push({
+                                pathname:"/RepClients",
+                                state:{
+                                  contractsubmission:true,
+                                  targetSendid:this.props.senduid
+                                }
+                              })
+                            })}>
+                           <span>OK</span></button>
+                        </div>
+                     </div>
 			               </div>
 			               </div>
 			             </div>

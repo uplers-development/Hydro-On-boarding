@@ -35,7 +35,7 @@ class Login extends Component{
     	this.getLoginPageContent();
     	if(document.cookie){
 			let value;
-			var errortimes =document.cookie.split('; ').find(row => row.startsWith('visits')).split('=')[1];;
+			var errortimes =document.cookie.split('; ').find(row => row.startsWith('visits')).split('=')[1];
 			if (errortimes != "" && errortimes >= 3) {
 				this.setState({showresetpassworderror:true,showresetpassworderrormsg:"Too many failed attempts with API.please contact your administrator."});
 			}

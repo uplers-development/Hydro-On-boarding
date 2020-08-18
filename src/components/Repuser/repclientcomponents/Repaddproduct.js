@@ -280,21 +280,21 @@ class Repaddproduct extends React.Component{
                                        <input type="text" name="seller" placeholder="Seller" className="seller"/>
                                     </div>
                                     <div className="form-group">
-                                       <label>Purchase date</label>
+                                       <label>Purchase date*</label>
                                        <input type="date"  name="purchase" className="purchase" onBlur={((e)=>{
                                              hasValidDate(e.target.value) ? this.setState({purchseDatempty:true}) : this.setState({purchseDatempty:false}) 
                                        })}/>
                                        {this.state.purchseDatempty ? ValidationMsg.common.default.purchaseProductdate : ''}
                                     </div>
                                     <div className="form-group">
-                                       <label>Cost</label>
+                                       <label>Cost*</label>
                                        <input type="text" name="cost" placeholder="Cost" className="cost" onBlur={((e)=>{
                                              !hasNumeric(e.target.value) ? this.setState({costState:true}) : this.setState({costState:false}) 
                                        })}/>
                                        {this.state.costState ? ValidationMsg.common.default.coststate : ''}
                                     </div>
                                     <div className="form-group">
-                                       <label>Item ID</label>
+                                       <label>Item ID*</label>
                                        <input type="text" name="item-id" placeholder="Item ID" className="item-id" onBlur={((e)=>{
                                              !hasNumeric(e.target.value) ? this.setState({itemidState:true}) : this.setState({itemidState:false}) 
                                        })} />
@@ -355,8 +355,24 @@ class Repaddproduct extends React.Component{
                  <img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
                    <h2>Product added</h2>
                    <p>Product details were submitted successfully</p>
+                   <div className="btn-block add-client">
+                           <div className="upload-btn-wrapper">
+                              <button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})
+                       this.props.historyPush.history.push({
+                                pathname:"/RepClients",
+                                state:{
+                                  contractsubmission:true,
+                                  targetSendid:this.props.senduid
+                                }
+                              })
+
+               })}>
+                              <span>OK</span></button>
+                           </div>
+                  </div>
                </div>
                </div>
+
              </div>
              : <></>}
             {/*<!--Container End-->*/}

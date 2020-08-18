@@ -455,6 +455,13 @@ class Adminresourceadd extends React.Component{
 									<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
 										<h2>Resource published</h2>
 										<p>Content was submitted successfully</p>
+										<div className="btn-block">
+										   <button className="btn wide common-btn-blue" onClick={((e)=>{e.preventDefault();
+										this.setState({openResourceSubmission:false});
+										this.props.updatedTheresourceresponse(false);
+									})}>
+										   <span>OK</span></button>
+					  					 </div>
 								</div>
 						</div>
 				</div>

@@ -320,6 +320,13 @@ class Adminproductadd extends React.Component{
 											<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
 												<h2>Product uploaded</h2>
 												<p>Product was submitted successfully</p>
+												<div className="btn-block">
+													<button className="btn wide common-btn-blue" onClick={((e)=>{e.preventDefault();
+												this.setState({openProductSubmission:false});
+												this.props.updatedTheproductresponse(false);
+											})}>
+													<span>OK</span></button>
+													</div>
 										</div>
 								</div>
 						</div>

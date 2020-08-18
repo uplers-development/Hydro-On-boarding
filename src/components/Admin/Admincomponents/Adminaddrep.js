@@ -214,6 +214,13 @@ class Adminaddrep extends React.Component{
 											<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
 												<h2>{this.state.popupmsg}</h2>
 												<p>Rep was submitted successfully</p>
+												<div className="btn-block">
+										            <button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();
+												this.setState({openRepsubmission:false});
+												this.props.updatedThereresponse(false);
+											})}>
+										            <span>OK</span></button>
+										         </div>
 										</div>
 								</div>
 						</div>

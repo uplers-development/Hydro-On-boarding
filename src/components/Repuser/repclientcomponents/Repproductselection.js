@@ -13,7 +13,8 @@ class Repproductselection extends React.Component{
 			productPage:false,
 			contractPage:false,
 			uidToPass:this.props.repclientuid!=='' ||this.props.repclientuid!==undefined ? this.props.repclientuid : '',
-			loader:true
+			loader:true,
+			showCancelicon:false,
 		}
 		this.clientProductSearch=React.createRef();
 		this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
@@ -41,6 +42,7 @@ class Repproductselection extends React.Component{
 
 	Search_client_Product_Details=(e)=>{
 		if(this.clientProductSearch.current.value!==''){
+			this.setState({showCancelicon:true});
 			fetch(Repclient.Repclientproductdetails.url+`${this.props.repclientuid}?_format=json&title=${this.clientProductSearch.current.value}`,{
 			    headers:{
 			            "Content-Type" : "application/json",
@@ -55,6 +57,7 @@ class Repproductselection extends React.Component{
   				}
   			});
   		 }else{
+  		 	this.setState({showCancelicon:false});
   		 	this.Get_client_Product_Details();
   		 }
 		}
@@ -94,7 +97,7 @@ class Repproductselection extends React.Component{
 									<form>
 										<div className="autocomplete-ss">
 											<input type="text" id="product-search" placeholder="Search Products" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details} />
-											<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#product-search").value=''})} className="clear-search-value">clear</Link>
+											 {this.state.showCancelicon ?<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#product-search").value='' ;this.setState({showCancelicon:false}); this.Get_client_Product_Details();})} className="clear-search-value"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>:""}
 										</div>
 									</form>
 								</div>

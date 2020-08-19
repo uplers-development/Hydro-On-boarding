@@ -17,6 +17,7 @@ class Product extends Component {
 			loader:true,
 			noDataFound:productmsg.product.productListEmpty,
 			noData:false,
+			showCancelicon:false,
 		}
 
 		this.filterProductCategoryById=this.filterProductCategoryById.bind(this);
@@ -407,6 +408,7 @@ class Product extends Component {
 
 		console.log(productSelectedvalue);
 		//return false;	
+		this.setState({showCancelicon:true});
 		fetch(Client.GetProductTitle.url+"&field_product_category_target_id="+productSelectedvalue+"&title="+productnamestring,{
 			headers: {
                 	"Content-Type" : "application/json",
@@ -424,6 +426,7 @@ class Product extends Component {
     		let self=this;
     		setTimeout(()=>{
     			self.setState({getTileListforSearch:''});
+    			this.setState({showCancelicon:false});
     			self.callProductListAfterSearchEmpty();
     		},800)
         }
@@ -535,7 +538,7 @@ class Product extends Component {
 									<form>
 										<div className="autocomplete">
 											<input id="myInput" type="text" name="hydro" onChange={this.GetProductTitleForSearch}/>
-											<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
+											{this.state.showCancelicon ?<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value='' ; this.setState({showCancelicon:false}); this.callProductListAfterSearchEmpty();})} className="clear-search-value"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link> : ""}
 										</div>
 										<ul className="list">
 											{this.state.getTileListforSearch.length > 0 && this.state.getTileListforSearch.map((titlename,index)=>

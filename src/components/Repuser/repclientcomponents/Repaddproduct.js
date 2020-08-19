@@ -24,6 +24,7 @@ class Repaddproduct extends React.Component{
          openPopup:false,
          checkboxnotchecked:false,
          fieldsNotvalid:false,
+         showCancelicon:false,
 		}
       this.clientProductSearch = React.createRef();
       this.openAccordian=this.openAccordian.bind(this);
@@ -118,6 +119,7 @@ class Repaddproduct extends React.Component{
 
    Search_client_Product_Details=(e)=>{
       if(this.clientProductSearch.current.value!==''){
+        this.setState({showCancelicon:true});
          fetch(Repclient.RepAddproductsearch.url+`&title=${this.clientProductSearch.current.value}`,{
              headers:{
                      "Content-Type" : "application/json",
@@ -139,6 +141,7 @@ class Repaddproduct extends React.Component{
             }
          });
        }else{
+         this.setState({showCancelicon:false});
          this.Get_Product_details();
        }
       }
@@ -251,7 +254,8 @@ class Repaddproduct extends React.Component{
                         </div>
                         <div className="auto-search-box">
                            <form>
-                              <div className="autocomplete-ss"><input type="text" id="product-search" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details}/><Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#product-search").value=''})} className="clear-search-value">clear</Link></div>
+                              <div className="autocomplete-ss"><input type="text" id="product-search" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details}/>
+                              {this.state.showCancelicon ? <Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#product-search").value=''; this.setState({showCancelicon:false}); this.Get_Product_details()})} className="clear-search-value"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link> :'' }</div>
                            </form>
                         </div>
                      </div>

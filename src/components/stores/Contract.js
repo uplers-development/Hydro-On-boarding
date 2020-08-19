@@ -20,6 +20,7 @@ class Contract extends Component {
 			loader:true,
 			noDatafound:contractmsg.contractmsg.contractmsg,
 			noData:false,
+			showCancelicon:false,
 		}
 		this.FilterContract=this.FilterContract.bind(this);
 		this.GetAllContractForSearch=this.GetAllContractForSearch.bind(this);
@@ -141,6 +142,7 @@ class Contract extends Component {
 	GetAllContractForSearch=(e)=>{
 		if(e.target.value!==''){
 		var contractText=e.target.value;
+		this.setState({showCancelicon:true})
 		fetch(Client.GetAllContractForSearch.url+"&title="+contractText,{
 				headers: {
                 	"Content-Type" : "application/json",
@@ -157,7 +159,7 @@ class Contract extends Component {
      }else{
      	let self=this;
      	setTimeout(()=>{
-    		this.setState({ContractdropDownSearch:''})
+    		this.setState({showCancelicon:false,ContractdropDownSearch:''})
     		self.GetContractForEndusers();
     	},800);
      }
@@ -280,7 +282,7 @@ class Contract extends Component {
 												<form>
 													<div className="autocomplete">
 														<input id="myInput" type="text" name="hydro" onChange={this.GetAllContractForSearch}/>
-														<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
+														{this.state.showCancelicon ?<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value='' ; this.setState({showCancelicon:false}); this.GetContractForEndusers();})} className="clear-search-value"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link> : ""}
 													</div>
 													<ul className="list">
 														{this.state.ContractdropDownSearch.length > 0 && this.state.ContractdropDownSearch.map((contractSearchlist,index)=>

@@ -6,6 +6,7 @@ class Adminrepsearch extends React.Component{
 	constructor(props){
 		super(props)
 		this.state={
+			showCancelicon:false,
 		}
 		this.repnamesearch=React.createRef();
 		this.admin_rep_search_item=this.admin_rep_search_item.bind(this);
@@ -23,6 +24,8 @@ class Adminrepsearch extends React.Component{
 		//return false;
 		//&sort_by=&sort_order=${sortedselected!==undefined ? sortedselected :"All"}
 		let status,datastatus;
+		if(this.repnamesearch.current.value!==''){
+		this.setState({showCancelicon:true});
 		fetch(Admin.adminreptablelisting.url+`&field_first_name_value=${this.repnamesearch.current.value}&field_last_name_value=${this.repnamesearch.current.value}`,{
 					headers:{
 	                  "Content-Type" : "application/json",
@@ -45,6 +48,12 @@ class Adminrepsearch extends React.Component{
 						}
 					}
 				});
+		}else{
+			this.setState({showCancelicon:false});
+			datastatus=false;
+			let data='';
+		    this.props.getSearchedvalue(datastatus,data);
+		}
 
 	}
 
@@ -55,7 +64,7 @@ class Adminrepsearch extends React.Component{
                 <form>
                    <div className="autocomplete-ss">
                       <input placeholder="Search client" id="admin-rep-search" type="text" name="hydro" ref={this.repnamesearch} onChange={this.admin_rep_search_item} />
-                   	  <Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#admin-rep-search").value=''})} className="clear-search-value">clear</Link>
+                   	  {this.state.showCancelicon ? <Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#admin-rep-search").value='' ;  this.setState({showCancelicon:false}); this.admin_rep_search_item();})} className="clear-search-value"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link> : ''}
                    </div>
                 </form>
              </div>

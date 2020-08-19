@@ -8,6 +8,7 @@ class  Repclientsearchbox extends React.Component{
 		this.state={
 			searchfieldValuefirstname:'',
 			searchfieldValuelastname:'',
+			showCancelicon:false,
 		}
 		this.searchByName=this.searchByName.bind(this);
 		this.searchRef = React.createRef();
@@ -15,6 +16,8 @@ class  Repclientsearchbox extends React.Component{
 
 
 	searchByName=(e)=>{
+		if(this.searchRef.current.value!==''){
+			this.setState({showCancelicon:true});
 			fetch(Repclient.Repclientdatatable.url+`&field_first_name_value=${this.searchRef.current.value}&field_last_name_value=${this.searchRef.current.value}`,{
 					headers: {
 		                	"Content-Type" : "application/json",
@@ -24,6 +27,9 @@ class  Repclientsearchbox extends React.Component{
 				}).then(res=>res.json()).then(data=>{
 					this.props.getSearchedItems(data);
 				});
+		}else{
+			this.setState({showCancelicon:false});
+		}
 	}
 
 	render(){
@@ -32,7 +38,7 @@ class  Repclientsearchbox extends React.Component{
 				<form>
 					<div className="autocomplete-ss">
 						<input placeholder="Search client" id="myInput" type="text" name="hydro" ref={this.searchRef}  onChange={this.searchByName}/>
-						<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
+						{this.state.showCancelicon ? <Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value='' ; this.setState({showCancelicon:false});})} className="clear-search-value"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link> : ""}
 					</div>
 				</form>
 			</div>

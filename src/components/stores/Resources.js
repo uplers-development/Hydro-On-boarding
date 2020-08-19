@@ -19,7 +19,8 @@ class Resources extends Component {
 			mobileview:false,
 			loader:true,
 			noDatafound:resourcesmsg.resources.resourcesListEmpty,
-			noData:false
+			noData:false,
+			showCancelicon:false,
 
 		}
 		this.ListResourcesforSearch=this.ListResourcesforSearch.bind(this);
@@ -202,6 +203,7 @@ class Resources extends Component {
 
 		if(resourcenameString!==''){
 			console.log(resourcenameString)
+			this.setState({showCancelicon:true})
 			fetch(Client.ListResourcesforSearch.url+"&field_resource_type_target_id="+filterType+"&field_product_category_target_id="+resource_id+"&title="+resourcenameString,{
 				headers: {
 	                	 "Content-Type" : "application/json",
@@ -217,7 +219,7 @@ class Resources extends Component {
     	}else{
     		let self=this;
     		setTimeout(()=>{
-    			self.setState({SearchList:''});
+    			self.setState({showCancelicon:false,SearchList:''});
     			self.callResourceListAfterSearchEmpty();
     		},800);
 
@@ -341,7 +343,7 @@ class Resources extends Component {
 									<form>
 										<div className="autocomplete">
 											<input id="myInput" type="text" name="hydro" onChange={this.ListResourcesforSearch}/>
-											<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
+											{this.state.showCancelicon ?<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value='' ; this.setState({showCancelicon:false}); this.callResourceListAfterSearchEmpty();})} className="clear-search-value"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link> : ""}
 										</div>
 										<ul className="list">
 											{this.state.SearchList.length > 0 && this.state.SearchList.map((resourcename,index)=>

@@ -32,6 +32,7 @@ class AdminProduct extends React.Component {
 		this.checkloadingfordata=this.checkloadingfordata.bind(this);
 		this.checkdropdownselected=this.checkdropdownselected.bind(this);
 		this.getallproduct=this.getallproduct.bind(this);
+		this.changetheview=this.changetheview.bind(this);
 	}
 
 	productafterFilter=(productfilteredata)=>{
@@ -70,6 +71,10 @@ class AdminProduct extends React.Component {
    		this.setState({checkifselesctedropdown:checkstatus})
    }
 
+   changetheview=(calldefaultview,changedthetitle)=>{
+  		this.setState({viewcaller:calldefaultview,pageTitleChange:changedthetitle});
+   }
+
 	render(){
 		return(<div>
 				   <section className="main-wrapper">
@@ -77,7 +82,7 @@ class AdminProduct extends React.Component {
 				         <Adminnavbar historyPush={this.props}/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
-				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom} />
+				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom} changetodefaultView={this.changetheview}/>
 				            </div>
 				            <div className="bottom-content-block with-filter">
 				                {!this.state.viewcaller ? 

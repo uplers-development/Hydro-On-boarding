@@ -34,6 +34,7 @@ class Announcements extends React.Component {
 		}
 		this.filtereddata=this.filtereddata.bind(this);
 		this.returnSummerNoteData=this.returnSummerNoteData.bind(this);
+		this.change_to_defaultView=this.change_to_defaultView.bind(this);
 	}
 
 	componentWillMount(){
@@ -162,7 +163,12 @@ class Announcements extends React.Component {
 	}
 	check_view_page_call=(viewpagecalled,uid)=>{
 		console.log(uid);
+		console.log(viewpagecalled);
 		this.setState({updatedRepclientId : uid,viewpagecall : viewpagecalled});
+	}
+
+	change_to_defaultView=(callthedefaultview)=>{
+		this.setState({viewpagecall:callthedefaultview})
 	}
 
 
@@ -173,7 +179,7 @@ class Announcements extends React.Component {
 				         <Repnav repmenulisting={this.state.menulisting}/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
-				               <Repheader menulisting={this.state.menulisting} historyPush={this.props}/>
+				               <Repheader menulisting={this.state.menulisting} historyPush={this.props} sendtheDefaultAnnouncement={this.state.viewpagecall} returntothedefault={this.change_to_defaultView}/>
 				            </div>
 				            {!this.state.loader ?
 			            	<>

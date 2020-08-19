@@ -32,6 +32,7 @@ class RepClients extends React.Component {
 		}
 		this.getSearchedItems = this.getSearchedItems.bind(this);
 		this.getSortedItem = this.getSortedItem.bind(this);
+		this.changetheviewtodefault=this.changetheviewtodefault.bind(this);
 		console.log(this.state.viewpagecall);
 	}	
 
@@ -105,6 +106,11 @@ class RepClients extends React.Component {
 		this.setState({updatedRepclientId : uid,viewpagecall : viewpagecalled , pageTitleChange:viewpagecalled});
 	}
 
+	changetheviewtodefault=(viewofpagecall)=>{
+		this.setState({viewpagecall : viewofpagecall , pageTitleChange:viewofpagecall})
+		console.log(this.state.pageTitleChange);
+	}
+
 	client_data_Table=()=>{
 		fetch(Repclient.Repclientdatatable.url,{
 			headers: {
@@ -150,7 +156,7 @@ class RepClients extends React.Component {
 			         <Repnav repmenulisting={this.state.menulisting}/>
 			         <div className="d-flex flex-wrap right-content-part">
 			            <div className="top-heading">
-			               <Repheader menulisting={this.state.menulisting}  historyPush={this.props} checkifPagecall={this.state.pageTitleChange}/>
+			               <Repheader menulisting={this.state.menulisting}  historyPush={this.props} checkifPagecall={this.state.pageTitleChange} changetodefult={this.changetheviewtodefault}/>
 			            </div>
 			            {!this.state.loader ?
 			            <>

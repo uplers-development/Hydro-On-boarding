@@ -34,6 +34,7 @@ class AdminResource extends React.Component {
 		this.updatedresourcestatus=this.updatedresourcestatus.bind(this);
 		this.checkdropdownselected=this.checkdropdownselected.bind(this);
 		this.sendViewercallfalse=this.sendViewercallfalse.bind(this);
+		this.changetheview=this.changetheview.bind(this);
 	}
 
 	componentDidMount(){
@@ -83,6 +84,10 @@ class AdminResource extends React.Component {
    }
 
 
+  changetheview=(calldefaultview,changedthetitle)=>{
+  	this.setState({viewcaller:calldefaultview,pageTitleChange:changedthetitle});
+  }
+
 	render(){
 		return(<div>
 				   <section className="main-wrapper">
@@ -90,7 +95,7 @@ class AdminResource extends React.Component {
 				         <Adminnavbar checktheviewercall={this.sendViewercallfalse} sendviewcall={this.state.viewcaller} historyPush={this.props}/>
 				         <div className="d-flex flex-wrap right-content-part">
 				            <div className="top-heading">
-				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom}  />
+				               <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom} changetodefaultView={this.changetheview}  />
 				            </div>
 				            <div className="bottom-content-block with-filter">
 				               {!this.state.viewcaller ? 

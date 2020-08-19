@@ -33,6 +33,7 @@ class AdminRep extends React.Component {
 		this.getSortedfilterdata=this.getSortedfilterdata.bind(this);
 		this.returnserachedItem=this.returnserachedItem.bind(this);
 		this.updatedrepstatus=this.updatedrepstatus.bind(this);
+		this.changetheview=this.changetheview.bind(this);
 	}
 
 	checkloadingfordata=(getstatus)=>{
@@ -75,6 +76,10 @@ class AdminRep extends React.Component {
 		this.setState({mulitdeleteSuccess:returnrecords,bulkdeleteupdate:returnsrecords})
 	}
 
+	changetheview=(calldefaultview,changedthetitle)=>{
+  		this.setState({viewcaller:calldefaultview,pageTitleChange:changedthetitle});
+   }
+
 	render(){
 	
 		return(<div>
@@ -83,7 +88,7 @@ class AdminRep extends React.Component {
 						      <Adminnavbar historyPush={this.props}/>
 						      <div className="d-flex flex-wrap right-content-part">
 						         <div className="top-heading">
-						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom}/>
+						            <Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom} changetodefaultView={this.changetheview}/>
 						         </div>
 						         <div className="bottom-content-block with-filter reps-filter add">
 						         {!this.state.viewcaller ? 

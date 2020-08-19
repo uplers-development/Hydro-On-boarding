@@ -36,7 +36,7 @@ class Repheader extends React.Component{
       this.state={
          Repclient:false,
          openPopup:false,
-         repinfo:null
+         repinfo:null,
       }
    }
 
@@ -69,24 +69,31 @@ class Repheader extends React.Component{
    }
 
 
-
-
-
 render(){
 console.log(this.state.repinfo);
+console.log(this.props.sendtheDefaultAnnouncement);
   return (
       <div className="top-heading-continer d-flex flex-wrap align-center" >
             <div className="name-of-heading d-flex flex-wrap">
                {this.props.menulisting.map((item,index)=>
                   {if(window.location.pathname===item.field_react_route){
                   return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
-                  <h1>{!this.props.checkifPagecall ? item.title :'Client Details'}</h1></React.Fragment>)
+                  <h1>{!this.props.checkifPagecall ? item.title :'Client Details'}</h1>
+                  <>{this.props.sendtheDefaultAnnouncement ?  <Link to={""} onClick={((e)=>{e.preventDefault();this.props.returntothedefault(false)})} className="back-dashboard">Back</Link> : ''}</>
+                  </React.Fragment>)
                }else if(item.child!==undefined && window.location.pathname===item.child[0].field_react_route){
                   return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.child[0].field_icon_svg }} />
-                  <h1>{item.child[0].title}</h1></React.Fragment>)
+                  <h1>{item.child[0].title}</h1> <Link to={""} onClick={((e)=>{e.preventDefault();
+                     this.props.historyPush.history.push({
+                                 pathname:'/RepClients',
+                              })
+                  })} className="back-dashboard">Back</Link></React.Fragment>)
                }}
                )}
-			<Link to={""} onClick={(e)=>e.preventDefault()} className="back-dashboard">Back</Link>
+               {this.props.checkifPagecall ?
+			         <Link to={""} onClick={((e)=>{e.preventDefault();this.props.changetodefult(false)})} className="back-dashboard">Back</Link>
+                  :''
+               }
             </div>
             <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>

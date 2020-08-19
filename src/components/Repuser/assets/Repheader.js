@@ -86,6 +86,7 @@ console.log(this.state.repinfo);
                   <h1>{item.child[0].title}</h1></React.Fragment>)
                }}
                )}
+			<Link to={""} onClick={(e)=>e.preventDefault()} className="back-dashboard">Back</Link>
             </div>
             <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>

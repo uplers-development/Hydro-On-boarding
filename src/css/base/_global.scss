@@ -61,11 +61,9 @@ ul {
 .container {
 	max-width: 1320px;
 	width: 100%;
-
 	@media screen and (max-width:$large-m) {
 		padding: 0 15px 0 0;
 	}
-
 	@media screen and (max-width:$mobile-small) {
 		padding: 0;
 	}
@@ -1059,6 +1057,18 @@ nav {
 					fill: $sky-blue;
 				}
 			}
+			.back-dashboard {
+				font-size: 18px;
+				line-height: normal;
+				margin: 0;
+				color: $cobalt-blue;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+				padding-left: 15px;
+				&:hover {
+					color: $sky-blue;
+				}
+			}
 		}
 
 		/*Profile progressbar css*/
@@ -1124,8 +1134,8 @@ nav {
 					transform: translateX(-100%);
 				}
 			}
-
 		}
+		
 	}
 
 	/*Profile bottom details*/
@@ -2371,6 +2381,9 @@ a {
 	color: $red;
 	font-family: $arial;
 	font-weight: $font-normal;
+	&.form-empty {
+		font-weight: $font-semi-bold;
+	}
 }
 
 /*Loader Css Start*/

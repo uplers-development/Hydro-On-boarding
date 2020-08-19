@@ -413,7 +413,24 @@ class Resources extends Component {
 											<div className="btn-block">
 												<button className="common-btn-blue" onClick={(e)=>this.setState({mobileView:false})}><span>Apply filters</span></button>
 											</div>
-
+											<div className="btn-block">
+													<button className="common-btn-blue" onClick={((e)=>{
+															e.preventDefault();
+															document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
+																item.parentNode.classList.remove("active");
+																item.classList.remove("active")
+															});
+															document.querySelectorAll(".list-type-mobile-filter li a").forEach((item,index)=>{
+																item.parentNode.classList.remove("active");
+																item.classList.remove("active")
+															});	
+															document.querySelectorAll(".resource-filter-sort li a").forEach((item,index)=>{
+																item.parentNode.classList.remove("active");
+																item.classList.remove("active")
+															});	
+															this.callResourceListAfterSearchEmpty()
+													})}><span>Clear filters</span></button>
+												</div>
 										</div>
 									</div>
 								</div>

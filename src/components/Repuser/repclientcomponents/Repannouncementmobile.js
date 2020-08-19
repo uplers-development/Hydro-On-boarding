@@ -224,6 +224,29 @@ class Repannouncementmobile extends React.Component {
 							<li key={index}><Link className="product-item" to={""} data-id={item.tid} onClick={this.filterTheClientProduct} title={ReactHtmlParser(item.name)}>{ReactHtmlParser(item.name)}</Link></li>	
 						 )}
 			         </ul>
+
+			          <div className="btn-block">
+		                                    <button className="common-btn-blue" onClick={((e)=>{
+		                                 	e.preventDefault();
+		                                 	this.setState({openContainer:false})
+		                                 })}><span>Apply filters</span></button>
+		                                 </div>
+										 <div className="btn-block">
+											<button className="common-btn-blue" onClick={((e)=>{
+													e.preventDefault();
+													document.querySelectorAll(".location-list-item li a").forEach((item,index)=>{
+														item.parentNode.classList.remove("active");
+														item.classList.remove("active")
+													});
+													document.querySelectorAll(".product-list-item li a").forEach((item,index)=>{
+														item.parentNode.classList.remove("active");
+														item.classList.remove("active")
+													});
+													this.get_product_list();
+													this.get_location_list();
+
+											})}><span>Clear filters</span></button>
+									</div>
 			      </div>
 			   </div>
 			</div>

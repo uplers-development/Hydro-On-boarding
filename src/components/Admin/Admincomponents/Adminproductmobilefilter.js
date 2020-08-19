@@ -67,6 +67,24 @@ class Adminproductmobilefilter extends React.Component{
        }
    }
 
+   cleartheChecklist=()=>{
+          this.props.loaderTrue(true);
+          this.props.selecteddropdown(true)
+         fetch(Admin.adminproducttabledata.url+`&field_product_category_target_id=All`,{
+                headers:{
+                     "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
+                     "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+               },
+               method:Admin.adminproducttabledata.method,
+            }).then(res=>{return res.json()}).then(data=>{
+                console.log(data);
+                this.props.checkproductfilter(data)
+                this.props.loaderTrue(false);
+             });
+
+   }
+
 
    render(){
    		return(
@@ -106,7 +124,17 @@ class Adminproductmobilefilter extends React.Component{
 	                                 	this.setState({openContainer:false})
 	                                 })}><span>Apply filters</span></button>
 											</div>
+                      <div className="btn-block">
+                      <button className="common-btn-blue" onClick={((e)=>{
+                          e.preventDefault();
+                          document.querySelectorAll(".list-filter-mobile ul li a").forEach((item,index)=>{
+                            item.parentNode.classList.remove("active");
+                            item.classList.remove("active")
+                          });
 
+                         this.cleartheChecklist();
+                      })}><span>Clear filters</span></button>
+                  </div>  
 										</div>
 
 									</div>

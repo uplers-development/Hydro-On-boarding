@@ -70,6 +70,23 @@ class Adminresourcesmobilefilter extends React.Component{
    }
 
 
+   cleartheChecklist=()=>{
+    this.props.loaderTrue(true);
+          this.props.selecteddropdown(true)
+         fetch(Admin.adminresourcelisting.url+`&field_resource_type_target_id=All`,{
+                headers:{
+                     "Content-Type" : "application/json",
+                     "X-CSRF-Token" : localStorage.getItem("access-token"),
+                     "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+               },
+               method:Admin.adminresourcelisting.method,
+            }).then(res=>{return res.json()}).then(data=>{
+                console.log(data);
+                this.props.checkresourcefilter(data)
+                this.props.loaderTrue(false);
+             });
+   }
+
    render(){
    		return(
 			<div className={this.state.openContainer ? "mobile-filter filter-active" : "mobile-filter"}>
@@ -105,6 +122,17 @@ class Adminresourcesmobilefilter extends React.Component{
 	                                 	this.setState({openContainer:false})
 	                                 })}><span>Apply filters</span></button>
 			         </div>
+               <div className="btn-block">
+                      <button className="common-btn-blue" onClick={((e)=>{
+                          e.preventDefault();
+                          document.querySelectorAll(".list-filter-mobile ul li a").forEach((item,index)=>{
+                            item.parentNode.classList.remove("active");
+                            item.classList.remove("active")
+                          });
+
+                         this.cleartheChecklist();
+                      })}><span>Clear filters</span></button>
+                  </div>
 			      </div>
 			   </div>
 			</div>

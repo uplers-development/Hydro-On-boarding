@@ -601,8 +601,22 @@ class Product extends Component {
 												</ul>
 
 												<div className="btn-block">
-												<button className="common-btn-blue" onClick={(e)=>this.setState({mobileView:false})}><span>Apply filters</span></button>
-											</div>
+													<button className="common-btn-blue" onClick={(e)=>this.setState({mobileView:false})}><span>Apply filters</span></button>
+												</div>
+												<div className="btn-block">
+													<button className="common-btn-blue" onClick={((e)=>{
+															e.preventDefault();
+															document.querySelectorAll(".product-filter-mob li a").forEach((item,index)=>{
+																item.parentNode.classList.remove("active");
+																item.classList.remove("active")
+															});
+															document.querySelectorAll(".product-sort-by li a").forEach((item,index)=>{
+																item.parentNode.classList.remove("active");
+																item.classList.remove("active")
+															});	
+															this.callProductListAfterSearchEmpty()
+													})}><span>Clear filters</span></button>
+												</div>
 
 											</div>
 	

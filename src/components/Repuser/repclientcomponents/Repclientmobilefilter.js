@@ -119,6 +119,24 @@ class Repclientmobilefilter extends React.Component {
 			
 	}
 
+	cleartheCouncils =() =>{
+		document.querySelector(".parentcheck").checked=false;
+		document.querySelectorAll(".clientchecked").forEach((item,index)=>{
+			item.checked=false;			
+		})
+		fetch(Repclient.Repclientdatatable.url,{
+					headers: {
+		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+		                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+		                },
+				}).then(res=>res.json()).then(data=>{
+					console.log(data);
+					this.props.getSortedItems(data);
+				});
+
+	}
+
 	render() {
 		return (
 			 <div className={this.state.openContainer ? "mobile-filter filter-active" : "mobile-filter"}>
@@ -151,18 +169,32 @@ class Repclientmobilefilter extends React.Component {
 	                                 })}>Action</Link></li>
 	                                 </ul>
 	                                 <h5>Sort by</h5>
-	                                 <ul>
+	                                 <ul className="mobile-sort">
 	                                   <li><Link to={""} title="&sort_by=created&sort_order=DESC"  onClick={this.SortClient}>Newest user</Link></li>
 										<li><Link to={""} title="&sort_by=created&sort_order=ASC"  onClick={this.SortClient}>Oldest user</Link></li>
 										<li><Link to={""} title="&sort_by=field_first_name_value&sort_order=ASC"  onClick={this.SortClient}>A-Z</Link></li>
 										<li><Link to={""} title="&sort_by=field_first_name_value&sort_order=DESC"  onClick={this.SortClient}>Z-A</Link></li>
 	                                 </ul>
-	                                 <div className="btn-block">
-	                                    <button className="common-btn-blue" onClick={((e)=>{
-	                                 	e.preventDefault();
-	                                 	this.setState({openContainer:false})
-	                                 })}><span>Apply filters</span></button>
-	                                 </div>
+		                                 <div className="btn-block">
+		                                    <button className="common-btn-blue" onClick={((e)=>{
+		                                 	e.preventDefault();
+		                                 	this.setState({openContainer:false})
+		                                 })}><span>Apply filters</span></button>
+		                                 </div>
+										 <div className="btn-block">
+											<button className="common-btn-blue" onClick={((e)=>{
+													e.preventDefault();
+													document.querySelectorAll(".list-filter-mobile ul li a").forEach((item,index)=>{
+														item.parentNode.classList.remove("active");
+														item.classList.remove("active")
+													});
+													document.querySelectorAll(".mobile-sort li a").forEach((item,index)=>{
+														item.parentNode.classList.remove("active");
+														item.classList.remove("active")
+													});
+													this.cleartheCouncils();
+											})}><span>Clear filters</span></button>
+									</div>
 	                              </div>
 	                           </div>
 	                           {this.state.openPopup ? 

@@ -165,6 +165,41 @@ class Adminremobilefilter extends React.Component{
 			
 	}
 
+	cleartheChecklist=()=>{
+		var checkboxes = document.getElementsByTagName('input');
+		document.querySelector(".repparent").checked=false;
+			for (var i = 0; i < checkboxes.length; i++) {
+				console.log(i)
+				if (checkboxes[i].type == 'checkbox') {
+					 checkboxes[i].checked = false;
+				}
+		  }
+
+		  this.props.loaderTrue(true); 
+		  this.props.selecteddropdown(false);
+			try{
+				let status;
+				fetch(Admin.adminreptablelisting.url,{
+					headers:{
+	                  "Content-Type" : "application/json",
+	                  "X-CSRF-Token" : localStorage.getItem("access-token"),
+	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	            	},
+	            	method:Admin.adminreptablelisting.method
+				}).then(res=>{
+					status=res.status;
+					return res.json()
+				}).then(data=>{
+					console.log(data);
+					this.props.sortedfilterdata(data);
+					this.props.loaderTrue(false); 
+				})
+			}catch(err){
+				console.log(err)
+			}
+
+	}
+
 	render(){
 		return(
 				 <div className={this.state.openContainer ? "mobile-filter filter-active" : "mobile-filter"}>
@@ -223,9 +258,24 @@ class Adminremobilefilter extends React.Component{
 	                                 	this.setState({openContainer:false})
 	                                 })}><span>Apply filters</span></button>
 	                          </div>
+	                          <div className="btn-block">
+			                      <button className="common-btn-blue" onClick={((e)=>{
+			                          e.preventDefault();
+			                          document.querySelectorAll(".list-filter-mobile ul li a").forEach((item,index)=>{
+			                            item.parentNode.classList.remove("active");
+			                            item.classList.remove("active")
+			                          });
+			                          document.querySelectorAll(".rep-admin-sort li a").forEach((item,index)=>{
+			                            item.parentNode.classList.remove("active");
+			                            item.classList.remove("active")
+			                          });
+
+			                         this.cleartheChecklist();
+			                      })}><span>Clear filters</span></button>
+                 				 </div>  
 	                       </div>
 	                    </div>
-							  {this.state.openPopup ? 
+				  {this.state.openPopup ? 
 					<div id="modal" className="modal-container">
 						<div className="modal d-flex flex-wrap align-center justify-center">
 							<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})})}

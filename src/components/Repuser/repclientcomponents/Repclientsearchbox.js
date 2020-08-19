@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Redirect } from "react-router-dom";
 import {site_url,base_url,Repclient} from '../../Apiurl'; 
 
 class  Repclientsearchbox extends React.Component{
@@ -31,6 +32,7 @@ class  Repclientsearchbox extends React.Component{
 				<form>
 					<div className="autocomplete-ss">
 						<input placeholder="Search client" id="myInput" type="text" name="hydro" ref={this.searchRef}  onChange={this.searchByName}/>
+						<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
 					</div>
 				</form>
 			</div>

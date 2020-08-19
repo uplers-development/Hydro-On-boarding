@@ -280,6 +280,7 @@ class Contract extends Component {
 												<form>
 													<div className="autocomplete">
 														<input id="myInput" type="text" name="hydro" onChange={this.GetAllContractForSearch}/>
+														<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
 													</div>
 													<ul className="list">
 														{this.state.ContractdropDownSearch.length > 0 && this.state.ContractdropDownSearch.map((contractSearchlist,index)=>

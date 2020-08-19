@@ -55,6 +55,7 @@ class Adminrepsearch extends React.Component{
                 <form>
                    <div className="autocomplete-ss">
                       <input placeholder="Search client" id="admin-rep-search" type="text" name="hydro" ref={this.repnamesearch} onChange={this.admin_rep_search_item} />
+                   	  <Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#admin-rep-search").value=''})} className="clear-search-value">clear</Link>
                    </div>
                 </form>
              </div>

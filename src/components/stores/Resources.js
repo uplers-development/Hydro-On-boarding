@@ -341,6 +341,7 @@ class Resources extends Component {
 									<form>
 										<div className="autocomplete">
 											<input id="myInput" type="text" name="hydro" onChange={this.ListResourcesforSearch}/>
+											<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
 										</div>
 										<ul className="list">
 											{this.state.SearchList.length > 0 && this.state.SearchList.map((resourcename,index)=>

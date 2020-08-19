@@ -535,6 +535,7 @@ class Product extends Component {
 									<form>
 										<div className="autocomplete">
 											<input id="myInput" type="text" name="hydro" onChange={this.GetProductTitleForSearch}/>
+											<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#myInput").value=''})} className="clear-search-value">clear</Link>
 										</div>
 										<ul className="list">
 											{this.state.getTileListforSearch.length > 0 && this.state.getTileListforSearch.map((titlename,index)=>

@@ -52,8 +52,6 @@ class Repproductselection extends React.Component{
   				console.log(data);
   				if(data.length>0){
   					this.setState({porductDetails:data})
-  				}else{
-  					alert("sorry no records found");
   				}
   			});
   		 }else{
@@ -95,7 +93,8 @@ class Repproductselection extends React.Component{
 								<div className="auto-search-box">
 									<form>
 										<div className="autocomplete-ss">
-											<input type="text" placeholder="Search Products" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details} />
+											<input type="text" id="product-search" placeholder="Search Products" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details} />
+											<Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#product-search").value=''})} className="clear-search-value">clear</Link>
 										</div>
 									</form>
 								</div>

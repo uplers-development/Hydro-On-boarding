@@ -251,7 +251,7 @@ class Repaddproduct extends React.Component{
                         </div>
                         <div className="auto-search-box">
                            <form>
-                              <div className="autocomplete-ss"><input type="text" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details}/></div>
+                              <div className="autocomplete-ss"><input type="text" id="product-search" className="hydro" ref={this.clientProductSearch} onChange={this.Search_client_Product_Details}/><Link to={""} onClick={((e)=>{e.preventDefault(); document.querySelector("#product-search").value=''})} className="clear-search-value">clear</Link></div>
                            </form>
                         </div>
                      </div>

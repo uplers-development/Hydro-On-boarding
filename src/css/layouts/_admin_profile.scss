@@ -53,3 +53,28 @@
 		
 	}
 }
+
+
+.profile-cust {
+	nav {
+		&.fixed-left
+		{
+			@media screen and (max-width:$mobile-small) {
+				justify-content: space-around;
+				display: flex;
+				align-items: center;
+			}
+			.navbar-logo {
+				@media screen and (max-width:$mobile-small) {
+					display: block;
+					margin: 0;	
+					width: 100px;
+				}
+			}
+		}
+	}
+}
+
+
+
+

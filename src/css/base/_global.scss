@@ -2923,11 +2923,13 @@ a {
     position: relative;
 	a.clear-search-value {
 		position: absolute;
-		right: 10px;
-		top: 12px;
+		right: 7px;
+		top: 50%;
 		text-decoration: none;
+		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
 		img {
-			width: 25px;
+			width: 12px;
 		}
 	}
 }

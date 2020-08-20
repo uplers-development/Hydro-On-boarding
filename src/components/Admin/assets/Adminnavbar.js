@@ -32,7 +32,7 @@ class Adminnavbar extends React.Component {
                      if(status===200) return res.json();
       }).then(data=>{
             if(status!==200){
-              if(document.cookie){
+              if(document.cookie && document.cookie.split('; ').find(row => row.startsWith('visits'))){
             let value;
             var errortimes =document.cookie.split('; ').find(row => row.startsWith('visits')).split('=')[1];;
             if (errortimes != "") {

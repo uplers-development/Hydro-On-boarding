@@ -24,7 +24,7 @@ import Apiurl,{site_url,Client} from './components/Apiurl';
 import "./css/style.scss";
 
 
-//console.log=function(){}
+console.log=function(){}
 class App extends Component {
   constructor(props){
     super(props);

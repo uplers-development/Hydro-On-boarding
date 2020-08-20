@@ -11,43 +11,57 @@ class Repclientbulkaction extends React.Component {
 			openPopup:false,
 			bulkIds:[]
 		}
+		this.bulkdelete=React.createRef();
 		this.bulkDelete=this.bulkDelete.bind(this);
 		this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
 	}
 
 
 	selectAllcheckbox=(e)=>{
-			e.preventDefault();
-			let collectId=[]
-			
-			if(document.querySelector(".parentcheck:checked")===false){
-				document.querySelectorAll(".clientchecked").forEach((item,index)=>{
-					if(item.checked===true){
-						collectId.push(item.value)
+		e.preventDefault();
+		this.bulkdelete.current.classList.toggle("active");
+		var ele=document.querySelector(".parentcheck");
+		var checkboxes = document.getElementsByTagName('input');
+		if(this.bulkdelete.current.classList.contains("active")){
+		document.querySelector(".parentcheck").checked=true;
+		 if (ele.checked) {
+			  for (var i = 0; i < checkboxes.length; i++) {
+					if (checkboxes[i].type == 'checkbox') {
+						 checkboxes[i].checked = true;
 					}
-				})
-				console.log(collectId);
-				this.setState({bulkIds:collectId});
+			  }
+		 }else {
+			  for (var i = 0; i < checkboxes.length; i++) {
+					console.log(i)
+					if (checkboxes[i].type == 'checkbox') {
+						 checkboxes[i].checked = false;
+					}
+			  }
+		  }
 		}else{
-			 var ele=document.querySelector(".parentcheck");
-			 ele.checked=true;
-	         document.querySelectorAll(".clientchecked").forEach((item,index)=>{
-					item.checked=true;
-					if(item.checked===true){
-						collectId.push(item.value)
-					}
-				})
-				this.setState({bulkIds:collectId});
-		      }
+			document.querySelector(".parentcheck").checked=false;	
+			for (var i = 0; i < checkboxes.length; i++) {
+				console.log(i)
+				if (checkboxes[i].type == 'checkbox') {
+					 checkboxes[i].checked = false;
+				}
+		  }
+		}
+
 	}
 
 
 	bulkDelete=(e)=>{
-	
-		console.log(this.state.bulkIds);
+		let collectId=[];
+		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
+				collectId.push(item.value)
+		})
+		console.log(collectId);
 		let clientbulkid={
-				user_ids:this.state.bulkIds.toString()
+				user_ids:collectId.toString()
 			}
+		console.log(this.state.bulkIds);
+
 			try{
 				fetch(Repclient.RepBulkdelete.url,{
 						headers: {
@@ -62,8 +76,14 @@ class Repclientbulkaction extends React.Component {
 				}).then(data=>{
 					console.log(data);
 					this.setState({openPopup:false});
+					this.bulkdelete.current.classList.remove("active");
 		 			this.props.recordDelete(true);
 				})
+				document.querySelector(".parentcheck").checked=false;
+				   document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
+						item.checked=false;
+					})
+
 		 	}catch(err){
 		 		console.log(err);
 		 		alert(err);
@@ -79,7 +99,7 @@ render(){
 	  			<div className="select-box">
 				   <span>Bulk Actions</span>
 				   <ul className="list">
-				      <li><Link to={""} onClick={this.selectAllcheckbox} title="Delete">Delete</Link></li>
+				      <li><Link to={""} onClick={this.selectAllcheckbox} title="Delete" ref={this.bulkdelete}>Delete</Link></li>
 				   </ul>
 				</div>
 				<div className="btn-block mobile-hide">

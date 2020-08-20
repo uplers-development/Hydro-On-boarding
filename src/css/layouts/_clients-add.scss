@@ -386,6 +386,9 @@
 						left: 0;
 						top: 0;
 						height: 100%;
+						&:after {
+							display: none;
+						}
 					}
 					.checkbox-cust {
 						padding-top: 5px;

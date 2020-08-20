@@ -21,7 +21,9 @@ class Repaddcontract extends React.Component{
       fields_are_empty:false,
       purchseDatempty:false,
       duplicateProducts:false,
-      contractType:[]
+      contractType:[],
+      showuploadbox:false,
+      showsharepoint:false,
   	}
     console.log(this.state.suggestions);
     console.log(this.props.productDataList);
@@ -29,6 +31,7 @@ class Repaddcontract extends React.Component{
 		console.log(this.props.senduid);
     this.productTaginput=React.createRef();
     this.contractype=React.createRef();
+    this.sharepoint=React.createRef();
     this.addContract=this.addContract.bind(this);
     this.productTag=this.productTag.bind(this);
     this.clearProductTag=this.clearProductTag.bind(this);
@@ -59,6 +62,7 @@ class Repaddcontract extends React.Component{
       var fullPath = e.target.files[0];
       var exactfile=e.target.value;
       var filename='';
+      this.setState({showuploadbox:true})
          if (exactfile) {
              var startIndex = (exactfile.indexOf('\\') >= 0 ? exactfile.lastIndexOf('\\') : exactfile.lastIndexOf('/'));
              filename = exactfile.substring(startIndex);
@@ -257,12 +261,16 @@ class Repaddcontract extends React.Component{
 
                             {this.state.duplicateProducts ? ValidationMsg.common.default.resourceduplicateproduct : ''} 
 		                     </div>
-		                     <div className="form-group">
+		                    {!this.state.showuploadbox ?  
+                          <div className="form-group">
                             <label>Sharepoint URL</label>
-                <div className="input-box">
-                            <input type="text" name="sharepoint-url"  placeholder="Sharepoint URL" id="sharepoint-url"/>
-                  </div> 
-                  </div>
+                              <div className="input-box">
+                                          <input type="text" name="sharepoint-url"  placeholder="Sharepoint URL" ref={this.sharepoint} id="sharepoint-url" onChange={((e)=>{
+                                            e.preventDefault();
+                                            this.sharepoint.current.value!=='' ? this.setState({showsharepoint:true}) : this.setState({showsharepoint:false});
+                                          })}/>
+                                </div> 
+                  </div>:''}
                    <div className="form-group">
 		                        <label>Type of Contract</label>
 								            <div className="input-box">
@@ -273,6 +281,7 @@ class Repaddcontract extends React.Component{
                             </select>
 									          </div>
 		                     </div>
+                         {!this.state.showsharepoint ? 
 		                    <div className="btn-block">
                                         <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>
                                        <div className="upload-btn-wrapper">
@@ -285,6 +294,7 @@ class Repaddcontract extends React.Component{
 <span className='document-item document-item-contract' get-id={this.state.fid}>{this.state.fileuploadedname}</span>
                                        {this.state.imageFormateState ? ValidationMsg.common.default.imageformate : ''}
                                     </div>
+                                    : ''}
 		                  </form>
 		               </div>
 		            </div>

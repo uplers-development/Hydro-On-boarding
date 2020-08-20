@@ -322,6 +322,7 @@
 					.top {
 						position: relative;
 						padding: 10px 37px 32px 0;
+						    cursor: pointer;
 
 						@media screen and (max-width: $ipad-portrait) {
 							padding: 10px 25px 25px 0;

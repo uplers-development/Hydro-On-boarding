@@ -33,7 +33,7 @@ class Login extends Component{
     }
     componentDidMount(){
     	this.getLoginPageContent();
-    	if(document.cookie){
+    	if(document.cookie && document.cookie.split('; ').find(row => row.startsWith('visits'))){
 			let value;
 			var errortimes =document.cookie.split('; ').find(row => row.startsWith('visits')).split('=')[1];
 			if (errortimes != "" && errortimes >= 3) {

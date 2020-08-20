@@ -475,7 +475,7 @@ class Profile extends Component {
 						</div>
 
 						:
-						<div>
+						<div className="password-chnge-block">
 						 <form onSubmit={this.update_password}>
 							<div className="form-group" tabIndex="1">
 								<label>Current password</label>

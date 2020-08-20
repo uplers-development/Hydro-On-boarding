@@ -285,6 +285,9 @@
 			@media screen and (max-width:$large-m) {
 				margin-top: 30px;
 			}
+			@media screen and (max-width:$mobile-small) {
+				padding: 10px 25px 15px 0;
+			}
 			.btn-block {
 				margin-right: 0;
 			}
@@ -317,6 +320,10 @@
 			.name-of-heading {
 				@media screen and (max-width: $mobile-small) {
 					width: auto;
+					padding-top: 10px;
+				}
+				@media screen and (max-width: $small-medium) {
+					padding-top: 5px;
 				}
 				img {
 					width:38px;

@@ -19,7 +19,7 @@
 				color: $panton-gray;
 				font-weight: $font-semi-bold;
 				font-family: $gibson;
-				@media screen and (max-width:$mobile-small) {
+				@media screen and (max-width:$ipad-portrait) {
 					padding-right: 15px;
 					margin:3px 0; 
 				}

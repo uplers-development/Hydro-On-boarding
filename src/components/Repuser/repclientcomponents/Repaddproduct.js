@@ -282,7 +282,7 @@ class Repaddproduct extends React.Component{
                                     <h4>{ReactHtmlParser(item.title)}</h4>
                                     <h5>{ReactHtmlParser(item.field_product_category)}</h5>
                                  </div>
-                                 <Link to={""} className="overlay" onClick={this.openAccordian}></Link> 
+                                 <Link to={""} className="overlay-chk" onClick={this.openAccordian}></Link> 
                                  <Link to={""}>When product was released: {item.created}</Link>
                               </div>
                               <div className="bottom-details d-flex flex-wrap">

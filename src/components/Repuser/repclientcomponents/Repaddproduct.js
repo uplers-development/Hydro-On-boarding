@@ -28,7 +28,6 @@ class Repaddproduct extends React.Component{
 		}
       this.clientProductSearch = React.createRef();
       this.openAccordian=this.openAccordian.bind(this);
-      this.openAccordianOnLabelcall=this.openAccordianOnLabelcall.bind(this);
       this.selectBoxChecked=this.selectBoxChecked.bind(this);
       this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
       this.get_uploaded_file_path=this.get_uploaded_file_path.bind(this);
@@ -274,7 +273,7 @@ class Repaddproduct extends React.Component{
                      <div className="list-add-product">
                      {this.state.purchaseProductList.map((item,index)=>
                            <div className={"list-box"+' ' +ReactHtmlParser(item.title)}  key={index}>
-                              <div className="top d-flex flex-wrap" onClick={this.openAccordian}>
+                              <div className="top d-flex flex-wrap" >
                                  <div className="checkbox-cust"><input type="checkbox" id={"checkbox"+index} defaultValue={item.nid} className="productcheck" onChange={this.selectBoxChecked}/>
                                     <label htmlFor={"checkbox"+index}></label>
                                     {this.state.purchseDatempty ? <span className='error-msg'></span>:''}
@@ -283,6 +282,7 @@ class Repaddproduct extends React.Component{
                                     <h4>{ReactHtmlParser(item.title)}</h4>
                                     <h5>{ReactHtmlParser(item.field_product_category)}</h5>
                                  </div>
+                                 <Link to={""} className="overlay" onClick={this.openAccordian}></Link> 
                                  <Link to={""}>When product was released: {item.created}</Link>
                               </div>
                               <div className="bottom-details d-flex flex-wrap">

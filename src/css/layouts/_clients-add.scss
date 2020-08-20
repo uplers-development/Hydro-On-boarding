@@ -322,7 +322,6 @@
 					.top {
 						position: relative;
 						padding: 10px 37px 32px 0;
-						    cursor: pointer;
 
 						@media screen and (max-width: $ipad-portrait) {
 							padding: 10px 25px 25px 0;
@@ -373,6 +372,7 @@
 					padding: 20px 37px 40px 0;
 					align-items: flex-start;
 					position: relative;
+					cursor: pointer;
 					@media screen and (max-width:$large-x) {
 						padding: 10px 0 25px 0;
 						align-items: flex-start;
@@ -381,7 +381,12 @@
 					@media screen and (max-width:$mobile-small) {
 						padding: 20px 0;
 					}
-
+					.overlay-chk {
+						position: absolute;
+						left: 0;
+						top: 0;
+						height: 100%;
+					}
 					.checkbox-cust {
 						padding-top: 5px;
 					}

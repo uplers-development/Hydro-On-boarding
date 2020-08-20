@@ -2946,3 +2946,28 @@ a {
 		}
 	}
 }
+
+.doller-label {
+	position: relative;
+	&:before {
+		content: "$";
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: $light-black-2;
+		width: 30px;
+		height: calc(100% - 2px);
+		position: absolute;
+		left: 1px;
+		top: 1px;
+		font-weight: $font-medium;
+		color: $black;
+	}
+	input[type="text"] {
+		padding-left: 35px;
+	}
+}
+
+
+
+

@@ -175,20 +175,34 @@ class RepClients_add extends React.Component {
                }).then(data=>{console.log(data)});
             }
 
-             let productTagsId=[]
+             let productTagsId=[],contractoptions;
                 document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
                     productTagsId.push({"target_id":item.getAttribute("nid")});
                 })
-             let contractoptions={
+
+            if(document.querySelector('.document-item-contract') !== null){
+
+              contractoptions={
                 "title":[{"value":document.querySelector("#title").value}],
                 "type":[{"target_id":"contracts"}],
-                //"field_contract_document_type":[{"target_id":"tid"}],
+                "field_contract_document_type":[{"target_id":document.querySelector("#type-of-contract").value}],
                 "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
                 "field_contract_expiry":[{"value":document.querySelector("#expirydate").value}],
-              "field_contract_document_external":[{"uri":document.querySelector("#sharepoint-url").value ,"title":"","options": []}],
                 "field_sub_title":[{"value":document.querySelector("#description").value}],
                 "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
                 "field_contract_for_client":[{"target_id":data.uid[0].value}]
+            }
+            }else{
+                contractoptions={
+                "title":[{"value":document.querySelector("#title").value}],
+                "type":[{"target_id":"contracts"}],
+                "field_contract_document_type":[{"target_id":document.querySelector("#type-of-contract").value}],
+                "field_contract_expiry":[{"value":document.querySelector("#expirydate").value}],
+                "field_contract_document_external":[{"uri":document.querySelector("#sharepoint-url").value ,"title":"","options": []}],
+                "field_sub_title":[{"value":document.querySelector("#description").value}],
+                "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
+                "field_contract_for_client":[{"target_id":data.uid[0].value}]
+            }
             }       
               productList = []; 
                document.querySelectorAll(".list-box.checked").forEach((item,index)=>{
@@ -319,6 +333,13 @@ class RepClients_add extends React.Component {
               <img className="svg" src={require("../../images/round-correct.svg")} alt="Right icon"/>
                 <h2>Client added</h2>
                 <p>Client details were submitted successfully</p>
+                <div className="btn-block add-client">
+                           <div className="upload-btn-wrapper">
+                              <button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})
+                              this.props.history.push("/RepClients")})}>
+                              <span>OK</span></button>
+                           </div>
+                  </div>
             </div>
             </div>
           </div>

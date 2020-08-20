@@ -41,7 +41,8 @@ class Repaddproduct extends React.Component{
 
    openAccordian=(e)=>{
       e.preventDefault();
-      console.log(e.target.parentNode.parentNode);
+      e.target.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[0].click();
+      
       if(!e.target.parentNode.parentNode.classList.contains("active")){
          document.querySelectorAll(".list-box").forEach((item,index)=>{
             if(item.classList.contains("active")){item.classList.remove("active")}
@@ -50,8 +51,6 @@ class Repaddproduct extends React.Component{
       }else{
          e.target.parentNode.parentNode.classList.remove("active");
       }
-
-
    }
 
    get_uploaded_file_path=(e)=>{
@@ -263,16 +262,17 @@ class Repaddproduct extends React.Component{
                      <div className="list-add-product">
                      {this.state.purchaseProductList.map((item,index)=>
                            <div className={"list-box"+' ' +ReactHtmlParser(item.title)}  key={index}>
-                              <div className="top d-flex flex-wrap">
+                              <div className="top d-flex flex-wrap" >
                                  <div className="checkbox-cust"><input type="checkbox" id={"checkbox"+index} defaultValue={item.nid} className="productcheck" onChange={this.selectBoxChecked}/>
                                     <label htmlFor={"checkbox"+index}></label>
                                     {this.state.purchseDatempty ? <span className='error-msg'></span>:''}
                                  </div>
-                                 <div className="title" onClick={((e)=>e.target.parentNode.parentNode.childNodes[0].childNodes[0].click())}>
+                                 <div className="title">
                                     <h4>{ReactHtmlParser(item.title)}</h4>
                                     <h5>{ReactHtmlParser(item.field_product_category)}</h5>
                                  </div>
-                                 <Link to={""} onClick={this.openAccordian}>When product was released: {item.created}</Link>
+                                 <Link to={""} className="overlay-chk" onClick={this.openAccordian}></Link> 
+                                 <Link to={""}>When product was released: {item.created}</Link>
                               </div>
                               <div className="bottom-details d-flex flex-wrap">
                                  <div className="left-prod-img" style={{backgroundImage: `url(${site_url+item.field_product_image})`}}>
@@ -292,9 +292,9 @@ class Repaddproduct extends React.Component{
                                     </div>
                                     <div className="form-group">
                                        <label>Cost*</label>
-                                       <input type="text" name="cost" placeholder="Cost" className="cost" onBlur={((e)=>{
+                                       <span className="doller-label">{item.field_product_currency}<input type="text" name="cost" placeholder="Cost" className="cost" onBlur={((e)=>{
                                              !hasNumeric(e.target.value) ? this.setState({costState:true}) : this.setState({costState:false}) 
-                                       })}/>
+                                       })}/></span>
                                        {this.state.costState ? ValidationMsg.common.default.coststate : ''}
                                     </div>
                                     <div className="form-group">

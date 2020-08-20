@@ -2950,7 +2950,7 @@ a {
 .doller-label {
 	position: relative;
 	&:before {
-		content: "$";
+		content: "";
 		display: flex;
 		align-items: center;
 		justify-content: center;

@@ -43,14 +43,14 @@ class Repaddproduct extends React.Component{
       e.preventDefault();
       console.log(e.target);
       
-      /*if(!e.target.parentNode.parentNode.classList.contains("active")){
+      if(!e.target.parentNode.parentNode.classList.contains("active")){
          document.querySelectorAll(".list-box").forEach((item,index)=>{
             if(item.classList.contains("active")){item.classList.remove("active")}
          })
          e.target.parentNode.parentNode.classList.add("active");
       }else{
          e.target.parentNode.parentNode.classList.remove("active");
-      }*/
+      }
    }
 
   /* openAccordianOnLabelcall=(e)=>{

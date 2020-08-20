@@ -28,6 +28,7 @@ class Repaddproduct extends React.Component{
 		}
       this.clientProductSearch = React.createRef();
       this.openAccordian=this.openAccordian.bind(this);
+      this.openAccordianOnLabelcall=this.openAccordianOnLabelcall.bind(this);
       this.selectBoxChecked=this.selectBoxChecked.bind(this);
       this.Search_client_Product_Details=this.Search_client_Product_Details.bind(this);
       this.get_uploaded_file_path=this.get_uploaded_file_path.bind(this);
@@ -41,18 +42,28 @@ class Repaddproduct extends React.Component{
 
    openAccordian=(e)=>{
       e.preventDefault();
-      console.log(e.target.parentNode.parentNode);
-      if(!e.target.parentNode.parentNode.classList.contains("active")){
+      console.log(e.target);
+      
+      /*if(!e.target.parentNode.parentNode.classList.contains("active")){
          document.querySelectorAll(".list-box").forEach((item,index)=>{
             if(item.classList.contains("active")){item.classList.remove("active")}
          })
          e.target.parentNode.parentNode.classList.add("active");
       }else{
          e.target.parentNode.parentNode.classList.remove("active");
-      }
-
-
+      }*/
    }
+
+  /* openAccordianOnLabelcall=(e)=>{
+      if(!e.target.parentNode.parentNode.parentNode.classList.contains("active")){
+         document.querySelectorAll(".list-box").forEach((item,index)=>{
+            if(item.classList.contains("active")){item.classList.remove("active")}
+         })
+         e.target.parentNode.parentNode.parentNode.classList.add("active");
+      }else{
+         e.target.parentNode.parentNode.parentNode.classList.remove("active");
+      }
+   }*/
 
    get_uploaded_file_path=(e)=>{
       var fullPath = e.target.files[0];
@@ -263,16 +274,16 @@ class Repaddproduct extends React.Component{
                      <div className="list-add-product">
                      {this.state.purchaseProductList.map((item,index)=>
                            <div className={"list-box"+' ' +ReactHtmlParser(item.title)}  key={index}>
-                              <div className="top d-flex flex-wrap">
+                              <div className="top d-flex flex-wrap" onClick={this.openAccordian}>
                                  <div className="checkbox-cust"><input type="checkbox" id={"checkbox"+index} defaultValue={item.nid} className="productcheck" onChange={this.selectBoxChecked}/>
                                     <label htmlFor={"checkbox"+index}></label>
                                     {this.state.purchseDatempty ? <span className='error-msg'></span>:''}
                                  </div>
-                                 <div className="title" onClick={((e)=>e.target.parentNode.parentNode.childNodes[0].childNodes[0].click())}>
+                                 <div className="title">
                                     <h4>{ReactHtmlParser(item.title)}</h4>
                                     <h5>{ReactHtmlParser(item.field_product_category)}</h5>
                                  </div>
-                                 <Link to={""} onClick={this.openAccordian}>When product was released: {item.created}</Link>
+                                 <Link to={""}>When product was released: {item.created}</Link>
                               </div>
                               <div className="bottom-details d-flex flex-wrap">
                                  <div className="left-prod-img" style={{backgroundImage: `url(${site_url+item.field_product_image})`}}>

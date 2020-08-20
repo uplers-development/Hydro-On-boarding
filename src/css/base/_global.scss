@@ -2949,6 +2949,9 @@ a {
 
 .doller-label {
 	position: relative;
+	@media screen and (max-width:$mobile-small) {
+		width: 100%;
+	}
 	&:before {
 		content: "";
 		display: flex;

@@ -31,8 +31,8 @@
 				color: $light-black;
 				font-family: $arial;
 				font-weight: $font-normal;
-
-				@media screen and (max-width:$mobile-small) {
+				
+				@media screen and (max-width:$ipad-portrait) {
 					width: auto;
 					margin:3px 0; 
 				}

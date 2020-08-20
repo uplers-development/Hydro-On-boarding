@@ -41,7 +41,7 @@ class Repaddproduct extends React.Component{
 
    openAccordian=(e)=>{
       e.preventDefault();
-      console.log(e.target);
+      e.target.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[0].click();
       
       if(!e.target.parentNode.parentNode.classList.contains("active")){
          document.querySelectorAll(".list-box").forEach((item,index)=>{
@@ -52,17 +52,6 @@ class Repaddproduct extends React.Component{
          e.target.parentNode.parentNode.classList.remove("active");
       }
    }
-
-  /* openAccordianOnLabelcall=(e)=>{
-      if(!e.target.parentNode.parentNode.parentNode.classList.contains("active")){
-         document.querySelectorAll(".list-box").forEach((item,index)=>{
-            if(item.classList.contains("active")){item.classList.remove("active")}
-         })
-         e.target.parentNode.parentNode.parentNode.classList.add("active");
-      }else{
-         e.target.parentNode.parentNode.parentNode.classList.remove("active");
-      }
-   }*/
 
    get_uploaded_file_path=(e)=>{
       var fullPath = e.target.files[0];
@@ -303,9 +292,9 @@ class Repaddproduct extends React.Component{
                                     </div>
                                     <div className="form-group">
                                        <label>Cost*</label>
-                                       <input type="text" name="cost" placeholder="Cost" className="cost" onBlur={((e)=>{
+                                       <span className="doller-label">{item.field_product_currency}<input type="text" name="cost" placeholder="Cost" className="cost" onBlur={((e)=>{
                                              !hasNumeric(e.target.value) ? this.setState({costState:true}) : this.setState({costState:false}) 
-                                       })}/>
+                                       })}/></span>
                                        {this.state.costState ? ValidationMsg.common.default.coststate : ''}
                                     </div>
                                     <div className="form-group">

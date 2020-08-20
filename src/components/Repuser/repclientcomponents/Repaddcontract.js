@@ -98,24 +98,34 @@ class Repaddcontract extends React.Component{
     }
 
   addContract=(e)=>{
-    let productTagsId=[]
+    let productTagsId=[];
+    let contractoptions;
       document.querySelectorAll(".shareall-email .emailall").forEach((item,index)=>{
           productTagsId.push({"target_id":item.getAttribute("nid")});
       })
-
-  	   let contractoptions={
+        if(document.querySelector('.document-item-contract') !== null){
+  	    contractoptions={
               "title":[{"value":document.querySelector("#title").value}],
               "type":[{"target_id":"contracts"}],
               "field_contract_document_type":[{"target_id":this.contractype.current.value}],
               "field_contract_document":[{"target_id":document.querySelector(".document-item-contract").getAttribute("get-id")}],
               "field_contract_expiry":[{"value":document.querySelector("#expirydate").value}],
-              "field_contract_document_external":[{"uri":document.querySelector("#sharepoint-url").value ,"title":"","options": []}],
               "field_sub_title":[{"value":document.querySelector("#description").value}],
               "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
               "field_contract_for_client":[{"target_id":this.props.senduid}]
           }   
-
-      console.log(contractoptions);
+        }else{
+            contractoptions={
+              "title":[{"value":document.querySelector("#title").value}],
+              "type":[{"target_id":"contracts"}],
+              "field_contract_document_type":[{"target_id":this.contractype.current.value}],
+              "field_contract_expiry":[{"value":document.querySelector("#expirydate").value}],
+              "field_contract_document_external":[{"uri":document.querySelector("#sharepoint-url").value ,"title":"","options": []}],
+              "field_sub_title":[{"value":document.querySelector("#description").value}],
+              "field_contract_for_products":productTagsId,/*PRoduct tags Id*/
+              "field_contract_for_client":[{"target_id":this.props.senduid}]
+          } 
+        }
        if(document.querySelector("#expirydate").value!=='' || document.querySelector("#title").value!=='' || document.querySelector("#description").value!=='' || document.querySelector("#sharepoint-url").value!=='' || document.querySelector(".document-item-contract").getAttribute("get-id")!=='' && !this.state.duplicateProducts){
         	 fetch(Repclient.Repclientdetailssubmissionproductlist.url,{
                             method:Repclient.Repclientdetailssubmissionproductlist.method,

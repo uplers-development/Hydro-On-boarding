@@ -19,6 +19,10 @@
 				color: $panton-gray;
 				font-weight: $font-semi-bold;
 				font-family: $gibson;
+				@media screen and (max-width:$mobile-small) {
+					padding-right: 15px;
+					margin:3px 0; 
+				}
 			}
 			h4 {
 				font-size: 16px;
@@ -28,12 +32,9 @@
 				font-family: $arial;
 				font-weight: $font-normal;
 
-				/*@media screen and (max-width:$large-x) {
-					margin: 10px 0 0 0;
-				}*/
-
 				@media screen and (max-width:$mobile-small) {
-					width: 100%;
+					width: auto;
+					margin:3px 0; 
 				}
 			}
 		}

@@ -292,7 +292,7 @@ class Repaddproduct extends React.Component{
                                     </div>
                                     <div className="form-group">
                                        <label>Cost*</label>
-                                       <span className="doller-label">{item.field_product_currency}<input type="text" name="cost" placeholder="Cost" className="cost" onBlur={((e)=>{
+                                       <span className="doller-label"><span className='currency-icon'>{item.field_product_currency}</span><input type="text" name="cost" placeholder="Cost" className="cost" onBlur={((e)=>{
                                              !hasNumeric(e.target.value) ? this.setState({costState:true}) : this.setState({costState:false}) 
                                        })}/></span>
                                        {this.state.costState ? ValidationMsg.common.default.coststate : ''}

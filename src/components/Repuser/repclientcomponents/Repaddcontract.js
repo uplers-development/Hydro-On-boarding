@@ -148,11 +148,11 @@ class Repaddcontract extends React.Component{
 
   productTag=(e)=>{
     e.preventDefault();
-    console.log(this.productTaginput.current.value);
+    console.log(this.productTaginput.current.value.toUpperCase());
     if(this.productTaginput.current.value!=='') {
           this.state.productSuggestion=[];
         this.props.productDataList.filter((value,index,array)=>{
-            if(value.title.match(this.productTaginput.current.value)){
+            if(value.title.toUpperCase().match(this.productTaginput.current.value.toUpperCase())){
               console.log(value);
               this.state.productSuggestion.push(value)
             }

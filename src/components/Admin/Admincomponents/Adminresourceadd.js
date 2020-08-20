@@ -71,7 +71,7 @@ class Adminresourceadd extends React.Component{
 	          		console.log(data);
 	          		    this.state.productSuggestion=[];
 	          		    data.filter((value,index,array)=>{
-				            if(value.title.match(document.querySelector("#product-tags").value)){
+				            if(value.title.toUpperCase().match(document.querySelector("#product-tags").value.toUpperCase())){
 					              console.log(value);
 					              this.state.productSuggestion.push(value)
 				            }else{

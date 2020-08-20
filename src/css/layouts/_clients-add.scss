@@ -386,6 +386,7 @@
 						left: 0;
 						top: 0;
 						height: 100%;
+						z-index: 11;
 						&:after {
 							display: none;
 						}

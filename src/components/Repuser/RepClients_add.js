@@ -305,11 +305,7 @@ class RepClients_add extends React.Component {
                           <div className="upload-btn-wrapper">
                                 <button className="btn common-btn-blue" onClick={this.submitClientDetails}>
                                   <span>Add new client</span></button>
-                                   <Link to={""} onClick={((e)=>{e.preventDefault();
-                                       this.props.history.push({
-                                                   pathname:'/RepClients'
-                                      })
-                                    })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
+                                  
                                {this.state.formEmpty ? 
                                   <>
                                     {ValidationMsg.common.default.fieldsEmptyAnnoucementform}
@@ -318,7 +314,11 @@ class RepClients_add extends React.Component {
                                   ''
                                   } 
                               </div>
-                              
+                               <Link to={""} onClick={((e)=>{e.preventDefault();
+                                       this.props.history.push({
+                                                   pathname:'/RepClients'
+                                      })
+                                    })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                         </div>
                         
                      </div>

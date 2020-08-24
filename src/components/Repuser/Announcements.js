@@ -212,7 +212,7 @@ class Announcements extends React.Component {
 										<div className="container">
 											<Repproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
 											<Repcontractdetails  historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
-											<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({viewpagecall:false})})} className="back-dashboard">Back</Link>
+											<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({viewpagecall:false})})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 										</div>
 									</div>
 								</div>

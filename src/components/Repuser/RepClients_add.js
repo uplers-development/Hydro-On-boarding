@@ -309,7 +309,7 @@ class RepClients_add extends React.Component {
                                        this.props.history.push({
                                                    pathname:'/RepClients'
                                       })
-                                    })} className="back-dashboard">Back</Link>
+                                    })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                                {this.state.formEmpty ? 
                                   <>
                                     {ValidationMsg.common.default.fieldsEmptyAnnoucementform}

@@ -322,7 +322,7 @@ class Repaddcontract extends React.Component{
                                            targetSendid:this.props.senduid
                                          }
                                       })
-                          })} className="back-dashboard">Back</Link>
+                          })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                         </div>
                      </div>
                     {this.state.fields_are_empty  ? ValidationMsg.common.default.addproductfieldnotvalid :''}

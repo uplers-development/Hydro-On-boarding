@@ -337,7 +337,7 @@ class Repaddproduct extends React.Component{
                                    targetSendid:this.props.senduid
                                  }
                               })
-                  })} className="back-dashboard">Back</Link>
+                  })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                   </div>
                   <>
                     <>

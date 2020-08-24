@@ -83,14 +83,14 @@ class Repproductselection extends React.Component{
 						{/*<!--Search right Start-->*/}
 							<div className="search-right d-flex flex-wrap align-center">					  
 								<div className="btn-block">
-									<button className="btn common-btn-blue" onClick={((e)=>{
+									<button className="btn common-btn-blue" onClick={((e)=>{localStorage.setItem("redirection-pathname",window.location.pathname);
 										this.props.historyPush.history.push({
 											pathname:'/RepClients_add',
 											state:{
 												productPage:true,
 												senduid:this.state.uidToPass	
 											}
-										})
+										});
 									})}><span>Add new Product</span></button>
 								</div>												  
 								<div className="auto-search-box">
@@ -135,6 +135,7 @@ class Repproductselection extends React.Component{
 						<div className="search-right d-flex flex-wrap align-center">  
 							<div className="btn-block">
 								<button className="btn common-btn-blue" onClick={((e)=>{
+									localStorage.setItem("redirection-pathname",window.location.pathname);
 										this.props.historyPush.history.push({
 											pathname:'/RepClients_add',
 											state:{

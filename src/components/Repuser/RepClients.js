@@ -22,7 +22,7 @@ class RepClients extends React.Component {
 		super(props);
 		this.state={
 			menulisting:[],
-			viewpagecall:this.props.location.state!==undefined ? this.props.location.state.contractsubmission:false,
+			viewpagecall:this.props.location.state!==undefined  ? this.props.location.state.contractsubmission:false,
 			searchedItem:[],
 			searchedclientresult:[],
 			repclientdata:[],
@@ -182,6 +182,7 @@ class RepClients extends React.Component {
 										<div className="container">
 											<Repproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
 											<Repcontractdetails  historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
+											<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({viewpagecall:false})})} className="back-dashboard">Back</Link>
 										</div>
 									</div>
 							</div>

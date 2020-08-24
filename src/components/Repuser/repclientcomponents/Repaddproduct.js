@@ -329,6 +329,15 @@ class Repaddproduct extends React.Component{
                               <button className="btn common-btn-blue" onClick={this.addProduct}>
                               <span>Add new product</span></button>
                            </div>
+                  <Link to={""} onClick={((e)=>{e.preventDefault();
+                     this.props.historyPush.history.push({
+                                 pathname:localStorage.getItem("redirection-pathname")==='/Announcements' ? '/Announcements' : '/RepClients',
+                                   state:{
+                                   contractsubmission:true,
+                                   targetSendid:this.props.senduid
+                                 }
+                              })
+                  })} className="back-dashboard">Back</Link>
                   </div>
                   <>
                     <>

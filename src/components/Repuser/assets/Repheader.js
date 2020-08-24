@@ -78,22 +78,12 @@ console.log(this.props.sendtheDefaultAnnouncement);
                {this.props.menulisting.map((item,index)=>
                   {if(window.location.pathname===item.field_react_route){
                   return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
-                  <h1>{!this.props.checkifPagecall ? item.title :'Client Details'}</h1>
-                  <>{this.props.sendtheDefaultAnnouncement ?  <Link to={""} onClick={((e)=>{e.preventDefault();this.props.returntothedefault(false)})} className="back-dashboard">Back</Link> : ''}</>
-                  </React.Fragment>)
+                  <h1>{!this.props.checkifPagecall ? item.title :'Client Details'}</h1></React.Fragment>)
                }else if(item.child!==undefined && window.location.pathname===item.child[0].field_react_route){
                   return(<React.Fragment key={index}><div dangerouslySetInnerHTML={{ __html: item.child[0].field_icon_svg }} />
-                  <h1>{item.child[0].title}</h1> <Link to={""} onClick={((e)=>{e.preventDefault();
-                     this.props.historyPush.history.push({
-                                 pathname:'/RepClients',
-                              })
-                  })} className="back-dashboard">Back</Link></React.Fragment>)
+                  <h1>{item.child[0].title}</h1></React.Fragment>)
                }}
                )}
-               {this.props.checkifPagecall ?
-			         <Link to={""} onClick={((e)=>{e.preventDefault();this.props.changetodefult(false)})} className="back-dashboard">Back</Link>
-                  :''
-               }
             </div>
             <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
                <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>

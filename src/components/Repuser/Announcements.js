@@ -27,8 +27,9 @@ class Announcements extends React.Component {
 			announcementDetails:[],
 			repclientdata:[],
 			announcement:true,
-			updatedRepclientId:null,
+			updatedRepclientId:this.props.location.state!==undefined ? this.props.location.state.targetSendid : null,
 			viewpagecalled:false,
+			viewpagecall:this.props.location.state!==undefined  ? this.props.location.state.contractsubmission:false,
 			noDataforTable:false,
 			summernoteData:null
 		}
@@ -211,6 +212,7 @@ class Announcements extends React.Component {
 										<div className="container">
 											<Repproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
 											<Repcontractdetails  historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
+											<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({viewpagecall:false})})} className="back-dashboard">Back</Link>
 										</div>
 									</div>
 								</div>

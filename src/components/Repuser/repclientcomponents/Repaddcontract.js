@@ -314,6 +314,15 @@ class Repaddcontract extends React.Component{
                         <div className="upload-btn-wrapper">
                            <button className="btn common-btn-blue" onClick={this.addContract}>
                            <span>Add new contract</span></button>
+                            <Link to={""} onClick={((e)=>{e.preventDefault();
+                             this.props.historyPush.history.push({
+                                         pathname:localStorage.getItem("redirection-pathname")==='/Announcements' ? '/Announcements' : '/RepClients',
+                                         state:{
+                                           contractsubmission:true,
+                                           targetSendid:this.props.senduid
+                                         }
+                                      })
+                          })} className="back-dashboard">Back</Link>
                         </div>
                      </div>
                     {this.state.fields_are_empty  ? ValidationMsg.common.default.addproductfieldnotvalid :''}

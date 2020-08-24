@@ -458,7 +458,7 @@ class Profile extends Component {
 
 									<div className="form-group one-by-two">
 										<label>Location*</label>
-										<input type="text" id='location' defaultValue={this.state.location} placeholder="Location" tabIndex="7" onBlur={(e)=>
+										<textarea type="text" id='location' defaultValue={this.state.location} placeholder="Location" tabIndex="7" onBlur={(e)=>
 												hasNull(e.target.value) ? this.setState({locationState:true}): this.setState({locationState:false})
 									}/>
 									{this.state.locationState ? ValidationMsg.common.default.location : ''}

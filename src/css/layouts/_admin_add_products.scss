@@ -187,8 +187,12 @@
 			}
 		}
 		.btn-block {
-			padding-top: 30px;
-
+			padding-top: 32px;
+			align-items: center;
+			display: flex;
+			@media screen and (max-width:$mobile-small) {
+				padding-top: 25px;
+			}
 			.btn {
 				margin-bottom: 0;
 				min-width: 196px;

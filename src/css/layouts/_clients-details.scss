@@ -1,6 +1,13 @@
 .clients-detils-main {
 	 max-width: 1320px;
-     width: 100%;
+	 width: 100%;
+	 > .container {
+		> .back-dashboard {
+			@media screen and (max-width: $ipad-portrait) {
+				margin: 5px 0;
+			}
+		} 
+	 }
 	.person-detils-box {
 		width: 100%;
 		max-width: 840px;

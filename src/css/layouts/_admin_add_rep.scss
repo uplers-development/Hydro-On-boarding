@@ -106,7 +106,11 @@
 
 				.btn-block {
 					margin-top: 55px;
-
+					align-items: center;
+					display: flex;
+					@media screen and (max-width:$mobile-small) {
+						padding-top: 25px;
+					}
 					@media screen and (max-width:$ipad-landscape) {
 						margin-top: 35px;
 					}

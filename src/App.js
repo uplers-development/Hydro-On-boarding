@@ -18,13 +18,14 @@ import Announcements from "./components/Repuser/Announcements";
 import AdminResource from "./components/Admin/admin-resources";
 import AdminRep from "./components/Admin/admin-reps";
 import AdminProduct from "./components/Admin/admin-products";
+import Adminclients from "./components/Admin/admin-clients";
 import Admin_add_rep from "./components/Admin/Admin_add_rep";
 import AdminProfile from "./components/Admin/Html/Admin_Profile";
 import Apiurl,{site_url,Client} from './components/Apiurl'; 
 import "./css/style.scss";
 
 
-console.log=function(){}
+//console.log=function(){}
 class App extends Component {
   constructor(props){
     super(props);
@@ -59,6 +60,7 @@ class App extends Component {
                     <Route path="/RepClients"  component={RepClients} />		  	
                     <Route path="/admin-resources"  component={AdminResource} />        
                     <Route path="/admin-products"  component={AdminProduct} />        
+                    <Route path="/admin-clients"  component={Adminclients} />        
                     <Route path="/admin-reps"  component={AdminRep} />        
                     <Route path="/Admin_add_rep"  component={Admin_add_rep} />        
                     <Route path="/RepClients_details" component={RepClients_details} />

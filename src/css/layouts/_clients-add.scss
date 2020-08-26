@@ -152,7 +152,14 @@
 
 		&.only-add-contract {
 			padding-top: 0;
-
+			.btn-block {
+				@media screen and (max-width:$mobile-small) {
+					padding-left: 0;
+				}
+				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					padding-left: 0;
+				}
+			} 
 			.client-add-product {
 				margin-top: 0;
 			}

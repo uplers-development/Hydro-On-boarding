@@ -2967,9 +2967,11 @@ a {
 
 .back-dashboard {
 	margin: 0 15px;
-	min-width: 100px !important;
 	@media screen and (max-width:$small-x) {
-		margin: 0 5px;
-		min-width: 80px !important;
+		margin: 0 10px;
+		min-width: 100px !important; 
+	}
+	@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+		min-width: 130px !important; 
 	}
 }

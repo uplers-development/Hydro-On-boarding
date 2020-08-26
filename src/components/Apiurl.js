@@ -1,6 +1,8 @@
 /*********************************Staging Server*********************************************/
-export const base_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin : '//staging.project-progress.net/projects/hydro';
-export const site_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin :'//staging.project-progress.net';
+//export const base_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin : '//staging.project-progress.net/projects/hydro';
+//export const site_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin :'//staging.project-progress.net';
+export const base_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin : 'http://hydro.staging.project-progress.net';
+export const site_url=process.env.NODE_ENV==='production' && window.location.origin!=="http://hydro-on-boarding.dev.project-progress.net" ? window.location.origin :'http://hydro.staging.project-progress.net/';
 const target_id=localStorage.getItem("user-type")!==null? JSON.parse(localStorage.getItem("user-type")).uid:'';
 
 

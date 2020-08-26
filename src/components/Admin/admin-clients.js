@@ -5,16 +5,16 @@ import CommonBackground from '../../images/common-bg.jpg';
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
 import ReactHtmlParser from 'react-html-parser';
-import Adminheader from './assets/Adminheader'
-import Adminnavbar from './assets/Adminnavbar'
-/*import Repclientbulkaction from './Admincomponents/Repclientbulkaction'
-import Repclientsearchbox from './Admincomponents/Repclientsearchbox'
-import Repclientsorting from './Admincomponents/Repclientsorting'
-import Repclientmobilefilter from './Admincomponents/Repclientmobilefilter'
-import Repclienttabledata from './Admincomponents/Repclienttabledata'
-import Repclientdetails from './Admincomponents/Repclientdetails';
-import Repproductselection from './Admincomponents/Repproductselection';
-import Repcontractdetails from './Admincomponents/Repcontractdetails';*/
+import Adminheader from './assets/Adminheader';
+import Adminnavbar from './assets/Adminnavbar';
+import Adminclientbulkaction from './Admincomponents/Adminclientbulkaction';
+import Adminclientsearchbox from './Admincomponents/Adminclientsearchbox';
+import Adminclientsorting from './Admincomponents/Adminclientsorting';
+import Adminclientmobilefilter from './Admincomponents/Adminclientmobilefilter';
+import Adminclienttabledata from './Admincomponents/Adminclienttabledata';
+import Adminclientdetails from './Admincomponents/Adminclientdetails';
+import Adminproductselection from './Admincomponents/Adminproductselection';
+import Admincontractdetails from './Admincomponents/Admincontractdetails';
 import {cosmaticAsset} from'../constants/common';
 
 class Adminclients extends React.Component {
@@ -30,53 +30,25 @@ class Adminclients extends React.Component {
 			loader:true,
 			pageTitleChange:false,
 		}
-		this.productafterFilter=this.productafterFilter.bind(this);
-		this.getadmindetail=this.getadmindetail.bind(this);
+	/*	this.productafterFilter=this.productafterFilter.bind(this);
 		this.checkloadingfordata=this.checkloadingfordata.bind(this);
 		this.checkdropdownselected=this.checkdropdownselected.bind(this);
-		this.getallproduct=this.getallproduct.bind(this);
+		this.getallproduct=this.getallproduct.bind(this);*/
+		this.getadmindetail=this.getadmindetail.bind(this);
 		this.changetheview=this.changetheview.bind(this);
 	}	
 
-	productafterFilter=(productfilteredata)=>{
-		console.log(productfilteredata);
-   		this.setState({productFiltereddata:productfilteredata})
-   }
-
-   checkloadingfordata=(getstatus)=>{
-		console.log(getstatus);
-   		this.setState({statusfiltered:getstatus})
-   }
-
-   checktheview=(addpage,callfrom,viewcall,getChangeid)=>{
-  		console.log(addpage);
-  		console.log(getChangeid);
-  		console.log(callfrom);
-  		console.log(viewcall);
-   		this.setState({addStatus:addpage,checkcallfrom:callfrom,viewcaller:viewcall,productchangedid:getChangeid,pageTitleChange:viewcall});
-   }  
-
-   getallproduct=(getallproducts)=>{
-   		this.setState({getAllproducts:getallproducts});
-   }
-
-   updatedproductstatus=(checkupdatedresponse)=>{		
-   		this.setState({viewcaller:checkupdatedresponse});
-   }
-
-	getadmindetail=(admindetails)=>{
-  		console.log(admindetails);
-   		this.setState({adminuid:admindetails.uid[0]}.value);
-   }
-
-   checkdropdownselected=(checkstatus)=>{
-   		console.log(checkstatus);
-   		this.setState({checkifselesctedropdown:checkstatus})
-   }
-
-   changetheview=(calldefaultview,changedthetitle)=>{
+	 changetheview=(calldefaultview,changedthetitle)=>{
   		this.setState({viewcaller:calldefaultview,pageTitleChange:changedthetitle});
-   }
+   	 }
+
+   	 getadmindetail=(admindetails)=>{
+  		console.log(admindetails);
+   		this.setState({adminuid:admindetails.uid[0].value,loader:false});
+    }
+
+
+
 
 	render(){
 		return(<div>
@@ -85,7 +57,7 @@ class Adminclients extends React.Component {
 			         <Adminnavbar historyPush={this.props}/>
 			         <div className="d-flex flex-wrap right-content-part">
 			            <div className="top-heading">
-		               	<Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} checkveiworaddclass={this.state.checkcallfrom} changetodefaultView={this.changetheview}/>
+		               	<Adminheader historyPush={this.props} getAdminuid={this.getadmindetail} checkifPagecall={this.state.pageTitleChange} changetodefaultView={this.changetheview}/>
 
 			            </div>
 			            {!this.state.loader ?
@@ -94,25 +66,25 @@ class Adminclients extends React.Component {
 			            	<div className="bottom-content-block with-filter">
 					               <div className="d-flex flex-wrap clients-main-block">
 					                  <div className="fileter-block d-flex flex-wrap border-bottom">
-					                  {/*   <Repclientbulkaction recordDelete={this.checkAnyDelete}/>*/}
+					                     <Adminclientbulkaction recordDelete={this.checkAnyDelete}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
-					                       {/* <Repclientsearchbox getSearchedItems={this.getSearchedItems}/>
-					                       					                        <Repclientmobilefilter getSortedItems={this.getSortedItem} recordDelete={this.checkAnyDelete}/>
-					                       					                        <Repclientsorting getSortedItems={this.getSortedItem}/>*/}
+					                        <Adminclientsearchbox/>
+					                        <Adminclientmobilefilter />
+					                        <Adminclientsorting />
 					                     </div>
 					                  </div>
-					                	{/*<Repclienttabledata clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>*/}
+					                	<Adminclienttabledata/>
 					               </div>
 			            	</div>
 				             :
 							<div className="bottom-content-block">
 								{/*<!-Client details main start-->*/}
 									<div className="d-flex flex-wrap clients-detils-main">				
-										{/*<Repclientdetails repclientuid={this.state.updatedRepclientId}/>*/}
+										<Adminclientdetails/>
 										<div className="container">
-											{/*<Repproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
-																						<Repcontractdetails  historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
-																						<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({viewpagecall:false})})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>*/}
+											<Adminproductselection historyPush={this.props} />
+											<Admincontractdetails  historyPush={this.props} />
+											<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({viewpagecall:false})})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 										</div>
 									</div>
 							</div>

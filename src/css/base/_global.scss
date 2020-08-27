@@ -1966,7 +1966,7 @@ nav {
 			background-position: 3% center;
 		}
 		@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
-			background-position: 1% center;
+			background-position: 10px center;
 		}
 
 		&:focus {

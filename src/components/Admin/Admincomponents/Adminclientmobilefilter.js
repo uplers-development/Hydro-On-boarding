@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{site_url,base_url,Repclient} from '../../Apiurl'; 
+import Apiurl,{site_url,base_url,Repclient,Admin} from '../../Apiurl'; 
 
 class Adminclientmobilefilter extends React.Component {
 	constructor(props) {
@@ -25,7 +25,7 @@ class Adminclientmobilefilter extends React.Component {
 		})
 		e.target.classList.add("active");
 
-		fetch(Repclient.Repclientdatatable.url+e.target.getAttribute("title"),{
+		fetch(Admin.adminClientlisting.url+e.target.getAttribute("title"),{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
@@ -37,7 +37,7 @@ class Adminclientmobilefilter extends React.Component {
 				});
 		}else{
 			e.target.classList.remove("active");
-			fetch(Repclient.Repclientdatatable.url,{
+			fetch(Admin.adminClientlisting.url,{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
@@ -124,7 +124,7 @@ class Adminclientmobilefilter extends React.Component {
 		document.querySelectorAll(".clientchecked").forEach((item,index)=>{
 			item.checked=false;			
 		})
-		fetch(Repclient.Repclientdatatable.url,{
+		fetch(Admin.adminClientlisting.url,{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),

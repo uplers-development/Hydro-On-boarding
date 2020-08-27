@@ -269,10 +269,10 @@ class Addadminclient extends React.Component {
     }
 }
 
-     getadmindetail=(admindetails)=>{
-      console.log(admindetails);
-      this.setState({adminuid:admindetails.uid[0].value,loader:false});
-    }
+ getadmindetail=(admindetails)=>{
+  console.log(admindetails);
+  this.setState({adminuid:admindetails.uid[0].value,loader:false});
+}
 	render(){
 		return(
       <div>

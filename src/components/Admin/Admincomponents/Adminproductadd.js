@@ -301,6 +301,7 @@ class Adminproductadd extends React.Component{
 						<div className="btn-block">
 							<button className="btn wide common-btn-blue">
 							<span>{!this.props.readmode ? "Update Product":"Add Product"}</span></button>
+								<Link to={""} onClick={((e)=>{e.preventDefault();this.props.updatedTheproductresponse(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 							</div>
 						</div>
 						</form>

@@ -435,6 +435,7 @@ class Adminresourceadd extends React.Component{
 					   <div className="btn-block">
 						   <button className="btn wide common-btn-blue" >
 						   <span>{!this.props.readmode ? "Update Resource":"Add Resource"}</span></button>
+						   	<Link to={""} onClick={((e)=>{e.preventDefault();this.props.updatedTheresourceresponse(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 					   </div>
 				  	 </form>
 				  	 :<>

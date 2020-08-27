@@ -195,6 +195,7 @@ class Adminaddrep extends React.Component{
 				         <div className="btn-block">
 				            <button className="btn common-btn-blue">
 				            <span>{!this.props.readmode ? "Update Rep":"Add Rep"}</span></button>
+				            	<Link to={""} onClick={((e)=>{e.preventDefault();this.props.updatedThereresponse(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 				         </div>
 				      </form>
 				      :<>

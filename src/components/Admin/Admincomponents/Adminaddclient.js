@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Admin} from '../../Apiurl'; 
 import{hasNull,isRequired,hasValidEmail,hasValidMobile,hasValidPassword} from '../../validation';
 import {ValidationMsg} from'../../constants/validationmsg';
 import ReactHtmlParser from 'react-html-parser';
@@ -18,14 +18,45 @@ class Adminaddclient extends React.Component{
             passowrdState:false,
             checkedState:false,
             timeZone:null,
+            repclientlist:[],
 		}
       this.form=React.createRef();
       this.timeZoneref=React.createRef();
+      this.Repclientref=React.createRef();
 	}
 
    componentDidMount(){
       this.GetTimeZone();
+      this.get_admin_rep_table_data();
    }
+
+
+   get_admin_rep_table_data=()=>{
+    let status;
+    try{
+      fetch(Admin.adminreptablelisting.url,{
+        headers:{
+                  "Content-Type" : "application/json",
+                  "X-CSRF-Token" : localStorage.getItem("access-token"),
+                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+              },
+              method:Admin.adminreptablelisting.method
+      }).then(res=>{
+        status=res.status;
+        return res.json()
+      }).then(data=>{
+        if(status===200){
+          console.log(data);
+          this.setState({loader:false,repclientlist:data});
+        }else{
+          this.setState({loader:false,});
+        }
+      })
+    }catch(err){
+      console.log(err);
+      this.setState({loader:false});
+    }
+  }
 
   GetTimeZone=()=>{
     fetch(Apiurl.ProfiletimeZone.url,{
@@ -89,6 +120,23 @@ class Adminaddclient extends React.Component{
                               <label>Time zone</label>
                               <select name="1" className="" tabIndex="6" id="time_zone" ref={this.timeZoneref} >
                                  {this.state.timeZone!==null ? ReactHtmlParser(this.state.timeZone) : '' }
+                              </select>
+                           </div> 
+                           <div className="form-group">
+                              <label>Rep client</label>
+                              <select name="1" className="" tabIndex="6" id="rep-client-add" ref={this.Repclientref} >
+                                 
+                                 {this.state.repclientlist!==null ? 
+                                  <>
+                                    {this.state.repclientlist.map((item,index)=>
+                                     <option key={index} value={item.uid}>{ReactHtmlParser(item.name_1)}
+                                     </option>
+                                    )}
+                                  </>:
+                                  <>
+                                    <option value="none">none</option>
+                                  </>
+                                }
                               </select>
                            </div>
                            <div className="form-group">

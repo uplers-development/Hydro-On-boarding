@@ -144,7 +144,7 @@ class Addadminclient extends React.Component {
            "pass" : [{"value":document.getElementById("password") && document.querySelector("#password").value!=='' ? document.querySelector("#password").value :''}],
            "roles" : [{ "target_id":"client" }],
            "status" : [{"value":1}],
-           "field_rep_reference" : [{"target_id":JSON.parse(localStorage.getItem("user-type")).uid}]
+           "field_rep_reference" : [{"target_id":document.querySelector("#rep-client-add").value}]
 
          }
 
@@ -216,14 +216,14 @@ class Addadminclient extends React.Component {
                   let seller = document.querySelectorAll(".checked .seller")[index].value;
                   let cost = document.querySelectorAll(".checked .cost")[index].value;
                   let item_id = document.querySelectorAll(".checked .item-id")[index].value;
-                  let file_id = document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id");
+                  let file_id = document.querySelectorAll(".checked .document-item")[index] ? document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id") : '';
                   object['title'] =  [{"value": title}];
                   object['field_purchase_date'] =  [{"value":purchase}];
                   object['field_product'] = [{"target_id":productcheck}];
                   object['field_seller'] =  [{"value":seller}];
                   object['field_cost'] =  [{"value":cost}];
                   object['field_item_id'] = [{"value":item_id}];  
-                  object['field_purchase_doument']=[{"target_id":file_id}]
+                  if(file_id!==''){object['field_purchase_doument']=[{"target_id":file_id}]}
                   object['type']=[{"target_id":"product_purchase"}];
                   object['field_user']=[{"target_id":data.uid[0].value}];
                   productList.push(object);
@@ -321,7 +321,7 @@ class Addadminclient extends React.Component {
                               </div>
                                <Link to={""} onClick={((e)=>{e.preventDefault();
                                        this.props.history.push({
-                                                   pathname:'/RepClients'
+                                                   pathname:'/admin-clients'
                                       })
                                     })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                         </div>
@@ -336,7 +336,7 @@ class Addadminclient extends React.Component {
             {this.state.openPopup ? 
           <div id="modal" className="modal-container">
             <div className="modal d-flex flex-wrap align-center justify-center">
-              <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false}); this.props.history.push("/RepClients");})}
+              <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false}); this.props.history.push("/admin-clients");})}
               className="close" title="Close"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
               
             <div>
@@ -346,7 +346,7 @@ class Addadminclient extends React.Component {
                 <div className="btn-block add-client">
                            <div className="upload-btn-wrapper">
                               <button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})
-                              this.props.history.push("/RepClients")})}>
+                              this.props.history.push("/admin-clients")})}>
                               <span>OK</span></button>
                            </div>
                   </div>

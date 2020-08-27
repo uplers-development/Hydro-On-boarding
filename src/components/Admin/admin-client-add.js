@@ -144,7 +144,7 @@ class Addadminclient extends React.Component {
            "pass" : [{"value":document.getElementById("password") && document.querySelector("#password").value!=='' ? document.querySelector("#password").value :''}],
            "roles" : [{ "target_id":"client" }],
            "status" : [{"value":1}],
-           "field_rep_reference" : [{"target_id":JSON.parse(localStorage.getItem("user-type")).uid}]
+           "field_rep_reference" : [{"target_id":document.querySelector("#rep-client-add").value}]
 
          }
 
@@ -223,7 +223,7 @@ class Addadminclient extends React.Component {
                   object['field_seller'] =  [{"value":seller}];
                   object['field_cost'] =  [{"value":cost}];
                   object['field_item_id'] = [{"value":item_id}];  
-                  object['field_purchase_doument']=[{"target_id":file_id}]
+                   if(file_id!==''){object['field_purchase_doument']=[{"target_id":file_id}]}
                   object['type']=[{"target_id":"product_purchase"}];
                   object['field_user']=[{"target_id":data.uid[0].value}];
                   productList.push(object);

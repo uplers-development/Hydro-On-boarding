@@ -221,7 +221,7 @@ class RepClients_add extends React.Component {
                   object['field_seller'] =  [{"value":seller}];
                   object['field_cost'] =  [{"value":cost}];
                   object['field_item_id'] = [{"value":item_id}];  
-                  object['field_purchase_doument']=[{"target_id":file_id}]
+                   if(file_id!==''){object['field_purchase_doument']=[{"target_id":file_id}]}
                   object['type']=[{"target_id":"product_purchase"}];
                   object['field_user']=[{"target_id":data.uid[0].value}];
                   productList.push(object);

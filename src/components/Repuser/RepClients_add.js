@@ -214,7 +214,7 @@ class RepClients_add extends React.Component {
                   let seller = document.querySelectorAll(".checked .seller")[index].value;
                   let cost = document.querySelectorAll(".checked .cost")[index].value;
                   let item_id = document.querySelectorAll(".checked .item-id")[index].value;
-                  let file_id = document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id");
+                  let file_id = document.querySelectorAll(".checked .document-item")[index] ? document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id") : '';
                   object['title'] =  [{"value": title}];
                   object['field_purchase_date'] =  [{"value":purchase}];
                   object['field_product'] = [{"target_id":productcheck}];

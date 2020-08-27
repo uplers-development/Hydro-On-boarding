@@ -216,14 +216,14 @@ class Addadminclient extends React.Component {
                   let seller = document.querySelectorAll(".checked .seller")[index].value;
                   let cost = document.querySelectorAll(".checked .cost")[index].value;
                   let item_id = document.querySelectorAll(".checked .item-id")[index].value;
-                  let file_id = document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id");
+                  let file_id = document.querySelectorAll(".checked .document-item")[index] ? document.querySelectorAll(".checked .document-item")[index].getAttribute("get-id") : '';
                   object['title'] =  [{"value": title}];
                   object['field_purchase_date'] =  [{"value":purchase}];
                   object['field_product'] = [{"target_id":productcheck}];
                   object['field_seller'] =  [{"value":seller}];
                   object['field_cost'] =  [{"value":cost}];
                   object['field_item_id'] = [{"value":item_id}];  
-                   if(file_id!==''){object['field_purchase_doument']=[{"target_id":file_id}]}
+                  if(file_id!==''){object['field_purchase_doument']=[{"target_id":file_id}]}
                   object['type']=[{"target_id":"product_purchase"}];
                   object['field_user']=[{"target_id":data.uid[0].value}];
                   productList.push(object);

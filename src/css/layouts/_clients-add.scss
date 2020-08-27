@@ -147,6 +147,13 @@
 
 			.client-add-product {
 				margin-top: 10px;
+				.modal {
+					.btn-block {
+						.common-btn-blue {
+							min-width: 130px;
+						}
+					}
+				}
 			}
 		}
 
@@ -935,6 +942,7 @@
 			padding-top: 35px;
 			display: flex;
 			align-items: center;
+			justify-content: center;
 			@media screen and (max-width:$mobile-small) {
 				padding-left: 23px;
 			}

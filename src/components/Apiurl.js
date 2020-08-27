@@ -339,6 +339,10 @@ export const Admin={
     adminrepBulkDelete:{
         url:base_url + '/json-api/bulk_delete.json',
         method:'POST'
+    },
+    adminClientlisting:{
+        url:base_url + `/jsonapi/clients_admin?_format=json`,
+        method:'GET'
     }
 }
 

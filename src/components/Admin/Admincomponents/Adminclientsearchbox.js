@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import {site_url,base_url,Repclient} from '../../Apiurl'; 
+import {site_url,base_url,Admin} from '../../Apiurl'; 
 
 class  Adminclientsearchbox extends React.Component{
 	constructor(props){
@@ -18,7 +18,7 @@ class  Adminclientsearchbox extends React.Component{
 	searchByName=(e)=>{
 		if(this.searchRef.current.value!==''){
 			this.setState({showCancelicon:true});
-			fetch(Repclient.Repclientdatatable.url+`&field_first_name_value=${this.searchRef.current.value}&field_last_name_value=${this.searchRef.current.value}`,{
+			fetch(Admin.adminClientlisting.url+`&field_first_name_value=${this.searchRef.current.value}&field_last_name_value=${this.searchRef.current.value}`,{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),

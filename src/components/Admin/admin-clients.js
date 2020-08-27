@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{site_url,Repclient} from '../Apiurl'; 
+import Apiurl,{site_url,Admin} from '../Apiurl'; 
 import CommonBackground from '../../images/common-bg.jpg';
 import Sidebar from '../assets/Sidebar';
 import UserProfile from '../assets/UserProfile';
@@ -29,14 +29,21 @@ class Adminclients extends React.Component {
 			updatedRepclientId:this.props.location.state!==undefined ? this.props.location.state.targetSendid : null,
 			loader:true,
 			pageTitleChange:false,
+			adminuid:null
 		}
-	/*	this.productafterFilter=this.productafterFilter.bind(this);
-		this.checkloadingfordata=this.checkloadingfordata.bind(this);
-		this.checkdropdownselected=this.checkdropdownselected.bind(this);
-		this.getallproduct=this.getallproduct.bind(this);*/
-		this.getadmindetail=this.getadmindetail.bind(this);
-		this.changetheview=this.changetheview.bind(this);
+		this.getSearchedItems = this.getSearchedItems.bind(this);
+		this.getSortedItem = this.getSortedItem.bind(this);
+		this.changetheviewtodefault=this.changetheviewtodefault.bind(this);
 	}	
+
+
+	componentDidMount(){
+		if(localStorage.getItem("access-token")!==null){
+			this.client_data_Table()
+		}else{
+			this.props.history.push('/Login')
+		}
+	}
 
 	 changetheview=(calldefaultview,changedthetitle)=>{
   		this.setState({viewcaller:calldefaultview,pageTitleChange:changedthetitle});
@@ -46,6 +53,44 @@ class Adminclients extends React.Component {
   		console.log(admindetails);
    		this.setState({adminuid:admindetails.uid[0].value,loader:false});
     }
+
+    checkAnyDelete=(recordDelete)=>{
+		if(recordDelete) {this.client_data_Table()} 
+	}
+
+	getSearchedItems =(getSearchedItem) =>{
+
+		console.log(getSearchedItem);
+		document.querySelector("#myInput").value==='' ? this.client_data_Table() : this.setState({repclientdata:getSearchedItem});
+	}
+
+	getSortedItem =(getSortedItem) =>{
+
+		console.log(getSortedItem);
+		this.setState({repclientdata:getSortedItem});
+	}
+
+	check_view_page_call=(viewpagecalled,uid)=>{
+		console.log(uid);
+		this.setState({updatedRepclientId : uid,viewpagecall : viewpagecalled , pageTitleChange:viewpagecalled});
+	}
+
+	changetheviewtodefault=(viewofpagecall)=>{
+		this.setState({viewpagecall : viewofpagecall , pageTitleChange:viewofpagecall})
+		console.log(this.state.pageTitleChange);
+	}
+
+	client_data_Table=()=>{
+		fetch(Admin.adminClientlisting.url,{
+			headers: {
+                	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+		}).then(res=>res.json()).then(data=>this.setState({repclientdata:data,loader:false}));
+
+	}
+
 
 
 
@@ -68,22 +113,22 @@ class Adminclients extends React.Component {
 					                  <div className="fileter-block d-flex flex-wrap border-bottom">
 					                     <Adminclientbulkaction recordDelete={this.checkAnyDelete}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
-					                        <Adminclientsearchbox/>
-					                        <Adminclientmobilefilter />
-					                        <Adminclientsorting />
+					                        <Adminclientsearchbox getSearchedItems={this.getSearchedItems}/>
+					                        <Adminclientmobilefilter getSortedItems={this.getSortedItem} recordDelete={this.checkAnyDelete} />
+					                        <Adminclientsorting getSortedItems={this.getSortedItem} />
 					                     </div>
 					                  </div>
-					                	<Adminclienttabledata/>
+					                	<Adminclienttabledata clientdataTable={this.state.repclientdata} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>
 					               </div>
 			            	</div>
 				             :
 							<div className="bottom-content-block">
 								{/*<!-Client details main start-->*/}
 									<div className="d-flex flex-wrap clients-detils-main">				
-										<Adminclientdetails/>
+										<Adminclientdetails repclientuid={this.state.updatedRepclientId}/>
 										<div className="container">
-											<Adminproductselection historyPush={this.props} />
-											<Admincontractdetails  historyPush={this.props} />
+											<Adminproductselection historyPush={this.props} repclientuid={this.state.updatedRepclientId} />
+											<Admincontractdetails  historyPush={this.props} repclientuid={this.state.updatedRepclientId}/>
 											<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({viewpagecall:false})})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 										</div>
 									</div>

@@ -19,6 +19,7 @@ import AdminResource from "./components/Admin/admin-resources";
 import AdminRep from "./components/Admin/admin-reps";
 import AdminProduct from "./components/Admin/admin-products";
 import Adminclients from "./components/Admin/admin-clients";
+import Addadminclient from "./components/Admin/admin-client-add";
 import Admin_add_rep from "./components/Admin/Admin_add_rep";
 import AdminProfile from "./components/Admin/Html/Admin_Profile";
 import Apiurl,{site_url,Client} from './components/Apiurl'; 
@@ -61,6 +62,7 @@ class App extends Component {
                     <Route path="/admin-resources"  component={AdminResource} />        
                     <Route path="/admin-products"  component={AdminProduct} />        
                     <Route path="/admin-clients"  component={Adminclients} />        
+                    <Route path="/admin-client-add"  component={Addadminclient} />        
                     <Route path="/admin-reps"  component={AdminRep} />        
                     <Route path="/Admin_add_rep"  component={Admin_add_rep} />        
                     <Route path="/RepClients_details" component={RepClients_details} />

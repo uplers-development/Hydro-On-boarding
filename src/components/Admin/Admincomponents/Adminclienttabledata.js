@@ -16,7 +16,6 @@ class Adminclienttabledata extends React.Component{
 	this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
 	this.singleSelect=this.singleSelect.bind(this);
 	this.handleViewEvent=this.handleViewEvent.bind(this);
-	this.submitAnnoucement=this.submitAnnoucement.bind(this);
 	}
 
 	selectAllcheckbox=(e)=>{
@@ -91,61 +90,7 @@ class Adminclienttabledata extends React.Component{
 		this.props.checkViewpageCall(true,uid);
 	}
 
-	submitAnnoucement=(e)=>{
-		e.preventDefault();
-		console.log(this.props.summernoteData);
-		let singlecheckedArray=[];
-		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
-				singlecheckedArray.push({"target_id":item.value});
-		});
-
-		console.log(singlecheckedArray);
-		if(this.props.summernoteData!==null){
-			let options;
-			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
-				options={
-				    "title":[{"value":document.querySelector("#Title").value}],
-			        "body":[{"value":this.props.summernoteData,
-			        		 "format": "basic_html"}],
-			        "type":[{"target_id":"article"}],
-			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
-			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
-			        "field_image":[{"target_id":document.querySelector("#announcement-image").getAttribute("data-id")}],
-			        "field_client":singlecheckedArray
-			}
-			}else{
-				options={
-				    "title":[{"value":document.querySelector("#Title").value}],
-			        "body":[{"value":this.props.summernoteData,
-			        		 "format": "basic_html"}],
-			        "type":[{"target_id":"article"}],
-			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
-			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
-			        "field_client":singlecheckedArray
-				}
-			}
-			console.log(options);
-			fetch(Repclient.Repclientdetailssubmissionproductlist.url,{
-		         method:Repclient.Repclientdetailssubmissionproductlist.method,
-				headers: {
-		                	"Content-Type" : "application/json",
-		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
-		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
-		                },
-		                body:JSON.stringify(options)
-		            }).then(res=>{
-		            	return res.json();
-		            }).then(data=>{
-		            	console.log(data);
-		            	//if(data.length){
-		            		this.setState({opensubmissionpopup:true,formempty:false})
-		            	//}
-		            })
-		    }else{
-		    	this.setState({formempty:true})
-		    }
-		}
-
+	
 
 	render(){
 		console.log(this.props.noDatacall);

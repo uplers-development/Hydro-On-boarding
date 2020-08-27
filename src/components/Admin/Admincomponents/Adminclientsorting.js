@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import {site_url,base_url,Repclient} from '../../Apiurl'; 
+import {site_url,base_url,Admin} from '../../Apiurl'; 
 
 
 
@@ -22,7 +22,7 @@ class Adminclientsorting extends React.Component {
 		})
 		e.target.classList.add("active");
 
-		fetch(Repclient.Repclientdatatable.url+e.target.getAttribute("title"),{
+		fetch(Admin.adminClientlisting.url+e.target.getAttribute("title"),{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
@@ -34,7 +34,7 @@ class Adminclientsorting extends React.Component {
 				});
 		}else{
 			e.target.classList.remove("active");
-			fetch(Repclient.Repclientdatatable.url,{
+			fetch(Admin.adminClientlisting.url,{
 					headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),

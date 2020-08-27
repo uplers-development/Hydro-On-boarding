@@ -147,6 +147,13 @@
 
 			.client-add-product {
 				margin-top: 10px;
+				.modal {
+					.btn-block {
+						.common-btn-blue {
+							min-width: 130px;
+						}
+					}
+				}
 			}
 		}
 

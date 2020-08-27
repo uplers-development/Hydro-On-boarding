@@ -73,7 +73,7 @@ class Adminnavbar extends React.Component {
             })} className="navbar-logo"><img src={require("../../../images/hydrop-whitet-logo.svg")} alt="Main white logo"/></Link>
 
             <ul>
-              {this.state.menulisting.map((item,index)=>
+               {this.state.menulisting.map((item,index)=>
                    <li key={index}><Link to={item.field_react_route} className={window.location.pathname===item.field_react_route ? "active" :''}  title={item.title}>
                       {item.field_icon_svg!=='' ? 
                       <div dangerouslySetInnerHTML={{ __html: item.field_icon_svg }} />
@@ -81,8 +81,15 @@ class Adminnavbar extends React.Component {
                       <img src={require("../../../images/bell-icon-logo.svg")}/>
                      }
                       <span>{item.title}</span></Link>
+                      {item.child && item.child!=='' ? 
+                        <ul>
+                          <li className={window.location.pathname===item.child[0].field_react_route ? "active" :''}  key={index}>                              
+                              <Link className={window.location.pathname===item.child[0].field_react_route ? "active" :''} to={item.child[0].field_react_route} title={item.child[0].title}>{item.child[0].title}</Link>
+                          </li>
+                        </ul>:''}
                   </li>
                 )}
+
 
             </ul>
             {/*<!--List of menu end-->*/}

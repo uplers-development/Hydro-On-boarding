@@ -85,7 +85,7 @@ class Adminproductselection extends React.Component{
 								<div className="btn-block">
 									<button className="btn common-btn-blue" onClick={((e)=>{localStorage.setItem("redirection-pathname",window.location.pathname);
 										this.props.historyPush.history.push({
-											pathname:'/admin-client-add',
+											pathname:'/admin-add-client',
 											state:{
 												productPage:true,
 												senduid:this.state.uidToPass	
@@ -137,7 +137,7 @@ class Adminproductselection extends React.Component{
 								<button className="btn common-btn-blue" onClick={((e)=>{
 									localStorage.setItem("redirection-pathname",window.location.pathname);
 										this.props.historyPush.history.push({
-											pathname:'/admin-client-add',
+											pathname:'/admin-add-client',
 											state:{
 												contractPage:true,
 												senduid:this.state.uidToPass,

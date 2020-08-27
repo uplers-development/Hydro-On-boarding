@@ -321,7 +321,7 @@ class Addadminclient extends React.Component {
                               </div>
                                <Link to={""} onClick={((e)=>{e.preventDefault();
                                        this.props.history.push({
-                                                   pathname:'/RepClients'
+                                                   pathname:'/admin-clients'
                                       })
                                     })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                         </div>
@@ -336,7 +336,7 @@ class Addadminclient extends React.Component {
             {this.state.openPopup ? 
           <div id="modal" className="modal-container">
             <div className="modal d-flex flex-wrap align-center justify-center">
-              <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false}); this.props.history.push("/RepClients");})}
+              <Link to={""} onClick={((e)=>{e.preventDefault();this.setState({openPopup:false}); this.props.history.push("/admin-clients");})}
               className="close" title="Close"><img src={require("../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
               
             <div>
@@ -346,7 +346,7 @@ class Addadminclient extends React.Component {
                 <div className="btn-block add-client">
                            <div className="upload-btn-wrapper">
                               <button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({openPopup:false})
-                              this.props.history.push("/RepClients")})}>
+                              this.props.history.push("/admin-clients")})}>
                               <span>OK</span></button>
                            </div>
                   </div>

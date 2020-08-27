@@ -61,6 +61,15 @@
 				}
 			}
 		}
+		.mobile-show{
+			&.add-client {
+				display: none;
+				margin: 0 0 10px;
+				@media screen and (max-width: $mobile-small) {
+					display: block;
+				}
+			}
+		}
 	}
 	.clients-table {
 		padding-top: 8px;

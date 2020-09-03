@@ -310,18 +310,19 @@ class RepClients_add extends React.Component {
                                 <button className="btn common-btn-blue" onClick={this.submitClientDetails}>
                                   <span>Add new client</span></button>
                           </div>
-                          {this.state.formEmpty ? 
+                           <Link to={""} onClick={((e)=>{e.preventDefault();
+                                   this.props.history.push({
+                                               pathname:'/RepClients'
+                                  })
+                                })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
+
+                            {this.state.formEmpty ? 
                                   <>
                                     {this.state.entityState ? ValidationMsg.common.default.EmailAlreadytaken : ValidationMsg.common.default.fieldsEmptyAnnoucementform}
                                   </>
                                        :
                                   ''
                             } 
-                           <Link to={""} onClick={((e)=>{e.preventDefault();
-                                   this.props.history.push({
-                                               pathname:'/RepClients'
-                                  })
-                                })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                         </div>
                         
                      </div>

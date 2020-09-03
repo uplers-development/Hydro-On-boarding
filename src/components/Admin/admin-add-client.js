@@ -317,18 +317,18 @@ class Addadminclient extends React.Component {
                                   
                               
                               </div>
-                               {this.state.formEmpty ? 
+                               <Link to={""} onClick={((e)=>{e.preventDefault();
+                                       this.props.history.push({
+                                                   pathname:'/admin-clients'
+                                      })
+                                    })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
+                              {this.state.formEmpty ? 
                                  <>
                                     {this.state.entityState ? ValidationMsg.common.default.EmailAlreadytaken : ValidationMsg.common.default.fieldsEmptyAnnoucementform}
                                   </>
                                        :
                                   ''
                                   } 
-                               <Link to={""} onClick={((e)=>{e.preventDefault();
-                                       this.props.history.push({
-                                                   pathname:'/admin-clients'
-                                      })
-                                    })} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                         </div>
                         
                      </div>

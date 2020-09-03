@@ -203,6 +203,8 @@ class Adminaddrep extends React.Component{
 				            <button className="btn common-btn-blue">
 				            <span>{!this.props.readmode ? "Update Rep":"Add Rep"}</span></button>
 
+
+				            	<Link to={""} onClick={((e)=>{e.preventDefault();this.props.updatedThereresponse(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
                                {this.state.emailalreadexists ? 
                                  <>
                                     { ValidationMsg.common.default.EmailAlreadytaken }
@@ -210,8 +212,6 @@ class Adminaddrep extends React.Component{
                                        :
                                   ''
                                   } 
-
-				            	<Link to={""} onClick={((e)=>{e.preventDefault();this.props.updatedThereresponse(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 				         </div>
 				      </form>
 				      :<>

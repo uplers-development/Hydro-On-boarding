@@ -34,6 +34,7 @@ class RepClients_add extends React.Component {
       contact:false,
       password:false,
       formEmpty:false,
+      entityState:false,
       contractProductAdmitted:false,
       getProductListforcontract:[],
 			fromProductSec:this.props.location.state!==undefined ? this.props.location.state.productPage :'',
@@ -128,7 +129,7 @@ class RepClients_add extends React.Component {
     e.preventDefault();
     var e = document.getElementById("time_zone");
     var strUser = e.options[e.selectedIndex].value;
-    if(hasValidEmail(document.querySelector("#email").value) && hasValidMobile(document.querySelector("#contact").value) && document.querySelectorAll(".productcheck:checked").length > 0){
+    if(hasValidEmail(document.querySelector("#email").value) && !hasValidMobile(document.querySelector("#contact").value) && document.querySelectorAll(".productcheck:checked").length > 0){
     this.setState({formEmpty:false});
     let option={  
            "field_first_name" : [{"value":document.getElementById("fname") && document.querySelector("#fname").value!=='' ? document.querySelector("#fname").value : ''}],
@@ -159,7 +160,10 @@ class RepClients_add extends React.Component {
             return res.json();
          }).then(data=>{
             console.log(data);
-            this.setState({openPopup:true});
+            if(data.message){
+              this.setState({formEmpty:true,entityState:true});
+            }else{
+            this.setState({formEmpty:false,entityState:false,openPopup:true});
             if(document.querySelector("#checkboxmessage").checked===true){
              let notifictionvalue={"user_id":data.uid[0].value} 
              fetch(Repclient.Repclientdetailssubmissionnotification.url,{
@@ -256,9 +260,9 @@ class RepClients_add extends React.Component {
                   }).then(data=>{
                       console.log(data);
             })
-
-
-         })
+          }
+        })
+        
       }catch(err){
          console.log(err);
       }
@@ -308,7 +312,7 @@ class RepClients_add extends React.Component {
                                   
                                {this.state.formEmpty ? 
                                   <>
-                                    {ValidationMsg.common.default.fieldsEmptyAnnoucementform}
+                                    {this.state.entityState ? ValidationMsg.common.default.EmailAlreadytaken : ValidationMsg.common.default.fieldsEmptyAnnoucementform}
                                   </>
                                        :
                                   ''

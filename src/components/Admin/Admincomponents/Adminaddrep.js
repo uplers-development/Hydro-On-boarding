@@ -15,13 +15,14 @@ class Adminaddrep extends React.Component{
    	  		lastnamestate:false,
    	  		emailstate:false,
    	  		companystate:false,
-   	  		rolestate:false,
+  	  		rolestate:false,
    	  		contactnumberstate:false,
    	  		passwordstate:false,
    	  		openRepsubmission:false,
    	  		repdetails:'',
    	  		loader:true,
-   	  		popupmsg:''
+   	  		popupmsg:'',
+   	  		emailalreadexists:false,
    		}   
 
    		this.timeZoneref=React.createRef();
@@ -55,7 +56,7 @@ class Adminaddrep extends React.Component{
 
 	onSubmit=(e)=>{
 		e.preventDefault();
-		if(!hasNull(document.querySelector("#fname").value) && !hasNull(document.querySelector("#sname").value) && hasValidEmail(document.querySelector("#email").value) && !hasNull(document.querySelector("#company").value) && !hasNull(document.querySelector("#role").value) && hasValidMobile(document.querySelector("#contact").value) && hasValidPassword(document.querySelector("#password").value)){
+		if(!hasNull(document.querySelector("#fname").value) && !hasNull(document.querySelector("#sname").value) && hasValidEmail(document.querySelector("#email").value) && !hasNull(document.querySelector("#company").value) && !hasNull(document.querySelector("#role").value) && !hasValidMobile(document.querySelector("#contact").value) && hasValidPassword(document.querySelector("#password").value)){
 
 			let addrepoptions={
 				"field_first_name" : [{ "value": document.querySelector("#fname").value}],
@@ -87,11 +88,17 @@ class Adminaddrep extends React.Component{
 					status=res.status;
 					return res.json();
 				}).then(data=>{
+				 if(data.message){
+				 	this.setState({
+				 		emailalreadexists:true
+				 	})
+				 }else{
 					if(status===201){
-						this.setState({openRepsubmission:true,popupmsg:"Rep added"});
+						this.setState({emailalreadexists:false,openRepsubmission:true,popupmsg:"Rep added"});
 					}else if(status===200){
-						this.setState({openRepsubmission:true,popupmsg:"Rep updated"});
+						this.setState({emailalreadexists:false,openRepsubmission:true,popupmsg:"Rep updated"});
 					}
+				}
 					console.log(data);
 				})
 			}catch(err){
@@ -104,7 +111,7 @@ class Adminaddrep extends React.Component{
 			!hasValidEmail(document.querySelector("#email").value) ? this.setState({emailstate:true}): this.setState({emailstate:false})
 			hasNull(document.querySelector("#company").value) ? this.setState({companystate:true}): this.setState({companystate:false})
 			hasNull(document.querySelector("#role").value) ? this.setState({rolestate:true}): this.setState({rolestate:false})
-			!hasValidMobile(document.querySelector("#contact").value) ? this.setState({contactnumberstate:true}): this.setState({contactnumberstate:false})
+			hasValidMobile(document.querySelector("#contact").value) ? this.setState({contactnumberstate:true}): this.setState({contactnumberstate:false})
 			!hasValidPassword(document.querySelector("#password").value) ? this.setState({passwordstate:true}): this.setState({passwordstate:false})
 		} 
 	}
@@ -174,7 +181,7 @@ class Adminaddrep extends React.Component{
 				         </div>
 				         <div className="form-group">
 				            <label>Contact number*</label>
-				            <div className="input-box"><input type="number" name="contact" id="contact" onBlur={(e)=>!hasValidMobile(e.target.value) ? this.setState({contactnumberstate:true}): this.setState({contactnumberstate:false})} defaultValue={this.state.repdetails!=='' ? this.state.repdetails.field_contact_number[0].value : '' }/>
+				            <div className="input-box"><input type="number" name="contact" id="contact" onBlur={(e)=>hasValidMobile(e.target.value) ? this.setState({contactnumberstate:true}): this.setState({contactnumberstate:false})} defaultValue={this.state.repdetails!=='' ? this.state.repdetails.field_contact_number[0].value : '' }/>
 				             	{this.state.contactnumberstate ? ValidationMsg.common.default.contactNumber : ''}
 				            </div>
 				         </div>
@@ -195,6 +202,15 @@ class Adminaddrep extends React.Component{
 				         <div className="btn-block">
 				            <button className="btn common-btn-blue">
 				            <span>{!this.props.readmode ? "Update Rep":"Add Rep"}</span></button>
+
+                               {this.state.emailalreadexists ? 
+                                 <>
+                                    { ValidationMsg.common.default.EmailAlreadytaken }
+                                  </>
+                                       :
+                                  ''
+                                  } 
+
 				            	<Link to={""} onClick={((e)=>{e.preventDefault();this.props.updatedThereresponse(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 				         </div>
 				      </form>

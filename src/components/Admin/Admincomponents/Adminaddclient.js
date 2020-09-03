@@ -113,7 +113,7 @@ class Adminaddclient extends React.Component{
                            <div className="form-group">
                               <label>Contact number</label>
                               <input type="text" id="contact" placeholder="Contact number"  onBlur={(e)=>
-                              !hasValidMobile(e.target.value)? this.setState({contactnumberState:true}): this.setState({contactnumberState:false})}/>
+                              hasValidMobile(e.target.value)? this.setState({contactnumberState:true}): this.setState({contactnumberState:false})}/>
                               {this.state.contactnumberState ? ValidationMsg.common.default.contactNumber : ''}
                            </div>
                            <div className="form-group">

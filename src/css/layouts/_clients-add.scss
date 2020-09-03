@@ -942,7 +942,11 @@
 			padding-top: 35px;
 			display: flex;
 			align-items: center;
-			justify-content: center;
+			flex-wrap: wrap;
+			h5 {
+				width: 100%;
+				margin: 10px 0 0;
+			}
 			@media screen and (max-width:$mobile-small) {
 				padding-left: 23px;
 			}

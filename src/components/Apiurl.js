@@ -343,6 +343,14 @@ export const Admin={
     adminClientlisting:{
         url:base_url + `/jsonapi/clients_admin?_format=json`,
         method:'GET'
+    },
+    adminResourcesbulkdelete:{
+        url:base_url+`/json-api/node_action.json`,
+        method:"POST",
+    },
+    adminProductbulkdelete:{
+        url:base_url+`/json-api/node_action.json`,
+        method:"POST",
     }
 }
 
@@ -402,6 +410,7 @@ export default {
     forgotPassword:{
         url:base_url+`/user/password?_format=json`,
         method:'POST'
-    }
+    },
+   
 
 }

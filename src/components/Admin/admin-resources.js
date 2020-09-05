@@ -7,6 +7,7 @@ import Adminheader from './assets/Adminheader';
 import Adminnavbar from './assets/Adminnavbar';
 import Adminresourcesfilter from './Admincomponents/Adminresourcesfilter';
 import Adminresourcesmobilefilter from './Admincomponents/Adminresourcesmobilefilter';
+import Adminresourcebulkaction from './Admincomponents/Adminresourcebulkaction';
 import Adminresourcetable from './Admincomponents/Adminresourcetable';
 import Adminresourceadd from './Admincomponents/Adminresourceadd';
 import Apiurl,{site_url} from '../Apiurl'; 
@@ -26,6 +27,7 @@ class AdminResource extends React.Component {
 				statusfiltered:false,
 				checkifselesctedropdown:false,
 				pageTitleChange:false,
+				mulitdeleteSuccess:false,
 		}
 		this.resourcesafterFilter=this.resourcesafterFilter.bind(this);
 		this.checktheview=this.checktheview.bind(this);
@@ -88,6 +90,11 @@ class AdminResource extends React.Component {
   	this.setState({viewcaller:calldefaultview,pageTitleChange:changedthetitle});
   }
 
+  recordDelete=(returnrecords,returnsrecords)=>{
+  		console.log(returnsrecords);
+		this.setState({mulitdeleteSuccess:returnrecords,bulkdeleteupdate:returnsrecords})
+	}
+
 	render(){
 		return(<div>
 				   <section className="main-wrapper">
@@ -102,6 +109,7 @@ class AdminResource extends React.Component {
 				               		<div className="d-flex flex-wrap admin-resources-main">
 				                  <div className="fileter-block d-flex flex-wrap border-bottom">
 				                     <Adminresourcesfilter getResources={this.getallresources} selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata} checktheviewcalled={this.checktheview} checkresourcefilter={this.resourcesafterFilter}/>
+				                     <Adminresourcebulkaction recordDelete={this.recordDelete}/>
 					                     <div className="search-sort-block d-flex flex-wrap align-center">
 					                 	    <div className="btn-block">
 												<button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
@@ -110,7 +118,7 @@ class AdminResource extends React.Component {
 				                     </div>
 
 				                  </div>
-				                  <Adminresourcetable checkifselected={this.state.checkifselesctedropdown} getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} />
+				                  <Adminresourcetable checkifselected={this.state.checkifselesctedropdown} getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.resourcesFiltereddata} checktheviewcalled={this.checktheview} getrefreshtableafterdelete={this.state.mulitdeleteSuccess} getupdateAfterBulkDelete={this.state.bulkdeleteupdate}/>
 				               		</div>
 								:
 								<Adminresourceadd sendresourcetitle={this.state.resourcestitles} sendresourceId={this.state.resourcechangeid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus} 

@@ -9,6 +9,7 @@ import Adminproductfilter from './Admincomponents/Adminproductfilter'
 import Adminproductmobilefilter from './Admincomponents/Adminproductmobilefilter'
 import Adminproducttable from './Admincomponents/Adminproducttable'
 import Adminproductadd from './Admincomponents/Adminproductadd'
+import Adminrproductbulkaction from './Admincomponents/Adminrproductbulkaction'
 import adminProductImage from '../../images/headcell2x.png';
 import adminProductImage2 from '../../images/hydro-gritcleanse2x.png';
 
@@ -26,6 +27,7 @@ class AdminProduct extends React.Component {
 			viewcaller:false,
 			checkifselesctedropdown:false,
 			pageTitleChange:false,
+			mulitdeleteSuccess:false,
 		}
 		this.productafterFilter=this.productafterFilter.bind(this);
 		this.getadmindetail=this.getadmindetail.bind(this);
@@ -74,6 +76,10 @@ class AdminProduct extends React.Component {
    changetheview=(calldefaultview,changedthetitle)=>{
   		this.setState({viewcaller:calldefaultview,pageTitleChange:changedthetitle});
    }
+   recordDelete=(returnrecords,returnsrecords)=>{
+  		console.log(returnsrecords);
+		this.setState({mulitdeleteSuccess:returnrecords,bulkdeleteupdate:returnsrecords})
+	}
 
 	render(){
 		return(<div>
@@ -88,8 +94,8 @@ class AdminProduct extends React.Component {
 				                {!this.state.viewcaller ? 
 				               <div className="d-flex flex-wrap admin-products-main">
 				                  <div className="fileter-block d-flex flex-wrap border-bottom">
-
 				                     <Adminproductfilter getallproducts={this.getallproduct} selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata}  checkproductfilter={this.productafterFilter} checktheviewcalled={this.checktheview}/>
+				                  	<Adminrproductbulkaction recordDelete={this.recordDelete}/>
 				                     <div className="search-sort-block d-flex flex-wrap align-center">
 				                        <div className="btn-block">
 				                           <button className="common-btn-blue" onClick={((e)=>{e.preventDefault();this.checktheview(true,true,true,JSON.parse(localStorage.getItem("user-type")).uid)})}><span>ADD NEW</span></button>
@@ -97,7 +103,7 @@ class AdminProduct extends React.Component {
 				                        <Adminproductmobilefilter getallproducts={this.getallproduct}  selecteddropdown={this.checkdropdownselected} loaderTrue={this.checkloadingfordata}  checkproductfilter={this.productafterFilter} checktheviewcalled={this.checktheview}/>
 				                     </div>
 				                  </div>
-				                  <Adminproducttable checkifselected={this.state.checkifselesctedropdown}  getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.productFiltereddata} checktheviewcalled={this.checktheview}/>
+				                  <Adminproducttable checkifselected={this.state.checkifselesctedropdown}  getifilteredstatus={this.state.statusfiltered} getdatafromfilter={this.state.productFiltereddata} checktheviewcalled={this.checktheview}getrefreshtableafterdelete={this.state.mulitdeleteSuccess} getupdateAfterBulkDelete={this.state.bulkdeleteupdate}/>
 				               </div>
 				               :
 				               <Adminproductadd sendproducttitle={this.state.getAllproducts} sendproductId={this.state.productchangedid} readmode={this.state.checkcallfrom} addstatus={this.state.addStatus}

@@ -152,7 +152,21 @@ delete_single_resource=(e)=>{
 		 if(this.props.checkifselected && this.props.getdatafromfilter.length > 0){
    			noDatacall=!this.state.noDatacall;
    			newresourcedata=this.props.getdatafromfilter;
-   		}
+   		}else if(this.props.getrefreshtableafterdelete){
+  				if(this.props.getrefreshtableafterdelete && this.props.getupdateAfterBulkDelete.length > 0){
+					noDatacall=!this.state.noDatacall;
+					newresourcedata=this.props.getupdateAfterBulkDelete;
+				}
+				else if(this.props.getrefreshtableafterdelete && this.props.getupdateAfterBulkDelete.length <= 0){
+					newresourcedata='';
+					noDatacall=this.state.noDatacall;
+				}
+				else if(!this.props.getrefreshtableafterdelete){
+					newresourcedata=this.state.adminresourcetabledata;
+					noDatacall=!this.state.noDatacall;
+				}
+
+		 }
    		else if(this.props.checkifselected && this.props.getdatafromfilter.length <= 0){
    			newresourcedata='';
    			noDatacall=this.state.noDatacall;

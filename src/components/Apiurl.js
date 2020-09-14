@@ -232,7 +232,19 @@ export const Repclient={
     contracttypes:{
         url:base_url+`/jsonapi/taxonomy_list/contract_type?_format=json`,
         method:'GET'
-    }, 
+    },
+    get_all_announcement:{
+        url:base_url+`/jsonapi/announcements?_format=json`,
+        method:"GET",
+    } ,
+    get_perticular_annoucement_detail:{
+        url:base_url+`/json-api/node_view.json`,
+        method:"POST",
+    } ,
+    update_aanouncement_details:{
+        url:base_url+`/node/`,
+        method:"PATCH",
+    } 
 
 }
 

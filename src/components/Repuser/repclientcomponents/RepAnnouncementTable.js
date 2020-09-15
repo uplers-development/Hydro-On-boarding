@@ -60,23 +60,21 @@ class RepAnnouncementTable extends React.Component{
 
 	deleteRecord = (e) =>{
 		e.preventDefault();
-		let status={"status" : [{ "value":0}] }
+		/*let status={"status" : [{ "value":0}] }*/
 		try{
-			fetch(Repclient.Repclientsingledelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
+			fetch(Repclient.delete_announcement_details.url+`${this.state.setSingleDeleteId}?_format=json`,{
+	                method:Repclient.delete_announcement_details.method,
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:Repclient.Repclientsingledelete.method,
-	                body:JSON.stringify(status)
-			}).then(res=>{
-				return res.json();
-			}).then(data=>{
-				console.log(data);
-				this.setState({openPopup:false});
-	 			this.props.recordDelete(true);
-
+			}).then((data)=>{
+				if(data.status===204){
+						console.log(data);
+						this.setState({openPopup:false});
+			 			this.props.recordDelete(true);
+	 			}
 			})
 	 	}catch(err){
 	 		console.log(err);
@@ -85,10 +83,10 @@ class RepAnnouncementTable extends React.Component{
 	 	}
 	}
 
-	handleViewEvent=(e,field_news_feed_type)=>{
+	handleViewEvent=(e,accouncementid)=>{
 		e.preventDefault();
-		console.log(field_news_feed_type);
-		this.props.checkViewpageCall(true,field_news_feed_type);
+		console.log(accouncementid);
+		this.props.checkViewpageCall(true,accouncementid);
 	}
 
 	render(){
@@ -111,7 +109,7 @@ class RepAnnouncementTable extends React.Component{
 							            	<tr key={index}>
 							               <td>
 							                  <div className="checkbox-cust">
-							                     <input type="checkbox" id={"checkbox"+index} className="announcementcheck" name="checkbox" onChange={this.singleSelect} defaultValue={item.field_news_feed_type}/>
+							                     <input type="checkbox" id={"checkbox"+index} className="announcementcheck" name="checkbox" onChange={this.singleSelect} defaultValue={item.nid}/>
 							                     <label htmlFor={"checkbox"+index}></label>	 
 							                  </div>
 							                  <div className="name-edit">
@@ -121,12 +119,12 @@ class RepAnnouncementTable extends React.Component{
 							                     <div className="right-detail">
 							                        <h3>{ReactHtmlParser(item.title)}</h3>
 							                        <div className="action d-flex flex-wrap">
-							                           <Link to={""} onClick={(e)=>this.handleViewEvent(e,item.field_news_feed_type)} title="Edit">Edit</Link>	 
+							                           <Link to={""} onClick={(e)=>this.handleViewEvent(e,item.nid)} title="Edit">Edit</Link>	 
 							                           <Link to={""} onClick={((e)=>
 							                           	{	e.preventDefault();
-							                           		this.setState({openPopup:true,setSingleDeleteId:item.field_news_feed_type})}
+							                           		this.setState({openPopup:true,setSingleDeleteId:item.nid})}
 							                           	)} title="Delete">Delete</Link>	 
-							                           <Link to={""} onClick={(e)=>this.handleViewEvent(e,item.field_news_feed_type)} title="View">View</Link>	 
+							                           <Link to={""} onClick={(e)=>this.handleViewEvent(e,item.nid)} title="View">View</Link>	 
 							                        </div>
 							                     </div>
 							                  </div>
@@ -168,8 +166,6 @@ class RepAnnouncementTable extends React.Component{
 											<div id="modal" className="modal-container">
 												<div className="modal d-flex flex-wrap align-center justify-center">
 													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
-														this.props.historyPush.history.push("/RepDashboard");
-
 													})}
 													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
 													
@@ -179,8 +175,7 @@ class RepAnnouncementTable extends React.Component{
                   										 <p>Your message was submitted successfully</p>
                   										 <div className="btn-block">
 																<button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
-														this.props.historyPush.history.push("/RepDashboard");
-
+																	this.props.checkCallback(false);
 													})}><span>OK</span></button>	
 														</div>
 												</div>

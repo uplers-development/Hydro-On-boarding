@@ -14,8 +14,9 @@ class Repannouncementadd extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={		
-			editorState:this.props.getAnnouncementDetailsforEdit!==undefined && this.props.getAnnouncementDetailsforEdit.node.body!=='' ? EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(this.props.getAnnouncementDetailsforEdit.node.body))) : EditorState.createEmpty(),
+			editorState:this.props.getAnnouncementDetailsforEdit!==undefined && (this.props.getAnnouncementDetailsforEdit.node.body!=='' && this.props.getAnnouncementDetailsforEdit.node.body!==null) ? EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(this.props.getAnnouncementDetailsforEdit.node.body))) : EditorState.createEmpty(),
 			imageFormateState:false,
+			opensubmissionpopup:false,
 			smallLoader:false,
 			announcement_image:false,
 			announcement_image_uploaded:'',
@@ -33,9 +34,8 @@ class Repannouncementadd extends React.Component {
 	    this.setState({
 	      editorState,
 	    });
-	
    this.props.getsummernote(draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())));
-
+	   
   }
   	componentDidMount(){
   		if(this.props.getAnnouncementDetailsforEdit!==undefined && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid!==''){
@@ -43,6 +43,9 @@ class Repannouncementadd extends React.Component {
   				if(item.getAttribute("id")===this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid){
 	  				item.parentNode.classList.add("active")
 					item.classList.add("active")
+				  if(this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid==="4"){
+				  	this.setState({hidedefaultimageblock:true});
+				  }
   				}
   			})
   		}else{
@@ -53,35 +56,47 @@ class Repannouncementadd extends React.Component {
   	//nid?_format=json
   	updateAnnouncementDetails=(e)=>{
   		e.preventDefault();
-  		/*let options={
-  		    "title":[{value:title}],
-	        "body":[{value:body}],
-	        "type":[{target_id:article}],
-	        "field_news_feed_button":[{uri: internal:/,title: Find Out More,options: []"}],
-	        "field_news_feed_type":[{target_id:}],
-	        "field_image":[{target_id:}],
-	        "field_client":[{target_id:2},{target_id:14}]
-  		};*/
-
-  	/*	try{
-  			fetch(Repclient.update_aanouncement_details.url+`${this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid}?_format=json`,{
-  				headers:{
-		            "Content-Type" : "application/json",
-		            "X-CSRF-Token" : localStorage.getItem("access-token"),
-		            "Authorization": "Basic "+localStorage.getItem("basic-auth"),
-		    	},
-				method:Repclient.update_aanouncement_details.method,
-				body:JSON.stringify(options)
-  			}).then((res)=>{
-  				return res.json();
-  			}).then((data)=>{
-  				console.log(data);
-  			})
-  		}catch(error){
-  			console.log(error);
-  		}*/
-
-  		alert();
+  		let options;
+  		if(this.state.editorState.getCurrentContent()!==null){
+			let options;
+			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
+				options={
+				    "title":[{"value":document.querySelector("#Title").value}],
+			        "body":[{"value": draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+			        		 "format": "basic_html"}],
+			        "type":[{"target_id":"article"}],
+			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
+			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
+			        "field_image":[{"target_id":document.querySelector("#announcement-image").getAttribute("data-id")}],
+			}
+			}else{
+				options={
+				    "title":[{"value":document.querySelector("#Title").value}],
+			        "body":[{"value": draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+			        		 "format": "basic_html"}],
+			        "type":[{"target_id":"article"}],
+			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
+			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
+				}
+			}
+			console.log(options);
+			fetch(Repclient.update_aanouncement_details.url+`${this.props.getAnnouncementId}?_format=json`,{
+		         method:Repclient.update_aanouncement_details.method,
+				headers: {
+		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+		                },
+		                body:JSON.stringify(options)
+		            }).then(res=>{
+		            	return res.json();
+		            }).then(data=>{
+		            	console.log(data);
+		            		this.setState({opensubmissionpopup:true,formempty:false})
+		            })
+		    }else{
+		    	this.setState({formempty:true})
+		    }
   	}
 
   	updateAnnouncementPic=(e)=>{
@@ -223,20 +238,50 @@ class Repannouncementadd extends React.Component {
 					 : ''}
 				      <div className="form-group">
 				         <label>Button Copy</label>
-				         <input type="text" name="Button Copy" id="Button_Copy" placeholder="Button Copy"/> 
+				         <input type="text" name="Button Copy" id="Button_Copy" placeholder="Button Copy" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.title : ''}/> 
 				      </div>
 				      <div className="form-group">
 				         <label>Button link</label>
-				         <input type="text" name="Button link" id="Button_link" placeholder="Button link"/> 
+				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''}/> 
 				      </div>
+				      {this.props.getAnnouncementDetailsforEdit!==undefined ? 
 				      <div className="btn-block add-client">
                         <button className="btn common-btn-blue" onClick={this.updateAnnouncementDetails}>
                                   <span>Upadate announcement</span></button>
 							<Link to={""} onClick={((e)=>{e.preventDefault();this.check_view_page_call(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
-					</div>
+					</div>:''}
 
 				   </form>
 				</div>
+
+				{this.state.formempty ? 
+											<>
+												{ValidationMsg.common.default.fieldsEmptyAnnoucementform}
+											</>
+											:
+											''
+										}
+				{this.state.opensubmissionpopup ? 
+											<div id="modal" className="modal-container">
+												<div className="modal d-flex flex-wrap align-center justify-center">
+													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
+														this.check_view_page_call(false)
+
+													})}
+													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
+													
+												<div>
+													<img className="svg" src={require("../../../images/round-correct.svg")} alt="Right icon"/>
+                  										 <h2>Announcement updated successfully.</h2>
+                  										 <div className="btn-block">
+																<button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
+																this.check_view_page_call(false)
+													})}><span>OK</span></button>	
+														</div>
+												</div>
+												</div>
+											</div>
+								: <></>}
 			</>
 			);
 	}

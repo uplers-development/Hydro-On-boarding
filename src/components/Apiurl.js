@@ -244,8 +244,11 @@ export const Repclient={
     update_aanouncement_details:{
         url:base_url+`/node/`,
         method:"PATCH",
-    } 
-
+    } ,
+    delete_announcement_details:{
+        url:base_url+`/node/`,
+        method:"DELETE",
+    } ,
 }
 
 export const Admin={

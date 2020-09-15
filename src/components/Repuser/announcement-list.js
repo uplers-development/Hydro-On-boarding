@@ -23,7 +23,7 @@ class Announcementlist extends React.Component {
 			announcementtablelist:[],
 			announcement:true,
 			EditAnnouncementDetails:[],
-			updatedRepclientId:this.props.location.state!==undefined ? this.props.location.state.targetSendid : null,
+			updatedAnnouncementId:this.props.location.state!==undefined ? this.props.location.state.targetSendid : null,
 			viewpagecalled:false,
 			viewpagecall:this.props.location.state!==undefined  ? this.props.location.state.contractsubmission:false,
 			summernoteData:null
@@ -152,11 +152,12 @@ class Announcementlist extends React.Component {
 		console.log(announcementId);
 		console.log(viewpagecalled);
 		this.getAnnouncementEditDetails(announcementId)
-		this.setState({loader:true,updatedRepclientId : announcementId,viewpagecall : viewpagecalled});
+		this.setState({loader:true,updatedAnnouncementId : announcementId,viewpagecall : viewpagecalled});
 	}
 
 	returnback=(viewpagecalled)=>{
 		this.setState({viewpagecall:viewpagecalled});
+		this.announce_data_table()
 	}
 
 	getAnnouncementEditDetails=(idforupdate)=>{
@@ -206,7 +207,7 @@ class Announcementlist extends React.Component {
 					            <div className="bottom-content-block">
 					               <div className="d-flex flex-wrap announcements-main">
 					                  <div className="container">
-					                     {!this.state.loader  && <RepAnnouncementTable  announcementList={this.state.announcementTablelist} checkViewpageCall={this.check_view_page_call}/>}	
+					                     {!this.state.loader  && <RepAnnouncementTable  announcementList={this.state.announcementTablelist} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>}	
 					                  </div>
 					               </div>
 					            </div>
@@ -217,7 +218,7 @@ class Announcementlist extends React.Component {
 					                     <h3>Edit an announcement</h3>
 					                  </div>
 					                  <div className="container">		
-										<Repannouncementadd addAnnouncementDetails={this.state.announcementDetails} getsummernote={this.returnSummerNoteData} getAnnouncementDetailsforEdit={this.state.EditAnnouncementDetails} checkCallback={this.returnback}/>
+										<Repannouncementadd addAnnouncementDetails={this.state.announcementDetails} getsummernote={this.returnSummerNoteData} getAnnouncementDetailsforEdit={this.state.EditAnnouncementDetails} getAnnouncementId={this.state.updatedAnnouncementId} checkCallback={this.returnback}/>
 											 
 										</div>
 

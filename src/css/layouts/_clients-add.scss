@@ -1,0 +1,1013 @@
+.clients-add-main {
+	padding-bottom: 40px;
+	.fileter-block {
+		&.details-head-block {
+			padding-bottom: 32px;
+
+			@media screen and (max-width:$mobile-small) {
+				padding-bottom: 15px;
+			}
+
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				padding-bottom: 15px;
+			}
+
+			h3 {
+				font-size: 16px;
+				line-height: 28px;
+				margin: 0;
+				color: $panton-gray;
+				font-weight: $font-semi-bold;
+				font-family: $gibson;
+				@media screen and (max-width:$ipad-portrait) {
+					padding-right: 15px;
+					margin:3px 0; 
+				}
+			}
+			h4 {
+				font-size: 16px;
+				line-height: 20px;
+				margin: 0 0 0 45px;
+				color: $light-black;
+				font-family: $arial;
+				font-weight: $font-normal;
+				
+				@media screen and (max-width:$ipad-portrait) {
+					width: auto;
+					margin:3px 0; 
+				}
+			}
+		}
+	}
+
+	.clients-add {
+		padding-top: 35px;
+		width: 100%;
+
+		.first-form {
+			form {
+				max-width: 635px;
+				width: 100%;
+
+				.form-group {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					margin-bottom: 12px;
+
+					input,
+					select {
+						width: 481px;
+						border: 1px solid $dim-gray;
+						background-color: $white;
+						&:focus {
+							border-color: $sky-blue;
+						}
+					}
+
+					.empty-field {
+						width: 481px;
+						margin: 2px 0 0 auto;
+					}
+
+					input[type=number] {
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						appearance: none;
+					}
+
+					label {
+						font-size: 18px;
+						line-height: 22px;
+						color: $black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						display: inherit;
+						width: 154px;
+						padding-right: 15px;
+						margin-bottom: 0;
+
+						@media screen and (max-width:$mobile-small) {
+							padding: 0 0 5px;
+							font-size: 16px;
+							line-height: 20px;
+						}
+
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							padding: 0 0 5px;
+							font-size: 16px;
+							line-height: 20px;
+						}
+					}
+				}
+
+				.send-user-notification {
+					margin-top: 24px;
+
+					.notification {
+						align-items: center;
+						.checkbox-cust {
+							label {
+								margin-bottom: -4px;
+							}
+						}
+
+						h3 {
+							font-size: 18px;
+							line-height: 22px;
+							color: $black;
+							font-family: $arial;
+							font-weight: $font-normal;
+							margin: 0 8px 0 0;
+						}
+					}
+
+					p {
+						font-size: 16px;
+						line-height: 20px;
+						color: $light-black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						margin: 7px 0 0 0;
+					}
+				}
+			}
+		}
+
+		@media screen and (max-width:$mobile-small) {
+			padding: 20px 23px 0;
+		}
+
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+			padding: 20px 23px 0;
+		}
+
+		&.only-add-product {
+			padding-top: 0;
+
+			.client-add-product {
+				margin-top: 10px;
+				.modal {
+					.btn-block {
+						.common-btn-blue {
+							min-width: 130px;
+						}
+					}
+				}
+			}
+		}
+
+		&.only-add-contract {
+			padding-top: 0;
+			.btn-block {
+				@media screen and (max-width:$mobile-small) {
+					padding-left: 0;
+				}
+				@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+					padding-left: 0;
+				}
+			} 
+			.client-add-product {
+				margin-top: 0;
+			}
+		}
+
+	}
+
+	.client-add-product {
+		margin-top: 70px;
+
+		.pro-title {
+			padding: 16px 25px 10px 0;
+			position: relative;
+
+			@media screen and (max-width: $ipad-portrait) {
+				padding: 16px 0 10px 0;
+			}
+
+			&:after {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
+			}
+
+			&:before {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
+			}
+
+			.name-of-heading {
+				display: flex;
+
+				h3 {
+					font-size: 40px;
+					line-height: 46px;
+					color: $cobalt-blue;
+					font-weight: $font-semi-bold;
+					font-family: $gibson;
+					margin: 0;
+					padding-left: 19px;
+
+					@media screen and (max-width:$large-m) {
+						font-size: 30px;
+						line-height: 36px;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						font-size: 20px;
+						line-height: 25px;
+						padding-left: 10px;
+					}
+
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 20px;
+						line-height: 25px;
+					}
+				}
+
+				img {
+					width: 33px;
+
+					@media screen and (max-width:$large-m) {
+						width: 26px;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						width: 20px;
+					}
+
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						width: 20px;
+					}
+				}
+			}
+		}
+
+		.auto-search-box {
+			form {
+				input[type="text"] {
+					padding: 7px 25px 7px 33px;
+
+					@media screen and (max-width:$mobile-small) {
+						padding: 7px 0 7px 33px;
+					}
+				}
+			}
+			@media screen and (max-width:$large-m) {
+				margin-top: 0;
+			}
+			@media screen and (max-width:$ipad-portrait) {
+				margin-top: 0;
+			}
+			@media screen and (max-width:$mobile-small) {
+				margin-top: 0;
+				margin-left: auto;
+				margin-right: 0;
+			}
+			@media screen and (max-width:$small-medium) {
+				width: 198px;
+				margin-top: 0;
+			}
+			@media screen and (max-width:$mob-landscape-414) {
+				width: 158px;
+			}
+			@media screen and (max-width:$small-xx) {
+				width: 180px;
+				margin-left: 0;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+
+		}
+
+		.list-add-product {
+			padding-top: 40px;
+
+			@media screen and (max-width:$small-medium) {
+				padding-top: 20px;
+			}
+
+			.list-box {
+				padding: 0 30px;
+				position: relative;
+
+				@media screen and (max-width:$large-x) {
+					padding: 0 15px;
+				}
+
+				&.active {
+					&:after {
+						content: "";
+						display: block;
+						width: calc(100% - 30px);
+						height: 1px;
+						background-color: $off-white;
+						position: absolute;
+						top: 10px;
+						left: 0;
+
+						@media screen and (max-width:$mobile-small) {
+							width: 100%;
+						}
+					}
+
+					padding: 20px 30px 20px;
+					background-color: $sky-blue-transparent-2;
+
+					@media screen and (max-width: $mobile-small) {
+						padding: 20px 15px 20px;
+					}
+
+					.top {
+						position: relative;
+						padding: 10px 37px 32px 0;
+
+						@media screen and (max-width: $ipad-portrait) {
+							padding: 10px 25px 25px 0;
+						}
+
+						> a {
+							&:after {
+								transform: translateY(-50%) rotate(180deg);
+								-webkit-transform: translateY(-50%) rotate(180deg);
+							}
+						}
+
+						&:after {
+							content: "";
+							display: block;
+							width: calc(100% + 30px);
+							height: 1px;
+							background-color: $off-white;
+							position: absolute;
+							bottom: 0;
+							left: -30px;
+							right: 0;
+
+							@media screen and (max-width:$mobile-small) {
+								width: calc(100% + 30px);
+								left: -15px;
+							}
+						}
+
+
+					}
+
+					.bottom-details {
+						padding-bottom: 23px;
+						margin-top: 20px;
+						height: 100%;
+						overflow: visible;
+						padding-bottom: 10px;
+						visibility: visible;
+						opacity: 1;
+						align-items: flex-start;
+					}
+				}
+
+				border-bottom: 1px solid $off-white;
+
+				.top {
+					padding: 20px 37px 40px 0;
+					align-items: flex-start;
+					position: relative;
+					cursor: pointer;
+					@media screen and (max-width:$large-x) {
+						padding: 10px 0 25px 0;
+						align-items: flex-start;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						padding: 20px 0;
+					}
+					.overlay-chk {
+						position: absolute;
+						left: 0;
+						top: 0;
+						height: 100%;
+						z-index: 11;
+						&:after {
+							display: none;
+						}
+					}
+					.checkbox-cust {
+						padding-top: 5px;
+					}
+
+					.title {
+						padding-left: 20px;
+						width: calc(100% - 255px);
+
+						@media screen and (max-width: $ipad-portrait) {
+							width: calc(100% - 25px);
+						}
+
+						h4 {
+							margin: 0;
+							font-size: 24px;
+							line-height: 28px;
+							color: $cobalt-blue;
+							font-weight: $font-semi-bold;
+							font-family: $gibson;
+
+							@media screen and (max-width:$mobile-small) {
+								font-size: 18px;
+								line-height: 24px;
+							}
+
+							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								font-size: 18px;
+								line-height: 24px;
+							}
+						}
+
+						h5 {
+							margin: 0;
+							font-size: 18px;
+							line-height: 22px;
+							color: $black;
+							font-family: $arial;
+							font-weight: $font-normal;
+
+							@media screen and (max-width:$mobile-small) {
+								font-size: 16px;
+								line-height: 20px;
+							}
+
+							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								font-size: 16px;
+								line-height: 20px;
+							}
+						}
+					}
+
+					a {
+						margin-left: auto;
+						text-decoration: none;
+						font-size: 12px;
+						line-height: 18px;
+						color: $panton-gray;
+						font-family: $arial;
+						font-weight: $font-normal;
+						position: relative;
+						padding: 0 15px 0 0;
+						margin-top: 0;
+						position: absolute;
+						right: 0;
+						top: calc(50% - 8px);
+						transform: translateY(-50%);
+						-webkit-transform: translateY(-50%);
+
+						@media screen and (max-width:$ipad-portrait) {
+							margin: 25px 0 0 0;
+							padding-top: 0;
+							position: relative;
+							transform: none;
+							-webkit-transform: none;
+						}
+
+						@media screen and (max-width:$mobile-small) {
+							margin: 10px 0 0 10px;
+						}
+
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							margin: 10px 0 0 auto;
+						}
+
+						@media screen and (max-width:$small-x) {
+							margin: 10px 0 0 0;
+						}
+
+						&:after {
+							content: "";
+							display: inline-block;
+							position: absolute;
+							top: 50%;
+							transform: translateY(-50%);
+							-webkit-transform: translateY(-50%);
+							right: 0;
+							width: 0;
+							height: 0;
+							border-left: 4px solid transparent;
+							border-right: 4px solid transparent;
+							border-top: 8px solid $panton-gray;
+						}
+					}
+				}
+
+				.bottom-details {
+					overflow: hidden;
+					height: 0;
+					visibility: hidden;
+					opacity: 0;
+					@include transition(0.2s all ease-in-out);
+					padding-top: 0;
+					padding-bottom: 0;
+
+					@media screen and (max-width:$large-x) {
+						align-content: flex-start;
+					}
+
+					.left-prod-img {
+						width: 385px;
+						padding-bottom: 21.20%;
+						background-position: center center;
+						background-repeat: no-repeat;
+						background-size: contain;
+
+						@media screen and (max-width:$large-x) {
+							width: calc(50% - 30px);
+							padding-bottom: 31%;
+						}
+
+						@media screen and (max-width:$ipad-portrait) {
+							width: 100%;
+							padding-bottom: 71%;
+							margin-bottom: 25px;
+						}
+					}
+
+					.right-prod-upload {
+						width: 400px;
+						margin-left: 65px;
+
+						@media screen and (max-width:$large-x) {
+							width: 50%;
+							margin-left: 30px;
+						}
+
+						@media screen and (max-width:$ipad-portrait) {
+							width: 100%;
+							margin-left: 0;
+						}
+
+						.form-group {
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+							margin-bottom: 12px;
+
+							input,
+							select {
+								width: 242px;
+								border: 1px solid $dim-gray;
+								&:focus {
+									border-color: $sky-blue;
+								}	
+								@media screen and (max-width:$mobile-small) {
+									width: 100%;
+								}
+							}
+
+							.empty-field {
+								width: 242px;
+								margin: 2px 0 0 auto;
+
+								@media screen and (max-width:$ipad-landscape) {
+									margin-left: 0;
+								}
+
+								@media screen and (max-width:$ipad-portrait) {
+									margin-left: auto;
+									width: 252px;
+								}
+
+								@media screen and (max-width:$mobile-small) {
+									margin-left: 0;
+								}
+							}
+
+							label {
+								width: 154px;
+								padding-right: 15px;
+								font-size: 18px;
+								line-height: 22px;
+								color: $black;
+								font-family: $arial;
+								font-weight: $font-normal;
+								margin-bottom: 0;
+
+								@media screen and (max-width:$mobile-small) {
+									font-size: 16px;
+									line-height: 20px;
+									margin-bottom: 5px;
+								}
+
+								@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+									font-size: 16px;
+									line-height: 20px;
+								}
+							}
+						}
+
+						.btn-block {
+							margin-top: 37px;
+
+							.upload-btn-wrapper {
+								.btn {
+									min-width: 216px;
+
+									@media screen and (max-width: $ipad-portrait) {
+										min-width: auto;
+									}
+
+									&:after {
+										background-repeat: repeat-x;
+										background-size: contain;
+										width: auto;
+										height: 90px;
+									}
+								}
+							}
+
+							.empty-field {
+								width: 100%;
+								display: block;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		@media screen and (max-width:$mobile-small) {
+			margin-top: 40px;
+		}
+
+		@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+			margin-top: 40px;
+		}
+	}
+
+	.add-contract {
+		margin-top: 33px;
+
+		.pro-title {
+			padding: 10px 25px 10px 0;
+			position: relative;
+
+			&:after {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
+			}
+
+			&:before {
+				content: "";
+				display: block;
+				width: 100%;
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.16);
+			}
+
+			.name-of-heading {
+				display: flex;
+
+				h3 {
+					font-size: 40px;
+					line-height: 46px;
+					color: $cobalt-blue;
+					font-weight: $font-semi-bold;
+					font-family: $gibson;
+					margin: 0;
+					padding-left: 19px;
+
+					@media screen and (max-width:$large-m) {
+						font-size: 30px;
+						line-height: 36px;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						font-size: 20px;
+						line-height: 25px;
+						padding-left: 10px;
+					}
+
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 20px;
+						line-height: 25px;
+					}
+				}
+
+				img {
+					width: 38px;
+
+					@media screen and (max-width:$large-m) {
+						width: 26px;
+					}
+
+					@media screen and (max-width:$mobile-small) {
+						width: 20px;
+					}
+
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						width: 20px;
+					}
+				}
+
+				@media screen and (max-width:$small-medium) {
+					margin-top: 10px;
+				}
+			}
+		}
+		.form-contracts {
+			padding: 54px 30px 33px;
+			background-color: $sky-blue-transparent-2;
+			margin-top: 26px;
+
+			form {
+				max-width: 635px;
+				width: 100%;
+
+				.form-group {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					margin-bottom: 15px;
+					.input-box {
+						width: 481px;
+							input,
+						select {
+							width:100%;
+							border: 1px solid $dim-gray;
+							&:focus {
+								border-color: $sky-blue;
+							}
+						}
+						&.suggestion {
+							position: relative;
+							border: 1px solid $dim-gray;			
+							background-color: $white;
+							.shareall-email {
+								display: inline;
+								width: auto;
+								.emailall {
+									background: $sky-blue;
+									display: inline-block;
+									color: $white ;
+									border-radius: 20px;
+									margin: 3px;
+									font-size: 12px;
+									position: relative;
+									padding: 4px 20px 4px 10px;
+									margin-bottom: 4px;
+									.remove-email {
+										cursor: pointer;
+										position: absolute;
+										top: 3px;
+										right: 5px;
+										height: 15px;
+										width: 15px;
+										display: inline-block;
+										border-radius: 50%;
+										background-image: url(#{$imgpath}/close-gray.svg);
+										background-repeat: no-repeat;
+										background-position: 50%;
+									}
+								}
+							}	
+							input[type="text"] {
+								width: 200px;
+								display: inline-block;
+								border: none;
+								vertical-align: middle;
+								background-color: transparent;
+							}
+							.search-detail {
+								padding-left: 0;
+								margin: 0;
+								position: absolute;
+								top: 100%;
+								border-top: 0;
+								background-color: $white;
+								width: calc(100% + 2px);
+								left: -1px;
+								border: 1px solid $dim-gray;
+								border-top:0;
+								z-index: 1;
+								li {
+									a {
+										text-decoration: none;
+										font-size: 16px;
+										line-height: 22px;
+										padding: 8px 12px;
+										width: 100%;
+										display: block;
+										font-family: $gibson;
+										font-weight: $font-normal;
+										color: $panton-gray;
+										opacity: 0.5;
+									}
+								}
+							}
+						}
+					}
+					
+					.empty-field {
+						width: 481px;
+						margin: 2px 0 0 auto;
+					}
+					input[type=number] {
+						-webkit-appearance: none;
+						-moz-appearance: none;
+						appearance: none;
+					}
+					label {
+						font-size: 18px;
+						line-height: 22px;
+						color: $black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						display: inherit;
+						width: 154px;
+						padding-right: 15px;
+						margin-bottom: 0;
+						@media screen and (max-width:$ipad-landscape) {
+							margin-bottom: 5px;
+						}
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+					}
+				}
+				.btn-block {
+					margin-top: 16px;
+					margin-left: 154px;
+
+					@media screen and (max-width:$ipad-landscape) {
+						margin-left: 0;
+					}
+					> label {
+						font-size: 18px;
+						line-height: 22px;
+						color: $black;
+						font-family: $arial;
+						font-weight: $font-normal;
+						margin-bottom: 12px;
+						@media screen and (max-width:$mobile-small) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+						@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+					}
+					.upload-btn-wrapper {
+						input[type='file'] {
+							&:hover {
+								+ .btn {
+									&:after {
+										@media screen and (max-width:$mobile-small) {
+											transform: translateY(-85px);
+    										-webkit-transform: translateY(-85px);
+										}
+										@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+											transform: translateY(-85px);
+    										-webkit-transform: translateY(-85px);
+										}
+									}
+								}		
+							}
+						}
+						.btn {
+							min-width: 216px;
+							@media screen and (max-width:$mobile-small) {
+								min-width: auto;
+							}
+							@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+								min-width: auto;
+							}
+							&:after {
+								background-repeat: repeat-x;
+								background-size: contain;
+								width: auto;
+								height: 90px;
+							}
+						}
+					}
+					.empty-field {
+						width: 100%;
+						display: block;
+					}
+				}
+			}
+			@media screen and (max-width:$mobile-small) {
+				padding: 30px 15px;
+			}
+
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				padding: 30px 15px;
+			}
+		}
+	}
+	.empty-field {
+		margin-top: 3px;
+		display: block;
+	}
+	.btn-block {
+		&.add-client {
+			padding-top: 35px;
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			h5 {
+				width: 100%;
+				margin: 10px 0 0;
+			}
+			@media screen and (max-width:$mobile-small) {
+				padding-left: 23px;
+			}
+			@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+				padding-left: 23px;
+			}
+			.btn {
+				min-width: 214px;
+				padding: 8px 10px 4px;
+
+				@media screen and (max-width:$large-m) {
+					padding: 5px 14px 2px;
+				}
+				@media screen and (max-width:$mobile-small) {
+					min-width: auto;
+					padding: 6px 14px 4px;
+				}
+				span {
+					font-size: 20px;
+					line-height: 46px;
+					@media screen and (max-width:$large-m) {
+						font-size: 18px;
+						line-height: 40px;
+					}
+					@media screen and (max-width:$mobile-small) {
+						font-size: 16px;
+						line-height: 30px;
+					}
+					@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+						font-size: 16px;
+						line-height: 30px;
+					}
+				}
+				&:after {
+					background-repeat: repeat-x;
+					background-size: contain;
+					width: auto;
+					height: 94px;
+				}
+			}
+			.empty-field {
+				width: 100%;
+				display: block;
+    			margin: 5px 0;
+			}
+			input[type=file] {
+				&:hover {
+					+ .btn {
+						&:after {
+							transform: translateY(-82px);
+							-webkit-transform: translateY(-82px);
+						}
+					}
+				}
+			}
+		}
+	}
+	@media screen and (max-width:$mobile-small) {
+		padding-bottom: 10px;
+	}
+	@media (max-height: $mob-landscape-414) and (orientation: landscape) {
+		padding-bottom: 10px;
+	}
+}

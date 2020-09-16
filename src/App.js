@@ -15,6 +15,7 @@ import RepClients from "./components/Repuser/RepClients";
 import RepClients_add from "./components/Repuser/RepClients_add";
 import RepClients_details from "./components/Repuser/RepClients_details";
 import Announcements from "./components/Repuser/Announcements";
+import Announcementlist from "./components/Repuser/announcement-list";
 import AdminResource from "./components/Admin/admin-resources";
 import AdminRep from "./components/Admin/admin-reps";
 import AdminProduct from "./components/Admin/admin-products";
@@ -26,7 +27,7 @@ import Apiurl,{site_url,Client} from './components/Apiurl';
 import "./css/style.scss";
 
 
-//console.log=function(){}
+console.log=function(){}
 class App extends Component {
   constructor(props){
     super(props);
@@ -67,7 +68,8 @@ class App extends Component {
                     <Route path="/Admin_add_rep"  component={Admin_add_rep} />        
                     <Route path="/RepClients_details" component={RepClients_details} />
                     <Route path="/AdminProfile" component={AdminProfile} />
-		  			        <Route path="/Announcements" component={Announcements} />
+                    <Route path="/Announcements" component={Announcements} />
+		  			        <Route path="/announcement-list" component={Announcementlist} />
 		  
                     <Route path="/RepClients_add"  component={RepClients_add} />
                     {this.state.sidebarItem.length > 0 ?

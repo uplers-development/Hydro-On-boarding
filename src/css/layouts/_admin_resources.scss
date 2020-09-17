@@ -33,11 +33,39 @@
 					box-shadow: 0 15px 16px rgba(69, 91, 99, .08);
 				}
 			}
+			&:nth-of-type(2) {
+				width: auto;
+				margin: 0 10px;
+				@media screen and (max-width: $ipad-portrait) {
+					margin-top: 10px;
+				}
+			}
+		
+			
+		}
+		.mobile-hide {
+			@media screen and (max-width: $ipad-portrait) {
+				margin-top: 10px;
+			}
+			.common-btn-blue {
+				min-width: 127px;
+				margin-bottom: 0;
+				padding: 5px 15px;
+				span {
+					font-size: 18px;
+					line-height: 28px;
+				}
+			}
+		}
+		.search-sort-block {
+			@media screen and (max-width: $large-x) {
+				margin-top: 0;
+			}
 		}
 		.search-sort-block {
 			@media screen and (max-width: $ipad-portrait) {
-				margin-top: 5px;
-				margin-left: auto;
+				margin-top: 10px;
+				margin-left: 10px;
 				margin-right: 0;
 			}
 

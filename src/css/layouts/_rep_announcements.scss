@@ -259,6 +259,21 @@
 			}
 			
 		}
+		.btn-block {
+			&.add-client {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				margin-top: 25px;
+				> * {
+					margin-top: 5px;
+					margin-bottom: 5px;
+					@media screen and (max-width:$small-x) {
+						margin: 5px;
+					}
+				}
+			}
+		}
 	}
 
 	.announcements-filter {

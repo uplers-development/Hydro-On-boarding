@@ -19,6 +19,20 @@ class Repclienttabledata extends React.Component{
 	this.submitAnnoucement=this.submitAnnoucement.bind(this);
 	}
 
+	componentWillMount(){
+		let self=this;
+		setTimeout(()=>{
+		if(this.props.forUpdateClient.length>0){
+	       	this.props.forUpdateClient.map((item,index)=>{
+				document.querySelectorAll('.clientchecked').forEach((checked,index)=>{
+		       		if(checked.value===item){
+		       			checked.click();
+		       		}
+				})
+	       	})  
+	    }
+	  },2000)
+	}
 	selectAllcheckbox=(e)=>{
 		 var ele=e.target;
 		 var checkboxes = document.getElementsByTagName('input');
@@ -148,7 +162,7 @@ class Repclienttabledata extends React.Component{
 
 
 	render(){
-		console.log(this.props.noDatacall);
+		console.log(this.props.forUpdateClient);
 		return (
 			<div className="clients-table table-outer">
 						   <div className="table-responsive">

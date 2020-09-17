@@ -8,7 +8,7 @@ import {ValidationMsg} from'../../constants/validationmsg';
 import draftToHtml from 'draftjs-to-html';
 /*import htmlToDraft from 'html-to-draftjs';*/
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';	
-
+import Repclienttabledata from './Repclienttabledata'
 
 class Repannouncementadd extends React.Component {
 	constructor(props){
@@ -22,7 +22,8 @@ class Repannouncementadd extends React.Component {
 			announcement_image_uploaded:'',
 			newuserPic_id:null,
 			hidedefaultimageblock:false,
-			viewpagecall:false
+			viewpagecall:false,
+			repclientdata:[]
 		}
 		this.updateAnnouncementPic=this.updateAnnouncementPic.bind(this);
 		this.updateAnnouncementDetails=this.updateAnnouncementDetails.bind(this);
@@ -52,11 +53,16 @@ class Repannouncementadd extends React.Component {
   		document.querySelector(".announcment-type").parentNode.classList.add("active")
 		document.querySelector(".announcment-type").classList.add("active");
 		}
+		this.client_data_Table();
   	}
   	//nid?_format=json
   	updateAnnouncementDetails=(e)=>{
   		e.preventDefault();
   		let options;
+  		let singlecheckedArray=[];
+		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
+				singlecheckedArray.push({"target_id":item.value});
+		});
   		if(this.state.editorState.getCurrentContent()!==null){
 			let options;
 			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
@@ -68,6 +74,7 @@ class Repannouncementadd extends React.Component {
 			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
 			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
 			        "field_image":[{"target_id":document.querySelector("#announcement-image").getAttribute("data-id")}],
+			        "field_client":singlecheckedArray
 			}
 			}else{
 				options={
@@ -77,6 +84,7 @@ class Repannouncementadd extends React.Component {
 			        "type":[{"target_id":"article"}],
 			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
 			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
+			        "field_client":singlecheckedArray
 				}
 			}
 			console.log(options);
@@ -158,6 +166,17 @@ class Repannouncementadd extends React.Component {
 	check_view_page_call=(viewpagecalled)=>{
 		console.log(viewpagecalled);
 		this.props.checkCallback(false);
+	}
+
+	  client_data_Table=()=>{
+		fetch(Repclient.RepAnnouncementclienttable.url,{
+			headers: {
+                	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+		}).then(res=>res.json()).then(data=>this.setState({repclientdata:data,loader:false}));
+
 	}
 
 	render(){
@@ -244,13 +263,14 @@ class Repannouncementadd extends React.Component {
 				         <label>Button link</label>
 				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''}/> 
 				      </div>
-				      {this.props.getAnnouncementDetailsforEdit!==undefined ? 
+				      
+					<Repclienttabledata clientdataTable={this.state.repclientdata} forUpdateClient={this.props.getAnnouncementDetailsforEdit.node.field_client}/>
+					{this.props.getAnnouncementDetailsforEdit!==undefined ? 
 				      <div className="btn-block add-client">
                         <button className="btn common-btn-blue" onClick={this.updateAnnouncementDetails}>
                                   <span>Upadate announcement</span></button>
 							<Link to={""} onClick={((e)=>{e.preventDefault();this.check_view_page_call(false)})} className="back-dashboard btn common-btn-blue"><span>Back</span></Link>
 					</div>:''}
-
 				   </form>
 				</div>
 

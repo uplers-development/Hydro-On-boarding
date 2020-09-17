@@ -117,9 +117,6 @@ render(){
 				<div className="btn-block mobile-hide">
 				   <button className="common-btn-blue" onClick={(e)=>this.setState({openPopup:true})}><span>APPLY</span></button>
 				</div>
-				<div className="btn-block mobile-show add-client">
-    				<Link className="common-btn-blue" to={"/admin-add-client"}><span>Add Client</span></Link>
-    			</div>
 				{this.state.openPopup ? 
 					<div id="modal" className="modal-container">
 						<div className="modal d-flex flex-wrap align-center justify-center">

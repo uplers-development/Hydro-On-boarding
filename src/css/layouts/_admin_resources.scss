@@ -20,7 +20,7 @@
 				font-size: 18px;
 				line-height: 22px;
 				@media screen and (max-width: $large-m) {
-					padding: 7px 15	px;
+					padding: 7px 25px;
 				}
 			}
 			.list {
@@ -41,8 +41,8 @@
 				}
 			}
 		
-			
 		}
+		
 		.mobile-hide {
 			@media screen and (max-width: $ipad-portrait) {
 				margin-top: 10px;
@@ -57,12 +57,11 @@
 				}
 			}
 		}
+		
 		.search-sort-block {
 			@media screen and (max-width: $large-x) {
 				margin-top: 0;
 			}
-		}
-		.search-sort-block {
 			@media screen and (max-width: $ipad-portrait) {
 				margin-top: 10px;
 				margin-left: 10px;

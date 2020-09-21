@@ -111,7 +111,7 @@ class Adminresourceadd extends React.Component{
                  this.setState({fileuploadedname:filename})
              }
              console.log(filename);
-             if(filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt")){
+             if(filename.includes(".mp4") || filename.includes(".ogg") || filename.includes(".wmv") || filename.includes(".docx") || filename.includes(".pptx") || filename.includes(".ppt")|| filename.includes(".doc")|| filename.includes(".pdf")|| filename.includes(".txt")){
                this.setState({doucmentformatestate:false,checkdocempty:false})
                var myHeaders = new Headers();
                   myHeaders.append("Content-Type", "application/octet-stream");
@@ -398,7 +398,7 @@ class Adminresourceadd extends React.Component{
 									</div>	
 		                     </div>
 				            <div className="upload-btn-block">
-				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx.</span>
+				            <span className='suggestion-file-name'>txt, pdf, doc, ppt, pptx, docx, MP4, OGG, WMV</span>
 				               <div className="upload-btn-wrapper">
 				                  <input type="file" name="Upload Document" onChange={this.upload_resource_document} />
 				                  <button className="btn wide common-btn-blue">

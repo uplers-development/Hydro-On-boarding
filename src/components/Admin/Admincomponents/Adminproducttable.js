@@ -228,7 +228,9 @@ delete_single_product=(e)=>{
                                                    {     e.preventDefault();
                                                          this.setState({openDeletepopup:true,setSingleDeleteId:item.nid})}
                                                    )} title="Delete">Delete</Link>   
-                                             <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,false,true,item.nid)})} title="View">View</Link>       
+                                             <Link to={""} onClick={((e)=>{e.preventDefault();
+                                              window.open(item.field_product_document,"_target")
+                                              })} title="View">View</Link>       
                                           </div>
                                        </div>
                                        </div>

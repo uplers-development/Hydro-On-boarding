@@ -216,7 +216,9 @@ delete_single_resource=(e)=>{
 							                           	{		e.preventDefault();
 							                           			this.setState({openDeletepopup:true,setSingleDeleteId:item.nid})}
 							                           	)} title="Delete">Delete</Link>	 
-					                           <Link to={""} onClick={((e)=>{e.preventDefault();this.props.checktheviewcalled(false,false,true,item.nid)})} title="View">View</Link>	 
+					                           <Link to={""} onClick={((e)=>{e.preventDefault();
+					                           		window.open(site_url+item.field_resources_document,"_target")
+					                           })} title="View">View</Link>	 
 					                        </div>
 					                     </div>
 					                  </div>

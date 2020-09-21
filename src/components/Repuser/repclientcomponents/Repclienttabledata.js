@@ -22,7 +22,7 @@ class Repclienttabledata extends React.Component{
 	componentWillMount(){
 		let self=this;
 		setTimeout(()=>{
-		if(this.props.forUpdateClient.length>0){
+		if(this.props.forUpdateClient!==undefined && this.props.forUpdateClient.length>0){
 	       	this.props.forUpdateClient.map((item,index)=>{
 				document.querySelectorAll('.clientchecked').forEach((checked,index)=>{
 		       		if(checked.value===item){

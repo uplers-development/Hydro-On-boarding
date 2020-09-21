@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect,useHistory  } from "react-router-dom";
-import Apiurl,{site_url,Admin} from '../../Apiurl'; 
+import Apiurl,{site_url,Admin,Repclient} from '../../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 import {ValidationMsg} from'../../constants/validationmsg';
 import{hasNull,isRequired,hasValidEmail,hasValidMobile,hasValidPassword} from '../../validation';
@@ -95,6 +95,18 @@ class Adminaddrep extends React.Component{
 				 }else{
 					if(status===201){
 						this.setState({emailalreadexists:false,openRepsubmission:true,popupmsg:"Rep added"});
+						 let notifictionvalue={"user_id":data.uid[0].value} 
+				             fetch(Repclient.Repclientdetailssubmissionnotification.url,{
+				               method:Repclient.Repclientdetailssubmissionnotification.method,
+				               headers: {
+				                     "Content-Type" : "application/json",
+				                     "X-CSRF-Token" : localStorage.getItem("access-token"),
+				                     "Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+				                   },
+				                   body:JSON.stringify(notifictionvalue)
+				               }).then(res=>{
+				                  return res.json();
+				               }).then(data=>{console.log(data)});
 					}else if(status===200){
 						this.setState({emailalreadexists:false,openRepsubmission:true,popupmsg:"Rep updated"});
 					}

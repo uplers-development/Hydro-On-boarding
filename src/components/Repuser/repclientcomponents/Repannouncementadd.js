@@ -49,6 +49,7 @@ class Repannouncementadd extends React.Component {
 				  }
   				}
   			})
+  		this.setState({newuserPic_id:this.props.getAnnouncementDetailsforEdit.node.field_image.fid!=='' ? this.props.getAnnouncementDetailsforEdit.node.field_image.fid : null,announcement_image:this.props.getAnnouncementDetailsforEdit.node.field_image.url!=='' ? this.props.getAnnouncementDetailsforEdit.node.field_image.url : null})
   		}else{
   		document.querySelector(".announcment-type").parentNode.classList.add("active")
 		document.querySelector(".announcment-type").classList.add("active");
@@ -230,16 +231,17 @@ class Repannouncementadd extends React.Component {
 				         </div>
 				      </div>
 				      {this.state.hidedefaultimageblock ?
+				      
 				      <div className="profile-form-block">
-				      <div className="upload-profile-photo">
-								{/*<label>Announcement photo</label>*/}
-								<div className=" d-flex flex-wrap align-center">
-								<div className="prof-user-img">
-									{this.state.smallLoader ? 
-										<div className="loader"></div>
-									:
-									<img src={this.state.announcement_image ? this.state.announcement_image_uploaded :require("../../../images/profile-logo-blue.svg")} alt="profile-img"/>
-							}
+					      <div className="upload-profile-photo">
+									{/*<label>Announcement photo</label>*/}
+									<div className=" d-flex flex-wrap align-center">
+									<div className="prof-user-img">
+										{this.state.smallLoader ? 
+											<div className="loader"></div>
+										:
+										<img src={this.state.announcement_image ? this.state.announcement_image_uploaded :require("../../../images/profile-logo-blue.svg")} alt="profile-img"/>
+										}
 							</div>
 									<div className="upload-img">
 
@@ -264,8 +266,8 @@ class Repannouncementadd extends React.Component {
 				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''}/> 
 				      </div>
 				      
-					<Repclienttabledata clientdataTable={this.state.repclientdata} forUpdateClient={this.props.getAnnouncementDetailsforEdit.node.field_client}/>
-					{this.props.getAnnouncementDetailsforEdit!==undefined ? 
+					{this.props.getAnnouncementDetailsforEdit!==undefined && <Repclienttabledata clientdataTable={this.state.repclientdata} forUpdateClient={this.props.getAnnouncementDetailsforEdit.node.field_client}/>}
+					{this.props.getAnnouncementDetailsforEdit!==undefined? 
 				      <div className="btn-block add-client">
                         <button className="btn common-btn-blue" onClick={this.updateAnnouncementDetails}>
                                   <span>Upadate announcement</span></button>

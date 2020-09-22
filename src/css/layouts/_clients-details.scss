@@ -348,6 +348,16 @@
 	@media screen and (max-width:$mobile-small) {
 			padding: 0 23px;
 	}
+
+	.container {
+		.back-dashboard {
+			margin-top: 15px;
+			&:first-of-type {
+				margin-left: 0;
+			}
+		}
+	}
+	
 }
 
 .right-content-part .bottom-content-block {

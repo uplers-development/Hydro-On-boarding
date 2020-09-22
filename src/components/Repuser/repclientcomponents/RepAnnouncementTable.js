@@ -73,8 +73,11 @@ class RepAnnouncementTable extends React.Component{
 				if(data.status===204){
 						console.log(data);
 						this.setState({openPopup:false});
+			 			document.querySelectorAll('.announcementcheck:checked').forEach((item,index)=>{
+			 				item.checked=false;
+			 			})
 			 			this.props.recordDelete(true);
-	 			}
+	 			}	
 			})
 	 	}catch(err){
 	 		console.log(err);

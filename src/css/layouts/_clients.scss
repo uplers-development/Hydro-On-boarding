@@ -24,8 +24,11 @@
 		}
 		.btn-block {
 			margin-left: 14px;
+			@media screen and (max-width:$large-x) {
+				margin: 5px 0 0 14px;
+			}
 			.common-btn-blue {
-				min-width: 87px;
+				min-width: 110px;
 				margin-bottom: 0;
 				padding: 6px 10px 4px;
 				span {
@@ -35,6 +38,12 @@
 			}
 		}
 		.search-sort-block {
+			@media screen and (max-width:$large-x) {
+				margin: 5px 0 0 auto;
+			}
+			@media screen and (max-width:$ipad-portrait) {
+				margin: 10px 0 0 0;
+			}
 			.auto-search-box {
 				@media screen and (max-width: $mobile-small) {
 					width: 198px;

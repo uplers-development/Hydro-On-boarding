@@ -158,6 +158,8 @@
 
 		.form-block {
 			padding-top: 35px;
+			position: relative;
+			z-index: 1;
 			@media screen and (max-width:$mobile-small) {
 				padding: 0 35px;	
 			}

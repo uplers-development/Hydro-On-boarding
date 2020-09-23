@@ -24,7 +24,7 @@
 			.left-dashboard-top {
 				padding: 30px 35px 48px 52px;
 				box-shadow: 0px 4px 16px $product-box-shadow;
-				max-width: 937px;
+				max-width: 65%;
 				width: 100%;
 				@media screen and (max-width:$large-mx) {
 					max-width: none;
@@ -233,7 +233,7 @@
 
 			.right-dashboard-top {
 				box-shadow: 0px 4px 16px $product-box-shadow;
-				max-width: 346px;
+				max-width: calc(35% - 37px);
 				width: 100%;
 				background-color: $mint-color;
 				padding: 30px 37px 50px 49px;
@@ -305,13 +305,10 @@
 			margin-top: 27px;
 			align-items: flex-start;
 			.latest-products {
-				max-width: 480px;
-				width: 100%;
+				width: 40%;
 				padding: 8px 32px 50px 45px;
 				box-shadow: 0px 4px 16px $product-box-shadow;
 				@media screen and (max-width:$large-mx) {
-					max-width: none;
-					width: 40%;
 					padding: 8px 25px 30px 25px;
 				}
 				@media screen and (max-width:$large) {
@@ -346,13 +343,11 @@
 				}
 			}
 			.news-and-events {
-				max-width: 810px;
-				width: 100%;
+				width: calc(60% - 30px);
 				padding: 8px 85px 20px 82px;
 				box-shadow: 0px 4px 16px $product-box-shadow;
 				margin-left: 30px;
 				@media screen and (max-width:$large-mx) {
-					max-width: none;
 					width: calc(60% - 20px);
 					margin-left: 20px;
 					padding: 45px 50px 20px 50px;

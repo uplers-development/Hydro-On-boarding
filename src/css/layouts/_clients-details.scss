@@ -1,5 +1,5 @@
 .clients-detils-main {
-	 max-width: 1320px;
+	 max-width: none;
 	 width: 100%;
 	 > .container {
 		> .back-dashboard {
@@ -10,7 +10,7 @@
 	 }
 	.person-detils-box {
 		width: 100%;
-		max-width: 840px;
+		/*max-width: 840px;*/
 		padding: 40px 44px 73px 40px;
 		@media screen and (max-width:$large-mx) {
 			padding: 30px;

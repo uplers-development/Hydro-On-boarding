@@ -59,11 +59,11 @@ ul {
 }
 
 .container {
-	max-width: 1320px;
+	max-width: none;
 	width: 100%;
-	@media screen and (max-width:$large-m) {
+	/*@media screen and (max-width:$large-m) {
 		padding: 0 15px 0 0;
-	}
+	}*/
 	@media screen and (max-width:$mobile-small) {
 		padding: 0;
 	}
@@ -946,7 +946,7 @@ nav {
 /*Common right block*/
 .right-content-part {
 	width: calc(100% - 255px);
-	padding-left: 90px;
+	padding: 0 90px;
 	margin-left: auto;
 	align-items: flex-start;
 	position: relative;
@@ -954,7 +954,7 @@ nav {
 		padding-left: 40px;
 	}
 	@media screen and (max-width:$large-m) {
-		padding-left: 20px;
+		padding:0 20px;
 	}
 	@media screen and (max-width:$ipad-landscape) {
 		padding: 0 15px;
@@ -967,7 +967,7 @@ nav {
 
 	/*Top Heading block*/
 	.top-heading-continer {
-		max-width: 1320px;
+		max-width: none;
 		width: 100%;
 		position: relative;
 
@@ -988,7 +988,7 @@ nav {
 		padding: 36px 0 36px 0;
 
 		@media screen and (max-width:$large-mx) {
-			padding: 12px 20px 12px 0;
+			padding: 12px 10px 12px 0;
 			width: 100%;
 			margin-left: auto;
 		}
@@ -1149,7 +1149,7 @@ nav {
 			padding: 15px 0;
 
 			@media screen and (max-width:$large-mx) {
-				padding: 15px 15px 15px 0;
+				padding: 15px 10px 15px 0;
 			}
 
 			@media screen and (max-width:$ipad-portrait) {
@@ -1806,7 +1806,7 @@ nav {
 			top: 50%;
 			transform: translateY(-50%);
 			-webkit-transform: translateY(-50%);
-			right: 24px;
+			right: 14px;
 			width: 0;
 			height: 0;
 			border-left: 4px solid transparent;
@@ -1873,7 +1873,7 @@ nav {
 
 /*Filter Block*/
 .fileter-block {
-	max-width: 1320px;
+	max-width: none;
 	width: 100%;
 	align-items: center;
 
@@ -2513,7 +2513,7 @@ a {
 		.table {
 			border-collapse: collapse;
 			table-layout: fixed;
-			max-width: 1320px;
+			max-width: none;
 			width: 100%;
 
 			thead {

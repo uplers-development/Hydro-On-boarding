@@ -543,7 +543,7 @@
 					}
 
 					.right-prod-upload {
-						width: 400px;
+						width: calc(100% - 450px);
 						margin-left: 65px;
 
 						@media screen and (max-width:$large-x) {
@@ -564,7 +564,7 @@
 
 							input,
 							select {
-								width: 242px;
+								width: calc(100% - 154px);
 								border: 1px solid $dim-gray;
 								&:focus {
 									border-color: $sky-blue;
@@ -611,6 +611,12 @@
 								@media (max-height: $mob-landscape-414) and (orientation: landscape) {
 									font-size: 16px;
 									line-height: 20px;
+								}
+							}
+							.doller-label {
+								width: calc(100% - 154px);
+								input[type="text"] {
+									width: 100%;
 								}
 							}
 						}

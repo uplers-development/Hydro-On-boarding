@@ -293,13 +293,12 @@
 	}
 	.news-feed-right
 	{
-		width: 330px;
-		margin-left: 30px;
+		width: 35%;
+		margin-left: 4.04%;
+		margin-top: 25px;
 		@media screen and (max-width:$large-m) {
-			width: 39%;
-			padding: 0 15px;
-			max-width: 330px;
-			margin-left: 0;
+			width: 37%;
+			margin-left: 2.04%;
 		}
 		@media screen and (max-width:$ipad-landscape) {
 			width: 100%;
@@ -308,9 +307,9 @@
 		}
 		@media screen and (max-width:$ipad-portrait) {
 			margin-left: 0;
+			max-width: none;
 		}
 		@media screen and (max-width:$mobile-small) {
-			max-width: 100%;
 			margin: 0;
 			padding: 0 10px;
 		}

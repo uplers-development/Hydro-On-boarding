@@ -4,15 +4,16 @@
 	}
 	align-items: flex-start;
 	.rep-contracts-left {
-		max-width: 840px;
+		max-width: 60%;
 		width: 100%;
-
+/*
 		@media screen and (max-width:$large-mx) {
 			max-width: none;
 			width: calc(100% - 350px);
-		}
+		}*/
 		@media screen and (max-width: $ipad-landscape) {
 			width: 100%;
+			max-width: none;
 		}
 		.get-in-touch {
 			margin-top: 42px;
@@ -90,20 +91,20 @@
 	}
 
 	.rep-contracts-right {
-		max-width: 330px;
+		max-width: calc(40% - 30px);
 		width: 100%;
 		border: 1px solid $off-white;
 		padding: 27px 30px;
 		margin-left: 30px;
 
-		@media screen and (max-width:$large-mx) {
+		/*	@media screen and (max-width:$large-mx) {
 			margin-left: 20px;
 			padding: 15px;
-		}
-
+		}*/
 		@media screen and (max-width: $ipad-landscape) {
 			width: 100%;
-			margin: 15px 0 0 0;
+			max-width: 350px;
+			margin: 25px 0 0 0;
 		}
 		@media (max-height: $mob-landscape-375) and (orientation: landscape) {
 			display: none;
@@ -178,7 +179,7 @@
 	position: relative;
 
 	@media screen and (max-width:$large-mx) {
-		padding: 30px;
+		padding: 30px 15px 30px 30px;
 	}
 
 	@media screen and (max-width:$mobile-small) {
@@ -235,7 +236,9 @@
 			width: calc(100% - 145px);
 			padding-left: 10px;
 		}
-
+		@media screen and (max-width:$large) {
+			width: calc(100% - 100px);
+		}
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 			padding-left: 0;

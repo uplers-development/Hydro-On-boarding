@@ -99,9 +99,9 @@ class UserProfile extends Component {
 	render() {
 		return (
 			<div>
-				<div className="d-flex flex-wrap user-log " onMouseLeave={this.renderOutHover}>
+				<div className="d-flex flex-wrap user-log">
 					{this.state.dataLoaded ? 	
-						<div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={this.renderInHover} onClick={this.renderClass} ref={(input) => { divType = input; }}>
+						<div className="user-image-name d-flex flex-wrap align-center"  onClick={this.renderClass} ref={(input) => { divType = input; }}>
 			
 						<div className="person-profile-img bg-cover" style={{backgroundImage:`url(${this.state.userPicture!=='' ? this.state.userPicture : "../../images/profile-logo-blue.svg"})`}}>
 						</div>

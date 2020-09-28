@@ -406,11 +406,11 @@
 			.btn {
 				min-width: 330px;
 				margin-bottom: 0;
-				padding: 8px 15px 4px;
+				padding: 8px 15px;
 
 				@media screen and (max-width:$large-mx) {
 					min-width: 250px;
-					padding: 8px 15px 4px;
+					padding: 8px 15px;
 				}
 
 				@media screen and (max-width: $ipad-portrait) {

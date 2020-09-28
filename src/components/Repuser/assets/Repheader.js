@@ -85,8 +85,8 @@ console.log(this.props.sendtheDefaultAnnouncement);
                }}
                )}
             </div>
-            <div className="d-flex flex-wrap user-log" onMouseLeave={renderOutHover}>
-               <div className="user-image-name d-flex flex-wrap align-center" onMouseEnter={renderInHover} onClick={renderClass} ref={(input) => { divType = input; }}>
+            <div className="d-flex flex-wrap user-log">
+               <div className="user-image-name d-flex flex-wrap align-center"  onClick={renderClass} ref={(input) => { divType = input; }}>
                   {this.state.repinfo!==null ? 
                      <>
                         <div className="person-profile-img bg-cover" style={{backgroundImage: `url(${this.state.repinfo.user_picture.length>0 && this.state.repinfo.user_picture[0]!=='' ? this.state.repinfo.user_picture[0].url : "../../../images/profile-logo-blue.svg"})`}}></div>

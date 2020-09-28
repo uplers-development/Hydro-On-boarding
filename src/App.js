@@ -3,7 +3,6 @@ import { BrowserRouter, Route,Redirect } from "react-router-dom";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Welcome from "./components/Welcome";
-import Clients from "./components/Clients";
 import Dashboard from "./components/Dashboard";
 import Newsfeeds from "./components/stores/Newsfeeds";
 import Product from "./components/stores/Product";
@@ -77,7 +76,6 @@ class App extends Component {
 		  
                     <Route path="/Profile"  component={Profile} />
                     <Route path="/Welcome"  component={Welcome} />
-                    <Route path="/Clients"  component={Clients} />
                     <Route path="/Dashboard"  component={Dashboard} />
                     <Route path={this.state.sidebarItem[0].field_react_route}  component={Newsfeeds} />
                     <Route path={this.state.sidebarItem[1].field_react_route}  component={Product} />

@@ -1510,6 +1510,7 @@ nav {
 	}
 	.user-image-name {
 		width: 100%;
+	    cursor: pointer;	
 		@media screen and (max-width:$mobile-small) {
 			width: 100%;
 			padding-right: 20px;

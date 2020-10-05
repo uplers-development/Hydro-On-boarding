@@ -635,7 +635,7 @@ class Product extends Component {
 
 									</div>
 									<div className="product-content">
-										<Link to={""} title={ReactHtmlParser(item.title)}>{ReactHtmlParser(item.title)}</Link>
+										<Link to={""} onClick={((e)=>this.callPDF(e,item.field_product_document))} title={ReactHtmlParser(item.title)}>{ReactHtmlParser(item.title)}</Link>
 										<h4>
 										{item.field_product_category.split(',').map((cat,cat_index)=>
 											<span key={cat_index}>{ReactHtmlParser(cat)}</span>

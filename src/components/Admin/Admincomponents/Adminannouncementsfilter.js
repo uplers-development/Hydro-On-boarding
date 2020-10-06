@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Admin} from '../../Apiurl'; 
 import ReactHtmlParser from 'react-html-parser';
 
 class Adminannouncementsfilter extends React.Component{
@@ -24,13 +24,13 @@ class Adminannouncementsfilter extends React.Component{
 	get_product_list=()=>{
 
 		try{
-			fetch(Repclient.RepAnnouncementproductlist.url,{
+			fetch(Admin.AdminAnnouncementproductlist.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:Repclient.RepAnnouncementproductlist.method,
+	                method:Admin.AdminAnnouncementproductlist.method,
 			}).then(res=>{
 				return res.json();
 			}).then(data=>{
@@ -60,13 +60,13 @@ class Adminannouncementsfilter extends React.Component{
 			productvalue=document.querySelector(".product-item") && document.querySelector(".product-item").classList.contains("active") ? document.querySelector(".product-item").getAttribute("data-id") : '';
 			console.log(productvalue);
 			try{
-				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Admin.AdminAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:Repclient.RepAnnouncementfilterclientlocation.method,
+		                method:Admin.AdminAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -83,13 +83,13 @@ class Adminannouncementsfilter extends React.Component{
 			locationvalue='';
 
 			try{
-				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Admin.AdminAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:Repclient.RepAnnouncementfilterclientlocation.method,
+		                method:Admin.AdminAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -125,13 +125,13 @@ class Adminannouncementsfilter extends React.Component{
 				}
 			})
 			try{
-				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_category_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Admin.AdminAnnouncementfilterclientlocation.url+`&field_product_category_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:Repclient.RepAnnouncementfilterclientlocation.method,
+		                method:Admin.AdminAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -147,13 +147,13 @@ class Adminannouncementsfilter extends React.Component{
 			e.target.classList.remove("active");
 			productvalue='';
 			try{
-				fetch(Repclient.RepAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
+				fetch(Admin.AdminAnnouncementfilterclientlocation.url+`&field_product_target_id=${productvalue==='' || productvalue===undefined ? '' : productvalue}&field_organisation_value=${locationvalue==='' || locationvalue===undefined ? '' : locationvalue}`,{
 						headers: {
 		                	"Content-Type" : "application/json",
 		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 		                },
-		                method:Repclient.RepAnnouncementfilterclientlocation.method,
+		                method:Admin.AdminAnnouncementfilterclientlocation.method,
 				}).then(res=>{
 					return res.json();
 				}).then(data=>{
@@ -172,13 +172,13 @@ class Adminannouncementsfilter extends React.Component{
 	get_location_list=()=>{
 
 		try{
-			fetch(Repclient.RepAnnouncementlocationlist.url,{
+			fetch(Admin.AdminAnnouncementlocationlist.url,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:Repclient.RepAnnouncementlocationlist.method,
+	                method:Admin.AdminAnnouncementlocationlist.method,
 			}).then(res=>{
 				return res.json();
 			}).then(data=>{

@@ -402,6 +402,18 @@ export const Admin={
     AdminAnnouncementaddimage:{
         url:base_url+"/file/upload/node/article/field_image?_format=json",
     },
+    AdminAnnouncementfilterclientlocation:{
+        url:base_url+"/jsonapi/admin_announcement_clients?_format=json",
+        method:"GET"
+    },
+    AdminAnnouncementproductlist:{
+        url:base_url+"/jsonapi/taxonomy_list/applications?_format=json",
+        method:"GET"
+    },
+    AdminAnnouncementlocationlist:{
+        url:base_url+"/json/company_list?_format=json",
+        method:"GET"
+    }, 
 }
 
 export default {

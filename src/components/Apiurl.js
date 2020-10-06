@@ -366,7 +366,42 @@ export const Admin={
     adminProductbulkdelete:{
         url:base_url+`/json-api/node_action.json`,
         method:"POST",
-    }
+    },
+    get_all_announcement:{
+        url:base_url+`/jsonapi/admin_announcements?_format=json`,
+        method:"GET",
+    } ,
+    AdminAnnouncementclientnewsfeeds:{
+        url:base_url+"/json-api/news_feed_type.json",
+        method:"GET"
+    },
+    get_perticular_annoucement_detail:{
+        url:base_url+`/json-api/node_view.json`,
+        method:"POST",
+    } ,
+    delete_announcement_details:{
+        url:base_url+`/node/`,
+        method:"DELETE",
+    } ,
+    AdminAnnouncementclienttable:{
+        url:base_url+"/jsonapi/admin_announcement_clients?_format=json",
+        method:"GET"
+    },
+    Adminclientdetailssubmissionproductlist:{
+        url:base_url+"/node?_format=json",
+        method:"POST"
+    },
+    Adminclientsingledelete:{
+        url:base_url+"/user/",
+        method:"PATCH"
+    },
+    Admin_update_aanouncement_details:{
+        url:base_url+`/node/`,
+        method:"PATCH",
+    } ,
+    AdminAnnouncementaddimage:{
+        url:base_url+"/file/upload/node/article/field_image?_format=json",
+    },
 }
 
 export default {

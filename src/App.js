@@ -21,6 +21,8 @@ import AdminProduct from "./components/Admin/admin-products";
 import Adminclients from "./components/Admin/admin-clients";
 import Addadminclient from "./components/Admin/admin-add-client";
 import Admin_add_rep from "./components/Admin/Admin_add_rep";
+import Adminannouncement from "./components/Admin/admin-announcement";
+import Adminannouncementlist from "./components/Admin/admin-announcement-list";
 import AdminProfile from "./components/Admin/Html/Admin_Profile";
 import Apiurl,{site_url,Client} from './components/Apiurl'; 
 import "./css/style.scss";
@@ -61,7 +63,9 @@ class App extends Component {
                     <Route path="/RepClients"  component={RepClients} />		  	
                     <Route path="/admin-resources"  component={AdminResource} />        
                     <Route path="/admin-products"  component={AdminProduct} />        
-                    <Route path="/admin-clients"  component={Adminclients} />        
+                    <Route path="/admin-clients"  component={Adminclients} /> 
+                    <Route path="/admin-announcement"  component={Adminannouncement} />
+                    <Route path="/admin-announcement-list"  component={Adminannouncementlist} />       
                     <Route path="/admin-add-client"  component={Addadminclient} />        
                     <Route path="/admin-reps"  component={AdminRep} />        
                     <Route path="/Admin_add_rep"  component={Admin_add_rep} />        

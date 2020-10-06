@@ -246,7 +246,7 @@ class Repclienttabledata extends React.Component{
 											<div id="modal" className="modal-container">
 												<div className="modal d-flex flex-wrap align-center justify-center">
 													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
-														this.props.historyPush.history.push("/RepDashboard");
+														this.props.historyPush.history.push("/announcement-list");
 
 													})}
 													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
@@ -257,7 +257,7 @@ class Repclienttabledata extends React.Component{
                   										 <p>Your message was submitted successfully</p>
                   										 <div className="btn-block">
 																<button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
-														this.props.historyPush.history.push("/RepDashboard");
+														this.props.historyPush.history.push("/announcement-list");
 
 													})}><span>OK</span></button>	
 														</div>

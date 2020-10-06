@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from "react-router-dom";
-import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
+import Apiurl,{base_url,site_url,Admin} from '../../Apiurl'; 
 import {RepLogoutPopup} from'../../constants/RepConstants';
 import {ValidationMsg} from'../../constants/validationmsg';
 
@@ -16,8 +16,24 @@ class Adminclienttabledata extends React.Component{
 	this.selectAllcheckbox=this.selectAllcheckbox.bind(this);
 	this.singleSelect=this.singleSelect.bind(this);
 	this.handleViewEvent=this.handleViewEvent.bind(this);
+	this.submitAnnoucement=this.submitAnnoucement.bind(this);
 	}
 
+	componentWillMount(){
+		let self=this;
+		setTimeout(()=>{
+		if(this.props.forUpdateClient!==undefined && this.props.forUpdateClient.length>0){
+	       	this.props.forUpdateClient.map((item,index)=>{
+				document.querySelectorAll('.clientchecked').forEach((checked,index)=>{
+		       		if(checked.value===item){
+		       			checked.click();
+		       		}
+				})
+	       	})  
+	    }
+	  },2000)
+	}
+	
 	selectAllcheckbox=(e)=>{
 		 var ele=e.target;
 		 var checkboxes = document.getElementsByTagName('input');
@@ -55,19 +71,72 @@ class Adminclienttabledata extends React.Component{
 		}	
 	}
 
+	submitAnnoucement=(e)=>{
+		e.preventDefault();
+		console.log(this.props.summernoteData);
+		let singlecheckedArray=[];
+		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
+				singlecheckedArray.push({"target_id":item.value});
+		});
 
+		console.log(singlecheckedArray);
+		if(this.props.summernoteData!==null){
+			let options;
+			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
+				options={
+				    "title":[{"value":document.querySelector("#Title").value}],
+			        "body":[{"value":this.props.summernoteData,
+			        		 "format": "basic_html"}],
+			        "type":[{"target_id":"article"}],
+			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
+			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
+			        "field_image":[{"target_id":document.querySelector("#announcement-image").getAttribute("data-id")}],
+			        "field_client":singlecheckedArray
+			}
+			}else{
+				options={
+				    "title":[{"value":document.querySelector("#Title").value}],
+			        "body":[{"value":this.props.summernoteData,
+			        		 "format": "basic_html"}],
+			        "type":[{"target_id":"article"}],
+			        "field_news_feed_button":[{"uri":document.querySelector("#Button_link").value,"title":document.querySelector("#Button_Copy").value ,"options": []}],
+			        "field_news_feed_type":[{"target_id":document.querySelector(".announcment-type.active").getAttribute("id")}],
+			        "field_client":singlecheckedArray
+				}
+			}
+			console.log(options);
+			fetch(Admin.Adminclientdetailssubmissionproductlist.url,{
+		         method:Admin.Adminclientdetailssubmissionproductlist.method,
+				headers: {
+		                	"Content-Type" : "application/json",
+		                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+		                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
+		                },
+		                body:JSON.stringify(options)
+		            }).then(res=>{
+		            	return res.json();
+		            }).then(data=>{
+		            	console.log(data);
+		            	//if(data.length){
+		            		this.setState({opensubmissionpopup:true,formempty:false})
+		            	//}
+		            })
+		    }else{
+		    	this.setState({formempty:true})
+		    }
+		}
 
 	deleteRecord = (e) =>{
 		e.preventDefault();
 		let status={"status" : [{ "value":0}] }
 		try{
-			fetch(Repclient.Repclientsingledelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
+			fetch(Admin.Adminclientsingledelete.url+`${this.state.setSingleDeleteId}?_format=json`,{
 					headers: {
 	                	"Content-Type" : "application/json",
 	                	"X-CSRF-Token" : localStorage.getItem("access-token"),
 	                	"Authorization": 'Basic ' + localStorage.getItem("basic-auth"),
 	                },
-	                method:Repclient.Repclientsingledelete.method,
+	                method:Admin.Adminclientsingledelete.method,
 	                body:JSON.stringify(status)
 			}).then(res=>{
 				return res.json();
@@ -177,7 +246,7 @@ class Adminclienttabledata extends React.Component{
 											<div id="modal" className="modal-container">
 												<div className="modal d-flex flex-wrap align-center justify-center">
 													<Link to={""} onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
-														this.props.historyPush.history.push("/RepDashboard");
+														this.props.historyPush.history.push("/admin-announcement-list");
 
 													})}
 													className="close" title="Close"><img src={require("../../../images/close-icon-gray.svg")} alt="Close icon" /></Link>
@@ -188,7 +257,7 @@ class Adminclienttabledata extends React.Component{
                   										 <p>Your message was submitted successfully</p>
                   										 <div className="btn-block">
 																<button className="btn common-btn-blue" onClick={((e)=>{e.preventDefault();this.setState({opensubmissionpopup:false});
-														this.props.historyPush.history.push("/RepDashboard");
+														this.props.historyPush.history.push("/admin-announcement-list");
 
 													})}><span>OK</span></button>	
 														</div>

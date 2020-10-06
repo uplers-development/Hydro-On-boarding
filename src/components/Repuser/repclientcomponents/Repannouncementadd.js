@@ -9,6 +9,7 @@ import draftToHtml from 'draftjs-to-html';
 /*import htmlToDraft from 'html-to-draftjs';*/
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';	
 import Repclienttabledata from './Repclienttabledata'
+import Repannouncementsfilter from './Repannouncementsfilter'
 
 class Repannouncementadd extends React.Component {
 	constructor(props){
@@ -25,11 +26,30 @@ class Repannouncementadd extends React.Component {
 			viewpagecall:false,
 			repclientdata:[]
 		}
+		this.filtereddata=this.filtereddata.bind(this);
 		this.updateAnnouncementPic=this.updateAnnouncementPic.bind(this);
 		this.updateAnnouncementDetails=this.updateAnnouncementDetails.bind(this);
 	}
 
 
+	filtereddata=(filtersuccess)=>{
+		console.log(filtersuccess);
+		if(filtersuccess.length>0){
+			this.setState({noDataforTable:false,repclientdata:filtersuccess});
+			let self=this;
+			setTimeout(()=>{
+						document.querySelectorAll('.clientchecked').forEach((checked,index)=>{
+				       			if(document.querySelectorAll('.clientchecked')[index].value===self.props.getAnnouncementDetailsforEdit.node.field_client[index]){
+				       				document.querySelectorAll('.clientchecked')[index].checked=true;
+				       			}else{
+				       				document.querySelectorAll('.clientchecked')[index].checked=false;	
+				       			}
+						})
+			},1000)
+		}else{
+			this.setState({noDataforTable:true})
+		}
+	}
 
 	onEditorStateChange=(editorState) => {
 	    this.setState({
@@ -265,7 +285,7 @@ class Repannouncementadd extends React.Component {
 				         <label>Button link</label>
 				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''}/> 
 				      </div>
-				      
+				      <Repannouncementsfilter checkFiltereddata={this.filtereddata}/>
 					{this.props.getAnnouncementDetailsforEdit!==undefined && <Repclienttabledata clientdataTable={this.state.repclientdata} forUpdateClient={this.props.getAnnouncementDetailsforEdit.node.field_client}/>}
 					{this.props.getAnnouncementDetailsforEdit!==undefined? 
 				      <div className="btn-block add-client">

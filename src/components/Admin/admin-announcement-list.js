@@ -8,8 +8,8 @@ import ReactHtmlParser from 'react-html-parser';
 import hydroImage from '../../images/hydro-biofilter-product.jpg';
 import Adminheader from './assets/Adminheader'
 import Adminnavbar from './assets/Adminnavbar'
-import AdminAnnouncementTable from './Admincomponents/AdminAnnouncementTable'
-import Adminannouncementadd from './Admincomponents/Adminannouncementadd'
+import AdminAnnouncementTable from './Admincomponents/AdminAnnouncementTable';
+import Adminannouncementadd from './Admincomponents/Adminannouncementadd';
 import {cosmaticAsset} from'../constants/common';
 
 
@@ -28,6 +28,7 @@ class Adminannouncementlist extends React.Component {
 			viewpagecall:this.props.location.state!==undefined  ? this.props.location.state.contractsubmission:false,
 			summernoteData:null
 		}
+		
 		this.returnSummerNoteData=this.returnSummerNoteData.bind(this);
 		this.returnback=this.returnback.bind(this);
 		this.change_to_defaultView=this.change_to_defaultView.bind(this);
@@ -42,7 +43,8 @@ class Adminannouncementlist extends React.Component {
       }
       
    }
-   
+   	
+   	
     announce_data_table=()=>{
 		fetch(Admin.get_all_announcement.url,{
 			headers: {

@@ -506,6 +506,13 @@
 				}
 			}
 		}
+		&.client-for-only-details {
+			.right-detail {
+				.action {
+					display: none;
+				}
+			}
+		}
 	}
 	.rdw-editor-toolbar {
 		border: 0;

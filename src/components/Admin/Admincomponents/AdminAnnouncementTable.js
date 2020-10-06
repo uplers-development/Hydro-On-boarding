@@ -107,7 +107,7 @@ class AdminAnnouncementTable extends React.Component{
 							            </tr>
 							         </thead>
 							          <tbody>
-							         { this.state.announcementTablelist!=='undefined'  ?
+							         {this.props.announcementList && this.props.announcementList.length>0  ?
 						             	this.props.announcementList.map((item,index)=>
 							            	<tr key={index}>
 							               <td>

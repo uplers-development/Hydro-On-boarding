@@ -33,16 +33,31 @@ class Adminannouncementlist extends React.Component {
 		this.change_to_defaultView=this.change_to_defaultView.bind(this);
 	}
 
-	componentWillMount(){
+	componentDidMount(){
       if(localStorage.getItem("access-token")!==null){
-         this.announce_data_table();
          this.get_announcements_list();
+         this.announce_data_table();
       }else{
          this.props.history.push('/Login')
       }
       
    }
+   
+    announce_data_table=()=>{
+		fetch(Admin.get_all_announcement.url,{
+			headers: {
+                	"Content-Type" : "application/json",
+                	"X-CSRF-Token" : localStorage.getItem("access-token"),
+                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
+                },
+		}).then(res=>res.json()).then(data=>
+		{
+			console.log(data)
+			this.setState({announcementTablelist:data,loader:false})
+			console.log(this.state.announcementTablelist,"###################################################################################################")
 
+	});
+	}	
    
    	 getadmindetail=(admindetails)=>{
   		console.log(admindetails);
@@ -70,21 +85,7 @@ class Adminannouncementlist extends React.Component {
 		document.querySelector("#myInput").value==='' ? this.announce_data_table() : this.setState({announcementtablelist:getSearchedItem});
 	}*/
 
-   announce_data_table=()=>{
-		fetch(Admin.get_all_announcement.url,{
-			headers: {
-                	"Content-Type" : "application/json",
-                	"X-CSRF-Token" : localStorage.getItem("access-token"),
-                	"Authorization": "Basic "+localStorage.getItem("basic-auth"),
-                },
-		}).then(res=>res.json()).then(data=>
-		{
-			console.log(data)
-			this.setState({announcementTablelist:data,loader:false})
-			console.log(this.state.announcementTablelist,"###################################################################################################")
-
-	});
-	}	
+  
 
 
 
@@ -154,7 +155,7 @@ class Adminannouncementlist extends React.Component {
 					            <div className="bottom-content-block">
 					               <div className="d-flex flex-wrap announcements-main">
 					                  <div className="container">
-					                     {!this.state.loader && this.state.announcementTablelist!=='undefined'   && <AdminAnnouncementTable  announcementList={this.state.announcementTablelist} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>}	
+					                     {!this.state.loader && <AdminAnnouncementTable  announcementList={this.state.announcementTablelist} checkViewpageCall={this.check_view_page_call} recordDelete={this.checkAnyDelete}/>}	
 					                  </div>
 					               </div>
 					            </div>

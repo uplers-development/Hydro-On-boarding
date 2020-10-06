@@ -164,7 +164,7 @@ class Adminclienttabledata extends React.Component{
 	render(){
 		console.log(this.props.noDatacall);
 		return (
-			<div className="clients-table table-outer">
+			<div className="clients-table table-outer client-for-only-details">
 						   <div className="table-responsive">
 						   		 <table className="table table-striped">
 							         <thead>

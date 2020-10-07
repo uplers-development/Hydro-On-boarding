@@ -60,19 +60,24 @@ class Adminannouncementadd extends React.Component {
   }
   	componentDidMount(){
   		if(this.props.getAnnouncementDetailsforEdit!==undefined && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid!==''){
-  			document.querySelectorAll(".announcment-type").forEach((item,index)=>{
-  				if(item.getAttribute("id")===this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid){
-	  				item.parentNode.classList.add("active")
-					item.classList.add("active")
-				  if(this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid==="4"){
-				  	this.setState({hidedefaultimageblock:true});
-				  }
-  				}
-  			})
+  			let self=this;
+  			setTimeout(()=>{
+	  			document.querySelectorAll(".announcment-type").forEach((item,index)=>{
+	  				if(item.getAttribute("id")===self.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid){
+		  				item.parentNode.classList.add("active")
+						item.classList.add("active")
+					  if(self.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid==="4"){
+					  	self.setState({hidedefaultimageblock:true});
+					  }
+	  				}
+	  			})
+  			},1200)
   		this.setState({newuserPic_id:this.props.getAnnouncementDetailsforEdit.node.field_image.fid!=='' ? this.props.getAnnouncementDetailsforEdit.node.field_image.fid : null,announcement_image:this.props.getAnnouncementDetailsforEdit.node.field_image.url!=='' ? this.props.getAnnouncementDetailsforEdit.node.field_image.url : null})
   		}else{
-  		document.querySelector(".announcment-type").parentNode.classList.add("active")
-		document.querySelector(".announcment-type").classList.add("active");
+  			setTimeout(()=>{
+	  			document.querySelector(".announcment-type").parentNode.classList.add("active")
+				document.querySelector(".announcment-type").classList.add("active");
+			},1200);
 		}
 		this.client_data_Table();
   	}
@@ -176,12 +181,14 @@ class Adminannouncementadd extends React.Component {
 			this.setState({hidedefaultimageblock:false})
 		}
 		//hidedefaultimageblock
-		document.querySelectorAll(".announcment-type").forEach((item,index)=>{
-			item.classList.remove("active");
-			item.parentNode.classList.remove("active");
-			document.querySelectorAll(".announcment-type")[value].parentNode.classList.add("active");
-			document.querySelectorAll(".announcment-type")[value].classList.add("active");
-		});
+		setTimeout(()=>{
+			document.querySelectorAll(".announcment-type").forEach((item,index)=>{
+				item.classList.remove("active");
+				item.parentNode.classList.remove("active");
+				document.querySelectorAll(".announcment-type")[value].parentNode.classList.add("active");
+				document.querySelectorAll(".announcment-type")[value].classList.add("active");
+			});
+		},1200);
 	}
 
 	check_view_page_call=(viewpagecalled)=>{

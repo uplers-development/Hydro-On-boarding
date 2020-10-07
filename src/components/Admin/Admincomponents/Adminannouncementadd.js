@@ -6,6 +6,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState,ContentState,convertFromHTML,CompositeDecorator,convertToRaw,getDefaultKeyBinding, } from 'draft-js';
 import {ValidationMsg} from'../../constants/validationmsg';
 import draftToHtml from 'draftjs-to-html';
+import {cosmaticAsset} from'../../constants/common';
 /*import htmlToDraft from 'html-to-draftjs';*/
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';	
 import Adminclienttabledata from './Adminclienttabledata'
@@ -24,7 +25,8 @@ class Adminannouncementadd extends React.Component {
 			newuserPic_id:null,
 			hidedefaultimageblock:false,
 			viewpagecall:false,
-			repclientdata:[]
+			repclientdata:[],
+			loader:true,
 		}
 		this.filtereddata=this.filtereddata.bind(this);
 		this.updateAnnouncementPic=this.updateAnnouncementPic.bind(this);
@@ -35,16 +37,13 @@ class Adminannouncementadd extends React.Component {
 		console.log(filtersuccess);
 		if(filtersuccess.length>0){
 			this.setState({noDataforTable:false,repclientdata:filtersuccess});
-			let self=this;
-			setTimeout(()=>{
-						document.querySelectorAll('.clientchecked').forEach((checked,index)=>{
-				       			if(document.querySelectorAll('.clientchecked')[index].value===self.props.getAnnouncementDetailsforEdit.node.field_client[index]){
-				       				document.querySelectorAll('.clientchecked')[index].checked=true;
-				       			}else{
-				       				document.querySelectorAll('.clientchecked')[index].checked=false;	
-				       			}
-						})
-			},1000)
+			document.querySelectorAll('.clientchecked').forEach((checked,index)=>{
+	       			if(document.querySelectorAll('.clientchecked')[index].value===this.props.getAnnouncementDetailsforEdit.node.field_client[index]){
+	       				document.querySelectorAll('.clientchecked')[index].checked=true;
+	       			}else{
+	       				document.querySelectorAll('.clientchecked')[index].checked=false;	
+	       			}
+			})
 		}else{
 			this.setState({noDataforTable:true})
 		}
@@ -59,8 +58,8 @@ class Adminannouncementadd extends React.Component {
 	   
   }
   	componentDidMount(){
+  		let self=this;
   		if(this.props.getAnnouncementDetailsforEdit!==undefined && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid!==''){
-  			let self=this;
   			setTimeout(()=>{
 	  			document.querySelectorAll(".announcment-type").forEach((item,index)=>{
 	  				if(item.getAttribute("id")===self.props.getAnnouncementDetailsforEdit.node.field_news_feed_type[0].tid){
@@ -71,13 +70,15 @@ class Adminannouncementadd extends React.Component {
 					  }
 	  				}
 	  			})
-  			},1200)
+	  			self.setState({loader:false})
+  			},2000)
   		this.setState({newuserPic_id:this.props.getAnnouncementDetailsforEdit.node.field_image.fid!=='' ? this.props.getAnnouncementDetailsforEdit.node.field_image.fid : null,announcement_image:this.props.getAnnouncementDetailsforEdit.node.field_image.url!=='' ? this.props.getAnnouncementDetailsforEdit.node.field_image.url : null})
   		}else{
   			setTimeout(()=>{
 	  			document.querySelector(".announcment-type").parentNode.classList.add("active")
 				document.querySelector(".announcment-type").classList.add("active");
-			},1200);
+				self.setState({loader:false})
+			},2000);
 		}
 		this.client_data_Table();
   	}
@@ -175,6 +176,7 @@ class Adminannouncementadd extends React.Component {
 
 	selectannouncement=(e,getannouncementid,value)=>{
 		e.preventDefault();
+		let self=this;
 		if(getannouncementid==="4"){
 			this.setState({hidedefaultimageblock:true})
 		}else{
@@ -188,7 +190,8 @@ class Adminannouncementadd extends React.Component {
 				document.querySelectorAll(".announcment-type")[value].parentNode.classList.add("active");
 				document.querySelectorAll(".announcment-type")[value].classList.add("active");
 			});
-		},1200);
+			self.setState({loader:false})
+		},2000);
 	}
 
 	check_view_page_call=(viewpagecalled)=>{
@@ -211,6 +214,9 @@ class Adminannouncementadd extends React.Component {
 		console.log(this.props.getAnnouncementDetailsforEdit);
 		return(
 			<>
+
+				{!this.state.loader ? 
+				<>
 				<div className="anouncements-top-block">
 				   <ul className="anouncements-check d-flex flex-wrap">
 				     {this.props.addAnnouncementDetails.map((item,index)=>
@@ -223,8 +229,6 @@ class Adminannouncementadd extends React.Component {
 				     )}
 				   </ul>
 				</div>
-				{/*<!--Announcements Top block end-->*/}
-				{/*<!--Announcements Form block Start-->*/}
 				<div className="anouncements-form">
 				   <form onSubmit={(e)=>e.preventDefault()}>
 				      <div className="form-group">
@@ -331,6 +335,12 @@ class Adminannouncementadd extends React.Component {
 												</div>
 											</div>
 								: <></>}
+				</>
+					:
+			 	 <>
+					{cosmaticAsset.cosmatic.default.loader}
+				</>
+				}
 			</>
 			);
 	}

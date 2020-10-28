@@ -103,7 +103,8 @@ class AdminAnnouncementTable extends React.Component{
 							               <th>
 							                <div className="checkbox-cust"><input type="checkbox" className="parentcheck" id="checkbox" name="checkbox" onChange={this.selectAllcheckbox}/><label htmlFor="checkbox"></label></div><span>Name</span>
 							                </th>
-							               <th>Description</th>
+							                <th>Announcement type</th>
+							                <th>Description</th>
 							            </tr>
 							         </thead>
 							          <tbody>
@@ -132,6 +133,7 @@ class AdminAnnouncementTable extends React.Component{
 							                     </div>
 							                  </div>
 							               </td>
+							                <td>{ReactHtmlParser(item.field_news_feed_type_1)}</td>
 				               			   <td>{ReactHtmlParser(item.body)}</td>
 							            </tr>
 					               		)

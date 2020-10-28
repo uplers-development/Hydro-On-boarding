@@ -90,7 +90,7 @@ class Adminannouncementadd extends React.Component {
 		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
 				singlecheckedArray.push({"target_id":item.value});
 		});
-  		if(this.state.editorState.getCurrentContent()!==null){
+  		if(this.state.editorState.getCurrentContent()!==null && document.querySelector("#Button_link").value!==''){
 			let options;
 			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
 				options={

@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Apiurl,{base_url,site_url,Repclient} from '../../Apiurl'; 
 import {RepLogoutPopup} from'../../constants/RepConstants';
 import {ValidationMsg} from'../../constants/validationmsg';
+import{hasValidUrl} from '../../validation'; 
 
 class Repclienttabledata extends React.Component{
 	constructor(props){
@@ -116,6 +117,7 @@ class Repclienttabledata extends React.Component{
 		console.log(singlecheckedArray);
 		if(this.props.summernoteData!==null && document.querySelector("#Button_link").value!==''){
 			let options;
+			if(hasValidUrl(document.querySelector("#Button_link").value)){
 			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!=='' ){
 				options={
 				    "title":[{"value":document.querySelector("#Title").value}],
@@ -155,6 +157,10 @@ class Repclienttabledata extends React.Component{
 		            		this.setState({opensubmissionpopup:true,formempty:false})
 		            	//}
 		            })
+		         }
+		       	else{
+		       		this.setState({formempty:false});
+		        }
 		    }else{
 		    	this.setState({formempty:true})
 		    }

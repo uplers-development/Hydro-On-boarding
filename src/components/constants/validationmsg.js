@@ -48,7 +48,6 @@ export const ValidationMsg = {
             confirmpasswordmismatch: ReactHtmlParser('<span class="empty-field">New password and confirm password are not same.</span>'),
 
             announcementbuttonlink: ReactHtmlParser('<span class="empty-field">Please enter valid button link.</span>'),
-
     	}
     }
 }

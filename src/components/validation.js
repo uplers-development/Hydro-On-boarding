@@ -25,6 +25,11 @@ export function hasValidPassword(array) {
     return pattern.test(String(array).toLowerCase());
 }
 
+export function hasValidUrl(array) {
+    var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/; 
+    return pattern.test(String(array).toLowerCase());
+}
+
 export function hasValidDate(array){
     return array==='' ? true  : false ;
   /*  if(array!==''){

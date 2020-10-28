@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
-import Apiurl,{site_url,Repclient} from '../../Apiurl'; 
+import Apiurl,{site_url,Repclient} from '../../Apiurl';
+import{hasValidUrl} from '../../validation';  
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState,ContentState,convertFromHTML,CompositeDecorator,convertToRaw,getDefaultKeyBinding, } from 'draft-js';
 import {ValidationMsg} from'../../constants/validationmsg';
@@ -25,6 +26,7 @@ class Repannouncementadd extends React.Component {
 			hidedefaultimageblock:false,
 			viewpagecall:false,
 			repclientdata:[],
+			validbuttonlink:false,			
 		}
 		this.filtereddata=this.filtereddata.bind(this);
 		this.updateAnnouncementPic=this.updateAnnouncementPic.bind(this);
@@ -86,6 +88,8 @@ class Repannouncementadd extends React.Component {
 		});
   		if(this.state.editorState.getCurrentContent()!==null && document.querySelector("#Button_link").value!==''){
 			let options;
+			if(hasValidUrl(document.querySelector("#Button_link").value)){
+				this.setState({validbuttonlink:false});
 			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!=='' ){
 				options={
 				    "title":[{"value":document.querySelector("#Title").value}],
@@ -123,6 +127,9 @@ class Repannouncementadd extends React.Component {
 		            	console.log(data);
 		            		this.setState({opensubmissionpopup:true,formempty:false})
 		            })
+             	}else{
+		       		this.setState({validbuttonlink:true,formempty:false});
+       			}
 		    }else{
 		    	this.setState({formempty:true})
 		    }
@@ -283,7 +290,8 @@ class Repannouncementadd extends React.Component {
 				      </div>
 				      <div className="form-group">
 				         <label>Button link</label>
-				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''}/>
+				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''} onBlur={(e)=>hasValidUrl(e.target.value) ? this.setState({validbuttonlink:false}): this.setState({validbuttonlink:true})}/>
+			        	 {this.state.validbuttonlink ? ValidationMsg.common.default.announcementbuttonlink : ''}
 				       
 				      </div>
 				      <Repannouncementsfilter checkFiltereddata={this.filtereddata}/>

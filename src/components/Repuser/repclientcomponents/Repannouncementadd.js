@@ -24,7 +24,7 @@ class Repannouncementadd extends React.Component {
 			newuserPic_id:null,
 			hidedefaultimageblock:false,
 			viewpagecall:false,
-			repclientdata:[]
+			repclientdata:[],
 		}
 		this.filtereddata=this.filtereddata.bind(this);
 		this.updateAnnouncementPic=this.updateAnnouncementPic.bind(this);
@@ -84,9 +84,9 @@ class Repannouncementadd extends React.Component {
 		document.querySelectorAll(".clientchecked:checked").forEach((item,index)=>{
 				singlecheckedArray.push({"target_id":item.value});
 		});
-  		if(this.state.editorState.getCurrentContent()!==null){
+  		if(this.state.editorState.getCurrentContent()!==null && document.querySelector("#Button_link").value!==''){
 			let options;
-			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
+			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!=='' ){
 				options={
 				    "title":[{"value":document.querySelector("#Title").value}],
 			        "body":[{"value": draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
@@ -283,7 +283,8 @@ class Repannouncementadd extends React.Component {
 				      </div>
 				      <div className="form-group">
 				         <label>Button link</label>
-				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''}/> 
+				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''}/>
+				       
 				      </div>
 				      <Repannouncementsfilter checkFiltereddata={this.filtereddata}/>
 					{this.props.getAnnouncementDetailsforEdit!==undefined && <Repclienttabledata clientdataTable={this.state.repclientdata} forUpdateClient={this.props.getAnnouncementDetailsforEdit.node.field_client}/>}

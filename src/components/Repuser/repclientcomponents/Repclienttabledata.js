@@ -114,9 +114,9 @@ class Repclienttabledata extends React.Component{
 		});
 
 		console.log(singlecheckedArray);
-		if(this.props.summernoteData!==null){
+		if(this.props.summernoteData!==null && document.querySelector("#Button_link").value!==''){
 			let options;
-			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!==''){
+			if(document.getElementById("announcement-image") && document.querySelector("#announcement-image").getAttribute("data-id")!=='' ){
 				options={
 				    "title":[{"value":document.querySelector("#Title").value}],
 			        "body":[{"value":this.props.summernoteData,

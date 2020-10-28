@@ -29,7 +29,7 @@ export const ValidationMsg = {
 
             addproductCheckboxcheckmissing:ReactHtmlParser('<h5><span class="empty-field form-empty">Please select the checkbox of selected values.</span></h5>'),
             addproductfieldnotvalid:ReactHtmlParser('<h5><span class="empty-field form-empty">Please check inserted valid field items there might be something missing.</span></h5>'),
-            fieldsEmptyAnnoucementform:ReactHtmlParser('<h5><span class="empty-field form-empty">Please fill the above form details and make sure the product is selected.</span></h5>'),
+            fieldsEmptyAnnoucementform:ReactHtmlParser('<h5><span class="empty-field form-empty">Please fill the above form details and make sure the announcement is also selected.</span></h5>'),
             EmailAlreadytaken:ReactHtmlParser('<h5><span class="empty-field form-empty">Email id already exists.</span></h5>'),
 
             resourcetitlefield:ReactHtmlParser('<span class="empty-field">Please enter resource title.</span>'),
@@ -46,6 +46,8 @@ export const ValidationMsg = {
             newpasswordfield: ReactHtmlParser('<span class="empty-field">Please enter your valid new password.</span>'),
             confirmpasswordfield: ReactHtmlParser('<span class="empty-field">Please enter your valid confirm password.</span>'),
             confirmpasswordmismatch: ReactHtmlParser('<span class="empty-field">New password and confirm password are not same.</span>'),
+
+            announcementbuttonlink: ReactHtmlParser('<span class="empty-field">Please enter valid button link.</span>'),
 
     	}
     }

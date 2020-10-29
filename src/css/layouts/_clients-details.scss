@@ -1,0 +1,365 @@
+.clients-detils-main {
+	 max-width: none;
+	 width: 100%;
+	 > .container {
+		> .back-dashboard {
+			@media screen and (max-width: $ipad-portrait) {
+				margin: 5px 0;
+			}
+		} 
+	 }
+	.person-detils-box {
+		width: 100%;
+		/*max-width: 840px;*/
+		padding: 40px 44px 73px 40px;
+		@media screen and (max-width:$large-mx) {
+			padding: 30px;
+		}
+		@media screen and (max-width:$mobile-small) {
+			padding: 17px;
+		}
+			.person-right {
+				width: calc(100% - 195px);
+				@media screen and (max-width:$large) {
+					width: calc(100% - 98px);
+				}
+				@media screen and (max-width:$mobile-small) {
+					width: 100%;
+				}
+				@media (max-height: $mob-landscape-375) and (max-width: $iphone-x) and (orientation: landscape) {
+						width: 100%;
+				}
+				.person-details {
+					@media screen and (max-width:$large) {
+						width: 100%;
+					}
+					.left {
+						max-width: 200px;
+						width: 100%;
+					}
+				}
+			}
+	}
+	.pro-title {
+		width: 100%;
+		margin-top: 52px;
+		position: relative;
+		@media screen and (max-width:$large-m) {
+			margin-top: 30px;
+		}
+		@media screen and (max-width:$ipad-portrait) {
+			padding-right: 0;
+		}
+		.search-right {
+			margin-left: auto;
+			@media screen and (max-width:$ipad-portrait) {
+				/*margin-left: 0;*/
+				margin-top: 15px;
+				margin-bottom: 5px;
+				margin-left: 0;
+				width: 100%;
+			}
+			@media screen and (max-width: $mobile-small) {
+				margin-top: 0;
+			}
+			.btn-block {
+				margin-right: 24px;
+				.btn {
+					min-width: 210px;
+					margin-bottom: 0;
+					padding: 6px 15px 4px;
+					@media screen and (max-width:$ipad-landscape) {
+						min-width: auto;
+					}
+					@media screen and (max-width:$mobile-small	) {
+						padding: 5px 10px 2px;
+					}
+					@media (max-height: $mob-landscape-375) and (max-height: $iphone-x) and (orientation: landscape) {
+						padding: 5px 15px 3px;
+					}
+					span {
+						font-size: 18px;
+						line-height: 28px;
+						@media screen and (max-width:$large) {
+							font-size: 16px;
+						}
+						@media screen and (max-width: $small-x) {
+							font-size: 15px;
+						}
+						
+					}
+					&:after {
+						width: auto;
+						background-repeat: repeat-x;
+						background-size: contain;
+					}
+				}
+				@media screen and (max-width:$ipad-portrait) {
+					position: absolute;
+					top: 10px;
+					right: 0;
+					margin-right: 0;
+				}
+			}
+			.auto-search-box {
+				@media screen and (max-width:$ipad-portrait) {
+					width: 100%;
+				}
+				@media screen and (max-width:$mobile-small) {
+					margin-top: 0;
+					margin-left: 15px;
+				}
+				
+			}
+		}
+		.search-right {
+			input[type="text"] {
+				padding: 9px 25px 5px 33px;
+				@media screen and (max-width:$ipad-portrait) {
+					background-position: 2% center;
+				}
+			}
+		}
+	}
+	.your-product-list {
+		margin-top: 56px;
+		@media screen and (max-width:$large-m) {
+			margin-top: 35px;
+		}
+		.your-product-box {
+				margin-top: 32px;
+				.product-image {
+					width: 205px;
+					padding-bottom: 10.55%;	
+					@media screen and (max-width:$ipad-portrait) {
+						width: 100%;
+						padding-bottom: 56.25%;	
+					}
+				}
+				.product-content {
+					.purchase-date {
+						padding-top: 0;
+					}
+					@media screen and (max-width:$large) {
+						width: calc(100% - 205px);
+					}
+					@media screen and (max-width:$ipad-portrait) {
+						width: 100%;
+						padding: 15px 50px 20px 16px;
+					}
+				}
+				.btn-block {
+					bottom: 24px;
+    				right: 87px;
+					@media screen and (max-width:$large) {
+						bottom: 15px;
+    					right: 30px;
+					}
+					@media screen and (max-width:$ipad-portrait) {
+						right: 15px;
+					}
+				}
+		}
+		@media screen and (max-width:$ipad-portrait) {
+			padding-right: 0;
+		}
+		@media screen and (max-width:$mobile-small) {
+			padding-left: 0;
+		}
+	}
+	.contract-list {
+		.contract-box {
+			padding: 50px 22px 15px 32px;
+			margin-bottom: 25px;
+			position: relative;
+			@media screen and (max-width:$large-m) {
+				padding: 35px 20px 15px 25px;
+			}
+			@media screen and (max-width:$mobile-small) {
+				padding: 25px 15px 15px 15px;
+			}
+			&:after {
+				content: "";
+				display: block;
+				width: calc(100% - 20px);
+				height: 1px;
+				background-color: $off-white;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				@media screen and (max-width:$mobile-small) {
+					width: 100%;
+				}
+			}
+			.contract-content {
+				width: calc(100% - 165px);
+				@media screen and (max-width:$mobile-small) {
+					width: 100%;
+				}
+			> a {
+				font-size: 24px;
+				line-height: 28px;
+				color: $cobalt-blue;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+				text-decoration: none;
+				margin-bottom: 5px;
+				display: block;
+				@media screen and (max-width:$mobile-small) {
+					font-size: 20px;
+					line-height: 24px;
+				}
+			}
+			h4 {
+				margin: 0;
+				font-size: 18px;
+				line-height: 22px;
+				color: $black;
+				font-family: $arial;
+				font-weight: $font-normal;
+				@media screen and (max-width:$mobile-small) {
+					font-size: 16px;
+					line-height: 20px;
+				}
+			}
+		}
+			.date {
+				margin-left: auto;
+				p {
+					font-size: 12px;
+					line-height: 18px;
+					color: $panton-gray;
+					margin: 10px 0 0 0;
+				} 
+			}
+			&.active {
+				background-color: $sky-blue-transparent;
+				box-shadow: 0px 4px 16px $product-box-shadow;
+			}
+			&:nth-child(even) {
+				background-color: $sky-blue-transparent;
+				box-shadow: 0px 4px 16px $product-box-shadow;
+			}
+		}	
+	}
+	.prod {
+		&.pro-title {
+			@media screen and (max-width:$mobile-small) {
+				padding-right: 0;
+				position: relative;
+    			padding-bottom: 10px;
+			}
+			.search-right {
+				.auto-search-box {
+					margin: 0;
+					@media screen and (max-width:$mobile-small) {
+						width: 100%;
+						margin-left: 0;
+					}
+					
+					@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
+						margin-top: 15px; 
+						margin-left: 0;
+					}
+				}
+				@media screen and (max-width:$mobile-small) {
+					margin-top: 15px;
+					margin-left: auto;
+					width: 100%;
+				}
+				.btn-block {
+					@media screen and (max-width:$mobile-small) {
+						margin: 10px 0;
+						position: absolute; 
+						right: 0;
+						top: 0;
+					}
+				}
+				@media screen and (max-width:$small-medium) {
+					margin-left: 0;
+				}
+				@media (max-height: $mob-landscape-414) and (max-width: $mobile-small) and (orientation: landscape) {
+					margin-top: 0;
+					margin-left: auto;
+				}
+			}
+		}
+	}
+	.contract  {
+		&.pro-title {
+			padding-right: 0;
+			margin-top: 80px;
+			@media screen and (max-width:$large-m) {
+				margin-top: 30px;
+			}
+			@media screen and (max-width:$mobile-small) {
+				padding: 10px 25px 15px 0;
+			}
+			.btn-block {
+				margin-right: 0;
+			}
+			.search-right {
+				@media screen and (max-width:$mobile-small) {
+					margin-left: auto;
+					margin-top: 0;
+					margin-bottom: 0;
+				}
+				
+				@media (max-height: $mob-landscape-375) and (max-width: $iphone-x) and (orientation: landscape) {
+					margin-left: auto;
+					margin-top: 0;
+				}
+				.btn-block {
+					.btn {
+						min-width: 223px;
+						padding: 7px 15px 5px;
+						@media screen and (max-width:$ipad-landscape) {
+							min-width: auto;
+						}
+						span {
+							@media screen and (max-width: $small-x) {
+								font-size: 15px;
+							}
+						}
+					}
+				}
+			}
+			.name-of-heading {
+				@media screen and (max-width: $mobile-small) {
+					width: auto;
+					padding-top: 10px;
+				}
+				@media screen and (max-width: $small-medium) {
+					padding-top: 5px;
+				}
+				img {
+					width:38px;
+					@media screen and (max-width: $large-m) {
+						width: 28px;
+					}
+					@media screen and (max-width: $mobile-small) {
+						width: 17px;
+					}
+				}
+			}
+		}
+	}
+	
+	@media screen and (max-width:$mobile-small) {
+			padding: 0 23px;
+	}
+
+	.container {
+		.back-dashboard {
+			margin-top: 15px;
+			&:first-of-type {
+				margin-left: 0;
+			}
+		}
+	}
+	
+}
+
+.right-content-part .bottom-content-block {
+	padding: 22px 0; 
+}

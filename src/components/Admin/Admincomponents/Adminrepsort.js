@@ -1,0 +1,104 @@
+import React from 'react';
+import { Link, Redirect } from "react-router-dom";
+import Apiurl,{site_url,base_url,Admin} from '../../Apiurl'; 
+
+class Adminrepsort extends React.Component{
+	constructor(props){
+		super(props)
+		this.state={
+
+		}
+		this.sort_admin_rep_clients=this.sort_admin_rep_clients.bind(this);
+	}
+
+
+	sort_admin_rep_clients=(e)=>{
+		e.preventDefault();	
+		this.props.loaderTrue(true); 
+		if(!e.target.classList.contains("active")){
+			document.querySelectorAll(".rep-admin-sort ul li a").forEach((item,index)=>{
+				console.log(item);
+				item.classList.remove("active");
+			});
+			e.target.classList.add("active");
+			 this.props.selecteddropdown(true);
+			try{
+				let status;
+				fetch(Admin.adminreptablelisting.url+`&sort_by=created&sort_order=${e.target.getAttribute("sortorder")}`,{
+					headers:{
+	                  "Content-Type" : "application/json",
+	                  "X-CSRF-Token" : localStorage.getItem("access-token"),
+	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	            	},
+	            	method:Admin.adminreptablelisting.method
+				}).then(res=>{
+					status=res.status;
+					return res.json()
+				}).then(data=>{
+					console.log(data);
+					this.props.sortedfilterdata(data);
+					this.props.loaderTrue(false); 
+				})
+			}catch(err){
+				console.log(err)
+			}
+		}else{
+			e.target.classList.remove("active");
+			this.props.loaderTrue(true); 
+			this.props.selecteddropdown(false);
+			try{
+				let status;
+				fetch(Admin.adminreptablelisting.url,{
+					headers:{
+	                  "Content-Type" : "application/json",
+	                  "X-CSRF-Token" : localStorage.getItem("access-token"),
+	                  "Authorization": "Basic "+localStorage.getItem("basic-auth"),
+	            	},
+	            	method:Admin.adminreptablelisting.method
+				}).then(res=>{
+					status=res.status;
+					return res.json()
+				}).then(data=>{
+					console.log(data);
+					this.props.sortedfilterdata(data);
+					this.props.loaderTrue(false); 
+				})
+			}catch(err){
+				console.log(err)
+			}
+		}
+
+	}
+
+	render(){
+		return(
+	 			 <div className="d-flex flex-wrap sort-by">
+	                        <div className="sort-selected d-flex flex-wrap align-center">
+	                           <h2>Sort by</h2>
+	                        </div>
+	                        <div className="drop-down-menu rep-admin-sort">
+	                           <ul>
+	                              <li>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="Newest">
+	                                 Newest</Link>
+	                              </li>
+	                              <li>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="DESC" title="Oldest">
+	                                 Oldest</Link>
+	                              </li>
+	                              <li>
+	                                 <Link to={""} onClick={this.sort_admin_rep_clients} sortorder="ASC" title="A-Z">
+	                                 A-Z</Link>
+	                              </li>
+	                              <li>
+	                                 <Link to={""} sortorder="DESC" onClick={this.sort_admin_rep_clients} title="Z-A">
+	                                 Z-A</Link>
+	                              </li>
+	                           </ul>
+	                        </div>
+                 </div>
+			)
+	}
+}
+
+export default Adminrepsort;

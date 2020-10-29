@@ -1,0 +1,163 @@
+.resources-main
+{
+	.fileter-block
+	{
+		.select-box {
+			width: 282px;
+			@media screen and (max-width:$large-mx) {
+				width: 220px;
+			}
+			&:first-of-type 
+			{
+				margin-right: 19px;
+				@media screen and (max-width:$large-mx) {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+	.resources-list 
+	{
+		margin-top: 35px;
+		margin-left: -20px;
+		margin-right: -20px;
+		@media screen and (max-width:$large-m) {
+			margin-left: -15px;
+			margin-right: -15px;
+		}	
+		@media screen and (max-width:$mobile-small) {
+			margin-top: 25px;
+			margin-left: 0;
+			margin-right: 0;
+		}
+		
+		.resources-box {
+			width: 33.33%;
+			padding: 0 20px;
+		    margin-bottom: 45px;
+			@media screen and (max-width:$large-m) {
+				padding: 0 15px;
+		    	margin-bottom: 30px;
+			}	
+			@media screen and (max-width:$ipad-portrait) {
+				width: 50%;
+			}
+			@media screen and (max-width:$mobile-small) {
+				width: 100%;
+				padding: 0 24px;
+				margin-bottom: 24px;
+			}
+			> div{
+				position: relative;
+				cursor: pointer;
+				a {
+					position: absolute;
+					top: 0;
+					left: 0;
+					height: 100%;
+					width: 100%;
+					z-index: 1;
+				}
+			box-shadow: 0 4px 16px rgba(69,91,99,.08);
+			.image-block {
+				position: relative;
+				padding-bottom: 48.65%;
+				overflow: hidden;
+				label {
+					padding:5px 8px;
+					color: $white;
+					font-size: 14px;
+					line-height: 22px;
+					font-family: $gibson;
+					font-weight: $font-normal;
+					background-color: $sky-blue;
+					position: absolute;
+					right: 0;
+					top: 0;
+					@include transition(all 0.5s ease-in-out);
+					@media screen and (max-width:$large-m) {
+						padding: 9px;
+						font-size: 12px;
+    					line-height: 14px;
+					}	
+				}
+				> .bg-cover {
+					position: absolute;
+					top: 0;
+					left: 0;
+					height: 100%;
+					width: 100%;
+					@include transition(all 0.2s ease-in-out);
+				}
+			}
+			.res-content {
+				padding: 27px;
+				@media screen and (max-width:$large-m) {
+					padding: 15px;
+				}	
+				h3 {
+				font-size: 22px;
+				line-height: 22px;
+				color: $cobalt-blue;
+				font-family: $gibson;
+				font-weight: $font-semi-bold;
+				margin: 0 0 8px 0;	
+				text-decoration: none;
+				@include transition(all 0.3s ease-in-out);
+				@media screen and (max-width:$large-m) {
+					font-size: 18px;
+					line-height: 28px;
+				}		
+				@media screen and (max-width:$mobile-small) {
+					font-size: 16px;
+				}
+				
+				}
+				p {
+					font-size: 16px;
+					line-height: 22px;
+					color: $light-black;
+					font-family: $arial;
+					font-weight: $font-normal;
+					margin: 0;
+					max-width: 652px;
+					width: 100%;
+					@media screen and (max-width:$large-m) {
+						font-size: 15px;
+						line-height: 18px;
+					}	
+				}
+				.date {
+					font-size: 14px;
+					line-height: 17px;
+					color: $panton-gray;
+					font-family: $arial;
+					font-weight: $font-normal;
+					padding-top: 24px;
+					@media screen and (max-width:$large-m) {
+						padding-top: 14px;
+					}	
+					@media screen and (max-width:$mobile-small) {
+						font-size: 12px;
+						padding-top: 8px;
+						line-height: 18px;
+					}
+				}
+			}
+				&:hover {
+					label {
+						background-color: $cobalt-blue;
+					}
+					.image-block {
+						> .bg-cover {
+							transform: scale(1.2);
+							-webkit-transform: scale(1.2);
+						}
+					}
+				}
+			}	
+		}
+	}
+}
+
+

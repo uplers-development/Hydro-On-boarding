@@ -197,8 +197,11 @@ class Adminannouncementadd extends React.Component {
 				document.querySelectorAll(".announcment-type")[value].parentNode.classList.add("active");
 				document.querySelectorAll(".announcment-type")[value].classList.add("active");
 			});
+		});
+
+		setTimeout(()=>{
 			self.setState({loader:false})
-		},2000);
+		},2000)
 	}
 
 	check_view_page_call=(viewpagecalled)=>{

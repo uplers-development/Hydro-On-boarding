@@ -304,7 +304,6 @@ class Adminannouncementadd extends React.Component {
 				         <input type="text" name="Button link" id="Button_link" placeholder="Button link" defaultValue={this.props.getAnnouncementDetailsforEdit!==undefined  && this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button!=='' ?  "http:/"+this.props.getAnnouncementDetailsforEdit.node.field_news_feed_button.url : ''} onBlur={(e)=>hasValidUrl(e.target.value) ? this.setState({validbuttonlink:false}): this.setState({validbuttonlink:true})}/>
 			         {this.state.validbuttonlink ? ValidationMsg.common.default.announcementbuttonlink : ''}
 				      </div>
-				      <Adminannouncementsfilter checkFiltereddata={this.filtereddata}/>
 					{this.props.getAnnouncementDetailsforEdit!==undefined && <Adminclienttabledata clientdataTable={this.state.repclientdata} forUpdateClient={this.props.getAnnouncementDetailsforEdit.node.field_client}/>}
 					{this.props.getAnnouncementDetailsforEdit!==undefined? 
 				      <div className="btn-block add-client">

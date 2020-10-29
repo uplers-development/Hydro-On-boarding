@@ -294,7 +294,6 @@ class Repannouncementadd extends React.Component {
 			        	 {this.state.validbuttonlink ? ValidationMsg.common.default.announcementbuttonlink : ''}
 				       
 				      </div>
-				      <Repannouncementsfilter checkFiltereddata={this.filtereddata}/>
 					{this.props.getAnnouncementDetailsforEdit!==undefined && <Repclienttabledata clientdataTable={this.state.repclientdata} forUpdateClient={this.props.getAnnouncementDetailsforEdit.node.field_client}/>}
 					{this.props.getAnnouncementDetailsforEdit!==undefined? 
 				      <div className="btn-block add-client">
